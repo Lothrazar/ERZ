@@ -59,6 +59,7 @@ tile.standingStoneAccelerator.name=Стоячий камень ускорени�
 tile.standingStoneIgniter.name=Стоячий камень воспламенения
 tile.standingStoneGrower.name=Стоячий камень роста
 tile.standingStoneHealer.name=Стоячий камень исцеления
+tile.standingStoneAesthetic.name=Стоячий камень
 
 roots.attribute.fullset.name=Когда надет полный комплект:
 roots.attribute.equipped.name=Когда надет:
@@ -71,6 +72,11 @@ roots.tooltip.spellpotency.name=мощность
 roots.tooltip.spellefficiency.name=эффективность
 roots.tooltip.spellsize.name=размер
 roots.tooltip.usesremaining.name=использований осталось
+roots.tooltip.spikes.name=Шипы
+roots.tooltip.forceful.name=Влиятельность
+roots.tooltip.holy.name=Holy
+roots.tooltip.aquatic.name=Акватика
+roots.tooltip.shadowstep.name=Теневой шаг
 
 roots.error.noritual.name=Не найден действительный ритуал! 
 
@@ -96,6 +102,12 @@ roots.component.redtulip.name=Цветок дьявола
 roots.component.rosebush.name=Шипы розы
 roots.component.sunflower.name=Солнечный удар
 roots.component.whitetulip.name=Стремительный холод
+
+roots.mod.spikes.name=Шипы
+roots.mod.holy.name=Holy
+roots.mod.forceful.name=Влиятельность
+roots.mod.aquatic.name=Акватика
+roots.mod.shadowstep.name=Теневой шаг
 
 achievement.dust=Лепестковая пыль
 achievement.dust.desc=Сделать лепестковую пыль
@@ -403,14 +415,23 @@ roots.research.ritual.engravedSword.page1info=Using the properties of a Runic Fo
 roots.research.ritual.engravedSword.page2title.name=Ритуал: Выгравированный клинок
 roots.research.ritual.engravedSword.page3title.name=Шипы
 roots.research.ritual.engravedSword.page3info=Each acacia bark you burn as incense during the sword's crafting will add 2 damage to the sword.
-roots.research.ritual.engravedSword.page4title.name=Forceful
+roots.research.ritual.engravedSword.page4title.name=Влиятельность
 roots.research.ritual.engravedSword.page4info=Each spruce bark you burn as incense during the sword's crafting will add additional knockback to the sword's attacks.
 roots.research.ritual.engravedSword.page5title.name=Holy
 roots.research.ritual.engravedSword.page5info=Each birch bark you burn as incense during the sword's crafting will add 3 additional damage whenever the sword attacks undead creatures.
-roots.research.ritual.engravedSword.page6title.name=Aquatic
+roots.research.ritual.engravedSword.page6title.name=Акватика
 roots.research.ritual.engravedSword.page6info=Each jungle bark you burn as incense during the sword's crafting will add 1 drowning damage to the sword's damage output.
 roots.research.ritual.engravedSword.page7title.name=Теневой шаг
 roots.research.ritual.engravedSword.page7info=Each dark oak bark you burn as incense during the sword's crafting will increase your chance to dodge attacks made against you when holding the sword.
+
+roots.research.ritual.timeshift.name=Сдвиг времени
+roots.research.ritual.timeshift.page1title.name=Временная-швременная фиговина
++roots.research.ritual.timeshift.page1info=After many hours you have discovered that by burning common time keeping devices you can move time by an amount proportional to the amount of clocks burned as incense.
+roots.research.ritual.timeshift.page2title.name=Ритуал: Сдвиг времени
+
+roots.research.ritual.poweredstones.page16title.name=Ритуал: Стоячий камень
+roots.research.ritual.poweredstones.page17title.name=Стоячий камень
+roots.research.ritual.poweredstones.page17info=Базовый стоячий камень. Частицы могут быть окрашены при помощи красного красителя, лазурита, зелёного красителя и сброшены с помощью костной муки.
 
 achievement.tablet=Кому нужны страницы?
 achievement.tablet.desc=Сделать рунический планшет.
@@ -419,7 +440,7 @@ achievement.dust.desc=Используйте ступку для изготов�
 achievement.spellRose=Оружие с любым другим именем...
 achievement.spellRose.desc=Нанести урон используя заклинание "Шипы розы".
 achievement.spellGrowth=Я оцениваю это заклинание на 10/10/10.
-achievement.spellGrowth.desc=Get maximum growth from a single growth spell.
+achievement.spellGrowth.desc=Получить максимальный прирост от одного заклинания роста.
 achievement.spellInsanity=Ты - избранный!
 achievement.spellInsanity.desc=Заставьте монстра предать своих друзей с заклинанием "Безумие".
 achievement.maxModifiers=Все модификации!
@@ -435,7 +456,7 @@ achievement.standingStone.desc=Создать настроенный стояч�
 achievement.wildwood=Я есть РУТ
 achievement.wildwood.desc=Надеть полный комплект дикодревесной брони
 achievement.shadow=Я ночь
-achievement.shadow.desc=Forge an engraved blade with Shadow Step IV.
+achievement.shadow.desc=Выковать выгравированный клинок с Теневой шаг IV.
 achievement.spellElements=Воплощение божества.
 achievement.spellElements.desc=Вооружить кристальный посох зачарованиями "Земляной шип", "Одуванчиковый ветер", "Взрыв воды", и "Огненный шар".
 achievement.vampire=Я отвергаю мою человечность!
