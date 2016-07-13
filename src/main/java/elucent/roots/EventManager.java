@@ -28,6 +28,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -283,6 +284,21 @@ public class EventManager {
 					}
 					event.setCanceled(true);
 				}
+			}
+		}
+		if(event.getEntityLiving().getEntityData().hasKey("RMOD_icy")){
+			EntityLivingBase entity = event.getEntityLiving();
+			BlockPos pos = new BlockPos(entity.posX, entity.posY, entity.posZ);
+			if(!entity.getEntityWorld().isAirBlock(pos.down())){
+				if(entity.getEntityWorld().getBlockState(pos.down()) == Blocks.WATER.getDefaultState()){
+					entity.getEntityWorld().setBlockState(pos.down(), Blocks.ICE.getDefaultState());
+				} else{
+					entity.getEntityWorld().setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState());
+				}
+			}	
+			entity.getEntityData().setInteger("RMOD_icy", event.getEntityLiving().getEntityData().getInteger("RMOD_icy")-1);
+			if(entity.getEntityData().getInteger("RMOD_icy") <= 0){
+				entity.getEntityData().removeTag("RMOD_icy");
 			}
 		}
 	}
