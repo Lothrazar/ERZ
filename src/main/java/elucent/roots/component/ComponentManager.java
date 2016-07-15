@@ -5,28 +5,7 @@ import java.util.List;
 
 import elucent.roots.ConfigManager;
 import elucent.roots.RegistryManager;
-import elucent.roots.component.components.ComponentAllium;
-import elucent.roots.component.components.ComponentApple;
-import elucent.roots.component.components.ComponentAzureBluet;
-import elucent.roots.component.components.ComponentBlueOrchid;
-import elucent.roots.component.components.ComponentChorus;
-import elucent.roots.component.components.ComponentDandelion;
-import elucent.roots.component.components.ComponentFlareOrchid;
-import elucent.roots.component.components.ComponentLilac;
-import elucent.roots.component.components.ComponentLilyPad;
-import elucent.roots.component.components.ComponentMidnightBloom;
-import elucent.roots.component.components.ComponentNetherWart;
-import elucent.roots.component.components.ComponentOrangeTulip;
-import elucent.roots.component.components.ComponentOxeyeDaisy;
-import elucent.roots.component.components.ComponentPeony;
-import elucent.roots.component.components.ComponentPinkTulip;
-import elucent.roots.component.components.ComponentPoisonousPotato;
-import elucent.roots.component.components.ComponentPoppy;
-import elucent.roots.component.components.ComponentRadiantDaisy;
-import elucent.roots.component.components.ComponentRedTulip;
-import elucent.roots.component.components.ComponentRose;
-import elucent.roots.component.components.ComponentSunflower;
-import elucent.roots.component.components.ComponentWhiteTulip;
+import elucent.roots.component.components.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -60,7 +39,9 @@ public class ComponentManager {
 		components.add(new ComponentMidnightBloom().setPrimaryColor(12,6,36).setSecondaryColor(18,18,18).setTextColor(TextFormatting.DARK_PURPLE));
 		components.add(new ComponentFlareOrchid().setPrimaryColor(255,60,18).setSecondaryColor(255,60,18).setTextColor(TextFormatting.RED));
 		components.add(new ComponentRadiantDaisy().setPrimaryColor(255,255,255).setSecondaryColor(255,255,255).setTextColor(TextFormatting.WHITE));
-		
+
+		components.add(new ComponentCobweb().setPrimaryColor(0,255,154).setSecondaryColor(255,250,255).setTextColor(TextFormatting.AQUA));
+
 		recipes.add(new ComponentRecipe("rosebush")
 					.addIngredient(new ItemStack(Blocks.DOUBLE_PLANT,1,4))
 					.addIngredient(new ItemStack(Items.FERMENTED_SPIDER_EYE,1))
@@ -160,6 +141,10 @@ public class ComponentManager {
 					.addIngredient(new ItemStack(Blocks.GLOWSTONE,1))
 					.addIngredient(new ItemStack(Blocks.GLOWSTONE,1))
 					.addIngredient(new ItemStack(Blocks.REDSTONE_BLOCK,1)));
+		recipes.add(new ComponentRecipe("cobweb")
+					.addIngredient(new ItemStack(Blocks.WEB))
+					.addIngredient(new ItemStack(Items.SPIDER_EYE))
+					.addIngredient(new ItemStack(Blocks.CACTUS)));
 		
 		for (int i = 0; i < recipes.size(); i ++){
 			for (int j = 0; j < ConfigManager.disabledComponents.length; j ++){

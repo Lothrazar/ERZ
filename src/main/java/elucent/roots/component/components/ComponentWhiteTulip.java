@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 import elucent.roots.ConfigManager;
 import elucent.roots.PlayerManager;
 import elucent.roots.RegistryManager;
+import elucent.roots.RootsNames;
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.ComponentEffect;
 import elucent.roots.component.EnumCastType;
@@ -54,7 +55,7 @@ public class ComponentWhiteTulip extends ComponentBase{
 						damageDealt += (int)(5+2*potency);
 						targets.get(i).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("slowness"),200+100*(int)potency,(int)potency));
 						damageDealt += (int)(5+3*potency);
-						targets.get(i).getEntityData().setInteger("RMOD_icy", 200+(100*(int)potency));
+						targets.get(i).getEntityData().setInteger(RootsNames.TAG_WHITE_TULIP, 200+(100*(int)potency));
 						targets.get(i).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("slowness"),200+(100*(int)potency),(int)potency));
 						targets.get(i).setLastAttacker(caster);
 						targets.get(i).setRevengeTarget((EntityLivingBase)caster);

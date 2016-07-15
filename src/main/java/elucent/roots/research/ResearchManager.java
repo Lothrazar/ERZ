@@ -209,6 +209,11 @@ public class ResearchManager {
 				                    		    .addMortarRecipe(ComponentManager.getRecipe("midnightbloom"))
 				                    		    )
 				                       )
+							 .addResearch(new ResearchBase("cobweb", new ItemStack(Blocks.WEB))
+							         .addPage(new ResearchPage()
+											 .addDisplayItem(new ItemStack(Blocks.WEB))
+											 .addMortarRecipe(ComponentManager.getRecipe("cobweb"))
+									 ))
 							  );
 		globalResearches.add(new ResearchGroup("ritual","Rituals")
 				 .addResearch(new ResearchBase("ritual",new ItemStack(RegistryManager.altar))
