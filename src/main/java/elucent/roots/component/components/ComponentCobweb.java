@@ -2,6 +2,7 @@ package elucent.roots.component.components;
 
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.EnumCastType;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +11,10 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.text.TextComponentScore;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import org.lwjgl.Sys;
 
 import java.util.ArrayList;
 
@@ -30,8 +34,23 @@ public class ComponentCobweb extends ComponentBase {
                 if (entities.get(i).getUniqueID() != caster.getUniqueID()) {
                     if (entities.get(i) instanceof EntityPlayer && !world.getMinecraftServer().isPVPEnabled()) {
 
-                    } else {
-                        PotionEffect eff = new PotionEffect(MobEffects.SLOWNESS, 40 * (int) potency, 4 + (int) potency);
+                    } else
+                    {
+                        int defatultEffectDuration = 40;
+                        int defaultEffectAmplifier = 4;
+                        int potencyForEffectDuration = defatultEffectDuration * (int)potency;
+                        int potencyForEffectAmplifier = defaultEffectAmplifier * (int) potency;
+
+                        //////////Debug only/////////////
+                        /*int debugDuration = defatultEffectDuration + potencyForEffectAmplifier;
+                        int debugAmplifier = defaultEffectAmplifier + potencyForEffectAmplifier;
+                        System.out.println("Duration:");
+                        System.out.println(debugDuration);
+                        System.out.println("Amplifier:");
+                        System.out.println(debugAmplifier);*/
+                        //////////////////////////////////
+
+                        PotionEffect eff = new PotionEffect(MobEffects.SLOWNESS, defatultEffectDuration + potencyForEffectDuration, defaultEffectAmplifier + potencyForEffectAmplifier);
                         entities.get(i).addPotionEffect(new PotionEffect(eff));
                     }
                 }
