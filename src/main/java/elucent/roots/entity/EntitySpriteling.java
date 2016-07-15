@@ -2,78 +2,62 @@ package elucent.roots.entity;
 
 import java.util.Random;
 
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
+import net.minecraft.entity.ai.EntityAIFleeSun;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIRestrictSun;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityWolf;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
-public class EntitySpriteling extends EntityLiving {
-	Random random = new Random();
-	public EntitySpriteling(World world, double x, double y, double z) {
-		super(world);
-		this.setPosition(x, y, z);
-	}
-	
-	@Override
-	public boolean attackEntityFrom(DamageSource source, float amount){
-		super.attackEntityFrom(source, amount);
-		return true;
-	}
-	
-	@Override
-	public void onUpdate(){
-		super.onUpdate();
-		this.setPosition(posX+motionX, posY+motionY, posZ+motionZ);
-	}
-	
-	@Override
-	public void onLivingUpdate(){
-		super.onLivingUpdate();
-		this.doBlockCollisions();
-		this.setRotation(this.rotationYaw+0.1f*(random.nextFloat()-0.5f), this.rotationPitch+0.1f*(random.nextFloat()-0.5f));
-		this.motionX = 0.25*Math.sin(this.rotationYaw)*Math.cos(this.rotationPitch);
-		this.motionY = 0.25*Math.sin(this.rotationPitch);
-		this.motionZ = 0.25*Math.cos(this.rotationYaw)*Math.cos(this.rotationPitch);
-		this.setVelocity(motionX,motionY,motionZ);
-		this.doBlockCollisions();
-	}
-	
-	@Override
-	public boolean isEntityInvulnerable(DamageSource source){
-		return false;
-	}
-	
-	@Override
-	public boolean isBeingRidden(){
-		return false;
-	}
-	
-	@Override
-	public AxisAlignedBB getEntityBoundingBox(){
-		return new AxisAlignedBB(posX-0.25,posY-0.25,posZ-0.25,posX+0.25,posY+0.25,posZ+0.25);
-	}
-	
-	@Override
-	public AxisAlignedBB getRenderBoundingBox(){
-		return new AxisAlignedBB(posX-0.25,posY-0.25,posZ-0.25,posX+0.25,posY+0.25,posZ+0.25);
-	}
-	
-	@Override
-	public AxisAlignedBB getCollisionBoundingBox(){
-		return new AxisAlignedBB(posX-0.25,posY-0.25,posZ-0.25,posX+0.25,posY+0.25,posZ+0.25);
-	}
+public class EntitySpriteling  extends EntityMob {// implements IRangedAttackMob {
+    //The Quality of the Soulstone dropped into the Temple of the Rift, in order to summon a Chaosborn.
+    //Determines drops and difficulty.
+    public int quality = 0;
+    public float range = 64;
 
-	@Override
-	protected void applyEntityAttributes(){
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16.0);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
-		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5);
-		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0);
-		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0);
-	}
+    //Constructor that's actually supposed to be used.
+    public EntitySpriteling(World worldIn) {
+        super(worldIn);
+        setSize(0.5f,0.5f);
+    }
+
+    @Override
+    public boolean isAIDisabled() {
+        return false;
+    }
+
+    @Override
+    protected boolean canDespawn() {
+        return false;
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16.0);
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0);
+    }
+
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+    }
+
+
 }

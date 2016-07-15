@@ -38,6 +38,13 @@ public class GuiTablet extends GuiScreen {
 		if (p.getHeldItem(EnumHand.MAIN_HAND).hasTagCompound()){
 			currentGroup = p.getHeldItem(EnumHand.MAIN_HAND).getTagCompound().getInteger("currentGroup");
 		}
+		this.onGuiClosed();
+	}
+	
+	@Override
+	public void onGuiClosed(){
+		player.getHeldItem(EnumHand.MAIN_HAND).setTagCompound(new NBTTagCompound());
+		player.getHeldItem(EnumHand.MAIN_HAND).getTagCompound().setInteger("currentGroup", currentGroup);
 	}
 	
 	@Override

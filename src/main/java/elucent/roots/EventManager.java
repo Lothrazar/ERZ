@@ -108,7 +108,6 @@ public class EventManager {
 		if (event.getTarget() instanceof EntitySkeleton){
 			if (event.getEntityPlayer().getHeldItem(event.getHand()) != null){
 				if (event.getEntityPlayer().getHeldItem(event.getHand()).getItem() == RegistryManager.infernalStem){
-					System.out.println("WITHERING");
 					event.getEntityPlayer().getHeldItem(event.getHand()).stackSize --;
 					((EntitySkeleton)event.getTarget()).setSkeletonType(1);
 				}

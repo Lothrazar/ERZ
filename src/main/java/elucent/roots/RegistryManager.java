@@ -188,9 +188,9 @@ public class RegistryManager {
 	}
 	
 	public static void registerEntities(){
-		EntityRegistry.registerModEntity(EntityTileAccelerator.class, "tileAccelerator", 0, Roots.instance, 64, 20, true);
-		EntityRegistry.registerModEntity(EntityAccelerator.class, "entityAccelerator", 1, Roots.instance, 64, 20, true);
-		EntityRegistry.registerModEntity(EntitySpriteling.class, "spriteling", 2, Roots.instance, 64, 20, true, Util.intColor(160, 255, 0), Util.intColor(224, 255, 224));
+		EntityRegistry.registerModEntity(EntityTileAccelerator.class, "tileAccelerator", 0, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityAccelerator.class, "entityAccelerator", 1, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntitySpriteling.class, "spriteling", 2, Roots.instance, 64, 3, true);
 	}
 	
 	public static void registerRecipes(){

@@ -56,7 +56,7 @@ public class ModelSpriteling extends ModelBase
   
   @Override
   public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale){
-	  GlStateManager.translate(0, 1.5, 0);
+	  GlStateManager.translate(0, 1.25, 0);
 	  setRotation(head2, entity.rotationPitch, (float) (entity.rotationYaw+Math.toRadians(90.0)), 0);
 	  head2.render(1.0f/16.0f);
 	  GlStateManager.enableAlpha();
@@ -65,7 +65,7 @@ public class ModelSpriteling extends ModelBase
 	  setRotation(head1, entity.rotationPitch, (float) (entity.rotationYaw+Math.toRadians(90.0)), 0);
 	  setRotation(head1.childModels.get(2),(float) Math.toRadians(90.0),0,0);
 	  head1.render(1.0f/16.0f);
-	  GlStateManager.translate(0, -1.5, 0);
+	  GlStateManager.translate(0, -1.25, 0);
 	  GlStateManager.color(1, 1, 1, 1);
 	  GlStateManager.disableAlpha();
 	  GlStateManager.disableBlend();
