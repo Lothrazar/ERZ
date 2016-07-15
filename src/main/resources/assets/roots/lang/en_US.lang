@@ -102,7 +102,6 @@ roots.component.redtulip.name=Devil's Flower
 roots.component.rosebush.name=Rose's Thorns
 roots.component.sunflower.name=Solar Smite
 roots.component.whitetulip.name=Blistering Cold
-
 roots.component.cobweb.name=Snare
 
 roots.mod.spikes.name=Spikes 
@@ -276,7 +275,7 @@ roots.research.spells.midnightbloom.page2info=The new flower you have created is
 
 roots.research.spells.cobweb.name=Spell Component: Snare
 roots.research.spells.cobweb.page1title.name=Snare
-roots.research.spells.cobweb.page1info=Through the power of the cobweb you can now make your nearby enemies slower,giving you time to escape, fight back or even capture them.
+roots.research.spells.cobweb.page1info=Through the power of the cobweb you have te ability to make your nearby enemies slower or even stop them, giving you time to escape, fight back or even capture them.
 
 roots.research.ritual.name=Rituals
 
