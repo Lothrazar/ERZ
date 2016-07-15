@@ -10,4 +10,5 @@ public class RootsNames {
 	public static String TAG_HAS_RITUAL_POWER = "RMOD_hasRitualPower";
 	public static String TAG_RITUAL_POWER_BASE = "RMOD_ritualPower_";
 	public static String TAG_RITUAL_POWER_COOLDOWN = "RMOD_ritualPowerCooldown";
+	public static String TAG_WHITE_TULIP = "RMOD_icy";
 }
