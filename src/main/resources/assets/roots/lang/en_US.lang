@@ -188,7 +188,7 @@ roots.research.spells.blueorchid.page1info=The blue orchid seems to be related t
 
 roots.research.spells.allium.name=Spell Component: Rending Strike
 roots.research.spells.allium.page1title.name=Equipment Breaker
-roots.research.spells.allium.page1info=Alliums contain a modicum of destructive energy. Using the above recipe, you can create a spell that will deal simple damage to its targets. In addition to this, if the target is holding a tool or wearing armor, their equipment will be damaged severely.
+roots.research.spells.allium.page1info=Alliums contain a modicum of destructive energy. Using the above recipe, you can create a spell that will shatter targets' defenses, multiplying the next damage they receive significantly.
 
 roots.research.spells.azurebluet.name=Spell Component: Shatter
 roots.research.spells.azurebluet.page1title.name=Mining with Magic
@@ -228,11 +228,11 @@ roots.research.spells.lilac.page1info=You have discovered that lilacs contain a 
 
 roots.research.spells.rosebush.name=Spell Component: Rose's Thorns
 roots.research.spells.rosebush.page1title.name=Natural Defenses
-roots.research.spells.rosebush.page1info=You have discovered a way to capture the prickliness of a rose bush in your spells. Using the above recipe, you can create a spell capable of dealing raw damage to targets. Do note that this spell will not cause knockback.
+roots.research.spells.rosebush.page1info=You have discovered a way to capture the prickliness of a rose bush in your spells. Using the above recipe, you can create a spell capable of dealing significant damage to targets. However, the thorns from this spell will transfer to the target, and the next entity to attack the target of this spell will take damage.
 
 roots.research.spells.peony.name=Spell Component: Regeneration
 roots.research.spells.peony.page1title.name=Gentle Touch
-roots.research.spells.peony.page1info=You have found that peonies have a gentle healing character to them. Using the above recipe, you can create a spell that will simply heal you a small amount.
+roots.research.spells.peony.page1info=You have found that peonies have a gentle healing character to them. Using the above recipe, you can create a spell that will draw from nearby flowers to heal you a small amount.
 
 roots.research.spells.apple.name=Spell Component: Nature's Cure
 roots.research.spells.apple.page1title.name=Remedy
@@ -248,7 +248,7 @@ roots.research.spells.poisonouspotato.page1info=The innate charge of a potato co
 
 roots.research.spells.netherwart.name=Spell Component: Inferno
 roots.research.spells.netherwart.page1title.name=Fireball
-roots.research.spells.netherwart.page1info=Nether wart has absorbed a lot from its fiery home in the nether. Using the above recipe, you can create a spell that will both damage and ignite hit targets.
+roots.research.spells.netherwart.page1info=Nether wart has absorbed a lot from its fiery home in the nether. Using the above recipe, you can create a spell that will unleash a powerful burst of damaging energy. However, this burst will physically drain you, and hit targets will be slightly buffed after being struck.
 
 roots.research.spells.chorus.name=Spell Component: Ender Warp
 roots.research.spells.chorus.page1title.name=Teleportation
@@ -258,7 +258,7 @@ roots.research.spells.radiantdaisy.name=Spell Component: Radiance
 roots.research.spells.radiantdaisy.page1title.name=Flower of Light
 roots.research.spells.radiantdaisy.page1info=Using the mutating flower in the overworld, you create a shining white flower. To create, plant an oxeye daisy. At noon, toss down a glowstone block and one prismarine crystal next to it, and while under the night vision effect, use the powder on the flower.
 roots.research.spells.radiantdaisy.page2title.name=Piercing Rays
-roots.research.spells.radiantdaisy.page2info=The new flower you have created contains the very essence of the glowing daylight of the overworld. Using the above recipe, you can create a spell that will do very high damage to struck creatures in a large beam in front of you.
+roots.research.spells.radiantdaisy.page2info=The new flower you have created contains the very essence of the glowing daylight of the overworld. Using the above recipe, you can create a spell that will create a highly damaging beam that will reflect off of blocks. Each reflection takes away some of the beam's power, until it dissipates completely.
 
 roots.research.spells.flareorchid.name=Spell Component: Combustion
 roots.research.spells.flareorchid.page1title.name=Fiery Flora
@@ -293,7 +293,7 @@ roots.research.ritual.livingtools.page6title.name=Ritual: Living Hoe
 
 roots.research.ritual.grow.name=Growth Ritual
 roots.research.ritual.grow.page1title.name=Spark of Life
-roots.research.ritual.grow.page1info=With the simple life-channeling abilities of the altar, you have devised a ritual that will aid the growth of your crops. This ritual will scan for crops in a 35x35x9 area and randomly apply a bonemeal-like effect to a few of them.
+roots.research.ritual.grow.page1info=With the simple life-channeling abilities of the altar, you have devised a ritual that will aid the growth of your crops. This ritual will imbue the player on top of the altar with the power of growth, enabling them to right-click any growable plant with an empty hand to rapidly grow it.
 roots.research.ritual.grow.page2title.name=Ritual: Grow
 
 roots.research.ritual.standingstones.name=Standing Stones
@@ -327,7 +327,7 @@ roots.research.ritual.rainrituals.page3title.name=Ritual: Banish Rain
 
 roots.research.ritual.flare.name=Fire Blast
 roots.research.ritual.flare.page1title.name=Offensive Rituals
-roots.research.ritual.flare.page1info=Not all of your rituals are for happy, fun purposes like toggling the rain or bringing your pet pig back to life. The flare ritual uses some fiery materials from the nether as well as some volatile fuels to burn mobs inside a 45x45x17 area around the altar, except for players immediately near the altar.
+roots.research.ritual.flare.page1info=With the energy stored within an infernal bulb, you imbue the player on the altar with a fiery power. With this power in your hands, you may simply right-click any creature with your empty hand to ignite and damage them, with a small explosion.
 roots.research.ritual.flare.page2title.name=Ritual: Flare
 
 roots.research.ritual.standingstones2.name=Enhanced Standing Stones
@@ -388,12 +388,12 @@ roots.research.ritual.poweredstones.page15info=The vacuum stone will pull nearby
 
 roots.research.ritual.massbreeding.name=Mass Breeding
 roots.research.ritual.massbreeding.page1title.name=Animal Farm
-roots.research.ritual.massbreeding.page1info=By burning common breeding items as incense, you have developed a ritual that will cause all breedable mobs within a 45x45x17 box to enter breeding mode.
+roots.research.ritual.massbreeding.page1info=By burning common breeding items as incense, you imbue the player on the altar with the power to breed animals. After being given this power, right-clicking on a breedable creature with an empty hand will cause all nearby creatures to become breedable.
 roots.research.ritual.massbreeding.page2title.name=Ritual: Mass Breeding
 
 roots.research.ritual.lifedrain.name=Life Drain
 roots.research.ritual.lifedrain.page1title.name=Taking It Back
-roots.research.ritual.lifedrain.page1info=The life force present in hostile mobs is corrupt and tainted. With this ritual, you have developed a means of taking this life force for more beneficial purposes. This ritual will damage all hostile mobs in a large area, and divide the damage dealt evenly among nearby players in the form of healing.
+roots.research.ritual.lifedrain.page1info=The life force present in hostile mobs is corrupt and tainted. With this ritual, you imbue the player on the altar with the power to drain life from living things. After being given this power, right-clicking on a creature with an empty hand will damage them and heal you a portion of the damage dealt.
 roots.research.ritual.lifedrain.page2title.name=Ritual: Life Drain
 
 roots.research.ritual.sacrifice.name=Sacrifice

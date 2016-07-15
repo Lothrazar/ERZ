@@ -39,10 +39,26 @@ public class ComponentBlueOrchid extends ComponentBase{
 		super("blueorchid","Earthen Roots",Blocks.RED_FLOWER,14);	
 	}
 	
-	public void destroyBlockSafe(World world, BlockPos pos, int potency){
-		if (world.getBlockState(pos).getBlock().getHarvestLevel(world.getBlockState(pos)) <= 2+potency && world.getBlockState(pos).getBlock().getBlockHardness(world.getBlockState(pos), world, pos) != -1){
-			world.destroyBlock(pos, true);
+	public void placeBlockSafe(World world, BlockPos pos, IBlockState state, int potency){
+		if (world.isAirBlock(pos)){
+			world.setBlockState(pos, state);
 		}
+	}
+	
+	public void attemptAdd(World world, BlockPos pos, ArrayList<BlockPos> positions){
+		if (world.isAirBlock(pos)){
+			positions.add(pos);
+		}
+	}
+	
+	public int findTop(ArrayList<BlockPos> positions){
+		int max = 1;
+		for (int i = 0; i < positions.size(); i ++){
+			if (positions.get(i).getY()+1 > max){
+				max = positions.get(i).getY()+1;
+			}
+		}
+		return max;
 	}
 	
 	@Override
@@ -58,54 +74,48 @@ public class ComponentBlueOrchid extends ComponentBase{
 						world.setBlockState(pos, state);
 					}
 					world.setBlockState(pos.up(), state);
+					ArrayList<BlockPos> positions = new ArrayList<BlockPos>();
+					positions.add(pos);
+					int maxPositions = 64+((int)size-3)*128;
+					while (positions.size() < maxPositions){
+						int s = positions.size();
+						for (int j = 0; j < (double)s/4.0; j ++){
+							if (random.nextFloat() > 0.975){
+								positions.add(positions.get(j).north());
+							}
+							if (random.nextFloat() > 0.975){
+								positions.add(positions.get(j).south());
+							}
+							if (random.nextFloat() > 0.975){
+								positions.add(positions.get(j).east());
+							}
+							if (random.nextFloat() > 0.975){
+								positions.add(positions.get(j).west());
+							}
+							if (random.nextFloat() > 0.25){
+								positions.add(positions.get(j).up());
+							}
+							if (random.nextFloat() > 0.975){
+								positions.add(positions.get(j).down());
+							}
+							if (positions.size() > maxPositions){
+								break;
+							}
+						}
+					}
+					for (int i = 0; i < positions.size(); i ++){
+						this.placeBlockSafe(world, positions.get(i), state, (int) potency);
+					}
 					ArrayList<EntityLivingBase> targets = (ArrayList<EntityLivingBase>) world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos.getX()-size,pos.getY()-size,pos.getZ()-size,pos.getX()+size,pos.getY()+size,pos.getZ()+size));
 					for (int i = 0; i < targets.size(); i ++){
 						if (targets.get(i).getUniqueID() != caster.getUniqueID()){
-							targets.get(i).moveEntity(0, 3, 0);
-							targets.get(i).motionY = 0.65+random.nextDouble()+0.25*potency;
+							targets.get(i).moveEntity(0, findTop(positions)+1, 0);
+							targets.get(i).motionY = 0.35+random.nextDouble()+0.1*potency;
 							if (targets.get(i) instanceof EntityPlayer){
 								((EntityPlayer)targets.get(i)).velocityChanged = true;
 							}
 						}
 					}
-					if (random.nextInt(3) == 0){
-						world.setBlockState(pos.up().west().north(), state);
-					}
-					if (random.nextInt(3) == 0){
-						world.setBlockState(pos.up().east().south(), state);
-					}
-					if (random.nextInt(3) == 0){
-						world.setBlockState(pos.up().north().east(), state);
-					}
-					if (random.nextInt(3) == 0){
-						world.setBlockState(pos.up().south().west(), state);
-					}
-					if (random.nextInt(1) == 0){
-						world.setBlockState(pos.up().west(), state);
-					}
-					if (random.nextInt(1) == 0){
-						world.setBlockState(pos.up().east(), state);
-					}
-					if (random.nextInt(1) == 0){
-						world.setBlockState(pos.up().north(), state);
-					}
-					if (random.nextInt(1) == 0){
-						world.setBlockState(pos.up().south(), state);
-					}
-					world.setBlockState(pos.up().up(), state);
-					if (random.nextInt(3) == 0){
-						world.setBlockState(pos.up().up().west(), state);
-					}
-					if (random.nextInt(3) == 0){
-						world.setBlockState(pos.up().up().east(), state);
-					}
-					if (random.nextInt(3) == 0){
-						world.setBlockState(pos.up().up().north(), state);
-					}
-					if (random.nextInt(3) == 0){
-						world.setBlockState(pos.up().up().south(), state);
-					}
-					world.setBlockState(pos.up().up().up(), state);
 				}
 			}
 		}

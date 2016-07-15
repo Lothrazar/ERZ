@@ -6,6 +6,8 @@ public class DefaultManaCapability implements IManaCapability {
 	public DefaultManaCapability(float maxMana, float mana){
 		this.maxMana = maxMana;
 		this.mana = mana;
+		setMaxMana(this.maxMana);
+		setMana(this.mana);
 	}
 	
 	@Override

@@ -173,7 +173,7 @@ public class ModelArmorBase extends ModelBiped {
 		chest.rotationPointX = bipedBody.rotationPointX;
 		chest.rotationPointY = bipedBody.rotationPointY-1;
 		chest.rotationPointZ = bipedBody.rotationPointZ;
-		chest.offsetY -= 0.125;
+		//chest.offsetY -= 0.125;
 		armR.rotationPointX = bipedRightArm.rotationPointX+5;
 		armR.rotationPointY = bipedRightArm.rotationPointY-1;
 		armR.rotationPointZ = bipedRightArm.rotationPointZ;

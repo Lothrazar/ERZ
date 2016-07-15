@@ -105,6 +105,11 @@ public class GuiTablet extends GuiScreen {
 		return magnitude*(float)Math.sin((degrees/360.0f)*Math.PI);
 	}
 	
+	public void renderItemStackAt(ItemStack stack, int x, int y, int mouseX, int mouseY){
+		this.itemRender.renderItemIntoGUI(stack, x, y);
+		GlStateManager.color(1f, 1f, 1f, 1f);
+	}
+	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks){
 		this.player.stopActiveHand();
@@ -144,7 +149,7 @@ public class GuiTablet extends GuiScreen {
 			float xShift = i % 6;
 			this.drawTexturedModalRect(basePosX+32*xShift, 32+40*yShift, 16, 0, 24, 24);
 			if (ResearchManager.globalResearches.get(currentGroup).researches.get(i).icon != null){
-				this.itemRender.renderItemIntoGUI(ResearchManager.globalResearches.get(currentGroup).researches.get(i).icon, (int)(basePosX+xShift*32+4), (int)(32+40*yShift+4));
+				this.renderItemStackAt(ResearchManager.globalResearches.get(currentGroup).researches.get(i).icon, (int)(basePosX+xShift*32+4), (int)(32+40*yShift+4), mouseX, mouseY);
 			}
 			if (mouseX >= basePosX+32*xShift && mouseX < basePosX+32*xShift+24 && mouseY >= 32+40*yShift && mouseY < 32+40*yShift+24){
 				String name = I18n.format("roots.research."+ResearchManager.globalResearches.get(currentGroup).name+"."+ResearchManager.globalResearches.get(currentGroup).researches.get(i).name+".name");

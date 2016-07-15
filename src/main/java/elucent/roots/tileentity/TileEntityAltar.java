@@ -108,7 +108,9 @@ public class TileEntityAltar extends TEBase implements ITickable {
 	public void breakBlock(World world, BlockPos pos, IBlockState state, EntityPlayer player){
 		for (int i = 0; i < inventory.size(); i ++){
 			if (!world.isRemote){
-				world.spawnEntityInWorld(new EntityItem(world,pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,inventory.get(i)));
+				EntityItem item = new EntityItem(world,pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,inventory.get(i));
+				item.forceSpawn = true;
+				world.spawnEntityInWorld(item);
 			}
 		}
 		this.invalidate();

@@ -43,7 +43,7 @@ import net.minecraft.world.World;
 public class ComponentPoppy extends ComponentBase{
 	Random random = new Random();
 	public ComponentPoppy(){
-		super("poppy","Insanity",Blocks.RED_FLOWER,0,8);	
+		super("poppy","Insanity",Blocks.RED_FLOWER,0,16);	
 	}
 	
 	@Override
@@ -53,7 +53,7 @@ public class ComponentPoppy extends ComponentBase{
 			for (int i = 0; i < targets.size(); i ++){
 				targets.get(i).setAttackTarget(null);
 				int j = random.nextInt(targets.size());
-				if (j != i && random.nextDouble() >= 1.0/(potency+1.0)){
+				if (j != i && random.nextDouble() >= 1.6/(potency+2.0)){
 					if (caster instanceof EntityPlayer){
 						if (!((EntityPlayer)caster).hasAchievement(RegistryManager.achieveSpellInsanity)){
 							PlayerManager.addAchievement((EntityPlayer)caster, RegistryManager.achieveSpellInsanity);

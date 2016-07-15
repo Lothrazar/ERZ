@@ -7,6 +7,7 @@ import java.util.Random;
 import com.google.common.collect.Lists;
 
 import elucent.roots.PlayerManager;
+import elucent.roots.RootsNames;
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.ComponentEffect;
 import elucent.roots.component.EnumCastType;
@@ -54,8 +55,8 @@ public class ComponentRedTulip extends ComponentBase{
 				skeleton.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(x,y,z)), null);
 				skeleton.setHeldItem(EnumHand.MAIN_HAND, null);
 				skeleton.setDropItemsWhenDead(false);
-				skeleton.getEntityData().setBoolean("RMOD_dropItems", false);
-				skeleton.getEntityData().setLong("RMOD_dontTarget", caster.getUniqueID().getMostSignificantBits());
+				skeleton.getEntityData().setBoolean(RootsNames.TAG_SKIP_ITEM_DROPS, false);
+				skeleton.getEntityData().setLong(RootsNames.TAG_DONT_TARGET_PLAYERS, caster.getUniqueID().getMostSignificantBits());
 				skeleton.setPosition(x, y+2.0, z);
 				skeleton.setAttackTarget(targets.get(random.nextInt(targets.size())));
 				if (skeleton.getAttackTarget().getUniqueID() != caster.getUniqueID()){

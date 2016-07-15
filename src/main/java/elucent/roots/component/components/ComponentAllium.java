@@ -7,6 +7,7 @@ import java.util.Random;
 import com.google.common.collect.Lists;
 
 import elucent.roots.ConfigManager;
+import elucent.roots.RootsNames;
 import elucent.roots.PlayerManager;
 import elucent.roots.RegistryManager;
 import elucent.roots.component.ComponentBase;
@@ -60,7 +61,7 @@ public class ComponentAllium extends ComponentBase{
 						targets.get(i).attackEntityFrom(DamageSource.generic, (int)(5+2*potency));
 						targets.get(i).setLastAttacker(caster);
 						targets.get(i).setRevengeTarget((EntityLivingBase)caster);
-						targets.get(i).getEntityData().setDouble("RMOD_vuln", 1.0+0.5*potency);
+						targets.get(i).getEntityData().setDouble(RootsNames.TAG_SPELL_VULNERABILITY, 1.0+0.5*potency);
 					}
 				}
 			}

@@ -72,7 +72,7 @@ public class TileEntityStandingStoneHealer extends TEBase implements ITickable {
 			ArrayList<EntityLivingBase> nearbyCreatures = (ArrayList<EntityLivingBase>)this.getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.getPos().getX()-9,this.getPos().getY()-9,this.getPos().getZ()-9,this.getPos().getX()+10,this.getPos().getY()+10,this.getPos().getZ()+10));
 			if (nearbyCreatures.size() > 0){
 				for (int i = 0; i < nearbyCreatures.size(); i ++){
-					nearbyCreatures.get(i).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"),25,1));
+					nearbyCreatures.get(i).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"),25,0));
 				}
 			}
 		}

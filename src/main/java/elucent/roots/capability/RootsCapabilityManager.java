@@ -26,14 +26,10 @@ public class RootsCapabilityManager {
 		class ManaCapabilityProvider implements ICapabilityProvider, INBTSerializable, IManaCapability {
             private EntityPlayer player;
             
-            float mana;
-            float maxMana;
+            float mana = 40.0f;
+            float maxMana = 40.0f;
 
             ManaCapabilityProvider(boolean isNew){
-                if (isNew){
-                	mana = 40;
-                	maxMana = 40;
-                }
             }
             
             @Override
@@ -90,11 +86,12 @@ public class RootsCapabilityManager {
 					//System.out.println("Loading NBT! Mana=" + tag.getFloat("mana") + "/" + tag.getFloat("maxMana"));
 					if (tag.hasKey("maxMana")){
 						setMaxMana(tag.getFloat("maxMana"));
-					}
-					if (tag.hasKey("mana")){
 						setMana(tag.getFloat("mana"));
+						return;
 					}
 				}
+				setMaxMana(40.0f);
+				setMana(40.0f);
 			}
         }
 		

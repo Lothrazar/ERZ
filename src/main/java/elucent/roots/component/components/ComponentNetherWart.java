@@ -42,11 +42,17 @@ public class ComponentNetherWart extends ComponentBase{
 						
 					}
 					else {
-						damageDealt += (int)(5+3*potency);
-						targets.get(i).attackEntityFrom(DamageSource.inFire, (int)(5+3*potency));
-						targets.get(i).setFire((int) (4+3*potency));
+						damageDealt += (int)(11+2*potency);
+						targets.get(i).attackEntityFrom(DamageSource.inFire, (int)(11+2*potency));
+						targets.get(i).setFire((int) (2+potency));
 						targets.get(i).setLastAttacker(caster);
 						targets.get(i).setRevengeTarget((EntityLivingBase)caster);
+						((EntityLivingBase)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:slowness"), 100, 0));
+						((EntityLivingBase)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:weakness"), 100, 0));
+						((EntityLivingBase)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:mining_fatigue"), 100, 0));
+						targets.get(i).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:speed"), 100, 0));
+						targets.get(i).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:haste"), 100, 0));
+						targets.get(i).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:strength"), 100, 0));
 					}
 				}
 			}

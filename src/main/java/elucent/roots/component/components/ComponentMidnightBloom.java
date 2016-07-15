@@ -8,6 +8,8 @@ import com.google.common.collect.Lists;
 
 import elucent.roots.PlayerManager;
 import elucent.roots.RegistryManager;
+import elucent.roots.RootsNames;
+import elucent.roots.Util;
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.ComponentEffect;
 import elucent.roots.component.EnumCastType;
@@ -44,8 +46,8 @@ public class ComponentMidnightBloom extends ComponentBase{
 			ArrayList<EntityLivingBase> targets = (ArrayList<EntityLivingBase>) world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-size*6.0,y-size*6.0,z-size*6.0,x+size*6.0,y+size*6.0,z+size*6.0));
 			for (int i = 0; i < targets.size(); i ++){
 				if (targets.get(i).getUniqueID() != caster.getUniqueID()){
-					targets.get(i).getEntityData().setBoolean("RMOD_trackTicks", false);
-					targets.get(i).getEntityData().setInteger("RMOD_skipTicks", 40+40*(int)potency);
+					Util.addTickTracking(caster);
+					targets.get(i).getEntityData().setInteger(RootsNames.TAG_SPELL_SKIP_TICKS, 80+40*(int)potency);
 				}
 			}
 		}

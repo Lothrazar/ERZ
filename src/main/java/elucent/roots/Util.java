@@ -45,19 +45,19 @@ public class Util {
 	}
 	
 	public static void addTickTracking(Entity entity){
-		if (entity.getEntityData().hasKey("RMOD_trackTicks")){
-			entity.getEntityData().setInteger("RMOD_trackTicks", entity.getEntityData().getInteger("RMOD_trackTicks")+1);
+		if (entity.getEntityData().hasKey(RootsNames.TAG_TRACK_TICKS)){
+			entity.getEntityData().setInteger(RootsNames.TAG_TRACK_TICKS, entity.getEntityData().getInteger(RootsNames.TAG_TRACK_TICKS)+1);
 		}
 		else {
-			entity.getEntityData().setInteger("RMOD_trackTicks", 1);
+			entity.getEntityData().setInteger(RootsNames.TAG_TRACK_TICKS, 1);
 		}
 	}
 	
 	public static void decrementTickTracking(Entity entity){
-		if (entity.getEntityData().hasKey("RMOD_trackTicks")){
-			entity.getEntityData().setInteger("RMOD_trackTicks", entity.getEntityData().getInteger("RMOD_trackTicks")-1);
-			if (entity.getEntityData().getInteger("RMOD_trackTicks") == 0){
-				entity.removeTag("RMOD_trackTicks");
+		if (entity.getEntityData().hasKey(RootsNames.TAG_TRACK_TICKS)){
+			entity.getEntityData().setInteger(RootsNames.TAG_TRACK_TICKS, entity.getEntityData().getInteger(RootsNames.TAG_TRACK_TICKS)-1);
+			if (entity.getEntityData().getInteger(RootsNames.TAG_TRACK_TICKS) == 0){
+				entity.removeTag(RootsNames.TAG_TRACK_TICKS);
 			}
 		}
 	}

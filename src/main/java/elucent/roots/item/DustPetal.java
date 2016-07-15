@@ -66,9 +66,11 @@ public class DustPetal extends Item {
 				}
 			}
 		}
-		if (potency >= 3 || efficiency >= 3 || size >= 3){
-			if (!(player).hasAchievement(RegistryManager.achieveMaxModifiers)){
-				PlayerManager.addAchievement(player, RegistryManager.achieveMaxModifiers);
+		if (player != null){
+			if (potency >= 3 || efficiency >= 3 || size >= 3){
+				if (!(player).hasAchievement(RegistryManager.achieveMaxModifiers)){
+					PlayerManager.addAchievement(player, RegistryManager.achieveMaxModifiers);
+				}
 			}
 		}
 		stack.getTagCompound().setInteger("potency", potency);

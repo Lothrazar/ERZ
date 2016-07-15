@@ -18,9 +18,12 @@ import elucent.roots.block.BlockStandingStoneT1;
 import elucent.roots.block.BlockStandingStoneT2;
 import elucent.roots.block.BlockStandingStoneVacuum;
 import elucent.roots.entity.EntityAccelerator;
+import elucent.roots.entity.EntitySpriteling;
 import elucent.roots.entity.EntityTileAccelerator;
+import elucent.roots.entity.RenderSpriteling;
 import elucent.roots.item.DustPetal;
 import elucent.roots.item.ItemCrystalStaff;
+import elucent.roots.item.ItemDebugWand;
 import elucent.roots.item.ItemDragonsEye;
 import elucent.roots.item.ItemDruidArmor;
 import elucent.roots.item.ItemDruidKnife;
@@ -42,6 +45,7 @@ import elucent.roots.item.ItemRunicFocus;
 import elucent.roots.item.ItemStaff;
 import elucent.roots.item.ItemTreeBark;
 import elucent.roots.item.RootsItemFood;
+import elucent.roots.model.entity.ModelSpriteling;
 import elucent.roots.tileentity.TileEntityAestheticStandingStone;
 import elucent.roots.tileentity.TileEntityAltar;
 import elucent.roots.tileentity.TileEntityAltarRenderer;
@@ -61,6 +65,7 @@ import elucent.roots.tileentity.TileEntityStandingStoneRepulsor;
 import elucent.roots.tileentity.TileEntityStandingStoneVacuum;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -74,6 +79,7 @@ import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -82,7 +88,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class RegistryManager {
-	public static Item runicFocus, rootyStew, healingPoultice, mutagen, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,nightshade,blackCurrant,redCurrant,whiteCurrant,elderBerry, engravedSword;
+	public static Item debugWand, runicFocus, rootyStew, healingPoultice, mutagen, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,nightshade,blackCurrant,redCurrant,whiteCurrant,elderBerry, engravedSword;
 	public static Item manaResearchIcon;
 	public static Block flareOrchid, radiantDaisy, standingStoneGrower, standingStoneHealer, standingStoneIgniter, standingStoneEntangler, standingStoneAccelerator, standingStoneAesthetic, standingStoneRepulsor, standingStoneVacuum, midnightBloom, mortar, imbuer, altar, druidChalice, standingStoneT1, standingStoneT2, brazier;
 	
@@ -99,6 +105,7 @@ public class RegistryManager {
 		 */
 		GameRegistry.registerItem(druidKnife = new ItemDruidKnife(), "druidKnife");
 		GameRegistry.registerItem(dustPetal = new DustPetal(), "dustPetal");
+		GameRegistry.registerItem(debugWand = new ItemDebugWand(), "debugWand");
 		GameRegistry.registerItem(pestle = new ItemPestle(), "pestle");
 		GameRegistry.registerItem(staff = new ItemStaff(), "staff");
 		GameRegistry.registerItem(crystalStaff = new ItemCrystalStaff(), "crystalStaff");
@@ -182,7 +189,8 @@ public class RegistryManager {
 	
 	public static void registerEntities(){
 		EntityRegistry.registerModEntity(EntityTileAccelerator.class, "tileAccelerator", 0, Roots.instance, 64, 20, true);
-		EntityRegistry.registerModEntity(EntityAccelerator.class, "entityAccelerator", 0, Roots.instance, 64, 20, true);
+		EntityRegistry.registerModEntity(EntityAccelerator.class, "entityAccelerator", 1, Roots.instance, 64, 20, true);
+		EntityRegistry.registerModEntity(EntitySpriteling.class, "spriteling", 2, Roots.instance, 64, 20, true, Util.intColor(160, 255, 0), Util.intColor(224, 255, 224));
 	}
 	
 	public static void registerRecipes(){
@@ -330,5 +338,10 @@ public class RegistryManager {
 	public static void registerColorHandlers(){
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemStaff.ColorHandler(), staff);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemCrystalStaff.ColorHandler(), crystalStaff);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public static void registerEntityRenderers() {
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteling.class, new RenderSpriteling(Minecraft.getMinecraft().getRenderManager(),new ModelSpriteling(),0.5f));
 	}
 }

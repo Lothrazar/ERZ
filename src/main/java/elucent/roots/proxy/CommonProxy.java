@@ -9,6 +9,7 @@ import elucent.roots.gui.GuiHandler;
 import elucent.roots.mutation.MutagenManager;
 import elucent.roots.research.ResearchManager;
 import elucent.roots.ritual.RitualManager;
+import elucent.roots.ritual.RitualPowerManager;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -19,14 +20,15 @@ public class CommonProxy {
 	
 	public void preInit(FMLPreInitializationEvent event){
 		RegistryManager.init();
+		RegistryManager.registerEntities();
 		RegistryManager.registerRecipes();
 		RootsCapabilityManager.preInit();
 		RegistryManager.registerAchievements();
+		RitualPowerManager.init();
 	}
 	
 	public void init(FMLInitializationEvent event){
 		ComponentManager.init();
-		RegistryManager.registerEntities();
 		RitualManager.init();
 		MutagenManager.init();
 	}

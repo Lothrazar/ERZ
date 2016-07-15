@@ -39,29 +39,48 @@ public class ComponentAzureBluet extends ComponentBase{
 		}
 	}
 	
+	public void attemptAdd(World world, BlockPos pos, ArrayList<BlockPos> positions){
+		if (!world.isAirBlock(pos)){
+			positions.add(pos);
+		}
+	}
+	
 	@Override
 	public void doEffect(World world, Entity caster, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
 		if (type == EnumCastType.SPELL){	
 			if (caster instanceof EntityPlayer && !world.isRemote){
 				BlockPos pos = Util.getRayTrace(world,(EntityPlayer)caster,4+2*(int)size);
-				destroyBlockSafe(world, pos, (int)potency);
-				if (random.nextBoolean()){
-					destroyBlockSafe(world, pos.up(), (int)potency);
+				ArrayList<BlockPos> positions = new ArrayList<BlockPos>();
+				positions.add(pos);
+				int maxPositions = 3+((int)size-3)*3;
+				while (positions.size() < maxPositions){
+					int s = positions.size();
+					for (int j = 0; j < s; j ++){
+						if (random.nextFloat() > 0.5){
+							positions.add(positions.get(j).north());
+						}
+						if (random.nextFloat() > 0.5){
+							positions.add(positions.get(j).south());
+						}
+						if (random.nextFloat() > 0.5){
+							positions.add(positions.get(j).east());
+						}
+						if (random.nextFloat() > 0.5){
+							positions.add(positions.get(j).west());
+						}
+						if (random.nextFloat() > 0.5){
+							positions.add(positions.get(j).up());
+						}
+						if (random.nextFloat() > 0.5){
+							positions.add(positions.get(j).down());
+						}
+						if (positions.size() > maxPositions){
+							break;
+						}
+					}
 				}
-				if (random.nextBoolean()){
-					destroyBlockSafe(world, pos.down(), (int)potency);
-				}
-				if (random.nextBoolean()){
-					destroyBlockSafe(world, pos.east(), (int)potency);
-				}
-				if (random.nextBoolean()){
-					destroyBlockSafe(world, pos.west(), (int)potency);
-				}
-				if (random.nextBoolean()){
-					destroyBlockSafe(world, pos.north(), (int)potency);
-				}
-				if (random.nextBoolean()){
-					destroyBlockSafe(world, pos.south(), (int)potency);
+				for (int i = 0; i < positions.size(); i ++){
+					destroyBlockSafe(world,positions.get(i),(int)potency);
 				}
 			}
 		}
