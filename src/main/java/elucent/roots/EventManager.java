@@ -7,11 +7,13 @@ import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 
-import elucent.roots.capability.RootsCapabilityManager;
+import elucent.roots.capability.powers.IPowersCapability;
+import elucent.roots.capability.powers.PowerProvider;
 import elucent.roots.item.IManaRelatedItem;
 import elucent.roots.item.ItemCrystalStaff;
 import elucent.roots.ritual.RitualPower;
 import elucent.roots.ritual.RitualPowerManager;
+import elucent.roots.ritual.powers.RitualNull;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockNetherWart;
@@ -38,6 +40,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
@@ -94,11 +97,9 @@ public class EventManager {
 	public void onPlayerInteract(PlayerInteractEvent.RightClickBlock event){
 		if (event.getHand() == EnumHand.MAIN_HAND){
 			if (event.getEntityPlayer().getHeldItem(event.getHand()) == null){
-				if (event.getEntityPlayer().getEntityData().hasKey(RootsNames.TAG_HAS_RITUAL_POWER)){
-					if (event.getEntityPlayer().getEntityData().getInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN) == 0){
+					if (!PowerProvider.get(event.getEntityPlayer()).getPowerName().equals("none") && PowerProvider.get(event.getEntityPlayer()).getCooldown() == 0){
 						RitualPowerManager.getPlayerPower(event.getEntityPlayer()).onRightClickBlock(event.getEntityPlayer(), event.getWorld(), event.getPos(), event.getWorld().getBlockState(event.getPos()));
 					}
-				}
 			}
 		}
 	}
@@ -115,11 +116,9 @@ public class EventManager {
 		}
 		if (event.getHand() == EnumHand.MAIN_HAND){
 			if (event.getEntityPlayer().getHeldItem(event.getHand()) == null){
-				if (event.getEntityPlayer().getEntityData().hasKey(RootsNames.TAG_HAS_RITUAL_POWER)){
-					if (event.getEntityPlayer().getEntityData().getInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN) == 0){
+					if (!PowerProvider.get(event.getEntityPlayer()).getPowerName().equals("none") && PowerProvider.get(event.getEntityPlayer()).getCooldown() == 0){
 						RitualPowerManager.getPlayerPower(event.getEntityPlayer()).onRightClickEntity(event.getEntityPlayer(), event.getWorld(), event.getTarget());
 					}
-				}
 			}
 		}
 	}
@@ -263,8 +262,7 @@ public class EventManager {
 				}
 			}
 		}
-		/*System.out.println(player.getEntityData());
-		boolean showPowerBar = player.getEntityData().hasKey(RootsNames.TAG_HAS_RITUAL_POWER);
+		boolean showPowerBar = !PowerProvider.get(player).getPowerName().equals("none");
 		if (player.capabilities.isCreativeMode){
 			showPowerBar = false;
 		}
@@ -282,23 +280,18 @@ public class EventManager {
 				GlStateManager.color(1f, 1f, 1f, 1f);
 				int texOffset = 64;
 				RitualPower playerPower = RitualPowerManager.getPlayerPower(player);
-				if (playerPower.name == "grow"){
-					texOffset = 96;
+				if(!(playerPower instanceof RitualNull)){
+					texOffset = playerPower.offset;
 				}
-				if (playerPower.name == "breed"){
-					texOffset = 128;
-				}
-				if (playerPower.name == "flare"){
-					texOffset = 160;
-				}
-				int powerNumber = player.getEntityData().getInteger(playerPower.getTagName());
+
+				int powerNumber = PowerProvider.get(player).getPowerLeft();
 				int maxPowerNumber = 20;
 				
 				int offsetX = 0;
 				
 				b.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 				while (maxPowerNumber > 0){
-					this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-19), w/2+19+offsetX, h-(ConfigManager.manaBarOffset-19), w/2+19+offsetX, h-ConfigManager.manaBarOffset-10, w/2+10+offsetX, h-ConfigManager.manaBarOffset-10, texOffset, 0, 9, 9);
+					this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-ConfigManager.manaBarOffset-10, w/2+10+offsetX, h-ConfigManager.manaBarOffset-10, texOffset, 0, 9, 9);
 					if (maxPowerNumber > 2){
 						maxPowerNumber -= 2;
 						offsetX += 8;
@@ -310,16 +303,16 @@ public class EventManager {
 				offsetX = 0;
 				while (powerNumber > 0){
 					if (powerNumber > 2){
-						this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-19), w/2+19+offsetX, h-(ConfigManager.manaBarOffset-19), w/2+19+offsetX, h-ConfigManager.manaBarOffset-10, w/2+10+offsetX, h-ConfigManager.manaBarOffset-10, texOffset, 16, 9, 9);
+						this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-ConfigManager.manaBarOffset-10, w/2+10+offsetX, h-ConfigManager.manaBarOffset-10, texOffset, 16, 9, 9);
 						powerNumber -= 2;
 						offsetX += 8;
 					}
 					else {
 						if (powerNumber == 2){
-							this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-19), w/2+19+offsetX, h-(ConfigManager.manaBarOffset-19), w/2+19+offsetX, h-ConfigManager.manaBarOffset-10, w/2+10+offsetX, h-ConfigManager.manaBarOffset-10, texOffset, 16, 9, 9);
+							this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-ConfigManager.manaBarOffset-10, w/2+10+offsetX, h-ConfigManager.manaBarOffset-10, texOffset, 16, 9, 9);
 						}
 						if (powerNumber == 1){
-							this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-19), w/2+19+offsetX, h-(ConfigManager.manaBarOffset-19), w/2+19+offsetX, h-ConfigManager.manaBarOffset-10, w/2+10+offsetX, h-ConfigManager.manaBarOffset-10, texOffset+16, 16, 9, 9);
+							this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-ConfigManager.manaBarOffset-10, w/2+10+offsetX, h-ConfigManager.manaBarOffset-10, texOffset+16, 16, 9, 9);
 						}
 						powerNumber = 0;
 					}
@@ -330,7 +323,7 @@ public class EventManager {
 				GlStateManager.enableCull();
 				GlStateManager.enableDepth();
 			}
-		}*/
+		}
 	}
 	
 	@SubscribeEvent
@@ -354,12 +347,13 @@ public class EventManager {
 	@SubscribeEvent
 	public void onLivingTick(LivingUpdateEvent event){
 		if (event.getEntityLiving() instanceof EntityPlayer){
-			if (event.getEntityLiving().getEntityData().hasKey(RootsNames.TAG_RITUAL_POWER_COOLDOWN)){
-				if (event.getEntityLiving().getEntityData().getInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN) > 0){
-					event.getEntityLiving().getEntityData().setInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN, event.getEntityLiving().getEntityData().getInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN)-1);
+			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+			if (PlayerManager.getPersistedPlayerTag(player).hasKey(RootsNames.TAG_RITUAL_POWER_COOLDOWN)){
+				if (PlayerManager.getPersistedPlayerTag(player).getInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN) > 0){
+					PlayerManager.getPersistedPlayerTag(player).setInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN, PlayerManager.getPersistedPlayerTag(player).getInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN)-1);
 				}
-				if (event.getEntityLiving().getEntityData().getInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN) < 0){
-					event.getEntityLiving().getEntityData().setInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN, 0);
+				if (PlayerManager.getPersistedPlayerTag(player).getInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN) < 0){
+					PlayerManager.getPersistedPlayerTag(player).setInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN, 0);
 				}
 			}
 			if (event.getEntityLiving().ticksExisted % 5 == 0){
@@ -367,6 +361,8 @@ public class EventManager {
 					event.getEntityLiving().getCapability(RootsCapabilityManager.manaCapability, null).setMana(event.getEntityLiving().getCapability(RootsCapabilityManager.manaCapability, null).getMana()+1.0f);
 				}
 			}
+			
+			PowerProvider.get(player).startCooldown(player);
 		}
 		if (event.getEntityLiving().getEntityData().hasKey(RootsNames.TAG_TRACK_TICKS)){
 			if (event.getEntityLiving().getEntityData().hasKey(RootsNames.TAG_SPELL_SKIP_TICKS)){
@@ -475,6 +471,14 @@ public class EventManager {
 			}
 		}	
 	}
+	
+	@SubscribeEvent
+	public void entityJoinWorld(EntityJoinWorldEvent e) {
+		if (e.getEntity() instanceof EntityPlayer && !e.getEntity().worldObj.isRemote)
+		{
+			PowerProvider.get((EntityPlayer) e.getEntity()).dataChanged((EntityPlayer) e.getEntity());
+		}
+}
 	
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent

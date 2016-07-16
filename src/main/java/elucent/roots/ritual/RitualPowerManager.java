@@ -1,8 +1,13 @@
 package elucent.roots.ritual;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import elucent.roots.PlayerManager;
 import elucent.roots.RootsNames;
+import elucent.roots.capability.powers.IPowersCapability;
+import elucent.roots.capability.powers.PowerProvider;
+import elucent.roots.ritual.powers.RitualNull;
 import elucent.roots.ritual.powers.RitualPowerBreed;
 import elucent.roots.ritual.powers.RitualPowerFlare;
 import elucent.roots.ritual.powers.RitualPowerGrow;
@@ -10,24 +15,18 @@ import elucent.roots.ritual.powers.RitualPowerLifeDrain;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class RitualPowerManager {
-	public static ArrayList<RitualPower> powers = new ArrayList<RitualPower>();
+	public static HashMap<String,RitualPower> powers = new HashMap<String,RitualPower>();
 	
 	public static void init(){
-		powers.add(new RitualPowerFlare());
-		powers.add(new RitualPowerGrow());
-		powers.add(new RitualPowerBreed());
-		powers.add(new RitualPowerLifeDrain());
+		powers.put("flare", new RitualPowerFlare());
+		powers.put("grow",  new RitualPowerGrow());
+		powers.put("greed", new RitualPowerBreed());
+		powers.put("drain", new RitualPowerLifeDrain());
+		powers.put("none", new RitualNull());
 	}
 	
 	public static RitualPower getPlayerPower(EntityPlayer player){
-		if (player.getEntityData().hasKey(RootsNames.TAG_HAS_RITUAL_POWER)){
-			for (int i = 0; i < powers.size(); i ++){
-				if (player.getEntityData().hasKey(powers.get(i).getTagName())){
-					return powers.get(i);
-				}
-			}
-		}
-		return null;
+			return powers.get(PowerProvider.get(player).getPowerName());
 	}
 	
 	public static RitualPower getPowerFromName(String name){

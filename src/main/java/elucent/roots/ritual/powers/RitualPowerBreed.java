@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 public class RitualPowerBreed extends RitualPower {
 	Random random = new Random();
 	public RitualPowerBreed(){
-		super("breed",EnumPowerType.TYPE_TARGET_ENTITY);
+		super("breed",EnumPowerType.TYPE_TARGET_ENTITY,128);
 	}
 	
 	@Override

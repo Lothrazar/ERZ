@@ -2,9 +2,10 @@ package elucent.roots;
 
 import java.util.ArrayList;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.stats.Achievement;
 import elucent.roots.component.ComponentEffect;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.stats.Achievement;
 
 public class PlayerManager {
 	public static ArrayList<ComponentEffect> playerEffects = new ArrayList<ComponentEffect>();
@@ -44,4 +45,16 @@ public class PlayerManager {
 			player.addStat(ach, 1);
 		}
 	}
+	
+	public static NBTTagCompound getPersistedPlayerTag(EntityPlayer player)
+	{
+		NBTTagCompound nbt;
+		if (!player.getEntityData().hasKey("PlayerPersisted")){
+			nbt = new NBTTagCompound();
+			player.getEntityData().setTag("PlayerPersisted", nbt);
+		} else{
+			nbt = player.getEntityData().getCompoundTag("PlayerPersisted");
+		}
+		return nbt;
+}
 }

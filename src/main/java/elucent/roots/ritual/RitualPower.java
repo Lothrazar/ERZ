@@ -1,6 +1,8 @@
 package elucent.roots.ritual;
 
+import elucent.roots.PlayerManager;
 import elucent.roots.RootsNames;
+import elucent.roots.capability.powers.PowerProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,9 +12,11 @@ import net.minecraft.world.World;
 public class RitualPower {
 	public String name;
 	public EnumPowerType type;
-	public RitualPower(String name, EnumPowerType type){
+	public int offset;
+	public RitualPower(String name, EnumPowerType type, int textureOffset){
 		this.name = name;
 		this.type = type;
+		this.offset = textureOffset;
 	}
 	
 	public String getTagName(){
@@ -21,24 +25,18 @@ public class RitualPower {
 	
 	public void onRightClickEntity(EntityPlayer player, World world, Entity entity){
 		if (type == EnumPowerType.TYPE_TARGET_ENTITY){
-			player.getEntityData().setInteger(getTagName(), player.getEntityData().getInteger("RMOD_ritualPower_"+name)-1);
-			player.getEntityData().setInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN, 5);
-			if (player.getEntityData().getInteger(getTagName()) == 0){
-				player.getEntityData().removeTag(getTagName());
-				player.getEntityData().removeTag(RootsNames.TAG_HAS_RITUAL_POWER);
-				player.getEntityData().removeTag(RootsNames.TAG_RITUAL_POWER_COOLDOWN);
+			PowerProvider.get(player).usePower(player);
+			if (PowerProvider.get(player).getPowerLeft() == 0){
+				PowerProvider.get(player).setPower(player, "none");
 			}
 		}
 	}
 	
 	public void onRightClickBlock(EntityPlayer player, World world, BlockPos pos, IBlockState state){
 		if (type == EnumPowerType.TYPE_TARGET_BLOCK){
-			player.getEntityData().setInteger(getTagName(), player.getEntityData().getInteger("RMOD_ritualPower_"+name)-1);
-			player.getEntityData().setInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN, 5);
-			if (player.getEntityData().getInteger(getTagName()) == 0){
-				player.getEntityData().removeTag(getTagName());
-				player.getEntityData().removeTag(RootsNames.TAG_HAS_RITUAL_POWER);
-				player.getEntityData().removeTag(RootsNames.TAG_RITUAL_POWER_COOLDOWN);
+			PowerProvider.get(player).usePower(player);
+			if (PowerProvider.get(player).getPowerLeft() == 0){
+				PowerProvider.get(player).setPower(player, "none");
 			}
 		}
 	}

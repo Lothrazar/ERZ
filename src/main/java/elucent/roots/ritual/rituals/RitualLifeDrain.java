@@ -32,6 +32,17 @@ public class RitualLifeDrain extends RitualBase {
 	}
 	
 	@Override
+	public boolean matches(World world, BlockPos pos){
+		if (super.matches(world, pos)){
+			List<EntityMob> enemies = (List<EntityMob>)world.getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(pos.getX()-22,pos.getY()-8,pos.getZ()-22,pos.getX()+23,pos.getY()+9,pos.getZ()+23));
+			if (enemies.isEmpty() == false){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
 	public void doEffect(World world, BlockPos pos, List<ItemStack> inventory, List<ItemStack> incenses){
 		inventory.clear();
 		List<EntityMob> enemies = (List<EntityMob>)world.getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(pos.getX()-22,pos.getY()-8,pos.getZ()-22,pos.getX()+23,pos.getY()+9,pos.getZ()+23));

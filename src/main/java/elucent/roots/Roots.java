@@ -1,7 +1,6 @@
 package elucent.roots;
 
 import elucent.roots.capability.IManaCapability;
-import elucent.roots.capability.RootsCapabilityManager;
 import elucent.roots.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -49,8 +48,8 @@ public class Roots
     @EventHandler
     public void preInit(FMLPreInitializationEvent event){
     	ConfigManager.load(event);
-    	MinecraftForge.EVENT_BUS.register(new EventManager());
     	MinecraftForge.EVENT_BUS.register(new RootsCapabilityManager());
+    	MinecraftForge.EVENT_BUS.register(new EventManager());
     	proxy.preInit(event);
     }
     

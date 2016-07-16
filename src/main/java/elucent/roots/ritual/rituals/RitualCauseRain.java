@@ -25,7 +25,7 @@ public class RitualCauseRain extends RitualBase {
 	@Override
 	public boolean matches(World world, BlockPos pos){
 		if (super.matches(world, pos)){
-			if (world.getWorldInfo().isRaining() == false){
+			if (world.getWorldInfo().isRaining() == false && pos.getY() >= 128){
 				return true;
 			}
 		}

@@ -2,11 +2,12 @@ package elucent.roots.proxy;
 
 import elucent.roots.RegistryManager;
 import elucent.roots.Roots;
+import elucent.roots.RootsCapabilityManager;
 import elucent.roots.Util;
-import elucent.roots.capability.RootsCapabilityManager;
 import elucent.roots.component.ComponentManager;
 import elucent.roots.gui.GuiHandler;
 import elucent.roots.mutation.MutagenManager;
+import elucent.roots.network.MessageUpdateCaps;
 import elucent.roots.research.ResearchManager;
 import elucent.roots.ritual.RitualManager;
 import elucent.roots.ritual.RitualPowerManager;
@@ -15,8 +16,11 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class CommonProxy {
+	public static SimpleNetworkWrapper network;
 	
 	public void preInit(FMLPreInitializationEvent event){
 		RegistryManager.init();
@@ -24,6 +28,8 @@ public class CommonProxy {
 		RootsCapabilityManager.preInit();
 		RegistryManager.registerAchievements();
 		RitualPowerManager.init();
+		network = NetworkRegistry.INSTANCE.newSimpleChannel("roots");
+		network.registerMessage(MessageUpdateCaps.CapsMessageHandler.class, MessageUpdateCaps.class, 1, Side.CLIENT);
 	}
 	
 	public void init(FMLInitializationEvent event){

@@ -6,8 +6,8 @@ import java.util.Random;
 import net.minecraft.util.text.TextFormatting;
 
 import elucent.roots.Roots;
+import elucent.roots.RootsCapabilityManager;
 import elucent.roots.Util;
-import elucent.roots.capability.RootsCapabilityManager;
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.ComponentManager;
 import elucent.roots.component.EnumCastType;

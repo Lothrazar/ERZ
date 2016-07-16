@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 public class RitualPowerLifeDrain extends RitualPower {
 	Random random = new Random();
 	public RitualPowerLifeDrain(){
-		super("lifedrain",EnumPowerType.TYPE_TARGET_ENTITY);
+		super("lifedrain",EnumPowerType.TYPE_TARGET_ENTITY,64);
 	}
 	
 	@Override

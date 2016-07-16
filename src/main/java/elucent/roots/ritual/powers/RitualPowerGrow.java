@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 public class RitualPowerGrow extends RitualPower {
 	Random random = new Random();
 	public RitualPowerGrow(){
-		super("grow",EnumPowerType.TYPE_TARGET_BLOCK);
+		super("grow",EnumPowerType.TYPE_TARGET_BLOCK,96);
 	}
 	
 	public boolean growBlockSafe(World world, BlockPos pos){

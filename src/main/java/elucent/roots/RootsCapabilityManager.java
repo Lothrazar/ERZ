@@ -1,5 +1,12 @@
-package elucent.roots.capability;
+package elucent.roots;
 
+import elucent.roots.capability.DefaultManaCapability;
+import elucent.roots.capability.IManaCapability;
+import elucent.roots.capability.ManaCapabilityStorage;
+import elucent.roots.capability.powers.DefaultPowerCapability;
+import elucent.roots.capability.powers.IPowersCapability;
+import elucent.roots.capability.powers.PowerCapabilityStorage;
+import elucent.roots.capability.powers.PowerProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,6 +26,7 @@ public class RootsCapabilityManager {
     
     public static void preInit(){
     	CapabilityManager.INSTANCE.register(IManaCapability.class, new ManaCapabilityStorage(), DefaultManaCapability.class);
+    	CapabilityManager.INSTANCE.register(IPowersCapability.class, new PowerCapabilityStorage(), DefaultPowerCapability.class);
     }
 	
 	@SubscribeEvent
@@ -98,6 +106,9 @@ public class RootsCapabilityManager {
 		if (e.getEntity() instanceof EntityPlayer){
 			ManaCapabilityProvider provider = new ManaCapabilityProvider(!e.getEntity().hasCapability(manaCapability, null));
 			e.addCapability(new ResourceLocation("roots:manaCapability"), provider);
+			if(!e.getEntity().hasCapability(PowerProvider.powerCapability, null)){
+				e.addCapability(new ResourceLocation("roots:powerCapability"), new PowerProvider(new DefaultPowerCapability()));
+			}
 		}
 	}
 }

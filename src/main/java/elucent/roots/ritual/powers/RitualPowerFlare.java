@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 public class RitualPowerFlare extends RitualPower {
 	Random random = new Random();
 	public RitualPowerFlare(){
-		super("flare",EnumPowerType.TYPE_TARGET_ENTITY);
+		super("flare",EnumPowerType.TYPE_TARGET_ENTITY,160);
 	}
 	
 	@Override

@@ -7,7 +7,7 @@ import com.google.common.collect.Multimap;
 
 import elucent.roots.RegistryManager;
 import elucent.roots.Roots;
-import elucent.roots.capability.RootsCapabilityManager;
+import elucent.roots.RootsCapabilityManager;
 import elucent.roots.model.ModelDruidRobes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
