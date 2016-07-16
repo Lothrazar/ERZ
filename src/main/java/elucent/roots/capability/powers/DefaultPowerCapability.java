@@ -31,7 +31,7 @@ public class DefaultPowerCapability implements IPowersCapability{
 	@Override
 	public void usePower(EntityPlayer player) {
 		this.powerUse -= 1;
-		this.cooldown = 20;
+		this.cooldown = 5;
 		this.cooling = true;
 		startCooldown(player);
 	}
