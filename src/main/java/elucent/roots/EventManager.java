@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.entity.monster.SkeletonType;
 import org.lwjgl.opengl.GL11;
 
 import elucent.roots.capability.RootsCapabilityManager;
@@ -111,7 +112,7 @@ public class EventManager {
 			if (event.getEntityPlayer().getHeldItem(event.getHand()) != null){
 				if (event.getEntityPlayer().getHeldItem(event.getHand()).getItem() == RegistryManager.infernalStem){
 					event.getEntityPlayer().getHeldItem(event.getHand()).stackSize --;
-					((EntitySkeleton)event.getTarget()).setSkeletonType(1);
+					((EntitySkeleton)event.getTarget()).func_189768_a(SkeletonType.WITHER);
 				}
 			}
 		}

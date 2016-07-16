@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = Roots.MODID, name = Roots.NAME, version = Roots.VERSION)
+@Mod(modid = Roots.MODID, name = Roots.NAME, version = Roots.VERSION, useMetadata = true)
 public class Roots
 {
 	public static final String NAME = "Roots";
