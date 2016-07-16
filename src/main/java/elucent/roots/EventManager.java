@@ -112,7 +112,6 @@ public class EventManager {
 				if (event.getEntityPlayer().getHeldItem(event.getHand()).getItem() == RegistryManager.infernalStem){
 					event.getEntityPlayer().getHeldItem(event.getHand()).stackSize --;
 					((EntitySkeleton)event.getTarget()).func_189768_a(SkeletonType.WITHER);
-					////VCSTest
 				}
 			}
 		}
