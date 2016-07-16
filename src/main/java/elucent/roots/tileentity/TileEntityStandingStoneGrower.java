@@ -73,7 +73,7 @@ public class TileEntityStandingStoneGrower extends TEBase implements ITickable {
 			for (int i = -9; i < 10; i ++){
 				for (int j = -9; j < 10; j ++){
 					BlockPos pos = this.getPos().add(i, -1, j);
-					if (this.getWorld().getBlockState(pos).getBlock() instanceof BlockCrops && random.nextInt(40) == 0){
+					if (this.getWorld().getBlockState(pos).getBlock() instanceof BlockCrops && random.nextInt(20) == 0){
 						int age = this.getWorld().getBlockState(pos).getBlock().getMetaFromState(this.getWorld().getBlockState(pos));
 						if (age < ((BlockCrops)this.getWorld().getBlockState(pos).getBlock()).getMaxAge()){
 							this.getWorld().setBlockState(pos, ((BlockCrops)this.getWorld().getBlockState(pos).getBlock()).withAge(age+1));

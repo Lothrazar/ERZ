@@ -20,8 +20,8 @@ public class RitualPowerManager {
 	public static void init(){
 		powers.put("flare", new RitualPowerFlare());
 		powers.put("grow",  new RitualPowerGrow());
-		powers.put("greed", new RitualPowerBreed());
-		powers.put("drain", new RitualPowerLifeDrain());
+		powers.put("breed", new RitualPowerBreed());
+		powers.put("lifedrain", new RitualPowerLifeDrain());
 		powers.put("none", new RitualNull());
 	}
 	

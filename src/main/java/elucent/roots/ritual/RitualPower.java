@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 public class RitualPower {
 	public String name;
 	public EnumPowerType type;
-	public int offset;
+	public int offset = 0;
 	public RitualPower(String name, EnumPowerType type, int textureOffset){
 		this.name = name;
 		this.type = type;

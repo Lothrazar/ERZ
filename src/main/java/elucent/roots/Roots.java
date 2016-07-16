@@ -1,7 +1,6 @@
 package elucent.roots;
 
 import elucent.roots.capability.IManaCapability;
-import elucent.roots.capability.RootsCapabilityManager;
 import elucent.roots.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
