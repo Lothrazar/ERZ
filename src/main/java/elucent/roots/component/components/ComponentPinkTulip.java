@@ -26,7 +26,7 @@ public class ComponentPinkTulip extends ComponentBase {
 			for (int i = 0; i < targets.size(); i ++){
 				if (targets.get(i).getUniqueID() != caster.getUniqueID()){
 					targets.get(i).attackEntityFrom(DamageSource.wither, (int)(3+2*potency));
-					((EntityLivingBase)caster).heal(targets.size()*(float)(1.0+0.5*potency));
+					((EntityLivingBase)caster).heal(targets.size()*(float)(2.0+1.0*potency));
 					targets.get(i).setLastAttacker(caster);
 					targets.get(i).setRevengeTarget((EntityLivingBase)caster);
 				}

@@ -7,6 +7,7 @@ import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 
+import elucent.roots.capability.RootsCapabilityManager;
 import elucent.roots.capability.powers.IPowersCapability;
 import elucent.roots.capability.powers.PowerProvider;
 import elucent.roots.item.IManaRelatedItem;
