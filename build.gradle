@@ -14,6 +14,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
+
 version = "${minecraft_version}-${mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
 group= mod_group 
 archivesBaseName = mod_artifact_basename
@@ -25,8 +26,11 @@ minecraft {
     mappings = mcp_mappings_version
 }
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 dependencies {
-   
+
 }
 
 processResources
