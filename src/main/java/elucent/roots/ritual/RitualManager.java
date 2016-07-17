@@ -3,10 +3,7 @@ package elucent.roots.ritual;
 import java.util.ArrayList;
 
 import elucent.roots.RegistryManager;
-import elucent.roots.ritual.powers.RitualPowerBreed;
-import elucent.roots.ritual.powers.RitualPowerFlare;
-import elucent.roots.ritual.powers.RitualPowerGrow;
-import elucent.roots.ritual.powers.RitualPowerLifeDrain;
+import elucent.roots.ritual.powers.*;
 import elucent.roots.ritual.rituals.RitualCauseRain;
 import elucent.roots.ritual.rituals.RitualCrafting;
 import elucent.roots.ritual.rituals.RitualEngravedSword;
@@ -803,6 +800,25 @@ public class RitualManager {
 				.addBlock(RegistryManager.standingStoneT1, 0, 0, -3)
 				.addIngredient(new ItemStack(Items.CLOCK))
 				.addIngredient(new ItemStack(Items.IRON_INGOT)));
+		rituals.add(new RitualPowerGiver("restoration", 139, 22, 40)
+				.setPower(new RitualPowerRestoration())
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, -3)
+				.addBlock(RegistryManager.standingStoneT2, 5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, -5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, 5)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
+				.addIngredient(new ItemStack(Items.MILK_BUCKET))
+				.addIngredient(new ItemStack(Items.FEATHER))
+				.addIngredient(new ItemStack(RegistryManager.itemCharmRestoration)));
+
+
 	}
 	
 	public static RitualBase getRitualFromName(String name){

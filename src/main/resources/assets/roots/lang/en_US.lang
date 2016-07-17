@@ -39,6 +39,12 @@ item.elderberry.name=Elderberry
 item.healingPoultice.name=Healing Poultice
 item.rootyStew.name=Rooty Stew
 item.engravedSword.name=Engraved Blade
+
+item.charmRestoration.name=Charm of Restoration
+item.charmEvocation.name=Charm of Evocation
+item.charmConjuration.name=Charm of Conjuration
+item.charmIllusion.name=Charm of Illusion
+
 runicFocus_0.name=Runic Focus
 runicFocus_1.name=Charged Runic Focus
 
@@ -433,6 +439,11 @@ roots.research.ritual.timeshift.name=Time Shift
 roots.research.ritual.timeshift.page1title.name=Timey Wimey Stuff
 roots.research.ritual.timeshift.page1info=After many hours you have discovered that by burning common time keeping devices you can move time by an amount proportional to the amount of clocks burned as incense.
 roots.research.ritual.timeshift.page2title.name=Ritual: Time Shift
+
+roots.research.ritual.restoration.name=Restoration
+roots.research.ritual.restoration.page1title.name=Restoration
+roots.research.ritual.restoration.page1info=After obtaining the charm of restoration, the power that it held was unleashed and you got the ability to remove all bad effects and push your enemies away from you.
+roots.research.ritual.restoration.page2title.name=Ritual: Restoration
 
 roots.research.ritual.poweredstones.page16title.name=Ritual: Standing Stone
 roots.research.ritual.poweredstones.page17title.name=Standing Stone

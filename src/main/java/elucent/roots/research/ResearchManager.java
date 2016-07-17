@@ -486,6 +486,14 @@ public class ResearchManager {
 								    .addAltarRecipe(RitualManager.getRitualFromName("timeshift"))
 								    )
 	                       )
+				.addResearch(new ResearchBase("restoration", new ItemStack(Blocks.BRICK_BLOCK))
+							.addPage(new ResearchPage()
+                                    )
+                            .addPage(new ResearchPage()
+                                    .addAltarRecipe(RitualManager.getRitualFromName("restoration")
+                                    )
+							    )
+                            )
 			  );
 	}
 	public static ResearchBase getResearch(String groupName, String researchName){

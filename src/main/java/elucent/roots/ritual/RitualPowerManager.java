@@ -7,11 +7,7 @@ import elucent.roots.PlayerManager;
 import elucent.roots.RootsNames;
 import elucent.roots.capability.powers.IPowersCapability;
 import elucent.roots.capability.powers.PowerProvider;
-import elucent.roots.ritual.powers.RitualNull;
-import elucent.roots.ritual.powers.RitualPowerBreed;
-import elucent.roots.ritual.powers.RitualPowerFlare;
-import elucent.roots.ritual.powers.RitualPowerGrow;
-import elucent.roots.ritual.powers.RitualPowerLifeDrain;
+import elucent.roots.ritual.powers.*;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class RitualPowerManager {
@@ -22,6 +18,7 @@ public class RitualPowerManager {
 		powers.put("grow",  new RitualPowerGrow());
 		powers.put("breed", new RitualPowerBreed());
 		powers.put("lifedrain", new RitualPowerLifeDrain());
+		powers.put("restoration", new RitualPowerRestoration());
 		powers.put("none", new RitualNull());
 	}
 	
