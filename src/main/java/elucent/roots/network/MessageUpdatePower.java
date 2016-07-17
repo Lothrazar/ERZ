@@ -11,13 +11,13 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageUpdateCaps implements IMessage{
+public class MessageUpdatePower implements IMessage{
 
 	private NBTTagCompound tags;
 	
-	public MessageUpdateCaps() {};
+	public MessageUpdatePower() {};
 	
-	public MessageUpdateCaps(NBTTagCompound tag){
+	public MessageUpdatePower(NBTTagCompound tag){
 		this.tags = tag;
 	};
 	
@@ -31,18 +31,17 @@ public class MessageUpdateCaps implements IMessage{
 		ByteBufUtils.writeTag(buf, tags);
 	}
 	
-	public static class CapsMessageHandler implements IMessageHandler<MessageUpdateCaps, IMessage>{
+	public static class CapsMessageHandler implements IMessageHandler<MessageUpdatePower, IMessage>{
 
 
 		@Override
-		public IMessage onMessage( final MessageUpdateCaps message, final MessageContext ctx) {
+		public IMessage onMessage( final MessageUpdatePower message, final MessageContext ctx) {
 			IThreadListener mainThread = (ctx.side.isClient())? Minecraft.getMinecraft() : (WorldServer) ctx.getServerHandler().playerEntity.worldObj;
             mainThread.addScheduledTask(new Runnable() 
             {
                 @Override
-                public void run() {           
+                public void run() {
                     PowerProvider.get(Minecraft.getMinecraft().thePlayer).loadNBTData(message.tags);
-                    System.out.println("Messge taken");
                 }
             });
             return null;

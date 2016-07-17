@@ -7,6 +7,7 @@ import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 
+import elucent.roots.capability.mana.ManaProvider;
 import elucent.roots.capability.powers.IPowersCapability;
 import elucent.roots.capability.powers.PowerProvider;
 import elucent.roots.item.IManaRelatedItem;
@@ -202,7 +203,7 @@ public class EventManager {
 			showBar = false;
 		}
 		if (showBar){
-			if (player.getCapability(RootsCapabilityManager.manaCapability, null).getMaxMana() > 0){
+			if (ManaProvider.get(player).getMana() > 0){
 				if (e.getType() == ElementType.TEXT){
 					GlStateManager.disableDepth();
 					GlStateManager.disableCull();
@@ -215,8 +216,8 @@ public class EventManager {
 					int h = e.getResolution().getScaledHeight();
 					GlStateManager.color(1f, 1f, 1f, 1f);
 					
-					int manaNumber = Math.round(player.getCapability(RootsCapabilityManager.manaCapability, null).getMana());
-					int maxManaNumber = Math.round(player.getCapability(RootsCapabilityManager.manaCapability, null).getMaxMana());
+					int manaNumber = Math.round(ManaProvider.get(player).getMana());
+					int maxManaNumber = Math.round(ManaProvider.get(player).getMaxMana());
 					
 					int offsetX = 0;
 					
@@ -357,8 +358,8 @@ public class EventManager {
 				}
 			}
 			if (event.getEntityLiving().ticksExisted % 5 == 0){
-				if (event.getEntityLiving().hasCapability(RootsCapabilityManager.manaCapability, null)){
-					event.getEntityLiving().getCapability(RootsCapabilityManager.manaCapability, null).setMana(event.getEntityLiving().getCapability(RootsCapabilityManager.manaCapability, null).getMana()+1.0f);
+				if (event.getEntityLiving().hasCapability(ManaProvider.manaCapability, null)){
+					ManaProvider.get(player).setMana(player, ManaProvider.get(player).getMana()+1.0f);
 				}
 			}
 			

@@ -8,6 +8,7 @@ import com.google.common.collect.Multimap;
 import elucent.roots.RegistryManager;
 import elucent.roots.Roots;
 import elucent.roots.RootsCapabilityManager;
+import elucent.roots.capability.mana.ManaProvider;
 import elucent.roots.model.ModelDruidRobes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -77,8 +78,8 @@ public class ItemDruidRobes extends ItemArmor {
 			stack.setItemDamage(stack.getItemDamage()-1);
 		}
 		if (rnd.nextInt(40) == 0){
-			if (player.hasCapability(RootsCapabilityManager.manaCapability, null)){
-				player.getCapability(RootsCapabilityManager.manaCapability, null).setMana(player.getCapability(RootsCapabilityManager.manaCapability, null).getMana()+1.0f);
+			if (player.hasCapability(ManaProvider.manaCapability, null)){
+				ManaProvider.get(player).setMana(player, ManaProvider.get(player).getMana()+1.0f);
 			}
 		}
 	}
