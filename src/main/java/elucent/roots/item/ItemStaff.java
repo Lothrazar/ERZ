@@ -7,6 +7,7 @@ import net.minecraft.util.text.TextFormatting;
 import elucent.roots.Roots;
 import elucent.roots.RootsCapabilityManager;
 import elucent.roots.Util;
+import elucent.roots.capability.mana.ManaProvider;
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.ComponentManager;
 import elucent.roots.component.EnumCastType;
@@ -95,8 +96,8 @@ public class ItemStaff extends Item implements IManaRelatedItem {
 							potency += 1;
 						}
 					}
-					if (((EntityPlayer)player).hasCapability(RootsCapabilityManager.manaCapability, null) && ((EntityPlayer)player).getCapability(RootsCapabilityManager.manaCapability, null).getMana() >= ((float)comp.xpCost)/(efficiency+1)){
-						((EntityPlayer)player).getCapability(RootsCapabilityManager.manaCapability, null).setMana(((EntityPlayer)player).getCapability(RootsCapabilityManager.manaCapability, null).getMana()-(((float)comp.xpCost)/(efficiency+1)));
+					if (((EntityPlayer)player).hasCapability(ManaProvider.manaCapability, null) && ManaProvider.get((EntityPlayer)player).getMana() >= ((float)comp.xpCost)/(efficiency+1)){
+						ManaProvider.get((EntityPlayer)player).setMana((EntityPlayer)player, ManaProvider.get((EntityPlayer)player).getMana()-(((float)comp.xpCost)/(efficiency+1)));
 						comp.doEffect(world, player, EnumCastType.SPELL, player.posX+3.0*player.getLookVec().xCoord, player.posY+3.0*player.getLookVec().yCoord, player.posZ+3.0*player.getLookVec().zCoord, potency, efficiency, 3.0+size);
 						for (int i = 0 ; i < 90; i ++){
 							double offX = random.nextFloat()*0.5-0.25;

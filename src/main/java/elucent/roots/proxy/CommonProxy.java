@@ -7,7 +7,8 @@ import elucent.roots.Util;
 import elucent.roots.component.ComponentManager;
 import elucent.roots.gui.GuiHandler;
 import elucent.roots.mutation.MutagenManager;
-import elucent.roots.network.MessageUpdateCaps;
+import elucent.roots.network.MessageUpdateMana;
+import elucent.roots.network.MessageUpdatePower;
 import elucent.roots.research.ResearchManager;
 import elucent.roots.ritual.RitualManager;
 import elucent.roots.ritual.RitualPowerManager;
@@ -29,7 +30,8 @@ public class CommonProxy {
 		RegistryManager.registerAchievements();
 		RitualPowerManager.init();
 		network = NetworkRegistry.INSTANCE.newSimpleChannel("roots");
-		network.registerMessage(MessageUpdateCaps.CapsMessageHandler.class, MessageUpdateCaps.class, 1, Side.CLIENT);
+		network.registerMessage(MessageUpdatePower.CapsMessageHandler.class, MessageUpdatePower.class, 1, Side.CLIENT);
+		network.registerMessage(MessageUpdateMana.CapsMessageHandler.class, MessageUpdateMana.class, 2, Side.CLIENT);
 	}
 	
 	public void init(FMLInitializationEvent event){

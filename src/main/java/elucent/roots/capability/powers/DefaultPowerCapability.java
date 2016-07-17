@@ -1,12 +1,10 @@
 package elucent.roots.capability.powers;
 
-import elucent.roots.network.MessageUpdateCaps;
+import elucent.roots.network.MessageUpdatePower;
 import elucent.roots.proxy.CommonProxy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.INBTSerializable;
 
 public class DefaultPowerCapability implements IPowersCapability{
 	public String power = "none";
@@ -66,7 +64,7 @@ public class DefaultPowerCapability implements IPowersCapability{
 	@Override
 	public void dataChanged(EntityPlayer player) {
 		if(player != null && !player.getEntityWorld().isRemote){
-			CommonProxy.network.sendTo(new MessageUpdateCaps(saveNBTData()), (EntityPlayerMP) player);
+			CommonProxy.network.sendTo(new MessageUpdatePower(saveNBTData()), (EntityPlayerMP) player);
 		}
 	}
 
