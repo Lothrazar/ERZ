@@ -486,7 +486,7 @@ public class ResearchManager {
 								    .addAltarRecipe(RitualManager.getRitualFromName("timeshift"))
 								    )
 	                       )
-				.addResearch(new ResearchBase("restoration", new ItemStack(Blocks.BRICK_BLOCK))
+				.addResearch(new ResearchBase("restoration", new ItemStack(RegistryManager.itemCharmRestoration))
 							.addPage(new ResearchPage()
                                     )
                             .addPage(new ResearchPage()
