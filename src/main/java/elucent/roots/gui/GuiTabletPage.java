@@ -58,8 +58,8 @@ public class GuiTabletPage extends GuiScreen {
 	
 	public void doRenderTooltip(){
 		if (renderTooltip){
-			renderTooltip = false;
 			this.renderToolTip(tooltipStack, tooltipX, tooltipY);
+			renderTooltip = false;
 		}
 	}
 	

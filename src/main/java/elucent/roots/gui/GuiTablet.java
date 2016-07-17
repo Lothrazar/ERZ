@@ -115,6 +115,7 @@ public class GuiTablet extends GuiScreen {
 	public void renderItemStackAt(ItemStack stack, int x, int y, int mouseX, int mouseY){
 		this.itemRender.renderItemIntoGUI(stack, x, y);
 		GlStateManager.color(1f, 1f, 1f, 1f);
+		
 	}
 	
 	@Override
