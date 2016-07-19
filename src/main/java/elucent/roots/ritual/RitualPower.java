@@ -25,19 +25,26 @@ public class RitualPower {
 	
 	public void onRightClickEntity(EntityPlayer player, World world, Entity entity){
 		if (type == EnumPowerType.TYPE_TARGET_ENTITY){
-			PowerProvider.get(player).usePower(player);
-			if (PowerProvider.get(player).getPowerLeft() == 0){
-				PowerProvider.get(player).setPower(player, "none");
-			}
+			usePower(player);
 		}
 	}
 	
 	public void onRightClickBlock(EntityPlayer player, World world, BlockPos pos, IBlockState state){
 		if (type == EnumPowerType.TYPE_TARGET_BLOCK){
-			PowerProvider.get(player).usePower(player);
-			if (PowerProvider.get(player).getPowerLeft() == 0){
-				PowerProvider.get(player).setPower(player, "none");
-			}
+			usePower(player);
+		}
+	}
+	
+	public void onRightClick(EntityPlayer player, World world, BlockPos pos, IBlockState state){
+		if (type == EnumPowerType.TYPE_TARGET_ANY){
+			usePower(player);
+		}
+	}
+	
+	private void usePower(EntityPlayer player){
+		PowerProvider.get(player).usePower(player);
+		if (PowerProvider.get(player).getPowerLeft() == 0){
+			PowerProvider.get(player).setPower(player, "none");
 		}
 	}
 }
