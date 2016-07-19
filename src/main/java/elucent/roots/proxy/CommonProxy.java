@@ -5,6 +5,7 @@ import elucent.roots.Roots;
 import elucent.roots.RootsCapabilityManager;
 import elucent.roots.Util;
 import elucent.roots.component.ComponentManager;
+import elucent.roots.entity.projectile.EntityRitualProjectile;
 import elucent.roots.gui.GuiHandler;
 import elucent.roots.mutation.MutagenManager;
 import elucent.roots.network.MessageUpdateMana;
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class CommonProxy {
@@ -29,6 +31,7 @@ public class CommonProxy {
 		RootsCapabilityManager.preInit();
 		RegistryManager.registerAchievements();
 		RitualPowerManager.init();
+		registerEntitys();
 		network = NetworkRegistry.INSTANCE.newSimpleChannel("roots");
 		network.registerMessage(MessageUpdatePower.CapsMessageHandler.class, MessageUpdatePower.class, 1, Side.CLIENT);
 		network.registerMessage(MessageUpdateMana.CapsMessageHandler.class, MessageUpdateMana.class, 2, Side.CLIENT);
@@ -67,5 +70,12 @@ public class CommonProxy {
 	
 	public void spawnParticleMagicAuraFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){
 		//
+	}
+
+	private void registerEntitys()
+	{
+		int id = 0;
+		EntityRegistry.registerModEntity(EntityRitualProjectile.class, "RitualProjectile", id++, Roots.instance, 64, 1, true);
+
 	}
 }

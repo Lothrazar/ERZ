@@ -1,14 +1,14 @@
 package elucent.roots.ritual;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import elucent.roots.PlayerManager;
-import elucent.roots.RootsNames;
-import elucent.roots.capability.powers.IPowersCapability;
 import elucent.roots.capability.powers.PowerProvider;
 import elucent.roots.ritual.powers.*;
+import elucent.roots.ritual.powers.charms.RitualPowerConjuration;
+import elucent.roots.ritual.powers.charms.RitualPowerEvocation;
+import elucent.roots.ritual.powers.charms.RitualPowerIllusion;
+import elucent.roots.ritual.powers.charms.RitualPowerRestoration;
 import net.minecraft.entity.player.EntityPlayer;
+
+import java.util.HashMap;
 
 public class RitualPowerManager {
 	public static HashMap<String,RitualPower> powers = new HashMap<String,RitualPower>();
@@ -19,6 +19,9 @@ public class RitualPowerManager {
 		powers.put("breed", new RitualPowerBreed());
 		powers.put("lifedrain", new RitualPowerLifeDrain());
 		powers.put("restoration", new RitualPowerRestoration());
+		powers.put("evocation", new RitualPowerEvocation());
+		powers.put("illusion", new RitualPowerIllusion());
+		powers.put("conjuration", new RitualPowerConjuration());
 		powers.put("none", new RitualNull());
 	}
 	

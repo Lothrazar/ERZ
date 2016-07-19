@@ -1,35 +1,22 @@
 package elucent.roots.ritual;
 
-import java.util.ArrayList;
-
 import elucent.roots.RegistryManager;
 import elucent.roots.ritual.powers.*;
-import elucent.roots.ritual.rituals.RitualCauseRain;
-import elucent.roots.ritual.rituals.RitualCrafting;
-import elucent.roots.ritual.rituals.RitualEngravedSword;
-import elucent.roots.ritual.rituals.RitualImbuer;
-import elucent.roots.ritual.rituals.RitualPowerGiver;
-import elucent.roots.ritual.rituals.RitualSacrifice;
-import elucent.roots.ritual.rituals.RitualSummoning;
-import elucent.roots.ritual.rituals.RitualTimeShift;
+import elucent.roots.ritual.powers.charms.RitualPowerConjuration;
+import elucent.roots.ritual.powers.charms.RitualPowerEvocation;
+import elucent.roots.ritual.powers.charms.RitualPowerIllusion;
+import elucent.roots.ritual.powers.charms.RitualPowerRestoration;
+import elucent.roots.ritual.rituals.*;
 import elucent.roots.tileentity.TileEntityBrazier;
-import net.minecraft.entity.monster.EntityCaveSpider;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntitySlime;
-import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.passive.EntityRabbit;
-import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
 
 public class RitualManager {
 	public static ArrayList<RitualBase> rituals = new ArrayList<RitualBase>();
@@ -817,6 +804,53 @@ public class RitualManager {
 				.addIngredient(new ItemStack(Items.MILK_BUCKET))
 				.addIngredient(new ItemStack(Items.FEATHER))
 				.addIngredient(new ItemStack(RegistryManager.itemCharmRestoration)));
+		rituals.add(new RitualPowerGiver("illusion", 139, 22, 40)
+				.setPower(new RitualPowerIllusion())
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, -3)
+				.addBlock(RegistryManager.standingStoneT2, 5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, -5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, 5)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
+				.addIngredient(new ItemStack(Items.ENDER_PEARL))
+				.addIngredient(new ItemStack(RegistryManager.itemCharmIllusion)));
+		rituals.add(new RitualPowerGiver("conjuration", 139, 22, 40)
+				.setPower(new RitualPowerConjuration())
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, -3)
+				.addBlock(RegistryManager.standingStoneT2, 5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, -5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, 5)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
+				.addIngredient(new ItemStack(Items.APPLE))
+				.addIngredient(new ItemStack(RegistryManager.itemCharmConjuration)));
+		rituals.add(new RitualPowerGiver("evocation", 139, 22, 40)
+				.setPower(new RitualPowerEvocation())
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, -3)
+				.addBlock(RegistryManager.standingStoneT2, 5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, -5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, 5)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
+				.addIngredient(new ItemStack(RegistryManager.itemCharmEvocation)));
 
 
 	}
