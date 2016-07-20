@@ -89,10 +89,10 @@ public class RegistryManager {
 		GameRegistry.registerItem(runicFocus = new ItemRunicFocus(), "runicFocus"); 
 		GameRegistry.registerItem(engravedSword = new ItemEngravedSword(engravedMaterial), "engravedSword");
 		GameRegistry.registerItem(manaResearchIcon = new ItemResearchIcon("manaResearchIcon"), "manaResearchIcon");
-		GameRegistry.registerItem(itemCharmRestoration = new ItemCharm("charmRestoration"),"charmRestoration");
+		/*GameRegistry.registerItem(itemCharmRestoration = new ItemCharm("charmRestoration"),"charmRestoration");
 		GameRegistry.registerItem(itemCharmEvocation = new ItemCharm("charmEvocation"),"charmEvocation");
 		GameRegistry.registerItem(itemCharmConjuration = new ItemCharm("charmConjuration"),"charmConjuration");
-		GameRegistry.registerItem(itemCharmIllusion = new ItemCharm("charmIllusion"),"charmIllusion");
+		GameRegistry.registerItem(itemCharmIllusion = new ItemCharm("charmIllusion"),"charmIllusion");*/
 
 
 		/**
@@ -116,7 +116,7 @@ public class RegistryManager {
 		GameRegistry.registerBlock(midnightBloom = new BlockMidnightBloom(),"midnightBloom");
 		GameRegistry.registerBlock(flareOrchid = new BlockFlareOrchid(),"flareOrchid");
 		GameRegistry.registerBlock(radiantDaisy = new BlockRadiantDaisy(),"radiantDaisy");
-		GameRegistry.registerBlock(bridge = new BlockBridge(),"bridgeBlock");
+		//GameRegistry.registerBlock(bridge = new BlockBridge(),"bridgeBlock");
 		
 		/**
 		 * REGISTERING TILE ENTITIES
@@ -267,10 +267,10 @@ public class RegistryManager {
 		((ItemResearchIcon)manaResearchIcon).initModel();
 
 		/**Charms**/
-		((ItemCharm)itemCharmRestoration).initModel();
+		/*((ItemCharm)itemCharmRestoration).initModel();
 		((ItemCharm)itemCharmConjuration).initModel();
 		((ItemCharm)itemCharmEvocation).initModel();
-		((ItemCharm)itemCharmIllusion).initModel();
+		((ItemCharm)itemCharmIllusion).initModel();*/
 		
 		//((BlockDruidChalice)druidChalice).initModel();
 		((BlockMortar)mortar).initModel();
