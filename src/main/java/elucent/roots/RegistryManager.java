@@ -1,48 +1,15 @@
 package elucent.roots;
 
-import elucent.roots.block.BlockAestheticStandingStone;
-import elucent.roots.block.BlockAltar;
-import elucent.roots.block.BlockBrazier;
-import elucent.roots.block.BlockFlareOrchid;
-import elucent.roots.block.BlockImbuer;
-import elucent.roots.block.BlockMidnightBloom;
-import elucent.roots.block.BlockMortar;
-import elucent.roots.block.BlockRadiantDaisy;
-import elucent.roots.block.BlockStandingStoneAccelerator;
-import elucent.roots.block.BlockStandingStoneEntangler;
-import elucent.roots.block.BlockStandingStoneGrower;
-import elucent.roots.block.BlockStandingStoneHealer;
-import elucent.roots.block.BlockStandingStoneIgniter;
-import elucent.roots.block.BlockStandingStoneRepulsor;
-import elucent.roots.block.BlockStandingStoneT1;
-import elucent.roots.block.BlockStandingStoneT2;
-import elucent.roots.block.BlockStandingStoneVacuum;
+import elucent.roots.block.*;
 import elucent.roots.entity.EntityAccelerator;
 import elucent.roots.entity.EntitySpriteling;
 import elucent.roots.entity.EntityTileAccelerator;
 import elucent.roots.entity.RenderSpriteling;
 import elucent.roots.item.*;
 import elucent.roots.model.entity.ModelSpriteling;
-import elucent.roots.tileentity.TileEntityAestheticStandingStone;
-import elucent.roots.tileentity.TileEntityAltar;
-import elucent.roots.tileentity.TileEntityAltarRenderer;
-import elucent.roots.tileentity.TileEntityBrazier;
-import elucent.roots.tileentity.TileEntityBrazierRenderer;
-import elucent.roots.tileentity.TileEntityDruidChalice;
-import elucent.roots.tileentity.TileEntityImbuer;
-import elucent.roots.tileentity.TileEntityImbuerRenderer;
-import elucent.roots.tileentity.TileEntityMortar;
-import elucent.roots.tileentity.TileEntityMortarRenderer;
-import elucent.roots.tileentity.TileEntityStandingStoneAccelerator;
-import elucent.roots.tileentity.TileEntityStandingStoneEntangler;
-import elucent.roots.tileentity.TileEntityStandingStoneGrower;
-import elucent.roots.tileentity.TileEntityStandingStoneHealer;
-import elucent.roots.tileentity.TileEntityStandingStoneIgniter;
-import elucent.roots.tileentity.TileEntityStandingStoneRepulsor;
-import elucent.roots.tileentity.TileEntityStandingStoneVacuum;
+import elucent.roots.tileentity.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -67,7 +34,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 public class RegistryManager {
 	public static Item debugWand, runicFocus, rootyStew, healingPoultice, mutagen, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,nightshade,blackCurrant,redCurrant,whiteCurrant,elderBerry, engravedSword,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion;
 	public static Item manaResearchIcon;
-	public static Block flareOrchid, radiantDaisy, standingStoneGrower, standingStoneHealer, standingStoneIgniter, standingStoneEntangler, standingStoneAccelerator, standingStoneAesthetic, standingStoneRepulsor, standingStoneVacuum, midnightBloom, mortar, imbuer, altar, druidChalice, standingStoneT1, standingStoneT2, brazier;
+	public static Block flareOrchid, radiantDaisy, standingStoneGrower, standingStoneHealer, standingStoneIgniter, standingStoneEntangler, standingStoneAccelerator, standingStoneAesthetic, standingStoneRepulsor, standingStoneVacuum, midnightBloom, mortar, imbuer, altar, druidChalice, standingStoneT1, standingStoneT2, brazier,bridge;
 	
 	public static Achievement achieveDust, achieveTablet, achieveSpellRose, achieveSpellGrowth, achieveSpellInsanity, achieveMaxModifiers, achieveLotsDamage, achieveTimeStop, achieveAltar, achieveStandingStone, achieveWildwood, achieveShadow, achieveSpellElements, achieveVampire;
 	
@@ -149,6 +116,7 @@ public class RegistryManager {
 		GameRegistry.registerBlock(midnightBloom = new BlockMidnightBloom(),"midnightBloom");
 		GameRegistry.registerBlock(flareOrchid = new BlockFlareOrchid(),"flareOrchid");
 		GameRegistry.registerBlock(radiantDaisy = new BlockRadiantDaisy(),"radiantDaisy");
+		GameRegistry.registerBlock(bridge = new BlockBridge(),"bridgeBlock");
 		
 		/**
 		 * REGISTERING TILE ENTITIES
@@ -166,6 +134,7 @@ public class RegistryManager {
 		GameRegistry.registerTileEntity(TileEntityStandingStoneGrower.class,"TileEntityStandingStoneGrower");
 		GameRegistry.registerTileEntity(TileEntityStandingStoneIgniter.class,"TileEntityStandingStoneIgniter");
 		GameRegistry.registerTileEntity(TileEntityStandingStoneHealer.class,"TileEntityStandingStoneHealer");
+		GameRegistry.registerTileEntity(TileEnityBridge.class,"TileEntityBridge");
 	
 		GameRegistry.registerFuelHandler(new FuelManager());
 	}

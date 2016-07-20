@@ -1,14 +1,13 @@
 package elucent.roots.research;
 
-import java.util.ArrayList;
-
 import elucent.roots.RegistryManager;
 import elucent.roots.component.ComponentManager;
 import elucent.roots.ritual.RitualManager;
-import net.minecraft.block.BlockDaylightDetector;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
 
 public class ResearchManager {
 	public static ArrayList<ResearchGroup> globalResearches = new ArrayList<ResearchGroup>();
@@ -486,38 +485,6 @@ public class ResearchManager {
 								    .addAltarRecipe(RitualManager.getRitualFromName("timeshift"))
 								    )
 	                       )
-				.addResearch(new ResearchBase("restoration", new ItemStack(RegistryManager.itemCharmRestoration))
-							.addPage(new ResearchPage()
-                                    )
-                            .addPage(new ResearchPage()
-                                    .addAltarRecipe(RitualManager.getRitualFromName("restoration")
-                                    )
-							    )
-                            )
-				.addResearch(new ResearchBase("illusion", new ItemStack(RegistryManager.itemCharmIllusion))
-						.addPage(new ResearchPage()
-						)
-						.addPage(new ResearchPage()
-								.addAltarRecipe(RitualManager.getRitualFromName("illusion")
-								)
-						)
-				)
-				.addResearch(new ResearchBase("conjuration", new ItemStack(RegistryManager.itemCharmConjuration))
-						.addPage(new ResearchPage()
-						)
-						.addPage(new ResearchPage()
-								.addAltarRecipe(RitualManager.getRitualFromName("conjuration")
-								)
-						)
-				)
-				.addResearch(new ResearchBase("evocation", new ItemStack(RegistryManager.itemCharmConjuration))
-						.addPage(new ResearchPage()
-						)
-						.addPage(new ResearchPage()
-								.addAltarRecipe(RitualManager.getRitualFromName("evocation")
-								)
-						)
-				)
 			  );
 	}
 	public static ResearchBase getResearch(String groupName, String researchName){

@@ -1,4 +1,4 @@
-package elucent.roots.ritual.powers.charms;
+package elucent.roots.ritual.powers;
 
 import elucent.roots.ritual.EnumPowerType;
 import elucent.roots.ritual.RitualPower;

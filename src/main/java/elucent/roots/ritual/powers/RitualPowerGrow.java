@@ -15,6 +15,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -51,8 +52,8 @@ public class RitualPowerGrow extends RitualPower {
 	}
 	
 	@Override
-	public void onRightClickBlock(EntityPlayer player, World world, BlockPos pos, IBlockState state){
-		super.onRightClickBlock(player,world,pos,state);
+	public void onRightClickBlock(EntityPlayer player, World world, BlockPos pos, IBlockState state,EnumFacing facing){
+		super.onRightClickBlock(player,world,pos,state,facing);
 		if (state.getBlock() instanceof IGrowable && state.getBlock() != Blocks.TALLGRASS){
 			((IGrowable)state.getBlock()).grow(world, random, pos, state);
 			this.growBlockSafe(world, pos.north());

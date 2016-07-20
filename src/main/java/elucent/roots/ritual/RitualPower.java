@@ -1,11 +1,11 @@
 package elucent.roots.ritual;
 
-import elucent.roots.PlayerManager;
 import elucent.roots.RootsNames;
 import elucent.roots.capability.powers.PowerProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -29,7 +29,7 @@ public class RitualPower {
 		}
 	}
 	
-	public void onRightClickBlock(EntityPlayer player, World world, BlockPos pos, IBlockState state){
+	public void onRightClickBlock(EntityPlayer player, World world, BlockPos pos, IBlockState state, EnumFacing facing){
 		if (type == EnumPowerType.TYPE_TARGET_BLOCK){
 			usePower(player);
 		}

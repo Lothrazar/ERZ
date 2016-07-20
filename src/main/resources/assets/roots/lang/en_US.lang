@@ -443,9 +443,14 @@ roots.research.ritual.timeshift.page1info=After many hours you have discovered t
 roots.research.ritual.timeshift.page2title.name=Ritual: Time Shift
 
 roots.research.ritual.restoration.name=Restoration
-roots.research.ritual.restoration.page1title.name=Restoration
+roots.research.ritual.restoration.page1title.name=Ritual:Restoration
 roots.research.ritual.restoration.page1info=After obtaining the charm of restoration, the power that it held was unleashed and you got the ability to remove all bad effects and push your enemies away from you.
 roots.research.ritual.restoration.page2title.name=Ritual: Restoration
+
+roots.research.ritual.conjuration.name=Conjuration
+roots.research.ritual.conjuration.page1title.name=Ritual:Conjuration
+roots.research.ritual.conjuration.page1info=...
+roots.research.ritual.conjuration.page2title.name=Ritual:Conjuration
 
 roots.research.ritual.poweredstones.page16title.name=Ritual: Standing Stone
 roots.research.ritual.poweredstones.page17title.name=Standing Stone

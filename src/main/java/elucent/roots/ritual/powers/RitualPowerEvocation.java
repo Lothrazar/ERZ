@@ -1,5 +1,6 @@
-package elucent.roots.ritual.powers.charms;
+package elucent.roots.ritual.powers;
 
+import elucent.roots.entity.projectile.EntityRitualProjectile;
 import elucent.roots.ritual.EnumPowerType;
 import elucent.roots.ritual.RitualPower;
 import net.minecraft.block.state.IBlockState;
@@ -16,7 +17,8 @@ public class RitualPowerEvocation extends RitualPower {
     }
 
     @Override
-    public void onRightClick(EntityPlayer player, World world, BlockPos pos, IBlockState state) {
-        //still working on it
+    public void onRightClick(EntityPlayer player, World world, BlockPos pos, IBlockState state)
+    {
+        //Nothing yet
     }
 }

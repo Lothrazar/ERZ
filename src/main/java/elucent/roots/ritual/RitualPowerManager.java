@@ -2,10 +2,6 @@ package elucent.roots.ritual;
 
 import elucent.roots.capability.powers.PowerProvider;
 import elucent.roots.ritual.powers.*;
-import elucent.roots.ritual.powers.charms.RitualPowerConjuration;
-import elucent.roots.ritual.powers.charms.RitualPowerEvocation;
-import elucent.roots.ritual.powers.charms.RitualPowerIllusion;
-import elucent.roots.ritual.powers.charms.RitualPowerRestoration;
 import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.HashMap;
