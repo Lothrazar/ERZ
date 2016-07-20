@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -32,12 +33,18 @@ public class RitualSummoning extends RitualBase {
 	@Override
 	public void doEffect(World world, BlockPos pos, List<ItemStack> inventory, List<ItemStack> incenses){
 		if (Util.itemListsMatchWithSize(inventory, this.ingredients)){
-			EntityCreature toSpawn;
+			EntityLivingBase toSpawn;
 			try {
-				toSpawn = (EntityCreature)result.getConstructor(World.class).newInstance(world);
-				toSpawn.setWorld(world);
-				toSpawn.onInitialSpawn(world.getDifficultyForLocation(pos), null);
-				toSpawn.setPosition(pos.getX()+0.5, pos.getY()+2.0, pos.getZ()+0.5);
+				toSpawn = (EntityLivingBase)result.getConstructor(World.class).newInstance(world);
+				if (toSpawn instanceof EntityCreature){
+					((EntityCreature)toSpawn).setWorld(world);
+					((EntityCreature)toSpawn).onInitialSpawn(world.getDifficultyForLocation(pos), null);
+				}
+				if (toSpawn instanceof EntitySlime){
+					((EntitySlime)toSpawn).setWorld(world);
+					((EntitySlime)toSpawn).onInitialSpawn(world.getDifficultyForLocation(pos), null);
+				}
+				toSpawn.setPosition(pos.getX()+0.5, pos.getY()+2.0, pos.getZ()+0.5);	
 				inventory.clear();
 				if (!world.isRemote){
 					world.spawnEntityInWorld(toSpawn);

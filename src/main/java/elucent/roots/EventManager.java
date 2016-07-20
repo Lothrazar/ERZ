@@ -1,8 +1,6 @@
 
 package elucent.roots;
 
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,7 +9,6 @@ import org.lwjgl.opengl.GL11;
 
 import elucent.roots.capability.mana.ManaProvider;
 import elucent.roots.capability.powers.IPowersCapability;
->>>>>>> adb6525917e748b42c4e97d761a9ec3c47d9db5c
 import elucent.roots.capability.powers.PowerProvider;
 import elucent.roots.item.IManaRelatedItem;
 import elucent.roots.item.ItemCrystalStaff;
@@ -30,7 +27,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -51,6 +47,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
@@ -101,12 +98,12 @@ public class EventManager {
 	}
 	
 	@SubscribeEvent
-	public void onPlayerInteract(PlayerInteractEvent.RightClickBlock event){
+	public void onPlayerInteract(PlayerInteractEvent.RightClickItem event){
 		if (event.getHand() == EnumHand.MAIN_HAND){
 			if (event.getEntityPlayer().getHeldItem(event.getHand()) == null){
-					if (!PowerProvider.get(event.getEntityPlayer()).getPowerName().equals("none") && PowerProvider.get(event.getEntityPlayer()).getCooldown() == 0){
-						RitualPowerManager.getPlayerPower(event.getEntityPlayer()).onRightClickBlock(event.getEntityPlayer(), event.getWorld(), event.getPos(), event.getWorld().getBlockState(event.getPos()));
-					}
+				if (!PowerProvider.get(event.getEntityPlayer()).getPowerName().equals("none") && PowerProvider.get(event.getEntityPlayer()).getCooldown() == 0){
+					RitualPowerManager.getPlayerPower(event.getEntityPlayer()).onRightClickBlock(event.getEntityPlayer(), event.getWorld(), event.getPos(), event.getWorld().getBlockState(event.getPos()));
+				}
 			}
 		}
 	}
@@ -117,7 +114,7 @@ public class EventManager {
 			if (event.getEntityPlayer().getHeldItem(event.getHand()) != null){
 				if (event.getEntityPlayer().getHeldItem(event.getHand()).getItem() == RegistryManager.infernalStem){
 					event.getEntityPlayer().getHeldItem(event.getHand()).stackSize --;
-					((EntitySkeleton)event.getTarget()).func_189768_a(SkeletonType.WITHER);
+					((EntitySkeleton)event.getTarget()).setSkeletonType(1);
 				}
 			}
 		}
@@ -351,7 +348,7 @@ public class EventManager {
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onLivingTick(LivingUpdateEvent event){
 		if (event.getEntityLiving() instanceof EntityPlayer){
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();

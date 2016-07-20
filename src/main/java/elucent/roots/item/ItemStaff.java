@@ -96,8 +96,9 @@ public class ItemStaff extends Item implements IManaRelatedItem {
 							potency += 1;
 						}
 					}
-					if (((EntityPlayer)player).hasCapability(ManaProvider.manaCapability, null) && ManaProvider.get((EntityPlayer)player).getMana() >= ((float)comp.xpCost)/(efficiency+1)){
-						ManaProvider.get((EntityPlayer)player).setMana((EntityPlayer)player, ManaProvider.get((EntityPlayer)player).getMana()-(((float)comp.xpCost)/(efficiency+1)));
+					double xpCost = (comp.xpCost + potency)*(1.0-0.25*(double)efficiency)*(1.0/((1.0+(1.0/((double)potency)))/2.0));
+					if (((EntityPlayer)player).hasCapability(ManaProvider.manaCapability, null) && ManaProvider.get((EntityPlayer)player).getMana() >= xpCost){
+						ManaProvider.get((EntityPlayer)player).setMana((EntityPlayer)player, (float) (ManaProvider.get((EntityPlayer)player).getMana()-xpCost));
 						comp.doEffect(world, player, EnumCastType.SPELL, player.posX+3.0*player.getLookVec().xCoord, player.posY+3.0*player.getLookVec().yCoord, player.posZ+3.0*player.getLookVec().zCoord, potency, efficiency, 3.0+size);
 						for (int i = 0 ; i < 90; i ++){
 							double offX = random.nextFloat()*0.5-0.25;

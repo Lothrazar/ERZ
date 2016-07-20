@@ -32,7 +32,7 @@ public class ComponentDandelion extends ComponentBase{
 			for(int i = 0; i < targets.size();i++){
 				if(targets.get(i).getUniqueID() != caster.getUniqueID()){
 					targets.get(i).motionX = caster.getLookVec().xCoord;
-					targets.get(i).motionY = (float)(potency==0?1.0:1.0+0.5*potency);
+					targets.get(i).motionY = (float)(potency==0?0.6:0.6+0.3*potency);
 					targets.get(i).motionZ = caster.getLookVec().zCoord;
 					if (targets.get(i) instanceof EntityPlayer){
 						((EntityPlayer)targets.get(i)).velocityChanged = true;

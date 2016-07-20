@@ -36,13 +36,13 @@ public class ModelSpriteling extends ModelBase
   	head3.setRotationPoint(3F, 0F, 0F);
   	head3.setTextureSize(128, 128);
   	head3.mirror = true;
-  	setRotation(head3, 0F, -0.3926991F, 0.3926991F);
+  	setRotation(head3, 0F, -0.3926991F, 0F);
   	head4 = new ModelRenderer(this, 48, 16);
   	head4.addBox(-4F, -1F, -2F, 4, 2, 4);
   	head4.setRotationPoint(-3F, 0F, 0F);
   	head4.setTextureSize(128, 128);
   	head4.mirror = true;
-  	setRotation(head4, 0F, 0.3926991F, -0.3926991F);
+  	setRotation(head4, 0F, 0.3926991F, 0F);
   	tail1 = new ModelRenderer(this, 48, 0);
   	tail1.addBox(-2F, 0F, -2F, 4, 6, 4);
   	tail1.setRotationPoint(0F, 0F, 1F);

@@ -29,6 +29,50 @@ public class Util {
 		return shifted;
 	}
 	
+	float fastSin(float x){
+	    if (x < -3.14159265){
+	        x += 6.28318531;
+	    }
+	    else {
+	        if (x >  3.14159265){
+	            x -= 6.28318531;
+	        }
+	    }
+
+	    if (x < 0){
+	        return (float) (1.27323954 * x + .405284735 * x * x);
+	    }
+	    else {
+	        return (float) (1.27323954 * x - 0.405284735 * x * x);
+	    }
+	}
+	float fastCos(float x){
+	    if (x < -3.14159265){
+	        x += 6.28318531;
+	    }
+	    else {
+	        if (x >  3.14159265){
+	            x -= 6.28318531;
+	        }
+	    }
+	    x += 1.57079632;
+	    if (x >  3.14159265){
+	        x -= 6.28318531;
+	    }
+
+	    if (x < 0){
+	        return (float) (1.27323954 * x + 0.405284735 * x * x);
+	    }
+	    else {
+	        return (float) (1.27323954 * x - 0.405284735 * x * x);
+	    }
+	}
+
+	double interpolate(float s, float e, float t){
+	    double t2 = (1.0-fastCos(t*3.14159265358979323f))/2.0;
+	    return(s*(1.0-t2)+(e)*t2);
+	}
+	
 	public static BlockPos getRayTrace(World world, EntityPlayer player, int reachDistance){
 		double x = player.posX;
 		double y = player.posY + player.getEyeHeight();

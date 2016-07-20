@@ -41,11 +41,11 @@ public class ComponentRose extends ComponentBase {
 							}
 						}
 						targets.get(i).attackEntityFrom(DamageSource.cactus, (int)(7+2*potency));
-						Util.addTickTracking(targets.get(i));
-						targets.get(i).getEntityData().setFloat(RootsNames.TAG_SPELL_THORNS_DAMAGE, 2.0f+(float)potency);
 						targets.get(i).attackEntityAsMob(caster);
+						Util.addTickTracking(targets.get(i));
 						targets.get(i).setLastAttacker(caster);
 						targets.get(i).setRevengeTarget((EntityLivingBase)caster);
+						targets.get(i).getEntityData().setFloat(RootsNames.TAG_SPELL_THORNS_DAMAGE, 2.0f+(float)potency);
 					}
 				}
 			}
