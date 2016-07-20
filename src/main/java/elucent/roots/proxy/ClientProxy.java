@@ -6,11 +6,14 @@ import elucent.roots.entity.fx.ParticleMagicAltar;
 import elucent.roots.entity.fx.ParticleMagicAltarLine;
 import elucent.roots.entity.fx.ParticleMagicAura;
 import elucent.roots.entity.fx.ParticleMagicLine;
+import elucent.roots.entity.projectile.EntityRitualProjectile;
 import elucent.roots.item.ItemStaff;
 import elucent.roots.model.ModelHolder;
+import elucent.roots.render.RitualProjectileRenderFactory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -21,6 +24,7 @@ public class ClientProxy extends CommonProxy {
 		super.preInit(event);
 		ModelHolder.init();
 		RegistryManager.registerItemRenderers();
+		registerRenders();
 	}
 	
 	public void init(FMLInitializationEvent event){
@@ -61,5 +65,11 @@ public class ClientProxy extends CommonProxy {
 	public void spawnParticleMagicAuraFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){
 		ParticleMagicAura particle = new ParticleMagicAura(world,x,y,z,vx,vy,vz,r,g,b);
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+	}
+
+	private void registerRenders()
+	{
+		RenderingRegistry.registerEntityRenderingHandler(EntityRitualProjectile.class, new RitualProjectileRenderFactory());
+
 	}
 }

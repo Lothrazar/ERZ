@@ -96,9 +96,18 @@ public class EventManager {
 			}
 		}
 	}
+	public void onRightClickAir(PlayerInteractEvent.RightClickEmpty event){
+		if (event.getHand() == EnumHand.MAIN_HAND){
+			if (event.getEntityPlayer().getHeldItem(event.getHand()) == null){
+					if (!PowerProvider.get(event.getEntityPlayer()).getPowerName().equals("none") && PowerProvider.get(event.getEntityPlayer()).getCooldown() == 0){
+						RitualPowerManager.getPlayerPower(event.getEntityPlayer()).onRightClick(event.getEntityPlayer(), event.getWorld(), event.getPos(), event.getWorld().getBlockState(event.getPos()));
+					}
+			}
+		}
+	}
 	
 	@SubscribeEvent
-	public void onPlayerInteract(PlayerInteractEvent.RightClickItem event){
+	public void onPlayerInteract(PlayerInteractEvent.RightClickBlock event){
 		if (event.getHand() == EnumHand.MAIN_HAND){
 			if (event.getEntityPlayer().getHeldItem(event.getHand()) == null){
 				if (!PowerProvider.get(event.getEntityPlayer()).getPowerName().equals("none") && PowerProvider.get(event.getEntityPlayer()).getCooldown() == 0){

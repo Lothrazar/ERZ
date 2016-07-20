@@ -39,6 +39,12 @@ item.elderberry.name=Elderberry
 item.healingPoultice.name=Healing Poultice
 item.rootyStew.name=Rooty Stew
 item.engravedSword.name=Engraved Blade
+
+item.charmRestoration.name=Charm of Restoration
+item.charmEvocation.name=Charm of Evocation
+item.charmConjuration.name=Charm of Conjuration
+item.charmIllusion.name=Charm of Illusion
+
 runicFocus_0.name=Runic Focus
 runicFocus_1.name=Charged Runic Focus
 
@@ -60,6 +66,8 @@ tile.standingStoneIgniter.name=Igniting Standing Stone
 tile.standingStoneGrower.name=Growing Standing Stone
 tile.standingStoneHealer.name=Healing Standing Stone
 tile.standingStoneAesthetic.name=Standing Stone
+
+roots.command.roots.usage=A general purpose command for the roots mod. Enter /roots help for subcommands.
 
 roots.attribute.fullset.name=When full set equipped:
 roots.attribute.equipped.name=When equipped:
@@ -434,6 +442,11 @@ roots.research.ritual.timeshift.page1title.name=Timey Wimey Stuff
 roots.research.ritual.timeshift.page1info=After many hours you have discovered that by burning common time keeping devices you can move time by an amount proportional to the amount of clocks burned as incense.
 roots.research.ritual.timeshift.page2title.name=Ritual: Time Shift
 
+roots.research.ritual.restoration.name=Restoration
+roots.research.ritual.restoration.page1title.name=Restoration
+roots.research.ritual.restoration.page1info=After obtaining the charm of restoration, the power that it held was unleashed and you got the ability to remove all bad effects and push your enemies away from you.
+roots.research.ritual.restoration.page2title.name=Ritual: Restoration
+
 roots.research.ritual.poweredstones.page16title.name=Ritual: Standing Stone
 roots.research.ritual.poweredstones.page17title.name=Standing Stone
 roots.research.ritual.poweredstones.page17info=A basic standing stone. Particles can be colored using Rose red, Lapis Lazuli, Cactus Green and reset using bone meal.
@@ -452,9 +465,9 @@ achievement.maxModifiers=All The Mods!
 achievement.maxModifiers.desc=Make a spell with three of any single modifier.
 achievement.lotsDamage=Nerf This!
 achievement.lotsDamage.desc=Deal over 80 total damage with one spell.
-achievement.timeStop=「THE WORLD」
+achievement.timeStop=ã€ŒTHE WORLDã€�
 achievement.timeStop.desc=Kill an entity during stopped time.
-achievement.altar=Another Original™ Block
+achievement.altar=Another Originalâ„¢ Block
 achievement.altar.desc=Craft a Casting Altar.
 achievement.standingStone=Your Very Own Henge
 achievement.standingStone.desc=Create an Attuned Standing Stone.
