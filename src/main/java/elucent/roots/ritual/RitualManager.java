@@ -240,7 +240,7 @@ public class RitualManager {
 				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
 				.addIngredient(new ItemStack(RegistryManager.standingStoneT2,1))
 				.addIngredient(new ItemStack(Items.GLOWSTONE_DUST,1))
-				.addIngredient(new ItemStack(Blocks.STONEBRICK,1,3)));
+				.addIngredient(new ItemStack(Blocks.STONEBRICK,1)));
 		rituals.add(new RitualCrafting("entanglerStoneCrafting", 0, 105, 73)
 				.setResult(new ItemStack(RegistryManager.standingStoneEntangler,1))
 				.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
