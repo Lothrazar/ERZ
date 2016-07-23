@@ -7,6 +7,7 @@ import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 
+import elucent.roots.capability.mana.DefaultManaCapability;
 import elucent.roots.capability.mana.ManaProvider;
 import elucent.roots.capability.powers.IPowersCapability;
 import elucent.roots.capability.powers.PowerProvider;
@@ -371,6 +372,9 @@ public class EventManager {
 			}
 			if (event.getEntityLiving().ticksExisted % 5 == 0){
 				if (event.getEntityLiving().hasCapability(ManaProvider.manaCapability, null)){
+					if (event.getEntityLiving().getCapability(ManaProvider.manaCapability, null).getMaxMana() == 0){
+						event.getEntityLiving().getCapability(ManaProvider.manaCapability, null).setMaxMana(40.0f);
+					}
 					ManaProvider.get(player).setMana(player, ManaProvider.get(player).getMana()+1.0f);
 				}
 			}

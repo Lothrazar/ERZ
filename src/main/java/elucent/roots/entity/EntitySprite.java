@@ -39,19 +39,25 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class EntitySpriteling  extends EntityFlying {// implements IRangedAttackMob {
+public class EntitySprite  extends EntityFlying {// implements IRangedAttackMob {
     public float range = 64;
-    public static final DataParameter<Float> targetDirectionX = EntityDataManager.<Float>createKey(EntitySpriteling.class, DataSerializers.FLOAT);
-    public static final DataParameter<Float> targetDirectionY = EntityDataManager.<Float>createKey(EntitySpriteling.class, DataSerializers.FLOAT);
-    public static final DataParameter<Integer> dashTimer = EntityDataManager.<Integer>createKey(EntitySpriteling.class, DataSerializers.VARINT);
+    public static final DataParameter<Float> targetDirectionX = EntityDataManager.<Float>createKey(EntitySprite.class, DataSerializers.FLOAT);
+    public static final DataParameter<Float> targetDirectionY = EntityDataManager.<Float>createKey(EntitySprite.class, DataSerializers.FLOAT);
+    public static final DataParameter<Integer> dashTimer = EntityDataManager.<Integer>createKey(EntitySprite.class, DataSerializers.VARINT);
     public float addDirectionX = 0;
     public float addDirectionY = 0;
     public float twirlTimer = 0;
+    public float prevYaw1 = 0;
+    public float prevYaw2 = 0;
+    public float prevYaw3 = 0;
+    public float prevPitch1 = 0;
+    public float prevPitch2 = 0;
+    public float prevPitch3 = 0;
     Random random = new Random();
 
-    public EntitySpriteling(World worldIn) {
+    public EntitySprite(World worldIn) {
     	super(worldIn);
-        setSize(0.5f,0.5f);
+        setSize(0.75f,0.75f);
         this.isAirBorne = true;
     }
     
@@ -84,6 +90,15 @@ public class EntitySpriteling  extends EntityFlying {// implements IRangedAttack
     @Override
     public void onUpdate(){
     	super.onUpdate();
+    	
+    	prevYaw3 = prevYaw2;
+    	prevYaw2 = prevYaw1;
+    	prevYaw1 = rotationYaw;
+    	
+    	prevPitch3 = prevPitch2;
+    	prevPitch2 = prevPitch1;
+    	prevPitch1 = rotationPitch;
+    	
     	if (twirlTimer > 0){
     		twirlTimer -= 1.0f;
     	}
@@ -97,7 +112,7 @@ public class EntitySpriteling  extends EntityFlying {// implements IRangedAttack
     			this.getDataManager().set(targetDirectionY, (float)Math.toRadians(Util.pitchDegreesBetweenPoints(posX, posY, posZ, getAttackTarget().posX, getAttackTarget().posY+getAttackTarget().getEyeHeight(), getAttackTarget().posZ)));
     			this.getDataManager().setDirty(targetDirectionX);
     		}
-    		if (this.ticksExisted % 20 == 0 && random.nextInt(4) == 0){
+    		if (this.ticksExisted % 20 == 0 && random.nextInt(3) == 0){
     			getDataManager().set(dashTimer, 20);
         		getDataManager().setDirty(dashTimer);
     			twirlTimer = 20;
@@ -115,7 +130,7 @@ public class EntitySpriteling  extends EntityFlying {// implements IRangedAttack
     	}
 		addDirectionX = (float) (addDirectionX+getDataManager().get(targetDirectionX))/2.0f;
 		addDirectionY = (float) (addDirectionY+getDataManager().get(targetDirectionY))/2.0f;
-		addDirectionY -= Math.toRadians(30.0f*(posY-(getEntityWorld().getTopSolidOrLiquidBlock(getPosition()).getY()+1.5)));
+		addDirectionY -= Math.toRadians(5.0f*(posY-(getEntityWorld().getTopSolidOrLiquidBlock(getPosition()).getY()+3.0)));
 		this.rotationYaw = (rotationYaw*0.8f+addDirectionX*0.2f);
 		this.rotationPitch = (rotationPitch*0.8f+addDirectionY*0.2f);
 		Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch).scale(getAttackTarget() != null ? (getDataManager().get(dashTimer) > 0 ? 0.4 : 0.2) : 0.1);
@@ -159,11 +174,11 @@ public class EntitySpriteling  extends EntityFlying {// implements IRangedAttack
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16.0);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2.0D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0);
     }
 
     @Override

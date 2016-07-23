@@ -37,7 +37,7 @@ import net.minecraft.world.World;
 public class ComponentWhiteTulip extends ComponentBase{
 	Random random = new Random();
 	public ComponentWhiteTulip(){
-		super("whitetulip","Blistering Cold",Blocks.RED_FLOWER,6,10);	
+		super("whitetulip","Blistering Cold",Blocks.RED_FLOWER,6,8);	
 	}
 	
 	@Override

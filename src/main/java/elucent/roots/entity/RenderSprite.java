@@ -10,19 +10,19 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
-public class RenderSpriteling extends RenderLiving<EntitySpriteling> {
+public class RenderSprite extends RenderLiving<EntitySprite> {
 
-	public RenderSpriteling(RenderManager renderManager, ModelBase modelBase, float shadowSize) {
+	public RenderSprite(RenderManager renderManager, ModelBase modelBase, float shadowSize) {
 		super(renderManager, modelBase, shadowSize);
 	}
 	
 	@Override
-	public boolean canRenderName(EntitySpriteling entity){
+	public boolean canRenderName(EntitySprite entity){
 		return false;
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntitySpriteling entity) {
+	protected ResourceLocation getEntityTexture(EntitySprite entity) {
 		return new ResourceLocation("roots:textures/entity/spriteling/spiritTexture.png");
 	}
 }

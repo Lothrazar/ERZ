@@ -18,7 +18,7 @@ public class EntityAccelerator extends Entity {
 		super(world);
 		this.entity = entity;
 		this.potency = potency+2;
-		this.lifetime = 200+200*size;
+		this.lifetime = 100+100*size;
 		this.posX = entity.posX;
 		this.posY = entity.posY;
 		this.posZ = entity.posZ;

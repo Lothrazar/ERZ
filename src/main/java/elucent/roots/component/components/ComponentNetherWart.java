@@ -6,8 +6,11 @@ import java.util.Random;
 import elucent.roots.ConfigManager;
 import elucent.roots.PlayerManager;
 import elucent.roots.RegistryManager;
+import elucent.roots.Util;
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.EnumCastType;
+import elucent.roots.entity.EntityAccelerator;
+import elucent.roots.entity.EntityNetherInfection;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.entity.Entity;
@@ -34,32 +37,15 @@ public class ComponentNetherWart extends ComponentBase{
 	@Override
 	public void doEffect(World world, Entity caster, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
 		if (type == EnumCastType.SPELL){	
-			int damageDealt = 0;
-			ArrayList<EntityLivingBase> targets = (ArrayList<EntityLivingBase>) world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-size,y-size,z-size,x+size,y+size,z+size));
-			for (int i = 0; i < targets.size(); i ++){
-				if (targets.get(i).getUniqueID() != caster.getUniqueID()){
-					if (targets.get(i) instanceof EntityPlayer && ConfigManager.disablePVP){
-						
-					}
-					else {
-						damageDealt += (int)(11+2*potency);
-						targets.get(i).attackEntityFrom(DamageSource.inFire, (int)(11+2*potency));
-						targets.get(i).setFire((int) (2+potency));
-						targets.get(i).setLastAttacker(caster);
-						targets.get(i).setRevengeTarget((EntityLivingBase)caster);
-						((EntityLivingBase)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:slowness"), 100, 0));
-						((EntityLivingBase)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:weakness"), 100, 0));
-						((EntityLivingBase)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:mining_fatigue"), 100, 0));
-						targets.get(i).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:speed"), 100, 0));
-						targets.get(i).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:haste"), 100, 0));
-						targets.get(i).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:strength"), 100, 0));
-					}
-				}
-			}
-			if (damageDealt > 80){
-				if (caster instanceof EntityPlayer){
-					if (!((EntityPlayer)caster).hasAchievement(RegistryManager.achieveLotsDamage)){
-						PlayerManager.addAchievement(((EntityPlayer)caster), RegistryManager.achieveLotsDamage);
+			Entity entity = Util.getRayTraceEntity(world, (EntityPlayer)caster, 4+2*(int)size);
+			if (entity != null){
+				if (!world.isRemote){
+					double tposX = (entity.posX);
+					double tposY = (entity.posY)+entity.getEyeHeight()/2.0f;
+					double tposZ = (entity.posZ);
+					if (world.getEntitiesWithinAABB(EntityAccelerator.class, new AxisAlignedBB(entity.posX-0.1,entity.posY-0.1,entity.posZ-0.1,entity.posX+0.1,entity.posY+0.1,entity.posZ+0.1)).size() == 0){
+						EntityNetherInfection a = new EntityNetherInfection(world,caster.getUniqueID(),entity,(int)potency,(int)size);
+						world.spawnEntityInWorld(a);
 					}
 				}
 			}

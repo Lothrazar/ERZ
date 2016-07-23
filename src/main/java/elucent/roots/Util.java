@@ -13,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -29,7 +30,7 @@ public class Util {
 		return shifted;
 	}
 	
-	float fastSin(float x){
+	public static float fastSin(float x){
 	    if (x < -3.14159265){
 	        x += 6.28318531;
 	    }
@@ -46,7 +47,7 @@ public class Util {
 	        return (float) (1.27323954 * x - 0.405284735 * x * x);
 	    }
 	}
-	float fastCos(float x){
+	public static float fastCos(float x){
 	    if (x < -3.14159265){
 	        x += 6.28318531;
 	    }
@@ -67,8 +68,28 @@ public class Util {
 	        return (float) (1.27323954 * x - 0.405284735 * x * x);
 	    }
 	}
+	
+	public static float yawDegreesBetweenPoints(double posX, double posY, double posZ, double posX2, double posY2, double posZ2){
+		float f = (float)Math.toDegrees(Math.atan2(posX2-posX,posZ2-posZ));
+		if (f < 0){
+			f += 360.0f;
+		}
+		return f;
+	}
+	
+	public static Vec3d lookVector(float rotYaw, float rotPitch){
+		return new Vec3d(
+			Math.sin(rotYaw)*Math.cos(rotPitch),
+			Math.sin(rotPitch),
+			Math.cos(rotYaw)*Math.cos(rotPitch)	
+		);
+	}
+	
+	public static float pitchDegreesBetweenPoints(double posX, double posY, double posZ, double posX2, double posY2, double posZ2){
+		return (float)Math.toDegrees(Math.atan2(posY2-posY,Math.sqrt((posX2-posX)*(posX2-posX)+(posZ2-posZ)*(posZ2-posZ))));
+	}
 
-	double interpolate(float s, float e, float t){
+	public static double interpolate(float s, float e, float t){
 	    double t2 = (1.0-fastCos(t*3.14159265358979323f))/2.0;
 	    return(s*(1.0-t2)+(e)*t2);
 	}
@@ -77,11 +98,11 @@ public class Util {
 		double x = player.posX;
 		double y = player.posY + player.getEyeHeight();
 		double z = player.posZ;
-		for (int i = 0; i < reachDistance*10.0; i ++){
-			x += player.getLookVec().xCoord*0.1;
-			y += player.getLookVec().yCoord*0.1;
-			z += player.getLookVec().zCoord*0.1;
-			if (world.getBlockState(new BlockPos(x,y,z)).getBlock() != Blocks.AIR){
+		for (int i = 0; i < reachDistance*40.0; i ++){
+			x += player.getLookVec().xCoord*0.025;
+			y += player.getLookVec().yCoord*0.025;
+			z += player.getLookVec().zCoord*0.025;
+			if (!world.getBlockState(new BlockPos(x,y,z)).getBlock().isFullCube(world.getBlockState(new BlockPos(x,y,z)))){
 				return new BlockPos(x,y,z);
 			}
 		}

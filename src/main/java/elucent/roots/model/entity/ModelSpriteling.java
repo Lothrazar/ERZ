@@ -1,5 +1,6 @@
 package elucent.roots.model.entity;
 
+import elucent.roots.entity.EntitySpriteling;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -56,19 +57,46 @@ public class ModelSpriteling extends ModelBase
   
   @Override
   public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale){
+	  GlStateManager.color(1f, 1f, 1f, 1f);
 	  GlStateManager.translate(0, 1.25, 0);
-	  setRotation(head2, entity.rotationPitch, (float) (entity.rotationYaw+Math.toRadians(90.0)), 0);
+	  setRotation(head2, 0, 0, 0);
+	  GlStateManager.rotate(-0.5f*(float)Math.PI-(float)Math.toDegrees(entity.rotationYaw), 0, 1, 0);
+	  GlStateManager.rotate((float)Math.toDegrees(-entity.rotationPitch/2.0f), 1, 0, 0);
+	  if (((EntitySpriteling)entity).twirlTimer > 0){
+		  GlStateManager.rotate((float)18.0f*(20.0f-(float)((EntitySpriteling)entity).twirlTimer),0,0,1);
+	  }
+	  GlStateManager.rotate((float)(15.0f*Math.sin(Math.PI*2.0*(((double)(entity.ticksExisted%20))/20.0))), 0, 0, 1);
 	  head2.render(1.0f/16.0f);
+	  GlStateManager.rotate((float)(-15.0f*Math.sin(Math.PI*2.0*(((double)(entity.ticksExisted%20))/20.0))), 0, 0, 1);
+	  if (((EntitySpriteling)entity).twirlTimer > 0){
+		  GlStateManager.rotate((float)-18.0f*(20.0f-(float)((EntitySpriteling)entity).twirlTimer),0,0,1);
+	  }
+	  GlStateManager.rotate(-(float)Math.toDegrees(-entity.rotationPitch/2.0f), 1, 0, 0);
+	  GlStateManager.rotate((float)Math.toDegrees(entity.rotationYaw)+0.5f*(float)Math.PI, 0, 1, 0);
 	  GlStateManager.enableAlpha();
 	  GlStateManager.enableBlend();
+	  GlStateManager.disableLighting();
 	  GlStateManager.color(1, 1, 1, 0.75f);
-	  setRotation(head1, entity.rotationPitch, (float) (entity.rotationYaw+Math.toRadians(90.0)), 0);
+	  setRotation(head1, 0, 0, 0);
 	  setRotation(head1.childModels.get(2),(float) Math.toRadians(90.0),0,0);
+	  GlStateManager.rotate(-0.5f*(float)Math.PI-(float)Math.toDegrees(entity.rotationYaw), 0, 1, 0);
+	  GlStateManager.rotate((float)Math.toDegrees(-entity.rotationPitch/2.0f), 1, 0, 0);
+	  if (((EntitySpriteling)entity).twirlTimer > 0){
+		  GlStateManager.rotate((float)18.0f*(20.0f-(float)((EntitySpriteling)entity).twirlTimer),0,0,1);
+	  }
+	  GlStateManager.rotate((float)(15.0f*Math.sin(Math.PI*2.0*(((double)(entity.ticksExisted%20))/20.0))), 0, 0, 1);
 	  head1.render(1.0f/16.0f);
-	  GlStateManager.translate(0, -1.25, 0);
-	  GlStateManager.color(1, 1, 1, 1);
+	  GlStateManager.rotate((float)(-15.0f*Math.sin(Math.PI*2.0*(((double)(entity.ticksExisted%20))/20.0))), 0, 0, 1);
+	  if (((EntitySpriteling)entity).twirlTimer > 0){
+		  GlStateManager.rotate((float)-18.0f*(20.0f-(float)((EntitySpriteling)entity).twirlTimer),0,0,1);
+	  }
+	  GlStateManager.rotate(-(float)Math.toDegrees(-entity.rotationPitch/2.0f), 1, 0, 0);
+	  GlStateManager.rotate((float)(entity.rotationYaw)+0.5f*(float)Math.PI, 0, 1, 0);
+	  GlStateManager.translate(0, -(1.25), 0);
+	  GlStateManager.color(1f, 1f, 1f, 1f);
 	  GlStateManager.disableAlpha();
 	  GlStateManager.disableBlend();
+	  GlStateManager.enableLighting();
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)
