@@ -65,7 +65,7 @@ tile.standingStoneAccelerator.name=Accelerating Standing Stone
 tile.standingStoneIgniter.name=Igniting Standing Stone
 tile.standingStoneGrower.name=Growing Standing Stone
 tile.standingStoneHealer.name=Healing Standing Stone
-tile.standingStoneAesthetic.name=Standing Stone
+tile.standingStoneAesthetic.name=Aesthetic Standing Stone
 
 roots.command.roots.usage=A general purpose command for the roots mod. Enter /roots help for subcommands.
 
@@ -283,7 +283,7 @@ roots.research.spells.midnightbloom.page2info=The new flower you have created is
 
 roots.research.spells.cobweb.name=Spell Component: Snare
 roots.research.spells.cobweb.page1title.name=Snare
-roots.research.spells.cobweb.page1info=Through the power of the cobweb you have te ability to make your nearby enemies slower or even stop them, giving you time to escape, fight back or even capture them.
+roots.research.spells.cobweb.page1info=By incorporating a cobweb into your spells, you gain the ability to ensnare targets. Using the above recipe, you can create a spell that will significantly slow entities in an area around the spell.
 
 roots.research.ritual.name=Rituals
 
@@ -438,23 +438,13 @@ roots.research.ritual.engravedSword.page7title.name=Shadow Step
 roots.research.ritual.engravedSword.page7info=Each dark oak bark you burn as incense during the sword's crafting will increase your chance to dodge attacks made against you when holding the sword.
 
 roots.research.ritual.timeshift.name=Time Shift
-roots.research.ritual.timeshift.page1title.name=Timey Wimey Stuff
-roots.research.ritual.timeshift.page1info=After many hours you have discovered that by burning common time keeping devices you can move time by an amount proportional to the amount of clocks burned as incense.
+roots.research.ritual.timeshift.page1title.name=Time Travel
+roots.research.ritual.timeshift.page1info=After many hours you have discovered that by burning flowers associated with time, you can increment time itself by an amount proportional to the amount of oxeye daisies burned as incense. Four oxeye daisies is sufficient to turn night into day, or vice versa.
 roots.research.ritual.timeshift.page2title.name=Ritual: Time Shift
 
-roots.research.ritual.restoration.name=Restoration
-roots.research.ritual.restoration.page1title.name=Ritual:Restoration
-roots.research.ritual.restoration.page1info=After obtaining the charm of restoration, the power that it held was unleashed and you got the ability to remove all bad effects and push your enemies away from you.
-roots.research.ritual.restoration.page2title.name=Ritual: Restoration
-
-roots.research.ritual.conjuration.name=Conjuration
-roots.research.ritual.conjuration.page1title.name=Ritual:Conjuration
-roots.research.ritual.conjuration.page1info=...
-roots.research.ritual.conjuration.page2title.name=Ritual:Conjuration
-
-roots.research.ritual.poweredstones.page16title.name=Ritual: Standing Stone
-roots.research.ritual.poweredstones.page17title.name=Standing Stone
-roots.research.ritual.poweredstones.page17info=A basic standing stone. Particles can be colored using Rose red, Lapis Lazuli, Cactus Green and reset using bone meal.
+roots.research.ritual.poweredstones.page16title.name=Ritual: Aesthetic Standing Stone
+roots.research.ritual.poweredstones.page17title.name=Aesthetic Standing Stone
+roots.research.ritual.poweredstones.page17info=A basic standing stone used for aesthetic purposes. Particles can be colored using Rose red, Lapis Lazuli, Cactus Green and reset using bone meal.
 
 achievement.tablet=Who Needs Pages?
 achievement.tablet.desc=Craft a Runic Tablet.

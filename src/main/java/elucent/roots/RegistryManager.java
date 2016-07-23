@@ -2,10 +2,14 @@ package elucent.roots;
 
 import elucent.roots.block.*;
 import elucent.roots.entity.EntityAccelerator;
+import elucent.roots.entity.EntityNetherInfection;
+import elucent.roots.entity.EntitySprite;
 import elucent.roots.entity.EntitySpriteling;
 import elucent.roots.entity.EntityTileAccelerator;
+import elucent.roots.entity.RenderSprite;
 import elucent.roots.entity.RenderSpriteling;
 import elucent.roots.item.*;
+import elucent.roots.model.ModelHolder;
 import elucent.roots.model.entity.ModelSpriteling;
 import elucent.roots.tileentity.*;
 import net.minecraft.block.Block;
@@ -143,6 +147,8 @@ public class RegistryManager {
 		EntityRegistry.registerModEntity(EntityTileAccelerator.class, "tileAccelerator", 0, Roots.instance, 64, 3, true);
 		EntityRegistry.registerModEntity(EntityAccelerator.class, "entityAccelerator", 1, Roots.instance, 64, 3, true);
 		EntityRegistry.registerModEntity(EntitySpriteling.class, "spriteling", 2, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntitySprite.class, "sprite", 3, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityNetherInfection.class, "entityInfection", 4, Roots.instance, 64, 3, true);
 	}
 	
 	public static void registerRecipes(){
@@ -300,6 +306,7 @@ public class RegistryManager {
 	
 	@SideOnly(Side.CLIENT)
 	public static void registerEntityRenderers() {
-		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteling.class, new RenderSpriteling(Minecraft.getMinecraft().getRenderManager(),new ModelSpriteling(),0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteling.class, new RenderSpriteling(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("spriteling"),0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySprite.class, new RenderSprite(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("sprite"),0.5f));
 	}
 }

@@ -80,7 +80,6 @@ public class ItemStaff extends Item implements IManaRelatedItem {
 		if (timeLeft < (72000-12)){
 			if (stack.hasTagCompound()){
 				if (stack.getTagCompound().getInteger("uses") >= 0){
-					stack.getTagCompound().setInteger("uses", stack.getTagCompound().getInteger("uses") - 1);
 					ComponentBase comp = ComponentManager.getComponentFromName(stack.getTagCompound().getString("effect"));
 					int potency = stack.getTagCompound().getInteger("potency");
 					int efficiency = stack.getTagCompound().getInteger("efficiency");
@@ -93,11 +92,13 @@ public class ItemStaff extends Item implements IManaRelatedItem {
 							&& ((EntityPlayer)player).getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() instanceof ItemDruidRobes
 							&& ((EntityPlayer)player).getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() instanceof ItemDruidRobes
 							&& ((EntityPlayer)player).getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() instanceof ItemDruidRobes){
-							potency += 1;
+							efficiency += 1;
 						}
 					}
-					double xpCost = (comp.xpCost + potency)*(1.0-0.25*(double)efficiency)*(1.0/((1.0+(1.0/((double)potency)))/2.0));
+					double xpCost = (comp.xpCost + potency)*(((1.0+(1.25/((double)efficiency+1.0)))/2.0))*(1.0/((1.25+(1.0/((double)potency+1.0)))/2.0));
+					System.out.println("XPCOST: " + xpCost);
 					if (((EntityPlayer)player).hasCapability(ManaProvider.manaCapability, null) && ManaProvider.get((EntityPlayer)player).getMana() >= xpCost){
+						stack.getTagCompound().setInteger("uses", stack.getTagCompound().getInteger("uses") - 1);
 						ManaProvider.get((EntityPlayer)player).setMana((EntityPlayer)player, (float) (ManaProvider.get((EntityPlayer)player).getMana()-xpCost));
 						comp.doEffect(world, player, EnumCastType.SPELL, player.posX+3.0*player.getLookVec().xCoord, player.posY+3.0*player.getLookVec().yCoord, player.posZ+3.0*player.getLookVec().zCoord, potency, efficiency, 3.0+size);
 						for (int i = 0 ; i < 90; i ++){

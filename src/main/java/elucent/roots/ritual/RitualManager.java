@@ -2,6 +2,10 @@ package elucent.roots.ritual;
 
 import elucent.roots.RegistryManager;
 import elucent.roots.ritual.powers.*;
+import elucent.roots.ritual.powers.charms.RitualPowerConjuration;
+import elucent.roots.ritual.powers.charms.RitualPowerEvocation;
+import elucent.roots.ritual.powers.charms.RitualPowerIllusion;
+import elucent.roots.ritual.powers.charms.RitualPowerRestoration;
 import elucent.roots.ritual.rituals.*;
 import elucent.roots.tileentity.TileEntityBrazier;
 import net.minecraft.entity.monster.*;
@@ -224,7 +228,7 @@ public class RitualManager {
 				.addIngredient(new ItemStack(RegistryManager.standingStoneT2,1))
 				.addIngredient(new ItemStack(Items.GLOWSTONE_DUST,1))
 				.addIngredient(new ItemStack(Blocks.STONEBRICK,1,3)));
-		rituals.add(new RitualCrafting("standingStone", 0, 105, 73)
+		rituals.add(new RitualCrafting("aestheticStoneCrafting", 0, 105, 73)
 				.setResult(new ItemStack(RegistryManager.standingStoneAesthetic,1))
 				.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
 				.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
@@ -240,7 +244,11 @@ public class RitualManager {
 				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
 				.addIngredient(new ItemStack(RegistryManager.standingStoneT2,1))
 				.addIngredient(new ItemStack(Items.GLOWSTONE_DUST,1))
-				.addIngredient(new ItemStack(Blocks.STONEBRICK,1)));
+				.addIngredient(new ItemStack(Blocks.STONEBRICK,1,3))
+				.addIncense(new ItemStack(Items.DYE,1,1))
+				.addIncense(new ItemStack(Items.DYE,1,4))
+				.addIncense(new ItemStack(Items.DYE,1,2))
+				.addIncense(new ItemStack(Items.DYE,1,15)));
 		rituals.add(new RitualCrafting("entanglerStoneCrafting", 0, 105, 73)
 				.setResult(new ItemStack(RegistryManager.standingStoneEntangler,1))
 				.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
@@ -783,7 +791,7 @@ public class RitualManager {
 				.addBlock(RegistryManager.standingStoneT1, 0, 0, -3)
 				.addIngredient(new ItemStack(Items.CLOCK))
 				.addIngredient(new ItemStack(Items.IRON_INGOT)));
-		rituals.add(new RitualPowerGiver("restoration", 139, 22, 40)
+		/*rituals.add(new RitualPowerGiver("restoration", 139, 22, 40)
 				.setPower(new RitualPowerRestoration())
 				.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
 				.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
@@ -797,6 +805,8 @@ public class RitualManager {
 				.addBlock(RegistryManager.standingStoneT2, -5, 1, 0)
 				.addBlock(RegistryManager.standingStoneT2, 0, 1, 5)
 				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
+				.addIngredient(new ItemStack(Items.MILK_BUCKET))
+				.addIngredient(new ItemStack(Items.FEATHER))
 				.addIngredient(new ItemStack(RegistryManager.itemCharmRestoration)));
 		rituals.add(new RitualPowerGiver("illusion", 139, 22, 40)
 				.setPower(new RitualPowerIllusion())
@@ -812,6 +822,7 @@ public class RitualManager {
 				.addBlock(RegistryManager.standingStoneT2, -5, 1, 0)
 				.addBlock(RegistryManager.standingStoneT2, 0, 1, 5)
 				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
+				.addIngredient(new ItemStack(Items.ENDER_PEARL))
 				.addIngredient(new ItemStack(RegistryManager.itemCharmIllusion)));
 		rituals.add(new RitualPowerGiver("conjuration", 139, 22, 40)
 				.setPower(new RitualPowerConjuration())
@@ -827,6 +838,7 @@ public class RitualManager {
 				.addBlock(RegistryManager.standingStoneT2, -5, 1, 0)
 				.addBlock(RegistryManager.standingStoneT2, 0, 1, 5)
 				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
+				.addIngredient(new ItemStack(Items.APPLE))
 				.addIngredient(new ItemStack(RegistryManager.itemCharmConjuration)));
 		rituals.add(new RitualPowerGiver("evocation", 139, 22, 40)
 				.setPower(new RitualPowerEvocation())
@@ -842,7 +854,7 @@ public class RitualManager {
 				.addBlock(RegistryManager.standingStoneT2, -5, 1, 0)
 				.addBlock(RegistryManager.standingStoneT2, 0, 1, 5)
 				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
-				.addIngredient(new ItemStack(RegistryManager.itemCharmEvocation)));
+				.addIngredient(new ItemStack(RegistryManager.itemCharmEvocation)));*/
 
 
 	}

@@ -27,7 +27,7 @@ public class RitualTimeShift extends RitualBase{
 		}
 		for(Item i: items){
 			if(i == Items.CLOCK){
-				shiftAmount += 1000;
+				shiftAmount += 3000;
 			}
 		}
 		inventory.clear();

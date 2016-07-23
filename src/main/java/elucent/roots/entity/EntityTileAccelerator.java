@@ -14,11 +14,12 @@ public class EntityTileAccelerator extends Entity {
 	Random random = new Random();
 	int lifetime = 0;
 	int potency = 1;
+	
 	public EntityTileAccelerator(World world, BlockPos pos, int potency, int size) {
 		super(world);
 		this.pos = pos;
-		this.potency = potency+2;
-		this.lifetime = 200+200*size;
+		this.potency = potency+1;
+		this.lifetime = 100+100*size;
 		this.posX = pos.getX();
 		this.posY = pos.getY();
 		this.posZ = pos.getZ();

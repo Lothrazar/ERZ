@@ -87,10 +87,10 @@ public class ItemCrystalStaff extends Item implements IManaRelatedItem {
 								&& ((EntityPlayer)player).getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() instanceof ItemDruidRobes
 								&& ((EntityPlayer)player).getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() instanceof ItemDruidRobes
 								&& ((EntityPlayer)player).getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() instanceof ItemDruidRobes){
-								potency += 1;
+								efficiency += 1;
 							}
 						}
-						double xpCost = (comp.xpCost + potency)*(1.0-0.25*(double)efficiency)*(1.0/((1.0+(1.0/((double)potency+1.0)))/2.0));
+						double xpCost = (comp.xpCost + potency)*(((1.0+(0.75/((double)efficiency)))/2.0))*(1.0/((0.75+(1.0/((double)potency+1.0)))/2.0));
 						Random random = new Random();
 						if (((EntityPlayer)player).hasCapability(ManaProvider.manaCapability, null) && ManaProvider.get((EntityPlayer)player).getMana() >= ((float)comp.xpCost)/(efficiency+1)){
 							ManaProvider.get((EntityPlayer)player).setMana((EntityPlayer)player, ManaProvider.get((EntityPlayer)player).getMana()-(((float)comp.xpCost)/(efficiency+1)));

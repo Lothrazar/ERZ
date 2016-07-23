@@ -38,7 +38,7 @@ import net.minecraft.world.World;
 public class ComponentRadiantDaisy extends ComponentBase{
 	Random random = new Random();
 	public ComponentRadiantDaisy(){
-		super("radiantdaisy","Radiance",RegistryManager.radiantDaisy,24);	
+		super("radiantdaisy","Radiance",RegistryManager.radiantDaisy,12);	
 	}
 	
 	@Override
