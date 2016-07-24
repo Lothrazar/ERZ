@@ -39,6 +39,12 @@ item.elderberry.name=Бузина
 item.healingPoultice.name=Лечебная припарка
 item.rootyStew.name=Тушёный корень
 item.engravedSword.name=Выгравированный клинок
+
+item.charmRestoration.name=Шарм восстановления
+item.charmEvocation.name=Шарм воплощения
+item.charmConjuration.name=Шарм колдовства
+item.charmIllusion.name=Шарм иллюзии
+
 runicFocus_0.name=Рунический фокус
 runicFocus_1.name=Заряженный рунический фокус
 
@@ -59,7 +65,9 @@ tile.standingStoneAccelerator.name=Стоячий камень ускорени�
 tile.standingStoneIgniter.name=Стоячий камень воспламенения
 tile.standingStoneGrower.name=Стоячий камень роста
 tile.standingStoneHealer.name=Стоячий камень исцеления
-tile.standingStoneAesthetic.name=Стоячий камень
+tile.standingStoneAesthetic.name=Эстетический стоячий камень
+
+roots.command.roots.usage=Команда общего назначения для мода Roots. Введите /roots help, для подкоманд.
 
 roots.attribute.fullset.name=Когда надет полный комплект:
 roots.attribute.equipped.name=Когда надет:
@@ -102,6 +110,7 @@ roots.component.redtulip.name=Цветок дьявола
 roots.component.rosebush.name=Шипы розы
 roots.component.sunflower.name=Солнечный удар
 roots.component.whitetulip.name=Стремительный холод
+roots.component.cobweb.name=Ловушка
 
 roots.mod.spikes.name=Шипы
 roots.mod.holy.name=Holy
@@ -188,7 +197,7 @@ roots.research.spells.blueorchid.page1info=The blue orchid seems to be related t
 
 roots.research.spells.allium.name=Компонент заклинания: Раздирающий удар
 roots.research.spells.allium.page1title.name=Выключатель оборудования
-roots.research.spells.allium.page1info=Alliums contain a modicum of destructive energy. Using the above recipe, you can create a spell that will deal simple damage to its targets. In addition to this, if the target is holding a tool or wearing armor, their equipment will be damaged severely.
+roots.research.spells.allium.page1info=Alliums contain a modicum of destructive energy. Using the above recipe, you can create a spell that will shatter targets' defenses, multiplying the next damage they receive significantly.
 
 roots.research.spells.azurebluet.name=Компонент заклинания: Дробление
 roots.research.spells.azurebluet.page1title.name=Добыча с магией
@@ -228,11 +237,11 @@ roots.research.spells.lilac.page1info=You have discovered that lilacs contain a 
 
 roots.research.spells.rosebush.name=Компонент заклинания: Шипы розы
 roots.research.spells.rosebush.page1title.name=Природная защита
-roots.research.spells.rosebush.page1info=You have discovered a way to capture the prickliness of a rose bush in your spells. Using the above recipe, you can create a spell capable of dealing raw damage to targets. Do note that this spell will not cause knockback.
+roots.research.spells.rosebush.page1info=You have discovered a way to capture the prickliness of a rose bush in your spells. Using the above recipe, you can create a spell capable of dealing significant damage to targets. However, the thorns from this spell will transfer to the target, and the next entity to attack the target of this spell will take damage.
 
 roots.research.spells.peony.name=Компонент заклинания: Регенерация
 roots.research.spells.peony.page1title.name=Нежное прикосновение
-roots.research.spells.peony.page1info=You have found that peonies have a gentle healing character to them. Using the above recipe, you can create a spell that will simply heal you a small amount.
+roots.research.spells.peony.page1info=You have found that peonies have a gentle healing character to them. Using the above recipe, you can create a spell that will draw from nearby flowers to heal you a small amount.
 
 roots.research.spells.apple.name=Компонент заклинания: Лечение природы
 roots.research.spells.apple.page1title.name=Лекарство
@@ -248,7 +257,7 @@ roots.research.spells.poisonouspotato.page1info=The innate charge of a potato co
 
 roots.research.spells.netherwart.name=Компонент заклинания: Инферно
 roots.research.spells.netherwart.page1title.name=Огненный шар
-roots.research.spells.netherwart.page1info=Nether wart has absorbed a lot from its fiery home in the nether. Using the above recipe, you can create a spell that will both damage and ignite hit targets.
+roots.research.spells.netherwart.page1info=Nether wart has absorbed a lot from its fiery home in the nether. Using the above recipe, you can create a spell that will unleash a powerful burst of damaging energy. However, this burst will physically drain you, and hit targets will be slightly buffed after being struck.
 
 roots.research.spells.chorus.name=Компонент заклинания: Эндер-варп
 roots.research.spells.chorus.page1title.name=Телепортация
@@ -258,7 +267,7 @@ roots.research.spells.radiantdaisy.name=Компонент заклинания:
 roots.research.spells.radiantdaisy.page1title.name=Цветок света
 roots.research.spells.radiantdaisy.page1info=Using the mutating flower in the overworld, you create a shining white flower. To create, plant an oxeye daisy. At noon, toss down a glowstone block and one prismarine crystal next to it, and while under the night vision effect, use the powder on the flower.
 roots.research.spells.radiantdaisy.page2title.name=Пронзительные лучи
-roots.research.spells.radiantdaisy.page2info=The new flower you have created contains the very essence of the glowing daylight of the overworld. Using the above recipe, you can create a spell that will do very high damage to struck creatures in a large beam in front of you.
+roots.research.spells.radiantdaisy.page2info=The new flower you have created contains the very essence of the glowing daylight of the overworld. Using the above recipe, you can create a spell that will create a highly damaging beam that will reflect off of blocks. Each reflection takes away some of the beam's power, until it dissipates completely.
 
 roots.research.spells.flareorchid.name=Компонент заклинания: Горение
 roots.research.spells.flareorchid.page1title.name=Огненная флора
@@ -271,6 +280,10 @@ roots.research.spells.midnightbloom.page1title.name=Эндер-цветок
 roots.research.spells.midnightbloom.page1info=Using the mutating powder in the end, you create a flower black as night. To create, plant a poppy two blocks above obsidian in the end. While under the slowness effect, toss a coal block next to the flower and use the powder on the flower.
 roots.research.spells.midnightbloom.page2title.name=Хрономаг
 roots.research.spells.midnightbloom.page2info=The new flower you have created is bursting with powers beyond your control. Using the above recipe, you can create a spell that will stop time for all entities in an area around you. They will not update until the spell ends, during which time you can move, attack, or gloat at them.
+
+roots.research.spells.cobweb.name=Компонент заклинания: Ловушка
+roots.research.spells.cobweb.page1title.name=Западня
+roots.research.spells.cobweb.page1info=By incorporating a cobweb into your spells, you gain the ability to ensnare targets. Using the above recipe, you can create a spell that will significantly slow entities in an area around the spell.
 
 roots.research.ritual.name=Ритуалы
 
@@ -293,7 +306,7 @@ roots.research.ritual.livingtools.page6title.name=Ритуал: Живая мо�
 
 roots.research.ritual.grow.name=Ритуал роста
 roots.research.ritual.grow.page1title.name=Искра жизни
-roots.research.ritual.grow.page1info=With the simple life-channeling abilities of the altar, you have devised a ritual that will aid the growth of your crops. This ritual will scan for crops in a 35x35x9 area and randomly apply a bonemeal-like effect to a few of them.
+roots.research.ritual.grow.page1info=With the simple life-channeling abilities of the altar, you have devised a ritual that will aid the growth of your crops. This ritual will imbue the player on top of the altar with the power of growth, enabling them to right-click any growable plant with an empty hand to rapidly grow it.
 roots.research.ritual.grow.page2title.name=Ритуал: Рост
 
 roots.research.ritual.standingstones.name=Стоячие камни
@@ -327,7 +340,7 @@ roots.research.ritual.rainrituals.page3title.name=Ритуал: Изгон до�
 
 roots.research.ritual.flare.name=Огненный взрыв
 roots.research.ritual.flare.page1title.name=Наступательные ритуалы
-roots.research.ritual.flare.page1info=Not all of your rituals are for happy, fun purposes like toggling the rain or bringing your pet pig back to life. The flare ritual uses some fiery materials from the nether as well as some volatile fuels to burn mobs inside a 45x45x17 area around the altar, except for players immediately near the altar.
+roots.research.ritual.flare.page1info=With the energy stored within an infernal bulb, you imbue the player on the altar with a fiery power. With this power in your hands, you may simply right-click any creature with your empty hand to ignite and damage them, with a small explosion.
 roots.research.ritual.flare.page2title.name=Ритуал: Вспышка
 
 roots.research.ritual.standingstones2.name=Усовершенствованные стоячие камни
@@ -388,12 +401,12 @@ roots.research.ritual.poweredstones.page15info=The vacuum stone will pull nearby
 
 roots.research.ritual.massbreeding.name=Массовое размножение
 roots.research.ritual.massbreeding.page1title.name=Ферма животных
-roots.research.ritual.massbreeding.page1info=By burning common breeding items as incense, you have developed a ritual that will cause all breedable mobs within a 45x45x17 box to enter breeding mode.
+roots.research.ritual.massbreeding.page1info=By burning common breeding items as incense, you imbue the player on the altar with the power to breed animals. After being given this power, right-clicking on a breedable creature with an empty hand will cause all nearby creatures to become breedable.
 roots.research.ritual.massbreeding.page2title.name=Ритуал: Массовое размножение
 
 roots.research.ritual.lifedrain.name=Life Drain
 roots.research.ritual.lifedrain.page1title.name=Taking It Back
-roots.research.ritual.lifedrain.page1info=The life force present in hostile mobs is corrupt and tainted. With this ritual, you have developed a means of taking this life force for more beneficial purposes. This ritual will damage all hostile mobs in a large area, and divide the damage dealt evenly among nearby players in the form of healing.
+roots.research.ritual.lifedrain.page1info=The life force present in hostile mobs is corrupt and tainted. With this ritual, you imbue the player on the altar with the power to drain life from living things. After being given this power, right-clicking on a creature with an empty hand will damage them and heal you a portion of the damage dealt.
 roots.research.ritual.lifedrain.page2title.name=Ритуал: Life Drain
 
 roots.research.ritual.sacrifice.name=Жертвоприношение
@@ -425,12 +438,12 @@ roots.research.ritual.engravedSword.page7title.name=Теневой шаг
 roots.research.ritual.engravedSword.page7info=Each dark oak bark you burn as incense during the sword's crafting will increase your chance to dodge attacks made against you when holding the sword.
 
 roots.research.ritual.timeshift.name=Сдвиг времени
-roots.research.ritual.timeshift.page1title.name=Временная-швременная фиговина
-+roots.research.ritual.timeshift.page1info=After many hours you have discovered that by burning common time keeping devices you can move time by an amount proportional to the amount of clocks burned as incense.
+roots.research.ritual.timeshift.page1title.name=Путешествие во времени
++roots.research.ritual.timeshift.page1info=After many hours you have discovered that by burning flowers associated with time, you can increment time itself by an amount proportional to the amount of oxeye daisies burned as incense. Four oxeye daisies is sufficient to turn night into day, or vice versa.
 roots.research.ritual.timeshift.page2title.name=Ритуал: Сдвиг времени
 
-roots.research.ritual.poweredstones.page16title.name=Ритуал: Стоячий камень
-roots.research.ritual.poweredstones.page17title.name=Стоячий камень
+roots.research.ritual.poweredstones.page16title.name=Ритуал: Эстетический стоячий камень
+roots.research.ritual.poweredstones.page17title.name=Эстетический стоячий камень
 roots.research.ritual.poweredstones.page17info=Базовый стоячий камень. Частицы могут быть окрашены при помощи красного красителя, лазурита, зелёного красителя и сброшены с помощью костной муки.
 
 achievement.tablet=Кому нужны страницы?
