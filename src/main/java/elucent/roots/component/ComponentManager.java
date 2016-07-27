@@ -41,6 +41,13 @@ public class ComponentManager {
 		components.add(new ComponentRadiantDaisy().setPrimaryColor(255,255,255).setSecondaryColor(255,255,255).setTextColor(TextFormatting.WHITE));
 
 		components.add(new ComponentCobweb().setPrimaryColor(0,255,154).setSecondaryColor(255,250,255).setTextColor(TextFormatting.AQUA));
+		/**
+		 * Charms
+         */
+		components.add(new ComponentCharmRestoration().setPrimaryColor(128,255,0).setSecondaryColor(178,255,102).setTextColor(TextFormatting.GREEN));
+		components.add(new ComponentCharmIllusion().setPrimaryColor(128,255,0).setSecondaryColor(178,255,102).setTextColor(TextFormatting.GREEN));
+		components.add(new ComponentCharmConjuration().setPrimaryColor(128,255,0).setSecondaryColor(178,255,102).setTextColor(TextFormatting.GREEN));
+
 
 		recipes.add(new ComponentRecipe("rosebush")
 					.addIngredient(new ItemStack(Blocks.DOUBLE_PLANT,1,4))
@@ -142,10 +149,22 @@ public class ComponentManager {
 					.addIngredient(new ItemStack(Blocks.GLOWSTONE,1))
 					.addIngredient(new ItemStack(Blocks.REDSTONE_BLOCK,1)));
 		recipes.add(new ComponentRecipe("cobweb")
-					.addIngredient(new ItemStack(Blocks.WEB))
-					.addIngredient(new ItemStack(Items.SPIDER_EYE))
-					.addIngredient(new ItemStack(Blocks.CACTUS)));
-		
+					.addIngredient(new ItemStack(Blocks.WEB,1))
+					.addIngredient(new ItemStack(Items.SPIDER_EYE,1))
+					.addIngredient(new ItemStack(Blocks.CACTUS,1)));
+		recipes.add(new ComponentRecipe("CharmOfRestoration")
+					.addIngredient(new ItemStack(RegistryManager.itemCharmRestoration,1))
+					.addIngredient(new ItemStack(Items.ENDER_EYE,1))
+					.addIngredient(new ItemStack(Items.APPLE,1)));
+		recipes.add(new ComponentRecipe("CharmOfIllusion")
+				.addIngredient(new ItemStack(RegistryManager.itemCharmIllusion,1))
+				.addIngredient(new ItemStack(Items.ENDER_EYE,1))
+				.addIngredient(new ItemStack(Items.APPLE,1)));
+		recipes.add(new ComponentRecipe("CharmOfConjuration")
+				.addIngredient(new ItemStack(RegistryManager.itemCharmConjuration,1))
+				.addIngredient(new ItemStack(Items.ENDER_EYE,1))
+				.addIngredient(new ItemStack(Items.APPLE,1)));
+
 		for (int i = 0; i < recipes.size(); i ++){
 			for (int j = 0; j < ConfigManager.disabledComponents.length; j ++){
 				if (recipes.get(i).effectResult.matches(ConfigManager.disabledComponents[j])){

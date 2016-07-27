@@ -1,15 +1,7 @@
 
 package elucent.roots;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import org.lwjgl.opengl.GL11;
-
-import elucent.roots.capability.mana.DefaultManaCapability;
 import elucent.roots.capability.mana.ManaProvider;
-import elucent.roots.capability.powers.IPowersCapability;
 import elucent.roots.capability.powers.PowerProvider;
 import elucent.roots.item.IManaRelatedItem;
 import elucent.roots.item.ItemCrystalStaff;
@@ -112,7 +104,7 @@ public class EventManager {
 		if (event.getHand() == EnumHand.MAIN_HAND){
 			if (event.getEntityPlayer().getHeldItem(event.getHand()) == null){
 				if (!PowerProvider.get(event.getEntityPlayer()).getPowerName().equals("none") && PowerProvider.get(event.getEntityPlayer()).getCooldown() == 0){
-					RitualPowerManager.getPlayerPower(event.getEntityPlayer()).onRightClickBlock(event.getEntityPlayer(), event.getWorld(), event.getPos(), event.getWorld().getBlockState(event.getPos()));
+					RitualPowerManager.getPlayerPower(event.getEntityPlayer()).onRightClickBlock(event.getEntityPlayer(), event.getWorld(), event.getPos(), event.getWorld().getBlockState(event.getPos()),event.getFace());
 				}
 			}
 		}

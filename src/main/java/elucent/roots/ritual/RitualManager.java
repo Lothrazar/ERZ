@@ -1,11 +1,10 @@
 package elucent.roots.ritual;
 
 import elucent.roots.RegistryManager;
-import elucent.roots.ritual.powers.*;
-import elucent.roots.ritual.powers.charms.RitualPowerConjuration;
-import elucent.roots.ritual.powers.charms.RitualPowerEvocation;
-import elucent.roots.ritual.powers.charms.RitualPowerIllusion;
-import elucent.roots.ritual.powers.charms.RitualPowerRestoration;
+import elucent.roots.ritual.powers.RitualPowerBreed;
+import elucent.roots.ritual.powers.RitualPowerFlare;
+import elucent.roots.ritual.powers.RitualPowerGrow;
+import elucent.roots.ritual.powers.RitualPowerLifeDrain;
 import elucent.roots.ritual.rituals.*;
 import elucent.roots.tileentity.TileEntityBrazier;
 import net.minecraft.entity.monster.*;

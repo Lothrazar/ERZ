@@ -36,7 +36,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class RegistryManager {
-	public static Item debugWand, runicFocus, rootyStew, healingPoultice, mutagen, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,nightshade,blackCurrant,redCurrant,whiteCurrant,elderBerry, engravedSword,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion;
+	public static Item debugWand, runicFocus, rootyStew, healingPoultice, mutagen, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,nightshade,blackCurrant,redCurrant,whiteCurrant,elderBerry, engravedSword,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion, itemOtherworlLeaf,itemOtherworldsubstance;
 	public static Item manaResearchIcon;
 	public static Block flareOrchid, radiantDaisy, standingStoneGrower, standingStoneHealer, standingStoneIgniter, standingStoneEntangler, standingStoneAccelerator, standingStoneAesthetic, standingStoneRepulsor, standingStoneVacuum, midnightBloom, mortar, imbuer, altar, druidChalice, standingStoneT1, standingStoneT2, brazier,bridge;
 	
@@ -93,11 +93,12 @@ public class RegistryManager {
 		GameRegistry.registerItem(runicFocus = new ItemRunicFocus(), "runicFocus"); 
 		GameRegistry.registerItem(engravedSword = new ItemEngravedSword(engravedMaterial), "engravedSword");
 		GameRegistry.registerItem(manaResearchIcon = new ItemResearchIcon("manaResearchIcon"), "manaResearchIcon");
-		/*GameRegistry.registerItem(itemCharmRestoration = new ItemCharm("charmRestoration"),"charmRestoration");
+		GameRegistry.registerItem(itemCharmRestoration = new ItemCharm("charmRestoration"),"charmRestoration");
 		GameRegistry.registerItem(itemCharmEvocation = new ItemCharm("charmEvocation"),"charmEvocation");
 		GameRegistry.registerItem(itemCharmConjuration = new ItemCharm("charmConjuration"),"charmConjuration");
-		GameRegistry.registerItem(itemCharmIllusion = new ItemCharm("charmIllusion"),"charmIllusion");*/
-
+		GameRegistry.registerItem(itemCharmIllusion = new ItemCharm("charmIllusion"),"charmIllusion");
+		GameRegistry.registerItem(itemOtherworlLeaf = new ItemOtherworld("otherworldLeaf"),"otherworldLeaf");
+		GameRegistry.registerItem(itemOtherworldsubstance = new ItemOtherworld("otherworldSubstance"),"otherworldSubstance");
 
 		/**
 		 * REGISTERING BLOCKS
@@ -120,7 +121,7 @@ public class RegistryManager {
 		GameRegistry.registerBlock(midnightBloom = new BlockMidnightBloom(),"midnightBloom");
 		GameRegistry.registerBlock(flareOrchid = new BlockFlareOrchid(),"flareOrchid");
 		GameRegistry.registerBlock(radiantDaisy = new BlockRadiantDaisy(),"radiantDaisy");
-		//GameRegistry.registerBlock(bridge = new BlockBridge(),"bridgeBlock");
+		GameRegistry.registerBlock(bridge = new BlockBridge(),"bridgeBlock");
 		
 		/**
 		 * REGISTERING TILE ENTITIES
@@ -273,10 +274,10 @@ public class RegistryManager {
 		((ItemResearchIcon)manaResearchIcon).initModel();
 
 		/**Charms**/
-		/*((ItemCharm)itemCharmRestoration).initModel();
+		((ItemCharm)itemCharmRestoration).initModel();
 		((ItemCharm)itemCharmConjuration).initModel();
 		((ItemCharm)itemCharmEvocation).initModel();
-		((ItemCharm)itemCharmIllusion).initModel();*/
+		((ItemCharm)itemCharmIllusion).initModel();
 		
 		//((BlockDruidChalice)druidChalice).initModel();
 		((BlockMortar)mortar).initModel();
