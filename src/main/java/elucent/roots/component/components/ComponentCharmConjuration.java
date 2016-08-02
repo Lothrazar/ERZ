@@ -17,7 +17,7 @@ public class ComponentCharmConjuration extends ComponentBase
 {
     public ComponentCharmConjuration()
     {
-        super("CharmOfConjuration", "Conjuration", RegistryManager.itemCharmConjuration, 8);
+        super("conjuration", "Conjuration", RegistryManager.itemCharmConjuration, 8);
     }
 
     @Override

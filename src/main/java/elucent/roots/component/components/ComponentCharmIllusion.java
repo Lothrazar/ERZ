@@ -18,7 +18,7 @@ public class ComponentCharmIllusion extends ComponentBase {
     public static boolean doStuff = false;
 
     public ComponentCharmIllusion() {
-        super("CharmOfIllusion", "Illusion", RegistryManager.itemCharmIllusion, 16);
+        super("illusion", "Illusion", RegistryManager.itemCharmIllusion, 16);
     }
 
     @Override

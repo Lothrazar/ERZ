@@ -9,10 +9,8 @@ import elucent.roots.entity.projectile.EntityRitualProjectile;
 import elucent.roots.gui.GuiHandler;
 import elucent.roots.mutation.MutagenManager;
 import elucent.roots.network.MessageUpdateMana;
-import elucent.roots.network.MessageUpdatePower;
 import elucent.roots.research.ResearchManager;
 import elucent.roots.ritual.RitualManager;
-import elucent.roots.ritual.RitualPowerManager;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -30,10 +28,7 @@ public class CommonProxy {
 		RegistryManager.registerRecipes();
 		RootsCapabilityManager.preInit();
 		RegistryManager.registerAchievements();
-		RitualPowerManager.init();
-		registerEntitys();
 		network = NetworkRegistry.INSTANCE.newSimpleChannel("roots");
-		network.registerMessage(MessageUpdatePower.CapsMessageHandler.class, MessageUpdatePower.class, 1, Side.CLIENT);
 		network.registerMessage(MessageUpdateMana.CapsMessageHandler.class, MessageUpdateMana.class, 2, Side.CLIENT);
 	}
 	
@@ -70,12 +65,5 @@ public class CommonProxy {
 	
 	public void spawnParticleMagicAuraFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){
 		//
-	}
-
-	private void registerEntitys()
-	{
-		int id = 0;
-		EntityRegistry.registerModEntity(EntityRitualProjectile.class, "RitualProjectile", id++, Roots.instance, 64, 1, true);
-
 	}
 }

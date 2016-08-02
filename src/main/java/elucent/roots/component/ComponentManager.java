@@ -152,15 +152,15 @@ public class ComponentManager {
 					.addIngredient(new ItemStack(Blocks.WEB,1))
 					.addIngredient(new ItemStack(Items.SPIDER_EYE,1))
 					.addIngredient(new ItemStack(Blocks.CACTUS,1)));
-		recipes.add(new ComponentRecipe("CharmOfRestoration")
+		recipes.add(new ComponentRecipe("restoration")
 					.addIngredient(new ItemStack(RegistryManager.itemCharmRestoration,1))
 					.addIngredient(new ItemStack(Items.ENDER_EYE,1))
 					.addIngredient(new ItemStack(Items.APPLE,1)));
-		recipes.add(new ComponentRecipe("CharmOfIllusion")
+		recipes.add(new ComponentRecipe("illusion")
 				.addIngredient(new ItemStack(RegistryManager.itemCharmIllusion,1))
 				.addIngredient(new ItemStack(Items.ENDER_EYE,1))
 				.addIngredient(new ItemStack(Items.APPLE,1)));
-		recipes.add(new ComponentRecipe("CharmOfConjuration")
+		recipes.add(new ComponentRecipe("conjuration")
 				.addIngredient(new ItemStack(RegistryManager.itemCharmConjuration,1))
 				.addIngredient(new ItemStack(Items.ENDER_EYE,1))
 				.addIngredient(new ItemStack(Items.APPLE,1)));

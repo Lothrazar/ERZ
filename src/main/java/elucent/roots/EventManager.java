@@ -2,13 +2,9 @@
 package elucent.roots;
 
 import elucent.roots.capability.mana.ManaProvider;
-import elucent.roots.capability.powers.PowerProvider;
 import elucent.roots.component.components.ComponentCharmIllusion;
 import elucent.roots.item.IManaRelatedItem;
 import elucent.roots.item.ItemCrystalStaff;
-import elucent.roots.ritual.RitualPower;
-import elucent.roots.ritual.RitualPowerManager;
-import elucent.roots.ritual.powers.RitualNull;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockNetherWart;
@@ -92,26 +88,6 @@ public class EventManager {
 			}
 		}
 	}
-	public void onRightClickAir(PlayerInteractEvent.RightClickEmpty event){
-		if (event.getHand() == EnumHand.MAIN_HAND){
-			if (event.getEntityPlayer().getHeldItem(event.getHand()) == null){
-					if (!PowerProvider.get(event.getEntityPlayer()).getPowerName().equals("none") && PowerProvider.get(event.getEntityPlayer()).getCooldown() == 0){
-						RitualPowerManager.getPlayerPower(event.getEntityPlayer()).onRightClick(event.getEntityPlayer(), event.getWorld(), event.getPos(), event.getWorld().getBlockState(event.getPos()));
-					}
-			}
-		}
-	}
-	
-	@SubscribeEvent
-	public void onPlayerInteract(PlayerInteractEvent.RightClickBlock event){
-		if (event.getHand() == EnumHand.MAIN_HAND){
-			if (event.getEntityPlayer().getHeldItem(event.getHand()) == null){
-				if (!PowerProvider.get(event.getEntityPlayer()).getPowerName().equals("none") && PowerProvider.get(event.getEntityPlayer()).getCooldown() == 0){
-					RitualPowerManager.getPlayerPower(event.getEntityPlayer()).onRightClickBlock(event.getEntityPlayer(), event.getWorld(), event.getPos(), event.getWorld().getBlockState(event.getPos()),event.getFace());
-				}
-			}
-		}
-	}
 	
 	@SubscribeEvent
 	public void onRightClickEntity(PlayerInteractEvent.EntityInteract event){
@@ -121,13 +97,6 @@ public class EventManager {
 					event.getEntityPlayer().getHeldItem(event.getHand()).stackSize --;
 					((EntitySkeleton)event.getTarget()).setSkeletonType(1);
 				}
-			}
-		}
-		if (event.getHand() == EnumHand.MAIN_HAND){
-			if (event.getEntityPlayer().getHeldItem(event.getHand()) == null){
-					if (!PowerProvider.get(event.getEntityPlayer()).getPowerName().equals("none") && PowerProvider.get(event.getEntityPlayer()).getCooldown() == 0){
-						RitualPowerManager.getPlayerPower(event.getEntityPlayer()).onRightClickEntity(event.getEntityPlayer(), event.getWorld(), event.getTarget());
-					}
 			}
 		}
 	}
@@ -271,68 +240,6 @@ public class EventManager {
 				}
 			}
 		}
-		boolean showPowerBar = !PowerProvider.get(player).getPowerName().equals("none");
-		if (player.capabilities.isCreativeMode){
-			showPowerBar = false;
-		}
-		if (showPowerBar){
-			if (e.getType() == ElementType.TEXT){
-				GlStateManager.disableDepth();
-				GlStateManager.disableCull();
-				GlStateManager.pushMatrix();
-				Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("roots:textures/gui/manaBar.png"));
-				
-				Tessellator tess = Tessellator.getInstance();
-				VertexBuffer b = tess.getBuffer();
-				int w = e.getResolution().getScaledWidth();
-				int h = e.getResolution().getScaledHeight();
-				GlStateManager.color(1f, 1f, 1f, 1f);
-				int texOffset = 64;
-				RitualPower playerPower = RitualPowerManager.getPlayerPower(player);
-				if(!(playerPower instanceof RitualNull)){
-					texOffset = playerPower.offset;
-				}
-
-				int powerNumber = PowerProvider.get(player).getPowerLeft();
-				int maxPowerNumber = 20;
-				
-				int offsetX = 0;
-				
-				b.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-				while (maxPowerNumber > 0){
-					this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-ConfigManager.manaBarOffset-10, w/2+10+offsetX, h-ConfigManager.manaBarOffset-10, texOffset, 0, 9, 9);
-					if (maxPowerNumber > 2){
-						maxPowerNumber -= 2;
-						offsetX += 8;
-					}
-					else {
-						maxPowerNumber = 0;
-					}
-				}
-				offsetX = 0;
-				while (powerNumber > 0){
-					if (powerNumber > 2){
-						this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-ConfigManager.manaBarOffset-10, w/2+10+offsetX, h-ConfigManager.manaBarOffset-10, texOffset, 16, 9, 9);
-						powerNumber -= 2;
-						offsetX += 8;
-					}
-					else {
-						if (powerNumber == 2){
-							this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-ConfigManager.manaBarOffset-10, w/2+10+offsetX, h-ConfigManager.manaBarOffset-10, texOffset, 16, 9, 9);
-						}
-						if (powerNumber == 1){
-							this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-(ConfigManager.manaBarOffset), w/2+19+offsetX, h-ConfigManager.manaBarOffset-10, w/2+10+offsetX, h-ConfigManager.manaBarOffset-10, texOffset+16, 16, 9, 9);
-						}
-						powerNumber = 0;
-					}
-				}
-				tess.draw();
-				
-				GlStateManager.popMatrix();
-				GlStateManager.enableCull();
-				GlStateManager.enableDepth();
-			}
-		}
 	}
 	
 	@SubscribeEvent
@@ -375,8 +282,6 @@ public class EventManager {
 					ManaProvider.get(player).setMana(player, ManaProvider.get(player).getMana()+1.0f);
 				}
 			}
-			
-			PowerProvider.get(player).startCooldown(player);
 		}
 		if (event.getEntityLiving().getEntityData().hasKey(RootsNames.TAG_TRACK_TICKS)){
 			if (event.getEntityLiving().getEntityData().hasKey(RootsNames.TAG_SPELL_SKIP_TICKS)){
@@ -485,14 +390,6 @@ public class EventManager {
 			}
 		}	
 	}
-	
-	@SubscribeEvent
-	public void entityJoinWorld(EntityJoinWorldEvent e) {
-		if (e.getEntity() instanceof EntityPlayer && !e.getEntity().worldObj.isRemote)
-		{
-			PowerProvider.get((EntityPlayer) e.getEntity()).dataChanged((EntityPlayer) e.getEntity());
-		}
-}
 	
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent

@@ -1,8 +1,5 @@
 package elucent.roots.capability.mana;
 
-import elucent.roots.capability.powers.DefaultPowerCapability;
-import elucent.roots.capability.powers.IPowersCapability;
-import elucent.roots.capability.powers.PowerCapabilityStorage;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

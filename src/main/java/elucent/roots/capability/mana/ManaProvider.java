@@ -1,7 +1,5 @@
 package elucent.roots.capability.mana;
 
-import elucent.roots.capability.powers.DefaultPowerCapability;
-import elucent.roots.capability.powers.IPowersCapability;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

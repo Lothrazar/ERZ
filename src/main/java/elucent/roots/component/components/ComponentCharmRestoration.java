@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class ComponentCharmRestoration extends ComponentBase {
     public ComponentCharmRestoration() {
-        super("CharmOfRestoration", "Restoration", RegistryManager.itemCharmRestoration, 16);
+        super("restoration", "Restoration", RegistryManager.itemCharmRestoration, 16);
     }
 
     @Override

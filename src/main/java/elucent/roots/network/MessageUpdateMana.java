@@ -1,7 +1,6 @@
 package elucent.roots.network;
 
 import elucent.roots.capability.mana.ManaProvider;
-import elucent.roots.capability.powers.PowerProvider;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;

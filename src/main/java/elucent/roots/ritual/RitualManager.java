@@ -1,10 +1,6 @@
 package elucent.roots.ritual;
 
 import elucent.roots.RegistryManager;
-import elucent.roots.ritual.powers.RitualPowerBreed;
-import elucent.roots.ritual.powers.RitualPowerFlare;
-import elucent.roots.ritual.powers.RitualPowerGrow;
-import elucent.roots.ritual.powers.RitualPowerLifeDrain;
 import elucent.roots.ritual.rituals.*;
 import elucent.roots.tileentity.TileEntityBrazier;
 import net.minecraft.entity.monster.*;
@@ -461,44 +457,6 @@ public class RitualManager {
 					.addIncense(new ItemStack(Blocks.VINE,1))
 					.addIncense(new ItemStack(RegistryManager.oldRoot,1))
 					.addIngredient(new ItemStack(Items.WHEAT,1)));
-		rituals.add(new RitualPowerGiver("massbreeding", 148, 61, 81)
-					.setPower(new RitualPowerBreed())
-					.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
-					.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
-					.addBlock(RegistryManager.standingStoneT1, 3, 0, -3)
-					.addBlock(RegistryManager.standingStoneT1, 3, 0, 3)
-					.addBlock(RegistryManager.standingStoneT1, 3, 0, 0)
-					.addBlock(RegistryManager.standingStoneT1, -3, 0, 0)
-					.addBlock(RegistryManager.standingStoneT1, 0, 0, 3)
-					.addBlock(RegistryManager.standingStoneT1, 0, 0, -3)
-					.addBlock(RegistryManager.standingStoneT2, 5, 1, 5)
-					.addBlock(RegistryManager.standingStoneT2, -5, 1, 5)
-					.addBlock(RegistryManager.standingStoneT2, 5, 1, -5)
-					.addBlock(RegistryManager.standingStoneT2, -5, 1, -5)
-					.addIncense(new ItemStack(Items.CARROT,1))
-					.addIncense(new ItemStack(Items.WHEAT,1))
-					.addIncense(new ItemStack(Items.WHEAT_SEEDS,1))
-					.addIncense(new ItemStack(Items.FISH,1))
-					.addIngredient(new ItemStack(Items.GLOWSTONE_DUST,1)));
-		rituals.add(new RitualPowerGiver("lifedrain", 139, 22, 40)
-					.setPower(new RitualPowerLifeDrain())
-					.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
-					.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
-					.addBlock(RegistryManager.standingStoneT1, 3, 0, -3)
-					.addBlock(RegistryManager.standingStoneT1, 3, 0, 3)
-					.addBlock(RegistryManager.standingStoneT1, 3, 0, 0)
-					.addBlock(RegistryManager.standingStoneT1, -3, 0, 0)
-					.addBlock(RegistryManager.standingStoneT1, 0, 0, 3)
-					.addBlock(RegistryManager.standingStoneT1, 0, 0, -3)
-					.addBlock(RegistryManager.standingStoneT2, 5, 1, 5)
-					.addBlock(RegistryManager.standingStoneT2, -5, 1, 5)
-					.addBlock(RegistryManager.standingStoneT2, 5, 1, -5)
-					.addBlock(RegistryManager.standingStoneT2, -5, 1, -5)
-					.addIncense(new ItemStack(Items.WOODEN_SWORD,1))
-					.addIncense(new ItemStack(Items.WOODEN_AXE,1))
-					.addIncense(new ItemStack(RegistryManager.darkOakTreeBark,1))
-					.addIncense(new ItemStack(RegistryManager.birchTreeBark,1))
-					.addIngredient(new ItemStack(Items.BLAZE_POWDER,1)));
 		rituals.add(new RitualImbuer()
 					.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
 					.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
@@ -736,30 +694,6 @@ public class RitualManager {
 				.addIngredient(new ItemStack(Items.FLINT,1))
 				.addIngredient(new ItemStack(Items.IRON_SWORD,1))
 				.addIngredient(new ItemStack(Items.BONE,1)));
-		rituals.add(new RitualPowerGiver("flare", 255, 91, 25)
-				.setPower(new RitualPowerFlare())
-				.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
-				.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
-				.addBlock(RegistryManager.standingStoneT1, 3, 0, -3)
-				.addBlock(RegistryManager.standingStoneT1, 3, 0, 3)
-				.addBlock(RegistryManager.standingStoneT1, 3, 0, 0)
-				.addBlock(RegistryManager.standingStoneT1, -3, 0, 0)
-				.addBlock(RegistryManager.standingStoneT1, 0, 0, 3)
-				.addBlock(RegistryManager.standingStoneT1, 0, 0, -3)
-				.addIncense(new ItemStack(Items.GUNPOWDER,1))
-				.addIncense(new ItemStack(RegistryManager.infernalStem,1))
-				.addIngredient(new ItemStack(Items.FLINT,1))
-				.addIngredient(new ItemStack(Items.COAL,1))
-				.addIngredient(new ItemStack(Items.COAL,1,1)));
-		rituals.add(new RitualPowerGiver("grow", 82, 212, 47)
-				.setPower(new RitualPowerGrow())
-				.addIncense(new ItemStack(Items.WHEAT,1))
-				.addIncense(new ItemStack(Items.BEETROOT,1))
-				.addIncense(new ItemStack(Items.POTATO,1))
-				.addIncense(new ItemStack(Items.CARROT,1))
-				.addIngredient(new ItemStack(Items.REDSTONE,1))
-				.addIngredient(new ItemStack(Items.DYE,1,15))
-				.addIngredient(new ItemStack(RegistryManager.verdantSprig,1)));
 		rituals.add(new RitualEngravedSword("engravedCrafting", 104, 106, 107)
 				.setResult(new ItemStack(RegistryManager.engravedSword))
 				.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
