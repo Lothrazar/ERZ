@@ -2,12 +2,21 @@ package elucent.roots;
 
 import elucent.roots.block.BlockAestheticStandingStone;
 import elucent.roots.block.BlockAltar;
+import elucent.roots.block.BlockBase;
 import elucent.roots.block.BlockBrazier;
+import elucent.roots.block.BlockDoubleSlabBase;
 import elucent.roots.block.BlockFlareOrchid;
 import elucent.roots.block.BlockImbuer;
+import elucent.roots.block.BlockLogBase;
 import elucent.roots.block.BlockMidnightBloom;
 import elucent.roots.block.BlockMortar;
 import elucent.roots.block.BlockRadiantDaisy;
+import elucent.roots.block.BlockSlabBase;
+import elucent.roots.block.BlockSpirit;
+import elucent.roots.block.BlockSpiritDoubleSlab;
+import elucent.roots.block.BlockSpiritSlab;
+import elucent.roots.block.BlockSpiritStairs;
+import elucent.roots.block.BlockStairsBase;
 import elucent.roots.block.BlockStandingStoneAccelerator;
 import elucent.roots.block.BlockStandingStoneEntangler;
 import elucent.roots.block.BlockStandingStoneGrower;
@@ -19,12 +28,17 @@ import elucent.roots.block.BlockStandingStoneT2;
 import elucent.roots.block.BlockStandingStoneVacuum;
 import elucent.roots.entity.EntityAccelerator;
 import elucent.roots.entity.EntityNetherInfection;
+import elucent.roots.entity.EntityGreaterSprite;
 import elucent.roots.entity.EntitySprite;
+import elucent.roots.entity.EntitySpriteProjectile;
 import elucent.roots.entity.EntitySpriteling;
 import elucent.roots.entity.EntityTileAccelerator;
+import elucent.roots.entity.RenderGreaterSprite;
 import elucent.roots.entity.RenderSprite;
+import elucent.roots.entity.RenderSpriteProjectile;
 import elucent.roots.entity.RenderSpriteling;
 import elucent.roots.item.*;
+import elucent.roots.item.block.ItemBlockSlab;
 import elucent.roots.model.ModelHolder;
 import elucent.roots.model.entity.ModelSpriteling;
 import elucent.roots.tileentity.TileEntityAestheticStandingStone;
@@ -45,6 +59,7 @@ import elucent.roots.tileentity.TileEntityStandingStoneIgniter;
 import elucent.roots.tileentity.TileEntityStandingStoneRepulsor;
 import elucent.roots.tileentity.TileEntityStandingStoneVacuum;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.init.Blocks;
@@ -53,6 +68,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -69,9 +85,11 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class RegistryManager {
-	public static Item debugWand, runicFocus, rootyStew, healingPoultice, mutagen, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,nightshade,blackCurrant,redCurrant,whiteCurrant,elderBerry, engravedSword,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion;
+	public static Item otherworldLeaf, otherworldSubstance, debugWand, runicFocus, rootyStew, healingPoultice, mutagen, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,nightshade,blackCurrant,redCurrant,whiteCurrant,elderBerry, engravedSword,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion;
 	public static Item manaResearchIcon;
+	public static ItemBlock itemBlockSpiritBlockSlab, itemBlockSpiritBrickSlab, itemBlockPlankWildwoodSlab, itemBlockRuneStoneSlab, itemBlockRuneStoneBrickSlab, itemBlockRuneStoneTileSlab;
 	public static Block flareOrchid, radiantDaisy, standingStoneGrower, standingStoneHealer, standingStoneIgniter, standingStoneEntangler, standingStoneAccelerator, standingStoneAesthetic, standingStoneRepulsor, standingStoneVacuum, midnightBloom, mortar, imbuer, altar, druidChalice, standingStoneT1, standingStoneT2, brazier;
+	public static Block spiritBlock, spiritBlockSlab, spiritBlockSlabDouble, spiritBlockStairs, spiritBrick, spiritBrickSlab, spiritBrickSlabDouble, spiritBrickStairs, runeStoneStairs, runeStoneBrickStairs, runeStoneTileStairs, plankWildwoodStairs, barkWildwood, barkWildwoodSymbolGlowing, barkWildwoodSymbol, logWildwood, logWildwoodSymbol, logWildwoodSymbolGlowing, plankWildwood, plankWildwoodSlab, plankWildwoodSlabDouble, runeStone, runeStoneBrick, runeStoneSlabDouble, runeStoneSlab, runeStoneBrickSlab, runeStoneBrickSlabDouble, runeStoneTile, runeStoneTileSlab, runeStoneTileSlabDouble, runeStoneSymbol, runeStoneSymbolGlowing;
 	
 	public static Achievement achieveDust, achieveTablet, achieveSpellRose, achieveSpellGrowth, achieveSpellInsanity, achieveMaxModifiers, achieveLotsDamage, achieveTimeStop, achieveAltar, achieveStandingStone, achieveWildwood, achieveShadow, achieveSpellElements, achieveVampire;
 	
@@ -130,7 +148,8 @@ public class RegistryManager {
 		GameRegistry.registerItem(itemCharmEvocation = new ItemCharm("charmEvocation"),"charmEvocation");
 		GameRegistry.registerItem(itemCharmConjuration = new ItemCharm("charmConjuration"),"charmConjuration");
 		GameRegistry.registerItem(itemCharmIllusion = new ItemCharm("charmIllusion"),"charmIllusion");
-
+		GameRegistry.registerItem(otherworldLeaf = new ItemMaterial("otherworldLeaf"),"otherworldLeaf");
+		GameRegistry.registerItem(otherworldSubstance = new ItemMaterial("otherworldSubstance"),"otherworldSubstance");
 
 		/**
 		 * REGISTERING BLOCKS
@@ -153,6 +172,60 @@ public class RegistryManager {
 		GameRegistry.registerBlock(midnightBloom = new BlockMidnightBloom(),"midnightBloom");
 		GameRegistry.registerBlock(flareOrchid = new BlockFlareOrchid(),"flareOrchid");
 		GameRegistry.registerBlock(radiantDaisy = new BlockRadiantDaisy(),"radiantDaisy");
+		GameRegistry.registerBlock(runeStone = new BlockBase("runeStone",Material.ROCK,1.0f));
+		GameRegistry.registerBlock(runeStoneStairs = new BlockStairsBase("runeStoneStairs",runeStone.getDefaultState(),1.0f));
+		GameRegistry.registerBlock(runeStoneBrick = new BlockBase("runeStoneBrick",Material.ROCK,1.0f));
+		GameRegistry.registerBlock(runeStoneBrickStairs = new BlockStairsBase("runeStoneBrickStairs",runeStoneBrick.getDefaultState(),1.0f));
+		GameRegistry.registerBlock(runeStoneTile = new BlockBase("runeStoneTile",Material.ROCK,1.0f));
+		GameRegistry.registerBlock(runeStoneTileStairs = new BlockStairsBase("runeStoneTileStairs",runeStoneTile.getDefaultState(),1.0f));
+		GameRegistry.registerBlock(runeStoneSymbol = new BlockBase("runeStoneSymbol",Material.ROCK,1.0f));
+		GameRegistry.registerBlock(runeStoneSymbolGlowing = new BlockBase("runeStoneSymbolGlowing",Material.ROCK,1.0f).setLightLevel(1.0f));
+		GameRegistry.registerBlock(plankWildwood = new BlockBase("plankWildwood",Material.WOOD,1.0f));
+		GameRegistry.registerBlock(plankWildwoodStairs = new BlockStairsBase("plankWildwoodStairs",plankWildwood.getDefaultState(),1.0f));
+		GameRegistry.registerBlock(logWildwood = new BlockLogBase("logWildwood",1.0f,"axe",0));
+		GameRegistry.registerBlock(logWildwoodSymbol = new BlockLogBase("logWildwoodSymbol",1.0f,"axe",0));
+		GameRegistry.registerBlock(logWildwoodSymbolGlowing = new BlockLogBase("logWildwoodSymbolGlowing",1.0f,"axe",0).setLightLevel(1.0f));
+		GameRegistry.registerBlock(barkWildwood = new BlockBase("barkWildwood",Material.WOOD,1.0f));
+		GameRegistry.registerBlock(barkWildwoodSymbol = new BlockBase("barkWildwoodSymbol",Material.WOOD,1.0f));
+		GameRegistry.registerBlock(barkWildwoodSymbolGlowing = new BlockBase("barkWildwoodSymbolGlowing",Material.WOOD,1.0f).setLightLevel(1.0f));
+		GameRegistry.registerBlock(spiritBlock = new BlockSpirit("spiritBlock",Material.GLASS,1.0f));
+		GameRegistry.registerBlock(spiritBlockStairs = new BlockSpiritStairs("spiritBlockStairs",spiritBlock.getDefaultState(),1.0f));
+		GameRegistry.registerBlock(spiritBrick = new BlockSpirit("spiritBrick",Material.GLASS,1.0f));
+		GameRegistry.registerBlock(spiritBrickStairs = new BlockSpiritStairs("spiritBrickStairs",spiritBrick.getDefaultState(),1.0f));
+		
+		GameRegistry.registerBlock(runeStoneSlabDouble = new BlockDoubleSlabBase("runeStoneSlabDouble",Material.ROCK,1.0f,"pickaxe",0,runeStoneSlab));
+		GameRegistry.registerBlock(runeStoneSlab = new BlockSlabBase("runeStoneSlab",Material.ROCK,1.0f,"pickaxe",0,runeStoneSlabDouble));
+		((BlockDoubleSlabBase)runeStoneSlabDouble).setSlab(runeStoneSlab);
+
+		GameRegistry.registerBlock(runeStoneBrickSlabDouble = new BlockDoubleSlabBase("runeStoneBrickSlabDouble",Material.ROCK,1.0f,"pickaxe",0,runeStoneBrickSlab));
+		GameRegistry.registerBlock(runeStoneBrickSlab = new BlockSlabBase("runeStoneBrickSlab",Material.ROCK,1.0f,"pickaxe",0,runeStoneBrickSlabDouble));
+		((BlockDoubleSlabBase)runeStoneBrickSlabDouble).setSlab(runeStoneBrickSlab);
+
+		GameRegistry.registerBlock(runeStoneTileSlabDouble = new BlockDoubleSlabBase("runeStoneTileSlabDouble",Material.ROCK,1.0f,"pickaxe",0,runeStoneTileSlab));
+		GameRegistry.registerBlock(runeStoneTileSlab = new BlockSlabBase("runeStoneTileSlab",Material.ROCK,1.0f,"pickaxe",0,runeStoneTileSlabDouble));
+		((BlockDoubleSlabBase)runeStoneTileSlabDouble).setSlab(runeStoneTileSlab);
+
+		GameRegistry.registerBlock(plankWildwoodSlabDouble = new BlockDoubleSlabBase("plankWildwoodSlabDouble",Material.WOOD,1.0f,"axe",0,plankWildwoodSlab));
+		GameRegistry.registerBlock(plankWildwoodSlab = new BlockSlabBase("plankWildwoodSlab",Material.WOOD,1.0f,"axe",0,plankWildwoodSlabDouble));
+		((BlockDoubleSlabBase)plankWildwoodSlabDouble).setSlab(plankWildwoodSlab);
+
+		GameRegistry.registerBlock(spiritBlockSlabDouble = new BlockSpiritDoubleSlab("spiritBlockSlabDouble",Material.GLASS,1.0f,"null",0,spiritBlockSlab));
+		GameRegistry.registerBlock(spiritBlockSlab = new BlockSpiritSlab("spiritBlockSlab",Material.GLASS,1.0f,"null",0,spiritBlockSlabDouble));
+		((BlockSpiritDoubleSlab)spiritBlockSlabDouble).setSlab(spiritBlockSlab);
+
+		GameRegistry.registerBlock(spiritBrickSlabDouble = new BlockSpiritDoubleSlab("spiritBrickSlabDouble",Material.GLASS,1.0f,"null",0,spiritBrickSlab));
+		GameRegistry.registerBlock(spiritBrickSlab = new BlockSpiritSlab("spiritBrickSlab",Material.GLASS,1.0f,"null",0,spiritBrickSlabDouble));
+		((BlockSpiritDoubleSlab)spiritBrickSlabDouble).setSlab(spiritBrickSlab);
+		/**
+		 * REGISTERING ITEMBLOCKS
+		 */
+		
+		GameRegistry.registerItem(itemBlockRuneStoneSlab = new ItemBlockSlab(runeStoneSlab, (BlockDoubleSlabBase)runeStoneSlabDouble),runeStoneSlab.getRegistryName().toString()+"Item");
+		GameRegistry.registerItem(itemBlockRuneStoneTileSlab = new ItemBlockSlab(runeStoneTileSlab, (BlockDoubleSlabBase)runeStoneTileSlabDouble),runeStoneTileSlab.getRegistryName().toString()+"Item");
+		GameRegistry.registerItem(itemBlockRuneStoneBrickSlab = new ItemBlockSlab(runeStoneBrickSlab, (BlockDoubleSlabBase)runeStoneBrickSlabDouble),runeStoneBrickSlab.getRegistryName().toString()+"Item");
+		GameRegistry.registerItem(itemBlockPlankWildwoodSlab = new ItemBlockSlab(plankWildwoodSlab, (BlockDoubleSlabBase)plankWildwoodSlabDouble),plankWildwoodSlab.getRegistryName().toString()+"Item");
+		GameRegistry.registerItem(itemBlockSpiritBlockSlab = new ItemBlockSlab(spiritBlockSlab, (BlockSpiritDoubleSlab)spiritBlockSlabDouble),spiritBlockSlab.getRegistryName().toString()+"Item");
+		GameRegistry.registerItem(itemBlockSpiritBrickSlab = new ItemBlockSlab(spiritBrickSlab, (BlockSpiritDoubleSlab)spiritBrickSlabDouble),spiritBrickSlab.getRegistryName().toString()+"Item");
 		
 		/**
 		 * REGISTERING TILE ENTITIES
@@ -179,7 +252,9 @@ public class RegistryManager {
 		EntityRegistry.registerModEntity(EntityAccelerator.class, "entityAccelerator", 1, Roots.instance, 64, 3, true);
 		EntityRegistry.registerModEntity(EntitySpriteling.class, "spriteling", 2, Roots.instance, 64, 3, true);
 		EntityRegistry.registerModEntity(EntitySprite.class, "sprite", 3, Roots.instance, 64, 3, true);
-		EntityRegistry.registerModEntity(EntityNetherInfection.class, "entityInfection", 4, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityGreaterSprite.class, "greatersprite", 4, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntitySpriteProjectile.class, "entitySpriteProjectile", 5, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityNetherInfection.class, "entityInfection", 6, Roots.instance, 64, 3, true);
 	}
 	
 	public static void registerRecipes(){
@@ -302,6 +377,8 @@ public class RegistryManager {
 		((ItemRunicFocus)runicFocus).initModel();
 		((ItemEngravedSword)engravedSword).initModel();
 		((ItemResearchIcon)manaResearchIcon).initModel();
+		((ItemMaterial)otherworldLeaf).initModel();
+		((ItemMaterial)otherworldSubstance).initModel();
 
 		/**Charms**/
 		((ItemCharm)itemCharmRestoration).initModel();
@@ -327,6 +404,38 @@ public class RegistryManager {
 		((BlockMidnightBloom)midnightBloom).initModel();
 		((BlockFlareOrchid)flareOrchid).initModel();
 		((BlockRadiantDaisy)radiantDaisy).initModel();
+		((BlockBase)runeStone).initModel();
+		((BlockStairsBase)runeStoneStairs).initModel();
+		((BlockBase)runeStoneBrick).initModel();
+		((BlockStairsBase)runeStoneBrickStairs).initModel();
+		((BlockBase)runeStoneTile).initModel();
+		((BlockStairsBase)runeStoneTileStairs).initModel();
+		((BlockBase)runeStoneSymbol).initModel();
+		((BlockBase)runeStoneSymbolGlowing).initModel();
+		((BlockSlabBase)runeStoneSlab).initModel();
+		((BlockDoubleSlabBase)runeStoneSlabDouble).initModel();
+		((BlockSlabBase)runeStoneTileSlab).initModel();
+		((BlockDoubleSlabBase)runeStoneTileSlabDouble).initModel();
+		((BlockSlabBase)runeStoneBrickSlab).initModel();
+		((BlockDoubleSlabBase)runeStoneBrickSlabDouble).initModel();
+		((BlockBase)plankWildwood).initModel();
+		((BlockSlabBase)plankWildwoodSlab).initModel();
+		((BlockStairsBase)plankWildwoodStairs).initModel();
+		((BlockDoubleSlabBase)plankWildwoodSlabDouble).initModel();
+		((BlockLogBase)logWildwood).initModel();
+		((BlockLogBase)logWildwoodSymbol).initModel();
+		((BlockLogBase)logWildwoodSymbolGlowing).initModel();
+		((BlockBase)barkWildwood).initModel();
+		((BlockBase)barkWildwoodSymbol).initModel();
+		((BlockBase)barkWildwoodSymbolGlowing).initModel();
+		((BlockSpirit)spiritBlock).initModel();
+		((BlockSpirit)spiritBrick).initModel();
+		((BlockSpiritSlab)spiritBlockSlab).initModel();
+		((BlockSpiritSlab)spiritBrickSlab).initModel();
+		((BlockSpiritDoubleSlab)spiritBlockSlabDouble).initModel();
+		((BlockSpiritDoubleSlab)spiritBrickSlabDouble).initModel();
+		((BlockSpiritStairs)spiritBlockStairs).initModel();
+		((BlockSpiritStairs)spiritBrickStairs).initModel();
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -339,5 +448,7 @@ public class RegistryManager {
 	public static void registerEntityRenderers() {
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteling.class, new RenderSpriteling(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("spriteling"),0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySprite.class, new RenderSprite(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("sprite"),0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterSprite.class, new RenderGreaterSprite(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("greatersprite"),0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteProjectile.class, new RenderSpriteProjectile(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
 	}
 }

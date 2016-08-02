@@ -16,6 +16,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -25,6 +26,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
@@ -88,6 +91,7 @@ public class TileEntityBrazier extends TEBase implements ITickable {
 			}
 			if (burning){
 				if (player.isSneaking()){
+					this.getWorld().playSound(getPos().getX()+0.5, getPos().getY()+0.5, getPos().getZ()+0.5, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.95F+random.nextFloat()*0.1f, 0.95F+random.nextFloat()*0.1f, false);
 					burning = false;
 					progress = 0;
 					heldItem = null;
@@ -99,6 +103,7 @@ public class TileEntityBrazier extends TEBase implements ITickable {
 		}
 		else if (playerItem.getItem() == Items.FLINT_AND_STEEL){
 			if (heldItem != null){
+				this.getWorld().playSound(getPos().getX()+0.5, getPos().getY()+0.5, getPos().getZ()+0.5, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 0.95F+random.nextFloat()*0.1f, 0.95F+random.nextFloat()*0.1f, false);
 				burning = true;
 				progress = 2400;
 				markDirty();

@@ -1,0 +1,9 @@
+{
+    "parent": "block/half_slab",
+    "textures": {
+        "top": "roots:blocks/spiritBlock",
+        "bottom": "roots:blocks/spiritBlock",
+        "side": "roots:blocks/spiritBlock",
+        "particle": "roots:blocks/spiritBlock"
+    }
+}

@@ -36,7 +36,7 @@ public class ParticleMagic  extends Particle {
 		this.motionY = vy;
 		this.motionZ = vz;
 	    TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(texture.toString());
-		this.setParticleTexture(sprite);
+	    this.setParticleTexture(sprite);
 	}
 	
 	@Override
