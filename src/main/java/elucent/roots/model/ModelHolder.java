@@ -2,6 +2,8 @@ package elucent.roots.model;
 
 import java.util.HashMap;
 
+import elucent.roots.model.entity.ModelGreaterSprite;
+import elucent.roots.model.entity.ModelNull;
 import elucent.roots.model.entity.ModelSprite;
 import elucent.roots.model.entity.ModelSpriteling;
 import net.minecraft.client.model.ModelBase;
@@ -16,5 +18,7 @@ public class ModelHolder {
 		
 		entityModels.put("spriteling", new ModelSpriteling());
 		entityModels.put("sprite", new ModelSprite());
+		entityModels.put("greatersprite", new ModelGreaterSprite());
+		entityModels.put("null", new ModelNull());
 	}
 }

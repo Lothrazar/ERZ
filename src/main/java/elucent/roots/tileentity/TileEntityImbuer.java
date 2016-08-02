@@ -22,6 +22,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
@@ -134,6 +137,9 @@ public class TileEntityImbuer extends TEBase implements ITickable {
 			spin += 12;
 		}
 		if (dust != null && stick != null){
+			if (progress == 0){
+				getWorld().playSound(getPos().getX()+0.5, getPos().getY()+0.5, getPos().getZ()+0.5, new SoundEvent(new ResourceLocation("roots:charging")), SoundCategory.BLOCKS, 1.0f, 1.0f, false);
+			}
 			progress ++;
 		}
 		if (progress != 0 && progress % 1 == 0){

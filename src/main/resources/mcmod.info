@@ -2,13 +2,13 @@
 {
   "modid": "roots",
   "name": "Roots",
-  "description": "Druidic Magic Mod for Minecraft 1.9 and 1.10.x",
-  "version": "0.108",
-  "mcversion": "1.10.2",
+  "description": "Druidic Magic Mod",
+  "version": "0.110",
+  "mcversion": "1.9.4",
   "url": "http://minecraft.curseforge.com/projects/roots",
   "updateUrl": "",
-  "authorList": ["Team Roots"],
-  "credits": "To Elucent,Werty1124,SirShadow,AlexisMachina(members of team roots), for developing and maintaining the mod.",
+  "authorList": ["Elucent","werty1124","AlexisMachina","SirShadow"],
+  "credits": "",
   "logoFile": "assets/roots/textures/misc/RootsLogo.png",
   "screenshots": [],
   "dependencies": []

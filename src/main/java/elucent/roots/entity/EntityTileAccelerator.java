@@ -19,7 +19,7 @@ public class EntityTileAccelerator extends Entity {
 		super(world);
 		this.pos = pos;
 		this.potency = potency+1;
-		this.lifetime = 100+100*size;
+		this.lifetime = 100+50*size;
 		this.posX = pos.getX();
 		this.posY = pos.getY();
 		this.posZ = pos.getZ();

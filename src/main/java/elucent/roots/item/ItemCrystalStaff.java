@@ -33,6 +33,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -74,6 +76,7 @@ public class ItemCrystalStaff extends Item implements IManaRelatedItem {
 					}
 				}
 				if (doEffect){
+					world.playSound(player.posX, player.posY, player.posZ, new SoundEvent(new ResourceLocation("roots:staffCast")), SoundCategory.PLAYERS, 0.95f+0.1f*random.nextFloat(), 0.95f+0.1f*random.nextFloat(), false);
 					ComponentBase comp = ComponentManager.getComponentFromName(this.getEffect(stack));
 					if (comp != null){
 						int potency = this.getPotency(stack);

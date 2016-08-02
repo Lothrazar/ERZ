@@ -38,12 +38,13 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 public class ComponentRedTulip extends ComponentBase{
 	Random random = new Random();
 	public ComponentRedTulip(){
-		super("redtulip","Devil's Flower",Blocks.RED_FLOWER,6);	
+		super("redtulip","Devil's Flower",Blocks.RED_FLOWER,6);
 	}
 	
 	@Override

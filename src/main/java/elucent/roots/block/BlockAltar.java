@@ -23,7 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockAltar extends TEBlockBase implements ITileEntityProvider {
 	public BlockAltar(){
-		super(Material.GROUND);
+		super(Material.ROCK);
 		setUnlocalizedName("altar");
 		setCreativeTab(Roots.tab);
 		setHardness(1.0f);

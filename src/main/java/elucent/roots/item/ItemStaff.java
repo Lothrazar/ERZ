@@ -33,6 +33,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -96,8 +98,8 @@ public class ItemStaff extends Item implements IManaRelatedItem {
 						}
 					}
 					double xpCost = (comp.xpCost + potency)*(((1.0+(1.25/((double)efficiency+1.0)))/2.0))*(1.0/((1.25+(1.0/((double)potency+1.0)))/2.0));
-					System.out.println("XPCOST: " + xpCost);
 					if (((EntityPlayer)player).hasCapability(ManaProvider.manaCapability, null) && ManaProvider.get((EntityPlayer)player).getMana() >= xpCost){
+						world.playSound(player.posX, player.posY, player.posZ, new SoundEvent(new ResourceLocation("roots:staffCast")), SoundCategory.PLAYERS, 0.95f+0.1f*random.nextFloat(), 0.95f+0.1f*random.nextFloat(), false);
 						stack.getTagCompound().setInteger("uses", stack.getTagCompound().getInteger("uses") - 1);
 						ManaProvider.get((EntityPlayer)player).setMana((EntityPlayer)player, (float) (ManaProvider.get((EntityPlayer)player).getMana()-xpCost));
 						comp.doEffect(world, player, EnumCastType.SPELL, player.posX+3.0*player.getLookVec().xCoord, player.posY+3.0*player.getLookVec().yCoord, player.posZ+3.0*player.getLookVec().zCoord, potency, efficiency, 3.0+size);

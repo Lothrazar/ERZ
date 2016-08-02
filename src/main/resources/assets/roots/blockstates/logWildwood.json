@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "roots:logWildwood" },
+        "axis=z":   { "model": "roots:logWildwood", "x": 90 },
+        "axis=x":   { "model": "roots:logWildwood", "x": 90, "y": 90 },
+        "axis=none": { "model": "roots:logWildwood" }
+    }
+}

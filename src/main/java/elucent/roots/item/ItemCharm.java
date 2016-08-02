@@ -18,7 +18,7 @@ public class ItemCharm extends Item
     {
         super();
         setUnlocalizedName(name);
-        setCreativeTab(Roots.tab);
+        //setCreativeTab(Roots.tab);
     }
 
     @SideOnly(Side.CLIENT)

@@ -30,6 +30,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
@@ -139,6 +142,7 @@ public class TileEntityAltar extends TEBase implements ITickable {
 					ritual = RitualManager.rituals.get(i);
 					incenses = RitualManager.getIncenses(world, getPos());
 					progress = 200;
+					getWorld().playSound(getPos().getX()+0.5, getPos().getY()+0.5, getPos().getZ()+0.5, new SoundEvent(new ResourceLocation("roots:ritualCast")), SoundCategory.BLOCKS, 1.0f, 1.0f, false);
 					markDirty();
 					this.getWorld().notifyBlockUpdate(getPos(), state, world.getBlockState(pos), 3);
 					return true;

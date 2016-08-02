@@ -70,10 +70,7 @@ public class Util {
 	}
 	
 	public static float yawDegreesBetweenPoints(double posX, double posY, double posZ, double posX2, double posY2, double posZ2){
-		float f = (float)Math.toDegrees(Math.atan2(posX2-posX,posZ2-posZ));
-		if (f < 0){
-			f += 360.0f;
-		}
+		float f = (float) ((180.0f*Math.atan2(posX2-posX,posZ2-posZ))/(float)Math.PI);
 		return f;
 	}
 	

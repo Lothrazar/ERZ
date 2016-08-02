@@ -1,0 +1,9 @@
+{
+    "parent": "block/upper_slab",
+    "textures": {
+        "top": "roots:blocks/runeStoneBrick",
+        "bottom": "roots:blocks/runeStoneBrick",
+        "side": "roots:blocks/runeStoneBrick",
+        "particle": "roots:blocks/runeStoneBrick"
+    }
+}

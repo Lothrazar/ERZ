@@ -430,7 +430,7 @@ public class ResearchManager {
 								    .addDisplayItem(new ItemStack(RegistryManager.standingStoneVacuum))
 								    )
 						   .addPage(new ResearchPage()
-								    .addAltarRecipe(RitualManager.getRitualFromName("standingStone"))
+								    .addAltarRecipe(RitualManager.getRitualFromName("aestheticStoneCrafting"))
 								    )
 						   .addPage(new ResearchPage()
 								    .addDisplayItem(new ItemStack(RegistryManager.standingStoneAesthetic))

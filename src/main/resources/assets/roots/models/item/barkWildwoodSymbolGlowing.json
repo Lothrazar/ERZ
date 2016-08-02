@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "roots:blocks/barkWildwoodSymbolGlowing",
+        "particle": "roots:blocks/barkWildwoodSymbolGlowing"
+    }
+}

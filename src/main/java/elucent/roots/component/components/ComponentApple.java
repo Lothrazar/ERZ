@@ -50,28 +50,28 @@ public class ComponentApple extends ComponentBase{
 						((EntityPlayer)caster).addPotionEffect(effect);
 					}
 					if (effect.getPotion() == Potion.getPotionFromResourceLocation("slowness")){
-						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("speed"),effect.getDuration(),effect.getAmplifier()+(int)potency));
+						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("speed"),20+10*(int)potency,0));
 					}
 					if (effect.getPotion() == Potion.getPotionFromResourceLocation("mining_fatigue")){
-						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("haste"),effect.getDuration(),effect.getAmplifier()+(int)potency));
+						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("haste"),20+10*(int)potency,0));
 					}
 					if (effect.getPotion() == Potion.getPotionFromResourceLocation("poison")){
-						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"),effect.getDuration(),effect.getAmplifier()+(int)potency));
+						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"),20+10*(int)potency,0));
 					}
 					if (effect.getPotion() == Potion.getPotionFromResourceLocation("wither")){
-						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"),effect.getDuration(),effect.getAmplifier()+(int)potency));
+						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"),20+10*(int)potency,0));
 					}
 					if (effect.getPotion() == Potion.getPotionFromResourceLocation("blindness")){
-						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("night_vision"),effect.getDuration(),effect.getAmplifier()+(int)potency));
+						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("night_vision"),20+10*(int)potency,0));
 					}
 					if (effect.getPotion() == Potion.getPotionFromResourceLocation("nausea")){
-						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("night_vision"),effect.getDuration(),effect.getAmplifier()+(int)potency));
+						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("night_vision"),20+10*(int)potency,0));
 					}
 					if (effect.getPotion() == Potion.getPotionFromResourceLocation("hunger")){
-						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("saturation"),effect.getDuration(),effect.getAmplifier()+(int)potency));
+						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("saturation"),4+2*(int)potency,0));
 					}
 					if (effect.getPotion() == Potion.getPotionFromResourceLocation("weakness")){
-						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("strength"),effect.getDuration(),effect.getAmplifier()+(int)potency));
+						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("strength"),20+10*(int)potency,0));
 					}
 				}
 			}
