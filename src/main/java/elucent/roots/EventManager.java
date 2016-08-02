@@ -3,6 +3,7 @@ package elucent.roots;
 
 import elucent.roots.capability.mana.ManaProvider;
 import elucent.roots.capability.powers.PowerProvider;
+import elucent.roots.component.components.ComponentCharmIllusion;
 import elucent.roots.item.IManaRelatedItem;
 import elucent.roots.item.ItemCrystalStaff;
 import elucent.roots.ritual.RitualPower;
@@ -16,10 +17,12 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -29,21 +32,20 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
@@ -349,6 +351,8 @@ public class EventManager {
 			}
 		}
 	}
+
+	public static int timer = 200, defaultTime = 200;
 	
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onLivingTick(LivingUpdateEvent event){
@@ -494,5 +498,75 @@ public class EventManager {
 	public void onTextureStitch(TextureStitchEvent event){
 		ResourceLocation magicParticleRL = new ResourceLocation("roots:entity/magicParticle");
 		event.getMap().registerSprite(magicParticleRL);
+	}
+
+	@SubscribeEvent
+	public void onUpdateAttack(LivingEvent.LivingUpdateEvent event)
+	{
+		onLivingAttack(event);
+	}
+
+	@SubscribeEvent
+	public void onTargetEvent(LivingSetAttackTargetEvent event)
+	{
+		setTarget(event);
+	}
+
+	private void onLivingAttack(LivingEvent event) {
+		if (!(event.getEntity() instanceof EntityLiving))
+			return;
+		EntityLiving entity = (EntityLiving) event.getEntity();
+
+		if (entity.getAttackTarget() == null || !(entity.getAttackTarget() instanceof EntityPlayer))
+			return;
+		if (!entity.worldObj.isRemote && ComponentCharmIllusion.doStuff && timer != defaultTime && timer > 0 && !isEntityAttacked) {
+			entity.setAttackTarget(null);
+			entity.setRevengeTarget(null);
+		}
+	}
+
+	public static boolean 	isEntityAttacked = false;
+
+	@SubscribeEvent
+	public void onAttackEvent(LivingHurtEvent event) {
+			isEntityAttacked = true;
+	}
+
+
+	private void setTarget(LivingSetAttackTargetEvent event) {
+		if (event.getTarget() == null)
+			return;
+		if (!(event.getTarget() instanceof EntityPlayer))
+			return;
+		if (!(event.getEntity() instanceof EntityLiving))
+			return;
+
+			EntityLiving entity = (EntityLiving) event.getEntity();
+
+		if (!entity.worldObj.isRemote && ComponentCharmIllusion.doStuff && timer != defaultTime && timer > 0 && !isEntityAttacked) {
+			entity.setAttackTarget(null);
+			entity.setRevengeTarget(null);
+		}
+	}
+
+	@SubscribeEvent
+	public void timer(TickEvent.WorldTickEvent event) {
+		if (ComponentCharmIllusion.doStuff == true) ;
+		{
+			if (timer > 0) {
+				timer--;
+			}
+			if (ComponentCharmIllusion.doStuff == false) {
+				timer = defaultTime;
+			}
+		}
+		if(timer == 0)
+		{
+			ComponentCharmIllusion.doStuff = false;
+		}
+		//DebugOnly
+		/*if (timer > 0 && timer != defaultTime) {
+			System.out.println(timer);
+		}*/
 	}
 }
