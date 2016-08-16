@@ -101,6 +101,9 @@ public class ItemStaff extends Item implements IManaRelatedItem {
 					if (((EntityPlayer)player).hasCapability(ManaProvider.manaCapability, null) && ManaProvider.get((EntityPlayer)player).getMana() >= xpCost){
 						world.playSound(player.posX, player.posY, player.posZ, new SoundEvent(new ResourceLocation("roots:staffCast")), SoundCategory.PLAYERS, 0.95f+0.1f*random.nextFloat(), 0.95f+0.1f*random.nextFloat(), false);
 						stack.getTagCompound().setInteger("uses", stack.getTagCompound().getInteger("uses") - 1);
+						if (stack.getTagCompound().getInteger("uses") <= 0){
+							player.setItemStackToSlot(player.getActiveHand() == EnumHand.MAIN_HAND ? EntityEquipmentSlot.MAINHAND : EntityEquipmentSlot.OFFHAND, new ItemStack(Items.STICK,1));
+						}
 						ManaProvider.get((EntityPlayer)player).setMana((EntityPlayer)player, (float) (ManaProvider.get((EntityPlayer)player).getMana()-xpCost));
 						comp.doEffect(world, player, EnumCastType.SPELL, player.posX+3.0*player.getLookVec().xCoord, player.posY+3.0*player.getLookVec().yCoord, player.posZ+3.0*player.getLookVec().zCoord, potency, efficiency, 3.0+size);
 						for (int i = 0 ; i < 90; i ++){
@@ -140,22 +143,14 @@ public class ItemStaff extends Item implements IManaRelatedItem {
 	}
 	
 	@Override
-	public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected){
-		if (stack.hasTagCompound()){
-			if (stack.getTagCompound().getInteger("uses") <= 0){
-				if (entity instanceof EntityPlayer){
-					((EntityPlayer)entity).inventory.setInventorySlotContents(slot, null);
-				}
-			}
-		}
-	}
-	
-	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldS, ItemStack newS, boolean slotChanged){
 		if (oldS.hasTagCompound() && newS.hasTagCompound()){
 			if (oldS.getTagCompound().getString("effect") != newS.getTagCompound().getString("effect")){
 				return true;
 			}
+		}
+		if (oldS.getItem() != newS.getItem()){
+			return true;
 		}
 		return slotChanged;
 	}

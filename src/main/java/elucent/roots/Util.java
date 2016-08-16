@@ -21,7 +21,6 @@ public class Util {
 	public static Random random = new Random();
 	public static ArrayList<IBlockState> oreList = new ArrayList<IBlockState>();
 	public static ArrayList<Block> naturalBlocks = new ArrayList<Block>();
-	public static ArrayList<Item> berries = new ArrayList<Item>();
 	
 	public static double randomDouble(double min, double max){
 		double range = max - min;
@@ -95,11 +94,11 @@ public class Util {
 		double x = player.posX;
 		double y = player.posY + player.getEyeHeight();
 		double z = player.posZ;
-		for (int i = 0; i < reachDistance*40.0; i ++){
-			x += player.getLookVec().xCoord*0.025;
-			y += player.getLookVec().yCoord*0.025;
-			z += player.getLookVec().zCoord*0.025;
-			if (!world.getBlockState(new BlockPos(x,y,z)).getBlock().isFullCube(world.getBlockState(new BlockPos(x,y,z)))){
+		for (int i = 0; i < reachDistance*4.0; i ++){
+			x += player.getLookVec().xCoord*0.25;
+			y += player.getLookVec().yCoord*0.25;
+			z += player.getLookVec().zCoord*0.25;
+			if (!world.getBlockState(new BlockPos(x,y,z)).getBlock().isTranslucent(world.getBlockState(new BlockPos(x,y,z)))){
 				return new BlockPos(x,y,z);
 			}
 		}
@@ -165,14 +164,6 @@ public class Util {
 		naturalBlocks.add(Blocks.FLOWING_WATER);
 		naturalBlocks.add(Blocks.RED_FLOWER);
 		naturalBlocks.add(Blocks.YELLOW_FLOWER);
-	}
-	
-	public static void initBerries(){
-		berries.add(RegistryManager.nightshade);
-		berries.add(RegistryManager.blackCurrant);
-		berries.add(RegistryManager.redCurrant);
-		berries.add(RegistryManager.whiteCurrant);
-		berries.add(RegistryManager.elderBerry);
 	}
 	
 	public static boolean containsItem(List<ItemStack> list, Item item){

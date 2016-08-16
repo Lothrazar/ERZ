@@ -133,21 +133,6 @@ public class ComponentManager {
 					.addIngredient(new ItemStack(Items.APPLE,1))
 					.addIngredient(new ItemStack(Items.SPECKLED_MELON,1))
 					.addIngredient(new ItemStack(Items.GOLDEN_APPLE,1)));
-		recipes.add(new ComponentRecipe("midnightbloom")
-					.addIngredient(new ItemStack(RegistryManager.midnightBloom,1))
-					.addIngredient(new ItemStack(Blocks.OBSIDIAN,1))
-					.addIngredient(new ItemStack(Items.DRAGON_BREATH,1))
-					.addIngredient(new ItemStack(Items.DIAMOND,1)));
-		recipes.add(new ComponentRecipe("flareorchid")
-					.addIngredient(new ItemStack(RegistryManager.flareOrchid,1))
-					.addIngredient(new ItemStack(Blocks.NETHERRACK,1))
-					.addIngredient(new ItemStack(Items.MAGMA_CREAM,1))
-					.addIngredient(new ItemStack(Items.BLAZE_ROD,1)));
-		recipes.add(new ComponentRecipe("radiantdaisy")
-					.addIngredient(new ItemStack(RegistryManager.radiantDaisy,1))
-					.addIngredient(new ItemStack(Blocks.GLOWSTONE,1))
-					.addIngredient(new ItemStack(Blocks.GLOWSTONE,1))
-					.addIngredient(new ItemStack(Blocks.REDSTONE_BLOCK,1)));
 		recipes.add(new ComponentRecipe("cobweb")
 					.addIngredient(new ItemStack(Blocks.WEB,1))
 					.addIngredient(new ItemStack(Items.SPIDER_EYE,1))

@@ -44,7 +44,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class EntityGreaterSprite  extends EntityFlying {// implements IRangedAttackMob {
+public class EntityGreaterSprite  extends EntityFlying implements ISprite {// implements IRangedAttackMob {
     public float range = 64;
     public static final DataParameter<Float> targetDirectionX = EntityDataManager.<Float>createKey(EntityGreaterSprite.class, DataSerializers.FLOAT);
     public static final DataParameter<Float> targetDirectionY = EntityDataManager.<Float>createKey(EntityGreaterSprite.class, DataSerializers.FLOAT);
@@ -296,5 +296,16 @@ public class EntityGreaterSprite  extends EntityFlying {// implements IRangedAtt
 		compound.setInteger("shootTimer", getDataManager().get(shootTimer));
 		compound.setInteger("happiness", getDataManager().get(happiness));
 		compound.setBoolean("stunned", getDataManager().get(stunned));
+	}
+
+	@Override
+	public int getHappiness() {
+		return getDataManager().get(happiness).intValue();
+	}
+
+	@Override
+	public void setHappiness(int value) {
+		getDataManager().set(happiness, value);
+		getDataManager().setDirty(happiness);
 	}
 }

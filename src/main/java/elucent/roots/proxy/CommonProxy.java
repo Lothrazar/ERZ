@@ -7,7 +7,6 @@ import elucent.roots.Util;
 import elucent.roots.component.ComponentManager;
 import elucent.roots.entity.projectile.EntityRitualProjectile;
 import elucent.roots.gui.GuiHandler;
-import elucent.roots.mutation.MutagenManager;
 import elucent.roots.network.MessageUpdateMana;
 import elucent.roots.research.ResearchManager;
 import elucent.roots.ritual.RitualManager;
@@ -36,13 +35,11 @@ public class CommonProxy {
 		RegistryManager.registerEntities();
 		ComponentManager.init();
 		RitualManager.init();
-		MutagenManager.init();
 	}
 	
 	public void postInit(FMLPostInitializationEvent event){
 		Util.initOres();
 		Util.initNaturalBlocks();
-		Util.initBerries();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Roots.instance, new GuiHandler());
 		ResearchManager.init();
 	}

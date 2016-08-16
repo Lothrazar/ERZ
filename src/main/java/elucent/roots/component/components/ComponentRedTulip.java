@@ -8,9 +8,11 @@ import com.google.common.collect.Lists;
 
 import elucent.roots.PlayerManager;
 import elucent.roots.RootsNames;
+import elucent.roots.Util;
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.ComponentEffect;
 import elucent.roots.component.EnumCastType;
+import elucent.roots.entity.EntitySanctuary;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.block.Block;
@@ -50,19 +52,9 @@ public class ComponentRedTulip extends ComponentBase{
 	@Override
 	public void doEffect(World world, Entity caster, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
 		if (type == EnumCastType.SPELL){
-			ArrayList<EntityLivingBase> targets = (ArrayList<EntityLivingBase>) world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-size*2.4,y-size*2.4,z-size*2.4,x+size*2.4,y+size*2.4,z+size*2.4));
-			if (targets.size() > 0 && !world.isRemote){
-				EntitySkeleton skeleton = new EntitySkeleton(world);
-				skeleton.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(x,y,z)), null);
-				skeleton.setHeldItem(EnumHand.MAIN_HAND, null);
-				skeleton.setDropItemsWhenDead(false);
-				skeleton.getEntityData().setBoolean(RootsNames.TAG_SKIP_ITEM_DROPS, false);
-				skeleton.getEntityData().setLong(RootsNames.TAG_DONT_TARGET_PLAYERS, caster.getUniqueID().getMostSignificantBits());
-				skeleton.setPosition(x, y+2.0, z);
-				skeleton.setAttackTarget(targets.get(random.nextInt(targets.size())));
-				if (skeleton.getAttackTarget().getUniqueID() != caster.getUniqueID()){
-					world.spawnEntityInWorld(skeleton);
-				}
+			BlockPos pos = Util.getRayTrace(world, (EntityPlayer)caster, 6+2*(int)size);
+			if (!world.isRemote){
+				world.spawnEntityInWorld(new EntitySanctuary(world, pos.getX()+0.5, pos.getY()+1.0, pos.getZ()+0.5, (int)potency, (int)size));
 			}
 		}
 	}

@@ -45,13 +45,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class EntitySpriteling  extends EntityFlying {// implements IRangedAttackMob {
+public class EntitySpriteling  extends EntityFlying implements ISprite {// implements IRangedAttackMob {
     public float range = 64;
     public static final DataParameter<Float> targetDirectionX = EntityDataManager.<Float>createKey(EntitySpriteling.class, DataSerializers.FLOAT);
     public static final DataParameter<Float> targetDirectionY = EntityDataManager.<Float>createKey(EntitySpriteling.class, DataSerializers.FLOAT);
     public static final DataParameter<Integer> dashTimer = EntityDataManager.<Integer>createKey(EntitySpriteling.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> happiness = EntityDataManager.<Integer>createKey(EntitySprite.class, DataSerializers.VARINT);
-    public static final DataParameter<Boolean> stunned = EntityDataManager.<Boolean>createKey(EntitySprite.class, DataSerializers.BOOLEAN);
+    public static final DataParameter<Integer> happiness = EntityDataManager.<Integer>createKey(EntitySpriteling.class, DataSerializers.VARINT);
+    public static final DataParameter<Boolean> stunned = EntityDataManager.<Boolean>createKey(EntitySpriteling.class, DataSerializers.BOOLEAN);
     public float addDirectionX = 0;
     public float addDirectionY = 0;
     public float twirlTimer = 0;
@@ -254,5 +254,16 @@ public class EntitySpriteling  extends EntityFlying {// implements IRangedAttack
 		compound.setInteger("dashTimer", getDataManager().get(dashTimer));
 		compound.setInteger("happiness", getDataManager().get(happiness));
 		compound.setBoolean("stunned", getDataManager().get(stunned));
+	}
+
+	@Override
+	public int getHappiness() {
+		return getDataManager().get(happiness).intValue();
+	}
+
+	@Override
+	public void setHappiness(int value) {
+		getDataManager().set(happiness, value);
+		getDataManager().setDirty(happiness);
 	}
 }

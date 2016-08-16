@@ -49,7 +49,7 @@ public class ComponentAzureBluet extends ComponentBase{
 	public void doEffect(World world, Entity caster, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
 		if (type == EnumCastType.SPELL){	
 			if (caster instanceof EntityPlayer && !world.isRemote){
-				BlockPos pos = Util.getRayTrace(world,(EntityPlayer)caster,4+2*(int)size);
+				BlockPos pos = Util.getRayTrace(world,(EntityPlayer)caster,6+2*(int)size);
 				ArrayList<BlockPos> positions = new ArrayList<BlockPos>();
 				positions.add(pos);
 				int maxPositions = 3+((int)size-3)*3;

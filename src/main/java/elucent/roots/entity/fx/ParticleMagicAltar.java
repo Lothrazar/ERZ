@@ -41,6 +41,11 @@ public class ParticleMagicAltar extends Particle {
 	}
 	
 	@Override
+	public int getBrightnessForRender(float pTicks){
+		return 255;
+	}
+	
+	@Override
 	public boolean isTransparent(){
 		return true;
 	}

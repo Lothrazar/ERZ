@@ -22,14 +22,6 @@ public class RootsItemFood extends ItemFood
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving){
 		 super.onItemUseFinish(stack, worldIn, entityLiving);
-		 if(stack.getItem() == RegistryManager.redCurrant){
-			 entityLiving.heal(2F); 
-		 }
-		 if(stack.getItem() == RegistryManager.elderBerry){
-			 if(!worldIn.isRemote){
-				 entityLiving.clearActivePotions();
-			 }
-		 }
 		 if (stack.getItem() == RegistryManager.healingPoultice){
 			 entityLiving.heal(5F);
 		 }
