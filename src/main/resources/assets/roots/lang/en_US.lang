@@ -1,4 +1,4 @@
-itemGroup.roots=Roots
+﻿itemGroup.roots=Roots
 
 item.dustPetal.name=Petal Dust
 item.pestle.name=Pestle
@@ -45,9 +45,6 @@ item.charmRestoration.name=Charm of Restoration
 item.charmEvocation.name=Charm of Evocation
 item.charmConjuration.name=Charm of Conjuration
 item.charmIllusion.name=Charm of Illusion
-
-runicFocus_0.name=Runic Focus
-runicFocus_1.name=Charged Runic Focus
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
@@ -99,6 +96,10 @@ tile.otherworldBlock.name=Otherworld Brick
 tile.otherworldBlockSlab.name=Otherworld Brick Slab
 tile.otherworldBlockSlabDouble.name=Double Otherworld Brick Slab
 tile.otherworldBlockStairs.name=Otherworld Brick Stairs
+
+entity.roots.spriteling.name=Lesser Sprite
+entity.roots.sprite.name=Sprite
+entity.roots.greaterSprite.name=Greater Sprite
 
 roots.command.roots.usage=A general purpose command for the roots mod. Enter /roots help for subcommands.
 
@@ -236,17 +237,17 @@ roots.research.spells.azurebluet.name=Spell Component: Shatter
 roots.research.spells.azurebluet.page1title.name=Mining with Magic
 roots.research.spells.azurebluet.page1info=The azure bluet contains latent energy capable of shattering stone. Using the above recipe, you create a spell capable of breaking a small area of blocks that you target. The spell has a mining level equivalent to an iron tool, increasable with potency modifiers.
 
-roots.research.spells.redtulip.name=Spell Component: Devil's Flower
-roots.research.spells.redtulip.page1title.name=Summoning
-roots.research.spells.redtulip.page1info=The allure of the red tulip seems to draw rather...sinister attention. Using the above recipe, you can summon a spectral skeleton to attack a nearby mob. 
+roots.research.spells.redtulip.name=Spell Component: Sanctuary
+roots.research.spells.redtulip.page1title.name=Warding
+roots.research.spells.redtulip.page1info=The alluring red tulip is tied with some of the more demonic elements of our world. Using the above recipe, you can create a circle of warding that will keep these demonic creatures at bay, nullify their ranged attacks, and boost natural regeneration for those within the circle. 
 
 roots.research.spells.orangetulip.name=Spell Component: Shielding
 roots.research.spells.orangetulip.page1title.name=Force Field
 roots.research.spells.orangetulip.page1info=The orange tulip is associated with protection and resistance. Using the above recipe, you can create a spell that will repel mobs and stop projectiles while holding-right click on the spell.
 
 roots.research.spells.whitetulip.name=Spell Component: Blistering Cold
-roots.research.spells.whitetulip.page1title.name=Frozen Solid
-roots.research.spells.whitetulip.page1info=The white tulip contains magical essences of cold and ice. Using the above recipe, you can free this cold power, creating a spell that will both damage and slow hit targets.
+roots.research.spells.whitetulip.page1title.name=Frozen Defense
+roots.research.spells.whitetulip.page1info=The white tulip contains magical essences of cold and ice. Using the above recipe, you can free this cold power, creating a spell that will launch a large number of frost shards forth in the direction the caster is looking.
 
 roots.research.spells.pinktulip.name=Spell Component: Life Drain
 roots.research.spells.pinktulip.page1title.name=Vampirism
@@ -295,24 +296,6 @@ roots.research.spells.netherwart.page1info=A hellish plant like nether wart can 
 roots.research.spells.chorus.name=Spell Component: Ender Warp
 roots.research.spells.chorus.page1title.name=Teleportation
 roots.research.spells.chorus.page1info=Just eating a chorus fruit on its own is enough to grant a random teleport. Using the above recipe, you can create a spell with greater control over this ability, letting the user teleport forward, even through walls or when falling.
-
-roots.research.spells.radiantdaisy.name=Spell Component: Radiance
-roots.research.spells.radiantdaisy.page1title.name=Flower of Light
-roots.research.spells.radiantdaisy.page1info=Using the mutating flower in the overworld, you create a shining white flower. To create, plant an oxeye daisy. At noon, toss down a glowstone block and one prismarine crystal next to it, and while under the night vision effect, use the powder on the flower.
-roots.research.spells.radiantdaisy.page2title.name=Piercing Rays
-roots.research.spells.radiantdaisy.page2info=The new flower you have created contains the very essence of the glowing daylight of the overworld. Using the above recipe, you can create a spell that will create a highly damaging beam that will reflect off of blocks. Each reflection takes away some of the beam's power, until it dissipates completely.
-
-roots.research.spells.flareorchid.name=Spell Component: Combustion
-roots.research.spells.flareorchid.page1title.name=Fiery Flora
-roots.research.spells.flareorchid.page1info=Using the mutating powder in the nether, you create a burning red flower. To create, plant a blue orchid in the nether. Make a ring of netherrack around the flower. While under the fire resistance effect, toss a blaze rod and lava bucket near the flower, then use the powder on the flower.
-roots.research.spells.flareorchid.page2title.name=Destruction
-roots.research.spells.flareorchid.page2info=The new flower you have created is bursting with the chaotic fire of the nether. Using the above recipe, you can use it to create a spell that will allow you to create large explosions on blocks that you look at.
-
-roots.research.spells.midnightbloom.name=Spell Component: Time Stop
-roots.research.spells.midnightbloom.page1title.name=Ender Flower
-roots.research.spells.midnightbloom.page1info=Using the mutating powder in the end, you create a flower black as night. To create, plant a poppy two blocks above obsidian in the end. While under the slowness effect, toss a coal block next to the flower and use the powder on the flower.
-roots.research.spells.midnightbloom.page2title.name=Chronomage
-roots.research.spells.midnightbloom.page2info=The new flower you have created is bursting with powers beyond your control. Using the above recipe, you can create a spell that will stop time for all entities in an area around you. They will not update until the spell ends, during which time you can move, attack, or gloat at them.
 
 roots.research.spells.cobweb.name=Spell Component: Snare
 roots.research.spells.cobweb.page1title.name=Snare

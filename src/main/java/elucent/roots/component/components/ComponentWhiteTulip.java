@@ -3,6 +3,7 @@ package elucent.roots.component.components;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import com.google.common.collect.Lists;
 
@@ -13,6 +14,7 @@ import elucent.roots.RootsNames;
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.ComponentEffect;
 import elucent.roots.component.EnumCastType;
+import elucent.roots.entity.EntityFrostShard;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.block.Block;
@@ -31,6 +33,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 
@@ -43,31 +46,28 @@ public class ComponentWhiteTulip extends ComponentBase{
 	@Override
 	public void doEffect(World world, Entity caster, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
 		if (type == EnumCastType.SPELL){
-			int damageDealt = 0;
-			ArrayList<EntityLivingBase> targets = (ArrayList<EntityLivingBase>) world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-size,y-size,z-size,x+size,y+size,z+size));
-			for (int i = 0; i < targets.size(); i ++){
-				if (targets.get(i).getUniqueID() != caster.getUniqueID()){
-					if (targets.get(i) instanceof EntityPlayer && ConfigManager.disablePVP){
-						
-					}
-					else {
-						targets.get(i).attackEntityFrom(DamageSource.generic, (int)(5+3*potency));
-						damageDealt += (int)(5+2*potency);
-						targets.get(i).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("slowness"),200+100*(int)potency,(int)potency));
-						damageDealt += (int)(5+3*potency);
-						targets.get(i).getEntityData().setInteger(RootsNames.TAG_WHITE_TULIP, 200+(100*(int)potency));
-						targets.get(i).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("slowness"),200+(100*(int)potency),(int)potency));
-						targets.get(i).setLastAttacker(caster);
-						targets.get(i).setRevengeTarget((EntityLivingBase)caster);
-					}
+			for (int i = 0; i < 6; i ++){
+				if (!world.isRemote){
+					EntityFrostShard shard = new EntityFrostShard(world);
+					shard.initSpecial(3.0f+2.0f*(float)potency);
+					shard.setPosition(caster.posX, caster.posY+caster.getEyeHeight(), caster.posZ);
+					shard.setVelocity(0.75*(caster.getLookVec().xCoord+0.125*size*(random.nextFloat()-0.5)), 0.75*(caster.getLookVec().yCoord+0.125*size*(random.nextFloat()-0.5)), 0.75*(caster.getLookVec().zCoord+0.125*size*(random.nextFloat()-0.5)));
+					shard.setPosition(shard.posX+shard.motionX*2.0, shard.posY+shard.motionY*2.0, shard.posZ+shard.motionZ*2.0);
+					world.spawnEntityInWorld(shard);
 				}
 			}
-			if (damageDealt > 80){
-				if (caster instanceof EntityPlayer){
-					if (!((EntityPlayer)caster).hasAchievement(RegistryManager.achieveLotsDamage)){
-						PlayerManager.addAchievement(((EntityPlayer)caster), RegistryManager.achieveLotsDamage);
-					}
-				}
+		}
+	}
+	
+	@Override
+	public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
+		if (type == EnumCastType.SPELL && !world.isRemote){
+			for (int i = 0; i < 8; i ++){
+				EntityFrostShard shard = new EntityFrostShard(world);
+				shard.initSpecial(3.0f+2.0f*(float)potency);
+				shard.setPosition(x, y+0.25, z);
+				shard.setVelocity(shard.motionX*(1.0+0.5*size), shard.motionY*(1.0+0.5*size), shard.motionZ*(1.0+0.5*size));
+				world.spawnEntityInWorld(shard);
 			}
 		}
 	}

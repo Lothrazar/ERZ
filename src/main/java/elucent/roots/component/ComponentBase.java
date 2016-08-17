@@ -98,7 +98,7 @@ public class ComponentBase {
 		
 	}
 	
-	public void doEffect(World world, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
+	public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
 		
 	}
 	

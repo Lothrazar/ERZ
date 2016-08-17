@@ -28,7 +28,7 @@ public class RootsCommand implements ICommand {
 
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
-		return I18n.format("roots.command.roots.usage");
+		return "/" + getCommandName() + " <subcommand> <args> (try '" + getCommandName() + " help' for more info)";
 	}
 
 	@Override
@@ -40,10 +40,15 @@ public class RootsCommand implements ICommand {
 
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+		if (args.length == 0){
+			sender.addChatMessage(new TextComponentString(TextFormatting.GREEN+"Use \"/roots help\" for a list of subcommands."));
+		}
 		if (args.length >= 1){
 			if (args[0].equals("help")){
 				sender.addChatMessage(new TextComponentString(TextFormatting.BOLD+""+TextFormatting.GREEN+"/roots subcommands:"));
+				sender.addChatMessage(new TextComponentString("  "));
 				sender.addChatMessage(new TextComponentString("  "+TextFormatting.DARK_GREEN+"/roots setterra <amount> [player] :: Sets a player's current terra, leave blank to target yourself."));
+				sender.addChatMessage(new TextComponentString("  "));
 				sender.addChatMessage(new TextComponentString("  "+TextFormatting.DARK_GREEN+"/roots setmaxterra <amount> [player] :: Sets a player's maximum terra, leave blank to target yourself."));
 			}
 			if (args[0].equals("setterra")){

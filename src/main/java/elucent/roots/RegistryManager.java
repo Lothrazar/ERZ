@@ -28,12 +28,15 @@ import elucent.roots.block.BlockStandingStoneT1;
 import elucent.roots.block.BlockStandingStoneT2;
 import elucent.roots.block.BlockStandingStoneVacuum;
 import elucent.roots.entity.EntityAccelerator;
+import elucent.roots.entity.EntityFrostShard;
 import elucent.roots.entity.EntityNetherInfection;
+import elucent.roots.entity.EntitySanctuary;
 import elucent.roots.entity.EntityGreaterSprite;
 import elucent.roots.entity.EntitySprite;
 import elucent.roots.entity.EntitySpriteProjectile;
 import elucent.roots.entity.EntitySpriteling;
 import elucent.roots.entity.EntityTileAccelerator;
+import elucent.roots.entity.RenderFrostShard;
 import elucent.roots.entity.RenderGreaterSprite;
 import elucent.roots.entity.RenderSprite;
 import elucent.roots.entity.RenderSpriteProjectile;
@@ -86,10 +89,10 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class RegistryManager {
-	public static Item otherworldLeaf, otherworldSubstance, debugWand, runicFocus, rootyStew, healingPoultice, mutagen, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,nightshade,blackCurrant,redCurrant,whiteCurrant,elderBerry, engravedSword,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion;
+	public static Item otherworldLeaf, otherworldSubstance, debugWand, rootyStew, healingPoultice, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion;
 	public static Item manaResearchIcon;
 	public static ItemBlock itemBlockSpiritBlockSlab, itemBlockSpiritBrickSlab, itemBlockPlankWildwoodSlab, itemBlockRuneStoneSlab, itemBlockRuneStoneBrickSlab, itemBlockRuneStoneTileSlab;
-	public static Block flareOrchid, radiantDaisy, standingStoneGrower, standingStoneHealer, standingStoneIgniter, standingStoneEntangler, standingStoneAccelerator, standingStoneAesthetic, standingStoneRepulsor, standingStoneVacuum, midnightBloom, mortar, imbuer, altar, druidChalice, standingStoneT1, standingStoneT2, brazier;
+	public static Block standingStoneGrower, standingStoneHealer, standingStoneIgniter, standingStoneEntangler, standingStoneAccelerator, standingStoneAesthetic, standingStoneRepulsor, standingStoneVacuum, mortar, imbuer, altar, druidChalice, standingStoneT1, standingStoneT2, brazier;
 	public static Block bridge, spiritBlock, spiritBlockSlab, spiritBlockSlabDouble, spiritBlockStairs, spiritBrick, spiritBrickSlab, spiritBrickSlabDouble, spiritBrickStairs, runeStoneStairs, runeStoneBrickStairs, runeStoneTileStairs, plankWildwoodStairs, barkWildwood, barkWildwoodSymbolGlowing, barkWildwoodSymbol, logWildwood, logWildwoodSymbol, logWildwoodSymbolGlowing, plankWildwood, plankWildwoodSlab, plankWildwoodSlabDouble, runeStone, runeStoneBrick, runeStoneSlabDouble, runeStoneSlab, runeStoneBrickSlab, runeStoneBrickSlabDouble, runeStoneTile, runeStoneTileSlab, runeStoneTileSlabDouble, runeStoneSymbol, runeStoneSymbolGlowing;
 	
 	public static Achievement achieveDust, achieveTablet, achieveSpellRose, achieveSpellGrowth, achieveSpellInsanity, achieveMaxModifiers, achieveLotsDamage, achieveTimeStop, achieveAltar, achieveStandingStone, achieveWildwood, achieveShadow, achieveSpellElements, achieveVampire;
@@ -134,16 +137,8 @@ public class RegistryManager {
 		GameRegistry.registerItem(druidArmorBoots = new ItemDruidArmor(2, EntityEquipmentSlot.FEET),"druidArmorBoots");
 		GameRegistry.registerItem(runedTablet = new ItemRunedTablet(),"runedTablet");
 		GameRegistry.registerItem(growthSalve = new ItemGrowthSalve(),"growthSalve");
-		GameRegistry.registerItem(mutagen = new ItemMutagen(),"mutagen");
-		GameRegistry.registerItem(nightshade = new RootsItemFood("nightshade", 2, 0.1F, false).setPotionEffect(new PotionEffect(Potion.getPotionById(19), 320), 1F), "nightshade");
-		GameRegistry.registerItem(blackCurrant = new RootsItemFood("blackcurrant", 4, 0.4F, false), "blackcurrant");
-		GameRegistry.registerItem(redCurrant = new RootsItemFood("redcurrant", 4, 0.4F, false), "redcurrant");
-		GameRegistry.registerItem(whiteCurrant = new RootsItemFood("whitecurrant", 4, 0.4F, false), "whitecurrant");
-		GameRegistry.registerItem(elderBerry = new RootsItemFood("elderberry", 2, 0.1F, false), "elderberry");
 		GameRegistry.registerItem(healingPoultice = new RootsItemFood("healingPoultice", 0, 0F, false).setAlwaysEdible().setMaxStackSize(8), "healingPoultice"); 
 		GameRegistry.registerItem(rootyStew = new ItemRootyStew(), "rootyStew"); 
-		GameRegistry.registerItem(runicFocus = new ItemRunicFocus(), "runicFocus"); 
-		GameRegistry.registerItem(engravedSword = new ItemEngravedSword(engravedMaterial), "engravedSword");
 		GameRegistry.registerItem(manaResearchIcon = new ItemResearchIcon("manaResearchIcon"), "manaResearchIcon");
 		GameRegistry.registerItem(itemCharmRestoration = new ItemCharm("charmRestoration"),"charmRestoration");
 		GameRegistry.registerItem(itemCharmEvocation = new ItemCharm("charmEvocation"),"charmEvocation");
@@ -170,9 +165,6 @@ public class RegistryManager {
 		GameRegistry.registerBlock(standingStoneIgniter = new BlockStandingStoneIgniter(),"standingStoneIgniter");
 		GameRegistry.registerBlock(standingStoneGrower = new BlockStandingStoneGrower(),"standingStoneGrower");
 		GameRegistry.registerBlock(standingStoneHealer = new BlockStandingStoneHealer(),"standingStoneHealer");
-		GameRegistry.registerBlock(midnightBloom = new BlockMidnightBloom(),"midnightBloom");
-		GameRegistry.registerBlock(flareOrchid = new BlockFlareOrchid(),"flareOrchid");
-		GameRegistry.registerBlock(radiantDaisy = new BlockRadiantDaisy(),"radiantDaisy");
 		GameRegistry.registerBlock(bridge = new BlockBridge().setRegistryName(Roots.MODID+":bridge"));
 		GameRegistry.registerBlock(runeStone = new BlockBase("runeStone",Material.ROCK,1.0f));
 		GameRegistry.registerBlock(runeStoneStairs = new BlockStairsBase("runeStoneStairs",runeStone.getDefaultState(),1.0f));
@@ -253,10 +245,15 @@ public class RegistryManager {
 		EntityRegistry.registerModEntity(EntityTileAccelerator.class, "tileAccelerator", 0, Roots.instance, 64, 3, true);
 		EntityRegistry.registerModEntity(EntityAccelerator.class, "entityAccelerator", 1, Roots.instance, 64, 3, true);
 		EntityRegistry.registerModEntity(EntitySpriteling.class, "spriteling", 2, Roots.instance, 64, 3, true);
+		EntityRegistry.registerEgg(EntitySpriteling.class, Util.intColor(130, 255, 60), Util.intColor(66, 230, 0));
 		EntityRegistry.registerModEntity(EntitySprite.class, "sprite", 3, Roots.instance, 64, 3, true);
-		EntityRegistry.registerModEntity(EntityGreaterSprite.class, "greatersprite", 4, Roots.instance, 64, 3, true);
+		EntityRegistry.registerEgg(EntitySprite.class, Util.intColor(130, 255, 60), Util.intColor(66, 230, 0));
+		EntityRegistry.registerModEntity(EntityGreaterSprite.class, "greaterSprite", 4, Roots.instance, 64, 3, true);
+		EntityRegistry.registerEgg(EntityGreaterSprite.class, Util.intColor(130, 255, 60), Util.intColor(66, 230, 0));
 		EntityRegistry.registerModEntity(EntitySpriteProjectile.class, "entitySpriteProjectile", 5, Roots.instance, 64, 3, true);
 		EntityRegistry.registerModEntity(EntityNetherInfection.class, "entityInfection", 6, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntitySanctuary.class, "entitySanctuary", 7, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityFrostShard.class, "entityFrostShard", 8, Roots.instance, 64, 3, true);
 	}
 	
 	public static void registerRecipes(){
@@ -270,7 +267,6 @@ public class RegistryManager {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.altar,1), true, new Object[]{"BFB","SGS"," C ",'S',"stone",'F',new ItemStack(Blocks.RED_FLOWER,1,0),'B',RegistryManager.verdantSprig,'G',"blockGold",'C',new ItemStack(Blocks.STONEBRICK,1,3)}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.druidKnife,1), true, new Object[]{" VV","VPV","SV ",'S',"stickWood",'V',"treeSapling",'P',"plankWood"}));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(RegistryManager.growthSalve,4), new Object[]{new ItemStack(Items.WHEAT_SEEDS,1),new ItemStack(Blocks.TALLGRASS,1,1),"dustRedstone", new ItemStack(RegistryManager.pestle,1)}));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(RegistryManager.mutagen,1), new Object[]{new ItemStack(RegistryManager.growthSalve), new ItemStack(RegistryManager.growthSalve), new ItemStack(RegistryManager.growthSalve), new ItemStack(RegistryManager.growthSalve), new ItemStack(Items.NETHER_STAR,1), new ItemStack(Items.NETHER_WART,1), new ItemStack(RegistryManager.pestle,1)}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.runedTablet,1), true, new Object[]{" R ","SBS"," S ",'S',Items.WHEAT_SEEDS,'B',"stone",'R',RegistryManager.oldRoot}));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(RegistryManager.rootyStew,1), new Object[]{new ItemStack(Items.WHEAT,1), new ItemStack(Items.BOWL,1), new ItemStack(RegistryManager.oldRoot,1)}));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(RegistryManager.healingPoultice,2), new Object[]{new ItemStack(Items.DYE,1,1), new ItemStack(Items.PAPER,1), new ItemStack(RegistryManager.pestle,1), new ItemStack(RegistryManager.verdantSprig,1)}));
@@ -292,8 +288,6 @@ public class RegistryManager {
 		achieveMaxModifiers.registerStat();
 		achieveLotsDamage = new Achievement("achievement.lotsDamage","lotsDamage",-6,2,new ItemStack(Items.BLAZE_POWDER,1),achieveMaxModifiers).setSpecial();
 		achieveLotsDamage.registerStat();
-		achieveTimeStop = new Achievement("achievement.timeStop","timeStop",-5,4,new ItemStack(RegistryManager.midnightBloom,1),achieveMaxModifiers).setSpecial();
-		achieveTimeStop.registerStat();
 		achieveAltar = new Achievement("achievement.altar","altar",0,-2,new ItemStack(RegistryManager.altar,1),achieveTablet);
 		achieveAltar.registerStat();
 		achieveSpellElements = new Achievement("achievement.spellElements","spellElements",-2,-4,new ItemStack(RegistryManager.crystalStaff,1),achieveAltar).setSpecial();
@@ -302,8 +296,6 @@ public class RegistryManager {
 		achieveStandingStone.registerStat();
 		achieveWildwood = new Achievement("achievement.wildwood","wildwood",4,-6,new ItemStack(RegistryManager.druidArmorHead,1),achieveStandingStone);
 		achieveWildwood.registerStat();
-		achieveShadow = new Achievement("achievement.shadow","shadow",4,-2,new ItemStack(RegistryManager.runicFocus,1),achieveStandingStone);
-		achieveShadow.registerStat();
 		achieveVampire = new Achievement("achievement.vampire","vampire",6,-4,new ItemStack(Items.GHAST_TEAR,1),achieveStandingStone).setSpecial();
 		achieveVampire.registerStat();
 		
@@ -368,16 +360,8 @@ public class RegistryManager {
 		((ItemDruidArmor)druidArmorBoots).initModel();
 		((ItemRunedTablet)runedTablet).initModel();
 		((ItemGrowthSalve)growthSalve).initModel();
-		((ItemMutagen)mutagen).initModel();
-		((RootsItemFood)nightshade).initModel();
-		((RootsItemFood)blackCurrant).initModel();
-		((RootsItemFood)redCurrant).initModel();
-		((RootsItemFood)whiteCurrant).initModel();
-		((RootsItemFood)elderBerry).initModel();
 		((RootsItemFood)healingPoultice).initModel();
 		((ItemRootyStew)rootyStew).initModel();
-		((ItemRunicFocus)runicFocus).initModel();
-		((ItemEngravedSword)engravedSword).initModel();
 		((ItemResearchIcon)manaResearchIcon).initModel();
 		((ItemMaterial)otherworldLeaf).initModel();
 		((ItemMaterial)otherworldSubstance).initModel();
@@ -403,9 +387,6 @@ public class RegistryManager {
 		((BlockStandingStoneGrower)standingStoneGrower).initModel();
 		((BlockStandingStoneIgniter)standingStoneIgniter).initModel();
 		((BlockStandingStoneHealer)standingStoneHealer).initModel();
-		((BlockMidnightBloom)midnightBloom).initModel();
-		((BlockFlareOrchid)flareOrchid).initModel();
-		((BlockRadiantDaisy)radiantDaisy).initModel();
 		((BlockBridge)bridge).initModel();
 		((BlockBase)runeStone).initModel();
 		((BlockStairsBase)runeStoneStairs).initModel();
@@ -453,5 +434,6 @@ public class RegistryManager {
 		RenderingRegistry.registerEntityRenderingHandler(EntitySprite.class, new RenderSprite(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("sprite"),0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterSprite.class, new RenderGreaterSprite(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("greatersprite"),0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteProjectile.class, new RenderSpriteProjectile(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(EntityFrostShard.class, new RenderFrostShard(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
 	}
 }

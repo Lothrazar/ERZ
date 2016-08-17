@@ -3,6 +3,7 @@ package elucent.roots;
 
 import elucent.roots.capability.mana.ManaProvider;
 import elucent.roots.component.components.ComponentCharmIllusion;
+import elucent.roots.entity.ISprite;
 import elucent.roots.item.IManaRelatedItem;
 import elucent.roots.item.ItemCrystalStaff;
 import net.minecraft.block.Block;
@@ -19,6 +20,7 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -33,6 +35,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -55,35 +58,33 @@ public class EventManager {
 	Random random = new Random();
 	@SubscribeEvent
 	public void onBlockHarvested(HarvestDropsEvent event){
-		Block block = event.getState().getBlock();
-		if (block == Blocks.TALLGRASS){
-			if (random.nextInt(ConfigManager.oldRootDropChance) == 0){
-				event.getDrops().add(new ItemStack(RegistryManager.oldRoot,1));
-			}
-		}
-		if (block instanceof BlockCrops){
-			if (((BlockCrops)block).isMaxAge(event.getState())){
-				if (random.nextInt(ConfigManager.verdantSprigDropChance) == 0){
-					event.getDrops().add(new ItemStack(RegistryManager.verdantSprig,1));
-				}
-			}
-		}
-		if (block == Blocks.NETHER_WART){
-			if (((BlockNetherWart) block).getMetaFromState(event.getState()) != 0){
-				if (random.nextInt(ConfigManager.infernalStemDropChance) == 0){
-					event.getDrops().add(new ItemStack(RegistryManager.infernalStem,1));
-				}
-			}
-		}
-		if (block == Blocks.CHORUS_FLOWER){
-			if (random.nextInt(ConfigManager.dragonsEyeDropChance) == 0){
-				event.getDrops().add(new ItemStack(RegistryManager.dragonsEye,1));
-			}
-		}
 		if (event.getHarvester() != null){
-			if (block == Blocks.LEAVES && block.getMetaFromState(event.getState()) == 8){
-				if (random.nextInt(ConfigManager.berriesDropChance) == 0){
-					event.getDrops().add(new ItemStack(Util.berries.get(random.nextInt(Util.berries.size())),1));
+			if (!(event.getHarvester() instanceof FakePlayer)){
+
+				Block block = event.getState().getBlock();
+				if (block == Blocks.TALLGRASS){
+					if (random.nextInt(ConfigManager.oldRootDropChance) == 0){
+						event.getDrops().add(new ItemStack(RegistryManager.oldRoot,1));
+					}
+				}
+				if (block instanceof BlockCrops){
+					if (((BlockCrops)block).isMaxAge(event.getState())){
+						if (random.nextInt(ConfigManager.verdantSprigDropChance) == 0){
+							event.getDrops().add(new ItemStack(RegistryManager.verdantSprig,1));
+						}
+					}
+				}
+				if (block == Blocks.NETHER_WART){
+					if (((BlockNetherWart) block).getMetaFromState(event.getState()) != 0){
+						if (random.nextInt(ConfigManager.infernalStemDropChance) == 0){
+							event.getDrops().add(new ItemStack(RegistryManager.infernalStem,1));
+						}
+					}
+				}
+				if (block == Blocks.CHORUS_FLOWER){
+					if (random.nextInt(ConfigManager.dragonsEyeDropChance) == 0){
+						event.getDrops().add(new ItemStack(RegistryManager.dragonsEye,1));
+					}
 				}
 			}
 		}
@@ -91,11 +92,18 @@ public class EventManager {
 	
 	@SubscribeEvent
 	public void onRightClickEntity(PlayerInteractEvent.EntityInteract event){
+		if (event.getEntityPlayer().getHeldItem(event.getHand()) != null){
+			if (event.getEntityPlayer().getHeldItem(event.getHand()).getItem() == RegistryManager.debugWand){
+				if (event.getTarget() instanceof ISprite){
+					System.out.println(((ISprite)event.getTarget()).getHappiness());
+				}
+			}
+		}
 		if (event.getTarget() instanceof EntitySkeleton){
 			if (event.getEntityPlayer().getHeldItem(event.getHand()) != null){
 				if (event.getEntityPlayer().getHeldItem(event.getHand()).getItem() == RegistryManager.infernalStem){
 					event.getEntityPlayer().getHeldItem(event.getHand()).stackSize --;
-					((EntitySkeleton)event.getTarget()).setSkeletonType(1);
+					((EntitySkeleton)event.getTarget()).func_189768_a(SkeletonType.WITHER);
 				}
 			}
 		}
@@ -348,46 +356,6 @@ public class EventManager {
 			((EntityLivingBase)event.getSource().getEntity()).attackEntityFrom(DamageSource.cactus, event.getEntityLiving().getEntityData().getFloat(RootsNames.TAG_SPELL_THORNS_DAMAGE));
 			event.getEntityLiving().getEntityData().removeTag(RootsNames.TAG_SPELL_THORNS_DAMAGE);
 			Util.decrementTickTracking(event.getEntityLiving());
-		}
-		
-		if(event.getEntityLiving() instanceof EntityPlayer){
-			EntityPlayer player = (EntityPlayer)event.getEntity();
-			if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() == RegistryManager.engravedSword){
-				ItemStack sword = player.inventory.getCurrentItem();
-				if(sword.hasTagCompound() && sword.getTagCompound().hasKey("shadowstep")){
-					int stepLvl = sword.getTagCompound().getInteger("shadowstep");
-					double chance = (double)stepLvl * 12.5;
-					if(random.nextInt(100) < chance){
-						event.setCanceled(true);
-					}
-				}
-			}
-		}
-		
-		if(event.getSource().getEntity() instanceof EntityPlayer){
-			if(!event.getEntity().getEntityWorld().isRemote){
-				EntityPlayer player = (EntityPlayer)event.getSource().getEntity();
-				if(player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() == RegistryManager.engravedSword){
-					ItemStack sword = player.inventory.getCurrentItem();
-					if(sword.hasTagCompound() && sword.getTagCompound().hasKey("aquatic")){
-						int aquaLvl = sword.getTagCompound().getInteger("aquatic");
-						float amount = aquaLvl * 0.5f;
-						event.getEntity().attackEntityFrom(DamageSource.drown, amount);
-					}
-					if((sword.hasTagCompound() && sword.getTagCompound().hasKey("holy")) && event.getEntityLiving().getCreatureAttribute() == EnumCreatureAttribute.UNDEAD){
-						int holyLvl = sword.getTagCompound().getInteger("holy");
-						float amount = holyLvl * 1.5f;
-						float currentAmount = event.getAmount();
-						event.setAmount(currentAmount + amount);
-					}
-					if(sword.hasTagCompound() && sword.getTagCompound().hasKey("spikes")){
-						int spikeLvl = sword.getTagCompound().getInteger("spikes");
-						float amount = spikeLvl;
-						float currentAmount = event.getAmount();
-						event.setAmount(currentAmount + amount);
-					}
-				}
-			}
 		}	
 	}
 	
