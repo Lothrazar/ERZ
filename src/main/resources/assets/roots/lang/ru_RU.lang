@@ -39,14 +39,12 @@ item.elderberry.name=Бузина
 item.healingPoultice.name=Лечебная припарка
 item.rootyStew.name=Тушёный корень
 item.engravedSword.name=Выгравированный клинок
-
+item.otherworldLeaf.name=Иномирская листва
+item.otherworldSubstance.name=Иномирская сущность
 item.charmRestoration.name=Шарм восстановления
 item.charmEvocation.name=Шарм воплощения
 item.charmConjuration.name=Шарм колдовства
 item.charmIllusion.name=Шарм иллюзии
-
-runicFocus_0.name=Рунический фокус
-runicFocus_1.name=Заряженный рунический фокус
 
 tile.mortar.name=Ступка
 tile.imbuer.name=Наполнитель
@@ -66,6 +64,42 @@ tile.standingStoneIgniter.name=Стоячий камень воспламене�
 tile.standingStoneGrower.name=Стоячий камень роста
 tile.standingStoneHealer.name=Стоячий камень исцеления
 tile.standingStoneAesthetic.name=Эстетический стоячий камень
+tile.runeStone.name=Рунстоун
+tile.runeStoneBrick.name=Рунстоуновые кирпичи
+tile.runeStoneTile.name=Рунстоуновая плитка
+tile.runeStoneSymbol.name=Рунстоуновый символ
+tile.runeStoneSymbolGlowing.name=Рунстоуновый светящийся символ
+tile.runeStoneSlab.name=Рунстоуновая плита
+tile.runeStoneStairs.name=Рунстоуновые ступеньки
+tile.runeStoneSlabDouble.name=Двойная рунстоуновая плита
+tile.runeStoneTileSlab.name=Плита из рунстоуновой плитки
+tile.runeStoneTileSlabDouble.name=Двойная плита из рунстоуновой плитки
+tile.runeStoneTileStairs.name=Ступеньки из рунстоуновой плитки
+tile.runeStoneBrickSlab.name=Плита из рунстоуновых кирпичей
+tile.runeStoneBrickSlabDouble.name=Двойная плита из рунстоуновых кирпичей
+tile.runeStoneBrickStairs.name=Ступеньки из рунстоуновых кирпичей
+tile.plankWildwood.name=Дикодревесные доски
+tile.plankWildwoodSlab.name=Дикодревесная плита
+tile.plankWildwoodSlabDouble.name=Двойная дикодревесная плита
+tile.plankWildwoodStairs.name=Дикодревесные ступеньки
+tile.logWildwood.name=Дикое дерево
+tile.logWildwoodSymbol.name=Дикодревесный символ
+tile.logWildwoodSymbolGlowing.name=Дикодревесный светящийся символ
+tile.barkWildwood.name=Дикодревесная кора
+tile.barkWildwoodSymbol.name=Дикодревесная кора с символом
+tile.barkWildwoodSymbolGlowing.name=Дикодревесная кора со светящимся символом
+tile.otherworldBlock.name=Иномирской блок
+tile.otherworldBlockSlab.name=Иномирская плита
+tile.otherworldBlockSlabDouble.name=Двойная иномирская плита
+tile.otherworldBlockStairs.name=Иномирские ступеньки
+tile.otherworldBlock.name=Иномирские кирпичи
+tile.otherworldBlockSlab.name=Плита из иномирского кирпича
+tile.otherworldBlockSlabDouble.name=Двойная плита из иномирского кирпича
+tile.otherworldBlockStairs.name=Ступеньки из иномирского кирпича
+
+entity.roots.spriteling.name=Маленькая фея
+entity.roots.sprite.name=Фея
+entity.roots.greaterSprite.name=Большая фея
 
 roots.command.roots.usage=Команда общего назначения для мода Roots. Введите /roots help, для подкоманд.
 
@@ -98,7 +132,7 @@ roots.component.flareorchid.name=Горение
 roots.component.lilac.name=Рост
 roots.component.lilypad.name=Взрыв воды
 roots.component.midnightbloom.name=Остановка времени
-roots.component.netherwart.name=Инферно
+roots.component.netherwart.name=Заражение
 roots.component.orangetulip.name=Защита
 roots.component.oxeyedaisy.name=Ускорение
 roots.component.peony.name=Регенерация
@@ -203,17 +237,17 @@ roots.research.spells.azurebluet.name=Компонент заклинания: �
 roots.research.spells.azurebluet.page1title.name=Добыча с магией
 roots.research.spells.azurebluet.page1info=The azure bluet contains latent energy capable of shattering stone. Using the above recipe, you create a spell capable of breaking a small area of blocks that you target. The spell has a mining level equivalent to an iron tool, increasable with potency modifiers.
 
-roots.research.spells.redtulip.name=Компонент заклинания: Цветок дьявола
-roots.research.spells.redtulip.page1title.name=Призыв
-roots.research.spells.redtulip.page1info=The allure of the red tulip seems to draw rather...sinister attention. Using the above recipe, you can summon a spectral skeleton to attack a nearby mob. 
+roots.research.spells.redtulip.name=Компонент заклинания: Святилище
+roots.research.spells.redtulip.page1title.name=Оберёг
+roots.research.spells.redtulip.page1info=The alluring red tulip is tied with some of the more demonic elements of our world. Using the above recipe, you can create a circle of warding that will keep these demonic creatures at bay, nullify their ranged attacks, and boost natural regeneration for those within the circle.
 
 roots.research.spells.orangetulip.name=Компонент заклинания: Защита
 roots.research.spells.orangetulip.page1title.name=Силовое поле
 roots.research.spells.orangetulip.page1info=The orange tulip is associated with protection and resistance. Using the above recipe, you can create a spell that will repel mobs and stop projectiles while holding-right click on the spell.
 
 roots.research.spells.whitetulip.name=Компонент заклинания: Стремительный холод
-roots.research.spells.whitetulip.page1title.name=Цельная заморозка
-roots.research.spells.whitetulip.page1info=The white tulip contains magical essences of cold and ice. Using the above recipe, you can free this cold power, creating a spell that will both damage and slow hit targets.
+roots.research.spells.whitetulip.page1title.name=Холодная защита
+roots.research.spells.whitetulip.page1info=The white tulip contains magical essences of cold and ice. Using the above recipe, you can free this cold power, creating a spell that will launch a large number of frost shards forth in the direction the caster is looking.
 
 roots.research.spells.pinktulip.name=Компонент заклинания: Похищение жизни
 roots.research.spells.pinktulip.page1title.name=Вампиризм
@@ -255,31 +289,13 @@ roots.research.spells.poisonouspotato.name=Компонент заклинани
 roots.research.spells.poisonouspotato.page1title.name=Удар молнии
 roots.research.spells.poisonouspotato.page1info=The innate charge of a potato combined with the harmfulness of its poison create a highly destructive spell. Using the above recipe, you can create a spell that will simply strike lightning on a nearby block you look at.
 
-roots.research.spells.netherwart.name=Компонент заклинания: Инферно
-roots.research.spells.netherwart.page1title.name=Огненный шар
-roots.research.spells.netherwart.page1info=Nether wart has absorbed a lot from its fiery home in the nether. Using the above recipe, you can create a spell that will unleash a powerful burst of damaging energy. However, this burst will physically drain you, and hit targets will be slightly buffed after being struck.
+roots.research.spells.netherwart.name=Компонент заклинания: Заражение
+roots.research.spells.netherwart.page1title.name=Злоба
+roots.research.spells.netherwart.page1info=A hellish plant like nether wart can be put to very nefarious uses. Using the above recipe, you can create a spell that will deal damage over time to its targets. It is unique in the fact that if its current target dies, it will spread to another viable target besides the caster within a short range.
 
 roots.research.spells.chorus.name=Компонент заклинания: Эндер-варп
 roots.research.spells.chorus.page1title.name=Телепортация
 roots.research.spells.chorus.page1info=Just eating a chorus fruit on its own is enough to grant a random teleport. Using the above recipe, you can create a spell with greater control over this ability, letting the user teleport forward, even through walls or when falling.
-
-roots.research.spells.radiantdaisy.name=Компонент заклинания: Cияние
-roots.research.spells.radiantdaisy.page1title.name=Цветок света
-roots.research.spells.radiantdaisy.page1info=Using the mutating flower in the overworld, you create a shining white flower. To create, plant an oxeye daisy. At noon, toss down a glowstone block and one prismarine crystal next to it, and while under the night vision effect, use the powder on the flower.
-roots.research.spells.radiantdaisy.page2title.name=Пронзительные лучи
-roots.research.spells.radiantdaisy.page2info=The new flower you have created contains the very essence of the glowing daylight of the overworld. Using the above recipe, you can create a spell that will create a highly damaging beam that will reflect off of blocks. Each reflection takes away some of the beam's power, until it dissipates completely.
-
-roots.research.spells.flareorchid.name=Компонент заклинания: Горение
-roots.research.spells.flareorchid.page1title.name=Огненная флора
-roots.research.spells.flareorchid.page1info=Using the mutating powder in the nether, you create a burning red flower. To create, plant a blue orchid in the nether. Make a ring of netherrack around the flower. While under the fire resistance effect, toss a blaze rod and lava bucket near the flower, then use the powder on the flower.
-roots.research.spells.flareorchid.page2title.name=Разрушение
-roots.research.spells.flareorchid.page2info=The new flower you have created is bursting with the chaotic fire of the nether. Using the above recipe, you can use it to create a spell that will allow you to create large explosions on blocks that you look at.
-
-roots.research.spells.midnightbloom.name=Компонент заклинания: Остановка времени
-roots.research.spells.midnightbloom.page1title.name=Эндер-цветок
-roots.research.spells.midnightbloom.page1info=Using the mutating powder in the end, you create a flower black as night. To create, plant a poppy two blocks above obsidian in the end. While under the slowness effect, toss a coal block next to the flower and use the powder on the flower.
-roots.research.spells.midnightbloom.page2title.name=Хрономаг
-roots.research.spells.midnightbloom.page2info=The new flower you have created is bursting with powers beyond your control. Using the above recipe, you can create a spell that will stop time for all entities in an area around you. They will not update until the spell ends, during which time you can move, attack, or gloat at them.
 
 roots.research.spells.cobweb.name=Компонент заклинания: Ловушка
 roots.research.spells.cobweb.page1title.name=Западня
