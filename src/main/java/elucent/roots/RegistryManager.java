@@ -307,7 +307,6 @@ public class RegistryManager {
 				achieveSpellInsanity, 
 				achieveMaxModifiers, 
 				achieveLotsDamage, 
-				achieveTimeStop, 
 				achieveAltar, 
 				achieveSpellElements, 
 				achieveStandingStone, 

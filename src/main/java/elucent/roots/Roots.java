@@ -28,7 +28,7 @@ public class Roots
 {
 	public static final String NAME = "Roots";
     public static final String MODID = "roots";
-    public static final String VERSION = "0.110";
+    public static final String VERSION = "0.111";
     
     public static CreativeTabs tab = new CreativeTabs("roots") {
     	@Override
