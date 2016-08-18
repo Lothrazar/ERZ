@@ -311,7 +311,6 @@ public class RegistryManager {
 				achieveSpellElements, 
 				achieveStandingStone, 
 				achieveWildwood, 
-				achieveShadow, 
 				achieveVampire
 				));
 	}
