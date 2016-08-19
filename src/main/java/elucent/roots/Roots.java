@@ -1,17 +1,10 @@
 package elucent.roots;
 
-import elucent.roots.capability.mana.IManaCapability;
 import elucent.roots.command.RootsCommand;
 import elucent.roots.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -23,12 +16,13 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = Roots.MODID, name = Roots.NAME, version = Roots.VERSION, useMetadata = true)
+@Mod(modid = Roots.MODID, name = Roots.NAME, version = Roots.VERSION,guiFactory = Roots.GUIFACORY,useMetadata = true)
 public class Roots
 {
 	public static final String NAME = "Roots";
     public static final String MODID = "roots";
     public static final String VERSION = "0.112";
+    public static final String GUIFACORY = "elucent.roots.gui.GuiFactory";
     
     public static CreativeTabs tab = new CreativeTabs("roots") {
     	@Override
@@ -50,8 +44,9 @@ public class Roots
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event){
-    	ConfigManager.load(event);
-    	MinecraftForge.EVENT_BUS.register(new RootsCapabilityManager());
+        ConfigManager.init(event.getSuggestedConfigurationFile());
+        MinecraftForge.EVENT_BUS.register(new ConfigManager());
+        MinecraftForge.EVENT_BUS.register(new RootsCapabilityManager());
     	MinecraftForge.EVENT_BUS.register(new EventManager());
     	proxy.preInit(event);
     }
