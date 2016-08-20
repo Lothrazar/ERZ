@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=bottom": { "model": "roots:spiritBlockSlabBottom" },
+        "half=top": { "model": "roots:spiritBlockSlabTop" }
+    }
+}

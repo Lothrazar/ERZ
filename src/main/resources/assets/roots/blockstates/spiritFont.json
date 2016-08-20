@@ -1,0 +1,6 @@
+{
+    "variants":{
+        "topq=bottom":{"model": "roots:spiritFontBottom"},
+        "topq=top":{"model": "roots:spiritFontTop"}
+    }
+}

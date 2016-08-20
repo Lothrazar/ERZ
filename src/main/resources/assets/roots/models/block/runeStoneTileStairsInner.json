@@ -1,0 +1,9 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "roots:blocks/runeStoneTile",
+        "top": "roots:blocks/runeStoneTile",
+        "side": "roots:blocks/runeStoneTile",
+        "particle": "roots:blocks/runeStoneTile"
+    }
+}

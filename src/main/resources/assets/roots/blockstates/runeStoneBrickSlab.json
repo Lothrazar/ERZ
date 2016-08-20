@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=bottom": { "model": "roots:runeStoneBrickSlabBottom" },
+        "half=top": { "model": "roots:runeStoneBrickSlabTop" }
+    }
+}
