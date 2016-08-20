@@ -171,6 +171,7 @@ public class RegistryManager {
 		GameRegistry.registerBlock(bridge = new BlockBridge().setRegistryName(Roots.MODID+":bridge"));
 		GameRegistry.registerBlock(runeStone = new BlockBase("runeStone",Material.ROCK,1.0f));
 		GameRegistry.registerBlock(runeStoneStairs = new BlockStairsBase("runeStoneStairs",runeStone.getDefaultState(),1.0f));
+
 		GameRegistry.registerBlock(runeStoneSlabDouble = new BlockDoubleSlabBase("runeStoneSlabDouble",Material.ROCK,1.0f,"pickaxe",0,runeStoneSlab));
 		GameRegistry.registerBlock(runeStoneSlab = new BlockSlabBase("runeStoneSlab",Material.ROCK,1.0f,"pickaxe",0,runeStoneSlabDouble));
 		((BlockDoubleSlabBase)runeStoneSlabDouble).setSlab(runeStoneSlab);
@@ -194,6 +195,7 @@ public class RegistryManager {
 		GameRegistry.registerBlock(runeStoneSymbolGlowing = new BlockBase("runeStoneSymbolGlowing",Material.ROCK,1.0f).setLightLevel(1.0f));
 		GameRegistry.registerBlock(plankWildwood = new BlockBase("plankWildwood",Material.WOOD,1.0f));
 		GameRegistry.registerBlock(plankWildwoodStairs = new BlockStairsBase("plankWildwoodStairs",plankWildwood.getDefaultState(),1.0f));
+
 		GameRegistry.registerBlock(plankWildwoodSlabDouble = new BlockDoubleSlabBase("plankWildwoodSlabDouble",Material.WOOD,1.0f,"axe",0,plankWildwoodSlab));
 		GameRegistry.registerBlock(plankWildwoodSlab = new BlockSlabBase("plankWildwoodSlab",Material.WOOD,1.0f,"axe",0,plankWildwoodSlabDouble));
 		((BlockDoubleSlabBase)plankWildwoodSlabDouble).setSlab(plankWildwoodSlab);
@@ -221,10 +223,6 @@ public class RegistryManager {
 		GameRegistry.registerItem(itemBlockSpiritBrickSlab = new ItemBlockSlab(spiritBrickSlab, (BlockSpiritDoubleSlab)spiritBrickSlabDouble),spiritBrickSlab.getRegistryName().toString()+"Item");
 		
 		GameRegistry.registerBlock(spiritFont = new BlockSpiritFont(),"spiritFont");
-		/**
-		 * REGISTERING ITEMBLOCKS
-		 */
-		
 		
 		/**
 		 * REGISTERING TILE ENTITIES

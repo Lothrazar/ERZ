@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 itemGroup.roots=Roots
+=======
+﻿itemGroup.roots=Roots
+>>>>>>> 24a162326dec5ed8b59376a0ae149738d118c242
 
 item.dustPetal.name=Petal Dust
 item.pestle.name=Pestle
@@ -88,6 +92,7 @@ tile.logWildwoodSymbolGlowing.name=Glowing Wildwood Symbol
 tile.barkWildwood.name=Wildwood Bark
 tile.barkWildwoodSymbol.name=Wildwood Bark Symbol
 tile.barkWildwoodSymbolGlowing.name=Glowing Wildwood Bark Symbol
+<<<<<<< HEAD
 tile.spiritBlock.name=Otherworld Block
 tile.spiritBlockSlab.name=Otherworld Slab
 tile.spiritBlockSlabDouble.name=Double Otherworld Slab
@@ -97,6 +102,16 @@ tile.spiritBrickSlab.name=Otherworld Brick Slab
 tile.spiritBrickSlabDouble.name=Double Otherworld Brick Slab
 tile.spiritBrickStairs.name=Otherworld Brick Stairs
 tile.spiritFont.name=Spirit Font
+=======
+tile.otherworldBlock.name=Otherworld Block
+tile.otherworldBlockSlab.name=Otherworld Slab
+tile.otherworldBlockSlabDouble.name=Double Otherworld Slab
+tile.otherworldBlockStairs.name=Otherworld Stairs
+tile.otherworldBlock.name=Otherworld Brick
+tile.otherworldBlockSlab.name=Otherworld Brick Slab
+tile.otherworldBlockSlabDouble.name=Double Otherworld Brick Slab
+tile.otherworldBlockStairs.name=Otherworld Brick Stairs
+>>>>>>> 24a162326dec5ed8b59376a0ae149738d118c242
 
 entity.roots.spriteling.name=Lesser Sprite
 entity.roots.sprite.name=Sprite
@@ -477,12 +492,23 @@ achievement.maxModifiers=All The Mods!
 achievement.maxModifiers.desc=Make a spell with three of any single modifier.
 achievement.lotsDamage=Nerf This!
 achievement.lotsDamage.desc=Deal over 80 total damage with one spell.
+<<<<<<< HEAD
 achievement.altar=Another Original� Block
+=======
+achievement.timeStop=ã€ŒTHE WORLDã€�
+achievement.timeStop.desc=Kill an entity during stopped time.
+achievement.altar=Another Originalâ„¢ Block
+>>>>>>> 24a162326dec5ed8b59376a0ae149738d118c242
 achievement.altar.desc=Craft a Casting Altar.
 achievement.standingStone=Your Very Own Henge
 achievement.standingStone.desc=Create an Attuned Standing Stone.
 achievement.wildwood=I Am Root
 achievement.wildwood.desc=Equip a full set of Wildwood armor.
+<<<<<<< HEAD
+=======
+achievement.shadow=I Am The Night
+achievement.shadow.desc=Forge an engraved blade with Shadow Step IV.
+>>>>>>> 24a162326dec5ed8b59376a0ae149738d118c242
 achievement.spellElements=Avatar.
 achievement.spellElements.desc=Equip the "Earth Spike", "Dandelion Winds", "Water Blast", and "Fireball" spells on a crystal staff.
 achievement.vampire=I Reject My Humanity!

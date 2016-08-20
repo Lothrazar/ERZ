@@ -132,7 +132,7 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
 	    			this.getDataManager().set(targetDirectionY, (float)Math.toRadians(random.nextFloat()*90.0f-45.0f));
 	    		 	this.getDataManager().setDirty(targetDirectionX);
 	    		 	this.getDataManager().setDirty(targetDirectionY);
-	    	    }
+	    		}
 	    		if (this.ticksExisted % 40 == 0 && random.nextInt(8) == 0){
 	    			twirlTimer = 20;
 	    		}

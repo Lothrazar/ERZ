@@ -107,6 +107,7 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
     @Override
     public void onUpdate(){
     	super.onUpdate();
+    	
     	prevYaw4 = prevYaw3;
     	prevYaw3 = prevYaw2;
     	prevYaw2 = prevYaw1;
@@ -162,7 +163,7 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
 			if (getDataManager().get(dashTimer) > 0){
 				Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX+((random.nextDouble())-0.5)*0.5, posY+0.25+((random.nextDouble())-0.5)*0.5, posZ+((random.nextDouble())-0.5)*0.5, -0.25*moveVec.xCoord, -0.25*moveVec.yCoord, -0.25*moveVec.zCoord, 107, 255, 28);
 			}
-			if (getDataManager().get(happiness) < -25 && this.ticksExisted % 20 == 0 && this.getAttackTarget() == null){
+			if (getDataManager().get(happiness) < -25){
 				List<EntityPlayer> players = (List<EntityPlayer>) getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX-16.0,posY-16.0,posZ-16.0,posX+16.0,posY+16.0,posZ+16.0));
 				if (players.size() > 0){
 					this.setAttackTarget(players.get(0));

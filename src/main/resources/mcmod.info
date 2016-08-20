@@ -3,7 +3,11 @@
   "modid": "roots",
   "name": "Roots",
   "description": "Druidic Magic Mod",
+<<<<<<< HEAD
   "version": "0.111",
+=======
+  "version": "0.112",
+>>>>>>> 24a162326dec5ed8b59376a0ae149738d118c242
   "mcversion": "1.10.2",
   "url": "http://minecraft.curseforge.com/projects/roots",
   "updateUrl": "",

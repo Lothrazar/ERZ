@@ -23,12 +23,14 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = Roots.MODID, name = Roots.NAME, version = Roots.VERSION, useMetadata = true)
+@Mod(modid = Roots.MODID, name = Roots.NAME, version = Roots.VERSION,guiFactory = Roots.GUIFACTORY,useMetadata = true)
 public class Roots
 {
 	public static final String NAME = "Roots";
     public static final String MODID = "roots";
     public static final String VERSION = "0.112";
+    
+    public static final String GUIFACTORY = "elucent.roots.gui.GuiFactory";
     
     public static CreativeTabs tab = new CreativeTabs("roots") {
     	@Override
@@ -50,8 +52,9 @@ public class Roots
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event){
-    	ConfigManager.load(event);
-    	MinecraftForge.EVENT_BUS.register(new RootsCapabilityManager());
+        ConfigManager.init(event.getSuggestedConfigurationFile());
+        MinecraftForge.EVENT_BUS.register(new ConfigManager());
+        MinecraftForge.EVENT_BUS.register(new RootsCapabilityManager());
     	MinecraftForge.EVENT_BUS.register(new EventManager());
     	proxy.preInit(event);
     }
