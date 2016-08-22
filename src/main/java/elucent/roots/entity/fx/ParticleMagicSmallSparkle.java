@@ -12,15 +12,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class ParticleMagicSparkle extends Particle {
+public class ParticleMagicSmallSparkle extends Particle {
 
 	Random random = new Random();
 	public double colorR = 0;
 	public double colorG = 0;
 	public double colorB = 0;
-	public int lifetime = 12;
+	public int lifetime = 4;
 	public ResourceLocation texture = new ResourceLocation("roots:entity/sparkle");
-	public ParticleMagicSparkle(World worldIn, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b) {
+	public ParticleMagicSmallSparkle(World worldIn, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b) {
 		super(worldIn, x,y,z,0,0,0);
 		this.colorR = r;
 		this.colorG = g;
@@ -39,7 +39,7 @@ public class ParticleMagicSparkle extends Particle {
 		this.motionX = vx;
 		this.motionY = vy;
 		this.motionZ = vz;
-		this.particleScale = 5.0f;
+		this.particleScale = 1.5f;
 	    TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(texture.toString());
 		this.setParticleTexture(sprite);
 	}
@@ -75,10 +75,10 @@ public class ParticleMagicSparkle extends Particle {
 		this.particleAlpha = lifeCoeff;
 		this.particleScale = lifeCoeff;
 		if (lifeCoeff > 0.5){
-			this.particleScale = 5.0f+5.0f*(1.0f-lifeCoeff);
+			this.particleScale = 1.5f+2.5f*(1.0f-lifeCoeff);
 		}
 		if (lifeCoeff <= 0.5){
-			this.particleScale = 10.0f*(lifeCoeff);
+			this.particleScale = 4.0f*(lifeCoeff);
 		}
 		field_190015_G = field_190014_F;
 		field_190014_F += 1.0f;

@@ -98,6 +98,7 @@ public class ComponentBase {
 		
 	}
 	
+	//direction should be a normalized motion vector from a projectile or beam or something
 	public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
 		
 	}

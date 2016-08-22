@@ -3,10 +3,12 @@ package elucent.roots.component.components;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import com.google.common.collect.Lists;
 
 import elucent.roots.PlayerManager;
+import elucent.roots.RootsNames;
 import elucent.roots.Util;
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.ComponentEffect;
@@ -34,6 +36,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 
@@ -47,7 +50,23 @@ public class ComponentLilyPad extends ComponentBase{
 	public void doEffect(World world, Entity caster, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
 		if (type == EnumCastType.SPELL){	
 			if (caster instanceof EntityPlayer && !world.isRemote){
-				BlockPos pos = Util.getRayTrace(world,(EntityPlayer)caster,4+2*(int)size);
+				BlockPos pos = Util.getRayTrace(world,(EntityPlayer)caster,6+2*(int)size);
+				if (world.getBlockState(pos.up()).getBlock() == Blocks.AIR || world.getBlockState(pos.up()).getBlock() == Blocks.TALLGRASS || world.getBlockState(pos.up()).getBlock() == Blocks.FLOWING_WATER){
+					world.setBlockState(pos.up(), Blocks.FLOWING_WATER.getDefaultState().withProperty(BlockLiquid.LEVEL, 15),3);
+					world.setBlockState(pos.up().west(), Blocks.FLOWING_WATER.getDefaultState().withProperty(BlockLiquid.LEVEL, 15),3);
+					world.setBlockState(pos.up().east(), Blocks.FLOWING_WATER.getDefaultState().withProperty(BlockLiquid.LEVEL, 15),3);
+					world.setBlockState(pos.up().north(), Blocks.FLOWING_WATER.getDefaultState().withProperty(BlockLiquid.LEVEL, 15),3);
+					world.setBlockState(pos.up().south(), Blocks.FLOWING_WATER.getDefaultState().withProperty(BlockLiquid.LEVEL, 15),3);
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
+		if (type == EnumCastType.SPELL){	
+			if (!world.isRemote){
+				BlockPos pos = new BlockPos(x,y,z);
 				if (world.getBlockState(pos.up()).getBlock() == Blocks.AIR || world.getBlockState(pos.up()).getBlock() == Blocks.TALLGRASS || world.getBlockState(pos.up()).getBlock() == Blocks.FLOWING_WATER){
 					world.setBlockState(pos.up(), Blocks.FLOWING_WATER.getDefaultState().withProperty(BlockLiquid.LEVEL, 15),3);
 					world.setBlockState(pos.up().west(), Blocks.FLOWING_WATER.getDefaultState().withProperty(BlockLiquid.LEVEL, 15),3);

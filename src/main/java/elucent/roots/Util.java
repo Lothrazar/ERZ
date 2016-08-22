@@ -303,4 +303,38 @@ public class Util {
 		}
 		return recipe.size() == 0;
 	}
+	
+	public static float getNatureAmount(IBlockState state){
+		if (state.getBlock() == Blocks.DIRT){
+			return 0.04f;
+		}
+		if (state.getBlock() == Blocks.GRASS){
+			return 0.16f;
+		}
+		if (state.getBlock() == Blocks.TALLGRASS){
+			return 0.24f;
+		}
+		if (state.getBlock() == Blocks.RED_FLOWER){
+			return 0.64f;
+		}
+		if (state.getBlock() == Blocks.YELLOW_FLOWER){
+			return 0.64f;
+		}
+		if (state.getBlock() == Blocks.DOUBLE_PLANT){
+			return 0.8f;
+		}
+		if (state.getBlock() == Blocks.LEAVES || state.getBlock() == Blocks.LEAVES2){
+			return 0.32f;
+		}
+		if (state.getBlock() == Blocks.LOG || state.getBlock() == Blocks.LOG2){
+			return 0.24f;
+		}
+		if (state.getBlock() == Blocks.WATERLILY){
+			return 0.56f;
+		}
+		if (state.getBlock() == Blocks.CACTUS){
+			return 0.72f;
+		}
+		return 0;
+	}
 }

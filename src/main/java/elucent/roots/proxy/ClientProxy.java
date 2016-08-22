@@ -6,7 +6,9 @@ import elucent.roots.entity.fx.ParticleMagicAltar;
 import elucent.roots.entity.fx.ParticleMagicAltarLine;
 import elucent.roots.entity.fx.ParticleMagicAura;
 import elucent.roots.entity.fx.ParticleMagicLine;
+import elucent.roots.entity.fx.ParticleMagicSmallSparkle;
 import elucent.roots.entity.fx.ParticleMagicSparkle;
+import elucent.roots.entity.fx.ParticleMagicSparklePulse;
 import elucent.roots.entity.projectile.EntityRitualProjectile;
 import elucent.roots.item.ItemStaff;
 import elucent.roots.model.ModelHolder;
@@ -71,6 +73,18 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void spawnParticleMagicSparkleFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){
 		ParticleMagicSparkle particle = new ParticleMagicSparkle(world,x,y,z,vx,vy,vz,r,g,b);
+		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+	}
+
+	@Override
+	public void spawnParticleMagicSmallSparkleFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){
+		ParticleMagicSmallSparkle particle = new ParticleMagicSmallSparkle(world,x,y,z,vx,vy,vz,r,g,b);
+		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+	}
+
+	@Override
+	public void spawnParticleMagicSparklePulseFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){
+		ParticleMagicSparklePulse particle = new ParticleMagicSparklePulse(world,x,y,z,vx,vy,vz,r,g,b);
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 	}
 

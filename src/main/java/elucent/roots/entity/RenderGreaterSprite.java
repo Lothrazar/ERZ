@@ -17,11 +17,6 @@ public class RenderGreaterSprite extends RenderLiving<EntityGreaterSprite> {
 	}
 	
 	@Override
-	public boolean canRenderName(EntityGreaterSprite entity){
-		return false;
-	}
-
-	@Override
 	protected ResourceLocation getEntityTexture(EntityGreaterSprite entity) {
 		return new ResourceLocation("roots:textures/entity/spriteling/spiritTexture.png");
 	}

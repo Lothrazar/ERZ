@@ -44,13 +44,14 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
-public class TileEntitySpiritFont extends TEBase implements ITickable {
+public class TileEntitySpiritConduit extends TEBase implements ITickable {
 	int ticker = 0;
 	Random random = new Random();
 	float angle = 0;
 	float power = 0;
+	boolean powered = false;
 	float totalPower = 0;
-	public TileEntitySpiritFont(){
+	public TileEntitySpiritConduit(){
 		super();
 	}
 	
@@ -70,46 +71,22 @@ public class TileEntitySpiritFont extends TEBase implements ITickable {
 		angle += 24.0f;
 		ticker ++;
 		if (ticker % 2 == 0){
-			Roots.proxy.spawnParticleMagicSmallSparkleFX(getWorld(), getPos().getX()+0.125+random.nextFloat()*0.75, getPos().getY()+0.375+random.nextFloat()*0.75,getPos().getZ()+0.125+random.nextFloat()*0.75, 0, 0, 0, 107, 255, 28);
+			if (getWorld().isBlockIndirectlyGettingPowered(getPos()) == 0){
+				Roots.proxy.spawnParticleMagicSmallSparkleFX(getWorld(), getPos().getX()+0.125+random.nextFloat()*0.75, getPos().getY()+0.75+random.nextFloat()*0.75,getPos().getZ()+0.125+random.nextFloat()*0.75, 0, 0, 0, 107, 255, 28);
+				powered = true;
+			}
+			else {
+				powered = false;
+			}
 		}
-		if (ticker % 100 == 0){
-			float sum = 0;
-			for (int i = -5; i < 6; i ++){
-				for (int j = -5; j < 6; j ++){
-					BlockPos highest = getWorld().getTopSolidOrLiquidBlock(getPos().add(i,0,j));
-					if (getWorld().getBlockState(highest.up()).getBlock() != Blocks.AIR){
-						highest.add(0,1,0);
-					}
-					sum += Util.getNatureAmount(getWorld().getBlockState(highest)); 
-				}
-			}
-			this.power = sum/50.0f;
-			sum = 0;
-			for (int i = -5; i < 6; i ++){
-				for (int j = -5; j < 6; j ++){
-					BlockPos pos = getPos().down().add(i,0,j);
-					if (getWorld().getBlockState(pos.down()).getBlock() == Blocks.WATER){
-						sum += 1.0f;
-					}
-				}
-			}
-
-			totalPower = (float)Math.pow(sum,1.5)*0.0625f;
-			float powerMirror = totalPower;
+		if (ticker % 100 == 0 && powered){
 			List<EntityLivingBase> entities = getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(getPos().getX()-10.0,getPos().getY()-15.0,getPos().getZ()-10.0,getPos().getX()+11.0,getPos().getY()+16.0,getPos().getZ()+11.0));
 			for (int i = 0; i < entities.size(); i ++){
-				if (entities.get(i) instanceof ISprite && powerMirror > 0 && random.nextInt(2) == 0){
+				if (entities.get(i) instanceof ISprite && random.nextInt(2) == 0){
 					if (!getWorld().isRemote){
 						EntitySpritePlacator p = new EntitySpritePlacator(getWorld());
-						if (powerMirror >= power){
-							p.initSpecial(entities.get(i), power, getPos());
-							powerMirror -= power;
-						}
-						else {
-							p.initSpecial(entities.get(i), powerMirror, getPos());
-							powerMirror = 0;
-						}
-						p.setPosition(getPos().getX()+0.5, getPos().getY()+0.5, getPos().getZ()+0.5);
+						p.initSpecial(entities.get(i), 0, getPos());
+						p.setPosition(getPos().getX()+0.5, getPos().getY()+0.75, getPos().getZ()+0.5);
 						getWorld().spawnEntityInWorld(p);
 					}
 				}

@@ -2,6 +2,7 @@ package elucent.roots.component.components;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.UUID;
 
 import elucent.roots.PlayerManager;
 import elucent.roots.Util;
@@ -24,6 +25,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 
@@ -52,7 +54,48 @@ public class ComponentAzureBluet extends ComponentBase{
 				BlockPos pos = Util.getRayTrace(world,(EntityPlayer)caster,6+2*(int)size);
 				ArrayList<BlockPos> positions = new ArrayList<BlockPos>();
 				positions.add(pos);
-				int maxPositions = 3+((int)size-3)*3;
+				int maxPositions = 3+((int)size)*3;
+				while (positions.size() < maxPositions){
+					int s = positions.size();
+					for (int j = 0; j < s; j ++){
+						if (random.nextFloat() > 0.5){
+							positions.add(positions.get(j).north());
+						}
+						if (random.nextFloat() > 0.5){
+							positions.add(positions.get(j).south());
+						}
+						if (random.nextFloat() > 0.5){
+							positions.add(positions.get(j).east());
+						}
+						if (random.nextFloat() > 0.5){
+							positions.add(positions.get(j).west());
+						}
+						if (random.nextFloat() > 0.5){
+							positions.add(positions.get(j).up());
+						}
+						if (random.nextFloat() > 0.5){
+							positions.add(positions.get(j).down());
+						}
+						if (positions.size() > maxPositions){
+							break;
+						}
+					}
+				}
+				for (int i = 0; i < positions.size(); i ++){
+					destroyBlockSafe(world,positions.get(i),(int)potency);
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
+		if (type == EnumCastType.SPELL){	
+			if (!world.isRemote){
+				BlockPos pos =new BlockPos(x,y,z);
+				ArrayList<BlockPos> positions = new ArrayList<BlockPos>();
+				positions.add(pos);
+				int maxPositions = 3+((int)size)*3;
 				while (positions.size() < maxPositions){
 					int s = positions.size();
 					for (int j = 0; j < s; j ++){

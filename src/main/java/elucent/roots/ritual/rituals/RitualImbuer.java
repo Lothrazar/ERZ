@@ -12,6 +12,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import elucent.roots.RegistryManager;
 import elucent.roots.Util;
+import elucent.roots.item.IImbuable;
+import elucent.roots.item.ItemCastingBase;
 import elucent.roots.item.ItemCrystalStaff;
 import elucent.roots.ritual.RitualBase;
 
@@ -27,9 +29,9 @@ public class RitualImbuer extends RitualBase {
 		ItemCrystalStaff.createData(toSpawn);
 		for (int i = 0; i < incenses.size() && i < 4; i ++){
 			if (incenses.get(i) != null){
-				if (incenses.get(i).getItem() == RegistryManager.dustPetal && incenses.get(i).hasTagCompound()){
-					NBTTagCompound tag = incenses.get(i).getTagCompound();
-					ItemCrystalStaff.addEffect(toSpawn, i+1, tag.getString("effect"), tag.getInteger("potency"), tag.getInteger("efficiency"), tag.getInteger("size"));
+				if (incenses.get(i).getItem() instanceof IImbuable && incenses.get(i).hasTagCompound()){
+					IImbuable im = (IImbuable)incenses.get(i).getItem();
+					((ItemCastingBase)toSpawn.getItem()).setEffectInSlot(toSpawn, i+1, im.getEffect(incenses.get(i)), im.getPotency(incenses.get(i)), im.getEfficiency(incenses.get(i)), im.getSize(incenses.get(i)));
 				}
 			}
 		}

@@ -9,6 +9,8 @@ import elucent.roots.Util;
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.ComponentManager;
 import elucent.roots.item.DustPetal;
+import elucent.roots.item.IImbuable;
+import elucent.roots.item.ItemCastingBase;
 import elucent.roots.item.ItemStaff;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -111,7 +113,7 @@ public class TileEntityImbuer extends TEBase implements ITickable {
 				}
 				return false;
 			}
-			else if (heldItem.getItem() == RegistryManager.dustPetal){
+			else if (heldItem.getItem() instanceof IImbuable){
 				if (dust == null){
 					NBTTagCompound tag = new NBTTagCompound();
 					heldItem.writeToNBT(tag);
@@ -190,11 +192,13 @@ public class TileEntityImbuer extends TEBase implements ITickable {
 			if (dust != null && stick != null){
 				if (dust.hasTagCompound()){
 					ItemStack staff = new ItemStack(RegistryManager.staff,1,1);
-					String effectName = dust.getTagCompound().getString("effect");
-					int potency = dust.getTagCompound().getInteger("potency");
-					int duration = dust.getTagCompound().getInteger("efficiency");
-					int size = dust.getTagCompound().getInteger("size");
-					ItemStaff.createData(staff, effectName, potency, duration, size);
+					String effectName = ((IImbuable)dust.getItem()).getEffect(dust);
+					int potency = ((IImbuable)dust.getItem()).getPotency(dust);
+					int duration = ((IImbuable)dust.getItem()).getEfficiency(dust);
+					int size = ((IImbuable)dust.getItem()).getSize(dust);
+					ItemCastingBase.createData(staff);
+					((ItemCastingBase)staff.getItem()).setEffectInSlot(staff, 1, effectName, potency, duration, size);
+
 					if (!getWorld().isRemote){
 						getWorld().spawnEntityInWorld(new EntityItem(getWorld(),getPos().getX()+0.5,getPos().getY()+1.0,getPos().getZ()+0.5,staff));
 					}

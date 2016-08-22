@@ -3,6 +3,7 @@ package elucent.roots.component.components;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import com.google.common.collect.Lists;
 
@@ -31,6 +32,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 
@@ -43,10 +45,23 @@ public class ComponentMidnightBloom extends ComponentBase{
 	@Override
 	public void doEffect(World world, Entity caster, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
 		if (type == EnumCastType.SPELL){
-			ArrayList<EntityLivingBase> targets = (ArrayList<EntityLivingBase>) world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-size*6.0,y-size*6.0,z-size*6.0,x+size*6.0,y+size*6.0,z+size*6.0));
+			ArrayList<EntityLivingBase> targets = (ArrayList<EntityLivingBase>) world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-(3.0+size)*6.0,y-(3.0+size)*6.0,z-(3.0+size)*6.0,x+(3.0+size)*6.0,y+(3.0+size)*6.0,z+(3.0+size)*6.0));
 			for (int i = 0; i < targets.size(); i ++){
 				if (targets.get(i).getUniqueID() != caster.getUniqueID()){
-					Util.addTickTracking(caster);
+					Util.addTickTracking(targets.get(i));
+					targets.get(i).getEntityData().setInteger(RootsNames.TAG_SPELL_SKIP_TICKS, 80+40*(int)potency);
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
+		if (type == EnumCastType.SPELL){
+			ArrayList<EntityLivingBase> targets = (ArrayList<EntityLivingBase>) world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-(3.0+size)*6.0,y-(3.0+size)*6.0,z-(3.0+size)*6.0,x+(3.0+size)*6.0,y+(3.0+size)*6.0,z+(3.0+size)*6.0));
+			for (int i = 0; i < targets.size(); i ++){
+				if (targets.get(i).getUniqueID() != casterId){
+					Util.addTickTracking(targets.get(i));
 					targets.get(i).getEntityData().setInteger(RootsNames.TAG_SPELL_SKIP_TICKS, 80+40*(int)potency);
 				}
 			}

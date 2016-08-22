@@ -3,6 +3,7 @@ package elucent.roots.component.components;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import com.google.common.collect.Lists;
 
@@ -30,6 +31,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 
@@ -43,7 +45,15 @@ public class ComponentFlareOrchid extends ComponentBase{
 	public void doEffect(World world, Entity caster, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
 		if (type == EnumCastType.SPELL){
 			BlockPos pos = Util.getRayTrace(world,(EntityPlayer)caster,16+8*(int)size);
-			world.newExplosion(null, pos.getX(), pos.getY(), pos.getZ(), (float) (3.0+(double)potency), true, true);
+			world.newExplosion(null, pos.getX(), pos.getY(), pos.getZ(), (float) (2.0+(double)potency), true, true);
+		}
+	}
+	
+	@Override
+	public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
+		if (type == EnumCastType.SPELL){
+			BlockPos pos = new BlockPos(x,y,z);
+			world.newExplosion(null, pos.getX(), pos.getY(), pos.getZ(), (float) (2.0+(double)potency), true, true);
 		}
 	}
 }

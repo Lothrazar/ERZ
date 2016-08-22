@@ -12,15 +12,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class ParticleMagicSparkle extends Particle {
+public class ParticleMagicSparklePulse extends Particle {
 
 	Random random = new Random();
 	public double colorR = 0;
 	public double colorG = 0;
 	public double colorB = 0;
-	public int lifetime = 12;
+	public int lifetime = 30;
 	public ResourceLocation texture = new ResourceLocation("roots:entity/sparkle");
-	public ParticleMagicSparkle(World worldIn, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b) {
+	public ParticleMagicSparklePulse(World worldIn, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b) {
 		super(worldIn, x,y,z,0,0,0);
 		this.colorR = r;
 		this.colorG = g;
@@ -62,12 +62,8 @@ public class ParticleMagicSparkle extends Particle {
 	@Override
 	public void onUpdate(){
 		super.onUpdate();
-		this.motionX *= 0.9;
-		this.motionY += 0.003;
-		this.motionZ *= 0.9;
-		if (random.nextInt(4) == 0 && this.particleAge < this.particleMaxAge){
-			this.particleAge ++;
-		}
+		this.motionX *= 0.99;
+		this.motionZ *= 0.99;
 		float lifeCoeff = ((float)this.particleMaxAge-(float)this.particleAge)/(float)this.particleMaxAge;
 		this.particleRed = Math.min(1.0f, (float)colorR*(1.0f-lifeCoeff)+lifeCoeff);
 		this.particleGreen = Math.min(1.0f, (float)colorG*(1.0f-lifeCoeff)+lifeCoeff);

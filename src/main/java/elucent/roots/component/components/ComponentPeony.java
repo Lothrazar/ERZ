@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import elucent.roots.Roots;
@@ -20,6 +21,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class ComponentPeony extends ComponentBase{
@@ -68,4 +70,16 @@ public class ComponentPeony extends ComponentBase{
 			pos.clear();
 		}
 	}	
+	
+	@Override
+	public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
+		
+		if (type == EnumCastType.SPELL){
+			List<EntityLivingBase> targets = (List<EntityLivingBase>)world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-0.25,y-0.25,z-0.25,x+0.25,y+0.25,z+0.25));
+			if (targets.size() > 0){
+				targets.get(0).heal((float)(pos.size()/2+(potency*2)));
+			}
+			pos.clear();
+		}
+	}
 }

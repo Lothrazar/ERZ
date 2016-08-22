@@ -5,6 +5,7 @@ import elucent.roots.component.ComponentBase;
 import elucent.roots.component.EnumCastType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -12,6 +13,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by SirShadow for the mod Roots on 26.7.2016.
@@ -24,29 +26,28 @@ public class ComponentCharmRestoration extends ComponentBase {
     @Override
     public void doEffect(World world, Entity caster, EnumCastType type, double x, double y, double z, double potency, double duration, double size) {
         if (type == EnumCastType.SPELL) {
-            ArrayList<EntityLivingBase> hostile = (ArrayList<EntityLivingBase>) world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - size, y - size, z - size, x + size, y + size, z + size));
+            ArrayList<EntityMob> hostile = (ArrayList<EntityMob>) world.getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(x - size, y - size, z - size, x + size, y + size, z + size));
             for (int i = 0; i < hostile.size(); i++) {
-                EntityPlayer player = (EntityPlayer) caster;
-                if (hostile.get(i).getUniqueID() != player.getUniqueID()) {
-                    Vec3d look = player.getLookVec();
+            	hostile.get(i).knockBack(null, 0.6f+(float)potency*0.2f, x-hostile.get(i).posX, z-hostile.get(i).posZ);
+            }
+            ((EntityLivingBase)caster).removePotionEffect(MobEffects.HUNGER);
+            ((EntityLivingBase)caster).removePotionEffect(MobEffects.BLINDNESS);
+            ((EntityLivingBase)caster).removePotionEffect(MobEffects.INSTANT_DAMAGE);
+            ((EntityLivingBase)caster).removePotionEffect(MobEffects.WEAKNESS);
+            ((EntityLivingBase)caster).removePotionEffect(MobEffects.WITHER);
+            ((EntityLivingBase)caster).removePotionEffect(MobEffects.NAUSEA);
+            ((EntityLivingBase)caster).removePotionEffect(MobEffects.MINING_FATIGUE);
+            ((EntityLivingBase)caster).removePotionEffect(MobEffects.POISON);
+            ((EntityLivingBase)caster).removePotionEffect(MobEffects.SLOWNESS);
+        }
+    }
 
-                    double x1 = look.xCoord;
-                    double z1 = look.zCoord;
-                    hostile.get(i).setVelocity(x1, 0, z1);
-                }
-
-                /**
-                 * All the potion effects that are going to be removed
-                 */
-                player.removePotionEffect(MobEffects.HUNGER);
-                player.removePotionEffect(MobEffects.BLINDNESS);
-                player.removePotionEffect(MobEffects.INSTANT_DAMAGE);
-                player.removePotionEffect(MobEffects.WEAKNESS);
-                player.removePotionEffect(MobEffects.WITHER);
-                player.removePotionEffect(MobEffects.NAUSEA);
-                player.removePotionEffect(MobEffects.MINING_FATIGUE);
-                player.removePotionEffect(MobEffects.POISON);
-                player.removePotionEffect(MobEffects.SLOWNESS);
+    @Override
+    public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
+        if (type == EnumCastType.SPELL) {
+            ArrayList<EntityMob> hostile = (ArrayList<EntityMob>) world.getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(x - size, y - size, z - size, x + size, y + size, z + size));
+            for (int i = 0; i < hostile.size(); i++) {
+            	hostile.get(i).knockBack(null, 0.6f+(float)potency*0.2f, x-hostile.get(i).posX, z-hostile.get(i).posZ);
             }
         }
     }

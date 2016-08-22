@@ -14,6 +14,7 @@ import elucent.roots.block.BlockMortar;
 import elucent.roots.block.BlockRadiantDaisy;
 import elucent.roots.block.BlockSlabBase;
 import elucent.roots.block.BlockSpirit;
+import elucent.roots.block.BlockSpiritConduit;
 import elucent.roots.block.BlockSpiritDoubleSlab;
 import elucent.roots.block.BlockSpiritFont;
 import elucent.roots.block.BlockSpiritSlab;
@@ -34,12 +35,14 @@ import elucent.roots.entity.EntityNetherInfection;
 import elucent.roots.entity.EntitySanctuary;
 import elucent.roots.entity.EntityGreaterSprite;
 import elucent.roots.entity.EntitySprite;
+import elucent.roots.entity.EntitySpritePlacator;
 import elucent.roots.entity.EntitySpriteProjectile;
 import elucent.roots.entity.EntitySpriteling;
 import elucent.roots.entity.EntityTileAccelerator;
 import elucent.roots.entity.RenderFrostShard;
 import elucent.roots.entity.RenderGreaterSprite;
 import elucent.roots.entity.RenderSprite;
+import elucent.roots.entity.RenderSpritePlacator;
 import elucent.roots.entity.RenderSpriteProjectile;
 import elucent.roots.entity.RenderSpriteling;
 import elucent.roots.item.*;
@@ -56,6 +59,8 @@ import elucent.roots.tileentity.TileEntityImbuer;
 import elucent.roots.tileentity.TileEntityImbuerRenderer;
 import elucent.roots.tileentity.TileEntityMortar;
 import elucent.roots.tileentity.TileEntityMortarRenderer;
+import elucent.roots.tileentity.TileEntitySpiritConduit;
+import elucent.roots.tileentity.TileEntitySpiritConduitRenderer;
 import elucent.roots.tileentity.TileEntitySpiritFont;
 import elucent.roots.tileentity.TileEntitySpiritFontRenderer;
 import elucent.roots.tileentity.TileEntityStandingStoneAccelerator;
@@ -95,7 +100,7 @@ public class RegistryManager {
 	public static Item otherworldLeaf, otherworldSubstance, debugWand, rootyStew, healingPoultice, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion;
 	public static Item manaResearchIcon;
 	public static ItemBlock itemBlockSpiritBlockSlab, itemBlockSpiritBrickSlab, itemBlockPlankWildwoodSlab, itemBlockRuneStoneSlab, itemBlockRuneStoneBrickSlab, itemBlockRuneStoneTileSlab;
-	public static Block spiritFont, standingStoneGrower, standingStoneHealer, standingStoneIgniter, standingStoneEntangler, standingStoneAccelerator, standingStoneAesthetic, standingStoneRepulsor, standingStoneVacuum, mortar, imbuer, altar, druidChalice, standingStoneT1, standingStoneT2, brazier;
+	public static Block spiritConduit, spiritFont, standingStoneGrower, standingStoneHealer, standingStoneIgniter, standingStoneEntangler, standingStoneAccelerator, standingStoneAesthetic, standingStoneRepulsor, standingStoneVacuum, mortar, imbuer, altar, druidChalice, standingStoneT1, standingStoneT2, brazier;
 	public static Block bridge, spiritBlock, spiritBlockSlab, spiritBlockSlabDouble, spiritBlockStairs, spiritBrick, spiritBrickSlab, spiritBrickSlabDouble, spiritBrickStairs, runeStoneStairs, runeStoneBrickStairs, runeStoneTileStairs, plankWildwoodStairs, barkWildwood, barkWildwoodSymbolGlowing, barkWildwoodSymbol, logWildwood, logWildwoodSymbol, logWildwoodSymbolGlowing, plankWildwood, plankWildwoodSlab, plankWildwoodSlabDouble, runeStone, runeStoneBrick, runeStoneSlabDouble, runeStoneSlab, runeStoneBrickSlab, runeStoneBrickSlabDouble, runeStoneTile, runeStoneTileSlab, runeStoneTileSlabDouble, runeStoneSymbol, runeStoneSymbolGlowing;
 	
 	public static Achievement achieveDust, achieveTablet, achieveSpellRose, achieveSpellGrowth, achieveSpellInsanity, achieveMaxModifiers, achieveLotsDamage, achieveTimeStop, achieveAltar, achieveStandingStone, achieveWildwood, achieveShadow, achieveSpellElements, achieveVampire;
@@ -223,6 +228,7 @@ public class RegistryManager {
 		GameRegistry.registerItem(itemBlockSpiritBrickSlab = new ItemBlockSlab(spiritBrickSlab, (BlockSpiritDoubleSlab)spiritBrickSlabDouble),spiritBrickSlab.getRegistryName().toString()+"Item");
 		
 		GameRegistry.registerBlock(spiritFont = new BlockSpiritFont(),"spiritFont");
+		GameRegistry.registerBlock(spiritConduit = new BlockSpiritConduit(),"spiritConduit");
 		
 		/**
 		 * REGISTERING TILE ENTITIES
@@ -241,6 +247,7 @@ public class RegistryManager {
 		GameRegistry.registerTileEntity(TileEntityStandingStoneIgniter.class,"TileEntityStandingStoneIgniter");
 		GameRegistry.registerTileEntity(TileEntityStandingStoneHealer.class,"TileEntityStandingStoneHealer");
 		GameRegistry.registerTileEntity(TileEntitySpiritFont.class,"TileEntitySpiritFont");
+		GameRegistry.registerTileEntity(TileEntitySpiritConduit.class,"TileEntitySpiritConduit");
 		
 		GameRegistry.registerFuelHandler(new FuelManager());
 	}
@@ -258,6 +265,7 @@ public class RegistryManager {
 		EntityRegistry.registerModEntity(EntityNetherInfection.class, "entityInfection", 6, Roots.instance, 64, 3, true);
 		EntityRegistry.registerModEntity(EntitySanctuary.class, "entitySanctuary", 7, Roots.instance, 64, 3, true);
 		EntityRegistry.registerModEntity(EntityFrostShard.class, "entityFrostShard", 8, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntitySpritePlacator.class, "entitySpritePlacator", 9, Roots.instance, 64, 3, true);
 	}
 	
 	public static void registerRecipes(){
@@ -329,6 +337,7 @@ public class RegistryManager {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityImbuer.class, new TileEntityImbuerRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBrazier.class, new TileEntityBrazierRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpiritFont.class, new TileEntitySpiritFontRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpiritConduit.class, new TileEntitySpiritConduitRenderer());
 		
 		/**
 		 * REGISTERING ITEM MODELS
@@ -424,6 +433,7 @@ public class RegistryManager {
 		((BlockSpiritStairs)spiritBlockStairs).initModel();
 		((BlockSpiritStairs)spiritBrickStairs).initModel();
 		((BlockSpiritFont)spiritFont).initModel();
+		((BlockSpiritConduit)spiritConduit).initModel();
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -439,5 +449,6 @@ public class RegistryManager {
 		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterSprite.class, new RenderGreaterSprite(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("greatersprite"),0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteProjectile.class, new RenderSpriteProjectile(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostShard.class, new RenderFrostShard(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpritePlacator.class, new RenderSpritePlacator(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
 	}
 }

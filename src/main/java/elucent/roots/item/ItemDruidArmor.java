@@ -60,13 +60,6 @@ public class ItemDruidArmor extends ItemArmor {
 		setCreativeTab(Roots.tab);
 	}
 	
-	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced){
-		tooltip.add("");
-		tooltip.add(TextFormatting.GRAY + I18n.format("roots.attribute.equipped.name"));
-		tooltip.add(TextFormatting.BLUE + " " + I18n.format("roots.attribute.increasedregen.name"));
-	}
-	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type){

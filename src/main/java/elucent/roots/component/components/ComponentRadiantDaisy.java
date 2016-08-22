@@ -3,6 +3,7 @@ package elucent.roots.component.components;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import com.google.common.collect.Lists;
 
@@ -32,6 +33,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 
@@ -103,6 +105,31 @@ public class ComponentRadiantDaisy extends ComponentBase{
 				}
 				if (didHit){
 					return;
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
+		if (type == EnumCastType.SPELL){
+			EntityPlayer player = world.getPlayerEntityByUUID(casterId);
+			List<EntityLivingBase> targets = (List<EntityLivingBase>)world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-0.25,y-0.25,z-0.25,x+0.25,y+0.25,z+0.25));
+			if (targets.size() > 0){
+				for (int j = 0; j < targets.size(); j ++){
+					if (targets.get(j).getUniqueID() != casterId){
+						if (targets.get(j) instanceof EntityPlayer && ConfigManager.disablePVP){
+							
+						}
+						else {
+							targets.get(j).attackEntityFrom(DamageSource.generic, (float) (12+3.0*(potency)));
+							targets.get(j).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("blindness"),40+(int)(20.0*(potency)),0));
+							if (player != null){
+								targets.get(j).setLastAttacker(player);
+								targets.get(j).setRevengeTarget((EntityLivingBase)player);
+							}
+						}
+					}
 				}
 			}
 		}

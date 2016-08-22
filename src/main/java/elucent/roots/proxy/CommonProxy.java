@@ -67,4 +67,12 @@ public class CommonProxy {
 	public void spawnParticleMagicSparkleFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){
 		//
 	}
+	
+	public void spawnParticleMagicSmallSparkleFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){
+		//
+	}
+	
+	public void spawnParticleMagicSparklePulseFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){
+		//
+	}
 }

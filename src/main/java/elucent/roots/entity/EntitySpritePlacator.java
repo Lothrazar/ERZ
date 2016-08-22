@@ -43,7 +43,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class EntitySpriteProjectile  extends EntityFlying {// implements IRangedAttackMob {
+public class EntitySpritePlacator  extends EntityFlying {// implements IRangedAttackMob {
     public float range = 64;
     public float addDirectionX = 0;
     public float addDirectionY = 0;
@@ -51,28 +51,32 @@ public class EntitySpriteProjectile  extends EntityFlying {// implements IRanged
     public int lifetime = 80;
     Random random = new Random();
     EntityLivingBase target = null;
-    public float damage = 2.0f;
+    public float healing = 2.0f;
+    public BlockPos pos;
 
-    public EntitySpriteProjectile(World worldIn) {
+    public EntitySpritePlacator(World worldIn) {
     	super(worldIn);
         setSize(1.0f,1.0f);
         this.isAirBorne = true;
         this.setInvisible(true);
     }
     
-    public void initSpecial(EntityLivingBase target, float damage){
+    public void initSpecial(EntityLivingBase target, float healing, BlockPos pos){
     	this.target = target;
-    	this.damage = damage;
+    	this.healing = healing;
+    	this.pos = pos;
     }
     
     @Override
     public void collideWithEntity(Entity entity){
     	if (target != null){
 	    	if (entity.getUniqueID().compareTo(target.getUniqueID()) == 0){
-	    		target.attackEntityFrom(DamageSource.generic, damage);
+	    		target.heal(healing);
+	    		((ISprite)target).setHappiness(((ISprite)target).getHappiness()+healing);
 	    		this.getEntityWorld().removeEntity(this);
-				for (int i = 0; i < 20; i ++){
-					Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX, posY+height/2.0f, posZ, Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), 107, 255, 28);
+	    		((ISprite)target).setTargetPosition(pos);
+				for (int i = 0; i < 40; i ++){
+					Roots.proxy.spawnParticleMagicSmallSparkleFX(getEntityWorld(), posX, posY+height/2.0f, posZ, Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), 107, 255, 28);
 				}
 	    	}
     	}
@@ -95,11 +99,11 @@ public class EntitySpriteProjectile  extends EntityFlying {// implements IRanged
 			rotationPitch = (float)Math.toRadians(Util.pitchDegreesBetweenPoints(posX, posY, posZ, target.posX, target.posY+target.getEyeHeight(), target.posZ));
 		    Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch).scale(0.35f);
 			this.setVelocity(0.5f*motionX+0.5f*moveVec.xCoord,0.5f*motionY+0.5f*moveVec.yCoord,0.5f*motionZ+0.5f*moveVec.zCoord);
-			for (double i = 0; i < 1; i ++){
-				double x = posX;
-				double y = posY;
-				double z = posZ;
-				Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), x, y, z, -0.125*moveVec.xCoord, -0.125*moveVec.yCoord, -0.125*moveVec.zCoord, 107, 255, 28);
+			for (double i = 0; i < 3; i ++){
+				double x = prevPosX + (1.0-i/3.0)*(posX-prevPosX);
+				double y = prevPosY + (1.0-i/3.0)*(posY-prevPosY);
+				double z = prevPosZ + (1.0-i/3.0)*(posZ-prevPosZ);
+				Roots.proxy.spawnParticleMagicSmallSparkleFX(getEntityWorld(), x, y, z, -0.125*moveVec.xCoord, -0.125*moveVec.yCoord, -0.125*moveVec.zCoord, 107, 255, 28);
 			}
 		}
     }
@@ -113,8 +117,8 @@ public class EntitySpriteProjectile  extends EntityFlying {// implements IRanged
     public boolean attackEntityFrom(DamageSource source, float amount){
     	if (source.getEntity() != null){
     		this.getEntityWorld().removeEntity(this);
-			for (int i = 0; i < 20; i ++){
-				Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX, posY+height/2.0f, posZ, Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), 107, 255, 28);
+			for (int i = 0; i < 40; i ++){
+				Roots.proxy.spawnParticleMagicSmallSparkleFX(getEntityWorld(), posX, posY+height/2.0f, posZ, Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), 107, 255, 28);
 			}
     	}
     	return false;

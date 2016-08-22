@@ -15,11 +15,6 @@ public class RenderSprite extends RenderLiving<EntitySprite> {
 	public RenderSprite(RenderManager renderManager, ModelBase modelBase, float shadowSize) {
 		super(renderManager, modelBase, shadowSize);
 	}
-	
-	@Override
-	public boolean canRenderName(EntitySprite entity){
-		return false;
-	}
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntitySprite entity) {

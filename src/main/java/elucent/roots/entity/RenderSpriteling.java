@@ -15,11 +15,6 @@ public class RenderSpriteling extends RenderLiving<EntitySpriteling> {
 	public RenderSpriteling(RenderManager renderManager, ModelBase modelBase, float shadowSize) {
 		super(renderManager, modelBase, shadowSize);
 	}
-	
-	@Override
-	public boolean canRenderName(EntitySpriteling entity){
-		return false;
-	}
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntitySpriteling entity) {

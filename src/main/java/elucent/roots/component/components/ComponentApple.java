@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import com.google.common.collect.Lists;
 
@@ -29,6 +30,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 
@@ -72,6 +74,48 @@ public class ComponentApple extends ComponentBase{
 					}
 					if (effect.getPotion() == Potion.getPotionFromResourceLocation("weakness")){
 						((EntityPlayer)caster).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("strength"),20+10*(int)potency,0));
+					}
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
+		if (type == EnumCastType.SPELL){
+			List<EntityLivingBase> targets = (List<EntityLivingBase>)world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-0.25,y-0.25,z-0.25,x+0.25,y+0.25,z+0.25));
+			if (targets.size() > 0){
+				EntityLivingBase entity = targets.get(0);
+				ArrayList<PotionEffect> effects = new ArrayList<PotionEffect>(entity.getActivePotionEffects());
+				entity.clearActivePotions();
+				for (int i = 0; i < effects.size(); i ++){
+					PotionEffect effect = effects.get(i);
+					if (effect.getPotion().getName() == "Soul Fray"){
+						(entity).addPotionEffect(effect);
+					}
+					if (effect.getPotion() == Potion.getPotionFromResourceLocation("slowness")){
+						(entity).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("speed"),20+10*(int)potency,0));
+					}
+					if (effect.getPotion() == Potion.getPotionFromResourceLocation("mining_fatigue")){
+						(entity).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("haste"),20+10*(int)potency,0));
+					}
+					if (effect.getPotion() == Potion.getPotionFromResourceLocation("poison")){
+						(entity).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"),20+10*(int)potency,0));
+					}
+					if (effect.getPotion() == Potion.getPotionFromResourceLocation("wither")){
+						(entity).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"),20+10*(int)potency,0));
+					}
+					if (effect.getPotion() == Potion.getPotionFromResourceLocation("blindness")){
+						(entity).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("night_vision"),20+10*(int)potency,0));
+					}
+					if (effect.getPotion() == Potion.getPotionFromResourceLocation("nausea")){
+						(entity).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("night_vision"),20+10*(int)potency,0));
+					}
+					if (effect.getPotion() == Potion.getPotionFromResourceLocation("hunger")){
+						(entity).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("saturation"),4+2*(int)potency,0));
+					}
+					if (effect.getPotion() == Potion.getPotionFromResourceLocation("weakness")){
+						(entity).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("strength"),20+10*(int)potency,0));
 					}
 				}
 			}

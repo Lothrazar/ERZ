@@ -3,6 +3,7 @@ package elucent.roots.component.components;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import com.google.common.collect.Lists;
 
@@ -45,10 +46,15 @@ public class ComponentOrangeTulip extends ComponentBase{
 	}
 	
 	@Override
+	public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
+		//
+	}
+	
+	@Override
 	public void castingAction(EntityPlayer player, int count, int potency, int efficiency, int size){
 		super.castingAction(player, count, potency, efficiency, size);
 		if (count % 1 == 0){
-			List<Entity> entities = (List<Entity>)player.worldObj.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(player.posX-(1.0+(double)0.5*size),player.posY-(1.0+(double)0.5*size),player.posZ-(1.0+(double)0.5*size),player.posX+(1.0+(double)0.5*size),player.posY+(1.0+(double)0.5*size),player.posZ+(1.0+0.5*(double)size)));
+			List<Entity> entities = (List<Entity>)player.worldObj.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(player.posX-(1.0+(double)0.5*(3.0+size)),player.posY-(1.0+(double)0.5*(3.0+size)),player.posZ-(1.0+(double)0.5*(3.0+size)),player.posX+(1.0+(double)0.5*(3.0+size)),player.posY+(1.0+(double)0.5*(3.0+size)),player.posZ+(1.0+0.5*(double)(3.0+size))));
 			for (int i = 0; i < entities.size(); i ++){
 				if (entities.get(i) instanceof EntityLivingBase || entities.get(i) instanceof EntityArrow){
 					Vec3d v = new Vec3d(entities.get(i).posX-player.posX,entities.get(i).posY-(player.posY+1.0),entities.get(i).posZ-player.posZ);

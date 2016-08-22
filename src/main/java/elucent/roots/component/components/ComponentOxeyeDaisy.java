@@ -3,6 +3,7 @@ package elucent.roots.component.components;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import com.google.common.collect.Lists;
 
@@ -34,6 +35,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 
@@ -63,6 +65,31 @@ public class ComponentOxeyeDaisy extends ComponentBase{
 							EntityTileAccelerator a = new EntityTileAccelerator(world,pos,(int)potency,(int)size);
 							world.spawnEntityInWorld(a);
 						}
+					}
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
+		if (type == EnumCastType.SPELL){	
+			List<EntityLivingBase> targets = (List<EntityLivingBase>)world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-0.25,y-0.25,z-0.25,x+0.25,y+0.25,z+0.25));
+			if (targets.size() > 0){
+				EntityLivingBase entity = targets.get(0);
+				if (!world.isRemote){
+					if (world.getEntitiesWithinAABB(EntityAccelerator.class, new AxisAlignedBB(entity.posX-0.1,entity.posY-0.1,entity.posZ-0.1,entity.posX+0.1,entity.posY+0.1,entity.posZ+0.1)).size() == 0){
+						EntityAccelerator a = new EntityAccelerator(world,entity,(int)potency,(int)size);
+						world.spawnEntityInWorld(a);
+					}
+				}
+			}
+			else {
+				BlockPos pos = new BlockPos(x,y,z);
+				if (world.getTileEntity(pos) != null && !world.isRemote){
+					if (world.getEntitiesWithinAABB(EntityTileAccelerator.class, new AxisAlignedBB(pos.getX()-0.1,pos.getY()-0.1,pos.getZ()-0.1,pos.getX()+0.1,pos.getY()+0.1,pos.getZ()+0.1)).size() == 0){
+						EntityTileAccelerator a = new EntityTileAccelerator(world,pos,(int)potency,(int)size);
+						world.spawnEntityInWorld(a);
 					}
 				}
 			}

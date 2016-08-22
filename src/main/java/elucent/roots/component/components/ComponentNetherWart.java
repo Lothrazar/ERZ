@@ -1,7 +1,9 @@
 package elucent.roots.component.components;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import elucent.roots.ConfigManager;
 import elucent.roots.PlayerManager;
@@ -25,6 +27,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 
@@ -43,10 +46,25 @@ public class ComponentNetherWart extends ComponentBase{
 					double tposX = (entity.posX);
 					double tposY = (entity.posY)+entity.getEyeHeight()/2.0f;
 					double tposZ = (entity.posZ);
-					if (world.getEntitiesWithinAABB(EntityAccelerator.class, new AxisAlignedBB(entity.posX-0.1,entity.posY-0.1,entity.posZ-0.1,entity.posX+0.1,entity.posY+0.1,entity.posZ+0.1)).size() == 0){
-						EntityNetherInfection a = new EntityNetherInfection(world,caster.getUniqueID(),entity,(int)potency,(int)size);
-						world.spawnEntityInWorld(a);
-					}
+					EntityNetherInfection a = new EntityNetherInfection(world,caster.getUniqueID(),entity,(int)potency,(int)size);
+					world.spawnEntityInWorld(a);
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
+		if (type == EnumCastType.SPELL){	
+			List<EntityLivingBase> targets = (List<EntityLivingBase>)world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-0.25,y-0.25,z-0.25,x+0.25,y+0.25,z+0.25));
+			if (targets.size() > 0){
+				EntityLivingBase entity = targets.get(0);
+				if (!world.isRemote){
+					double tposX = (entity.posX);
+					double tposY = (entity.posY)+entity.getEyeHeight()/2.0f;
+					double tposZ = (entity.posZ);
+					EntityNetherInfection a = new EntityNetherInfection(world,casterId,entity,(int)potency,(int)size);
+					world.spawnEntityInWorld(a);
 				}
 			}
 		}

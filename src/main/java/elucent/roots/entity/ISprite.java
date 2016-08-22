@@ -1,6 +1,9 @@
 package elucent.roots.entity;
 
+import net.minecraft.util.math.BlockPos;
+
 public interface ISprite {
-	public int getHappiness();
-	public void setHappiness(int value);
+	public float getHappiness();
+	public void setHappiness(float value);
+	public void setTargetPosition(BlockPos pos);
 }

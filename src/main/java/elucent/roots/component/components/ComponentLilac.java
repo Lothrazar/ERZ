@@ -2,6 +2,7 @@ package elucent.roots.component.components;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.UUID;
 
 import elucent.roots.PlayerManager;
 import elucent.roots.RegistryManager;
@@ -12,6 +13,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockNetherWart;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
@@ -26,6 +28,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 
@@ -57,12 +60,30 @@ public class ComponentLilac extends ComponentBase{
 	public void doEffect(World world, Entity caster, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
 		if (type == EnumCastType.SPELL){	
 			if (caster instanceof EntityPlayer && !world.isRemote){
-				BlockPos pos = Util.getRayTrace(world,(EntityPlayer)caster,4+2*(int)size);
+				BlockPos pos = Util.getRayTrace(world,(EntityPlayer)caster,6+2*(int)size);
 				boolean fullEfficiency = growBlockSafe(world, pos, (int)potency) && growBlockSafe(world, pos.east(), (int)potency) && growBlockSafe(world, pos.west(), (int)potency) &&growBlockSafe(world, pos.north(), (int)potency) &&growBlockSafe(world, pos.south(), (int)potency);
 				if (fullEfficiency){
 					if (caster instanceof EntityPlayer){
 						if (!((EntityPlayer)caster).hasAchievement(RegistryManager.achieveSpellGrowth)){
 							PlayerManager.addAchievement((EntityPlayer)caster, RegistryManager.achieveSpellGrowth);
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
+		if (type == EnumCastType.SPELL){	
+			if (!world.isRemote){
+				BlockPos pos = new BlockPos(x,y,z);
+				boolean fullEfficiency = growBlockSafe(world, pos, (int)potency) && growBlockSafe(world, pos.east(), (int)potency) && growBlockSafe(world, pos.west(), (int)potency) &&growBlockSafe(world, pos.north(), (int)potency) &&growBlockSafe(world, pos.south(), (int)potency);
+				if (fullEfficiency){
+					EntityPlayer player = world.getPlayerEntityByUUID(casterId);
+					if (player != null){
+						if (!player.hasAchievement(RegistryManager.achieveSpellGrowth)){
+							PlayerManager.addAchievement(player, RegistryManager.achieveSpellGrowth);
 						}
 					}
 				}

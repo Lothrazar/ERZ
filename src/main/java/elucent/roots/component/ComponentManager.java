@@ -124,7 +124,7 @@ public class ComponentManager {
 					.addIngredient(new ItemStack(Blocks.RED_FLOWER,1,8))
 					.addIngredient(new ItemStack(Blocks.END_STONE,1))
 					.addIngredient(new ItemStack(Items.GOLD_INGOT,1))
-					.addIngredient(new ItemStack(Items.SUGAR,1)));
+					.addIngredient(new ItemStack(Items.DRAGON_BREATH,1)));
 		recipes.add(new ComponentRecipe("lilypad")
 					.addIngredient(new ItemStack(Blocks.WATERLILY,1))
 					.addIngredient(new ItemStack(Blocks.SPONGE,1,1))

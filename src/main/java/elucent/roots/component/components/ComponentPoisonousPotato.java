@@ -3,6 +3,7 @@ package elucent.roots.component.components;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import com.google.common.collect.Lists;
 
@@ -30,6 +31,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 
@@ -43,9 +45,14 @@ public class ComponentPoisonousPotato extends ComponentBase{
 	public void doEffect(World world, Entity caster, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
 		if (type == EnumCastType.SPELL){
 			if (caster instanceof EntityPlayer && !world.isRemote){
-				BlockPos pos = Util.getRayTrace(world,(EntityPlayer)caster,4+2*(int)size);
+				BlockPos pos = Util.getRayTrace(world,(EntityPlayer)caster,6+2*(int)size);
 				world.addWeatherEffect(new EntityLightningBolt(world,pos.getX(),pos.getY(),pos.getZ(),false));
 			}
 		}
+	}
+	
+	@Override
+	public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
+		world.addWeatherEffect(new EntityLightningBolt(world,x,y,z,false));
 	}
 }

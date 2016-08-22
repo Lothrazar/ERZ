@@ -29,7 +29,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class DustPetal extends Item {
+public class DustPetal extends Item implements IImbuable {
 	Random random = new Random();
 	
 	public DustPetal(){
@@ -97,5 +97,25 @@ public class DustPetal extends Item {
 	@SideOnly(Side.CLIENT)
 	public void initModel(){
 		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(),"inventory"));
+	}
+
+	@Override
+	public String getEffect(ItemStack stack) {
+		return stack.getTagCompound().getString("effect");
+	}
+
+	@Override
+	public int getPotency(ItemStack stack) {
+		return stack.getTagCompound().getInteger("potency");
+	}
+
+	@Override
+	public int getEfficiency(ItemStack stack) {
+		return stack.getTagCompound().getInteger("efficiency");
+	}
+
+	@Override
+	public int getSize(ItemStack stack) {
+		return stack.getTagCompound().getInteger("size");
 	}
 }
