@@ -1,79 +1,15 @@
 package elucent.roots;
 
-import elucent.roots.block.BlockAestheticStandingStone;
-import elucent.roots.block.BlockAltar;
-import elucent.roots.block.BlockBase;
-import elucent.roots.block.BlockBrazier;
-import elucent.roots.block.BlockBridge;
-import elucent.roots.block.BlockDoubleSlabBase;
-import elucent.roots.block.BlockFlareOrchid;
-import elucent.roots.block.BlockImbuer;
-import elucent.roots.block.BlockLogBase;
-import elucent.roots.block.BlockMidnightBloom;
-import elucent.roots.block.BlockMortar;
-import elucent.roots.block.BlockRadiantDaisy;
-import elucent.roots.block.BlockSlabBase;
-import elucent.roots.block.BlockSpirit;
-import elucent.roots.block.BlockSpiritConduit;
-import elucent.roots.block.BlockSpiritDoubleSlab;
-import elucent.roots.block.BlockSpiritFont;
-import elucent.roots.block.BlockSpiritSlab;
-import elucent.roots.block.BlockSpiritStairs;
-import elucent.roots.block.BlockStairsBase;
-import elucent.roots.block.BlockStandingStoneAccelerator;
-import elucent.roots.block.BlockStandingStoneEntangler;
-import elucent.roots.block.BlockStandingStoneGrower;
-import elucent.roots.block.BlockStandingStoneHealer;
-import elucent.roots.block.BlockStandingStoneIgniter;
-import elucent.roots.block.BlockStandingStoneRepulsor;
-import elucent.roots.block.BlockStandingStoneT1;
-import elucent.roots.block.BlockStandingStoneT2;
-import elucent.roots.block.BlockStandingStoneVacuum;
-import elucent.roots.entity.EntityAccelerator;
-import elucent.roots.entity.EntityFrostShard;
-import elucent.roots.entity.EntityNetherInfection;
-import elucent.roots.entity.EntitySanctuary;
-import elucent.roots.entity.EntityGreaterSprite;
-import elucent.roots.entity.EntitySprite;
-import elucent.roots.entity.EntitySpritePlacator;
-import elucent.roots.entity.EntitySpriteProjectile;
-import elucent.roots.entity.EntitySpriteling;
-import elucent.roots.entity.EntityTileAccelerator;
-import elucent.roots.entity.RenderFrostShard;
-import elucent.roots.entity.RenderGreaterSprite;
-import elucent.roots.entity.RenderSprite;
-import elucent.roots.entity.RenderSpritePlacator;
-import elucent.roots.entity.RenderSpriteProjectile;
-import elucent.roots.entity.RenderSpriteling;
+import elucent.roots.block.*;
+import elucent.roots.entity.*;
+import elucent.roots.entity.projectile.EntityRitualProjectile;
 import elucent.roots.item.*;
 import elucent.roots.item.block.ItemBlockSlab;
-import elucent.roots.model.ModelHolder;
-import elucent.roots.model.entity.ModelSpriteling;
-import elucent.roots.tileentity.TileEntityAestheticStandingStone;
-import elucent.roots.tileentity.TileEntityAltar;
-import elucent.roots.tileentity.TileEntityAltarRenderer;
-import elucent.roots.tileentity.TileEntityBrazier;
-import elucent.roots.tileentity.TileEntityBrazierRenderer;
-import elucent.roots.tileentity.TileEntityDruidChalice;
-import elucent.roots.tileentity.TileEntityImbuer;
-import elucent.roots.tileentity.TileEntityImbuerRenderer;
-import elucent.roots.tileentity.TileEntityMortar;
-import elucent.roots.tileentity.TileEntityMortarRenderer;
-import elucent.roots.tileentity.TileEntitySpiritConduit;
-import elucent.roots.tileentity.TileEntitySpiritConduitRenderer;
-import elucent.roots.tileentity.TileEntitySpiritFont;
-import elucent.roots.tileentity.TileEntitySpiritFontRenderer;
-import elucent.roots.tileentity.TileEntityStandingStoneAccelerator;
-import elucent.roots.tileentity.TileEntityStandingStoneEntangler;
-import elucent.roots.tileentity.TileEntityStandingStoneGrower;
-import elucent.roots.tileentity.TileEntityStandingStoneHealer;
-import elucent.roots.tileentity.TileEntityStandingStoneIgniter;
-import elucent.roots.tileentity.TileEntityStandingStoneRepulsor;
-import elucent.roots.tileentity.TileEntityStandingStoneVacuum;
+import elucent.roots.render.*;
+import elucent.roots.tileentity.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -82,8 +18,6 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.util.EnumHelper;
@@ -233,23 +167,28 @@ public class RegistryManager {
 		/**
 		 * REGISTERING TILE ENTITIES
 		 */
-		GameRegistry.registerTileEntity(TileEntityMortar.class, "TileEntityMortar");
-		GameRegistry.registerTileEntity(TileEntityImbuer.class, "TileEntityImbuer");
-		GameRegistry.registerTileEntity(TileEntityAltar.class, "TileEntityAltar");
-		GameRegistry.registerTileEntity(TileEntityDruidChalice.class,"TileEntityDruidChalice");
-		GameRegistry.registerTileEntity(TileEntityBrazier.class,"TileEntityBrazier");
-		GameRegistry.registerTileEntity(TileEntityStandingStoneVacuum.class,"TileEntityStandingStoneVacuum");
-		GameRegistry.registerTileEntity(TileEntityStandingStoneRepulsor.class,"TileEntityStandingStoneRepulsor");
-		GameRegistry.registerTileEntity(TileEntityStandingStoneAccelerator.class,"TileEntityStandingStoneAccelerator");
-		GameRegistry.registerTileEntity(TileEntityAestheticStandingStone.class,"TileEntityAestheticStandingStone");
-		GameRegistry.registerTileEntity(TileEntityStandingStoneEntangler.class,"TileEntityStandingStoneEntangler");
-		GameRegistry.registerTileEntity(TileEntityStandingStoneGrower.class,"TileEntityStandingStoneGrower");
-		GameRegistry.registerTileEntity(TileEntityStandingStoneIgniter.class,"TileEntityStandingStoneIgniter");
-		GameRegistry.registerTileEntity(TileEntityStandingStoneHealer.class,"TileEntityStandingStoneHealer");
-		GameRegistry.registerTileEntity(TileEntitySpiritFont.class,"TileEntitySpiritFont");
-		GameRegistry.registerTileEntity(TileEntitySpiritConduit.class,"TileEntitySpiritConduit");
+		GameRegistry.registerTileEntity(TileEntityMortar.class, customTileName("TileEntityMortar"));
+		GameRegistry.registerTileEntity(TileEntityImbuer.class, customTileName("TileEntityImbuer"));
+		GameRegistry.registerTileEntity(TileEntityAltar.class, customTileName("TileEntityAltar"));
+		GameRegistry.registerTileEntity(TileEntityDruidChalice.class,customTileName("TileEntityDruidChalice"));
+		GameRegistry.registerTileEntity(TileEntityBrazier.class,customTileName("TileEntityBrazier"));
+		GameRegistry.registerTileEntity(TileEntityStandingStoneVacuum.class,customTileName("TileEntityStandingStoneVacuum"));
+		GameRegistry.registerTileEntity(TileEntityStandingStoneRepulsor.class,customTileName("TileEntityStandingStoneRepulsor"));
+		GameRegistry.registerTileEntity(TileEntityStandingStoneAccelerator.class,customTileName("TileEntityStandingStoneAccelerator"));
+		GameRegistry.registerTileEntity(TileEntityAestheticStandingStone.class,customTileName("TileEntityAestheticStandingStone"));
+		GameRegistry.registerTileEntity(TileEntityStandingStoneEntangler.class,customTileName("TileEntityStandingStoneEntangler"));
+		GameRegistry.registerTileEntity(TileEntityStandingStoneGrower.class,customTileName("TileEntityStandingStoneGrower"));
+		GameRegistry.registerTileEntity(TileEntityStandingStoneIgniter.class,customTileName("TileEntityStandingStoneIgniter"));
+		GameRegistry.registerTileEntity(TileEntityStandingStoneHealer.class,customTileName("TileEntityStandingStoneHealer"));
+		GameRegistry.registerTileEntity(TileEntitySpiritFont.class,customTileName("TileEntitySpiritFont"));
+		GameRegistry.registerTileEntity(TileEntitySpiritConduit.class, customTileName("TileEntitySpiritConduit"));
 		
 		GameRegistry.registerFuelHandler(new FuelManager());
+	}
+
+	private static String customTileName(String name)
+	{
+		return Roots.MODID + ":" + name;
 	}
 	
 	public static void registerEntities(){
@@ -266,6 +205,7 @@ public class RegistryManager {
 		EntityRegistry.registerModEntity(EntitySanctuary.class, "entitySanctuary", 7, Roots.instance, 64, 3, true);
 		EntityRegistry.registerModEntity(EntityFrostShard.class, "entityFrostShard", 8, Roots.instance, 64, 3, true);
 		EntityRegistry.registerModEntity(EntitySpritePlacator.class, "entitySpritePlacator", 9, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityRitualProjectile.class,"entityRitualProjectile",10,Roots.instance,64,1,true);
 	}
 	
 	public static void registerRecipes(){
@@ -444,11 +384,12 @@ public class RegistryManager {
 	
 	@SideOnly(Side.CLIENT)
 	public static void registerEntityRenderers() {
-		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteling.class, new RenderSpriteling(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("spriteling"),0.5f));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySprite.class, new RenderSprite(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("sprite"),0.5f));
-		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterSprite.class, new RenderGreaterSprite(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("greatersprite"),0.5f));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteProjectile.class, new RenderSpriteProjectile(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
-		RenderingRegistry.registerEntityRenderingHandler(EntityFrostShard.class, new RenderFrostShard(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySpritePlacator.class, new RenderSpritePlacator(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteling.class, new EntitySpritelingRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySprite.class, new EntitySpriteRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterSprite.class, new EntityGreaterSpriteRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteProjectile.class, new EntitySpriteProjectileRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityFrostShard.class, new EntityFrostShardRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpritePlacator.class,new EntitySpritePlacatorRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityRitualProjectile.class,new RitualProjectileRenderFactory());
 	}
 }

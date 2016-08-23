@@ -3,6 +3,7 @@ package elucent.roots.entity.projectile;
 import elucent.roots.Roots;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
@@ -19,9 +20,9 @@ public class EntityRitualProjectile extends EntityThrowable
         super(worldIn);
     }
 
-    public EntityRitualProjectile(World worldIn, EntityLivingBase throwerIn, float potency)
+    public EntityRitualProjectile(World worldIn,EntityLivingBase entityLivingBase ,float potency)
     {
-        super(worldIn, throwerIn);
+        super(worldIn,entityLivingBase);
         this.potency = potency;
     }
 
@@ -44,6 +45,7 @@ public class EntityRitualProjectile extends EntityThrowable
                 /**
                  * What it does when  it hist the entity
                  */
+                result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this,result.entityHit),potency);
             }
         }
 
