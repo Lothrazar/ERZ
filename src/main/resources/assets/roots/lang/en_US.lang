@@ -154,6 +154,11 @@ roots.component.sunflower.name=Solar Smite
 roots.component.whitetulip.name=Blistering Cold
 roots.component.cobweb.name=Snare
 
+roots.component.restoration.name=Restoration
+roots.component.evocation.name=Evocation
+roots.component.conjuration.name=Conjuration
+roots.component.illusion.name=Illusion
+
 achievement.dust=Petal Dust
 achievement.dust.desc=Craft petal dust 
 
@@ -302,6 +307,16 @@ roots.research.spells.chorus.page1info=Just eating a chorus fruit on its own is 
 roots.research.spells.cobweb.name=Spell Component: Snare
 roots.research.spells.cobweb.page1title.name=Snare
 roots.research.spells.cobweb.page1info=By incorporating a cobweb into your spells, you gain the ability to ensnare targets. Using the above recipe, you can create a spell that will significantly slow entities in an area around the spell.
+
+roots.research.spells.charms.name=Otherworld Charms
+roots.research.spells.charms.page1title.name=Charm: Restoration
+roots.research.spells.charms.page1info=You discovered the power of the Otherworld charm of restoration, which grants you the power to knock back enemies and remove bad effects.
+roots.research.spells.charms.page2title.name=Charm: Evocation
+roots.research.spells.charms.page2info=You discovered the power of Otherworld charm of evocation, which grants you the ability to spawn a projectile which will damage your opponents.
+roots.research.spells.charms.page3title.name=Charm: Conjuration
+roots.research.spells.charms.page3info=You discovered the power of Otherworld charm of conjuration, which grants you the power to spawn, for 10 seconds, a 10 block long bridge in the direction that you are looking.
+roots.research.spells.charms.page4title.name=Charm: Illusion
+roots.research.spells.charms.page4info=You discovered the power of Otherworld charm of illusion, which grants you the power to not be detected by your enemies for 10 seconds.
 
 roots.research.ritual.name=Rituals
 

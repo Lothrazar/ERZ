@@ -3,12 +3,14 @@ package elucent.roots.component.components;
 import elucent.roots.RegistryManager;
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.EnumCastType;
+import elucent.roots.entity.projectile.EntityRitualProjectile;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.lwjgl.Sys;
 
 /**
  * Created by SirShadow for the mod Roots on 27.7.2016.
@@ -25,14 +27,15 @@ public class ComponentCharmConjuration extends ComponentBase
         if(type == EnumCastType.SPELL)
         {
 
-            int BridgeSize = 10 * (int)size;
+            int BridgeSize = 10 + (int)size;
 
-            for(int i = 0;i <= size;i++)
+            for(int i = 0;i <= 10;i++)
             {
                 BlockPos bridgePos = getThePosForBlock(world,(EntityPlayer)caster, i + BridgeSize);
 
                 buildBlock((EntityPlayer)caster,world,bridgePos);
             }
+
         }
     }
 
@@ -56,7 +59,7 @@ public class ComponentCharmConjuration extends ComponentBase
 
     private static BlockPos getThePosForBlock(World world, EntityPlayer player, int reachDistance){
         double x = player.posX;
-        double y = player.posY  - 2;
+        double y = player.posY - 1;
         double z = player.posZ;
         for (int i = 0; i < reachDistance*40.0; i ++){
             x += player.getLookVec().xCoord*0.025;
