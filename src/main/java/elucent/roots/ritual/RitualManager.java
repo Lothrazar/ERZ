@@ -1,6 +1,10 @@
 package elucent.roots.ritual;
 
 import elucent.roots.RegistryManager;
+import elucent.roots.entity.EntityGreaterSprite;
+import elucent.roots.entity.EntitySprite;
+import elucent.roots.entity.EntitySpriteGuardian;
+import elucent.roots.entity.EntitySpriteling;
 import elucent.roots.ritual.rituals.*;
 import elucent.roots.tileentity.TileEntityBrazier;
 import net.minecraft.entity.monster.*;
@@ -417,7 +421,7 @@ public class RitualManager {
 					.addIncense(new ItemStack(Blocks.VINE,1))
 					.addIncense(new ItemStack(RegistryManager.oldRoot,1))
 					.addIngredient(new ItemStack(Blocks.WATERLILY,1)));
-		rituals.add(new RitualCauseRain("banishrain", 204, 159, 35)
+		rituals.add(new RitualBanishRain("banishrain", 204, 159, 35)
 					.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
 					.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
 					.addBlock(RegistryManager.standingStoneT1, 3, 0, -3)
@@ -741,6 +745,77 @@ public class RitualManager {
 				.addBlock(RegistryManager.standingStoneT2, 0, 1, 5)
 				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
 				.addIngredient(new ItemStack(RegistryManager.itemCharmEvocation)));*/
+		rituals.add(new RitualSpiritSummoning("spritelingSummoning",107,255,28)
+				.init(EntitySpriteling.class,4,false)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, -3)
+				.addBlock(RegistryManager.standingStoneT2, 5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, -5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, 5)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
+				.addIngredient(new ItemStack(Items.ENDER_PEARL,1))
+				.addIngredient(new ItemStack(Items.REDSTONE,1))
+				.addIngredient(new ItemStack(Items.GLOWSTONE_DUST,1)));
+		rituals.add(new RitualSpiritSummoning("spriteSummoning",107,255,28)
+				.init(EntitySprite.class,6,false)
+				.setSpiritCosts(1, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, -3)
+				.addBlock(RegistryManager.standingStoneT2, 5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, -5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, 5)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
+				.addIngredient(new ItemStack(Items.ENDER_PEARL,1))
+				.addIngredient(new ItemStack(RegistryManager.otherworldLeaf,1))
+				.addIngredient(new ItemStack(Items.GLOWSTONE_DUST,1)));
+		rituals.add(new RitualSpiritSummoning("greaterSpriteSummoning",107,255,28)
+				.init(EntityGreaterSprite.class,8,false)
+				.setSpiritCosts(2, 1, 0)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, -3)
+				.addBlock(RegistryManager.standingStoneT2, 5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, -5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, 5)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
+				.addIngredient(new ItemStack(Items.ENDER_PEARL,1))
+				.addIngredient(new ItemStack(RegistryManager.otherworldLeaf,1))
+				.addIngredient(new ItemStack(Items.BLAZE_POWDER,1)));
+		rituals.add(new RitualSpiritSummoning("spriteGuardianSummoning",107,255,28)
+				.init(EntitySpriteGuardian.class,12,true)
+				.setSpiritCosts(4, 2, 2)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, -3)
+				.addBlock(RegistryManager.standingStoneT2, 5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, -5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, 5)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
+				.addIngredient(new ItemStack(Items.DIAMOND,1))
+				.addIngredient(new ItemStack(RegistryManager.otherworldLeaf,1))
+				.addIngredient(new ItemStack(Items.GHAST_TEAR,1)));
 
 
 	}

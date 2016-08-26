@@ -35,13 +35,16 @@ import elucent.roots.entity.EntityNetherInfection;
 import elucent.roots.entity.EntitySanctuary;
 import elucent.roots.entity.EntityGreaterSprite;
 import elucent.roots.entity.EntitySprite;
+import elucent.roots.entity.EntitySpriteGuardian;
 import elucent.roots.entity.EntitySpritePlacator;
 import elucent.roots.entity.EntitySpriteProjectile;
 import elucent.roots.entity.EntitySpriteling;
+import elucent.roots.entity.EntitySummoner;
 import elucent.roots.entity.EntityTileAccelerator;
 import elucent.roots.entity.RenderFrostShard;
 import elucent.roots.entity.RenderGreaterSprite;
 import elucent.roots.entity.RenderSprite;
+import elucent.roots.entity.RenderSpriteGuardian;
 import elucent.roots.entity.RenderSpritePlacator;
 import elucent.roots.entity.RenderSpriteProjectile;
 import elucent.roots.entity.RenderSpriteling;
@@ -266,6 +269,9 @@ public class RegistryManager {
 		EntityRegistry.registerModEntity(EntitySanctuary.class, "entitySanctuary", 7, Roots.instance, 64, 3, true);
 		EntityRegistry.registerModEntity(EntityFrostShard.class, "entityFrostShard", 8, Roots.instance, 64, 3, true);
 		EntityRegistry.registerModEntity(EntitySpritePlacator.class, "entitySpritePlacator", 9, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntitySpriteGuardian.class, "spriteGuardian", 10, Roots.instance, 64, 3, true);
+		EntityRegistry.registerEgg(EntitySpriteGuardian.class, Util.intColor(66, 230, 0), Util.intColor(130, 255, 60));
+		EntityRegistry.registerModEntity(EntitySummoner.class, "entitySummoner", 11, Roots.instance, 64, 3, true);
 	}
 	
 	public static void registerRecipes(){
@@ -444,11 +450,12 @@ public class RegistryManager {
 	
 	@SideOnly(Side.CLIENT)
 	public static void registerEntityRenderers() {
-		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteling.class, new RenderSpriteling(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("spriteling"),0.5f));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySprite.class, new RenderSprite(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("sprite"),0.5f));
-		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterSprite.class, new RenderGreaterSprite(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("greatersprite"),0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteling.class, new RenderSpriteling(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("spriteling"),0.4f));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySprite.class, new RenderSprite(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("sprite"),0.6f));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGreaterSprite.class, new RenderGreaterSprite(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("greatersprite"),0.8f));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteProjectile.class, new RenderSpriteProjectile(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFrostShard.class, new RenderFrostShard(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpritePlacator.class, new RenderSpritePlacator(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteGuardian.class, new RenderSpriteGuardian(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("spriteguardian"),1.2f));
 	}
 }

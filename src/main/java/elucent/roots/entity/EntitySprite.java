@@ -3,6 +3,8 @@ package elucent.roots.entity;
 import java.util.Random;
 
 import java.util.List;
+
+import elucent.roots.RegistryManager;
 import elucent.roots.Roots;
 import elucent.roots.Util;
 import net.minecraft.block.BlockRedstoneLight;
@@ -26,11 +28,14 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.EntityAIZombieAttack;
 import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -72,11 +77,13 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
 
     public EntitySprite(World worldIn) {
     	super(worldIn);
+        this.noClip = true;
         setSize(0.75f,0.75f);
         this.isAirBorne = true;
 		this.experienceValue = 10;
 		ambientSound = new SoundEvent(new ResourceLocation("roots:spiritAmbient"));
 		hurtSound = new SoundEvent(new ResourceLocation("roots:spiritHurt"));
+		this.rotationYaw = rand.nextInt(240)+60;
     }
     
     @Override
@@ -110,6 +117,19 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
     }
     
     @Override
+    public void dropLoot(boolean wasRecentlyHit, int lootingModifier, DamageSource source){
+    	super.dropLoot(wasRecentlyHit,lootingModifier,source);
+    	if (!getEntityWorld().isRemote){
+    		getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.otherworldLeaf,1)));
+    		for (int i = 0; i < 8+lootingModifier; i ++){
+	    		if (rand.nextInt(2) == 0){
+	    			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.otherworldLeaf,1)));
+	    		}
+	    	}
+    	}
+    }
+    
+    @Override
     public void onUpdate(){
     	super.onUpdate();
     	
@@ -125,7 +145,7 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
     	
     	if (!getDataManager().get(stunned).booleanValue()){
 		    if (this.ticksExisted % 20 == 0){
-		    	if (random.nextInt(7) == 0 && this.getDataManager().get(stunned).booleanValue() == false){
+		    	if (random.nextInt(4) == 0 && this.getDataManager().get(stunned).booleanValue() == false){
 		    		getEntityWorld().playSound(posX, posY, posZ, ambientSound, SoundCategory.NEUTRAL, random.nextFloat()*0.1f+0.95f, random.nextFloat()*0.1f+0.95f, false);
 		    	}
 		    }
@@ -171,12 +191,12 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
 	    		 	this.getDataManager().setDirty(targetDirectionY);
 	    		}
 	    	}
-			addDirectionX = (float) (addDirectionX*0.9f+0.1f*getDataManager().get(targetDirectionX));
+		    addDirectionX = (float) Util.interpolateYawDegrees(addDirectionX,0.9f,getDataManager().get(targetDirectionX),0.1f);
 			addDirectionY = (float) (addDirectionY*0.9f+0.1f*getDataManager().get(targetDirectionY));
-			
-			this.rotationYaw = (rotationYaw*0.9f+addDirectionX*0.1f);
+			float addedPitch = -0.05f*(float)Math.toRadians(10.0f*(posY-(getEntityWorld().getTopSolidOrLiquidBlock(getPosition()).getY()+4.5))); 
+			this.rotationYaw = Util.interpolateYawDegrees(rotationYaw,0.9f,addDirectionX,0.1f);
 			this.rotationPitch = (rotationPitch*0.9f+addDirectionY*0.1f);
-			Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch - 0.05f*(float)Math.toRadians(4.0f*(posY-(getEntityWorld().getTopSolidOrLiquidBlock(getPosition()).getY()+1.5)))).scale(getAttackTarget() != null ? (getDataManager().get(dashTimer) > 0 ? 0.4 : 0.2) : 0.1);
+			Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch+addedPitch).scale(getAttackTarget() != null ? (getDataManager().get(dashTimer) > 0 ? 0.4 : 0.2) : 0.1);
 			this.setVelocity(0.5f*motionX+0.5f*moveVec.xCoord,0.5f*motionY+0.5f*moveVec.yCoord,0.5f*motionZ+0.5f*moveVec.zCoord);
 			if (getDataManager().get(dashTimer) > 0){
 				Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX+((random.nextDouble())-0.5)*0.5, posY+0.25+((random.nextDouble())-0.5)*0.5, posZ+((random.nextDouble())-0.5)*0.5, -0.25*moveVec.xCoord, -0.25*moveVec.yCoord, -0.25*moveVec.zCoord, 107, 255, 28);

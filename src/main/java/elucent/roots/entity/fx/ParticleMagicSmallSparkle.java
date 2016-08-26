@@ -35,11 +35,12 @@ public class ParticleMagicSmallSparkle extends Particle {
 			this.colorB = this.colorB/255.0;
 		}
 		this.setRBGColorF(1, 1, 1);
-		this.particleMaxAge = 8;
+		this.particleMaxAge = 10;
 		this.motionX = vx;
 		this.motionY = vy;
 		this.motionZ = vz;
 		this.particleScale = 1.5f;
+		this.field_190014_F = random.nextFloat()*2.0f*(float)Math.PI;
 	    TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(texture.toString());
 		this.setParticleTexture(sprite);
 	}
@@ -65,7 +66,7 @@ public class ParticleMagicSmallSparkle extends Particle {
 		this.motionX *= 0.9;
 		this.motionY += 0.003;
 		this.motionZ *= 0.9;
-		if (random.nextInt(4) == 0 && this.particleAge < this.particleMaxAge){
+		if (random.nextInt(3) == 0 && this.particleAge < this.particleMaxAge){
 			this.particleAge ++;
 		}
 		float lifeCoeff = ((float)this.particleMaxAge-(float)this.particleAge)/(float)this.particleMaxAge;

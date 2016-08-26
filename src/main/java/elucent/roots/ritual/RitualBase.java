@@ -63,8 +63,8 @@ public class RitualBase {
 			}
 		}
 		ArrayList<ItemStack> test = new ArrayList<ItemStack>();
-		for (int i = -4; i < 5; i ++){
-			for (int j = -4; j < 5; j ++){
+		for (int i = -7; i < 8; i ++){
+			for (int j = -7; j < 8; j ++){
 				if (world.getBlockState(pos.add(i,0,j)).getBlock() == RegistryManager.brazier){
 					if (world.getTileEntity(pos.add(i,0,j)) != null){
 						TileEntityBrazier teb = (TileEntityBrazier)world.getTileEntity(pos.add(i,0,j));

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import elucent.roots.capability.mana.ManaProvider;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;

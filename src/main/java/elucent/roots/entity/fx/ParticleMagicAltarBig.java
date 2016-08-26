@@ -4,23 +4,19 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleFallingDust;
-import net.minecraft.client.particle.ParticleSuspend;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class ParticleMagicSparklePulse extends Particle {
+public class ParticleMagicAltarBig extends Particle {
 
 	Random random = new Random();
 	public double colorR = 0;
 	public double colorG = 0;
 	public double colorB = 0;
-	public int lifetime = 30;
-	public ResourceLocation texture = new ResourceLocation("roots:entity/sparkle");
-	public ParticleMagicSparklePulse(World worldIn, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b) {
+	public int lifetime = 8;
+	public ResourceLocation texture = new ResourceLocation("roots:entity/magicParticle");
+	public ParticleMagicAltarBig(World worldIn, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b) {
 		super(worldIn, x,y,z,0,0,0);
 		this.colorR = r;
 		this.colorG = g;
@@ -35,12 +31,11 @@ public class ParticleMagicSparklePulse extends Particle {
 			this.colorB = this.colorB/255.0;
 		}
 		this.setRBGColorF(1, 1, 1);
-		this.particleMaxAge = 6;
+		this.particleMaxAge = 16;
 		this.motionX = vx;
 		this.motionY = vy;
 		this.motionZ = vz;
 		this.particleScale = 5.0f;
-		this.field_190014_F = random.nextFloat()*2.0f*(float)Math.PI;
 	    TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(texture.toString());
 		this.setParticleTexture(sprite);
 	}
@@ -63,12 +58,16 @@ public class ParticleMagicSparklePulse extends Particle {
 	@Override
 	public void onUpdate(){
 		super.onUpdate();
-		this.motionX *= 0.99;
-		this.motionZ *= 0.99;
+		this.motionX *= 0.9;
+		this.motionY += 0.01;
+		this.motionZ *= 0.9;
+		if (random.nextInt(4) >= 2 && this.particleAge > 0){
+			this.particleAge --;
+		}
 		float lifeCoeff = ((float)this.particleMaxAge-(float)this.particleAge)/(float)this.particleMaxAge;
-		this.particleRed = Math.min(1.0f, (float)colorR*(1.0f-lifeCoeff)+lifeCoeff);
-		this.particleGreen = Math.min(1.0f, (float)colorG*(1.0f-lifeCoeff)+lifeCoeff);
-		this.particleBlue = Math.min(1.0f, (float)colorB*(1.0f-lifeCoeff)+lifeCoeff);
+		this.particleRed = Math.min(1.0f, (float)colorR*(1.5f-lifeCoeff)+lifeCoeff);
+		this.particleGreen = Math.min(1.0f, (float)colorG*(1.5f-lifeCoeff)+lifeCoeff);
+		this.particleBlue = Math.min(1.0f, (float)colorB*(1.5f-lifeCoeff)+lifeCoeff);
 		this.particleAlpha = lifeCoeff;
 		this.particleScale = lifeCoeff;
 		if (lifeCoeff > 0.5){
@@ -77,7 +76,5 @@ public class ParticleMagicSparklePulse extends Particle {
 		if (lifeCoeff <= 0.5){
 			this.particleScale = 10.0f*(lifeCoeff);
 		}
-		field_190015_G = field_190014_F;
-		field_190014_F += 1.0f;
 	}
 }

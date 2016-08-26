@@ -3,6 +3,8 @@ package elucent.roots.entity;
 import java.util.Random;
 
 import java.util.List;
+
+import elucent.roots.RegistryManager;
 import elucent.roots.Roots;
 import elucent.roots.Util;
 import net.minecraft.block.BlockRedstoneLight;
@@ -26,11 +28,13 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.EntityAIZombieAttack;
 import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -55,6 +59,7 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
     public static final DataParameter<Boolean> stunned = EntityDataManager.<Boolean>createKey(EntityGreaterSprite.class, DataSerializers.BOOLEAN);
     public static final DataParameter<BlockPos> targetBlock = EntityDataManager.<BlockPos>createKey(EntityGreaterSprite.class, DataSerializers.BLOCK_POS);
     public static final DataParameter<BlockPos> lastTargetBlock = EntityDataManager.<BlockPos>createKey(EntityGreaterSprite.class, DataSerializers.BLOCK_POS);
+    public static final DataParameter<Boolean> hostile = EntityDataManager.<Boolean>createKey(EntityGreaterSprite.class, DataSerializers.BOOLEAN);
     public float addDirectionX = 0;
     public float addDirectionY = 0;
     public float twirlTimer = 0;
@@ -75,11 +80,13 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
 
     public EntityGreaterSprite(World worldIn) {
     	super(worldIn);
+        this.noClip = true;
         setSize(1.0f, 1.0f);
         this.isAirBorne = true;
 		this.experienceValue = 20;
 		ambientSound = new SoundEvent(new ResourceLocation("roots:spiritAmbient"));
 		hurtSound = new SoundEvent(new ResourceLocation("roots:spiritHurt"));
+		this.rotationYaw = rand.nextInt(240)+60;
     }
     
     @Override
@@ -91,8 +98,14 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
         this.getDataManager().register(dashTimer, Integer.valueOf(0));
         this.getDataManager().register(happiness, Float.valueOf(-5));
         this.getDataManager().register(stunned, Boolean.valueOf(false));
+        this.getDataManager().register(hostile, Boolean.valueOf(false));
         this.getDataManager().register(targetBlock, new BlockPos(0,-1,0));
         this.getDataManager().register(lastTargetBlock, new BlockPos(0,-1,0));
+    }
+    
+    public void setHostile(){
+    	this.getDataManager().set(hostile,true);
+    	this.getDataManager().setDirty(hostile);
     }
     
     @Override
@@ -114,6 +127,24 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
     }
     
     @Override
+    public void dropLoot(boolean wasRecentlyHit, int lootingModifier, DamageSource source){
+    	super.dropLoot(wasRecentlyHit,lootingModifier,source);
+    	if (!getEntityWorld().isRemote){
+    		getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.otherworldLeaf,1)));
+    		for (int i = 0; i < 13+lootingModifier; i ++){
+	    		if (rand.nextInt(2) == 0){
+	    			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.otherworldLeaf,1)));
+	    		}
+	    	}
+    		for (int i = 0; i < 3+lootingModifier; i ++){
+	    		if (rand.nextInt(2) == 0){
+	    			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.runeStone,1)));
+	    		}
+	    	}
+    	}
+    }
+    
+    @Override
     public void onUpdate(){
     	super.onUpdate();
     	prevYaw5 = prevYaw4;
@@ -130,7 +161,7 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
     	
     	if (!getDataManager().get(stunned).booleanValue()){
 		    if (this.ticksExisted % 20 == 0){
-		    	if (random.nextInt(7) == 0 && this.getDataManager().get(stunned).booleanValue() == false){
+		    	if (random.nextInt(4) == 0 && this.getDataManager().get(stunned).booleanValue() == false){
 		    		getEntityWorld().playSound(posX, posY, posZ, ambientSound, SoundCategory.NEUTRAL, random.nextFloat()*0.1f+0.95f, random.nextFloat()*0.1f+0.7f, false);
 		    	}
 		    }
@@ -145,7 +176,7 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
 	    	if (getDataManager().get(shootTimer) > 0){
 	    		getDataManager().set(shootTimer, getDataManager().get(shootTimer)-1);
 	    		getDataManager().setDirty(shootTimer);
-	    		if (!getEntityWorld().isRemote && getDataManager().get(shootTimer) == 0 || getDataManager().get(shootTimer) == 10 || getDataManager().get(shootTimer) == 20){
+	    		if (!getEntityWorld().isRemote && getDataManager().get(shootTimer) == 0){
 	    			EntitySpriteProjectile proj = new EntitySpriteProjectile(getEntityWorld());
 	    			proj.setPosition(posX, posY, posZ);
 	    			proj.onInitialSpawn(getEntityWorld().getDifficultyForLocation(getPosition()), null);
@@ -196,11 +227,12 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
 	    		 	this.getDataManager().setDirty(targetDirectionY);
 	    	    }
 	    	}
-			addDirectionX = (float) (addDirectionX*0.9f+0.1f*getDataManager().get(targetDirectionX));
+		    addDirectionX = (float) Util.interpolateYawDegrees(addDirectionX,0.9f,getDataManager().get(targetDirectionX),0.1f);
 			addDirectionY = (float) (addDirectionY*0.9f+0.1f*getDataManager().get(targetDirectionY));
-			this.rotationYaw = (rotationYaw*0.9f+addDirectionX*0.1f);
+			float addedPitch = -0.05f*(float)Math.toRadians(10.0f*(posY-(getEntityWorld().getTopSolidOrLiquidBlock(getPosition()).getY()+4.5))); 
+			this.rotationYaw = Util.interpolateYawDegrees(rotationYaw,0.9f,addDirectionX,0.1f);
 			this.rotationPitch = (rotationPitch*0.9f+addDirectionY*0.1f);
-			Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch - 0.05f*(float)Math.toRadians(4.0f*(posY-(getEntityWorld().getTopSolidOrLiquidBlock(getPosition()).getY()+1.5))))
+			Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch+addedPitch)
 					.scale(getAttackTarget() != null ? (getDataManager().get(shootTimer) > 0 ? 0.03 : (getDataManager().get(dashTimer) > 0 ? 0.4 : 0.2)) : 0.1);
 			this.setVelocity(0.5f*motionX+0.5f*moveVec.xCoord,0.5f*motionY+0.5f*moveVec.yCoord,0.5f*motionZ+0.5f*moveVec.zCoord);
 			if (getDataManager().get(dashTimer) > 0){
@@ -222,7 +254,11 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
     		this.setVelocity(motionX*0.9, -0.05, motionZ*0.9);
     	}
     	getDataManager().set(happiness,(getDataManager().get(happiness)*0.999f));
+    	if (getDataManager().get(hostile)){
+    		getDataManager().set(happiness,-900.0f);	
+    	}
     	getDataManager().setDirty(happiness);
+    	
     }
     
     @Override
@@ -304,6 +340,7 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
 		getDataManager().set(shootTimer, compound.getInteger("shootTimer"));
 		getDataManager().set(happiness, compound.getFloat("happiness"));
 		getDataManager().set(stunned, compound.getBoolean("stunned"));
+		getDataManager().set(hostile, compound.getBoolean("hostile"));
 		getDataManager().set(targetBlock, new BlockPos(compound.getInteger("targetBlockX"),compound.getInteger("targetBlockY"),compound.getInteger("targetBlockZ")));
 		getDataManager().set(lastTargetBlock, new BlockPos(compound.getInteger("lastTargetBlockX"),compound.getInteger("lastTargetBlockY"),compound.getInteger("lastTargetBlockZ")));
 		getDataManager().setDirty(targetDirectionX);
@@ -312,6 +349,7 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
 		getDataManager().setDirty(shootTimer);
 		getDataManager().setDirty(happiness);
 		getDataManager().setDirty(stunned);
+		getDataManager().setDirty(hostile);
 		getDataManager().setDirty(targetBlock);
 		getDataManager().setDirty(lastTargetBlock);
 	}
@@ -325,6 +363,7 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
 		compound.setInteger("shootTimer", getDataManager().get(shootTimer));
 		compound.setFloat("happiness", getDataManager().get(happiness));
 		compound.setBoolean("stunned", getDataManager().get(stunned));
+		compound.setBoolean("hostile", getDataManager().get(hostile));
 		compound.setInteger("targetBlockX", getDataManager().get(targetBlock).getX());
 		compound.setInteger("targetBlockY", getDataManager().get(targetBlock).getY());
 		compound.setInteger("targetBlockZ", getDataManager().get(targetBlock).getZ());

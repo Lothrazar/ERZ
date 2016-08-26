@@ -18,7 +18,7 @@ public class ParticleMagicSparkle extends Particle {
 	public double colorR = 0;
 	public double colorG = 0;
 	public double colorB = 0;
-	public int lifetime = 12;
+	public int lifetime = 80;
 	public ResourceLocation texture = new ResourceLocation("roots:entity/sparkle");
 	public ParticleMagicSparkle(World worldIn, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b) {
 		super(worldIn, x,y,z,0,0,0);
@@ -35,11 +35,12 @@ public class ParticleMagicSparkle extends Particle {
 			this.colorB = this.colorB/255.0;
 		}
 		this.setRBGColorF(1, 1, 1);
-		this.particleMaxAge = 8;
+		this.particleMaxAge = 10;
 		this.motionX = vx;
 		this.motionY = vy;
 		this.motionZ = vz;
 		this.particleScale = 5.0f;
+		this.field_190014_F = random.nextFloat()*2.0f*(float)Math.PI;
 	    TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(texture.toString());
 		this.setParticleTexture(sprite);
 	}
@@ -65,7 +66,7 @@ public class ParticleMagicSparkle extends Particle {
 		this.motionX *= 0.9;
 		this.motionY += 0.003;
 		this.motionZ *= 0.9;
-		if (random.nextInt(4) == 0 && this.particleAge < this.particleMaxAge){
+		if (random.nextInt(3) == 0 && this.particleAge < this.particleMaxAge){
 			this.particleAge ++;
 		}
 		float lifeCoeff = ((float)this.particleMaxAge-(float)this.particleAge)/(float)this.particleMaxAge;

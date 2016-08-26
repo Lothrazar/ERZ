@@ -1,5 +1,6 @@
 package elucent.roots.block;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import elucent.roots.Roots;
@@ -75,6 +76,9 @@ public class BlockStandingStoneAccelerator extends TEBlockBase implements ITileE
 	
 	@Override
 	public int getMetaFromState(IBlockState state){
+		if (state.getValue(topState) == null){
+			return 0;
+		}
 		isTop TYPE = (isTop)state.getValue(topState);
 		return TYPE.getID();
 	}
@@ -96,7 +100,7 @@ public class BlockStandingStoneAccelerator extends TEBlockBase implements ITileE
 	
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune){
-		return null;
+		return new ArrayList<ItemStack>();
 	}
 	
 	@Override
@@ -142,7 +146,7 @@ public class BlockStandingStoneAccelerator extends TEBlockBase implements ITileE
 	
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos){
-		if (this.getMetaFromState(state) == 0){
+		if (getMetaFromState(state) == 0){
 			return new AxisAlignedBB(0.25,0,0.25,0.75,1.0,0.75);
 		}
 		else {

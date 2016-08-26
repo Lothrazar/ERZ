@@ -60,6 +60,10 @@ public class CommonProxy {
 		//
 	}
 	
+	public void spawnParticleMagicAltarBigFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){
+		//
+	}
+	
 	public void spawnParticleMagicAuraFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){
 		//
 	}

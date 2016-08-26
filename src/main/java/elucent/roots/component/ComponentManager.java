@@ -31,7 +31,7 @@ public class ComponentManager {
 		components.add(new ComponentPoppy().setPrimaryColor(255,0,0).setSecondaryColor(50,50,50).setTextColor(TextFormatting.RED));
 		components.add(new ComponentBlueOrchid().setPrimaryColor(68,39,26).setSecondaryColor(162,153,150).setTextColor(TextFormatting.GRAY));
 		components.add(new ComponentPoisonousPotato().setPrimaryColor(172,255,81).setSecondaryColor(81,181,255).setTextColor(TextFormatting.YELLOW));
-		components.add(new ComponentOrangeTulip().setPrimaryColor(255,181,70).setSecondaryColor(255,255,0).setTextColor(TextFormatting.GOLD));
+		components.add(new ComponentOrangeTulip().setSecondaryColor(255,181,70).setPrimaryColor(255,255,0).setTextColor(TextFormatting.GOLD));
 		components.add(new ComponentPinkTulip().setPrimaryColor(255,0,51).setSecondaryColor(255,0,249).setTextColor(TextFormatting.LIGHT_PURPLE));
 		components.add(new ComponentOxeyeDaisy().setPrimaryColor(255,254,206).setSecondaryColor(52,0,74).setTextColor(TextFormatting.WHITE));
 		components.add(new ComponentLilyPad().setPrimaryColor(36,255,167).setSecondaryColor(8,0,255).setTextColor(TextFormatting.BLUE));

@@ -113,7 +113,6 @@ public class ItemCastingBase extends Item{
 						}
 					}
 					double cost = this.getCost(comp, potency, efficiency);
-					System.out.println("COST: " + cost);
 					Random random = new Random();
 					if (((EntityPlayer)player).hasCapability(ManaProvider.manaCapability, null) && ManaProvider.get((EntityPlayer)player).getMana() >= ((float)cost)){
 						ManaProvider.get((EntityPlayer)player).setMana((EntityPlayer)player, ManaProvider.get((EntityPlayer)player).getMana()-(((float)cost)));

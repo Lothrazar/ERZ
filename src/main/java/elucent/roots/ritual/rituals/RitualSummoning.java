@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import elucent.roots.RegistryManager;
 import elucent.roots.Util;
+import elucent.roots.entity.EntitySummoner;
 import elucent.roots.ritual.RitualBase;
 
 public class RitualSummoning extends RitualBase {
@@ -33,36 +34,10 @@ public class RitualSummoning extends RitualBase {
 	@Override
 	public void doEffect(World world, BlockPos pos, List<ItemStack> inventory, List<ItemStack> incenses){
 		if (Util.itemListsMatchWithSize(inventory, this.ingredients)){
-			EntityLivingBase toSpawn;
-			try {
-				toSpawn = (EntityLivingBase)result.getConstructor(World.class).newInstance(world);
-				if (toSpawn instanceof EntityCreature){
-					((EntityCreature)toSpawn).setWorld(world);
-					((EntityCreature)toSpawn).onInitialSpawn(world.getDifficultyForLocation(pos), null);
-				}
-				if (toSpawn instanceof EntitySlime){
-					((EntitySlime)toSpawn).setWorld(world);
-					((EntitySlime)toSpawn).onInitialSpawn(world.getDifficultyForLocation(pos), null);
-				}
-				toSpawn.setPosition(pos.getX()+0.5, pos.getY()+2.0, pos.getZ()+0.5);	
-				inventory.clear();
-				if (!world.isRemote){
-					world.spawnEntityInWorld(toSpawn);
-				}
-				world.getTileEntity(pos).markDirty();
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				e.printStackTrace();
-			}
+			EntitySummoner summoner = new EntitySummoner(world,result,pos.getX()+0.5,pos.getY()+2.5,pos.getZ()+0.5,color,secondaryColor,false);
+			world.spawnEntityInWorld(summoner);
+			inventory.clear();
+			world.getTileEntity(pos).markDirty();
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package elucent.roots.block;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import elucent.roots.Roots;
@@ -97,7 +98,7 @@ public class BlockStandingStoneHealer extends TEBlockBase implements ITileEntity
 	
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune){
-		return null;
+		return new ArrayList<ItemStack>();
 	}
 	
 	@Override

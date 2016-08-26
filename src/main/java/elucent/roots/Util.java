@@ -68,6 +68,16 @@ public class Util {
 	    }
 	}
 	
+	public static boolean hasOreDictPrefix(ItemStack stack, String dict){
+		int[] ids = OreDictionary.getOreIDs(stack);
+		for (int i = 0; i < ids.length; i ++){
+			if (OreDictionary.getOreName(ids[i]).substring(0,dict.length()).compareTo(dict.substring(0, dict.length())) == 0){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static float yawDegreesBetweenPoints(double posX, double posY, double posZ, double posX2, double posY2, double posZ2){
 		float f = (float) ((180.0f*Math.atan2(posX2-posX,posZ2-posZ))/(float)Math.PI);
 		return f;
@@ -79,6 +89,18 @@ public class Util {
 			Math.sin(rotPitch),
 			Math.cos(rotYaw)*Math.cos(rotPitch)	
 		);
+	}
+	
+	public static float interpolateYawDegrees(float angle1, float ratio1, float angle2, float ratio2){
+		if (Math.abs(angle1-angle2) > 180){
+			if (angle2 > angle1){
+				angle2 -= 360;
+			}
+			else {
+				angle1 -= 360;
+			}
+		}
+		return angle1*ratio1 + angle2*ratio2;
 	}
 	
 	public static float pitchDegreesBetweenPoints(double posX, double posY, double posZ, double posX2, double posY2, double posZ2){

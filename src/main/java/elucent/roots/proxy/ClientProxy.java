@@ -3,6 +3,7 @@ package elucent.roots.proxy;
 import elucent.roots.RegistryManager;
 import elucent.roots.entity.fx.ParticleMagic;
 import elucent.roots.entity.fx.ParticleMagicAltar;
+import elucent.roots.entity.fx.ParticleMagicAltarBig;
 import elucent.roots.entity.fx.ParticleMagicAltarLine;
 import elucent.roots.entity.fx.ParticleMagicAura;
 import elucent.roots.entity.fx.ParticleMagicLine;
@@ -61,6 +62,12 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void spawnParticleMagicAltarFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){
 		ParticleMagicAltar particle = new ParticleMagicAltar(world,x,y,z,vx,vy,vz,r,g,b);
+		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+	}
+	
+	@Override
+	public void spawnParticleMagicAltarBigFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){
+		ParticleMagicAltarBig particle = new ParticleMagicAltarBig(world,x,y,z,vx,vy,vz,r,g,b);
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 	}
 	

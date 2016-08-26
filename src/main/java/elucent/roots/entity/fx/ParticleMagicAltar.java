@@ -35,7 +35,7 @@ public class ParticleMagicAltar extends Particle {
 		this.motionX = vx;
 		this.motionY = vy;
 		this.motionZ = vz;
-		this.particleScale = 0.5f;
+		this.particleScale = 2.5f;
 	    TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(texture.toString());
 		this.setParticleTexture(sprite);
 	}
@@ -71,7 +71,7 @@ public class ParticleMagicAltar extends Particle {
 		this.particleAlpha = lifeCoeff;
 		this.particleScale = lifeCoeff;
 		if (lifeCoeff > 0.5){
-			this.particleScale = 0.5f+4.0f*(1.0f-lifeCoeff);
+			this.particleScale = 2.5f+2.5f*(1.0f-lifeCoeff);
 		}
 		if (lifeCoeff <= 0.5){
 			this.particleScale = 5.0f*(lifeCoeff);

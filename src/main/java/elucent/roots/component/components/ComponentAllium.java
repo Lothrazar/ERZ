@@ -60,8 +60,8 @@ public class ComponentAllium extends ComponentBase{
 						
 					}
 					else {
-						damageDealt += (int)(5+2*potency);
-						targets.get(i).attackEntityFrom(DamageSource.generic, (int)(5+2*potency));
+						damageDealt += (int)(3+2*potency);
+						targets.get(i).attackEntityFrom(DamageSource.generic, (int)(3+2*potency));
 						targets.get(i).setLastAttacker(caster);
 						targets.get(i).setRevengeTarget((EntityLivingBase)caster);
 						targets.get(i).getEntityData().setDouble(RootsNames.TAG_SPELL_VULNERABILITY, 1.0+0.5*potency);
@@ -89,8 +89,8 @@ public class ComponentAllium extends ComponentBase{
 					if (targets.get(i) instanceof EntityPlayer && ConfigManager.disablePVP){
 					}
 					else {
-						damageDealt += (int)(4+2*potency);
-						targets.get(i).attackEntityFrom(DamageSource.generic, (int)(5+2*potency));
+						damageDealt += (int)(3+2*potency);
+						targets.get(i).attackEntityFrom(DamageSource.generic, (int)(3+2*potency));
 						if (player != null){
 							targets.get(i).attackEntityAsMob(player);
 							targets.get(i).setLastAttacker(player);
