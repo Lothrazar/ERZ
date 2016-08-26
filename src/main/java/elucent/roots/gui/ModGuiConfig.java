@@ -28,6 +28,7 @@ public class ModGuiConfig extends GuiConfig
         //Add categories to config GUI
         list.add(categoryElement(Configuration.CATEGORY_GENERAL, "General", "Geneeral"));
         list.add(categoryElement(Configuration.CATEGORY_CLIENT,"Client","Clieent"));
+        list.add(categoryElement(ConfigManager.CATEGORY_TALISMAN,"Talisman","Talisman"));
         return list;
     }
 
