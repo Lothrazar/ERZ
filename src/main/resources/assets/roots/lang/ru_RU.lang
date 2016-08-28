@@ -45,6 +45,9 @@ item.charmRestoration.name=Шарм восстановления
 item.charmEvocation.name=Шарм воплощения
 item.charmConjuration.name=Шарм колдовства
 item.charmIllusion.name=Шарм иллюзии
+item.spellweaverLance.name=Spellweaver Lance
+item.talismanHunger.name=Талисман голода
+item.talismanPursuit.name=Талисман преследования
 
 tile.mortar.name=Ступка
 tile.imbuer.name=Наполнитель
@@ -88,18 +91,26 @@ tile.logWildwoodSymbolGlowing.name=Дикодревесный светящийс
 tile.barkWildwood.name=Дикодревесная кора
 tile.barkWildwoodSymbol.name=Дикодревесная кора с символом
 tile.barkWildwoodSymbolGlowing.name=Дикодревесная кора со светящимся символом
-tile.otherworldBlock.name=Иномирской блок
-tile.otherworldBlockSlab.name=Иномирская плита
-tile.otherworldBlockSlabDouble.name=Двойная иномирская плита
-tile.otherworldBlockStairs.name=Иномирские ступеньки
-tile.otherworldBlock.name=Иномирские кирпичи
-tile.otherworldBlockSlab.name=Плита из иномирского кирпича
-tile.otherworldBlockSlabDouble.name=Двойная плита из иномирского кирпича
-tile.otherworldBlockStairs.name=Ступеньки из иномирского кирпича
+tile.spiritBlock.name=Иномирской блок
+tile.spiritBlockSlab.name=Иномирская плита
+tile.spiritBlockSlabDouble.name=Двойная иномирская плита
+tile.spiritBlockStairs.name=Иномирские ступеньки
+tile.spiritBrick.name=Иномирские кирпичи
+tile.spiritBrickSlab.name=Плита из иномирского кирпича
+tile.spiritBrickSlabDouble.name=Двойная плита из иномирского кирпича
+tile.spiritBrickStairs.name=Ступеньки из иномирского кирпича
+tile.spiritFont.name=Spirit Font
+tile.spiritConduit.name=Spirit Conduit
 
-entity.roots.spriteling.name=Маленькая фея
-entity.roots.sprite.name=Фея
-entity.roots.greaterSprite.name=Большая фея
+entity.roots.spriteling.name=Маленький дух
+entity.roots.sprite.name=Дух
+entity.roots.greaterSprite.name=Большой дух
+entity.roots.spriteGuardian.name=Дух-страж
+
+roots.dialogue.guardian1=This battle was a test. We can see that you are learned in the natural arts.
+roots.dialogue.guardian2=Despite ripping our comrades from their home in the Otherworld, we see that they are contented here, thanks to you.
+roots.dialogue.guardian3=We hope you continue to use the natural arts for good. As a reward for your efforts so far, we will grant you Essence of our world.
+roots.dialogue.guardian4=We will now take our leave. Farewell, mortal.
 
 roots.command.roots.usage=Команда общего назначения для мода Roots. Введите /roots help, для подкоманд.
 
@@ -107,13 +118,13 @@ roots.attribute.fullset.name=Когда надет полный комплект
 roots.attribute.equipped.name=Когда надет:
 roots.attribute.increasedregen.name=Повышенная регенерация здоровья
 roots.attribute.increasedmanaregen.name=Повышенная регенерация земли
-roots.attribute.potency.name=Мощность
+roots.attribute.potency.name=Эффективность
 
 roots.tooltip.spelltypeheading.name=Тип
 roots.tooltip.spellpotency.name=мощность
 roots.tooltip.spellefficiency.name=эффективность
 roots.tooltip.spellsize.name=размер
-roots.tooltip.usesremaining.name=использований осталось
+roots.tooltip.usesremaining.name= использований осталось
 roots.tooltip.spikes.name=Шипы
 roots.tooltip.forceful.name=Влиятельность
 roots.tooltip.holy.name=Holy
@@ -146,11 +157,10 @@ roots.component.sunflower.name=Солнечный удар
 roots.component.whitetulip.name=Стремительный холод
 roots.component.cobweb.name=Ловушка
 
-roots.mod.spikes.name=Шипы
-roots.mod.holy.name=Holy
-roots.mod.forceful.name=Влиятельность
-roots.mod.aquatic.name=Акватика
-roots.mod.shadowstep.name=Теневой шаг
+roots.component.restoration.name=Восстановление
+roots.component.evocation.name=Воплощение
+roots.component.conjuration.name=Колдовство
+roots.component.illusion.name=Иллюзия
 
 achievement.dust=Лепестковая пыль
 achievement.dust.desc=Сделать лепестковую пыль
@@ -301,6 +311,16 @@ roots.research.spells.cobweb.name=Компонент заклинания: Ло�
 roots.research.spells.cobweb.page1title.name=Западня
 roots.research.spells.cobweb.page1info=By incorporating a cobweb into your spells, you gain the ability to ensnare targets. Using the above recipe, you can create a spell that will significantly slow entities in an area around the spell.
 
+roots.research.spells.charms.name=Иномирские шармы
+roots.research.spells.charms.page1title.name=Шарм: Восстановление
+roots.research.spells.charms.page1info=You discovered the power of the Otherworld charm of restoration, which grants you the power to knock back enemies and remove bad effects.
+roots.research.spells.charms.page2title.name=Шарм: Воплощение
+roots.research.spells.charms.page2info=You discovered the power of Otherworld charm of evocation, which grants you the ability to spawn a projectile which will damage your opponents.
+roots.research.spells.charms.page3title.name=Шарм: Колдовство
+roots.research.spells.charms.page3info=You discovered the power of Otherworld charm of conjuration, which grants you the power to spawn, for 10 seconds, a 10 block long bridge in the direction that you are looking.
+roots.research.spells.charms.page4title.name=Шарм: Иллюзия
+roots.research.spells.charms.page4info=You discovered the power of Otherworld charm of illusion, which grants you the power to not be detected by your enemies for 10 seconds.
+
 roots.research.ritual.name=Ритуалы
 
 roots.research.ritual.ritual.name=Базовая механика ритуалов
@@ -384,7 +404,7 @@ roots.research.ritual.sylvanarmor.page5title.name=Ритуал: Лесные б�
 
 roots.research.ritual.wildwoodarmor.name=Дикодревесная броня
 roots.research.ritual.wildwoodarmor.page1title.name=Деревянная броня
-roots.research.ritual.wildwoodarmor.page1info=Fancy robes are nice and all, but sometimes you just want raw protection. The wildwood armor, built off of iron armor as a base, satisfies that purpose nicely. It has protection in-between iron and diamond armor, but also auto-repairs and increases your natural regeneration, even when out of food.
+roots.research.ritual.wildwoodarmor.page1info=Fancy robes are nice and all, but sometimes you just want raw protection. The wildwood armor, built off of iron armor as a base, satisfies that purpose nicely. It has protection in-between iron and diamond armor, and also auto-repairs itself after sustaining damage.
 roots.research.ritual.wildwoodarmor.page2title.name=Ритуал: Дикодревесная маска
 roots.research.ritual.wildwoodarmor.page3title.name=Ритуал: Дикодревесная пластина
 roots.research.ritual.wildwoodarmor.page4title.name=Ритуал: Дикодревесные поножи
@@ -392,7 +412,7 @@ roots.research.ritual.wildwoodarmor.page5title.name=Ритуал: Дикодре
 
 roots.research.ritual.poweredstones.name=Энергетические камни
 roots.research.ritual.poweredstones.page1title.name=Простые, но эффективные
-roots.research.ritual.poweredstones.page1info=You've used standing stones to channel life energy before, but never on their own. However, using the innate power within an infernal bulb and the regenerative effects of a ritual, you have created standing stones that will perform a simple purpose in an area around them forever, without cost.
+roots.research.ritual.poweredstones.page1info=You've used standing stones to channel life energy before, but never on their own. However, using the innate power within an infernal bulb and the regenerative effects of a ritual, you have created standing stones that will perform a simple purpose in an area around them indefinitely, only requiring redstone power to activate.
 roots.research.ritual.poweredstones.page2title.name=Ритуал: Камень ускорения
 roots.research.ritual.poweredstones.page3title.name=Ускорение
 roots.research.ritual.poweredstones.page3info=The accelerator stone will grant all nearby creatures the Speed II potion effect.
@@ -438,21 +458,6 @@ roots.research.ritual.runicFocus.page3title.name=Заряди его
 roots.research.ritual.runicFocus.page3info=To actually charge the focus, you need some energetic dust from the overworld, as well as some energetic dust from the nether. Using the fiery energies of an infernal stem, you can force the energy from the dusts into the focus, along with the life energy that accompanies all rituals.
 roots.research.ritual.runicFocus.page4title.name=Ритуал: Заряженный рунический фокус
 
-roots.research.ritual.engravedSword.name=Выгравированный клинок
-roots.research.ritual.engravedSword.page1title.name=Модульное оружие
-roots.research.ritual.engravedSword.page1info=Using the properties of a Runic Focus, you have created a new weapon. During the crafting of this weapon you can burn up to four different kinds of barks as additional incenses to add different buffs to the sword. You can mix and match these buffs as you please, and they will stack if you put more than one on at a time.
-roots.research.ritual.engravedSword.page2title.name=Ритуал: Выгравированный клинок
-roots.research.ritual.engravedSword.page3title.name=Шипы
-roots.research.ritual.engravedSword.page3info=Each acacia bark you burn as incense during the sword's crafting will add 2 damage to the sword.
-roots.research.ritual.engravedSword.page4title.name=Влиятельность
-roots.research.ritual.engravedSword.page4info=Each spruce bark you burn as incense during the sword's crafting will add additional knockback to the sword's attacks.
-roots.research.ritual.engravedSword.page5title.name=Holy
-roots.research.ritual.engravedSword.page5info=Each birch bark you burn as incense during the sword's crafting will add 3 additional damage whenever the sword attacks undead creatures.
-roots.research.ritual.engravedSword.page6title.name=Акватика
-roots.research.ritual.engravedSword.page6info=Each jungle bark you burn as incense during the sword's crafting will add 1 drowning damage to the sword's damage output.
-roots.research.ritual.engravedSword.page7title.name=Теневой шаг
-roots.research.ritual.engravedSword.page7info=Each dark oak bark you burn as incense during the sword's crafting will increase your chance to dodge attacks made against you when holding the sword.
-
 roots.research.ritual.timeshift.name=Сдвиг времени
 roots.research.ritual.timeshift.page1title.name=Путешествие во времени
 +roots.research.ritual.timeshift.page1info=After many hours you have discovered that by burning flowers associated with time, you can increment time itself by an amount proportional to the amount of oxeye daisies burned as incense. Four oxeye daisies is sufficient to turn night into day, or vice versa.
@@ -461,6 +466,11 @@ roots.research.ritual.timeshift.page2title.name=Ритуал: Сдвиг вре�
 roots.research.ritual.poweredstones.page16title.name=Ритуал: Эстетический стоячий камень
 roots.research.ritual.poweredstones.page17title.name=Эстетический стоячий камень
 roots.research.ritual.poweredstones.page17info=Базовый стоячий камень. Частицы могут быть окрашены при помощи красного красителя, лазурита, зелёного красителя и сброшены с помощью костной муки.
+
+General.tooltip=Общие конфигурации!
+Client.tooltip=Конфигурации сервера!
+Talisman.tooltip=О талисманах!
+
 
 achievement.tablet=Кому нужны страницы?
 achievement.tablet.desc=Сделать рунический планшет.
@@ -476,16 +486,11 @@ achievement.maxModifiers=Все модификации!
 achievement.maxModifiers.desc=Создать заклинание с любыми тремя одиночными модификаторами.
 achievement.lotsDamage=Понёрфите это!
 achievement.lotsDamage.desc=Нанести более 80 общего урона с одним из заклинаний.
-achievement.timeStop=「МИР」
-achievement.timeStop.desc=Убить существо во время остановки времени.
-achievement.altar=Другой оригинальный™ блок
 achievement.altar.desc=Сделать литейный алтарь.
 achievement.standingStone=Ваш собственный хендж
 achievement.standingStone.desc=Создать настроенный стоячий камень.
 achievement.wildwood=Я есть РУТ
-achievement.wildwood.desc=Надеть полный комплект дикодревесной брони
-achievement.shadow=Я ночь
-achievement.shadow.desc=Выковать выгравированный клинок с Теневой шаг IV.
+achievement.wildwood.desc=Надеть полный комплект дикодревесной брони.
 achievement.spellElements=Воплощение божества.
 achievement.spellElements.desc=Вооружить кристальный посох зачарованиями "Земляной шип", "Одуванчиковый ветер", "Взрыв воды", и "Огненный шар".
 achievement.vampire=Я отвергаю мою человечность!
