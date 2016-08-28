@@ -8,6 +8,7 @@ import elucent.roots.item.ItemDruidRobes;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -103,6 +104,6 @@ public class ComponentBase {
 		
 	}
 	
-	public void castingAction(EntityPlayer player, int count, int potency, int efficiency, int size){
+	public void castingAction(EntityLivingBase player, int count, double potency, double efficiency, double size){
 	}
 }

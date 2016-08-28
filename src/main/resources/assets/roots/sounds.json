@@ -29,6 +29,11 @@
     "category": "player",
     "sounds": [ "roots:staffcast" ] 
     },
+    "meleeCast":
+    { 
+    "category": "player",
+    "sounds": [ "roots:meleecast" ] 
+    },
     "ritualCast":
     { 
     "category": "roots:player",

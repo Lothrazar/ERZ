@@ -159,6 +159,18 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
     	prevPitch2 = prevPitch1;
     	prevPitch1 = rotationPitch;
     	
+    	this.noClip = !getDataManager().get(stunned).booleanValue();
+
+    	if (this.ticksExisted % 4000 == 0 && !this.getDataManager().get(stunned)){
+    		if (random.nextInt(6) == 0 && !this.getEntityWorld().isRemote){
+    			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY,posZ,new ItemStack(RegistryManager.otherworldLeaf,1)));
+    		}
+    	}
+    	
+    	if (getDataManager().get(stunned).booleanValue()){
+    		this.setAttackTarget(null);
+    	}
+    	
     	if (!getDataManager().get(stunned).booleanValue()){
 		    if (this.ticksExisted % 20 == 0){
 		    	if (random.nextInt(4) == 0 && this.getDataManager().get(stunned).booleanValue() == false){
@@ -274,7 +286,7 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
     	getEntityWorld().playSound(posX, posY, posZ, hurtSound, SoundCategory.NEUTRAL, random.nextFloat()*0.1f+0.95f, random.nextFloat()*0.1f+0.7f, false);
     	getDataManager().set(happiness, getDataManager().get(happiness)-5);
     	this.getDataManager().setDirty(happiness);
-		if (source.getEntity() instanceof EntityLivingBase && getDataManager().get(happiness).intValue() <= -5){
+		if (source.getEntity() instanceof EntityLivingBase){
     		this.setAttackTarget((EntityLivingBase)source.getEntity());
     	}
     	return super.attackEntityFrom(source, amount);
@@ -283,9 +295,14 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
     @Override
     public void damageEntity(DamageSource source, float amount){
     	if (this.getHealth() - amount <= 0 && !getDataManager().get(stunned).booleanValue()){
-    		this.setHealth(1);
-    		getDataManager().set(stunned, true);
-    		getDataManager().setDirty(stunned);
+    		if (getDataManager().get(hostile)){
+    			this.setHealth(0);
+    		}
+    		else {
+	    		this.setHealth(1);
+	    		getDataManager().set(stunned, true);
+	    		getDataManager().setDirty(stunned);
+    		}
     	}
     	else {
     		super.damageEntity(source, amount);
@@ -294,7 +311,7 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
     
     @Override
     public boolean attackEntityAsMob(Entity entity){
-    	if (entity instanceof EntityLivingBase && getDataManager().get(happiness).intValue() <= -5){
+    	if (entity instanceof EntityLivingBase){
     		this.setAttackTarget((EntityLivingBase)entity);
     	}
     	return super.attackEntityAsMob(entity);

@@ -45,6 +45,7 @@ item.charmRestoration.name=Charm of Restoration
 item.charmEvocation.name=Charm of Evocation
 item.charmConjuration.name=Charm of Conjuration
 item.charmIllusion.name=Charm of Illusion
+item.spellweaverLance.name=Spellweaver Lance
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
@@ -106,7 +107,7 @@ entity.roots.spriteGuardian.name=Sprite Guardian
 
 roots.dialogue.guardian1=This battle was a test. We can see that you are learned in the natural arts.
 roots.dialogue.guardian2=Despite ripping our comrades from their home in the Otherworld, we see that they are contented here, thanks to you.
-roots.dialogue.guardian3=We hope you continue to use the natural arts for good. As a reward for your efforts so far, we will grant you Essence of our world, and permit you to view more advanced knowledge in your Runic Tablet.
+roots.dialogue.guardian3=We hope you continue to use the natural arts for good. As a reward for your efforts so far, we will grant you Essence of our world.
 roots.dialogue.guardian4=We will now take our leave. Farewell, mortal.
 
 roots.command.roots.usage=A general purpose command for the roots mod. Enter /roots help for subcommands.

@@ -310,21 +310,6 @@ public class EventManager {
 				}
 			}
 		}
-		if(event.getEntityLiving().getEntityData().hasKey(RootsNames.TAG_WHITE_TULIP)){
-			EntityLivingBase entity = event.getEntityLiving();
-			BlockPos pos = new BlockPos(entity.posX, entity.posY, entity.posZ);
-			if(!entity.getEntityWorld().isAirBlock(pos.down())){
-				if(entity.getEntityWorld().getBlockState(pos.down()) == Blocks.WATER.getDefaultState()){
-					entity.getEntityWorld().setBlockState(pos.down(), Blocks.ICE.getDefaultState());
-				} else{
-					entity.getEntityWorld().setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState());
-				}
-			}	
-			entity.getEntityData().setInteger(RootsNames.TAG_WHITE_TULIP, event.getEntityLiving().getEntityData().getInteger(RootsNames.TAG_WHITE_TULIP)-1);
-			if(entity.getEntityData().getInteger(RootsNames.TAG_WHITE_TULIP) <= 0){
-				entity.getEntityData().removeTag(RootsNames.TAG_WHITE_TULIP);
-			}
-		}
 	}
 	
 	@SubscribeEvent

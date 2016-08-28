@@ -49,6 +49,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import sun.misc.Unsafe;
 
 public class EntitySprite  extends EntityFlying implements ISprite {// implements IRangedAttackMob {
     public float range = 64;
@@ -133,6 +134,8 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
     public void onUpdate(){
     	super.onUpdate();
     	
+    	this.noClip = !getDataManager().get(stunned).booleanValue();
+    	
     	prevYaw4 = prevYaw3;
     	prevYaw3 = prevYaw2;
     	prevYaw2 = prevYaw1;
@@ -142,6 +145,16 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
     	prevPitch3 = prevPitch2;
     	prevPitch2 = prevPitch1;
     	prevPitch1 = rotationPitch;
+    	
+    	if (this.ticksExisted % 4000 == 0 && !this.getDataManager().get(stunned)){
+    		if (random.nextInt(6) == 0 && !this.getEntityWorld().isRemote){
+    			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY,posZ,new ItemStack(RegistryManager.otherworldLeaf,1)));
+    		}
+    	}
+    	
+    	if (getDataManager().get(stunned).booleanValue()){
+    		this.setAttackTarget(null);
+    	}
     	
     	if (!getDataManager().get(stunned).booleanValue()){
 		    if (this.ticksExisted % 20 == 0){
@@ -233,9 +246,9 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
     	getEntityWorld().playSound(posX, posY, posZ, hurtSound, SoundCategory.NEUTRAL, random.nextFloat()*0.1f+0.95f, random.nextFloat()*0.1f+0.95f, false);
     	getDataManager().set(happiness, getDataManager().get(happiness)-5);
     	this.getDataManager().setDirty(happiness);
-		if (source.getEntity() instanceof EntityLivingBase && getDataManager().get(happiness).intValue() <= -5){
+		if (source.getEntity() instanceof EntityLivingBase){
     		this.setAttackTarget((EntityLivingBase)source.getEntity());
-    	}
+		}
     	return super.attackEntityFrom(source, amount);
     }
     
@@ -253,7 +266,7 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
     
     @Override
     public boolean attackEntityAsMob(Entity entity){
-    	if (entity instanceof EntityLivingBase && getDataManager().get(happiness).intValue() <= -5){
+    	if (entity instanceof EntityLivingBase){
     		this.setAttackTarget((EntityLivingBase)entity);
     	}
     	return super.attackEntityAsMob(entity);

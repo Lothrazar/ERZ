@@ -149,10 +149,10 @@ public class Util {
 		double x = player.posX;
 		double y = player.posY + player.getEyeHeight();
 		double z = player.posZ;
-		for (int i = 0; i < reachDistance*10.0; i ++){
-			x += player.getLookVec().xCoord*0.1;
-			y += player.getLookVec().yCoord*0.1;
-			z += player.getLookVec().zCoord*0.1;
+		for (int i = 0; i < reachDistance*100.0; i ++){
+			x += player.getLookVec().xCoord*0.01;
+			y += player.getLookVec().yCoord*0.01;
+			z += player.getLookVec().zCoord*0.01;
 			List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(x-0.1,y-0.1,z-0.1,x+0.1,y+0.1,z+0.1));
 			if (entities.size() > 0){
 				if (entities.get(0).getUniqueID() != player.getUniqueID()){

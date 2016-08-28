@@ -51,10 +51,10 @@ public class ComponentOrangeTulip extends ComponentBase{
 	}
 	
 	@Override
-	public void castingAction(EntityPlayer player, int count, int potency, int efficiency, int size){
+	public void castingAction(EntityLivingBase player, int count, double potency, double efficiency, double size){
 		super.castingAction(player, count, potency, efficiency, size);
 		if (count % 1 == 0){
-			List<Entity> entities = (List<Entity>)player.worldObj.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(player.posX-(1.0+(double)0.5*(3.0+size)),player.posY-(1.0+(double)0.5*(3.0+size)),player.posZ-(1.0+(double)0.5*(3.0+size)),player.posX+(1.0+(double)0.5*(3.0+size)),player.posY+(1.0+(double)0.5*(3.0+size)),player.posZ+(1.0+0.5*(double)(3.0+size))));
+			List<Entity> entities = (List<Entity>)player.getEntityWorld().getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(player.posX-(1.0+(double)0.5*(3.0+size)),player.posY-(1.0+(double)0.5*(3.0+size)),player.posZ-(1.0+(double)0.5*(3.0+size)),player.posX+(1.0+(double)0.5*(3.0+size)),player.posY+(1.0+(double)0.5*(3.0+size)),player.posZ+(1.0+0.5*(double)(3.0+size))));
 			for (int i = 0; i < entities.size(); i ++){
 				if (entities.get(i).getUniqueID().compareTo(player.getUniqueID()) != 0){
 					if (entities.get(i) instanceof EntityLivingBase || entities.get(i) instanceof EntityArrow){

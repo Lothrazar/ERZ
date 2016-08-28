@@ -122,6 +122,19 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
     @Override
     public void onUpdate(){
     	super.onUpdate();
+    	
+    	this.noClip = !getDataManager().get(stunned).booleanValue();
+
+    	if (this.ticksExisted % 4000 == 0 && !this.getDataManager().get(stunned)){
+    		if (random.nextInt(6) == 0 && !this.getEntityWorld().isRemote){
+    			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY,posZ,new ItemStack(RegistryManager.otherworldLeaf,1)));
+    		}
+    	}
+    	
+    	if (getDataManager().get(stunned).booleanValue()){
+    		this.setAttackTarget(null);
+    	}
+    	
     	if (!getDataManager().get(stunned).booleanValue()){
 		    if (this.ticksExisted % 20 == 0){
 		    	if (random.nextInt(4) == 0 && this.getDataManager().get(stunned).booleanValue() == false){
@@ -213,7 +226,7 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
     public boolean attackEntityFrom(DamageSource source, float amount){
     	getEntityWorld().playSound(posX, posY, posZ, hurtSound, SoundCategory.NEUTRAL, random.nextFloat()*0.1f+0.95f, random.nextFloat()*0.1f+1.7f, false);
     	getDataManager().set(happiness, getDataManager().get(happiness)-5);
-    	if (source.getEntity() instanceof EntityLivingBase && getDataManager().get(happiness).intValue() <= -5){
+    	if (source.getEntity() instanceof EntityLivingBase){
     		this.setAttackTarget((EntityLivingBase)source.getEntity());
     	}
     	return super.attackEntityFrom(source, amount);
@@ -233,7 +246,7 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
     
     @Override
     public boolean attackEntityAsMob(Entity entity){
-    	if (entity instanceof EntityLivingBase && getDataManager().get(happiness).intValue() <= -5){
+    	if (entity instanceof EntityLivingBase){
     		this.setAttackTarget((EntityLivingBase)entity);
     	}
     	return super.attackEntityAsMob(entity);

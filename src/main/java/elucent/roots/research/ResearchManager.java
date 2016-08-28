@@ -264,7 +264,7 @@ public class ResearchManager {
 						   .addPage(new ResearchPage()
 	                    		    )
 						   .addPage(new ResearchPage()
-	                    		    .addAltarRecipe(RitualManager.getRitualFromName("imbuer"))
+	                    		    .addAltarRecipe(RitualManager.getRitualFromName("staffImbuer"))
 	                    		    )
 						   .addPage(new ResearchPage()
 	                    		    )

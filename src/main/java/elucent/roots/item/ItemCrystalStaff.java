@@ -49,13 +49,13 @@ public class ItemCrystalStaff extends ItemCastingBase implements IManaRelatedIte
 	}
 	
 	@Override
-	public double getCost(ComponentBase comp, int potency, int efficiency){
+	public double getCost(ComponentBase comp, double potency, double efficiency){
 		return super.getCost(comp, potency+1, efficiency);
 	}
 	
 	@Override
-	public int getUseCount(int efficiency){
-		return 129+64*efficiency;
+	public int getUseCount(double efficiency){
+		return 129+(int)(64*efficiency);
 	}
 	
 	@SideOnly(Side.CLIENT)

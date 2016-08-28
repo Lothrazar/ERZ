@@ -32,7 +32,7 @@ public class ComponentPeony extends ComponentBase{
 	}
 	
 	@Override
-	public void castingAction(EntityPlayer player, int count, int potency, int efficiency, int size){
+	public void castingAction(EntityLivingBase player, int count, double potency, double efficiency, double size){
 		World world = player.worldObj;
 		int x = player.getPosition().getX();
 		int y = player.getPosition().getY();

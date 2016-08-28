@@ -2,6 +2,9 @@ package elucent.roots.item;
 
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+
+import com.google.common.collect.Sets;
 
 import elucent.roots.Roots;
 import elucent.roots.Util;
@@ -9,14 +12,18 @@ import elucent.roots.capability.mana.ManaProvider;
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.ComponentManager;
 import elucent.roots.component.EnumCastType;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -28,12 +35,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class ItemCastingBase extends Item{
-	public static SoundEvent castingSound = new SoundEvent(new ResourceLocation("roots:staffCast"));
+public class ItemMeleeCastingBase extends ItemTool {
+	public static SoundEvent castingSound = new SoundEvent(new ResourceLocation("roots:meleeCast"));
 	public static int spellSlots = 0;
 	
-	public ItemCastingBase(String name, int spellSlots){
-		super();
+	public ItemMeleeCastingBase(String name, int spellSlots, float attackDamage, float attackSpeed){
+		super(attackDamage, attackSpeed-4.0f, ToolMaterial.WOOD, Sets.newHashSet(new Block[]{}));
+		this.setMaxDamage(-1);
 		this.spellSlots = spellSlots;
 		setUnlocalizedName(name);
 		setCreativeTab(Roots.tab);
@@ -59,7 +67,17 @@ public class ItemCastingBase extends Item{
 	
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack){
-		return EnumAction.BOW;
+		return EnumAction.NONE;
+	}
+	
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity){
+		if (entity instanceof EntityLivingBase){
+			if (((EntityLivingBase)entity).hurtResistantTime == 0){
+				this.cast(stack, player.getEntityWorld(), player, EnumHand.MAIN_HAND);
+			}
+		}
+		return false;
 	}
 	
 	@Override
@@ -80,15 +98,13 @@ public class ItemCastingBase extends Item{
 		}
 	}
 	
-	public double getCost(ComponentBase component, double potency, double efficiency){
-		return (component.xpCost+(float)potency*4.0f)/(0.75*efficiency+1);//(component.xpCost + potency)*(((1.0+(0.75/((double)efficiency)))/2.0))*(1.0/((0.75+(1.0/((double)potency)))/2.0));
+	@Override
+	public boolean isDamageable(){
+		return false;
 	}
 	
-	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase player, int timeLeft){
-		if (timeLeft < (72000-12)){
-			this.cast(stack,world,player,player.getActiveHand());
-		}
+	public double getCost(ComponentBase component, double potency, double efficiency){
+		return (component.xpCost+(float)potency*4.0f)/(0.75*efficiency+1);//(component.xpCost + potency)*(((1.0+(0.75/((double)efficiency)))/2.0))*(1.0/((0.75+(1.0/((double)potency)))/2.0));
 	}
 	
 	public void cast(ItemStack stack, World world, EntityLivingBase player, EnumHand hand){
@@ -142,14 +158,14 @@ public class ItemCastingBase extends Item{
 	public static void decrementUses(ItemStack stack, EntityLivingBase player, EnumHand hand){
 		stack.getTagCompound().setInteger("uses"+getSlot(stack), getUses(stack)-1);
 		if (getUses(stack) < 0){
-			((ItemCastingBase)stack.getItem()).setEffectInSlot(stack,getSlot(stack),"",0,0,0);
+			((ItemMeleeCastingBase)stack.getItem()).setEffectInSlot(stack,getSlot(stack),"",0,0,0);
 			boolean isEmpty = true;
 			for (int i = 0; i < spellSlots; i ++){
 				if (!stack.getTagCompound().getString("effect"+i).equals("")){
 					isEmpty = false;
 				}
 			}
-			if (((ItemCastingBase)stack.getItem()).destroyWhenEmpty()){
+			if (((ItemMeleeCastingBase)stack.getItem()).destroyWhenEmpty()){
 				player.setItemStackToSlot(hand == EnumHand.MAIN_HAND ? EntityEquipmentSlot.MAINHAND : EntityEquipmentSlot.OFFHAND, null);
 			}
 		}
@@ -178,7 +194,7 @@ public class ItemCastingBase extends Item{
 		return 33+(int)(16*efficiency);
 	}
 	
-	public void setEffectInSlot(ItemStack stack, int slot, String effect, int potency, int efficiency, int size){
+	public void setEffectInSlot(ItemStack stack, int slot, String effect, double potency, double efficiency, double size){
 		if (slot > spellSlots){
 			slot = spellSlots;
 		}
@@ -277,24 +293,5 @@ public class ItemCastingBase extends Item{
 			}
 		}
 		return slotChanged;
-	}
-	
-	@Override
-	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count){
-		if (stack.hasTagCompound()){
-			ComponentBase comp = ComponentManager.getComponentFromName(this.getEffect(stack));
-			double potency = this.getPotency(stack);
-			double efficiency = this.getEfficiency(stack);
-			double size = this.getSize(stack);
-			if (comp != null){
-				comp.castingAction((EntityPlayer) player, count, potency, efficiency, size);
-				if (itemRand.nextBoolean()){	
-					Roots.proxy.spawnParticleMagicLineFX(player.getEntityWorld(), player.posX+2.0*(itemRand.nextFloat()-0.5), player.posY+2.0*(itemRand.nextFloat()-0.5)+1.0, player.posZ+2.0*(itemRand.nextFloat()-0.5), player.posX, player.posY+1.0, player.posZ, comp.primaryColor.xCoord, comp.primaryColor.yCoord, comp.primaryColor.zCoord);
-				}
-				else {
-					Roots.proxy.spawnParticleMagicLineFX(player.getEntityWorld(), player.posX+2.0*(itemRand.nextFloat()-0.5), player.posY+2.0*(itemRand.nextFloat()-0.5)+1.0, player.posZ+2.0*(itemRand.nextFloat()-0.5), player.posX, player.posY+1.0, player.posZ, comp.secondaryColor.xCoord, comp.secondaryColor.yCoord, comp.secondaryColor.zCoord);
-				}
-			}
-		}
 	}
 }

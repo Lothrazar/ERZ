@@ -83,9 +83,9 @@ public class RitualSpiritSummoning extends RitualSummoning {
 				}
 			}
 		}
-		List<EntitySpriteling> spritelings = world.getEntitiesWithinAABB(EntitySpriteling.class, new AxisAlignedBB(pos.getX()-7.5,pos.getY()-7.5,pos.getZ()-7.5,pos.getX()+8.5,pos.getY()+22.5,pos.getZ()+8.5));
-		List<EntitySprite> sprites = world.getEntitiesWithinAABB(EntitySprite.class, new AxisAlignedBB(pos.getX()-7.5,pos.getY()-7.5,pos.getZ()-7.5,pos.getX()+8.5,pos.getY()+22.5,pos.getZ()+8.5));
-		List<EntityGreaterSprite> greaterSprites = world.getEntitiesWithinAABB(EntityGreaterSprite.class, new AxisAlignedBB(pos.getX()-7.5,pos.getY()-7.5,pos.getZ()-7.5,pos.getX()+8.5,pos.getY()+22.5,pos.getZ()+8.5));
+		List<EntitySpriteling> spritelings = world.getEntitiesWithinAABB(EntitySpriteling.class, new AxisAlignedBB(pos.getX()-14.5,pos.getY()-14.5,pos.getZ()-14.5,pos.getX()+15.5,pos.getY()+22.5,pos.getZ()+15.5));
+		List<EntitySprite> sprites = world.getEntitiesWithinAABB(EntitySprite.class, new AxisAlignedBB(pos.getX()-14.5,pos.getY()-14.5,pos.getZ()-14.5,pos.getX()+15.5,pos.getY()+22.5,pos.getZ()+15.5));
+		List<EntityGreaterSprite> greaterSprites = world.getEntitiesWithinAABB(EntityGreaterSprite.class, new AxisAlignedBB(pos.getX()-14.5,pos.getY()-14.5,pos.getZ()-14.5,pos.getX()+15.5,pos.getY()+22.5,pos.getZ()+15.5));
 		if (spritelings.size() < numSpritelings){
 			return false;
 		}
