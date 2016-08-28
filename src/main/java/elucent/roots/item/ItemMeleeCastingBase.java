@@ -12,6 +12,7 @@ import elucent.roots.capability.mana.ManaProvider;
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.ComponentManager;
 import elucent.roots.component.EnumCastType;
+import elucent.roots.event.SpellCastEvent;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -34,6 +35,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class ItemMeleeCastingBase extends ItemTool {
 	public static SoundEvent castingSound = new SoundEvent(new ResourceLocation("roots:meleeCast"));
@@ -113,10 +115,15 @@ public class ItemMeleeCastingBase extends ItemTool {
 			if (true){
 				world.playSound(player.posX, player.posY, player.posZ, this.castingSound, SoundCategory.PLAYERS, 0.95f+0.1f*itemRand.nextFloat(), 0.95f+0.1f*itemRand.nextFloat(), false);
 				ComponentBase comp = ComponentManager.getComponentFromName(this.getEffect(stack));
-				if (comp != null){
-					double potency = this.getPotency(stack);
-					double efficiency = this.getEfficiency(stack);
-					double size = this.getSize(stack);
+				double potency = this.getPotency(stack);
+				double efficiency = this.getEfficiency(stack);
+				double size = this.getSize(stack);
+				SpellCastEvent event = new SpellCastEvent(comp,potency,efficiency,size);
+				MinecraftForge.EVENT_BUS.post(event);
+				potency = event.getPotency();
+				efficiency = event.getEfficiency();
+				size = event.getSize();
+				if (comp != null && !event.isCanceled()){
 					if (((EntityPlayer)player).getItemStackFromSlot(EntityEquipmentSlot.HEAD) != null
 						&& ((EntityPlayer)player).getItemStackFromSlot(EntityEquipmentSlot.CHEST) != null
 						&& ((EntityPlayer)player).getItemStackFromSlot(EntityEquipmentSlot.LEGS) != null

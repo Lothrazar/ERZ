@@ -9,6 +9,7 @@ import elucent.roots.capability.mana.ManaProvider;
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.ComponentManager;
 import elucent.roots.component.EnumCastType;
+import elucent.roots.event.SpellCastEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,6 +28,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class ItemCastingBase extends Item{
 	public static SoundEvent castingSound = new SoundEvent(new ResourceLocation("roots:staffCast"));
@@ -286,7 +288,12 @@ public class ItemCastingBase extends Item{
 			double potency = this.getPotency(stack);
 			double efficiency = this.getEfficiency(stack);
 			double size = this.getSize(stack);
-			if (comp != null){
+			SpellCastEvent event = new SpellCastEvent(comp,potency,efficiency,size);
+			MinecraftForge.EVENT_BUS.post(event);
+			potency = event.getPotency();
+			efficiency = event.getEfficiency();
+			size = event.getSize();
+			if (comp != null && !event.isCanceled()){
 				comp.castingAction((EntityPlayer) player, count, potency, efficiency, size);
 				if (itemRand.nextBoolean()){	
 					Roots.proxy.spawnParticleMagicLineFX(player.getEntityWorld(), player.posX+2.0*(itemRand.nextFloat()-0.5), player.posY+2.0*(itemRand.nextFloat()-0.5)+1.0, player.posZ+2.0*(itemRand.nextFloat()-0.5), player.posX, player.posY+1.0, player.posZ, comp.primaryColor.xCoord, comp.primaryColor.yCoord, comp.primaryColor.zCoord);

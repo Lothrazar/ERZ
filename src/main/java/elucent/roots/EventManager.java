@@ -3,6 +3,7 @@ package elucent.roots;
 
 import elucent.roots.capability.mana.ManaProvider;
 import elucent.roots.component.components.ComponentCharmIllusion;
+import elucent.roots.entity.EntityHomingProjectile;
 import elucent.roots.entity.ISprite;
 import elucent.roots.item.IManaRelatedItem;
 import elucent.roots.item.ItemCrystalStaff;
@@ -19,6 +20,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.SkeletonType;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -27,6 +29,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -77,6 +80,7 @@ public class EventManager {
 				}
 				if (block == Blocks.CHORUS_FLOWER){
 					if (random.nextInt(ConfigManager.dragonsEyeDropChance) == 0){
+						event.getDrops().clear();
 						event.getDrops().add(new ItemStack(RegistryManager.dragonsEye,1));
 					}
 				}
@@ -325,7 +329,91 @@ public class EventManager {
 	}
 	
 	@SubscribeEvent
+	public void onLivingDeath(LivingDeathEvent event){
+		if (event.getSource().getEntity() instanceof EntityPlayer){
+			EntityPlayer player = (EntityPlayer)event.getSource().getEntity();
+			for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
+				if (player.inventory.getStackInSlot(i) != null){
+					if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.talismanPursuit && !player.getEntityWorld().isRemote){
+						if (event.getEntityLiving() instanceof EntityAnimal){
+							List<EntityAnimal> animals = event.getEntity().getEntityWorld().getEntitiesWithinAABB(EntityAnimal.class, new AxisAlignedBB(event.getEntity().posX-10.0,event.getEntity().posY-10.0,event.getEntity().posZ-10.0,event.getEntity().posX+10.0,event.getEntity().posY+10.0,event.getEntity().posZ+10.0));
+							ArrayList<EntityAnimal> trimmedAnimals = new ArrayList<EntityAnimal>();
+							for (int j = 0; j < animals.size(); j ++){
+								if (animals.get(j).getUniqueID().compareTo(event.getEntityLiving().getUniqueID()) != 0){
+									trimmedAnimals.add(animals.get(j));
+								}
+							}
+							if (trimmedAnimals.size() > 0){
+								EntityHomingProjectile proj = new EntityHomingProjectile(player.getEntityWorld());
+								proj.setPosition(event.getEntity().posX, event.getEntity().posY+event.getEntity().height/2.0f, event.getEntity().posZ);
+								proj.onInitialSpawn(player.getEntityWorld().getDifficultyForLocation(event.getEntity().getPosition()), null);
+								proj.setVelocity(random.nextDouble()-0.5, random.nextDouble()-0.5, random.nextDouble()-0.5);
+				    			proj.initSpecial(trimmedAnimals.get(0), 4.0f, new Vec3d(234,41,255));
+								player.getEntityWorld().spawnEntityInWorld(proj);
+							}
+						}
+						if (event.getEntityLiving() instanceof EntityMob){
+							List<EntityMob> mobs = event.getEntity().getEntityWorld().getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(event.getEntity().posX-10.0,event.getEntity().posY-10.0,event.getEntity().posZ-10.0,event.getEntity().posX+10.0,event.getEntity().posY+10.0,event.getEntity().posZ+10.0));
+							ArrayList<EntityMob> trimmedMobs = new ArrayList<EntityMob>();
+							for (int j = 0; j < mobs.size(); j ++){
+								if (mobs.get(j).getUniqueID().compareTo(event.getEntityLiving().getUniqueID()) != 0){
+									trimmedMobs.add(mobs.get(j));
+								}
+							}
+							if (trimmedMobs.size() > 0){
+								EntityHomingProjectile proj = new EntityHomingProjectile(player.getEntityWorld());
+								proj.setPosition(event.getEntity().posX, event.getEntity().posY+event.getEntity().height/2.0f, event.getEntity().posZ);
+								proj.onInitialSpawn(player.getEntityWorld().getDifficultyForLocation(event.getEntity().getPosition()), null);
+								proj.setVelocity(random.nextDouble()-0.5, random.nextDouble()-0.5, random.nextDouble()-0.5);
+				    			proj.initSpecial(trimmedMobs.get(0), 4.0f, new Vec3d(234,41,255));
+								player.getEntityWorld().spawnEntityInWorld(proj);
+							}
+						}
+						if (event.getEntityLiving() instanceof EntityPlayer){
+							List<EntityPlayer> players = event.getEntity().getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(event.getEntity().posX-10.0,event.getEntity().posY-10.0,event.getEntity().posZ-10.0,event.getEntity().posX+10.0,event.getEntity().posY+10.0,event.getEntity().posZ+10.0));
+							ArrayList<EntityPlayer> trimmedPlayers = new ArrayList<EntityPlayer>();
+							for (int j = 0; j < players.size(); j ++){
+								if (players.get(j).getUniqueID().compareTo(player.getUniqueID()) != 0){
+									trimmedPlayers.add(players.get(j));
+								}
+							}
+							if (trimmedPlayers.size() > 0){
+								EntityHomingProjectile proj = new EntityHomingProjectile(player.getEntityWorld());
+								proj.setPosition(event.getEntity().posX, event.getEntity().posY+event.getEntity().height/2.0f, event.getEntity().posZ);
+								proj.onInitialSpawn(player.getEntityWorld().getDifficultyForLocation(event.getEntity().getPosition()), null);
+								proj.setVelocity(random.nextDouble()-0.5, random.nextDouble()-0.5, random.nextDouble()-0.5);
+				    			proj.initSpecial(trimmedPlayers.get(0), 4.0f, new Vec3d(234,41,255));
+								player.getEntityWorld().spawnEntityInWorld(proj);
+							}
+						}
+						return;
+					}
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
 	public void onLivingDamage(LivingHurtEvent event){
+		if (event.getEntityLiving() instanceof EntityPlayer){
+			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
+			if (event.getSource().isExplosion() || event.getSource().isFireDamage() || event.getSource().isMagicDamage()){
+				for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
+					if (player.inventory.getStackInSlot(i) != null){
+						if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.talismanHunger){
+							if (player.inventory.getStackInSlot(i).hasTagCompound()){
+								if (player.inventory.getStackInSlot(i).getTagCompound().getInteger("timer") == 0){
+									event.setCanceled(true);
+									player.inventory.getStackInSlot(i).getTagCompound().setInteger("timer", ConfigManager.hungerTalismanTimer);
+									return;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
 		if (event.getEntityLiving().getEntityData().hasKey(RootsNames.TAG_SPELL_VULNERABILITY)){
 			event.setAmount((float) (event.getAmount()*(1.0+event.getEntityLiving().getEntityData().getDouble("RMOD_vuln"))));
 			event.getEntityLiving().getEntityData().removeTag(RootsNames.TAG_SPELL_VULNERABILITY);
@@ -352,7 +440,7 @@ public class EventManager {
 	{
 		onLivingAttack(event);
 	}
-
+	
 	@SubscribeEvent
 	public void onTargetEvent(LivingSetAttackTargetEvent event)
 	{
@@ -376,7 +464,7 @@ public class EventManager {
 
 	@SubscribeEvent
 	public void onAttackEvent(LivingHurtEvent event) {
-			isEntityAttacked = true;
+		isEntityAttacked = true;
 	}
 
 

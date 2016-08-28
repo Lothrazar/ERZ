@@ -43,26 +43,28 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class EntitySpriteProjectile  extends EntityFlying {// implements IRangedAttackMob {
+public class EntityHomingProjectile  extends EntityFlying {// implements IRangedAttackMob {
     public float range = 64;
     public float addDirectionX = 0;
     public float addDirectionY = 0;
     public float twirlTimer = 0;
+    public Vec3d color = new Vec3d(255,255,255);
     public int lifetime = 80;
     Random random = new Random();
     EntityLivingBase target = null;
     public float damage = 2.0f;
 
-    public EntitySpriteProjectile(World worldIn) {
+    public EntityHomingProjectile(World worldIn) {
     	super(worldIn);
         setSize(1.0f,1.0f);
         this.isAirBorne = true;
         this.setInvisible(true);
     }
     
-    public void initSpecial(EntityLivingBase target, float damage){
+    public void initSpecial(EntityLivingBase target, float damage, Vec3d color){
     	this.target = target;
     	this.damage = damage;
+    	this.color = color;
     }
     
     @Override
@@ -71,8 +73,8 @@ public class EntitySpriteProjectile  extends EntityFlying {// implements IRanged
 	    	if (entity.getUniqueID().compareTo(target.getUniqueID()) == 0){
 	    		target.attackEntityFrom(DamageSource.generic, damage);
 	    		this.getEntityWorld().removeEntity(this);
-				for (int i = 0; i < 20; i ++){
-					Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX, posY+height/2.0f, posZ, Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), 107, 255, 28);
+				for (int i = 0; i < 40; i ++){
+					Roots.proxy.spawnParticleMagicAuraFX(getEntityWorld(), posX, posY, posZ, Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), color.xCoord, color.yCoord, color.zCoord);
 				}
 	    	}
     	}
@@ -99,7 +101,7 @@ public class EntitySpriteProjectile  extends EntityFlying {// implements IRanged
 				double x = posX;
 				double y = posY;
 				double z = posZ;
-				Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), x, y, z, -0.125*moveVec.xCoord, -0.125*moveVec.yCoord, -0.125*moveVec.zCoord, 107, 255, 28);
+				Roots.proxy.spawnParticleMagicAuraFX(getEntityWorld(), x, y, z, -0.125*moveVec.xCoord, -0.125*moveVec.yCoord, -0.125*moveVec.zCoord, color.xCoord, color.yCoord, color.zCoord);
 			}
 		}
     }
@@ -111,10 +113,12 @@ public class EntitySpriteProjectile  extends EntityFlying {// implements IRanged
     
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount){
-    	this.getEntityWorld().removeEntity(this);
-		for (int i = 0; i < 20; i ++){
-			Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX, posY+height/2.0f, posZ, Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), 107, 255, 28);
-		}
+    	if (this.ticksExisted > 2){
+	    	this.getEntityWorld().removeEntity(this);
+			for (int i = 0; i < 40; i ++){
+				Roots.proxy.spawnParticleMagicAuraFX(getEntityWorld(), posX, posY+height/2.0f, posZ, Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), color.xCoord, color.yCoord, color.zCoord);
+			}
+    	}
     	return false;
     }
 

@@ -35,16 +35,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegistryManager {
-	public static Item spellweaverLance, otherworldLeaf, otherworldSubstance, debugWand, rootyStew, healingPoultice, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion;
+	public static Item talismanHunger, talismanPursuit, spellweaverLance, otherworldLeaf, otherworldSubstance, debugWand, rootyStew, healingPoultice, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion;
 	public static Item manaResearchIcon;
 	public static ItemBlock itemBlockSpiritBlockSlab, itemBlockSpiritBrickSlab, itemBlockPlankWildwoodSlab, itemBlockRuneStoneSlab, itemBlockRuneStoneBrickSlab, itemBlockRuneStoneTileSlab;
 	public static Block spiritConduit, spiritFont, standingStoneGrower, standingStoneHealer, standingStoneIgniter, standingStoneEntangler, standingStoneAccelerator, standingStoneAesthetic, standingStoneRepulsor, standingStoneVacuum, mortar, imbuer, altar, druidChalice, standingStoneT1, standingStoneT2, brazier;
 	public static Block bridge, spiritBlock, spiritBlockSlab, spiritBlockSlabDouble, spiritBlockStairs, spiritBrick, spiritBrickSlab, spiritBrickSlabDouble, spiritBrickStairs, runeStoneStairs, runeStoneBrickStairs, runeStoneTileStairs, plankWildwoodStairs, barkWildwood, barkWildwoodSymbolGlowing, barkWildwoodSymbol, logWildwood, logWildwoodSymbol, logWildwoodSymbolGlowing, plankWildwood, plankWildwoodSlab, plankWildwoodSlabDouble, runeStone, runeStoneBrick, runeStoneSlabDouble, runeStoneSlab, runeStoneBrickSlab, runeStoneBrickSlabDouble, runeStoneTile, runeStoneTileSlab, runeStoneTileSlabDouble, runeStoneSymbol, runeStoneSymbolGlowing;
-
-	public static final List<ItemTalisman> TALISMAN_ITEM = new ArrayList<>();
-
-	public static ItemTalisman itemTalismanHunger = new ItemHungerTalisman(),itemPursuitTalisman = new ItemPursuitTalisman();
-
 
 	public static Achievement achieveDust, achieveTablet, achieveSpellRose, achieveSpellGrowth, achieveSpellInsanity, achieveMaxModifiers, achieveLotsDamage, achieveTimeStop, achieveAltar, achieveStandingStone, achieveWildwood, achieveShadow, achieveSpellElements, achieveVampire;
 	
@@ -98,8 +93,8 @@ public class RegistryManager {
 		GameRegistry.registerItem(otherworldLeaf = new ItemMaterial("otherworldLeaf"),"otherworldLeaf");
 		GameRegistry.registerItem(otherworldSubstance = new ItemMaterial("otherworldSubstance"),"otherworldSubstance");
 		GameRegistry.registerItem(spellweaverLance = new ItemSpellweaverLance(),"spellweaverLance");
-		GameRegistry.register(itemTalismanHunger);
-		GameRegistry.register(itemPursuitTalisman);
+		GameRegistry.registerItem(talismanHunger = new ItemHungerTalisman(),"talismanHunger");
+		GameRegistry.registerItem(talismanPursuit = new ItemPursuitTalisman(),"talismanPursuit");
 
 		/**
 		 * REGISTERING BLOCKS
@@ -222,6 +217,7 @@ public class RegistryManager {
 		EntityRegistry.registerEgg(EntitySpriteGuardian.class, Util.intColor(66, 230, 0), Util.intColor(130, 255, 60));
 		EntityRegistry.registerModEntity(EntitySummoner.class, "entitySummoner", 11, Roots.instance, 64, 3, true);
 		EntityRegistry.registerModEntity(EntityRitualProjectile.class,"entityRitualProjectile",12,Roots.instance,64,3,true);
+		EntityRegistry.registerModEntity(EntityHomingProjectile.class,"entityHomingProjectile",13,Roots.instance,64,3,true);
 	}
 	
 	public static void registerRecipes(){
@@ -299,8 +295,6 @@ public class RegistryManager {
 		 * REGISTERING ITEM MODELS
 		 */
 
-		TALISMAN_ITEM.forEach(ItemTalisman::initModelsAndVariants);
-
 		((ItemDruidKnife)druidKnife).initModel();
 		((DustPetal)dustPetal).initModel();
 		((ItemPestle)pestle).initModel();
@@ -337,6 +331,8 @@ public class RegistryManager {
 		((ItemMaterial)otherworldLeaf).initModel();
 		((ItemMaterial)otherworldSubstance).initModel();
 		((ItemSpellweaverLance)spellweaverLance).initModel();
+		((ItemHungerTalisman)talismanHunger).initModel();
+		((ItemPursuitTalisman)talismanPursuit).initModel();
 
 		/**Charms**/
 		((ItemCharm)itemCharmRestoration).initModel();
@@ -413,5 +409,6 @@ public class RegistryManager {
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpritePlacator.class, new RenderSpritePlacator(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteGuardian.class, new RenderSpriteGuardian(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("spriteguardian"),1.2f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRitualProjectile.class,new RitualProjectileRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityHomingProjectile.class,new RenderHomingProjectile(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
 	}
 }

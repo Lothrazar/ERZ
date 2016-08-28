@@ -51,7 +51,6 @@ public class CommonProxy {
 	{
 		MinecraftForge.EVENT_BUS.register(new ItemHungerTalisman());
 		MinecraftForge.EVENT_BUS.register(new ItemPursuitTalisman());
-		MinecraftForge.EVENT_BUS.register(new ItemConservingAmulet());
 	}
 	
 	public void spawnParticleMagicFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){

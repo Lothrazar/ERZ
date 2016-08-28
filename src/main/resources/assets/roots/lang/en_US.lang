@@ -46,6 +46,8 @@ item.charmEvocation.name=Charm of Evocation
 item.charmConjuration.name=Charm of Conjuration
 item.charmIllusion.name=Charm of Illusion
 item.spellweaverLance.name=Spellweaver Lance
+item.talismanHunger.name=Hunger Talisman
+item.talismanPursuit.name=Pursuit Talisman
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
