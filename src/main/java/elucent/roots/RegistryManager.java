@@ -1,60 +1,12 @@
 package elucent.roots;
 
-import elucent.roots.block.BlockAestheticStandingStone;
-import elucent.roots.block.BlockAltar;
-import elucent.roots.block.BlockBase;
-import elucent.roots.block.BlockBrazier;
-import elucent.roots.block.BlockBridge;
-import elucent.roots.block.BlockDoubleSlabBase;
-import elucent.roots.block.BlockFlareOrchid;
-import elucent.roots.block.BlockImbuer;
-import elucent.roots.block.BlockLogBase;
-import elucent.roots.block.BlockMidnightBloom;
-import elucent.roots.block.BlockMortar;
-import elucent.roots.block.BlockRadiantDaisy;
-import elucent.roots.block.BlockSlabBase;
-import elucent.roots.block.BlockSpirit;
-import elucent.roots.block.BlockSpiritConduit;
-import elucent.roots.block.BlockSpiritDoubleSlab;
-import elucent.roots.block.BlockSpiritFont;
-import elucent.roots.block.BlockSpiritSlab;
-import elucent.roots.block.BlockSpiritStairs;
-import elucent.roots.block.BlockStairsBase;
-import elucent.roots.block.BlockStandingStoneAccelerator;
-import elucent.roots.block.BlockStandingStoneEntangler;
-import elucent.roots.block.BlockStandingStoneGrower;
-import elucent.roots.block.BlockStandingStoneHealer;
-import elucent.roots.block.BlockStandingStoneIgniter;
-import elucent.roots.block.BlockStandingStoneRepulsor;
-import elucent.roots.block.BlockStandingStoneT1;
-import elucent.roots.block.BlockStandingStoneT2;
-import elucent.roots.block.BlockStandingStoneVacuum;
-import elucent.roots.entity.EntityAccelerator;
-import elucent.roots.entity.EntityFrostShard;
-import elucent.roots.entity.EntityNetherInfection;
-import elucent.roots.entity.EntitySanctuary;
-import elucent.roots.entity.EntityGreaterSprite;
-import elucent.roots.entity.EntitySprite;
-import elucent.roots.entity.EntitySpriteGuardian;
-import elucent.roots.entity.EntitySpritePlacator;
-import elucent.roots.entity.EntitySpriteProjectile;
-import elucent.roots.entity.EntitySpriteling;
-import elucent.roots.entity.EntitySummoner;
-import elucent.roots.entity.EntityTileAccelerator;
-import elucent.roots.entity.RenderFrostShard;
-import elucent.roots.entity.RenderGreaterSprite;
-import elucent.roots.entity.RenderSprite;
-import elucent.roots.entity.RenderSpriteGuardian;
-import elucent.roots.entity.RenderSpritePlacator;
-import elucent.roots.entity.RenderSpriteProjectile;
-import elucent.roots.entity.RenderSpriteling;
 import elucent.roots.block.*;
 import elucent.roots.entity.*;
 import elucent.roots.entity.projectile.EntityRitualProjectile;
 import elucent.roots.item.*;
 import elucent.roots.item.block.ItemBlockSlab;
 import elucent.roots.model.ModelHolder;
-import elucent.roots.render.*;
+import elucent.roots.render.RitualProjectileRenderFactory;
 import elucent.roots.tileentity.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -79,13 +31,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegistryManager {
 	public static Item spellweaverLance, otherworldLeaf, otherworldSubstance, debugWand, rootyStew, healingPoultice, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion;
 	public static Item manaResearchIcon;
 	public static ItemBlock itemBlockSpiritBlockSlab, itemBlockSpiritBrickSlab, itemBlockPlankWildwoodSlab, itemBlockRuneStoneSlab, itemBlockRuneStoneBrickSlab, itemBlockRuneStoneTileSlab;
 	public static Block spiritConduit, spiritFont, standingStoneGrower, standingStoneHealer, standingStoneIgniter, standingStoneEntangler, standingStoneAccelerator, standingStoneAesthetic, standingStoneRepulsor, standingStoneVacuum, mortar, imbuer, altar, druidChalice, standingStoneT1, standingStoneT2, brazier;
 	public static Block bridge, spiritBlock, spiritBlockSlab, spiritBlockSlabDouble, spiritBlockStairs, spiritBrick, spiritBrickSlab, spiritBrickSlabDouble, spiritBrickStairs, runeStoneStairs, runeStoneBrickStairs, runeStoneTileStairs, plankWildwoodStairs, barkWildwood, barkWildwoodSymbolGlowing, barkWildwoodSymbol, logWildwood, logWildwoodSymbol, logWildwoodSymbolGlowing, plankWildwood, plankWildwoodSlab, plankWildwoodSlabDouble, runeStone, runeStoneBrick, runeStoneSlabDouble, runeStoneSlab, runeStoneBrickSlab, runeStoneBrickSlabDouble, runeStoneTile, runeStoneTileSlab, runeStoneTileSlabDouble, runeStoneSymbol, runeStoneSymbolGlowing;
-	
+
+	public static final List<ItemTalisman> TALISMAN_ITEM = new ArrayList<>();
+
+	public static ItemTalisman itemTalismanHunger = new ItemHungerTalisman(),itemPursuitTalisman = new ItemPursuitTalisman();
+
+
 	public static Achievement achieveDust, achieveTablet, achieveSpellRose, achieveSpellGrowth, achieveSpellInsanity, achieveMaxModifiers, achieveLotsDamage, achieveTimeStop, achieveAltar, achieveStandingStone, achieveWildwood, achieveShadow, achieveSpellElements, achieveVampire;
 	
 	public static ToolMaterial engravedMaterial = EnumHelper.addToolMaterial("engraved", 2, 1050, 5F, 8.0F, 5);
@@ -138,6 +98,8 @@ public class RegistryManager {
 		GameRegistry.registerItem(otherworldLeaf = new ItemMaterial("otherworldLeaf"),"otherworldLeaf");
 		GameRegistry.registerItem(otherworldSubstance = new ItemMaterial("otherworldSubstance"),"otherworldSubstance");
 		GameRegistry.registerItem(spellweaverLance = new ItemSpellweaverLance(),"spellweaverLance");
+		GameRegistry.register(itemTalismanHunger);
+		GameRegistry.register(itemPursuitTalisman);
 
 		/**
 		 * REGISTERING BLOCKS
@@ -232,7 +194,8 @@ public class RegistryManager {
 		GameRegistry.registerTileEntity(TileEntityStandingStoneHealer.class,customTileName("TileEntityStandingStoneHealer"));
 		GameRegistry.registerTileEntity(TileEntitySpiritFont.class,customTileName("TileEntitySpiritFont"));
 		GameRegistry.registerTileEntity(TileEntitySpiritConduit.class, customTileName("TileEntitySpiritConduit"));
-		
+		GameRegistry.registerTileEntity(TileEnityBridge.class,customTileName("TileEntityBridge"));
+
 		GameRegistry.registerFuelHandler(new FuelManager());
 	}
 
@@ -335,6 +298,9 @@ public class RegistryManager {
 		/**
 		 * REGISTERING ITEM MODELS
 		 */
+
+		TALISMAN_ITEM.forEach(ItemTalisman::initModelsAndVariants);
+
 		((ItemDruidKnife)druidKnife).initModel();
 		((DustPetal)dustPetal).initModel();
 		((ItemPestle)pestle).initModel();

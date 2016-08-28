@@ -5,24 +5,27 @@ import elucent.roots.Roots;
 import elucent.roots.RootsCapabilityManager;
 import elucent.roots.Util;
 import elucent.roots.component.ComponentManager;
-import elucent.roots.entity.projectile.EntityRitualProjectile;
 import elucent.roots.gui.GuiHandler;
+import elucent.roots.item.ItemHungerTalisman;
+import elucent.roots.item.ItemPursuitTalisman;
 import elucent.roots.network.MessageUpdateMana;
 import elucent.roots.research.ResearchManager;
 import elucent.roots.ritual.RitualManager;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class CommonProxy {
 	public static SimpleNetworkWrapper network;
 	
-	public void preInit(FMLPreInitializationEvent event){
+	public void preInit(FMLPreInitializationEvent event)
+	{
+		registerEvents();
 		RegistryManager.init();
 		RegistryManager.registerRecipes();
 		RootsCapabilityManager.preInit();
@@ -42,6 +45,13 @@ public class CommonProxy {
 		Util.initNaturalBlocks();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Roots.instance, new GuiHandler());
 		ResearchManager.init();
+	}
+
+	public void registerEvents()
+	{
+		MinecraftForge.EVENT_BUS.register(new ItemHungerTalisman());
+		MinecraftForge.EVENT_BUS.register(new ItemPursuitTalisman());
+		MinecraftForge.EVENT_BUS.register(new ItemConservingAmulet());
 	}
 	
 	public void spawnParticleMagicFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){

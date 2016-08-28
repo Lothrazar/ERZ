@@ -465,6 +465,11 @@ roots.research.ritual.poweredstones.page16title.name=Ritual: Aesthetic Standing 
 roots.research.ritual.poweredstones.page17title.name=Aesthetic Standing Stone
 roots.research.ritual.poweredstones.page17info=A basic standing stone used for aesthetic purposes. Particles can be colored using Rose red, Lapis Lazuli, Cactus Green and reset using bone meal.
 
+General.tooltip=General configs!
+Client.tooltip=Client side configs!
+Talisman.tooltip=All about talismans!
+
+
 achievement.tablet=Who Needs Pages?
 achievement.tablet.desc=Craft a Runic Tablet.
 achievement.dust=No Macerator Required!

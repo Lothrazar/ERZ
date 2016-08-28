@@ -22,6 +22,12 @@ public class ConfigManager {
 	public static int manaBarOffset;
 	public static boolean disablePVP;
 
+	//Talismans
+	public static int cooldownTime;
+
+	//Custom classes
+	public static String CATEGORY_TALISMAN = "talisman";
+
 	public static void init(File configFile)
 	{
 		if(config == null)
@@ -49,7 +55,7 @@ public class ConfigManager {
 				"<example>", "<another example>"
 		}, "A string list of all disabled components. Valid component names include: \"allium\", \"apple\", \"azurebluet\", \"blueorchid\", \"chorus\", \"dandelion\", \"flareorchid\", \"lilac\", \"lilypad\", \"midnightbloom\", \"netherwart\", \"orangetulip\", \"oxeyedaisy\", \"peony\", \"pinktulip\", \"poisonouspotato\", \"poppy\", \"radiantdaisy\", \"redtulip\", \"rosebush\", \"sunflower\", \"whitetulip\"");
 		disablePVP = config.getBoolean("disablePVP", "spells", false, "Whether or not damaging spells can affect players.");
-
+		cooldownTime = config.getInt("Hunger talisman cooldown",CATEGORY_TALISMAN,100,20,1200000,"sets the cooldown time of the hunger talisman.");
 		if (config.hasChanged())
 		{
 			config.save();
