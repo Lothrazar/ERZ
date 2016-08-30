@@ -24,6 +24,7 @@ public class ConfigManager {
 
 	//TALISMANS
 	public static int hungerTalismanTimer;
+	public static int dischargeAmuletTimer;
 
 	public static void init(File configFile)
 	{
@@ -53,6 +54,7 @@ public class ConfigManager {
 		}, "A string list of all disabled components. Valid component names include: \"allium\", \"apple\", \"azurebluet\", \"blueorchid\", \"chorus\", \"dandelion\", \"flareorchid\", \"lilac\", \"lilypad\", \"midnightbloom\", \"netherwart\", \"orangetulip\", \"oxeyedaisy\", \"peony\", \"pinktulip\", \"poisonouspotato\", \"poppy\", \"radiantdaisy\", \"redtulip\", \"rosebush\", \"sunflower\", \"whitetulip\"");
 		disablePVP = config.getBoolean("disablePVP", "spells", false, "Whether or not damaging spells can affect players.");
 		hungerTalismanTimer = config.getInt("hungerTalismanTimer",Configuration.CATEGORY_GENERAL,100,1,32767,"The cooldown (in ticks) of the hunger talisman.");
+		dischargeAmuletTimer = config.getInt("dischargeAmuletTimer",Configuration.CATEGORY_GENERAL,100,1,32767,"The cooldown (in ticks) of the discharge amulet.");
 		if (config.hasChanged())
 		{
 			config.save();

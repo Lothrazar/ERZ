@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegistryManager {
-	public static Item talismanHunger, talismanPursuit, spellweaverLance, otherworldLeaf, otherworldSubstance, debugWand, rootyStew, healingPoultice, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion;
+	public static Item pixieStone, ancientHourglass, amuletConserving, amuletDischarge, talismanHunger, talismanPursuit, spellweaverLance, otherworldLeaf, otherworldSubstance, debugWand, rootyStew, healingPoultice, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion;
 	public static Item manaResearchIcon;
 	public static ItemBlock itemBlockSpiritBlockSlab, itemBlockSpiritBrickSlab, itemBlockPlankWildwoodSlab, itemBlockRuneStoneSlab, itemBlockRuneStoneBrickSlab, itemBlockRuneStoneTileSlab;
 	public static Block spiritConduit, spiritFont, standingStoneGrower, standingStoneHealer, standingStoneIgniter, standingStoneEntangler, standingStoneAccelerator, standingStoneAesthetic, standingStoneRepulsor, standingStoneVacuum, mortar, imbuer, altar, druidChalice, standingStoneT1, standingStoneT2, brazier;
@@ -95,6 +95,10 @@ public class RegistryManager {
 		GameRegistry.registerItem(spellweaverLance = new ItemSpellweaverLance(),"spellweaverLance");
 		GameRegistry.registerItem(talismanHunger = new ItemHungerTalisman(),"talismanHunger");
 		GameRegistry.registerItem(talismanPursuit = new ItemPursuitTalisman(),"talismanPursuit");
+		GameRegistry.registerItem(amuletDischarge = new ItemDischargeAmulet(),"amuletDischarge");
+		GameRegistry.registerItem(amuletConserving = new ItemConservingAmulet(),"amuletConserving");
+		GameRegistry.registerItem(ancientHourglass = new ItemAncientHourglass(),"ancientHourglass");
+		GameRegistry.registerItem(pixieStone = new ItemPixieStone(),"pixieStone");
 
 		/**
 		 * REGISTERING BLOCKS
@@ -333,6 +337,10 @@ public class RegistryManager {
 		((ItemSpellweaverLance)spellweaverLance).initModel();
 		((ItemHungerTalisman)talismanHunger).initModel();
 		((ItemPursuitTalisman)talismanPursuit).initModel();
+		((ItemDischargeAmulet)amuletDischarge).initModel();
+		((ItemConservingAmulet)amuletConserving).initModel();
+		((ItemAncientHourglass)ancientHourglass).initModel();
+		((ItemPixieStone)pixieStone).initModel();
 
 		/**Charms**/
 		((ItemCharm)itemCharmRestoration).initModel();

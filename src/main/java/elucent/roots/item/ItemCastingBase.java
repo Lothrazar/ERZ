@@ -114,9 +114,14 @@ public class ItemCastingBase extends Item{
 							efficiency += 1;
 						}
 					}
+					SpellCastEvent event = new SpellCastEvent((EntityPlayer)player,comp,potency,efficiency,size);
+					MinecraftForge.EVENT_BUS.post(event);
+					potency = event.getPotency();
+					efficiency = event.getEfficiency();
+					size = event.getSize();
 					double cost = this.getCost(comp, potency, efficiency);
 					Random random = new Random();
-					if (((EntityPlayer)player).hasCapability(ManaProvider.manaCapability, null) && ManaProvider.get((EntityPlayer)player).getMana() >= ((float)cost)){
+					if (((EntityPlayer)player).hasCapability(ManaProvider.manaCapability, null) && ManaProvider.get((EntityPlayer)player).getMana() >= ((float)cost) && !event.isCanceled()){
 						ManaProvider.get((EntityPlayer)player).setMana((EntityPlayer)player, ManaProvider.get((EntityPlayer)player).getMana()-(((float)cost)));
 						this.doEffect(world,(EntityPlayer)player,comp,this.getPotency(stack),this.getEfficiency(stack),this.getSize(stack));
 						decrementUses(stack, player, hand);
@@ -288,12 +293,7 @@ public class ItemCastingBase extends Item{
 			double potency = this.getPotency(stack);
 			double efficiency = this.getEfficiency(stack);
 			double size = this.getSize(stack);
-			SpellCastEvent event = new SpellCastEvent(comp,potency,efficiency,size);
-			MinecraftForge.EVENT_BUS.post(event);
-			potency = event.getPotency();
-			efficiency = event.getEfficiency();
-			size = event.getSize();
-			if (comp != null && !event.isCanceled()){
+			if (comp != null){
 				comp.castingAction((EntityPlayer) player, count, potency, efficiency, size);
 				if (itemRand.nextBoolean()){	
 					Roots.proxy.spawnParticleMagicLineFX(player.getEntityWorld(), player.posX+2.0*(itemRand.nextFloat()-0.5), player.posY+2.0*(itemRand.nextFloat()-0.5)+1.0, player.posZ+2.0*(itemRand.nextFloat()-0.5), player.posX, player.posY+1.0, player.posZ, comp.primaryColor.xCoord, comp.primaryColor.yCoord, comp.primaryColor.zCoord);

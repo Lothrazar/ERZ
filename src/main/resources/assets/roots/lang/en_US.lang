@@ -48,6 +48,10 @@ item.charmIllusion.name=Charm of Illusion
 item.spellweaverLance.name=Spellweaver Lance
 item.talismanHunger.name=Hunger Talisman
 item.talismanPursuit.name=Pursuit Talisman
+item.amuletDischarge.name=Discharge Amulet
+item.amuletConserving.name=Conserving Amulet
+item.ancientHourglass.name=Ancient Hourglass
+item.pixieStone.name=Pixie Stone
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer

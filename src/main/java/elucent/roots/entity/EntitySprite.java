@@ -210,7 +210,9 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
 			this.rotationYaw = Util.interpolateYawDegrees(rotationYaw,0.9f,addDirectionX,0.1f);
 			this.rotationPitch = (rotationPitch*0.9f+addDirectionY*0.1f);
 			Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch+addedPitch).scale(getAttackTarget() != null ? (getDataManager().get(dashTimer) > 0 ? 0.4 : 0.2) : 0.1);
-			this.setVelocity(0.5f*motionX+0.5f*moveVec.xCoord,0.5f*motionY+0.5f*moveVec.yCoord,0.5f*motionZ+0.5f*moveVec.zCoord);
+			this.motionX = 0.5f*motionX+0.5f*moveVec.xCoord;
+			this.motionY = 0.5f*motionY+0.5f*moveVec.yCoord;
+			this.motionZ = 0.5f*motionZ+0.5f*moveVec.zCoord;
 			if (getDataManager().get(dashTimer) > 0){
 				Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX+((random.nextDouble())-0.5)*0.5, posY+0.25+((random.nextDouble())-0.5)*0.5, posZ+((random.nextDouble())-0.5)*0.5, -0.25*moveVec.xCoord, -0.25*moveVec.yCoord, -0.25*moveVec.zCoord, 107, 255, 28);
 			}
@@ -227,7 +229,9 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
     			getDataManager().setDirty(stunned);
     		}
     		this.rotationPitch *= 0.9;
-    		this.setVelocity(motionX*0.9, -0.05, motionZ*0.9);
+    		this.motionX = 0.9*motionX;
+    		this.motionY = -0.05;
+    		this.motionZ = 0.9*motionZ;
     	}
     	getDataManager().set(happiness,(getDataManager().get(happiness)*0.999f));
     	getDataManager().setDirty(happiness);

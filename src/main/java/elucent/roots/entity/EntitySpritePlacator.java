@@ -98,7 +98,9 @@ public class EntitySpritePlacator  extends EntityFlying {// implements IRangedAt
 			rotationYaw = (float)Math.toRadians(Util.yawDegreesBetweenPoints(posX, posY, posZ, target.posX, target.posY+target.getEyeHeight(), target.posZ));
 			rotationPitch = (float)Math.toRadians(Util.pitchDegreesBetweenPoints(posX, posY, posZ, target.posX, target.posY+target.getEyeHeight(), target.posZ));
 		    Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch).scale(0.35f);
-			this.setVelocity(0.5f*motionX+0.5f*moveVec.xCoord,0.5f*motionY+0.5f*moveVec.yCoord,0.5f*motionZ+0.5f*moveVec.zCoord);
+		    this.motionX = 0.5f*motionX+0.5f*moveVec.xCoord;
+			this.motionY = 0.5f*motionY+0.5f*moveVec.yCoord;
+			this.motionZ = 0.5f*motionZ+0.5f*moveVec.zCoord;
 			for (double i = 0; i < 3; i ++){
 				double x = prevPosX + (1.0-i/3.0)*(posX-prevPosX);
 				double y = prevPosY + (1.0-i/3.0)*(posY-prevPosY);

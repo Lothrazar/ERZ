@@ -5,16 +5,19 @@ import elucent.roots.capability.mana.ManaProvider;
 import elucent.roots.component.components.ComponentCharmIllusion;
 import elucent.roots.entity.EntityHomingProjectile;
 import elucent.roots.entity.ISprite;
+import elucent.roots.event.SpellCastEvent;
 import elucent.roots.item.IManaRelatedItem;
 import elucent.roots.item.ItemCrystalStaff;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockNetherWart;
+import net.minecraft.block.SoundType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
@@ -22,11 +25,13 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -34,6 +39,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -116,6 +122,21 @@ public class EventManager {
 					List<EntityLivingBase> targets = event.getEntity().getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(event.getEntity().posX-4.0,event.getEntity().posY-4.0,event.getEntity().posZ-4.0, event.getEntity().posX+4.0,event.getEntity().posY+4.0,event.getEntity().posZ+4.0));
 					if (targets.size() > 0){
 						((EntityMob)event.getEntityLiving()).setAttackTarget(targets.get(random.nextInt(targets.size())));
+					}
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onSpellCast(SpellCastEvent event){
+		EntityPlayer player = event.getPlayer();
+		for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
+			if (player.inventory.getStackInSlot(i) != null){
+				if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.amuletConserving){
+					if (player.inventory.getStackInSlot(i).hasTagCompound()){
+						player.inventory.getStackInSlot(i).getTagCompound().setInteger("charge", (int) (player.inventory.getStackInSlot(i).getTagCompound().getInteger("charge")+(4+2*event.getPotency())));
+						return;
 					}
 				}
 			}
@@ -329,6 +350,70 @@ public class EventManager {
 	}
 	
 	@SubscribeEvent
+	public void onChat(ServerChatEvent event){
+		if (event.getComponent().getFormattedText().equals("ZA WARUDO")){
+			EntityPlayerMP player = event.getPlayer();
+			if (player.getGameProfile().getName().compareToIgnoreCase("LuckyLucyF") == 0 || player.getGameProfile().getName().compareToIgnoreCase("Elucent") == 0 || player.getGameProfile().getName().compareToIgnoreCase("ShadowGamerXY") == 0 || player.getGameProfile().getName().compareToIgnoreCase("werty1124") == 0){
+				for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
+					if (player.inventory.getStackInSlot(i) != null){
+						if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.ancientHourglass){
+							player.inventory.getStackInSlot(i).stackSize --;
+							if (player.inventory.getStackInSlot(i).stackSize <= 0){
+								player.inventory.removeStackFromSlot(i);
+							}
+							List<Entity> entities = player.getEntityWorld().getLoadedEntityList();
+							for (int j = 0; j < entities.size(); j ++){
+								boolean canFreeze = true;
+								if (entities.get(j) instanceof EntityPlayer){
+									EntityPlayer temp = ((EntityPlayer)entities.get(j));
+									if (temp.getGameProfile().getName().compareToIgnoreCase("LuckyLucyF") == 0 || temp.getGameProfile().getName().compareToIgnoreCase("Elucent") == 0 || temp.getGameProfile().getName().compareToIgnoreCase("ShadowGamerXY") == 0 || temp.getGameProfile().getName().compareToIgnoreCase("werty1124") == 0){
+										canFreeze = false;
+									}									
+								}
+								if (canFreeze){
+									Util.addTickTracking(entities.get(j));
+									entities.get(j).getEntityData().setInteger(RootsNames.TAG_SPELL_SKIP_TICKS, 400);
+								}
+							}	
+							player.getEntityWorld().playSound(player.posX, player.posY, player.posZ, SoundType.GLASS.getBreakSound(), SoundCategory.BLOCKS, random.nextFloat()*0.1f+0.95f, random.nextFloat()*0.1f+0.95f, false);
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public void onDeathHighPriority(LivingDeathEvent event){
+		if (event.getEntity() instanceof EntityPlayer){
+			EntityPlayer player = (EntityPlayer)event.getEntity();
+			for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
+				if (player.inventory.getStackInSlot(i) != null){
+					if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.ancientHourglass){
+						player.setHealth(1.0f);
+						event.setCanceled(true);
+						player.inventory.getStackInSlot(i).stackSize --;
+						if (player.inventory.getStackInSlot(i).stackSize <= 0){
+							player.inventory.removeStackFromSlot(i);
+						}
+						List<EntityLivingBase> entities = player.getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.posX-32.0,player.posY-32.0,player.posZ-32.0,player.posX+32.0,player.posY+32.0,player.posZ+32.0));
+						for (int j = 0; j < entities.size(); j ++){
+							Util.addTickTracking(entities.get(j));
+							entities.get(j).getEntityData().setInteger(RootsNames.TAG_SPELL_SKIP_TICKS, 200);
+						}	
+						player.getEntityWorld().playSound(player.posX, player.posY, player.posZ, SoundType.GLASS.getBreakSound(), SoundCategory.BLOCKS, random.nextFloat()*0.1f+0.95f, random.nextFloat()*0.1f+0.95f, false);
+						for (int j = 0; j < 20; j ++){
+							Roots.proxy.spawnParticleMagicSparkleFX(player.getEntityWorld(), event.getEntityLiving().posX, event.getEntityLiving().posY+event.getEntityLiving().height/2.0f, event.getEntityLiving().posZ, Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), 76, 230, 0);
+						}
+						return;
+					}
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
 	public void onLivingDeath(LivingDeathEvent event){
 		if (event.getSource().getEntity() instanceof EntityPlayer){
 			EntityPlayer player = (EntityPlayer)event.getSource().getEntity();
@@ -395,6 +480,23 @@ public class EventManager {
 	
 	@SubscribeEvent
 	public void onLivingDamage(LivingHurtEvent event){
+		if (event.getSource().getEntity() instanceof EntityPlayer){
+			EntityPlayer player = (EntityPlayer)event.getSource().getEntity();
+			for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
+				if (player.inventory.getStackInSlot(i) != null){
+					if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.amuletConserving){
+						if (player.inventory.getStackInSlot(i).getTagCompound().getInteger("charge") > 40){
+							player.inventory.getStackInSlot(i).getTagCompound().setInteger("charge",0);
+							event.getEntityLiving().setHealth(event.getEntityLiving().getHealth()-2.0f);
+							for (int j = 0; j < 20; j ++){
+								Roots.proxy.spawnParticleMagicSparkleFX(player.getEntityWorld(), event.getEntityLiving().posX, event.getEntityLiving().posY+event.getEntityLiving().height/2.0f, event.getEntityLiving().posZ, Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), 76, 230, 0);
+							}
+							return;
+						}
+					}
+				}
+			}
+		}
 		if (event.getEntityLiving() instanceof EntityPlayer){
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			if (event.getSource().isExplosion() || event.getSource().isFireDamage() || event.getSource().isMagicDamage()){
@@ -405,6 +507,31 @@ public class EventManager {
 								if (player.inventory.getStackInSlot(i).getTagCompound().getInteger("timer") == 0){
 									event.setCanceled(true);
 									player.inventory.getStackInSlot(i).getTagCompound().setInteger("timer", ConfigManager.hungerTalismanTimer);
+									return;
+								}
+							}
+						}
+					}
+				}
+			}
+			if (event.getAmount() > 6.0f){
+				for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
+					if (player.inventory.getStackInSlot(i) != null){
+						if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.amuletDischarge){
+							if (player.inventory.getStackInSlot(i).hasTagCompound()){
+								if (player.inventory.getStackInSlot(i).getTagCompound().getInteger("timer") == 0){
+									List<EntityLivingBase> entities = player.getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.posX-4.0,player.posY-4.0,player.posZ-4.0,player.posX+4.0,player.posY+4.0,player.posZ+4.0));
+									for (int j = 0; j < entities.size(); j ++){
+										if (entities.get(j).getUniqueID().compareTo(player.getUniqueID()) != 0){
+											entities.get(j).attackEntityFrom(DamageSource.generic, 3.0f);
+										}
+									}
+									for (double j = 0; j < 360; j += 30){
+										double dx = Math.sin(Math.toRadians(j));
+										double dz = Math.cos(Math.toRadians(j));
+										Roots.proxy.spawnParticleMagicSmallSparkleFX(player.getEntityWorld(), player.posX+dx, player.posY+1.0, player.posZ+dz, 0.025f*dx, 0, 0.025f*dz, 76, 230, 0);
+									}
+									player.inventory.getStackInSlot(i).getTagCompound().setInteger("timer", ConfigManager.dischargeAmuletTimer);
 									return;
 								}
 							}

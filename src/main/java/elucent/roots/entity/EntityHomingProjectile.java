@@ -61,6 +61,11 @@ public class EntityHomingProjectile  extends EntityFlying {// implements IRanged
         this.setInvisible(true);
     }
     
+    @Override
+    public boolean isEntityInvulnerable(DamageSource source){
+    	return false;
+    }
+    
     public void initSpecial(EntityLivingBase target, float damage, Vec3d color){
     	this.target = target;
     	this.damage = damage;
@@ -88,6 +93,7 @@ public class EntityHomingProjectile  extends EntityFlying {// implements IRanged
     @Override
     public void onUpdate(){
     	super.onUpdate();
+        this.setEntityBoundingBox(new AxisAlignedBB(posX-0.75,posY-0.75,posZ-0.75,posX+0.75,posY+0.75,posZ+0.75));
     	lifetime --;
     	if (lifetime == 0){
     		this.getEntityWorld().removeEntity(this);
@@ -96,11 +102,13 @@ public class EntityHomingProjectile  extends EntityFlying {// implements IRanged
 			rotationYaw = (float)Math.toRadians(Util.yawDegreesBetweenPoints(posX, posY, posZ, target.posX, target.posY+target.getEyeHeight(), target.posZ));
 			rotationPitch = (float)Math.toRadians(Util.pitchDegreesBetweenPoints(posX, posY, posZ, target.posX, target.posY+target.getEyeHeight(), target.posZ));
 		    Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch).scale(0.35f);
-			this.setVelocity(0.5f*motionX+0.5f*moveVec.xCoord,0.5f*motionY+0.5f*moveVec.yCoord,0.5f*motionZ+0.5f*moveVec.zCoord);
-			for (double i = 0; i < 1; i ++){
-				double x = posX;
-				double y = posY;
-				double z = posZ;
+		    this.motionX = 0.5f*motionX+0.5f*moveVec.xCoord;
+			this.motionY = 0.5f*motionY+0.5f*moveVec.yCoord;
+			this.motionZ = 0.5f*motionZ+0.5f*moveVec.zCoord;
+			for (double i = 0; i < 3; i ++){
+				double x = posX*(i/3.0)+prevPosX*((1.0+i)/3.0);
+				double y = posY*(i/3.0)+prevPosY*((1.0+i)/3.0);
+				double z = posZ*(i/3.0)+prevPosZ*((1.0+i)/3.0);
 				Roots.proxy.spawnParticleMagicAuraFX(getEntityWorld(), x, y, z, -0.125*moveVec.xCoord, -0.125*moveVec.yCoord, -0.125*moveVec.zCoord, color.xCoord, color.yCoord, color.zCoord);
 			}
 		}

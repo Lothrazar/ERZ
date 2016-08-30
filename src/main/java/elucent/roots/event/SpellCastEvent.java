@@ -1,19 +1,26 @@
 package elucent.roots.event;
 
 import elucent.roots.component.ComponentBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
 public class SpellCastEvent extends Event {
 	double potency = 0;
 	double efficiency = 0;
 	double size = 0;
+	EntityPlayer player = null;
 	ComponentBase component = null;
-	public SpellCastEvent(ComponentBase component, double potency, double efficiency, double size){
+	public SpellCastEvent(EntityPlayer player, ComponentBase component, double potency, double efficiency, double size){
 		super();
 		this.component = component;
 		this.potency = potency;
 		this.efficiency = efficiency;
 		this.size = size;
+		this.player = player;
+	}
+	
+	public EntityPlayer getPlayer(){
+		return player;
 	}
 	
 	public double getPotency(){

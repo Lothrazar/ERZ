@@ -187,7 +187,7 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
     		setDead();
     	}
 	    if (this.ticksExisted % 20 == 0){
-    		List<EntityPlayer> players = getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX-32,posY-32,posZ-32,posX+32,posY+32,posZ+32));
+    		List<EntityPlayer> players = getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX-72,posY-72,posZ-72,posX+72,posY+72,posZ+72));
     		boolean foundPrevious = false;
     		if (this.getAttackTarget() != null){
 	    		for (int i = 0; i < players.size(); i ++){
@@ -198,6 +198,20 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
     		}
     		if (!foundPrevious && players.size() > 0){
     			this.setAttackTarget(players.get(rand.nextInt(players.size())));
+    		}
+    		else if (!foundPrevious){
+    			for (int i = 0; i < 20; i ++){
+        			for (int j = 0; j < 5; j ++){
+        				Vec3d location = pastPositions.get(i).add((new Vec3d(rand.nextFloat()-0.5,rand.nextFloat()-0.5,rand.nextFloat()-0.5)).scale(3.0f));
+        				Roots.proxy.spawnParticleMagicSmallSparkleFX(getEntityWorld(), location.xCoord, location.yCoord+1.35f, location.zCoord, 0, 0, 0, 107, 255, 28);
+        			}
+        			for (int j = 0; j < 2; j ++){
+        				Vec3d location = pastPositions.get(i).add((new Vec3d(rand.nextFloat()-0.5,rand.nextFloat()-0.5,rand.nextFloat()-0.5)).scale(1.5f));
+        				Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), location.xCoord, location.yCoord+1.35f, location.zCoord, 0, 0, 0, 107, 255, 28);
+        			}
+        		}
+        		getEntityWorld().playSound(posX, posY, posZ, departureSound, SoundCategory.NEUTRAL, random.nextFloat()*0.1f+0.95f, random.nextFloat()*0.1f+0.95f, false);
+        		this.setDead();
     		}
 	    	if (random.nextInt(6) == 0){
 	    		getEntityWorld().playSound(posX, posY, posZ, ambientSound, SoundCategory.NEUTRAL, random.nextFloat()*0.1f+0.95f, random.nextFloat()*0.1f+0.95f, false);
@@ -231,7 +245,7 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
 					location = pastPositions.get(1).add((new Vec3d(rand.nextFloat()-0.5,rand.nextFloat()-0.5,rand.nextFloat()-0.5)).scale(1.5f));
 					Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), location.xCoord, location.yCoord+1.35f, location.zCoord, 0, 0, 0, 107, 255, 28);
 		    	}
-		    	if (ticksExisted % 20 == 0 && random.nextBoolean() && !getEntityWorld().isRemote){
+		    	if (ticksExisted % 60 == 0 && random.nextBoolean() && !getEntityWorld().isRemote){
 		    		getDataManager().set(projectiles,getDataManager().get(projectiles)-1);
 		    		getDataManager().setDirty(projectiles);
 		    		EntitySpriteProjectile proj = new EntitySpriteProjectile(getEntityWorld());
@@ -285,7 +299,9 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
 		this.rotationYaw = Util.interpolateYawDegrees(rotationYaw,0.9f,addDirectionX,0.1f);
 		this.rotationPitch = (rotationPitch*0.9f+addDirectionY*0.1f);
 		Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch - 0.05f*(float)Math.toRadians(4.0f*(posY-(getEntityWorld().getTopSolidOrLiquidBlock(getPosition()).getY()+1.5)))).scale(0.25*velocityScale);
-		this.setVelocity(0.5f*motionX+0.5f*moveVec.xCoord,0.5f*motionY+addedMotionY+0.5f*moveVec.yCoord,0.5f*motionZ+0.5f*moveVec.zCoord);
+		this.motionX = 0.5f*motionX+0.5f*moveVec.xCoord;
+		this.motionY = 0.5f*motionY+0.5f*moveVec.yCoord;
+		this.motionZ = 0.5f*motionZ+0.5f*moveVec.zCoord;
 		
 		if (getDataManager().get(pacifiedTimer) < 20){
 			for (int i = 1; i < pastPositions.size(); i ++){

@@ -55,7 +55,7 @@ public class EntitySpriteProjectile  extends EntityFlying {// implements IRanged
 
     public EntitySpriteProjectile(World worldIn) {
     	super(worldIn);
-        setSize(1.0f,1.0f);
+        setSize(1.5f,1.5f);
         this.isAirBorne = true;
         this.setInvisible(true);
     }
@@ -66,14 +66,21 @@ public class EntitySpriteProjectile  extends EntityFlying {// implements IRanged
     }
     
     @Override
+    public boolean isEntityInvulnerable(DamageSource source){
+    	return false;
+    }
+    
+    @Override
     public void collideWithEntity(Entity entity){
-    	if (target != null){
-	    	if (entity.getUniqueID().compareTo(target.getUniqueID()) == 0){
-	    		target.attackEntityFrom(DamageSource.generic, damage);
-	    		this.getEntityWorld().removeEntity(this);
-				for (int i = 0; i < 20; i ++){
-					Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX, posY+height/2.0f, posZ, Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), 107, 255, 28);
-				}
+    	if (Math.abs(entity.posX-posX) < 0.5 && Math.abs(entity.posY+entity.getEyeHeight()/2.0-posY) < 0.5 && Math.abs(entity.posZ-posZ) < 0.5){
+	    	if (target != null){
+		    	if (entity.getUniqueID().compareTo(target.getUniqueID()) == 0){
+		    		target.attackEntityFrom(DamageSource.generic, damage);
+		    		this.getEntityWorld().removeEntity(this);
+					for (int i = 0; i < 20; i ++){
+						Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX, posY+height/2.0f, posZ, Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), 107, 255, 28);
+					}
+		    	}
 	    	}
     	}
     }
@@ -91,14 +98,16 @@ public class EntitySpriteProjectile  extends EntityFlying {// implements IRanged
     		this.getEntityWorld().removeEntity(this);
     	}
     	if (target != null){
-			rotationYaw = (float)Math.toRadians(Util.yawDegreesBetweenPoints(posX, posY, posZ, target.posX, target.posY+target.getEyeHeight(), target.posZ));
-			rotationPitch = (float)Math.toRadians(Util.pitchDegreesBetweenPoints(posX, posY, posZ, target.posX, target.posY+target.getEyeHeight(), target.posZ));
+			rotationYaw = (float)Math.toRadians(Util.yawDegreesBetweenPoints(posX, posY, posZ, target.posX, target.posY+target.getEyeHeight()/2.0, target.posZ));
+			rotationPitch = (float)Math.toRadians(Util.pitchDegreesBetweenPoints(posX, posY, posZ, target.posX, target.posY+target.getEyeHeight()/2.0, target.posZ));
 		    Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch).scale(0.35f);
-			this.setVelocity(0.5f*motionX+0.5f*moveVec.xCoord,0.5f*motionY+0.5f*moveVec.yCoord,0.5f*motionZ+0.5f*moveVec.zCoord);
+		    this.motionX = 0.5f*motionX+0.5f*moveVec.xCoord;
+			this.motionY = 0.5f*motionY+0.5f*moveVec.yCoord;
+			this.motionZ = 0.5f*motionZ+0.5f*moveVec.zCoord;
 			for (double i = 0; i < 1; i ++){
-				double x = posX;
-				double y = posY;
-				double z = posZ;
+				double x = this.getEntityBoundingBox().minX*0.5+this.getEntityBoundingBox().maxX*0.5;
+				double y = this.getEntityBoundingBox().minY*0.5+this.getEntityBoundingBox().maxY*0.5;
+				double z = this.getEntityBoundingBox().minZ*0.5+this.getEntityBoundingBox().maxZ*0.5;
 				Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), x, y, z, -0.125*moveVec.xCoord, -0.125*moveVec.yCoord, -0.125*moveVec.zCoord, 107, 255, 28);
 			}
 		}
@@ -111,11 +120,28 @@ public class EntitySpriteProjectile  extends EntityFlying {// implements IRanged
     
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount){
-    	this.getEntityWorld().removeEntity(this);
+    	this.setDead();
 		for (int i = 0; i < 20; i ++){
 			Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX, posY+height/2.0f, posZ, Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), 107, 255, 28);
 		}
     	return false;
+    }
+    
+    @Override
+    public boolean attackEntityAsMob(Entity entity){
+    	this.setDead();
+		for (int i = 0; i < 20; i ++){
+			Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX, posY+height/2.0f, posZ, Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), 107, 255, 28);
+		}
+    	return false;
+    }
+    
+    @Override
+    public void damageEntity(DamageSource source, float amount){
+    	this.setDead();
+		for (int i = 0; i < 20; i ++){
+			Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX, posY+height/2.0f, posZ, Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), 107, 255, 28);
+		}
     }
 
     @Override
