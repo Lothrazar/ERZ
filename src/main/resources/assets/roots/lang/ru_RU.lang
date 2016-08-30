@@ -48,6 +48,10 @@ item.charmIllusion.name=Шарм иллюзии
 item.spellweaverLance.name=Spellweaver Lance
 item.talismanHunger.name=Талисман голода
 item.talismanPursuit.name=Талисман преследования
+item.amuletDischarge.name=Амулет разряда
+item.amuletConserving.name=Амулет сбережения
+item.ancientHourglass.name=Древние песочные часы
+item.pixieStone.name=Камень пикси
 
 tile.mortar.name=Ступка
 tile.imbuer.name=Наполнитель
