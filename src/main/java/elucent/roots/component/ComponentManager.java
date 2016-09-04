@@ -40,15 +40,14 @@ public class ComponentManager {
 		components.add(new ComponentMidnightBloom().setPrimaryColor(12,6,36).setSecondaryColor(18,18,18).setTextColor(TextFormatting.DARK_PURPLE));
 		components.add(new ComponentFlareOrchid().setPrimaryColor(255,60,18).setSecondaryColor(255,60,18).setTextColor(TextFormatting.RED));
 		components.add(new ComponentRadiantDaisy().setPrimaryColor(255,255,255).setSecondaryColor(255,255,255).setTextColor(TextFormatting.WHITE));
-
 		components.add(new ComponentCobweb().setPrimaryColor(0,255,154).setSecondaryColor(255,250,255).setTextColor(TextFormatting.AQUA));
 		/**
 		 * Charms
          */
-		components.add(new ComponentCharmRestoration().setPrimaryColor(128,255,0).setSecondaryColor(178,255,102).setTextColor(TextFormatting.GREEN));
-		components.add(new ComponentCharmIllusion().setPrimaryColor(128,255,0).setSecondaryColor(178,255,102).setTextColor(TextFormatting.GREEN));
-		components.add(new ComponentCharmConjuration().setPrimaryColor(128,255,0).setSecondaryColor(178,255,102).setTextColor(TextFormatting.GREEN));
-		components.add(new ComponentCharmEvocation().setPrimaryColor(128,255,0).setPrimaryColor(178,255,102).setTextColor(TextFormatting.GREEN));
+		components.add(new ComponentCharmRestoration().setPrimaryColor(76,230,0).setSecondaryColor(255,255,0).setTextColor(TextFormatting.GREEN));
+		components.add(new ComponentCharmIllusion().setPrimaryColor(76,230,0).setSecondaryColor(255,255,0).setTextColor(TextFormatting.GREEN));
+		components.add(new ComponentCharmConjuration().setPrimaryColor(76,230,0).setSecondaryColor(255,255,0).setTextColor(TextFormatting.GREEN));
+		components.add(new ComponentCharmEvocation().setPrimaryColor(76,230,0).setSecondaryColor(255,255,0).setTextColor(TextFormatting.GREEN));
 
 
 		recipes.add(new ComponentRecipe("rosebush")
@@ -139,23 +138,6 @@ public class ComponentManager {
 					.addIngredient(new ItemStack(Blocks.WEB,1))
 					.addIngredient(new ItemStack(Items.SPIDER_EYE,1))
 					.addIngredient(new ItemStack(Blocks.CACTUS,1)));
-
-		recipes.add(new ComponentRecipe("restoration")
-					.addIngredient(new ItemStack(RegistryManager.itemCharmRestoration,1))
-					.addIngredient(new ItemStack(Items.MILK_BUCKET,1))
-					.addIngredient(new ItemStack(Blocks.PISTON,1)));
-		recipes.add(new ComponentRecipe("illusion")
-				.addIngredient(new ItemStack(RegistryManager.itemCharmIllusion,1))
-				.addIngredient(new ItemStack(Items.ENDER_EYE,1))
-				.addIngredient(new ItemStack(Items.FERMENTED_SPIDER_EYE,1)));
-		recipes.add(new ComponentRecipe("conjuration")
-				.addIngredient(new ItemStack(RegistryManager.itemCharmConjuration,1))
-				.addIngredient(new ItemStack(Items.ENDER_EYE,1))
-				.addIngredient(new ItemStack(Items.APPLE,1)));
-		recipes.add(new ComponentRecipe("evocation")
-				.addIngredient(new ItemStack(RegistryManager.itemCharmEvocation,1))
-				.addIngredient(new ItemStack(Items.IRON_SWORD,1))
-				.addIngredient(new ItemStack(Items.BOW,1)));
 
 		for (int i = 0; i < recipes.size(); i ++){
 			for (int j = 0; j < ConfigManager.disabledComponents.length; j ++){

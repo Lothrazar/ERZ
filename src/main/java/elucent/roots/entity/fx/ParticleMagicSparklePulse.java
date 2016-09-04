@@ -18,7 +18,7 @@ public class ParticleMagicSparklePulse extends Particle {
 	public double colorR = 0;
 	public double colorG = 0;
 	public double colorB = 0;
-	public int lifetime = 30;
+	public int lifetime = 60;
 	public ResourceLocation texture = new ResourceLocation("roots:entity/sparkle");
 	public ParticleMagicSparklePulse(World worldIn, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b) {
 		super(worldIn, x,y,z,0,0,0);
@@ -35,7 +35,7 @@ public class ParticleMagicSparklePulse extends Particle {
 			this.colorB = this.colorB/255.0;
 		}
 		this.setRBGColorF(1, 1, 1);
-		this.particleMaxAge = 6;
+		this.particleMaxAge = 60;
 		this.motionX = vx;
 		this.motionY = vy;
 		this.motionZ = vz;
@@ -63,8 +63,8 @@ public class ParticleMagicSparklePulse extends Particle {
 	@Override
 	public void onUpdate(){
 		super.onUpdate();
-		this.motionX *= 0.99;
-		this.motionZ *= 0.99;
+		this.motionX *= 0.9;
+		this.motionZ *= 0.9;
 		float lifeCoeff = ((float)this.particleMaxAge-(float)this.particleAge)/(float)this.particleMaxAge;
 		this.particleRed = Math.min(1.0f, (float)colorR*(1.0f-lifeCoeff)+lifeCoeff);
 		this.particleGreen = Math.min(1.0f, (float)colorG*(1.0f-lifeCoeff)+lifeCoeff);

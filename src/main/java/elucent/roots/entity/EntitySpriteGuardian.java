@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
 
+import elucent.roots.PlayerManager;
 import elucent.roots.RegistryManager;
 import elucent.roots.Roots;
 import elucent.roots.Util;
@@ -183,6 +184,19 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
     	    			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.runeStone,1)));
     	    		}
     	    	}
+        		int chance = rand.nextInt(4);
+        		if (chance == 0){
+        			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.itemCharmConjuration,1)));
+    	    	}
+        		if (chance == 1){
+        			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.itemCharmEvocation,1)));
+    	    	}
+        		if (chance == 2){
+        			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.itemCharmIllusion,1)));
+    	    	}
+        		if (chance == 3){
+        			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.itemCharmRestoration,1)));
+    	    	}
         	}
     		setDead();
     	}
@@ -251,7 +265,6 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
 		    		EntitySpriteProjectile proj = new EntitySpriteProjectile(getEntityWorld());
 	    			proj.setPosition(pastPositions.get(1).xCoord, pastPositions.get(1).yCoord, pastPositions.get(1).zCoord);
 	    			proj.onInitialSpawn(getEntityWorld().getDifficultyForLocation(getPosition()), null);
-	    			proj.setVelocity(random.nextDouble()-0.5, random.nextDouble()-0.5, random.nextDouble()-0.5);
 	    			proj.initSpecial(getAttackTarget(), 6.0f);
 	    			getEntityWorld().spawnEntityInWorld(proj);
 	    			getEntityWorld().playSound(posX, posY, posZ, new SoundEvent(new ResourceLocation("roots:staffCast")), SoundCategory.HOSTILE, 0.95f+random.nextFloat()*0.1f, 0.7f+random.nextFloat()*0.1f, false);
@@ -279,7 +292,7 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
 	    	}
 	    }
 	    if (getAttackTarget() != null && getDataManager().get(tracking) && !this.getEntityWorld().isRemote){
-	    	this.getDataManager().set(targetDirectionX, (float)Math.toRadians(Util.yawDegreesBetweenPoints(posX, posY, posZ, getAttackTarget().posX, getAttackTarget().posY+getAttackTarget().getEyeHeight()/2.0, getAttackTarget().posZ)));
+	    	this.getDataManager().set(targetDirectionX, (float)Math.toRadians(Util.yawDegreesBetweenPointsSafe(posX, posY, posZ, getAttackTarget().posX, getAttackTarget().posY+getAttackTarget().getEyeHeight()/2.0, getAttackTarget().posZ, getDataManager().get(targetDirectionX))));
 			this.getDataManager().set(targetDirectionY, (float)Math.toRadians(Util.pitchDegreesBetweenPoints(posX, posY, posZ, getAttackTarget().posX, getAttackTarget().posY+getAttackTarget().getEyeHeight()/2.0, getAttackTarget().posZ)));
 			this.getDataManager().setDirty(targetDirectionX);
 		 	this.getDataManager().setDirty(targetDirectionY);
@@ -369,6 +382,12 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
     		this.bossInfo.setPercent(0);
     		getDataManager().set(pacified, true);
     		getDataManager().setDirty(pacified);
+    		if (source.getEntity() instanceof EntityPlayer){
+    			EntityPlayer player = (EntityPlayer)source.getEntity();
+    			if (!player.hasAchievement(RegistryManager.achieveGuardianBoss)){
+    				PlayerManager.addAchievement(player, RegistryManager.achieveGuardianBoss);
+    			}
+    		}
     	}
     	else {
     		if (!getDataManager().get(pacified).booleanValue()){

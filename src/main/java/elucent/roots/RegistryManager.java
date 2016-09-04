@@ -28,6 +28,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
@@ -35,13 +36,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegistryManager {
-	public static Item pixieStone, ancientHourglass, amuletConserving, amuletDischarge, talismanHunger, talismanPursuit, spellweaverLance, otherworldLeaf, otherworldSubstance, debugWand, rootyStew, healingPoultice, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion;
-	public static Item manaResearchIcon;
+	public static Item projectileStaff, pixieStone, ancientHourglass, amuletConserving, amuletDischarge, talismanHunger, talismanPursuit, spellweaverLance, otherworldLeaf, otherworldSubstance, debugWand, rootyStew, healingPoultice, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion;
+	public static Item spritelingIcon, spriteIcon, greaterSpriteIcon, manaResearchIcon;
 	public static ItemBlock itemBlockSpiritBlockSlab, itemBlockSpiritBrickSlab, itemBlockPlankWildwoodSlab, itemBlockRuneStoneSlab, itemBlockRuneStoneBrickSlab, itemBlockRuneStoneTileSlab;
 	public static Block spiritConduit, spiritFont, standingStoneGrower, standingStoneHealer, standingStoneIgniter, standingStoneEntangler, standingStoneAccelerator, standingStoneAesthetic, standingStoneRepulsor, standingStoneVacuum, mortar, imbuer, altar, druidChalice, standingStoneT1, standingStoneT2, brazier;
 	public static Block bridge, spiritBlock, spiritBlockSlab, spiritBlockSlabDouble, spiritBlockStairs, spiritBrick, spiritBrickSlab, spiritBrickSlabDouble, spiritBrickStairs, runeStoneStairs, runeStoneBrickStairs, runeStoneTileStairs, plankWildwoodStairs, barkWildwood, barkWildwoodSymbolGlowing, barkWildwoodSymbol, logWildwood, logWildwoodSymbol, logWildwoodSymbolGlowing, plankWildwood, plankWildwoodSlab, plankWildwoodSlabDouble, runeStone, runeStoneBrick, runeStoneSlabDouble, runeStoneSlab, runeStoneBrickSlab, runeStoneBrickSlabDouble, runeStoneTile, runeStoneTileSlab, runeStoneTileSlabDouble, runeStoneSymbol, runeStoneSymbolGlowing;
 
-	public static Achievement achieveDust, achieveTablet, achieveSpellRose, achieveSpellGrowth, achieveSpellInsanity, achieveMaxModifiers, achieveLotsDamage, achieveTimeStop, achieveAltar, achieveStandingStone, achieveWildwood, achieveShadow, achieveSpellElements, achieveVampire;
+	public static Achievement achieveArrowBlock, achieveIllusion, achieveGuardianBoss, achieveSpriteling, achieveHourglass, achieveDischarge, achieveDust, achieveTablet, achieveSpellRose, achieveSpellGrowth, achieveSpellInsanity, achieveMaxModifiers, achieveLotsDamage, achieveTimeStop, achieveAltar, achieveStandingStone, achieveWildwood, achieveShadow, achieveSpellElements, achieveVampire;
 	
 	public static ToolMaterial engravedMaterial = EnumHelper.addToolMaterial("engraved", 2, 1050, 5F, 8.0F, 5);
 	public static ToolMaterial livingMaterial = EnumHelper.addToolMaterial("livingMaterial", 2, 192, 6.0f, 2.0f, 18);
@@ -86,10 +87,10 @@ public class RegistryManager {
 		GameRegistry.registerItem(healingPoultice = new RootsItemFood("healingPoultice", 0, 0F, false).setAlwaysEdible().setMaxStackSize(8), "healingPoultice"); 
 		GameRegistry.registerItem(rootyStew = new ItemRootyStew(), "rootyStew"); 
 		GameRegistry.registerItem(manaResearchIcon = new ItemResearchIcon("manaResearchIcon"), "manaResearchIcon");
-		GameRegistry.registerItem(itemCharmRestoration = new ItemCharm("charmRestoration"),"charmRestoration");
-		GameRegistry.registerItem(itemCharmEvocation = new ItemCharm("charmEvocation"),"charmEvocation");
-		GameRegistry.registerItem(itemCharmConjuration = new ItemCharm("charmConjuration"),"charmConjuration");
-		GameRegistry.registerItem(itemCharmIllusion = new ItemCharm("charmIllusion"),"charmIllusion");
+		GameRegistry.registerItem(itemCharmRestoration = new ItemCharmRestoration("charmRestoration"),"charmRestoration");
+		GameRegistry.registerItem(itemCharmEvocation = new ItemCharmEvocation("charmEvocation"),"charmEvocation");
+		GameRegistry.registerItem(itemCharmConjuration = new ItemCharmConjuration("charmConjuration"),"charmConjuration");
+		GameRegistry.registerItem(itemCharmIllusion = new ItemCharmIllusion("charmIllusion"),"charmIllusion");
 		GameRegistry.registerItem(otherworldLeaf = new ItemMaterial("otherworldLeaf"),"otherworldLeaf");
 		GameRegistry.registerItem(otherworldSubstance = new ItemMaterial("otherworldSubstance"),"otherworldSubstance");
 		GameRegistry.registerItem(spellweaverLance = new ItemSpellweaverLance(),"spellweaverLance");
@@ -99,7 +100,11 @@ public class RegistryManager {
 		GameRegistry.registerItem(amuletConserving = new ItemConservingAmulet(),"amuletConserving");
 		GameRegistry.registerItem(ancientHourglass = new ItemAncientHourglass(),"ancientHourglass");
 		GameRegistry.registerItem(pixieStone = new ItemPixieStone(),"pixieStone");
-
+		GameRegistry.registerItem(projectileStaff = new ItemProjectileStaff(), "projectileStaff");
+		GameRegistry.registerItem(spritelingIcon = new ItemResearchIcon("spritelingIcon"), "spritelingIcon");
+		GameRegistry.registerItem(spriteIcon = new ItemResearchIcon("spriteIcon"), "spriteIcon");
+		GameRegistry.registerItem(greaterSpriteIcon = new ItemResearchIcon("greaterSpriteIcon"), "greaterSpriteIcon");
+		
 		/**
 		 * REGISTERING BLOCKS
 		 */
@@ -118,7 +123,7 @@ public class RegistryManager {
 		GameRegistry.registerBlock(standingStoneIgniter = new BlockStandingStoneIgniter(),"standingStoneIgniter");
 		GameRegistry.registerBlock(standingStoneGrower = new BlockStandingStoneGrower(),"standingStoneGrower");
 		GameRegistry.registerBlock(standingStoneHealer = new BlockStandingStoneHealer(),"standingStoneHealer");
-		GameRegistry.registerBlock(bridge = new BlockBridge().setRegistryName(Roots.MODID+":bridge"));
+		GameRegistry.registerBlock(bridge = new BlockBridge(),"bridgeBlock");
 		GameRegistry.registerBlock(runeStone = new BlockBase("runeStone",Material.ROCK,1.0f));
 		GameRegistry.registerBlock(runeStoneStairs = new BlockStairsBase("runeStoneStairs",runeStone.getDefaultState(),1.0f));
 
@@ -220,25 +225,279 @@ public class RegistryManager {
 		EntityRegistry.registerModEntity(EntitySpriteGuardian.class, "spriteGuardian", 10, Roots.instance, 64, 3, true);
 		EntityRegistry.registerEgg(EntitySpriteGuardian.class, Util.intColor(66, 230, 0), Util.intColor(130, 255, 60));
 		EntityRegistry.registerModEntity(EntitySummoner.class, "entitySummoner", 11, Roots.instance, 64, 3, true);
-		EntityRegistry.registerModEntity(EntityRitualProjectile.class,"entityRitualProjectile",12,Roots.instance,64,3,true);
-		EntityRegistry.registerModEntity(EntityHomingProjectile.class,"entityHomingProjectile",13,Roots.instance,64,3,true);
+		EntityRegistry.registerModEntity(EntityHomingProjectile.class,"entityHomingProjectile",12,Roots.instance,64,3,true);
+		EntityRegistry.registerModEntity(EntitySpellProjectile.class,"entitySpellProjectile",13,Roots.instance,64,3,true);
 	}
 	
 	public static void registerRecipes(){
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.pestle,1),true,new Object[]{"X  "," XX", " XX", 'X', new ItemStack(Blocks.STONE,1,3)}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.pestle,1),true,new Object[]{"  X","XX ", "XX ", 'X', new ItemStack(Blocks.STONE,1,3)}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.mortar,1),true,new Object[]{"X X","X X", " X ", 'X', "stone"}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.imbuer,1),true,new Object[]{"X X", "LSL", 'X', "stickWood", 'L', "logWood", 'S', new ItemStack(Blocks.STONEBRICK,1,3)}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.standingStoneT1,1), true, new Object[]{"SBS","BLB","SBS",'S',"stone",'B',new ItemStack(Blocks.STONEBRICK,1),'L',"blockLapis"}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.standingStoneT2,1), true, new Object[]{"SNS","NDN","SNS",'S',"stone",'N',"ingotBrickNether",'D',"gemDiamond"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.imbuer,1),true,new Object[]{"X X", " S ", "X X", 'X', "stickWood", 'S', new ItemStack(Blocks.STONEBRICK,1,3)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.standingStoneT1,1), true, new Object[]{"S S"," R ","S S",'S',RegistryManager.runeStone,'R',"dustRedstone"}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.standingStoneT2,1), true, new Object[]{"SNS","NDN","SNS",'S',RegistryManager.runeStone,'N',"ingotBrickNether",'D',"gemDiamond"}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.brazier,1), true, new Object[]{"ISI","ICI","I I",'I',"ingotIron",'S',"string",'C',Items.CAULDRON,'X',"stickWood"}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.altar,1), true, new Object[]{"BFB","SGS"," C ",'S',"stone",'F',new ItemStack(Blocks.RED_FLOWER,1,0),'B',RegistryManager.verdantSprig,'G',"blockGold",'C',new ItemStack(Blocks.STONEBRICK,1,3)}));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.altar,1), true, new Object[]{"BFB","SGS"," C ",'S',RegistryManager.runeStone,'F',new ItemStack(Blocks.RED_FLOWER,1,0),'B',RegistryManager.verdantSprig,'G',"blockGold",'C',RegistryManager.runeStoneSymbol}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.druidKnife,1), true, new Object[]{" VV","VPV","SV ",'S',"stickWood",'V',"treeSapling",'P',"plankWood"}));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(RegistryManager.growthSalve,4), new Object[]{new ItemStack(Items.WHEAT_SEEDS,1),new ItemStack(Blocks.TALLGRASS,1,1),"dustRedstone", new ItemStack(RegistryManager.pestle,1)}));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.runedTablet,1), true, new Object[]{" R ","SBS"," S ",'S',Items.WHEAT_SEEDS,'B',"stone",'R',RegistryManager.oldRoot}));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(RegistryManager.rootyStew,1), new Object[]{new ItemStack(Items.WHEAT,1), new ItemStack(Items.BOWL,1), new ItemStack(RegistryManager.oldRoot,1)}));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(RegistryManager.healingPoultice,2), new Object[]{new ItemStack(Items.DYE,1,1), new ItemStack(Items.PAPER,1), new ItemStack(RegistryManager.pestle,1), new ItemStack(RegistryManager.verdantSprig,1)}));
+		
 		GameRegistry.addSmelting(RegistryManager.dragonsEye, new ItemStack(Items.ENDER_PEARL), 1F);
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.runeStone,4),
+				true,
+				new Object[]{
+					"LS",
+					"SL",
+					'S',Blocks.STONE,
+					'L',"dyeBlue"
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.runeStone,4),
+				true,
+				new Object[]{
+					"SL",
+					"LS",
+					'S',Blocks.STONE,
+					'L',"dyeBlue"
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.runeStoneBrick,4),
+				true,
+				new Object[]{
+					"SS",
+					"SS",
+					'S',RegistryManager.runeStone
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.runeStoneTile,4),
+				true,
+				new Object[]{
+					"SS",
+					"SS",
+					'S',RegistryManager.runeStoneBrick
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.runeStoneSlab,6),
+				true,
+				new Object[]{
+					"SSS",
+					'S',RegistryManager.runeStone
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.runeStoneBrickSlab,6),
+				true,
+				new Object[]{
+					"SSS",
+					'S',RegistryManager.runeStoneBrick
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.runeStoneTileSlab,6),
+				true,
+				new Object[]{
+					"SSS",
+					'S',RegistryManager.runeStoneTile
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.runeStoneStairs,4),
+				true,
+				new Object[]{
+					"S  ",
+					"SS ",
+					"SSS",
+					'S',RegistryManager.runeStone
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.runeStoneBrickStairs,4),
+				true,
+				new Object[]{
+					"S  ",
+					"SS ",
+					"SSS",
+					'S',RegistryManager.runeStoneBrick
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.runeStoneTileStairs,4),
+				true,
+				new Object[]{
+					"S  ",
+					"SS ",
+					"SSS",
+					'S',RegistryManager.runeStoneTile
+				}
+				));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(
+				new ItemStack(RegistryManager.runeStoneSymbol,1),
+				new Object[]{
+					RegistryManager.runeStone,
+					Items.FLINT
+				}
+				));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(
+				new ItemStack(RegistryManager.runeStoneSymbolGlowing,1),
+				new Object[]{
+					RegistryManager.runeStoneSymbol,
+					RegistryManager.otherworldLeaf
+				}
+				));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(
+				new ItemStack(RegistryManager.logWildwoodSymbol,1),
+				new Object[]{
+					RegistryManager.logWildwood,
+					Items.FLINT
+				}
+				));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(
+				new ItemStack(RegistryManager.logWildwoodSymbolGlowing,1),
+				new Object[]{
+					RegistryManager.logWildwoodSymbol,
+					RegistryManager.otherworldLeaf
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.barkWildwood,4),
+				true,
+				new Object[]{
+					"SS",
+					"SS",
+					'S',RegistryManager.logWildwood
+				}
+				));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(
+				new ItemStack(RegistryManager.barkWildwoodSymbol,1),
+				new Object[]{
+					RegistryManager.barkWildwood,
+					Items.FLINT
+				}
+				));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(
+				new ItemStack(RegistryManager.barkWildwoodSymbolGlowing,1),
+				new Object[]{
+					RegistryManager.barkWildwoodSymbol,
+					RegistryManager.otherworldLeaf
+				}
+				));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(
+				new ItemStack(RegistryManager.plankWildwood,4),
+				new Object[]{
+					RegistryManager.logWildwood
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.plankWildwoodSlab,6),
+				true,
+				new Object[]{
+					"SSS",
+					'S',RegistryManager.plankWildwood
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.plankWildwoodStairs,4),
+				true,
+				new Object[]{
+					"S  ",
+					"SS ",
+					"SSS",
+					'S',RegistryManager.plankWildwood
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.spiritBlock,8),
+				true,
+				new Object[]{
+					"S S",
+					" E ",
+					"S S",
+					'S', RegistryManager.otherworldLeaf,
+					'E', RegistryManager.otherworldSubstance
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.spiritBrick,4),
+				true,
+				new Object[]{
+					"SS",
+					"SS",
+					'S', RegistryManager.spiritBlock
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.spiritBlockSlab,6),
+				true,
+				new Object[]{
+					"SSS",
+					'S', RegistryManager.spiritBlock
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.spiritBrickSlab,6),
+				true,
+				new Object[]{
+					"SSS",
+					'S', RegistryManager.spiritBrick
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.spiritBlockStairs,4),
+				true,
+				new Object[]{
+					"S  ",
+					"SS ",
+					"SSS",
+					'S', RegistryManager.spiritBlock
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.spiritBrickStairs,4),
+				true,
+				new Object[]{
+					"S  ",
+					"SS ",
+					"SSS",
+					'S', RegistryManager.spiritBrick
+				}
+				));
+		OreDictionary.registerOre("plankWood", RegistryManager.plankWildwood);
+		OreDictionary.registerOre("slabWood", RegistryManager.plankWildwoodSlab);
+		OreDictionary.registerOre("stairsWood", RegistryManager.plankWildwoodStairs);
+		OreDictionary.registerOre("logWood", RegistryManager.logWildwood);
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.spiritFont,1),
+				true,
+				new Object[]{
+					"LOL",
+					"SBS",
+					" B ",
+					'L', "treeLeaves",
+					'O', RegistryManager.otherworldLeaf,
+					'S', "vine",
+					'B', RegistryManager.runeStoneBrick
+				}
+				));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(RegistryManager.spiritConduit,1),
+				true,
+				new Object[]{
+					" O ",
+					" B ",
+					"SBS",
+					'O', RegistryManager.otherworldLeaf,
+					'S', RegistryManager.runeStoneStairs,
+					'B', RegistryManager.runeStoneBrick
+				}
+				));
 	}
 	
 	public static void registerAchievements(){
@@ -246,7 +505,7 @@ public class RegistryManager {
 		achieveTablet.registerStat();
 		achieveDust = new Achievement("achievement.dust","dust",0,0,RegistryManager.dustPetal,achieveTablet);
 		achieveDust.registerStat();
-		achieveSpellRose = new Achievement("achievement.spellRose","spellRose",0,3,new ItemStack(Blocks.DOUBLE_PLANT,1,4),achieveDust);
+		achieveSpellRose = new Achievement("achievement.spellRose","spellRose",0,5,new ItemStack(Blocks.DOUBLE_PLANT,1,4),achieveDust);
 		achieveSpellRose.registerStat();
 		achieveSpellGrowth = new Achievement("achievement.spellGrowth","spellGrowth",-2,3,new ItemStack(Blocks.DOUBLE_PLANT,1,1),achieveDust);
 		achieveSpellGrowth.registerStat();
@@ -258,14 +517,22 @@ public class RegistryManager {
 		achieveLotsDamage.registerStat();
 		achieveAltar = new Achievement("achievement.altar","altar",0,-2,new ItemStack(RegistryManager.altar,1),achieveTablet);
 		achieveAltar.registerStat();
-		achieveSpellElements = new Achievement("achievement.spellElements","spellElements",-2,-4,new ItemStack(RegistryManager.crystalStaff,1),achieveAltar).setSpecial();
-		achieveSpellElements.registerStat();
 		achieveStandingStone = new Achievement("achievement.standingStone","standingStone",2,-4,new ItemStack(RegistryManager.standingStoneT2,1),achieveAltar);
 		achieveStandingStone.registerStat();
 		achieveWildwood = new Achievement("achievement.wildwood","wildwood",4,-6,new ItemStack(RegistryManager.druidArmorHead,1),achieveStandingStone);
 		achieveWildwood.registerStat();
-		achieveVampire = new Achievement("achievement.vampire","vampire",6,-4,new ItemStack(Items.GHAST_TEAR,1),achieveStandingStone).setSpecial();
-		achieveVampire.registerStat();
+		achieveSpriteling = new Achievement("achievement.spriteling", "spriteling", 2, -6, new ItemStack(RegistryManager.otherworldLeaf,1),achieveStandingStone);
+		achieveSpriteling.registerStat();
+		achieveIllusion = new Achievement("achievement.illusion", "illusion", 4, -7, new ItemStack(RegistryManager.itemCharmIllusion,1),achieveSpriteling);
+		achieveIllusion.registerStat();
+		achieveDischarge = new Achievement("achievement.discharge", "discharge", 3, -8, new ItemStack(RegistryManager.amuletDischarge,1),achieveSpriteling);
+		achieveDischarge.registerStat();
+		achieveArrowBlock = new Achievement("achievement.arrowBlock", "arrowBlock", 2, -7, new ItemStack(Items.ARROW,1),achieveSpriteling);
+		achieveArrowBlock.registerStat();
+		achieveGuardianBoss = new Achievement("achievement.guardianBoss", "guardianBoss", 2, -9, new ItemStack(RegistryManager.otherworldSubstance,1),achieveSpriteling).setSpecial();
+		achieveGuardianBoss.registerStat();
+		achieveHourglass = new Achievement("achievement.hourglass", "hourglass", 2, -10, new ItemStack(RegistryManager.ancientHourglass,1),achieveGuardianBoss);
+		achieveHourglass.registerStat();
 		
 		AchievementPage.registerAchievementPage(new AchievementPage("Roots", 
 				achieveTablet, 
@@ -276,10 +543,14 @@ public class RegistryManager {
 				achieveMaxModifiers, 
 				achieveLotsDamage, 
 				achieveAltar, 
-				achieveSpellElements, 
 				achieveStandingStone, 
 				achieveWildwood, 
-				achieveVampire
+				achieveSpriteling,
+				achieveArrowBlock,
+				achieveIllusion,
+				achieveGuardianBoss,
+				achieveHourglass,
+				achieveDischarge
 				));
 	}
 	
@@ -341,12 +612,16 @@ public class RegistryManager {
 		((ItemConservingAmulet)amuletConserving).initModel();
 		((ItemAncientHourglass)ancientHourglass).initModel();
 		((ItemPixieStone)pixieStone).initModel();
+		((ItemProjectileStaff)projectileStaff).initModel();
+		((ItemResearchIcon)spritelingIcon).initModel();
+		((ItemResearchIcon)spriteIcon).initModel();
+		((ItemResearchIcon)greaterSpriteIcon).initModel();
 
 		/**Charms**/
-		((ItemCharm)itemCharmRestoration).initModel();
-		((ItemCharm)itemCharmConjuration).initModel();
-		((ItemCharm)itemCharmEvocation).initModel();
-		((ItemCharm)itemCharmIllusion).initModel();
+		((ItemCharmRestoration)itemCharmRestoration).initModel();
+		((ItemCharmConjuration)itemCharmConjuration).initModel();
+		((ItemCharmEvocation)itemCharmEvocation).initModel();
+		((ItemCharmIllusion)itemCharmIllusion).initModel();
 		
 		//((BlockDruidChalice)druidChalice).initModel();
 		((BlockMortar)mortar).initModel();
@@ -405,6 +680,7 @@ public class RegistryManager {
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemStaff.ColorHandler(), staff);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemCrystalStaff.ColorHandler(), crystalStaff);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemSpellweaverLance.ColorHandler(), spellweaverLance);
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemProjectileStaff.ColorHandler(), projectileStaff);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -418,5 +694,6 @@ public class RegistryManager {
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteGuardian.class, new RenderSpriteGuardian(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("spriteguardian"),1.2f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRitualProjectile.class,new RitualProjectileRenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityHomingProjectile.class,new RenderHomingProjectile(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpellProjectile.class,new RenderSpellProjectile(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
 	}
 }

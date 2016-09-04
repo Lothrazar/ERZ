@@ -147,10 +147,8 @@ public class TileEntityImbuer extends TEBase implements ITickable {
 		if (progress != 0 && progress % 1 == 0){
 			int chance = random.nextInt(4);
 			ComponentBase comp = null;
-			if (dust.hasTagCompound()){
-				if (dust.getTagCompound().hasKey("effect")){
-					comp = ComponentManager.getComponentFromName(dust.getTagCompound().getString("effect"));
-				}
+			if (dust.getItem() instanceof IImbuable){
+				comp = ComponentManager.getComponentFromName(((IImbuable)dust.getItem()).getEffect(dust));
 			}
 			if (comp != null){
 				if (chance == 0){
@@ -190,23 +188,21 @@ public class TileEntityImbuer extends TEBase implements ITickable {
 		if (progress > 40){
 			progress = 0;
 			if (dust != null && stick != null){
-				if (dust.hasTagCompound()){
-					ItemStack staff = new ItemStack(RegistryManager.staff,1,1);
-					String effectName = ((IImbuable)dust.getItem()).getEffect(dust);
-					int potency = ((IImbuable)dust.getItem()).getPotency(dust);
-					int duration = ((IImbuable)dust.getItem()).getEfficiency(dust);
-					int size = ((IImbuable)dust.getItem()).getSize(dust);
-					ItemCastingBase.createData(staff);
-					((ItemCastingBase)staff.getItem()).setEffectInSlot(staff, 1, effectName, potency, duration, size);
+				ItemStack staff = new ItemStack(RegistryManager.staff,1,1);
+				String effectName = ((IImbuable)dust.getItem()).getEffect(dust);
+				int potency = ((IImbuable)dust.getItem()).getPotency(dust);
+				int duration = ((IImbuable)dust.getItem()).getEfficiency(dust);
+				int size = ((IImbuable)dust.getItem()).getSize(dust);
+				ItemCastingBase.createData(staff);
+				((ItemCastingBase)staff.getItem()).setEffectInSlot(staff, 1, effectName, potency, duration, size);
 
-					if (!getWorld().isRemote){
-						getWorld().spawnEntityInWorld(new EntityItem(getWorld(),getPos().getX()+0.5,getPos().getY()+1.0,getPos().getZ()+0.5,staff));
-					}
-					stick = null;
-					dust = null;
-					markDirty();
-					this.getWorld().notifyBlockUpdate(getPos(), getWorld().getBlockState(getPos()), getWorld().getBlockState(getPos()), 3);
+				if (!getWorld().isRemote){
+					getWorld().spawnEntityInWorld(new EntityItem(getWorld(),getPos().getX()+0.5,getPos().getY()+1.0,getPos().getZ()+0.5,staff));
 				}
+				stick = null;
+				dust = null;
+				markDirty();
+				this.getWorld().notifyBlockUpdate(getPos(), getWorld().getBlockState(getPos()), getWorld().getBlockState(getPos()), 3);
 			}
 		}
 	}

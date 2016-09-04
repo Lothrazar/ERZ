@@ -3,6 +3,8 @@ package elucent.roots.entity;
 import java.util.List;
 import java.util.Random;
 
+import elucent.roots.PlayerManager;
+import elucent.roots.RegistryManager;
 import elucent.roots.Roots;
 import elucent.roots.Util;
 import net.minecraft.block.BlockRedstoneLight;
@@ -31,6 +33,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -123,6 +126,14 @@ public class EntitySpriteProjectile  extends EntityFlying {// implements IRanged
     	this.setDead();
 		for (int i = 0; i < 20; i ++){
 			Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX, posY+height/2.0f, posZ, Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), 107, 255, 28);
+		}
+		if (source.getEntity() instanceof EntityArrow){
+			if (((EntityArrow)source.getEntity()).shootingEntity instanceof EntityPlayer){
+				EntityPlayer player = ((EntityPlayer)((EntityArrow)source.getEntity()).shootingEntity);
+				if (!player.hasAchievement(RegistryManager.achieveArrowBlock)){
+					PlayerManager.addAchievement(player, RegistryManager.achieveArrowBlock);
+				}
+			}
 		}
     	return false;
     }

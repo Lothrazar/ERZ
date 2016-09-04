@@ -79,13 +79,13 @@ public class TileEntitySpiritConduit extends TEBase implements ITickable {
 				powered = false;
 			}
 		}
-		if (ticker % 100 == 0 && powered){
+		if (ticker % 20 == 0 && powered){
 			List<EntityLivingBase> entities = getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(getPos().getX()-10.0,getPos().getY()-15.0,getPos().getZ()-10.0,getPos().getX()+11.0,getPos().getY()+16.0,getPos().getZ()+11.0));
 			for (int i = 0; i < entities.size(); i ++){
-				if (entities.get(i) instanceof ISprite && random.nextInt(2) == 0){
-					if (!getWorld().isRemote){
+				if (entities.get(i) instanceof ISprite && random.nextInt(10) == 0){
+					if (!getWorld().isRemote && ((ISprite)entities.get(i)).getHappiness() > 8.0f){
 						EntitySpritePlacator p = new EntitySpritePlacator(getWorld());
-						p.initSpecial(entities.get(i), 0, getPos());
+						p.initSpecial(entities.get(i), ((ISprite)entities.get(i)).getHappiness(), getPos());
 						p.setPosition(getPos().getX()+0.5, getPos().getY()+0.75, getPos().getZ()+0.5);
 						getWorld().spawnEntityInWorld(p);
 					}

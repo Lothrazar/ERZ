@@ -141,6 +141,21 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
 	    			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.runeStone,1)));
 	    		}
 	    	}
+    		if (rand.nextInt(5) == 0){
+	    		int chance = rand.nextInt(4);
+	    		if (chance == 0){
+	    			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.itemCharmConjuration,1)));
+		    	}
+	    		if (chance == 1){
+	    			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.itemCharmEvocation,1)));
+		    	}
+	    		if (chance == 2){
+	    			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.itemCharmIllusion,1)));
+		    	}
+	    		if (chance == 3){
+	    			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.itemCharmRestoration,1)));
+		    	}
+    		}
     	}
     }
     
@@ -192,7 +207,6 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
 	    			EntitySpriteProjectile proj = new EntitySpriteProjectile(getEntityWorld());
 	    			proj.setPosition(posX, posY, posZ);
 	    			proj.onInitialSpawn(getEntityWorld().getDifficultyForLocation(getPosition()), null);
-	    			proj.setVelocity(random.nextDouble()-0.5, random.nextDouble()-0.5, random.nextDouble()-0.5);
 	    			proj.initSpecial(getAttackTarget(), 4.0f);
 	    			getEntityWorld().spawnEntityInWorld(proj);
 	    			getEntityWorld().playSound(posX, posY, posZ, new SoundEvent(new ResourceLocation("roots:staffCast")), SoundCategory.HOSTILE, 0.95f+random.nextFloat()*0.1f, 0.7f+random.nextFloat()*0.1f, false);
@@ -207,7 +221,7 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
 	    			getDataManager().setDirty(targetBlock);
 	    		}
 	    		if (getDataManager().get(dashTimer) <= 0){
-	    			this.getDataManager().set(targetDirectionX, (float)Math.toRadians(Util.yawDegreesBetweenPoints(posX, posY, posZ, getAttackTarget().posX, getAttackTarget().posY+getAttackTarget().getEyeHeight()/2.0, getAttackTarget().posZ)));
+	    			this.getDataManager().set(targetDirectionX, (float)Math.toRadians(Util.yawDegreesBetweenPointsSafe(posX, posY, posZ, getAttackTarget().posX, getAttackTarget().posY+getAttackTarget().getEyeHeight()/2.0, getAttackTarget().posZ, getDataManager().get(targetDirectionX).doubleValue())));
 	    			this.getDataManager().set(targetDirectionY, (float)Math.toRadians(Util.pitchDegreesBetweenPoints(posX, posY, posZ, getAttackTarget().posX, getAttackTarget().posY+getAttackTarget().getEyeHeight()/2.0, getAttackTarget().posZ)));
 	    			this.getDataManager().setDirty(targetDirectionX);
 	    		 	this.getDataManager().setDirty(targetDirectionY);
@@ -225,7 +239,7 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
 	    	else if (getDataManager().get(targetBlock).getY() != -1){
 	    		if (this.ticksExisted % 50 == 0 && !this.getEntityWorld().isRemote){
 	    			Vec3d target = new Vec3d(getDataManager().get(targetBlock).getX()+0.5+(random.nextFloat()-0.5f)*7.0f,getDataManager().get(targetBlock).getY()+9.0+(random.nextFloat()-0.5f)*17.0f,getDataManager().get(targetBlock).getZ()+0.5+(random.nextFloat()-0.5f)*7.0f);
-	    			this.getDataManager().set(targetDirectionX, (float)Math.toRadians(Util.yawDegreesBetweenPoints(posX, posY, posZ, target.xCoord, target.yCoord, target.zCoord)));
+	    			this.getDataManager().set(targetDirectionX, (float)Math.toRadians(Util.yawDegreesBetweenPointsSafe(posX, posY, posZ, target.xCoord, target.yCoord, target.zCoord,getDataManager().get(targetDirectionX))));
 	    			this.getDataManager().set(targetDirectionY, (float)Math.toRadians(Util.pitchDegreesBetweenPoints(posX, posY, posZ, target.xCoord, target.yCoord, target.zCoord)));
 	    			this.getDataManager().setDirty(targetDirectionX);
 	    		 	this.getDataManager().setDirty(targetDirectionY);
@@ -269,11 +283,10 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
     		this.motionY = -0.05;
     		this.motionZ = 0.9*motionZ;
     	}
-    	getDataManager().set(happiness,(getDataManager().get(happiness)*0.999f));
     	if (getDataManager().get(hostile)){
     		getDataManager().set(happiness,-900.0f);	
+        	getDataManager().setDirty(happiness);
     	}
-    	getDataManager().setDirty(happiness);
     	
     }
     

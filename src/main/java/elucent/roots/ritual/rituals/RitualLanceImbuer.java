@@ -30,7 +30,7 @@ public class RitualLanceImbuer extends RitualBase {
 		ItemCrystalStaff.createData(toSpawn);
 		for (int i = 0; i < incenses.size() && i < 2; i ++){
 			if (incenses.get(i) != null){
-				if (incenses.get(i).getItem() instanceof IImbuable && incenses.get(i).hasTagCompound()){
+				if (incenses.get(i).getItem() instanceof IImbuable){
 					IImbuable im = (IImbuable)incenses.get(i).getItem();
 					((ItemMeleeCastingBase)toSpawn.getItem()).setEffectInSlot(toSpawn, i+1, im.getEffect(incenses.get(i)), im.getPotency(incenses.get(i)), im.getEfficiency(incenses.get(i)), im.getSize(incenses.get(i)));
 				}

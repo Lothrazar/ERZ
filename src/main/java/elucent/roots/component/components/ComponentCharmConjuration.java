@@ -1,6 +1,7 @@
 package elucent.roots.component.components;
 
 import elucent.roots.RegistryManager;
+import elucent.roots.Util;
 import elucent.roots.component.ComponentBase;
 import elucent.roots.component.EnumCastType;
 import elucent.roots.entity.projectile.EntityRitualProjectile;
@@ -8,8 +9,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+
+import java.util.UUID;
+
 import org.lwjgl.Sys;
 
 /**
@@ -24,22 +30,43 @@ public class ComponentCharmConjuration extends ComponentBase
 
     @Override
     public void doEffect(World world, Entity caster, EnumCastType type, double x, double y, double z, double potency, double duration, double size) {
-        if(type == EnumCastType.SPELL)
+    	if(type == EnumCastType.SPELL)
         {
 
             int BridgeSize = 10 + (int)size;
-
-            for(int i = 0;i <= 10;i++)
-            {
-                BlockPos bridgePos = getThePosForBlock(world,(EntityPlayer)caster, i + BridgeSize);
-
-                buildBlock((EntityPlayer)caster,world,bridgePos);
+        	BlockPos bridgePos = Util.getRayTrace(world, ((EntityPlayer)caster), 16);
+            EnumFacing bridgeFace = Util.getRayFace(world,((EntityPlayer)caster), 16);
+            if (!world.isAirBlock(bridgePos)){
+	            for(int i = 0;i <= 4;i++)
+	            {
+	            	buildBlock(world, bridgePos.offset(bridgeFace,i+1));
+	            }
             }
 
         }
     }
 
-    private static void buildBlock(EntityPlayer player,World world,BlockPos pos)
+    @Override
+    public void doEffect(World world, UUID casterId, Vec3d direction, EnumCastType type, double x, double y, double z, double potency, double duration, double size) {
+        if(type == EnumCastType.SPELL)
+        {
+
+            int BridgeSize = 4 + (int)size;
+            if (world.getPlayerEntityByUUID(casterId) != null){
+            	BlockPos bridgePos = Util.getRayTrace(world, world.getPlayerEntityByUUID(casterId), 16);
+	            EnumFacing bridgeFace = Util.getRayFace(world,world.getPlayerEntityByUUID(casterId), 16);
+	            if (!world.isAirBlock(bridgePos)){
+		            for(int i = 0;i <= 4;i++)
+		            {
+		            	buildBlock(world, bridgePos.offset(bridgeFace,i+1));
+		            }
+	            }
+            }
+
+        }
+    }
+
+    private static void buildBlock(World world,BlockPos pos)
     {
         if(!world.isBlockLoaded(pos))
         {
@@ -55,20 +82,5 @@ public class ComponentCharmConjuration extends ComponentBase
                 world.setBlockState(pos, RegistryManager.bridge.getDefaultState());
             }
         }
-    }
-
-    private static BlockPos getThePosForBlock(World world, EntityPlayer player, int reachDistance){
-        double x = player.posX;
-        double y = player.posY - 1;
-        double z = player.posZ;
-        for (int i = 0; i < reachDistance*40.0; i ++){
-            x += player.getLookVec().xCoord*0.025;
-            y += player.getLookVec().yCoord*0.025;
-            z += player.getLookVec().zCoord*0.025;
-            if (!world.getBlockState(new BlockPos(x,y,z)).getBlock().isFullCube(world.getBlockState(new BlockPos(x,y,z)))){
-                return new BlockPos(x,y,z);
-            }
-        }
-        return new BlockPos(x,y,z);
     }
 }

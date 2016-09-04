@@ -58,6 +58,7 @@ public class EntitySpritePlacator  extends EntityFlying {// implements IRangedAt
     	super(worldIn);
         setSize(1.0f,1.0f);
         this.isAirBorne = true;
+        this.noClip = true;
         this.setInvisible(true);
     }
     
@@ -72,7 +73,7 @@ public class EntitySpritePlacator  extends EntityFlying {// implements IRangedAt
     	if (target != null){
 	    	if (entity.getUniqueID().compareTo(target.getUniqueID()) == 0){
 	    		target.heal(healing);
-	    		((ISprite)target).setHappiness(((ISprite)target).getHappiness()+healing);
+	    		((ISprite)target).setHappiness(healing);
 	    		this.getEntityWorld().removeEntity(this);
 	    		((ISprite)target).setTargetPosition(pos);
 				for (int i = 0; i < 40; i ++){

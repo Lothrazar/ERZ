@@ -48,8 +48,8 @@ public class TileEntitySpiritFont extends TEBase implements ITickable {
 	int ticker = 0;
 	Random random = new Random();
 	float angle = 0;
+	float maxPower = 0;
 	float power = 0;
-	float totalPower = 0;
 	public TileEntitySpiritFont(){
 		super();
 	}
@@ -69,50 +69,42 @@ public class TileEntitySpiritFont extends TEBase implements ITickable {
 	public void update() {
 		angle += 24.0f;
 		ticker ++;
+		BlockPos pos = getPos().down().add(random.nextInt(11)-5,0,random.nextInt(11)-5);
+		pos = getWorld().getTopSolidOrLiquidBlock(pos);
+		if (getWorld().getBlockState(pos.up()).getBlock() != Blocks.AIR){
+			pos = pos.up();
+		}
+		power += 1.75f*Util.getNatureAmount(getWorld().getBlockState(pos));
 		if (ticker % 2 == 0){
 			Roots.proxy.spawnParticleMagicSmallSparkleFX(getWorld(), getPos().getX()+0.125+random.nextFloat()*0.75, getPos().getY()+0.375+random.nextFloat()*0.75,getPos().getZ()+0.125+random.nextFloat()*0.75, 0, 0, 0, 107, 255, 28);
 		}
-		if (ticker % 100 == 0){
-			float sum = 0;
+		if (ticker % 20 == 0){
+			float sum = 0.0f;
 			for (int i = -5; i < 6; i ++){
 				for (int j = -5; j < 6; j ++){
-					BlockPos highest = getWorld().getTopSolidOrLiquidBlock(getPos().add(i,0,j));
-					if (getWorld().getBlockState(highest.up()).getBlock() != Blocks.AIR){
-						highest.add(0,1,0);
-					}
-					sum += Util.getNatureAmount(getWorld().getBlockState(highest)); 
-				}
-			}
-			this.power = sum/50.0f;
-			sum = 0;
-			for (int i = -5; i < 6; i ++){
-				for (int j = -5; j < 6; j ++){
-					BlockPos pos = getPos().down().add(i,0,j);
-					if (getWorld().getBlockState(pos.down()).getBlock() == Blocks.WATER){
+					BlockPos waterPos = getPos().down().add(i,0,j);
+					if (getWorld().getBlockState(waterPos.down()).getBlock() == Blocks.WATER){
 						sum += 1.0f;
 					}
 				}
 			}
-
-			totalPower = (float)Math.pow(sum,1.5)*0.0625f;
-			float powerMirror = totalPower;
+			this.maxPower = sum;
+		}
+		if (power > this.maxPower && this.maxPower > 0){
 			List<EntityLivingBase> entities = getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(getPos().getX()-10.0,getPos().getY()-15.0,getPos().getZ()-10.0,getPos().getX()+11.0,getPos().getY()+16.0,getPos().getZ()+11.0));
+			ArrayList<EntityLivingBase> sprites = new ArrayList<EntityLivingBase>();
 			for (int i = 0; i < entities.size(); i ++){
-				if (entities.get(i) instanceof ISprite && powerMirror > 0 && random.nextInt(2) == 0){
-					if (!getWorld().isRemote){
-						EntitySpritePlacator p = new EntitySpritePlacator(getWorld());
-						if (powerMirror >= power){
-							p.initSpecial(entities.get(i), power, getPos());
-							powerMirror -= power;
-						}
-						else {
-							p.initSpecial(entities.get(i), powerMirror, getPos());
-							powerMirror = 0;
-						}
-						p.setPosition(getPos().getX()+0.5, getPos().getY()+0.5, getPos().getZ()+0.5);
-						getWorld().spawnEntityInWorld(p);
-					}
+				if (entities.get(i) instanceof ISprite){
+					sprites.add(entities.get(i));
 				}
+			}
+			if (sprites.size() > 0 && !getWorld().isRemote){
+				EntityLivingBase target = sprites.get(random.nextInt(sprites.size()));
+				EntitySpritePlacator p = new EntitySpritePlacator(getWorld());
+				p.initSpecial(target, power, getPos());
+				power = 0;
+				p.setPosition(getPos().getX()+0.5, getPos().getY()+0.5, getPos().getZ()+0.5);
+				getWorld().spawnEntityInWorld(p);
 			}
 		}
 	}

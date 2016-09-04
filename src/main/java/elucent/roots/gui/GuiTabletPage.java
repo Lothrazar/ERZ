@@ -65,6 +65,7 @@ public class GuiTabletPage extends GuiScreen {
 	
 	public void renderItemStackAt(ItemStack stack, int x, int y, int mouseX, int mouseY){
 		this.itemRender.renderItemIntoGUI(stack, x, y);
+		this.itemRender.renderItemOverlayIntoGUI(this.fontRendererObj, stack, x, y, stack.stackSize != 1 ? Integer.toString(stack.stackSize) : "");
 		if (mouseX >= x && mouseY >= y && mouseX < x+16 && mouseY < y+16){
 			this.markTooltipForRender(stack, mouseX, mouseY);
 		}

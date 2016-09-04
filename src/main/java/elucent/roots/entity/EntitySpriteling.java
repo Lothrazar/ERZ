@@ -154,7 +154,7 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
 	    			getDataManager().setDirty(targetBlock);
 	    		}
 	    		if (getDataManager().get(dashTimer) <= 0){
-	    			this.getDataManager().set(targetDirectionX, (float)Math.toRadians(Util.yawDegreesBetweenPoints(posX, posY, posZ, getAttackTarget().posX, getAttackTarget().posY+getAttackTarget().getEyeHeight()/2.0, getAttackTarget().posZ)));
+	    			this.getDataManager().set(targetDirectionX, (float)Math.toRadians(Util.yawDegreesBetweenPointsSafe(posX, posY, posZ, getAttackTarget().posX, getAttackTarget().posY+getAttackTarget().getEyeHeight()/2.0, getAttackTarget().posZ, getDataManager().get(targetDirectionX).doubleValue())));
 	    			this.getDataManager().set(targetDirectionY, (float)Math.toRadians(Util.pitchDegreesBetweenPoints(posX, posY, posZ, getAttackTarget().posX, getAttackTarget().posY+getAttackTarget().getEyeHeight()/2.0, getAttackTarget().posZ)));
 	    			this.getDataManager().setDirty(targetDirectionX);
 	    		 	this.getDataManager().setDirty(targetDirectionY);
@@ -168,7 +168,7 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
 	    	else if (getDataManager().get(targetBlock).getY() != -1){
 	    		if (this.ticksExisted % 50 == 0 && !this.getEntityWorld().isRemote){
 	    			Vec3d target = new Vec3d(getDataManager().get(targetBlock).getX()+0.5+(random.nextFloat()-0.5f)*7.0f,getDataManager().get(targetBlock).getY()+9.0+(random.nextFloat()-0.5f)*17.0f,getDataManager().get(targetBlock).getZ()+0.5+(random.nextFloat()-0.5f)*7.0f);
-	    			this.getDataManager().set(targetDirectionX, (float)Math.toRadians(Util.yawDegreesBetweenPoints(posX, posY, posZ, target.xCoord, target.yCoord, target.zCoord)));
+	    			this.getDataManager().set(targetDirectionX, (float)Math.toRadians(Util.yawDegreesBetweenPointsSafe(posX, posY, posZ, target.xCoord, target.yCoord, target.zCoord, getDataManager().get(targetDirectionX).doubleValue())));
 	    			this.getDataManager().set(targetDirectionY, (float)Math.toRadians(Util.pitchDegreesBetweenPoints(posX, posY, posZ, target.xCoord, target.yCoord, target.zCoord)));
 	    			this.getDataManager().setDirty(targetDirectionX);
 	    		 	this.getDataManager().setDirty(targetDirectionY);
@@ -214,8 +214,6 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
     		this.motionY = -0.05;
     		this.motionZ = 0.9*motionZ;
     	}
-    	getDataManager().set(happiness,(getDataManager().get(happiness)*0.999f));
-    	getDataManager().setDirty(happiness);
     }
     
     @Override

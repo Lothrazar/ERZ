@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -17,6 +18,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import elucent.roots.PlayerManager;
 import elucent.roots.RegistryManager;
 import elucent.roots.Util;
 import elucent.roots.entity.EntityGreaterSprite;
@@ -105,6 +107,12 @@ public class RitualSpiritSummoning extends RitualSummoning {
 			world.spawnEntityInWorld(summoner);
 			inventory.clear();
 			world.getTileEntity(pos).markDirty();
+			List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class,new AxisAlignedBB(pos.getX()-5.0,pos.getY()-5.0,pos.getZ()-5.0,pos.getX()+6.0,pos.getY()+6.0,pos.getZ()+6.0));
+			for (int i = 0; i < players.size(); i ++){
+				if (!players.get(i).hasAchievement(RegistryManager.achieveSpriteling)){
+					PlayerManager.addAchievement(players.get(i), RegistryManager.achieveSpriteling);
+				}
+			}
 		}
 	}
 }

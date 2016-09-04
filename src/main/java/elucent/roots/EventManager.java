@@ -40,6 +40,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.ServerChatEvent;
+import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -129,6 +130,15 @@ public class EventManager {
 	}
 	
 	@SubscribeEvent
+	public void onLivingAttack(LivingAttackEvent event){
+		if (event.getSource().getEntity() != null){
+			if (event.getSource().getEntity().getEntityData().hasKey(RootsNames.TAG_SPELL_ILLUSION)){
+				event.getSource().getEntity().getEntityData().removeTag(RootsNames.TAG_SPELL_ILLUSION);
+			}
+		}
+	}
+	
+	@SubscribeEvent
 	public void onSpellCast(SpellCastEvent event){
 		EntityPlayer player = event.getPlayer();
 		for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
@@ -160,18 +170,6 @@ public class EventManager {
 				if (event.pickedUp.getEntityItem().getItem() == Item.getItemFromBlock(RegistryManager.standingStoneT2)){
 					if (!event.player.hasAchievement(RegistryManager.achieveStandingStone)){
 						PlayerManager.addAchievement(event.player, RegistryManager.achieveStandingStone);
-					}
-				}
-				if (event.pickedUp.getEntityItem().getItem() == RegistryManager.crystalStaff){
-					ArrayList<String> spells = new ArrayList<String>();
-					spells.add(ItemCrystalStaff.getEffect(event.pickedUp.getEntityItem(),1));
-					spells.add(ItemCrystalStaff.getEffect(event.pickedUp.getEntityItem(),2));
-					spells.add(ItemCrystalStaff.getEffect(event.pickedUp.getEntityItem(),3));
-					spells.add(ItemCrystalStaff.getEffect(event.pickedUp.getEntityItem(),4));
-					if (spells.contains("netherwart") && spells.contains("dandelion") && spells.contains("blueorchid") && spells.contains("lilypad")){
-						if (!event.player.hasAchievement(RegistryManager.achieveSpellElements)){
-							PlayerManager.addAchievement(event.player, RegistryManager.achieveSpellElements);
-						}
 					}
 				}
 			}
@@ -311,6 +309,15 @@ public class EventManager {
 			}
 		}
 		if (event.getEntityLiving().getEntityData().hasKey(RootsNames.TAG_TRACK_TICKS)){
+			if (event.getEntityLiving().getEntityData().hasKey(RootsNames.TAG_SPELL_ILLUSION)){
+				if (event.getEntityLiving().getEntityData().getInteger(RootsNames.TAG_SPELL_ILLUSION) > 0){
+					event.getEntityLiving().getEntityData().setInteger(RootsNames.TAG_SPELL_ILLUSION, event.getEntityLiving().getEntityData().getInteger(RootsNames.TAG_SPELL_ILLUSION)-1);
+					if (event.getEntityLiving().getEntityData().getInteger(RootsNames.TAG_SPELL_ILLUSION) <= 0){
+						event.getEntityLiving().getEntityData().removeTag(RootsNames.TAG_SPELL_ILLUSION);
+						Util.decrementTickTracking(event.getEntityLiving());
+					}
+				}
+			}
 			if (event.getEntityLiving().getEntityData().hasKey(RootsNames.TAG_SPELL_SKIP_TICKS)){
 				if (event.getEntityLiving().getEntityData().getInteger(RootsNames.TAG_SPELL_SKIP_TICKS) > 0){
 					if (event.getEntityLiving().getHealth() <= 0){
@@ -399,6 +406,9 @@ public class EventManager {
 						}
 						List<EntityLivingBase> entities = player.getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.posX-32.0,player.posY-32.0,player.posZ-32.0,player.posX+32.0,player.posY+32.0,player.posZ+32.0));
 						for (int j = 0; j < entities.size(); j ++){
+							if (!player.hasAchievement(RegistryManager.achieveHourglass)){
+								PlayerManager.addAchievement(player, RegistryManager.achieveHourglass);
+							}
 							Util.addTickTracking(entities.get(j));
 							entities.get(j).getEntityData().setInteger(RootsNames.TAG_SPELL_SKIP_TICKS, 200);
 						}	
@@ -432,8 +442,7 @@ public class EventManager {
 								EntityHomingProjectile proj = new EntityHomingProjectile(player.getEntityWorld());
 								proj.setPosition(event.getEntity().posX, event.getEntity().posY+event.getEntity().height/2.0f, event.getEntity().posZ);
 								proj.onInitialSpawn(player.getEntityWorld().getDifficultyForLocation(event.getEntity().getPosition()), null);
-								proj.setVelocity(random.nextDouble()-0.5, random.nextDouble()-0.5, random.nextDouble()-0.5);
-				    			proj.initSpecial(trimmedAnimals.get(0), 4.0f, new Vec3d(234,41,255));
+								proj.initSpecial(trimmedAnimals.get(0), 4.0f, new Vec3d(234,41,255));
 								player.getEntityWorld().spawnEntityInWorld(proj);
 							}
 						}
@@ -487,7 +496,7 @@ public class EventManager {
 					if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.amuletConserving){
 						if (player.inventory.getStackInSlot(i).getTagCompound().getInteger("charge") > 40){
 							player.inventory.getStackInSlot(i).getTagCompound().setInteger("charge",0);
-							event.getEntityLiving().setHealth(event.getEntityLiving().getHealth()-2.0f);
+							event.getEntityLiving().setHealth(event.getEntityLiving().getHealth()-5.0f);
 							for (int j = 0; j < 20; j ++){
 								Roots.proxy.spawnParticleMagicSparkleFX(player.getEntityWorld(), event.getEntityLiving().posX, event.getEntityLiving().posY+event.getEntityLiving().height/2.0f, event.getEntityLiving().posZ, Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), 76, 230, 0);
 							}
@@ -524,6 +533,11 @@ public class EventManager {
 									for (int j = 0; j < entities.size(); j ++){
 										if (entities.get(j).getUniqueID().compareTo(player.getUniqueID()) != 0){
 											entities.get(j).attackEntityFrom(DamageSource.generic, 3.0f);
+											if (entities.get(j).getHealth() <= 0){
+												if (!player.hasAchievement(RegistryManager.achieveDischarge)){
+													PlayerManager.addAchievement(player, RegistryManager.achieveDischarge);
+												}
+											}
 										}
 									}
 									for (double j = 0; j < 360; j += 30){
@@ -561,74 +575,24 @@ public class EventManager {
 		ResourceLocation sparkleRL = new ResourceLocation("roots:entity/sparkle");
 		event.getMap().registerSprite(sparkleRL);
 	}
-
-	@SubscribeEvent
-	public void onUpdateAttack(LivingEvent.LivingUpdateEvent event)
-	{
-		onLivingAttack(event);
-	}
 	
 	@SubscribeEvent
 	public void onTargetEvent(LivingSetAttackTargetEvent event)
 	{
-		setTarget(event);
-	}
-
-	private void onLivingAttack(LivingEvent event) {
-		if (!(event.getEntity() instanceof EntityLiving))
-			return;
-		EntityLiving entity = (EntityLiving) event.getEntity();
-
-		if (entity.getAttackTarget() == null || !(entity.getAttackTarget() instanceof EntityPlayer))
-			return;
-		if (!entity.worldObj.isRemote && ComponentCharmIllusion.doStuff && timer != defaultTime && timer > 0 && !isEntityAttacked) {
-			entity.setAttackTarget(null);
-			entity.setRevengeTarget(null);
-		}
-	}
-
-	public static boolean isEntityAttacked = false;
-
-	@SubscribeEvent
-	public void onAttackEvent(LivingHurtEvent event) {
-		isEntityAttacked = true;
-	}
-
-
-	private void setTarget(LivingSetAttackTargetEvent event) {
-		if (event.getTarget() == null)
-			return;
-		if (!(event.getTarget() instanceof EntityPlayer))
-			return;
-		if (!(event.getEntity() instanceof EntityLiving))
-			return;
-
-			EntityLiving entity = (EntityLiving) event.getEntity();
-
-		if (!entity.worldObj.isRemote && ComponentCharmIllusion.doStuff && timer != defaultTime && timer > 0 && !isEntityAttacked) {
-			entity.setAttackTarget(null);
-			entity.setRevengeTarget(null);
-		}
-	}
-
-	@SubscribeEvent
-	public void timer(TickEvent.WorldTickEvent event) {
-		if (ComponentCharmIllusion.doStuff == true) ;
-		{
-			if (timer > 0) {
-				timer--;
-			}
-			if (ComponentCharmIllusion.doStuff == false) {
-				timer = defaultTime;
+		if (event.getEntity() instanceof EntityMob){
+			if (event.getTarget() != null){
+				if (event.getTarget().getEntityData() != null){
+					if (event.getTarget().getEntityData().hasKey(RootsNames.TAG_SPELL_ILLUSION)){
+						if (event.getTarget() instanceof EntityPlayer){
+							EntityPlayer player = (EntityPlayer)event.getTarget();
+							if (!player.hasAchievement(RegistryManager.achieveIllusion)){
+								PlayerManager.addAchievement(player, RegistryManager.achieveIllusion);
+							}
+						}
+						((EntityMob)event.getEntityLiving()).setAttackTarget(null);
+					}
+				}
 			}
 		}
-		if(timer == 0)
-		{
-			ComponentCharmIllusion.doStuff = false;
-		}
-		//DebugOnly
-		/*if (timer > 0 && timer != defaultTime) {
-			System.out.println(timer);
-		}*/
 	}
 }

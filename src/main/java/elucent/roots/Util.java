@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -78,6 +79,19 @@ public class Util {
 		return false;
 	}
 	
+	public static float yawDegreesBetweenPointsSafe(double posX, double posY, double posZ, double posX2, double posY2, double posZ2, double previousYaw){
+		float f = (float) ((180.0f*Math.atan2(posX2-posX,posZ2-posZ))/(float)Math.PI);
+		if (Math.abs(f-previousYaw) > 90){
+			if (f < previousYaw){
+				f += 360.0;
+			}
+			else {
+				f -= 360.0;
+			}
+		}
+		return f;
+	}
+	
 	public static float yawDegreesBetweenPoints(double posX, double posY, double posZ, double posX2, double posY2, double posZ2){
 		float f = (float) ((180.0f*Math.atan2(posX2-posX,posZ2-posZ))/(float)Math.PI);
 		return f;
@@ -120,7 +134,7 @@ public class Util {
 			x += player.getLookVec().xCoord*0.25;
 			y += player.getLookVec().yCoord*0.25;
 			z += player.getLookVec().zCoord*0.25;
-			if (!world.getBlockState(new BlockPos(x,y,z)).getBlock().isTranslucent(world.getBlockState(new BlockPos(x,y,z)))){
+			if (world.getBlockState(new BlockPos(x,y,z)).isFullCube()){
 				return new BlockPos(x,y,z);
 			}
 		}
@@ -345,6 +359,9 @@ public class Util {
 		if (state.getBlock() == Blocks.DOUBLE_PLANT){
 			return 0.8f;
 		}
+		if (state.getBlock() == Blocks.WATER){
+			return 0.16f;
+		}
 		if (state.getBlock() == Blocks.LEAVES || state.getBlock() == Blocks.LEAVES2){
 			return 0.32f;
 		}
@@ -358,5 +375,50 @@ public class Util {
 			return 0.72f;
 		}
 		return 0;
+	}
+
+	public static EnumFacing getRayFace(World world, EntityPlayer player, int reachDistance) {
+		double x = player.posX;
+		double y = player.posY + player.getEyeHeight();
+		double z = player.posZ;
+		for (int i = 0; i < reachDistance*4.0; i ++){
+			x += player.getLookVec().xCoord*0.25;
+			y += player.getLookVec().yCoord*0.25;
+			z += player.getLookVec().zCoord*0.25;
+			if (world.getBlockState(new BlockPos(x,y,z)).isFullCube()){
+				BlockPos pos = new BlockPos(x,y,z);
+				double centerX = pos.getX()+0.5;
+				double centerY = pos.getY()+0.5;
+				double centerZ = pos.getZ()+0.5;
+				double dx = Math.abs(x-centerX);
+				double dy = Math.abs(y-centerY);
+				double dz = Math.abs(z-centerZ);
+				if (dx > dy && dx > dz){
+					if (x-centerX > 0){
+						return EnumFacing.EAST;
+					}
+					else {
+						return EnumFacing.WEST;
+					}
+				}
+				else if (dy > dz){
+					if (y-centerY > 0){
+						return EnumFacing.UP;
+					}
+					else {
+						return EnumFacing.DOWN;
+					}
+				}
+				else {
+					if (z-centerZ > 0){
+						return EnumFacing.SOUTH;
+					}
+					else {
+						return EnumFacing.NORTH;
+					}
+				}
+			}
+		}
+		return EnumFacing.UP;
 	}
 }

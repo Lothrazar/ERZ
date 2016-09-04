@@ -15,17 +15,18 @@ import elucent.roots.Util;
 import elucent.roots.item.IImbuable;
 import elucent.roots.item.ItemCastingBase;
 import elucent.roots.item.ItemCrystalStaff;
+import elucent.roots.item.ItemMeleeCastingBase;
 import elucent.roots.ritual.RitualBase;
 
-public class RitualStaffImbuer extends RitualBase {
+public class RitualProjectileStaffImbuer extends RitualBase {
 
-	public RitualStaffImbuer() {
-		super("staffImbuer", 255, 255, 255);
+	public RitualProjectileStaffImbuer() {
+		super("projectileStaffImbuer", 255, 255, 255);
 	}
 	
 	@Override
 	public void doEffect(World world, BlockPos pos, List<ItemStack> inventory, List<ItemStack> incenses){
-		ItemStack toSpawn = new ItemStack(RegistryManager.crystalStaff, 1);
+		ItemStack toSpawn = new ItemStack(RegistryManager.projectileStaff, 1);
 		ItemCrystalStaff.createData(toSpawn);
 		for (int i = 0; i < incenses.size() && i < 4; i ++){
 			if (incenses.get(i) != null){
