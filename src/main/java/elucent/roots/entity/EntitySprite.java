@@ -49,7 +49,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import sun.misc.Unsafe;
 
 public class EntitySprite  extends EntityFlying implements ISprite {// implements IRangedAttackMob {
     public float range = 64;
