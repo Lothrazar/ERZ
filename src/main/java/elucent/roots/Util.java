@@ -72,8 +72,10 @@ public class Util {
 	public static boolean hasOreDictPrefix(ItemStack stack, String dict){
 		int[] ids = OreDictionary.getOreIDs(stack);
 		for (int i = 0; i < ids.length; i ++){
-			if (OreDictionary.getOreName(ids[i]).substring(0,dict.length()).compareTo(dict.substring(0, dict.length())) == 0){
-				return true;
+			if (OreDictionary.getOreName(ids[i]).length() >= dict.length()){
+				if (OreDictionary.getOreName(ids[i]).substring(0,dict.length()).compareTo(dict.substring(0, dict.length())) == 0){
+					return true;
+				}
 			}
 		}
 		return false;

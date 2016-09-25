@@ -275,12 +275,6 @@ public class ItemMeleeCastingBase extends ItemTool {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand){
 		if (stack.hasTagCompound() && !player.isSneaking()){
-			if(world.isRemote && Minecraft.getMinecraft().currentScreen != null){
-				return new ActionResult(EnumActionResult.FAIL, stack);
-			} else{
-				player.setActiveHand(hand);
-				return new ActionResult(EnumActionResult.PASS, stack);
-			}
 		}
 		else if (stack.hasTagCompound()){
 			stack.getTagCompound().setInteger("selected", stack.getTagCompound().getInteger("selected")+1);

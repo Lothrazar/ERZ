@@ -63,6 +63,7 @@ public class ComponentOxeyeDaisy extends ComponentBase{
 					if (world.getTileEntity(pos) != null && !world.isRemote){
 						if (world.getEntitiesWithinAABB(EntityTileAccelerator.class, new AxisAlignedBB(pos.getX()-0.1,pos.getY()-0.1,pos.getZ()-0.1,pos.getX()+0.1,pos.getY()+0.1,pos.getZ()+0.1)).size() == 0){
 							EntityTileAccelerator a = new EntityTileAccelerator(world,pos,(int)potency,(int)size);
+							a.setPosition(x, potency, size);
 							world.spawnEntityInWorld(a);
 						}
 					}

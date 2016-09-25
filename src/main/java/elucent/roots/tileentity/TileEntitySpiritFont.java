@@ -74,7 +74,7 @@ public class TileEntitySpiritFont extends TEBase implements ITickable {
 		if (getWorld().getBlockState(pos.up()).getBlock() != Blocks.AIR){
 			pos = pos.up();
 		}
-		power += 1.75f*Util.getNatureAmount(getWorld().getBlockState(pos));
+		power += 4.0f*Util.getNatureAmount(getWorld().getBlockState(pos));
 		if (ticker % 2 == 0){
 			Roots.proxy.spawnParticleMagicSmallSparkleFX(getWorld(), getPos().getX()+0.125+random.nextFloat()*0.75, getPos().getY()+0.375+random.nextFloat()*0.75,getPos().getZ()+0.125+random.nextFloat()*0.75, 0, 0, 0, 107, 255, 28);
 		}

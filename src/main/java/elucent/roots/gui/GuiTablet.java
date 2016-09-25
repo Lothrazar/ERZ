@@ -85,7 +85,9 @@ public class GuiTablet extends GuiScreen {
 			}
 		}
 		if (currentGroup != 0){
-			player.getHeldItem(EnumHand.MAIN_HAND).setTagCompound(new NBTTagCompound());
+			if (!player.getHeldItem(EnumHand.MAIN_HAND).hasTagCompound()){
+				player.getHeldItem(EnumHand.MAIN_HAND).setTagCompound(new NBTTagCompound());
+			}
 			player.getHeldItem(EnumHand.MAIN_HAND).getTagCompound().setInteger("currentGroup", currentGroup);
 		}
 		else {

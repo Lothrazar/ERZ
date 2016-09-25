@@ -134,6 +134,9 @@ public class GuiTabletPage extends GuiScreen {
 		
 		float basePosX = ((float)width/2.0f)-96;
 		float basePosY = ((float)height/2.0f)-128;
+		if (currentPage >= research.info.size()){
+			currentPage = 0;
+		}
 		EnumRecipeType type = research.info.get(currentPage).recipe;
 		GlStateManager.color(1, 1, 1, 1);
 		if (type == EnumRecipeType.TYPE_NULL){

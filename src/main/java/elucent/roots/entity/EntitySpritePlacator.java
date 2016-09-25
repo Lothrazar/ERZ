@@ -53,6 +53,7 @@ public class EntitySpritePlacator  extends EntityFlying {// implements IRangedAt
     EntityLivingBase target = null;
     public float healing = 2.0f;
     public BlockPos pos;
+    public boolean addedToWorld = false;
 
     public EntitySpritePlacator(World worldIn) {
     	super(worldIn);
@@ -66,11 +67,12 @@ public class EntitySpritePlacator  extends EntityFlying {// implements IRangedAt
     	this.target = target;
     	this.healing = healing;
     	this.pos = pos;
+    	this.addedToWorld = true;
     }
     
     @Override
     public void collideWithEntity(Entity entity){
-    	if (target != null){
+    	if (target != null && addedToWorld){
 	    	if (entity.getUniqueID().compareTo(target.getUniqueID()) == 0){
 	    		target.heal(healing);
 	    		((ISprite)target).setHappiness(healing);
@@ -92,7 +94,7 @@ public class EntitySpritePlacator  extends EntityFlying {// implements IRangedAt
     public void onUpdate(){
     	super.onUpdate();
     	lifetime --;
-    	if (lifetime == 0){
+    	if (lifetime == 0 && addedToWorld){
     		this.getEntityWorld().removeEntity(this);
     	}
     	if (target != null){

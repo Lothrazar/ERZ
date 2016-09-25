@@ -28,7 +28,7 @@ public class Roots
 {
 	public static final String NAME = "Roots";
     public static final String MODID = "roots";
-    public static final String VERSION = "0.200";
+    public static final String VERSION = "0.203";
     
     public static final String GUIFACTORY = "elucent.roots.gui.GuiFactory";
     
