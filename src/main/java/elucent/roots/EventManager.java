@@ -409,8 +409,12 @@ public class EventManager {
 							if (!player.hasAchievement(RegistryManager.achieveHourglass)){
 								PlayerManager.addAchievement(player, RegistryManager.achieveHourglass);
 							}
-							Util.addTickTracking(entities.get(j));
-							entities.get(j).getEntityData().setInteger(RootsNames.TAG_SPELL_SKIP_TICKS, 200);
+							if(entities.get(j) instanceof EntityPlayer){
+								
+							} else {
+								Util.addTickTracking(entities.get(j));
+								entities.get(j).getEntityData().setInteger(RootsNames.TAG_SPELL_SKIP_TICKS, 200);
+							}	
 						}	
 						player.getEntityWorld().playSound(player.posX, player.posY, player.posZ, SoundType.GLASS.getBreakSound(), SoundCategory.BLOCKS, random.nextFloat()*0.1f+0.95f, random.nextFloat()*0.1f+0.95f, false);
 						for (int j = 0; j < 20; j ++){
