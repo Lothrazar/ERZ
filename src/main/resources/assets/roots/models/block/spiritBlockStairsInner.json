@@ -1,0 +1,9 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "top": "roots:blocks/spiritBlock",
+        "bottom": "roots:blocks/spiritBlock",
+        "side": "roots:blocks/spiritBlock",
+        "particle": "roots:blocks/spiritBlock"
+    }
+}

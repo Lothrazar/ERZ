@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "roots:blocks/logWildwood",
+        "side": "roots:blocks/barkWildwoodSymbolGlowing"
+    }
+}
