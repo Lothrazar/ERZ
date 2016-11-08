@@ -1,7 +1,10 @@
 package elucent.roots.capability.mana;
 
 import elucent.roots.network.MessageUpdateMana;
+<<<<<<< HEAD
 import elucent.roots.network.PacketHandler;
+=======
+>>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 import elucent.roots.proxy.CommonProxy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -41,7 +44,11 @@ public class DefaultManaCapability implements IManaCapability {
 	@Override
 	public void dataChanged(EntityPlayer player) {
 		if(player != null && !player.getEntityWorld().isRemote){
+<<<<<<< HEAD
 			PacketHandler.INSTANCE.sendTo(new MessageUpdateMana(saveNBTData()), (EntityPlayerMP) player);
+=======
+			CommonProxy.network.sendTo(new MessageUpdateMana(saveNBTData()), (EntityPlayerMP) player);
+>>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 		}
 	}
 

@@ -2,8 +2,11 @@ package elucent.roots.model;
 
 import java.util.HashMap;
 
+<<<<<<< HEAD
 import elucent.roots.model.entity.ModelDeer;
 import elucent.roots.model.entity.ModelDireWolf;
+=======
+>>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 import elucent.roots.model.entity.ModelGreaterSprite;
 import elucent.roots.model.entity.ModelNull;
 import elucent.roots.model.entity.ModelSprite;
@@ -32,7 +35,10 @@ public class ModelHolder {
 		entityModels.put("spriteguardiansegmentlarge", new ModelSpriteGuardianSegmentLarge());
 		entityModels.put("spriteguardiansegmentfirst", new ModelSpriteGuardianSegmentFirst());
 		entityModels.put("spriteguardiantail", new ModelSpriteGuardianTail());
+<<<<<<< HEAD
 		entityModels.put("deer", new ModelDeer());
 		entityModels.put("direwolf", new ModelDireWolf());
+=======
+>>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 	}
 }

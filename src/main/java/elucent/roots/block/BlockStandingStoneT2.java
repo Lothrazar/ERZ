@@ -3,7 +3,10 @@ package elucent.roots.block;
 import java.util.List;
 
 import elucent.roots.Roots;
+<<<<<<< HEAD
 import elucent.roots.tileentity.TEBase;
+=======
+>>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 import elucent.roots.tileentity.TileEntityMortar;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -24,7 +27,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+<<<<<<< HEAD
 import net.minecraft.world.Explosion;
+=======
+>>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -110,6 +116,7 @@ public class BlockStandingStoneT2 extends Block {
 	}
 	
 	@Override
+<<<<<<< HEAD
 	public void onBlockExploded(World world, BlockPos pos, Explosion explosion){
 		if (!world.isRemote){
 			world.spawnEntityInWorld(new EntityItem(world,pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,new ItemStack(this,1,0)));
@@ -126,6 +133,8 @@ public class BlockStandingStoneT2 extends Block {
 	}
 	
 	@Override
+=======
+>>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 	public boolean canPlaceBlockAt(World world, BlockPos pos){
 		if (world.getBlockState(pos.up()) == Blocks.AIR.getDefaultState()){
 			return true;

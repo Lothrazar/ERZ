@@ -133,15 +133,25 @@ public class OtherworldProvider extends WorldProvider {
 		return false;
 	}
 	
+<<<<<<< HEAD
 	/*@Override
+=======
+	@Override
+>>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 	public void generateLightBrightnessTable(){
         float f = 0.0F;
 
         for (int i = 0; i <= 15; ++i)
         {
+<<<<<<< HEAD
             this.lightBrightnessTable[i] = 0.4f+0.6f*((float)i)/15.0f;
         }
     }*/
+=======
+            this.lightBrightnessTable[i] = 0.6f+0.4f*((float)i)/15.0f;
+        }
+    }
+>>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 	
 	@Override
 	public int getHeight(){
