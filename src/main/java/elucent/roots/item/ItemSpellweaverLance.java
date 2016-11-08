@@ -56,7 +56,7 @@ public class ItemSpellweaverLance extends ItemMeleeCastingBase implements IManaR
 	
 	@Override
 	public int getUseCount(double efficiency){
-		return 97+(int)(48*efficiency);
+		return 193+(int)(96*efficiency);
 	}
 	
 	@SideOnly(Side.CLIENT)

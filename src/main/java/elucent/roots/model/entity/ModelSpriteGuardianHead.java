@@ -450,6 +450,7 @@ public class ModelSpriteGuardianHead extends ModelBase
     Vec3d pos2 = getPosFromIndex(guardian,1,ageInTicks-(int)ageInTicks);
     float yaw = Util.yawDegreesBetweenPoints(pos2.xCoord, pos1.yCoord, pos1.zCoord, pos1.xCoord, pos2.yCoord, pos2.zCoord);
     float pitch = Util.pitchDegreesBetweenPoints(pos2.xCoord, pos1.yCoord, pos1.zCoord, pos1.xCoord, pos2.yCoord, pos2.zCoord);
+	GlStateManager.pushAttrib();
     GlStateManager.rotate(yaw+180, 0, 1, 0);
     GlStateManager.rotate(pitch, 1, 0, 0);
     stonehead1.render(scale);
@@ -521,6 +522,7 @@ public class ModelSpriteGuardianHead extends ModelBase
     GlStateManager.disableAlpha();
     GlStateManager.disableBlend();
     GlStateManager.popMatrix();
+	GlStateManager.popAttrib();
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)

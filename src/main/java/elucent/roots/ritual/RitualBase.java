@@ -75,6 +75,6 @@ public class RitualBase {
 				}
 			}
 		}
-		return Util.itemListsMatch(incenses, test) && Util.itemListsMatchWithSize(ingredients,((TileEntityAltar)world.getTileEntity(pos)).inventory);
+		return Util.itemListsMatchWithSize(incenses, test) && Util.itemListsMatchWithSize(ingredients,((TileEntityAltar)world.getTileEntity(pos)).inventory);
 	}
 }

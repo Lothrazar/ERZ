@@ -73,6 +73,8 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
     public float addDirectionX = 0;
     public float addDirectionY = 0;
     Random random = new Random();
+    public Vec3d moveVec = new Vec3d(0,0,0);
+    public Vec3d prevMoveVec = new Vec3d(0,0,0);
     
     
     public SoundEvent ambientSound;
@@ -124,7 +126,7 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
     		if (entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0){
     			((EntityLivingBase)entity).attackEntityFrom(DamageSource.generic, 8.0f);
     			float magnitude = (float)Math.sqrt(motionX*motionX+motionZ*motionZ);
-    			((EntityLivingBase)entity).knockBack(this, 4.0f*magnitude, -motionX/magnitude, -motionZ/magnitude);
+    			((EntityLivingBase)entity).knockBack(this,6.0f*magnitude+0.1f, -motionX/magnitude+0.1, -motionZ/magnitude+0.1);
     			((EntityLivingBase)entity).attackEntityAsMob(this);
     			((EntityLivingBase)entity).setRevengeTarget(this);
     		}
@@ -306,15 +308,19 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
 	    if (getAttackTarget() != null && getDataManager().get(pacified) && !this.getEntityWorld().isRemote){
 	    	
 	    }
-	    addDirectionX = (float) Util.interpolateYawDegrees(addDirectionX,0.9f,getDataManager().get(targetDirectionX),0.1f);
-		addDirectionY = (float) (addDirectionY*0.9f+0.1f*getDataManager().get(targetDirectionY));
+    	if (this.ticksExisted % 20 == 0){
+    		prevMoveVec = moveVec;
+    		moveVec = Util.lookVector(this.getDataManager().get(targetDirectionX),this.getDataManager().get(targetDirectionY)).scale(0.25f*velocityScale);
+    	}
+    	
+    	float motionInterp = ((float)(this.ticksExisted%20))/20.0f;
+    	
+		this.motionX = (1.0f-motionInterp)*prevMoveVec.xCoord+(motionInterp)*moveVec.xCoord;
+		this.motionY = (1.0f-motionInterp)*prevMoveVec.yCoord+(motionInterp)*moveVec.yCoord;
+		this.motionZ = (1.0f-motionInterp)*prevMoveVec.zCoord+(motionInterp)*moveVec.zCoord;
 		
-		this.rotationYaw = Util.interpolateYawDegrees(rotationYaw,0.9f,addDirectionX,0.1f);
-		this.rotationPitch = (rotationPitch*0.9f+addDirectionY*0.1f);
-		Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch - 0.05f*(float)Math.toRadians(4.0f*(posY-(getEntityWorld().getTopSolidOrLiquidBlock(getPosition()).getY()+1.5)))).scale(0.25*velocityScale);
-		this.motionX = 0.5f*motionX+0.5f*moveVec.xCoord;
-		this.motionY = 0.5f*motionY+0.5f*moveVec.yCoord;
-		this.motionZ = 0.5f*motionZ+0.5f*moveVec.zCoord;
+		this.rotationYaw = (float)Math.toRadians(Util.yawDegreesBetweenPointsSafe(0, 0, 0, motionX, motionY, motionZ, rotationYaw));
+		this.rotationPitch = (float)Math.toRadians(Util.pitchDegreesBetweenPoints(0, 0, 0, motionX, motionY, motionZ));
 		
 		if (getDataManager().get(pacifiedTimer) < 20){
 			for (int i = 1; i < pastPositions.size(); i ++){

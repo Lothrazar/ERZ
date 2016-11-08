@@ -1,6 +1,8 @@
 package elucent.roots;
 
 import elucent.roots.block.*;
+import elucent.roots.dimension.OtherworldBiome;
+import elucent.roots.dimension.OtherworldProvider;
 import elucent.roots.entity.*;
 import elucent.roots.entity.projectile.EntityRitualProjectile;
 import elucent.roots.item.*;
@@ -9,8 +11,10 @@ import elucent.roots.model.ModelHolder;
 import elucent.roots.render.RitualProjectileRenderFactory;
 import elucent.roots.tileentity.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -20,7 +24,11 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
+import net.minecraft.world.DimensionType;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.BiomeProperties;
 import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -39,7 +47,7 @@ public class RegistryManager {
 	public static Item projectileStaff, pixieStone, ancientHourglass, amuletConserving, amuletDischarge, talismanHunger, talismanPursuit, spellweaverLance, otherworldLeaf, otherworldSubstance, debugWand, rootyStew, healingPoultice, growthSalve, runedTablet, druidArmorHead, druidArmorChest, druidArmorLegs, druidArmorBoots, druidRobesHead, druidRobesChest, druidRobesLegs, druidRobesBoots, livingPickaxe, livingSword, livingHoe, livingAxe, livingShovel, dustPetal, pestle, staff, oldRoot, crystalStaff, verdantSprig, infernalStem, dragonsEye,druidKnife,oakTreeBark,spruceTreeBark,birchTreeBark,jungleTreeBark,acaciaTreeBark,darkOakTreeBark,itemCharmRestoration,itemCharmEvocation,itemCharmConjuration ,itemCharmIllusion;
 	public static Item spritelingIcon, spriteIcon, greaterSpriteIcon, manaResearchIcon;
 	public static ItemBlock itemBlockSpiritBlockSlab, itemBlockSpiritBrickSlab, itemBlockPlankWildwoodSlab, itemBlockRuneStoneSlab, itemBlockRuneStoneBrickSlab, itemBlockRuneStoneTileSlab;
-	public static Block spiritConduit, spiritFont, standingStoneGrower, standingStoneHealer, standingStoneIgniter, standingStoneEntangler, standingStoneAccelerator, standingStoneAesthetic, standingStoneRepulsor, standingStoneVacuum, mortar, imbuer, altar, druidChalice, standingStoneT1, standingStoneT2, brazier;
+	public static Block leavesElderpine, leavesAzurepine, needleGrass, glowSand, leafyGrass, leavesWildwood, otherworldDirt, otherworldGrass, spiritConduit, spiritFont, standingStoneGrower, standingStoneHealer, standingStoneIgniter, standingStoneEntangler, standingStoneAccelerator, standingStoneAesthetic, standingStoneRepulsor, standingStoneVacuum, mortar, imbuer, altar, druidChalice, standingStoneT1, standingStoneT2, brazier;
 	public static Block bridge, spiritBlock, spiritBlockSlab, spiritBlockSlabDouble, spiritBlockStairs, spiritBrick, spiritBrickSlab, spiritBrickSlabDouble, spiritBrickStairs, runeStoneStairs, runeStoneBrickStairs, runeStoneTileStairs, plankWildwoodStairs, barkWildwood, barkWildwoodSymbolGlowing, barkWildwoodSymbol, logWildwood, logWildwoodSymbol, logWildwoodSymbolGlowing, plankWildwood, plankWildwoodSlab, plankWildwoodSlabDouble, runeStone, runeStoneBrick, runeStoneSlabDouble, runeStoneSlab, runeStoneBrickSlab, runeStoneBrickSlabDouble, runeStoneTile, runeStoneTileSlab, runeStoneTileSlabDouble, runeStoneSymbol, runeStoneSymbolGlowing;
 
 	public static Achievement achieveArrowBlock, achieveIllusion, achieveGuardianBoss, achieveSpriteling, achieveHourglass, achieveDischarge, achieveDust, achieveTablet, achieveSpellRose, achieveSpellGrowth, achieveSpellInsanity, achieveMaxModifiers, achieveLotsDamage, achieveTimeStop, achieveAltar, achieveStandingStone, achieveWildwood, achieveShadow, achieveSpellElements, achieveVampire;
@@ -49,7 +57,12 @@ public class RegistryManager {
 	public static ArmorMaterial druidRobesMaterial = EnumHelper.addArmorMaterial("druidRobes", "roots:druidRobes", 10, new int[]{1,5,6,2}, 20, null, 0);
 	public static ArmorMaterial druidArmorMaterial = EnumHelper.addArmorMaterial("druidArmor", "roots:druidArmor", 15, new int[]{2,5,7,3}, 10, null, 1.0f);
 	
+	public static DimensionType dimOtherworld = DimensionType.register("otherworld", "", ConfigManager.otherworldDimensionID, OtherworldProvider.class, false);
+	public static BiomeProperties biomeOtherworldProps;
+	public static Biome biomeOtherworld;
+	
 	public static void init(){
+		
 		/**
 		 * REGISTERING ITEMS
 		 */
@@ -124,44 +137,44 @@ public class RegistryManager {
 		GameRegistry.registerBlock(standingStoneGrower = new BlockStandingStoneGrower(),"standingStoneGrower");
 		GameRegistry.registerBlock(standingStoneHealer = new BlockStandingStoneHealer(),"standingStoneHealer");
 		GameRegistry.registerBlock(bridge = new BlockBridge(),"bridgeBlock");
-		GameRegistry.registerBlock(runeStone = new BlockBase("runeStone",Material.ROCK,1.0f));
-		GameRegistry.registerBlock(runeStoneStairs = new BlockStairsBase("runeStoneStairs",runeStone.getDefaultState(),1.0f));
+		GameRegistry.registerBlock(runeStone = new BlockBase("runeStone",Material.ROCK,SoundType.STONE,1.0f));
+		GameRegistry.registerBlock(runeStoneStairs = new BlockStairsBase("runeStoneStairs",runeStone.getDefaultState(),SoundType.STONE,1.0f));
 
-		GameRegistry.registerBlock(runeStoneSlabDouble = new BlockDoubleSlabBase("runeStoneSlabDouble",Material.ROCK,1.0f,"pickaxe",0,runeStoneSlab));
-		GameRegistry.registerBlock(runeStoneSlab = new BlockSlabBase("runeStoneSlab",Material.ROCK,1.0f,"pickaxe",0,runeStoneSlabDouble));
+		GameRegistry.registerBlock(runeStoneSlabDouble = new BlockDoubleSlabBase("runeStoneSlabDouble",Material.ROCK,SoundType.STONE,1.0f,"pickaxe",0,runeStoneSlab));
+		GameRegistry.registerBlock(runeStoneSlab = new BlockSlabBase("runeStoneSlab",Material.ROCK,SoundType.STONE,1.0f,"pickaxe",0,runeStoneSlabDouble));
 		((BlockDoubleSlabBase)runeStoneSlabDouble).setSlab(runeStoneSlab);
 		GameRegistry.registerItem(itemBlockRuneStoneSlab = new ItemBlockSlab(runeStoneSlab, (BlockDoubleSlabBase)runeStoneSlabDouble),runeStoneSlab.getRegistryName().toString()+"Item");
 		
-		GameRegistry.registerBlock(runeStoneBrick = new BlockBase("runeStoneBrick",Material.ROCK,1.0f));
-		GameRegistry.registerBlock(runeStoneBrickStairs = new BlockStairsBase("runeStoneBrickStairs",runeStoneBrick.getDefaultState(),1.0f));
-		GameRegistry.registerBlock(runeStoneBrickSlabDouble = new BlockDoubleSlabBase("runeStoneBrickSlabDouble",Material.ROCK,1.0f,"pickaxe",0,runeStoneBrickSlab));
-		GameRegistry.registerBlock(runeStoneBrickSlab = new BlockSlabBase("runeStoneBrickSlab",Material.ROCK,1.0f,"pickaxe",0,runeStoneBrickSlabDouble));
+		GameRegistry.registerBlock(runeStoneBrick = new BlockBase("runeStoneBrick",Material.ROCK,SoundType.STONE,1.0f));
+		GameRegistry.registerBlock(runeStoneBrickStairs = new BlockStairsBase("runeStoneBrickStairs",runeStoneBrick.getDefaultState(),SoundType.STONE,1.0f));
+		GameRegistry.registerBlock(runeStoneBrickSlabDouble = new BlockDoubleSlabBase("runeStoneBrickSlabDouble",Material.ROCK,SoundType.STONE,1.0f,"pickaxe",0,runeStoneBrickSlab));
+		GameRegistry.registerBlock(runeStoneBrickSlab = new BlockSlabBase("runeStoneBrickSlab",Material.ROCK,SoundType.STONE,1.0f,"pickaxe",0,runeStoneBrickSlabDouble));
 		((BlockDoubleSlabBase)runeStoneBrickSlabDouble).setSlab(runeStoneBrickSlab);
 		GameRegistry.registerItem(itemBlockRuneStoneBrickSlab = new ItemBlockSlab(runeStoneBrickSlab, (BlockDoubleSlabBase)runeStoneBrickSlabDouble),runeStoneBrickSlab.getRegistryName().toString()+"Item");
 		
-		GameRegistry.registerBlock(runeStoneTile = new BlockBase("runeStoneTile",Material.ROCK,1.0f));
-		GameRegistry.registerBlock(runeStoneTileStairs = new BlockStairsBase("runeStoneTileStairs",runeStoneTile.getDefaultState(),1.0f));
-		GameRegistry.registerBlock(runeStoneTileSlabDouble = new BlockDoubleSlabBase("runeStoneTileSlabDouble",Material.ROCK,1.0f,"pickaxe",0,runeStoneTileSlab));
-		GameRegistry.registerBlock(runeStoneTileSlab = new BlockSlabBase("runeStoneTileSlab",Material.ROCK,1.0f,"pickaxe",0,runeStoneTileSlabDouble));
+		GameRegistry.registerBlock(runeStoneTile = new BlockBase("runeStoneTile",Material.ROCK,SoundType.STONE,1.0f));
+		GameRegistry.registerBlock(runeStoneTileStairs = new BlockStairsBase("runeStoneTileStairs",runeStoneTile.getDefaultState(),SoundType.STONE,1.0f));
+		GameRegistry.registerBlock(runeStoneTileSlabDouble = new BlockDoubleSlabBase("runeStoneTileSlabDouble",Material.ROCK,SoundType.STONE,1.0f,"pickaxe",0,runeStoneTileSlab));
+		GameRegistry.registerBlock(runeStoneTileSlab = new BlockSlabBase("runeStoneTileSlab",Material.ROCK,SoundType.STONE,1.0f,"pickaxe",0,runeStoneTileSlabDouble));
 		((BlockDoubleSlabBase)runeStoneTileSlabDouble).setSlab(runeStoneTileSlab);
 		GameRegistry.registerItem(itemBlockRuneStoneTileSlab = new ItemBlockSlab(runeStoneTileSlab, (BlockDoubleSlabBase)runeStoneTileSlabDouble),runeStoneTileSlab.getRegistryName().toString()+"Item");
 		
-		GameRegistry.registerBlock(runeStoneSymbol = new BlockBase("runeStoneSymbol",Material.ROCK,1.0f));
-		GameRegistry.registerBlock(runeStoneSymbolGlowing = new BlockBase("runeStoneSymbolGlowing",Material.ROCK,1.0f).setLightLevel(1.0f));
-		GameRegistry.registerBlock(plankWildwood = new BlockBase("plankWildwood",Material.WOOD,1.0f));
-		GameRegistry.registerBlock(plankWildwoodStairs = new BlockStairsBase("plankWildwoodStairs",plankWildwood.getDefaultState(),1.0f));
+		GameRegistry.registerBlock(runeStoneSymbol = new BlockBase("runeStoneSymbol",Material.ROCK,SoundType.STONE,1.0f));
+		GameRegistry.registerBlock(runeStoneSymbolGlowing = new BlockBase("runeStoneSymbolGlowing",Material.ROCK,SoundType.STONE,1.0f).setLightLevel(1.0f));
+		GameRegistry.registerBlock(plankWildwood = new BlockBase("plankWildwood",Material.WOOD,SoundType.WOOD,1.0f));
+		GameRegistry.registerBlock(plankWildwoodStairs = new BlockStairsBase("plankWildwoodStairs",plankWildwood.getDefaultState(),SoundType.WOOD,1.0f));
 
-		GameRegistry.registerBlock(plankWildwoodSlabDouble = new BlockDoubleSlabBase("plankWildwoodSlabDouble",Material.WOOD,1.0f,"axe",0,plankWildwoodSlab));
-		GameRegistry.registerBlock(plankWildwoodSlab = new BlockSlabBase("plankWildwoodSlab",Material.WOOD,1.0f,"axe",0,plankWildwoodSlabDouble));
+		GameRegistry.registerBlock(plankWildwoodSlabDouble = new BlockDoubleSlabBase("plankWildwoodSlabDouble",Material.WOOD,SoundType.WOOD,1.0f,"axe",0,plankWildwoodSlab));
+		GameRegistry.registerBlock(plankWildwoodSlab = new BlockSlabBase("plankWildwoodSlab",Material.WOOD,SoundType.WOOD,1.0f,"axe",0,plankWildwoodSlabDouble));
 		((BlockDoubleSlabBase)plankWildwoodSlabDouble).setSlab(plankWildwoodSlab);
 		GameRegistry.registerItem(itemBlockPlankWildwoodSlab = new ItemBlockSlab(plankWildwoodSlab, (BlockDoubleSlabBase)plankWildwoodSlabDouble),plankWildwoodSlab.getRegistryName().toString()+"Item");
 		
 		GameRegistry.registerBlock(logWildwood = new BlockLogBase("logWildwood",1.0f,"axe",0));
 		GameRegistry.registerBlock(logWildwoodSymbol = new BlockLogBase("logWildwoodSymbol",1.0f,"axe",0));
 		GameRegistry.registerBlock(logWildwoodSymbolGlowing = new BlockLogBase("logWildwoodSymbolGlowing",1.0f,"axe",0).setLightLevel(1.0f));
-		GameRegistry.registerBlock(barkWildwood = new BlockBase("barkWildwood",Material.WOOD,1.0f));
-		GameRegistry.registerBlock(barkWildwoodSymbol = new BlockBase("barkWildwoodSymbol",Material.WOOD,1.0f));
-		GameRegistry.registerBlock(barkWildwoodSymbolGlowing = new BlockBase("barkWildwoodSymbolGlowing",Material.WOOD,1.0f).setLightLevel(1.0f));
+		GameRegistry.registerBlock(barkWildwood = new BlockBase("barkWildwood",Material.WOOD,SoundType.WOOD,1.0f));
+		GameRegistry.registerBlock(barkWildwoodSymbol = new BlockBase("barkWildwoodSymbol",Material.WOOD,SoundType.WOOD,1.0f));
+		GameRegistry.registerBlock(barkWildwoodSymbolGlowing = new BlockBase("barkWildwoodSymbolGlowing",Material.WOOD,SoundType.WOOD,1.0f).setLightLevel(1.0f));
 		
 		GameRegistry.registerBlock(spiritBlock = new BlockSpirit("spiritBlock",Material.GLASS,1.0f));
 		GameRegistry.registerBlock(spiritBlockStairs = new BlockSpiritStairs("spiritBlockStairs",spiritBlock.getDefaultState(),1.0f));
@@ -179,6 +192,15 @@ public class RegistryManager {
 		
 		GameRegistry.registerBlock(spiritFont = new BlockSpiritFont(),"spiritFont");
 		GameRegistry.registerBlock(spiritConduit = new BlockSpiritConduit(),"spiritConduit");
+		
+		GameRegistry.registerBlock(otherworldDirt = new BlockDirtBase("otherworldDirt",Material.GROUND,1.0f));
+		GameRegistry.registerBlock(otherworldGrass = new BlockGrassBase("otherworldGrass",otherworldDirt,Material.GROUND,1.0f));
+		GameRegistry.registerBlock(leavesWildwood = new BlockRootsLeaves("leavesWildwood",Material.LEAVES,0.2f));
+		GameRegistry.registerBlock(leafyGrass = new BlockShrubBase("leafyGrass",0.2f));
+		GameRegistry.registerBlock(needleGrass = new BlockGrassBase("needleGrass",otherworldDirt,Material.GROUND,1.0f));
+		GameRegistry.registerBlock(leavesElderpine = new BlockRootsLeaves("leavesElderpine",Material.LEAVES,0.2f));
+		GameRegistry.registerBlock(leavesAzurepine = new BlockRootsLeaves("leavesAzurepine",Material.LEAVES,0.2f));
+		GameRegistry.registerBlock(glowSand = (new BlockSandBase("glowSand",Material.SAND,1.0f)).setLightLevel(1.0f));
 		
 		/**
 		 * REGISTERING TILE ENTITIES
@@ -201,6 +223,25 @@ public class RegistryManager {
 		GameRegistry.registerTileEntity(TileEnityBridge.class,customTileName("TileEntityBridge"));
 
 		GameRegistry.registerFuelHandler(new FuelManager());
+		
+		/**
+		 * REGISTERING BIOMES
+		 */
+
+		biomeOtherworldProps = new BiomeProperties("otherworld");
+
+		biomeOtherworldProps.setRainDisabled();
+		biomeOtherworldProps.setBaseHeight(0);
+		biomeOtherworldProps.setTemperature(0);
+		biomeOtherworldProps.setWaterColor(Util.intColor(107, 255, 28));
+		
+		biomeOtherworld = new OtherworldBiome(biomeOtherworldProps);
+		
+		/**
+		 * REGISTERING DIMENSIONS
+		 */
+		
+		DimensionManager.registerDimension(ConfigManager.otherworldDimensionID, dimOtherworld);
 	}
 
 	private static String customTileName(String name)
@@ -209,24 +250,28 @@ public class RegistryManager {
 	}
 	
 	public static void registerEntities(){
-		EntityRegistry.registerModEntity(EntityTileAccelerator.class, "tileAccelerator", 0, Roots.instance, 64, 3, true);
-		EntityRegistry.registerModEntity(EntityAccelerator.class, "entityAccelerator", 1, Roots.instance, 64, 3, true);
-		EntityRegistry.registerModEntity(EntitySpriteling.class, "spriteling", 2, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityTileAccelerator.class, "tileAccelerator", 0, Roots.instance, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityAccelerator.class, "entityAccelerator", 1, Roots.instance, 64, 1, true);
+		EntityRegistry.registerModEntity(EntitySpriteling.class, "spriteling", 2, Roots.instance, 64, 1, true);
 		EntityRegistry.registerEgg(EntitySpriteling.class, Util.intColor(130, 255, 60), Util.intColor(66, 230, 0));
-		EntityRegistry.registerModEntity(EntitySprite.class, "sprite", 3, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntitySprite.class, "sprite", 3, Roots.instance, 64, 1, true);
 		EntityRegistry.registerEgg(EntitySprite.class, Util.intColor(130, 255, 60), Util.intColor(66, 230, 0));
-		EntityRegistry.registerModEntity(EntityGreaterSprite.class, "greaterSprite", 4, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntityGreaterSprite.class, "greaterSprite", 4, Roots.instance, 64, 1, true);
 		EntityRegistry.registerEgg(EntityGreaterSprite.class, Util.intColor(130, 255, 60), Util.intColor(66, 230, 0));
-		EntityRegistry.registerModEntity(EntitySpriteProjectile.class, "entitySpriteProjectile", 5, Roots.instance, 64, 3, true);
-		EntityRegistry.registerModEntity(EntityNetherInfection.class, "entityInfection", 6, Roots.instance, 64, 3, true);
-		EntityRegistry.registerModEntity(EntitySanctuary.class, "entitySanctuary", 7, Roots.instance, 64, 3, true);
-		EntityRegistry.registerModEntity(EntityFrostShard.class, "entityFrostShard", 8, Roots.instance, 64, 3, true);
-		EntityRegistry.registerModEntity(EntitySpritePlacator.class, "entitySpritePlacator", 9, Roots.instance, 64, 3, true);
-		EntityRegistry.registerModEntity(EntitySpriteGuardian.class, "spriteGuardian", 10, Roots.instance, 64, 3, true);
+		EntityRegistry.registerModEntity(EntitySpriteProjectile.class, "entitySpriteProjectile", 5, Roots.instance, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityNetherInfection.class, "entityInfection", 6, Roots.instance, 64, 1, true);
+		EntityRegistry.registerModEntity(EntitySanctuary.class, "entitySanctuary", 7, Roots.instance, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityFrostShard.class, "entityFrostShard", 8, Roots.instance, 64, 1, true);
+		EntityRegistry.registerModEntity(EntitySpritePlacator.class, "entitySpritePlacator", 9, Roots.instance, 64, 1, true);
+		EntityRegistry.registerModEntity(EntitySpriteGuardian.class, "spriteGuardian", 10, Roots.instance, 64, 1, true);
 		EntityRegistry.registerEgg(EntitySpriteGuardian.class, Util.intColor(66, 230, 0), Util.intColor(130, 255, 60));
-		EntityRegistry.registerModEntity(EntitySummoner.class, "entitySummoner", 11, Roots.instance, 64, 3, true);
-		EntityRegistry.registerModEntity(EntityHomingProjectile.class,"entityHomingProjectile",12,Roots.instance,64,3,true);
-		EntityRegistry.registerModEntity(EntitySpellProjectile.class,"entitySpellProjectile",13,Roots.instance,64,3,true);
+		EntityRegistry.registerModEntity(EntitySummoner.class, "entitySummoner", 11, Roots.instance, 64, 1, true);
+		EntityRegistry.registerModEntity(EntityHomingProjectile.class,"entityHomingProjectile",12,Roots.instance,64,1,true);
+		EntityRegistry.registerModEntity(EntitySpellProjectile.class,"entitySpellProjectile",13,Roots.instance,64,1,true);
+		EntityRegistry.registerModEntity(EntityDeer.class,"deer",14,Roots.instance,64,1,true);
+		EntityRegistry.registerEgg(EntityDeer.class, Util.intColor(161, 132, 88), Util.intColor(94, 77, 51));
+		EntityRegistry.registerModEntity(EntityDireWolf.class,"direwolf",15,Roots.instance,64,1,true);
+		EntityRegistry.registerEgg(EntityDireWolf.class, Util.intColor(172, 155, 147), Util.intColor(106, 94, 88));
 	}
 	
 	public static void registerRecipes(){
@@ -673,6 +718,14 @@ public class RegistryManager {
 		((BlockSpiritStairs)spiritBrickStairs).initModel();
 		((BlockSpiritFont)spiritFont).initModel();
 		((BlockSpiritConduit)spiritConduit).initModel();
+		((BlockDirtBase)otherworldDirt).initModel();
+		((BlockGrassBase)otherworldGrass).initModel();
+		((BlockRootsLeaves)leavesWildwood).initModel();
+		((BlockShrubBase)leafyGrass).initModel();
+		((BlockSandBase)glowSand).initModel();
+		((BlockGrassBase)needleGrass).initModel();
+		((BlockRootsLeaves)leavesElderpine).initModel();
+		((BlockRootsLeaves)leavesAzurepine).initModel();
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -695,5 +748,7 @@ public class RegistryManager {
 		RenderingRegistry.registerEntityRenderingHandler(EntityRitualProjectile.class,new RitualProjectileRenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityHomingProjectile.class,new RenderHomingProjectile(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpellProjectile.class,new RenderSpellProjectile(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("null"),0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class,new RenderDeer(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("deer"),0.5f));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDireWolf.class,new RenderDireWolf(Minecraft.getMinecraft().getRenderManager(),ModelHolder.entityModels.get("direwolf"),0.5f));
 	}
 }

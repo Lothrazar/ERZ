@@ -3,19 +3,29 @@ package elucent.roots;
 
 import elucent.roots.capability.mana.ManaProvider;
 import elucent.roots.component.components.ComponentCharmIllusion;
+import elucent.roots.dimension.OtherworldProvider;
 import elucent.roots.entity.EntityHomingProjectile;
 import elucent.roots.entity.ISprite;
 import elucent.roots.event.SpellCastEvent;
 import elucent.roots.item.IManaRelatedItem;
 import elucent.roots.item.ItemCrystalStaff;
+import elucent.roots.item.ItemPixieStone;
+import elucent.roots.network.MessageTerraBurstFX;
+import elucent.roots.network.PacketHandler;
+import elucent.roots.util.RenderUtil;
+import elucent.roots.util.StructUV;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockNetherWart;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.GlStateManager.DestFactor;
+import net.minecraft.client.renderer.GlStateManager.FogMode;
+import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -24,6 +34,8 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -35,8 +47,12 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.client.event.EntityViewRenderEvent.FogDensity;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.client.event.RenderHandEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.ServerChatEvent;
@@ -47,8 +63,13 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -205,7 +226,7 @@ public class EventManager {
 			showBar = false;
 		}
 		if (showBar){
-			if (ManaProvider.get(player).getMana() > 0){
+			if (ManaProvider.get(player).getMana() >= 0){
 				if (e.getType() == ElementType.TEXT){
 					GlStateManager.disableDepth();
 					GlStateManager.disableCull();
@@ -434,54 +455,65 @@ public class EventManager {
 			for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
 				if (player.inventory.getStackInSlot(i) != null){
 					if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.talismanPursuit && !player.getEntityWorld().isRemote){
-						if (event.getEntityLiving() instanceof EntityAnimal){
-							List<EntityAnimal> animals = event.getEntity().getEntityWorld().getEntitiesWithinAABB(EntityAnimal.class, new AxisAlignedBB(event.getEntity().posX-10.0,event.getEntity().posY-10.0,event.getEntity().posZ-10.0,event.getEntity().posX+10.0,event.getEntity().posY+10.0,event.getEntity().posZ+10.0));
-							ArrayList<EntityAnimal> trimmedAnimals = new ArrayList<EntityAnimal>();
-							for (int j = 0; j < animals.size(); j ++){
-								if (animals.get(j).getUniqueID().compareTo(event.getEntityLiving().getUniqueID()) != 0){
-									trimmedAnimals.add(animals.get(j));
+						for (int k = 0; k < 3; k ++){
+							if (event.getEntityLiving() instanceof EntityAnimal){
+								List<EntityAnimal> animals = event.getEntity().getEntityWorld().getEntitiesWithinAABB(EntityAnimal.class, new AxisAlignedBB(event.getEntity().posX-10.0,event.getEntity().posY-10.0,event.getEntity().posZ-10.0,event.getEntity().posX+10.0,event.getEntity().posY+10.0,event.getEntity().posZ+10.0));
+								ArrayList<EntityAnimal> trimmedAnimals = new ArrayList<EntityAnimal>();
+								for (int j = 0; j < animals.size(); j ++){
+									if (animals.get(j).getUniqueID().compareTo(event.getEntityLiving().getUniqueID()) != 0){
+										trimmedAnimals.add(animals.get(j));
+									}
+								}
+								if (trimmedAnimals.size() > 0){
+									EntityHomingProjectile proj = new EntityHomingProjectile(player.getEntityWorld());
+									proj.onInitialSpawn(player.getEntityWorld().getDifficultyForLocation(event.getEntity().getPosition()), null);
+									proj.initSpecial(trimmedAnimals.get(random.nextInt(trimmedAnimals.size())), 5.0f, new Vec3d(234,41,255));
+									proj.setPosition(event.getEntity().posX, event.getEntity().posY+event.getEntity().height/2.0f, event.getEntity().posZ);
+									proj.motionX = (random.nextFloat()-0.5f)*0.375f;
+									proj.motionY = (random.nextFloat()-0.5f)*0.375f;
+									proj.motionZ = (random.nextFloat()-0.5f)*0.375f;
+									player.getEntityWorld().spawnEntityInWorld(proj);
 								}
 							}
-							if (trimmedAnimals.size() > 0){
-								EntityHomingProjectile proj = new EntityHomingProjectile(player.getEntityWorld());
-								proj.setPosition(event.getEntity().posX, event.getEntity().posY+event.getEntity().height/2.0f, event.getEntity().posZ);
-								proj.onInitialSpawn(player.getEntityWorld().getDifficultyForLocation(event.getEntity().getPosition()), null);
-								proj.initSpecial(trimmedAnimals.get(0), 4.0f, new Vec3d(234,41,255));
-								player.getEntityWorld().spawnEntityInWorld(proj);
-							}
-						}
-						if (event.getEntityLiving() instanceof EntityMob){
-							List<EntityMob> mobs = event.getEntity().getEntityWorld().getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(event.getEntity().posX-10.0,event.getEntity().posY-10.0,event.getEntity().posZ-10.0,event.getEntity().posX+10.0,event.getEntity().posY+10.0,event.getEntity().posZ+10.0));
-							ArrayList<EntityMob> trimmedMobs = new ArrayList<EntityMob>();
-							for (int j = 0; j < mobs.size(); j ++){
-								if (mobs.get(j).getUniqueID().compareTo(event.getEntityLiving().getUniqueID()) != 0){
-									trimmedMobs.add(mobs.get(j));
+							if (event.getEntityLiving() instanceof EntityMob){
+								List<EntityMob> mobs = event.getEntity().getEntityWorld().getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(event.getEntity().posX-10.0,event.getEntity().posY-10.0,event.getEntity().posZ-10.0,event.getEntity().posX+10.0,event.getEntity().posY+10.0,event.getEntity().posZ+10.0));
+								ArrayList<EntityMob> trimmedMobs = new ArrayList<EntityMob>();
+								for (int j = 0; j < mobs.size(); j ++){
+									if (mobs.get(j).getUniqueID().compareTo(event.getEntityLiving().getUniqueID()) != 0){
+										trimmedMobs.add(mobs.get(j));
+									}
+								}
+								if (trimmedMobs.size() > 0){
+									EntityHomingProjectile proj = new EntityHomingProjectile(player.getEntityWorld());
+									proj.setPosition(event.getEntity().posX, event.getEntity().posY+event.getEntity().height/2.0f, event.getEntity().posZ);
+									proj.onInitialSpawn(player.getEntityWorld().getDifficultyForLocation(event.getEntity().getPosition()), null);
+									proj.setPosition(event.getEntity().posX, event.getEntity().posY+event.getEntity().height/2.0f, event.getEntity().posZ);
+									proj.motionX = (random.nextFloat()-0.5f)*0.375f;
+									proj.motionY = (random.nextFloat()-0.5f)*0.375f;
+									proj.motionZ = (random.nextFloat()-0.5f)*0.375f;
+									proj.initSpecial(trimmedMobs.get(random.nextInt(trimmedMobs.size())), 5.0f, new Vec3d(234,41,255));
+									player.getEntityWorld().spawnEntityInWorld(proj);
 								}
 							}
-							if (trimmedMobs.size() > 0){
-								EntityHomingProjectile proj = new EntityHomingProjectile(player.getEntityWorld());
-								proj.setPosition(event.getEntity().posX, event.getEntity().posY+event.getEntity().height/2.0f, event.getEntity().posZ);
-								proj.onInitialSpawn(player.getEntityWorld().getDifficultyForLocation(event.getEntity().getPosition()), null);
-								proj.setVelocity(random.nextDouble()-0.5, random.nextDouble()-0.5, random.nextDouble()-0.5);
-				    			proj.initSpecial(trimmedMobs.get(0), 4.0f, new Vec3d(234,41,255));
-								player.getEntityWorld().spawnEntityInWorld(proj);
-							}
-						}
-						if (event.getEntityLiving() instanceof EntityPlayer){
-							List<EntityPlayer> players = event.getEntity().getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(event.getEntity().posX-10.0,event.getEntity().posY-10.0,event.getEntity().posZ-10.0,event.getEntity().posX+10.0,event.getEntity().posY+10.0,event.getEntity().posZ+10.0));
-							ArrayList<EntityPlayer> trimmedPlayers = new ArrayList<EntityPlayer>();
-							for (int j = 0; j < players.size(); j ++){
-								if (players.get(j).getUniqueID().compareTo(player.getUniqueID()) != 0){
-									trimmedPlayers.add(players.get(j));
+							if (event.getEntityLiving() instanceof EntityPlayer){
+								List<EntityPlayer> players = event.getEntity().getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(event.getEntity().posX-10.0,event.getEntity().posY-10.0,event.getEntity().posZ-10.0,event.getEntity().posX+10.0,event.getEntity().posY+10.0,event.getEntity().posZ+10.0));
+								ArrayList<EntityPlayer> trimmedPlayers = new ArrayList<EntityPlayer>();
+								for (int j = 0; j < players.size(); j ++){
+									if (players.get(j).getUniqueID().compareTo(player.getUniqueID()) != 0){
+										trimmedPlayers.add(players.get(j));
+									}
 								}
-							}
-							if (trimmedPlayers.size() > 0){
-								EntityHomingProjectile proj = new EntityHomingProjectile(player.getEntityWorld());
-								proj.setPosition(event.getEntity().posX, event.getEntity().posY+event.getEntity().height/2.0f, event.getEntity().posZ);
-								proj.onInitialSpawn(player.getEntityWorld().getDifficultyForLocation(event.getEntity().getPosition()), null);
-								proj.setVelocity(random.nextDouble()-0.5, random.nextDouble()-0.5, random.nextDouble()-0.5);
-				    			proj.initSpecial(trimmedPlayers.get(0), 4.0f, new Vec3d(234,41,255));
-								player.getEntityWorld().spawnEntityInWorld(proj);
+								if (trimmedPlayers.size() > 0){
+									EntityHomingProjectile proj = new EntityHomingProjectile(player.getEntityWorld());
+									proj.setPosition(event.getEntity().posX, event.getEntity().posY+event.getEntity().height/2.0f, event.getEntity().posZ);
+									proj.onInitialSpawn(player.getEntityWorld().getDifficultyForLocation(event.getEntity().getPosition()), null);
+									proj.setPosition(event.getEntity().posX, event.getEntity().posY+event.getEntity().height/2.0f, event.getEntity().posZ);
+									proj.motionX = (random.nextFloat()-0.5f)*0.375f;
+									proj.motionY = (random.nextFloat()-0.5f)*0.375f;
+									proj.motionZ = (random.nextFloat()-0.5f)*0.375f;
+									proj.initSpecial(trimmedPlayers.get(random.nextInt(trimmedPlayers.size())), 5.0f, new Vec3d(234,41,255));
+									player.getEntityWorld().spawnEntityInWorld(proj);
+								}
 							}
 						}
 						return;
@@ -493,6 +525,16 @@ public class EventManager {
 	
 	@SubscribeEvent
 	public void onLivingDamage(LivingHurtEvent event){
+		if (event.getSource().getDamageType() == DamageSource.fall.getDamageType()){
+			if (event.getEntity() instanceof EntityPlayer){
+				if (((EntityPlayer)event.getEntityLiving()).getHeldItemMainhand().getItem() instanceof ItemPixieStone){
+					event.setAmount(event.getAmount()/10.0f);
+					if (!event.getEntity().getEntityWorld().isRemote){
+						PacketHandler.INSTANCE.sendToAll(new MessageTerraBurstFX((float)event.getEntity().posX,(float)event.getEntity().posY+event.getEntity().height/2.0f,(float)event.getEntity().posZ));
+					}
+				}
+			}
+		}
 		if (event.getSource().getEntity() instanceof EntityPlayer){
 			EntityPlayer player = (EntityPlayer)event.getSource().getEntity();
 			for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
@@ -512,6 +554,21 @@ public class EventManager {
 		}
 		if (event.getEntityLiving() instanceof EntityPlayer){
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
+			for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
+				if (player.inventory.getStackInSlot(i) != null){
+					if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.amuletDischarge){
+						if (event.getSource().getEntity() instanceof EntityLivingBase){
+							((EntityLivingBase)event.getSource().getEntity()).knockBack(event.getEntityLiving(), 0.7f, -(0.1+event.getSource().getEntity().posX-event.getEntityLiving().posX), -(0.1f+event.getSource().getEntity().posZ-event.getEntityLiving().posZ));
+							if (!event.getEntity().getEntityWorld().isRemote){
+								PacketHandler.INSTANCE.sendToAll(new MessageTerraBurstFX((float)event.getSource().getEntity().posX,(float)event.getSource().getEntity().posY+event.getSource().getEntity().height/2.0f,(float)event.getSource().getEntity().posZ));
+							}
+						}
+					}
+				}
+			}
+		}
+		if (event.getEntityLiving() instanceof EntityPlayer){
+			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			if (event.getSource().isExplosion() || event.getSource().isFireDamage() || event.getSource().isMagicDamage()){
 				for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
 					if (player.inventory.getStackInSlot(i) != null){
@@ -520,36 +577,6 @@ public class EventManager {
 								if (player.inventory.getStackInSlot(i).getTagCompound().getInteger("timer") == 0){
 									event.setCanceled(true);
 									player.inventory.getStackInSlot(i).getTagCompound().setInteger("timer", ConfigManager.hungerTalismanTimer);
-									return;
-								}
-							}
-						}
-					}
-				}
-			}
-			if (event.getAmount() > 6.0f){
-				for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
-					if (player.inventory.getStackInSlot(i) != null){
-						if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.amuletDischarge){
-							if (player.inventory.getStackInSlot(i).hasTagCompound()){
-								if (player.inventory.getStackInSlot(i).getTagCompound().getInteger("timer") == 0){
-									List<EntityLivingBase> entities = player.getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.posX-4.0,player.posY-4.0,player.posZ-4.0,player.posX+4.0,player.posY+4.0,player.posZ+4.0));
-									for (int j = 0; j < entities.size(); j ++){
-										if (entities.get(j).getUniqueID().compareTo(player.getUniqueID()) != 0){
-											entities.get(j).attackEntityFrom(DamageSource.generic, 3.0f);
-											if (entities.get(j).getHealth() <= 0){
-												if (!player.hasAchievement(RegistryManager.achieveDischarge)){
-													PlayerManager.addAchievement(player, RegistryManager.achieveDischarge);
-												}
-											}
-										}
-									}
-									for (double j = 0; j < 360; j += 30){
-										double dx = Math.sin(Math.toRadians(j));
-										double dz = Math.cos(Math.toRadians(j));
-										Roots.proxy.spawnParticleMagicSmallSparkleFX(player.getEntityWorld(), player.posX+dx, player.posY+1.0, player.posZ+dz, 0.025f*dx, 0, 0.025f*dz, 76, 230, 0);
-									}
-									player.inventory.getStackInSlot(i).getTagCompound().setInteger("timer", ConfigManager.dischargeAmuletTimer);
 									return;
 								}
 							}
@@ -578,6 +605,29 @@ public class EventManager {
 		event.getMap().registerSprite(magicParticleRL);
 		ResourceLocation sparkleRL = new ResourceLocation("roots:entity/sparkle");
 		event.getMap().registerSprite(sparkleRL);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void fogEvent(FogDensity event){
+		if (Minecraft.getMinecraft().thePlayer.dimension == RegistryManager.dimOtherworld.getId()){
+			event.setDensity(0.02f);
+		}
+	}
+	
+	@SubscribeEvent
+	public void onEntitySpawn(LivingSpawnEvent.CheckSpawn event){
+		if (event.getWorld().provider.getDimension() == RegistryManager.dimOtherworld.getId()){
+			if (event.getEntityLiving() instanceof EntitySheep || event.getEntityLiving() instanceof EntityWolf){
+				event.setResult(Result.ALLOW);
+			}
+		}
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void onWorldRender(RenderWorldLastEvent event){
+		//
 	}
 	
 	@SubscribeEvent

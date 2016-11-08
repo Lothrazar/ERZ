@@ -584,9 +584,9 @@ roots.research.sprite.restoration.page1info=The charm of restoration can be foun
 
 roots.research.sprite.guardian.name=Guardian of Sprites
 roots.research.sprite.guardian.page1title.name=Guardian From Beyond
-roots.research.sprite.guardian.page1info=During your exploration of sprites, and the otherworld, you have noticed the occasional stray whisper in your head. You believe that the otherworld is much more vast than you previously thought, with creatures far beyond your comprehension. You have designed a ritual capable of summoning forth a creature far stronger than anything you have seen before. This ritual will require a whopping twelve unique overworld flowers as incenses, as well as the presence of four lesser sprites, two common sprites, and two greater sprites.
+roots.research.sprite.guardian.page1info=During your exploration of sprites, and the otherworld, you have noticed the occasional stray whisper in your head. You believe that the otherworld is much more vast than you previously thought, with creatures far beyond your comprehension. You have designed a ritual capable of summoning forth a creature far stronger than anything you have seen before. 
 roots.research.sprite.guardian.page2title.name=Guardian From Beyond
-roots.research.sprite.guardian.page2info=You believe that it would be prudent to prepare for combat before activating this ritual.
+roots.research.sprite.guardian.page2info=This ritual will require a whopping twelve unique overworld flowers as incenses, as well as the presence of four lesser sprites, two common sprites, and two greater sprites. You believe that it would be prudent to prepare for combat before activating this ritual.
 roots.research.sprite.guardian.page3title.name=Ritual: Call Sprite Guardian
 
 roots.research.sprite.talismanhunger.name=Hunger Talisman
@@ -610,6 +610,10 @@ roots.research.sprite.spiritblocks.page1info=Using otherworld leaves and otherwo
 roots.research.sprite.spiritblocks.page2title.name=Spirit Bricks
 roots.research.sprite.spiritblocks.page2info=Just like stone in the overworld, these blocks can be crafted into brick variants, which can in turn be crafted into slabs or stairs.
 
+roots.research.sprite.recharge.name=Recharge Ritual
+roots.research.sprite.recharge.page1title.name=Repairing Staves
+roots.research.sprite.recharge.page1info=Your magical staves are certainly quite powerful, but no matter what you do, you always end up losing the spells you infuse them with. Using some leaves from spirits, as well as some other reagents, you have discovered a way to regenerate the uses of casting items. The following ritual, when supplied with the displayed ingredients, as well as a casting item on the altar, will recharge the uses of every spell on that item.
+roots.research.sprite.recharge.page2title.name=Ritual: Recharge
 
 General.tooltip=General configs!
 Client.tooltip=Client side configs!

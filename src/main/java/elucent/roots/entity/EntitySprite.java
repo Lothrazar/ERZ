@@ -70,6 +70,8 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
     public float prevPitch2 = 0;
     public float prevPitch3 = 0;
     public float prevPitch4 = 0;
+    public Vec3d moveVec = new Vec3d(0,0,0);
+    public Vec3d prevMoveVec = new Vec3d(0,0,0);
     Random random = new Random();
     
     public SoundEvent ambientSound;
@@ -77,7 +79,7 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
 
     public EntitySprite(World worldIn) {
     	super(worldIn);
-        this.noClip = true;
+        this.noClip = false;
         setSize(0.75f,0.75f);
         this.isAirBorne = true;
 		this.experienceValue = 10;
@@ -104,7 +106,7 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
     		if (entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0){
     			((EntityLivingBase)entity).attackEntityFrom(DamageSource.generic, 5.5f);
     			float magnitude = (float)Math.sqrt(motionX*motionX+motionZ*motionZ);
-    			((EntityLivingBase)entity).knockBack(this,3.0f*magnitude, -motionX/magnitude, -motionZ/magnitude);
+    			((EntityLivingBase)entity).knockBack(this,3.0f*magnitude+0.1f, -motionX/magnitude+0.1, -motionZ/magnitude+0.1);
     			((EntityLivingBase)entity).attackEntityAsMob(this);
     			((EntityLivingBase)entity).setRevengeTarget(this);
     		}
@@ -133,7 +135,10 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
     public void onUpdate(){
     	super.onUpdate();
     	
-    	this.noClip = !getDataManager().get(stunned).booleanValue();
+    	if (this.getDataManager().get(targetBlock).getY() == -1){
+    		this.getDataManager().set(targetBlock, this.getPosition());
+    		this.getDataManager().setDirty(targetBlock);
+    	}
     	
     	prevYaw4 = prevYaw3;
     	prevYaw3 = prevYaw2;
@@ -170,10 +175,6 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
 	    		getDataManager().setDirty(dashTimer);
 	    	}
 	    	if (this.getAttackTarget() != null && !this.getEntityWorld().isRemote){
-	    		if (getDataManager().get(targetBlock).getY() != -1){
-	    			getDataManager().set(targetBlock,new BlockPos(0,-1,0));
-	    			getDataManager().setDirty(targetBlock);
-	    		}
 	    		if (getDataManager().get(dashTimer) <= 0){
 	    			this.getDataManager().set(targetDirectionX, (float)Math.toRadians(Util.yawDegreesBetweenPointsSafe(posX, posY, posZ, getAttackTarget().posX, getAttackTarget().posY+getAttackTarget().getEyeHeight()/2.0, getAttackTarget().posZ, getDataManager().get(targetDirectionX).doubleValue())));
 	    			this.getDataManager().set(targetDirectionY, (float)Math.toRadians(Util.pitchDegreesBetweenPoints(posX, posY, posZ, getAttackTarget().posX, getAttackTarget().posY+getAttackTarget().getEyeHeight()/2.0, getAttackTarget().posZ)));
@@ -188,7 +189,7 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
 	    	}
 	    	else if (getDataManager().get(targetBlock).getY() != -1){
 	    		if (this.ticksExisted % 50 == 0 && !this.getEntityWorld().isRemote){
-	    			Vec3d target = new Vec3d(getDataManager().get(targetBlock).getX()+0.5+(random.nextFloat()-0.5f)*7.0f,getDataManager().get(targetBlock).getY()+9.0+(random.nextFloat()-0.5f)*17.0f,getDataManager().get(targetBlock).getZ()+0.5+(random.nextFloat()-0.5f)*7.0f);
+	    			Vec3d target = new Vec3d(getDataManager().get(targetBlock).getX()+0.5+(random.nextFloat()-0.5f)*8.0f,getDataManager().get(targetBlock).getY()+9.0+(random.nextFloat()-0.5f)*17.0f,getDataManager().get(targetBlock).getZ()+0.5+(random.nextFloat()-0.5f)*8.0f);
 	    			this.getDataManager().set(targetDirectionX, (float)Math.toRadians(Util.yawDegreesBetweenPointsSafe(posX, posY, posZ, target.xCoord, target.yCoord, target.zCoord, getDataManager().get(targetDirectionX).doubleValue())));
 	    			this.getDataManager().set(targetDirectionY, (float)Math.toRadians(Util.pitchDegreesBetweenPoints(posX, posY, posZ, target.xCoord, target.yCoord, target.zCoord)));
 	    			this.getDataManager().setDirty(targetDirectionX);
@@ -203,15 +204,20 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
 	    		 	this.getDataManager().setDirty(targetDirectionY);
 	    		}
 	    	}
-		    addDirectionX = (float) Util.interpolateYawDegrees(addDirectionX,0.9f,getDataManager().get(targetDirectionX),0.1f);
-			addDirectionY = (float) (addDirectionY*0.9f+0.1f*getDataManager().get(targetDirectionY));
-			float addedPitch = -0.05f*(float)Math.toRadians(10.0f*(posY-(getEntityWorld().getTopSolidOrLiquidBlock(getPosition()).getY()+4.5))); 
-			this.rotationYaw = Util.interpolateYawDegrees(rotationYaw,0.9f,addDirectionX,0.1f);
-			this.rotationPitch = (rotationPitch*0.9f+addDirectionY*0.1f);
-			Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch+addedPitch).scale(getAttackTarget() != null ? (getDataManager().get(dashTimer) > 0 ? 0.4 : 0.2) : 0.1);
-			this.motionX = 0.5f*motionX+0.5f*moveVec.xCoord;
-			this.motionY = 0.5f*motionY+0.5f*moveVec.yCoord;
-			this.motionZ = 0.5f*motionZ+0.5f*moveVec.zCoord;
+	    	if (this.ticksExisted % 5 == 0){
+	    		prevMoveVec = moveVec;
+	    		moveVec = Util.lookVector(this.getDataManager().get(targetDirectionX),this.getDataManager().get(targetDirectionY)).scale(getAttackTarget() != null ? (getDataManager().get(dashTimer) > 0 ? 0.4 : 0.2) : 0.1);
+	    	}
+	    	
+	    	float motionInterp = ((float)(this.ticksExisted%5))/5.0f;
+	    	
+			this.motionX = (1.0f-motionInterp)*prevMoveVec.xCoord+(motionInterp)*moveVec.xCoord;
+			this.motionY = (1.0f-motionInterp)*prevMoveVec.yCoord+(motionInterp)*moveVec.yCoord;
+			this.motionZ = (1.0f-motionInterp)*prevMoveVec.zCoord+(motionInterp)*moveVec.zCoord;
+			
+			this.rotationYaw = (float)Math.toRadians(Util.yawDegreesBetweenPointsSafe(0, 0, 0, motionX, motionY, motionZ, rotationYaw));
+			this.rotationPitch = (float)Math.toRadians(Util.pitchDegreesBetweenPoints(0, 0, 0, motionX, motionY, motionZ));
+			
 			if (getDataManager().get(dashTimer) > 0){
 				Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX+((random.nextDouble())-0.5)*0.5, posY+0.25+((random.nextDouble())-0.5)*0.5, posZ+((random.nextDouble())-0.5)*0.5, -0.25*moveVec.xCoord, -0.25*moveVec.yCoord, -0.25*moveVec.zCoord, 107, 255, 28);
 			}

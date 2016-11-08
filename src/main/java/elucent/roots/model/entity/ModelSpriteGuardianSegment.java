@@ -149,6 +149,7 @@ public class ModelSpriteGuardianSegment extends ModelBase
 	float scale = scaleFactor;
     super.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
     setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
+	GlStateManager.pushAttrib();
     EntitySpriteGuardian guardian = (EntitySpriteGuardian)entity;
 	float fade = guardian.getFade(ageInTicks-(int)ageInTicks);
     Vec3d pos1 = getPosFromIndex(guardian,index,ageInTicks-(int)ageInTicks);
@@ -185,6 +186,7 @@ public class ModelSpriteGuardianSegment extends ModelBase
     GlStateManager.disableAlpha();
     GlStateManager.disableBlend();
     GlStateManager.popMatrix();
+	GlStateManager.popAttrib();
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)

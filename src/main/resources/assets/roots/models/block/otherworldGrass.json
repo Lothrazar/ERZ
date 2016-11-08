@@ -1,0 +1,9 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "particle": "roots:blocks/otherworldGrassSide",
+        "bottom": "roots:blocks/otherworldDirt",
+        "top": "roots:blocks/otherworldGrass",
+        "side": "roots:blocks/otherworldGrassSide"
+    }
+}

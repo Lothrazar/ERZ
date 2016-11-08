@@ -28,6 +28,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -113,6 +114,22 @@ public class BlockStandingStoneEntangler extends TEBlockBase implements ITileEnt
 		if (world.getTileEntity(pos) instanceof TEBase){
 			((TEBase)world.getTileEntity(pos)).breakBlock(world, pos, state, player);
 		}
+	}
+	
+	@Override
+	public void onBlockExploded(World world, BlockPos pos, Explosion explosion){
+		if (!world.isRemote){
+			world.spawnEntityInWorld(new EntityItem(world,pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,new ItemStack(this,1,0)));
+		}
+		IBlockState state = world.getBlockState(pos);
+		if (this.getMetaFromState(state) == 0){
+			world.setBlockToAir(pos.up());
+		}
+		else {
+			world.setBlockToAir(pos.down());
+		}
+		((TEBase)world.getTileEntity(pos)).breakBlock(world,pos,state,null);
+		world.setBlockToAir(pos);
 	}
 	
 	public BlockStandingStoneEntangler(){

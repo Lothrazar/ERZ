@@ -193,7 +193,7 @@ public class TileEntityImbuer extends TEBase implements ITickable {
 				int potency = ((IImbuable)dust.getItem()).getPotency(dust);
 				int duration = ((IImbuable)dust.getItem()).getEfficiency(dust);
 				int size = ((IImbuable)dust.getItem()).getSize(dust);
-				ItemCastingBase.createData(staff);
+				ItemCastingBase.createData(staff,1);
 				((ItemCastingBase)staff.getItem()).setEffectInSlot(staff, 1, effectName, potency, duration, size);
 
 				if (!getWorld().isRemote){

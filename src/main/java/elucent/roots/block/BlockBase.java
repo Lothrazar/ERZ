@@ -2,6 +2,7 @@ package elucent.roots.block;
 
 import elucent.roots.Roots;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -10,9 +11,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBase extends Block{
-	public BlockBase(String name, Material material, float hardness){
+	public BlockBase(String name, Material material, SoundType type, float hardness){
 		super(material);
 		setUnlocalizedName(name);
+		setSoundType(type);
 		setRegistryName(Roots.MODID+":"+name);
 		setCreativeTab(Roots.tab);
 		setHardness(hardness);

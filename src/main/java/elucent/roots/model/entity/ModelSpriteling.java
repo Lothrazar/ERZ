@@ -57,6 +57,7 @@ public class ModelSpriteling extends ModelBase
   
   @Override
   public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale){
+	  GlStateManager.pushAttrib();
 	  GlStateManager.color(1f, 1f, 1f, 1f);
 	  GlStateManager.translate(0, 1.25, 0);
 	  setRotation(head2, 0, 0, 0);
@@ -97,6 +98,7 @@ public class ModelSpriteling extends ModelBase
 	  GlStateManager.disableAlpha();
 	  GlStateManager.disableBlend();
 	  GlStateManager.enableLighting();
+	  GlStateManager.popAttrib();
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)

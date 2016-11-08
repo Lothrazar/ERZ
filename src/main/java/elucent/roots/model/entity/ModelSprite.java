@@ -123,6 +123,7 @@ public class ModelSprite extends ModelBase
 	  float yaw1 = (float)Util.interpolate(((EntitySprite)entity).prevYaw2, ((EntitySprite)entity).prevYaw1, pTicks);
 	  float yaw2 = (float)Util.interpolate(((EntitySprite)entity).prevYaw3, ((EntitySprite)entity).prevYaw2, pTicks);
 	  float yaw3 = (float)Util.interpolate(((EntitySprite)entity).prevYaw4, ((EntitySprite)entity).prevYaw3, pTicks);
+	  GlStateManager.pushAttrib();
 	  GlStateManager.color(1f, 1f, 1f, 1f);
 	  GlStateManager.translate(0, 1.25, 0);
 	  setRotation(head2, 0, 0, 0);
@@ -165,6 +166,7 @@ public class ModelSprite extends ModelBase
 	  GlStateManager.disableAlpha();
 	  GlStateManager.disableBlend();
 	  GlStateManager.enableLighting();
+	  GlStateManager.popAttrib();
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)

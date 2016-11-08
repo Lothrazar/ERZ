@@ -206,6 +206,7 @@ public class ModelGreaterSprite extends ModelBase
 	  float yaw2 = (float)Util.interpolate(((EntityGreaterSprite)entity).prevYaw3, ((EntityGreaterSprite)entity).prevYaw2, pTicks);
 	  float yaw3 = (float)Util.interpolate(((EntityGreaterSprite)entity).prevYaw4, ((EntityGreaterSprite)entity).prevYaw3, pTicks);
 	  float yaw4 = (float)Util.interpolate(((EntityGreaterSprite)entity).prevYaw5, ((EntityGreaterSprite)entity).prevYaw4, pTicks);
+	  GlStateManager.pushAttrib();
 	  GlStateManager.color(1f, 1f, 1f, 1f);
 	  GlStateManager.translate(0, 1.25, 0);
 	  setRotation(stonehead1, 0, 0, 0);
@@ -257,6 +258,7 @@ public class ModelGreaterSprite extends ModelBase
 	  GlStateManager.disableAlpha();
 	  GlStateManager.disableBlend();
 	  GlStateManager.enableLighting();
+	  GlStateManager.popAttrib();
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)

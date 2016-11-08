@@ -7,6 +7,7 @@ import java.util.Random;
 import elucent.roots.Roots;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.BlockPurpurSlab.Half;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -29,9 +30,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockDoubleSlabBase extends BlockSlab {
 	public Block slab;
 
-	public BlockDoubleSlabBase(String name, Material material, float hardness, String tool, int level, Block slab) {
+	public BlockDoubleSlabBase(String name, Material material, SoundType type, float hardness, String tool, int level, Block slab) {
 		super(material);
 		setUnlocalizedName(name);
+		setSoundType(type);
 		setRegistryName(Roots.MODID + ":" + name);
 		setHardness(hardness);
 		this.slab = slab;

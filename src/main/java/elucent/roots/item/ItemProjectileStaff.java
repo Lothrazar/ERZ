@@ -56,7 +56,7 @@ public class ItemProjectileStaff extends ItemCastingBase implements IManaRelated
 	
 	@Override
 	public int getUseCount(double efficiency){
-		return 129+(int)(64*efficiency);
+		return 257+(int)(128*efficiency);
 	}
 	
 	@Override

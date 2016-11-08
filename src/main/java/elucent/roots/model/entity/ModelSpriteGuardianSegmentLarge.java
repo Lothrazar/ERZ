@@ -132,6 +132,7 @@ public class ModelSpriteGuardianSegmentLarge extends ModelBase
   
   public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, int index)
   {
+	GlStateManager.pushAttrib();
 	float scale = scaleFactor;
     super.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
     setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
@@ -169,6 +170,7 @@ public class ModelSpriteGuardianSegmentLarge extends ModelBase
     GlStateManager.disableAlpha();
     GlStateManager.disableBlend();
     GlStateManager.popMatrix();
+	GlStateManager.popAttrib();
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)

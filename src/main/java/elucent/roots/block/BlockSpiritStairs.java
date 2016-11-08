@@ -5,6 +5,7 @@ import java.util.Random;
 import elucent.roots.Roots;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -22,6 +23,7 @@ public class BlockSpiritStairs extends BlockStairs {
 	public BlockSpiritStairs(String name, IBlockState state, float hardness){
 		super(state);
 		setUnlocalizedName(name);
+		setSoundType(SoundType.GLASS);
 		setRegistryName(Roots.MODID+":"+name);
 		setCreativeTab(Roots.tab);
 		setHardness(hardness);

@@ -4,6 +4,7 @@ import elucent.roots.Roots;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockRotatedPillar;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -27,6 +28,11 @@ public class BlockLogBase extends BlockRotatedPillar {
 		setHardness(hardness);
 		setHarvestLevel(tool,level);
 		setCreativeTab(Roots.tab);
+	}
+	
+	@Override
+	public SoundType getSoundType(){
+		return SoundType.WOOD;
 	}
 	
 	@Override public boolean canSustainLeaves(IBlockState state, net.minecraft.world.IBlockAccess world, BlockPos pos){ return true; }

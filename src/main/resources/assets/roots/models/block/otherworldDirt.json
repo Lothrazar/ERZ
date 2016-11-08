@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "roots:blocks/otherworldDirt",
+        "particle": "roots:blocks/otherworldDirt"
+    }
+}

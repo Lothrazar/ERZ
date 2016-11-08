@@ -69,7 +69,7 @@ public class TileEntityStandingStoneGrower extends TEBase implements ITickable {
 					double zShift = 0.5*Math.cos(Math.PI*(i/360.0));
 					Roots.proxy.spawnParticleMagicAuraFX(this.getWorld(), this.getPos().getX()+0.5+xShift, this.getPos().getY()+0.5, this.getPos().getZ()+0.5+zShift, 0, 0, 0, 32, 255, 32);
 				}
-				if (ticker % 100 == 0){
+				if (ticker % 50 == 0){
 					if (!worldObj.isRemote){
 						for (int i = -9; i < 10; i ++){
 							for (int j = -9; j < 10; j ++){

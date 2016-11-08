@@ -10,6 +10,7 @@ import elucent.roots.entity.fx.ParticleMagicLine;
 import elucent.roots.entity.fx.ParticleMagicSmallSparkle;
 import elucent.roots.entity.fx.ParticleMagicSparkle;
 import elucent.roots.entity.fx.ParticleMagicSparklePulse;
+import elucent.roots.entity.fx.ParticleMagicSparkleScalable;
 import elucent.roots.entity.projectile.EntityRitualProjectile;
 import elucent.roots.item.ItemStaff;
 import elucent.roots.model.ModelHolder;
@@ -92,6 +93,12 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void spawnParticleMagicSparklePulseFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){
 		ParticleMagicSparklePulse particle = new ParticleMagicSparklePulse(world,x,y,z,vx,vy,vz,r,g,b);
+		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+	}
+
+	@Override
+	public void spawnParticleMagicSparkleScalableFX(World world, int lifetime, double x, double y, double z, double vx, double vy, double vz, float scale, double r, double g, double b){
+		ParticleMagicSparkleScalable particle = new ParticleMagicSparkleScalable(world,lifetime,x,y,z,vx,vy,vz,scale,r,g,b);
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 	}
 

@@ -27,7 +27,7 @@ public class RitualProjectileStaffImbuer extends RitualBase {
 	@Override
 	public void doEffect(World world, BlockPos pos, List<ItemStack> inventory, List<ItemStack> incenses){
 		ItemStack toSpawn = new ItemStack(RegistryManager.projectileStaff, 1);
-		ItemCrystalStaff.createData(toSpawn);
+		ItemCrystalStaff.createData(toSpawn,4);
 		for (int i = 0; i < incenses.size() && i < 4; i ++){
 			if (incenses.get(i) != null){
 				if (incenses.get(i).getItem() instanceof IImbuable){

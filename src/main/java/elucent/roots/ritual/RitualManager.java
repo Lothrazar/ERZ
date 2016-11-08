@@ -1023,6 +1023,23 @@ public class RitualManager {
 				.addIngredient(new ItemStack(Items.DIAMOND,1))
 				.addIngredient(new ItemStack(RegistryManager.otherworldLeaf,1))
 				.addIngredient(new ItemStack(Items.GHAST_TEAR,1)));
+		rituals.add(new RitualRecharge("casterRecharge",192,255,128)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, -3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, -3, 0, 0)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, 3)
+				.addBlock(RegistryManager.standingStoneT1, 0, 0, -3)
+				.addBlock(RegistryManager.standingStoneT2, 5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, -5, 1, 0)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, 5)
+				.addBlock(RegistryManager.standingStoneT2, 0, 1, -5)
+				.addIngredient(new ItemStack(Items.GLOWSTONE_DUST,1))
+				.addIngredient(new ItemStack(Items.REDSTONE,1))
+				.addIncense(new ItemStack(RegistryManager.otherworldLeaf,1))
+				.addIncense(new ItemStack(RegistryManager.oldRoot,1)));
 
 
 	}

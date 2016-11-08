@@ -62,6 +62,10 @@ public class EntitySanctuary extends Entity {
 				}
 			}
 		}
+		lifetime --;
+		if (lifetime <= 0){
+			setDead();
+		}
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.util.Random;
 import elucent.roots.Roots;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.BlockPurpurSlab.Half;
 import net.minecraft.block.BlockSlab.EnumBlockHalf;
 import net.minecraft.block.material.Material;
@@ -36,6 +37,7 @@ public class BlockSpiritSlab extends BlockSlab {
 	public BlockSpiritSlab(String name, Material material, float hardness, String tool, int level, Block doubleSlab){
 		super(material);
 		setUnlocalizedName(name);
+		setSoundType(SoundType.GLASS);
 		setRegistryName(Roots.MODID+":"+name);
 		setHardness(hardness);
 		this.doubleSlab = doubleSlab;

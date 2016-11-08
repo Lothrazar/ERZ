@@ -73,6 +73,8 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
     public float prevPitch3 = 0;
     public float prevPitch4 = 0;
     public float prevPitch5 = 0;
+    public Vec3d moveVec = new Vec3d(0,0,0);
+    public Vec3d prevMoveVec = new Vec3d(0,0,0);
     Random random = new Random();
     
     public SoundEvent ambientSound;
@@ -80,7 +82,6 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
 
     public EntityGreaterSprite(World worldIn) {
     	super(worldIn);
-        this.noClip = true;
         setSize(1.0f, 1.0f);
         this.isAirBorne = true;
 		this.experienceValue = 20;
@@ -114,7 +115,7 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
     		if (entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0){
     			((EntityLivingBase)entity).attackEntityFrom(DamageSource.generic, 7.0f);
     			float magnitude = (float)Math.sqrt(motionX*motionX+motionZ*motionZ);
-    			((EntityLivingBase)entity).knockBack(this, 4.0f*magnitude, -motionX/magnitude, -motionZ/magnitude);
+    			((EntityLivingBase)entity).knockBack(this,4.0f*magnitude+0.1f, -motionX/magnitude+0.1, -motionZ/magnitude+0.1);
     			((EntityLivingBase)entity).attackEntityAsMob(this);
     			((EntityLivingBase)entity).setRevengeTarget(this);
     		}
@@ -174,7 +175,10 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
     	prevPitch2 = prevPitch1;
     	prevPitch1 = rotationPitch;
     	
-    	this.noClip = !getDataManager().get(stunned).booleanValue();
+    	if (this.getDataManager().get(targetBlock).getY() == -1){
+    		this.getDataManager().set(targetBlock, this.getPosition());
+    		this.getDataManager().setDirty(targetBlock);
+    	}
 
     	if (this.ticksExisted % 4000 == 0 && !this.getDataManager().get(stunned)){
     		if (random.nextInt(6) == 0 && !this.getEntityWorld().isRemote){
@@ -253,16 +257,20 @@ public class EntityGreaterSprite  extends EntityFlying implements ISprite {// im
 	    		 	this.getDataManager().setDirty(targetDirectionY);
 	    	    }
 	    	}
-		    addDirectionX = (float) Util.interpolateYawDegrees(addDirectionX,0.9f,getDataManager().get(targetDirectionX),0.1f);
-			addDirectionY = (float) (addDirectionY*0.9f+0.1f*getDataManager().get(targetDirectionY));
-			float addedPitch = -0.05f*(float)Math.toRadians(10.0f*(posY-(getEntityWorld().getTopSolidOrLiquidBlock(getPosition()).getY()+4.5))); 
-			this.rotationYaw = Util.interpolateYawDegrees(rotationYaw,0.9f,addDirectionX,0.1f);
-			this.rotationPitch = (rotationPitch*0.9f+addDirectionY*0.1f);
-			Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch+addedPitch)
-					.scale(getAttackTarget() != null ? (getDataManager().get(shootTimer) > 0 ? 0.03 : (getDataManager().get(dashTimer) > 0 ? 0.4 : 0.2)) : 0.1);
-			this.motionX = 0.5f*motionX+0.5f*moveVec.xCoord;
-			this.motionY = 0.5f*motionY+0.5f*moveVec.yCoord;
-			this.motionZ = 0.5f*motionZ+0.5f*moveVec.zCoord;
+	    	if (this.ticksExisted % 5 == 0){
+	    		prevMoveVec = moveVec;
+	    		moveVec = Util.lookVector(this.getDataManager().get(targetDirectionX),this.getDataManager().get(targetDirectionY)).scale(getAttackTarget() != null ? (getDataManager().get(dashTimer) > 0 ? 0.4 : 0.2) : 0.1);
+	    	}
+	    	
+	    	float motionInterp = ((float)(this.ticksExisted%5))/5.0f;
+	    	
+			this.motionX = (1.0f-motionInterp)*prevMoveVec.xCoord+(motionInterp)*moveVec.xCoord;
+			this.motionY = (1.0f-motionInterp)*prevMoveVec.yCoord+(motionInterp)*moveVec.yCoord;
+			this.motionZ = (1.0f-motionInterp)*prevMoveVec.zCoord+(motionInterp)*moveVec.zCoord;
+			
+			this.rotationYaw = (float)Math.toRadians(Util.yawDegreesBetweenPointsSafe(0, 0, 0, motionX, motionY, motionZ, rotationYaw));
+			this.rotationPitch = (float)Math.toRadians(Util.pitchDegreesBetweenPoints(0, 0, 0, motionX, motionY, motionZ));
+			
 			if (getDataManager().get(dashTimer) > 0){
 				Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX+((random.nextDouble())-0.5), posY+0.25+((random.nextDouble())-0.5), posZ+((random.nextDouble())-0.5), -0.25*moveVec.xCoord, -0.25*moveVec.yCoord, -0.25*moveVec.zCoord, 76, 230, 0);
 			}

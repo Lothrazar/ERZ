@@ -311,6 +311,14 @@ public class Util {
 		return recipe.size() == 0;
 	}
 	
+	public static float fract(float f){
+		return f - (int)f;
+	}
+	
+	public static double fract(double d){
+		return d - (int)d;
+	}
+	
 	public static boolean itemListsMatch(List<ItemStack> i1, List<ItemStack> i2){
 		ArrayList<ItemStack> recipe = new ArrayList<ItemStack>();
 		ArrayList<ItemStack> available = new ArrayList<ItemStack>();

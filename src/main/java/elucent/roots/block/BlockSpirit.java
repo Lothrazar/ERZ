@@ -4,6 +4,7 @@ import java.util.Random;
 
 import elucent.roots.Roots;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -21,6 +22,7 @@ public class BlockSpirit extends Block{
 	public BlockSpirit(String name, Material material, float hardness){
 		super(material);
 		setUnlocalizedName(name);
+		setSoundType(SoundType.GLASS);
 		setRegistryName(Roots.MODID+":"+name);
 		setCreativeTab(Roots.tab);
 		setHardness(hardness);

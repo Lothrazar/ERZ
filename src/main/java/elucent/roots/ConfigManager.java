@@ -13,7 +13,7 @@ public class ConfigManager {
 	public static Configuration config;
 
 	//WORLD
-	public static int oldRootDropChance, verdantSprigDropChance, infernalStemDropChance, dragonsEyeDropChance, berriesDropChance;
+	public static int otherworldDimensionID, oldRootDropChance, verdantSprigDropChance, infernalStemDropChance, dragonsEyeDropChance, berriesDropChance;
 	//CLIENT
 	public static boolean showTabletWave;
 	//SPELLS
@@ -55,6 +55,7 @@ public class ConfigManager {
 		disablePVP = config.getBoolean("disablePVP", "spells", false, "Whether or not damaging spells can affect players.");
 		hungerTalismanTimer = config.getInt("hungerTalismanTimer",Configuration.CATEGORY_GENERAL,100,1,32767,"The cooldown (in ticks) of the hunger talisman.");
 		dischargeAmuletTimer = config.getInt("dischargeAmuletTimer",Configuration.CATEGORY_GENERAL,100,1,32767,"The cooldown (in ticks) of the discharge amulet.");
+		otherworldDimensionID = config.getInt("otherworldDimensionID", Configuration.CATEGORY_GENERAL, 67, 0, 32767, "The dimension ID used for the otherworld dimension.");
 		if (config.hasChanged())
 		{
 			config.save();

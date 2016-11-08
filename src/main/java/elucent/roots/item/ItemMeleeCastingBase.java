@@ -13,6 +13,8 @@ import elucent.roots.component.ComponentBase;
 import elucent.roots.component.ComponentManager;
 import elucent.roots.component.EnumCastType;
 import elucent.roots.event.SpellCastEvent;
+import elucent.roots.network.MessageSpellCastFX;
+import elucent.roots.network.PacketHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -39,7 +41,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class ItemMeleeCastingBase extends ItemTool {
 	public static SoundEvent castingSound = new SoundEvent(new ResourceLocation("roots:meleeCast"));
-	public static int spellSlots = 0;
+	public int spellSlots = 0;
 	
 	public ItemMeleeCastingBase(String name, int spellSlots, float attackDamage, float attackSpeed){
 		super(attackDamage, attackSpeed-4.0f, ToolMaterial.WOOD, Sets.newHashSet(new Block[]{}));
@@ -87,9 +89,10 @@ public class ItemMeleeCastingBase extends ItemTool {
 		return 72000;
 	}
 	
-	public static void createData(ItemStack stack){
+	public static void createData(ItemStack stack, int spellSlots){
 		stack.setTagCompound(new NBTTagCompound());
 		stack.getTagCompound().setInteger("selected", 1);
+		stack.getTagCompound().setInteger("numSlots", spellSlots);
 		for (int i = 1; i < spellSlots+1; i ++){
 			stack.getTagCompound().setDouble("potency"+i, 0);
 			stack.getTagCompound().setDouble("efficiency"+i, 0);
@@ -140,21 +143,9 @@ public class ItemMeleeCastingBase extends ItemTool {
 					if (((EntityPlayer)player).hasCapability(ManaProvider.manaCapability, null) && ManaProvider.get((EntityPlayer)player).getMana() >= ((float)cost) && !event.isCanceled()){
 						ManaProvider.get((EntityPlayer)player).setMana((EntityPlayer)player, ManaProvider.get((EntityPlayer)player).getMana()-(((float)cost)));
 						this.doEffect(world,(EntityPlayer)player,comp,this.getPotency(stack),this.getEfficiency(stack),this.getSize(stack));
-						decrementUses(stack, player, hand);
-						for (int i = 0 ; i < 90; i ++){
-							double offX = random.nextFloat()*0.5-0.25;
-							double offY = random.nextFloat()*0.5-0.25;
-							double offZ = random.nextFloat()*0.5-0.25;
-							double coeff = (offX+offY+offZ)/1.5+0.5;
-							double dx = (player.getLookVec().xCoord+offX)*coeff;
-							double dy = (player.getLookVec().yCoord+offY)*coeff;
-							double dz = (player.getLookVec().zCoord+offZ)*coeff;
-							if (random.nextBoolean()){
-								Roots.proxy.spawnParticleMagicFX(world, player.posX+dx, player.posY+1.5+dy, player.posZ+dz, dx, dy, dz, comp.primaryColor.xCoord, comp.primaryColor.yCoord, comp.primaryColor.zCoord);
-							}
-							else {
-								Roots.proxy.spawnParticleMagicFX(world, player.posX+dx, player.posY+1.5+dy, player.posZ+dz, dx, dy, dz, comp.secondaryColor.xCoord, comp.secondaryColor.yCoord, comp.secondaryColor.zCoord);
-							}
+						decrementUses(stack, stack.getTagCompound().getInteger("spellSlots"), player, hand);
+						if (!world.isRemote){
+							PacketHandler.INSTANCE.sendToAll(new MessageSpellCastFX(comp.getName(),(float)player.posX,(float)player.posY,(float)player.posZ,player.getLookVec()));
 						}
 					}
 				}
@@ -162,7 +153,7 @@ public class ItemMeleeCastingBase extends ItemTool {
 		}
 	}
 	
-	public static void decrementUses(ItemStack stack, EntityLivingBase player, EnumHand hand){
+	public static void decrementUses(ItemStack stack, int spellSlots, EntityLivingBase player, EnumHand hand){
 		stack.getTagCompound().setInteger("uses"+getSlot(stack), getUses(stack)-1);
 		if (getUses(stack) < 0){
 			((ItemMeleeCastingBase)stack.getItem()).setEffectInSlot(stack,getSlot(stack),"",0,0,0);

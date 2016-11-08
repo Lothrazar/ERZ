@@ -216,7 +216,7 @@ roots.research.spells.mortar.name=研钵
 roots.research.spells.mortar.page1title.name=研钵
 roots.research.spells.mortar.page1info=世界各地的植物似乎有着什么不为人知的力量, 有什么办法比将它们研磨更能弄清它们的本质呢?
 roots.research.spells.mortar.page2title.name=杵
-roots.research.spells.mortar.page2info=当然,不是要让你空手将它们捣碎. 看,那边的白色石头就很适合做一个杵, 去吧,这会帮你一个大忙的.
+roots.research.spells.mortar.page2info=当然,不是要让你空手将它们捣碎. 看,那边的闪长岩就很适合做一个杵, 去吧,这会帮你一个大忙的.
 roots.research.spells.mortar.page3title.name=用法
 roots.research.spells.mortar.page3info=用臼和杵很简单, 这里,hi,就是这,你正在看的这个符文中记载了 许多不同的魔咒.你需要的仅仅是把所需的材料 放在正确的位置,再加上一个主要的特定材料, Abracadabra,ho,你想要的那些基本法术就出来了. 不过只是最简单的那种噢. (温馨提示：古老树根是必须的)
 
@@ -230,11 +230,11 @@ roots.research.spells.modifiers.name=改性剂
 roots.research.spells.modifiers.page1title.name=炼金带来的惊喜
 roots.research.spells.modifiers.page1info=在花瓣之尘制作时,放入一些用来炼药的物品 同样有效. 萤石粉能增强魔法的效果, 红石则是增长时间和法杖使用次数, 火药可以增加魔法所影响的范围.
 roots.research.spells.modifiers.page2title.name=基础材料
-roots.research.spells.modifiers.page2info=虽然魔法可以这样来增强它自己, 但事实上,改性剂需要一些其它成分来使它们 融合进法术中,古老树根可以制作魔法, 但不能用来使改性剂融合, 青翠绿枝允许一个改性剂融合, 地狱球茎则是两个,而龙之眼是三个. 这些成分要在改性剂添加之前加入研钵中.
+roots.research.spells.modifiers.page2info=虽然魔法可以以炼金形式来增强它自己, 但事实上,改性剂需要一些其它成分来使它们 融合进法术中,古老树根可以制作魔法, 但不能用来使改性剂融合, 青翠绿枝允许一个改性剂融合, 地狱球茎则是两个,而龙之眼是三个. 这些成分要在改性剂添加之前加入研钵中.
 
 roots.research.spells.mana.name=Terra
 roots.research.spells.mana.page1title.name=使用魔法的代价
-roots.research.spells.mana.page1info=当你把法杖握在手上时, 你会发现,那是什么? 一些绿色的叶子正在你的饥饿值上飘着, 那就是你的生命之力,被叫做Terra的能量. 法术的使用都会消耗它,但别担心,很快就会恢 复的.
+roots.research.spells.mana.page1info=当你把法杖握在手上时, 你会发现,那是什么? 一些绿色的叶子正在你的饥饿值上飘着, 那就是你的生命之力,被叫做Terra的能量. 使用法术都会消耗它,但别担心,很快就会恢 复的.
 
 roots.research.spells.poppy.name=魔法类型：混乱
 roots.research.spells.poppy.page1title.name=背叛者
@@ -246,11 +246,11 @@ roots.research.spells.blueorchid.page1info=兰花看起来和大地有关. 这�
 
 roots.research.spells.allium.name=魔法类型：裂击
 roots.research.spells.allium.page1title.name=破甲攻击
-roots.research.spells.allium.page1info=绒球葱含有少量的毁灭性的能量. 这个法术可以简单地攻击敌人, 如果它们有护甲的话,护甲会严重损坏.
+roots.research.spells.allium.page1info=绒球葱含有少量的毁灭性的能量. 这个法术可以用来攻击敌人, 如果它们有护甲的话,护甲会严重损坏.
 
 roots.research.spells.azurebluet.name=魔法类型：粉碎
 roots.research.spells.azurebluet.page1title.name=用魔法来挖矿
-roots.research.spells.azurebluet.page1info=矢车菊有一种破坏石头的能量. 使用上面的配方,你能创造一个 能够打破你所指的一小片区域的魔法. 开采水平相当于铁制工具,可增加效力的改性剂.
+roots.research.spells.azurebluet.page1info=矢车菊蕴含着破坏石头的能量. 这个法术能够打破你所指的一小片区域. 开采水平相当于铁制工具,可增加效力的改性剂.
 
 roots.research.spells.redtulip.name=魔法类型：恶魔之花
 roots.research.spells.redtulip.page1title.name=召唤
@@ -262,11 +262,11 @@ roots.research.spells.orangetulip.page1info=橙色郁金香与保护和抵抗有
 
 roots.research.spells.whitetulip.name=魔法类型：寒风
 roots.research.spells.whitetulip.page1title.name=冻住,不许走
-roots.research.spells.whitetulip.page1info=白色郁金香含有冰的魔法精华. 使用这个法术,你就可以操纵冰的力量. 这可以造成伤害和使对方减速.
+roots.research.spells.whitetulip.page1info=白色郁金香含有冰的魔法精华. 使用这个法术,你就可以操纵冰的力量, 来造成伤害和减速.
 
 roots.research.spells.pinktulip.name=魔法类型：生命吸取
 roots.research.spells.pinktulip.page1title.name=吸血鬼
-roots.research.spells.pinktulip.page1info=粉色郁金香和生物的生命能量密切联系. 这个法术在攻击的同时偷取他们的生命力量 来回复你的生命.
+roots.research.spells.pinktulip.page1info=粉色郁金香和生物的生命能量密切联系. 这个法术在攻击的同时吸取他们的生命力量 来回复你的生命.
 
 roots.research.spells.oxeyedaisy.name=魔法类型：加速
 roots.research.spells.oxeyedaisy.page1title.name=超频
@@ -278,7 +278,7 @@ roots.research.spells.dandelion.page1info=蒲公英有与风有关的力量. 使
 
 roots.research.spells.sunflower.name=魔法类型：日能猛击
 roots.research.spells.sunflower.page1title.name=不死生物的克星
-roots.research.spells.sunflower.page1info=向日葵一生都在努力吸收太阳的光芒. 这个法术对普通敌人效果不佳, 但会要了亡灵们的小命,让他们烧起来吧!
+roots.research.spells.sunflower.page1info=向日葵一生都在努力吸收太阳的光芒. 这个法术对普通敌人效果不佳, 但会要了亡灵们的小命. 让他们烧起来吧!
 
 roots.research.spells.lilac.name=魔法类型：生长
 roots.research.spells.lilac.page1title.name=神奇的肥料
@@ -286,15 +286,15 @@ roots.research.spells.lilac.page1info=丁香含有生长的能量. 这意味着�
 
 roots.research.spells.rosebush.name=魔法类型：玫瑰之刺
 roots.research.spells.rosebush.page1title.name=自然之力
-roots.research.spells.rosebush.page1info=你已经发现如何来应用这娇艳的玫瑰. 这个法术有着大量伤害,但没有击退效果.
+roots.research.spells.rosebush.page1info=你已经发现如何来应用娇艳的玫瑰. 这个法术有着大量伤害,但没有击退效果.
 
 roots.research.spells.peony.name=魔法类型：再生
 roots.research.spells.peony.page1title.name=温柔的触摸
-roots.research.spells.peony.page1info=牡丹有着治愈的力量. 这个法术用植物力量治疗你自己, 治疗量取决于周围花的多少.
+roots.research.spells.peony.page1info=牡丹有着治愈的力量. 这个法术用植物的力量治疗你自己, 治疗量的大小取决于周围花的多少.
 
 roots.research.spells.apple.name=魔法类型：自然治愈
 roots.research.spells.apple.page1title.name=补救
-roots.research.spells.apple.page1info=你发现苹果有一定的疗效. 这个法术就是应用苹果, 使你身上的debuff变为buff.
+roots.research.spells.apple.page1info=你发现苹果有一定的疗效. 这个法术就是用苹果 来使你身上的debuff变为buff.
 
 roots.research.spells.lilypad.name=魔法类型：水爆
 roots.research.spells.lilypad.page1title.name=灭火器
@@ -310,11 +310,11 @@ roots.research.spells.netherwart.page1info=地狱疣从地狱吸收了很多能�
 
 roots.research.spells.chorus.name=魔法类型：末影扭曲
 roots.research.spells.chorus.page1title.name=传送
-roots.research.spells.chorus.page1info=吃掉紫颂果就可以随机传送. 而这个能做到更多,穿过那堵墙吧.
+roots.research.spells.chorus.page1info=吃掉紫颂果就可以随机传送. 而这个法术能做的更好,穿过那堵墙吧.
 
 roots.research.spells.cobweb.name=魔法类型：陷阱
 roots.research.spells.cobweb.page1title.name=陷阱
-roots.research.spells.cobweb.page1info=蜘蛛网的力量将使你附近的敌人减缓, 让你有时间逃跑,反击甚至捕捉它们.
+roots.research.spells.cobweb.page1info=蜘蛛网的力量将使你附近的敌人减速, 让你有时间逃跑,反击甚至捕捉它们.
 
 roots.research.spells.charms.name=另世符文
 roots.research.spells.charms.page1title.name=再生咒文
@@ -330,15 +330,15 @@ roots.research.ritual.name=仪式
 
 roots.research.ritual.ritual.name=基本仪式
 roots.research.ritual.ritual.page1title.name=祭坛
-roots.research.ritual.ritual.page1info=随着你得到地球更深处的物质, 你创造了一个新的结构, 这能让你施展比以往任何时候都更强大的魔法. 不同的仪式可以在祭坛上进行, 每一个都需要不同的材料和条件来操作.
+roots.research.ritual.ritual.page1info=随着你得到地球更深处的物质, 你创造了一个新的结构, 这能让你施展有史以来最强大的魔法. 不同的仪式可以在祭坛上进行, 每一个都需要不同的材料和条件来操作.
 roots.research.ritual.ritual.page2title.name=焚香炉
-roots.research.ritual.ritual.page2info=大多数的仪式都需要熏香. 焚香炉只在祭坛周围9x9的区域内,并且在同一 水平面上.将物品放在香炉里,用打火石点燃. 焚香炉也可以空手右击熄灭.
+roots.research.ritual.ritual.page2info=大多数的仪式都需要熏香. 焚香炉只用在祭坛周围9x9的区域内,并且在同一 水平面上.将物品放在香炉里,用打火石点燃. 焚香炉也可以空手右击熄灭.
 roots.research.ritual.ritual.page3title.name=基础铸台
-roots.research.ritual.ritual.page3info=一个典型的仪式是： 首先,将必要的物品放在祭坛上, 在香炉上燃起所需的物品. 一定不要在祭坛上放上任何多余的成分, 焚香炉里也是,不然仪式会失败. 然后,空手右击祭坛以开始仪式.
+roots.research.ritual.ritual.page3info=一个正确的仪式是： 首先,将必要的物品放在祭坛上, 在香炉上燃起所需的物品. 一定不要在祭坛上放上任何多余的成分, 焚香炉里也是,不然仪式会失败. 然后,空手右击祭坛以开始仪式.
 
 roots.research.ritual.livingtools.name=活木工具
 roots.research.ritual.livingtools.page1title.name=自动修复
-roots.research.ritual.livingtools.page1info=你的仪式能将生命能量引导到死亡的物品上. 使用这个,你可以增强你的木制工具. 加入一点金子,还有青翠绿枝, 会给你的工具以铁工具的挖掘等级, 随着时间的推移工具会自动修复.
+roots.research.ritual.livingtools.page1info=你的仪式能将生命能量引导到无生命的物品上. 使用这个,你可以增强你的木制工具. 加入一点金子,还有青翠绿枝, 会给你的工具以铁工具的挖掘等级, 随着时间的推移工具会自动修复.
 roots.research.ritual.livingtools.page2title.name=仪式：活木镐
 roots.research.ritual.livingtools.page3title.name=仪式：活木斧
 roots.research.ritual.livingtools.page4title.name=仪式：活木锹
@@ -387,7 +387,7 @@ roots.research.ritual.standingstones2.name=增强的石柱
 roots.research.ritual.standingstones2.page1title.name=更高境界
 roots.research.ritual.standingstones2.page1info=你的石柱是强大的, 但你肯定有很多更强大的魔法无法得到. 然而,你已经发现,通过使用更多的材料, 你可以更有效的把生命能量给予石柱.
 
-roots.research.ritual.monstersummoning.name=怪物复活
+roots.research.ritual.monstersummoning.name=怪物召唤
 roots.research.ritual.monstersummoning.page1title.name=不死族
 roots.research.ritual.monstersummoning.page1info=有了一个更强大的祭坛, 你想你能把复活仪式的目标改为一些 更强大的邪恶生物. 通过提供一个骨头和一些相关的掉落物, 你可以在祭坛上召唤出一个你想要的怪物.
 roots.research.ritual.monstersummoning.page2title.name=召唤仪式：僵尸
@@ -408,7 +408,7 @@ roots.research.ritual.sylvanarmor.page5title.name=仪式：森林靴子
 
 roots.research.ritual.wildwoodarmor.name=守护者装备
 roots.research.ritual.wildwoodarmor.page1title.name=木制装备
-roots.research.ritual.wildwoodarmor.page1info=华丽的长袍是很好的, 但有时你只是想要原始的保护. 守护者的盔甲,以铁盔甲为基础, 有铁和钻石装甲之间的护甲值,也将自动修复, 并增加你的生命恢复(已失效), 即使当饥饿值空着的时候.
+roots.research.ritual.wildwoodarmor.page1info=华丽的长袍是很好的, 但有时你只是想要原始的保护. 守护者的盔甲,以铁盔甲为基础, 有铁和钻石装甲之间的护甲值,也将自动修复. 即使当饥饿值空着的时候, 它也有着生命恢复的效果(已失效).
 roots.research.ritual.wildwoodarmor.page2title.name=守护者面具
 roots.research.ritual.wildwoodarmor.page3title.name=守护者胸甲
 roots.research.ritual.wildwoodarmor.page4title.name=守护者护腿
@@ -440,7 +440,7 @@ roots.research.ritual.poweredstones.page15title.name=虚空
 roots.research.ritual.poweredstones.page15info=虚空石柱将使附近的物品靠近自己.
 
 roots.research.ritual.massbreeding.name=规模化养殖
-roots.research.ritual.massbreeding.page1info=通过将常见的育种作物燃起, 这个仪式将导致在45x45x17的 成年动物进入繁殖模式
+roots.research.ritual.massbreeding.page1info=通过将常见的育种作物燃起, 这个仪式将致使在45x45x17的 成年动物进入繁殖模式
 roots.research.ritual.massbreeding.page1title.name=动物农场
 roots.research.ritual.massbreeding.page2title.name=仪式：规模化养殖
 
@@ -451,7 +451,7 @@ roots.research.ritual.lifedrain.page2title.name=仪式：生命吸取
 
 roots.research.ritual.sacrifice.name=祭品
 roots.research.ritual.sacrifice.page1title.name=超自然的处理方式
-roots.research.ritual.sacrifice.page1info=你厌倦了不断的冒险, 去寻找特定的植物来完成法术. 你想到了这个仪式, 它完成时会以粒子效果来示意. 它会立刻杀死附近的怪物, 作为回报,一个随机的植物素材会出现. 这些植物的来源仍然是个谜...
+roots.research.ritual.sacrifice.page1info=你厌倦了不断的冒险, 去寻找特定的植物来完成法术. 你想到了这个仪式, 它完成时会以粒子效果示意. 它会立刻杀死附近的怪物, 作为回报,一个随机的植物素材会出现. 这些植物的来源仍然是个谜...
 roots.research.ritual.sacrifice.page2title.name=仪式：献祭
 
 roots.research.ritual.runicFocus.name=符文核心
@@ -553,7 +553,7 @@ roots.research.sprite.spellweaverlance.page2title.name=仪式：巫师之枪
 
 roots.research.sprite.talismanpursuit.name=连锁符
 roots.research.sprite.talismanpursuit.page1title.name=传递伤害
-roots.research.sprite.talismanpursuit.page1info=连锁符处于物品栏时, 没杀死一个敌人就会释放出一个魔法弹去攻击附近的敌人.
+roots.research.sprite.talismanpursuit.page1info=连锁符处于物品栏时, 每杀死一个敌人就会释放出一个魔法弹去攻击附近的敌人.
 roots.research.sprite.talismanpursuit.page2title.name=仪式：连锁符
 
 roots.research.sprite.amuletconserving.name=积蓄符
@@ -572,7 +572,7 @@ roots.research.sprite.evocation.page1info=召唤咒文是一个非常强力的�
 
 roots.research.sprite.conjuration.name=素材：魔力
 roots.research.sprite.conjuration.page1title.name=架起桥梁
-roots.research.sprite.conjuration.page1info=魔力咒文是一个非常强力的精灵掉落物, 在仪式中,它可以替代一个花瓣之尘. 它的法术将会创造一些方块于你所看的地方.
+roots.research.sprite.conjuration.page1info=魔力咒文是一个非常强力的精灵掉落物, 在仪式中,它可以替代一个花瓣之尘. 它的法术将会在你所指的地方创造一些方块.
 
 roots.research.sprite.illusion.name=素材：幻象
 roots.research.sprite.illusion.page1title.name=隐匿
@@ -596,12 +596,12 @@ roots.research.sprite.talismanhunger.page2title.name=仪式：吸收符
 
 roots.research.sprite.hourglass.name=远古沙漏
 roots.research.sprite.hourglass.page1title.name=死亡保护
-roots.research.sprite.hourglass.page1info=远古沙漏将阻止一次死亡. 当你被杀死是有这个在你的物品栏, 它将会消失以防止你死去, 给你留下半心, 同时对周围生物停止时间.
+roots.research.sprite.hourglass.page1info=远古沙漏将阻止一次死亡. 当你被杀死时这个存在于你的物品栏, 它将会消失以防止你死去, 给你留下半心的生命值, 同时对周围生物停止时间.
 roots.research.sprite.hourglass.page2title.name=仪式：远古沙漏
 
 roots.research.sprite.pixiestone.name=灵石
 roots.research.sprite.pixiestone.page1title.name=蹦蹦跳
-roots.research.sprite.pixiestone.page1info=灵石将会使你免受摔落伤害. 当其发光时 (右击改变模式), 无论你摔得多块, 灵石都会给你一个缓冲以免落地过快.
+roots.research.sprite.pixiestone.page1info=灵石将会使你免受摔落伤害. 当其发光时 (右击改变模式), 无论你摔得多快, 灵石都会给你一个缓冲以免你落地过快.
 roots.research.sprite.pixiestone.page2title.name=仪式：灵石
 
 roots.research.sprite.spiritblocks.name=魂块

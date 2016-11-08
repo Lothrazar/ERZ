@@ -41,7 +41,7 @@ public class ComponentRose extends ComponentBase {
 								PlayerManager.addAchievement(((EntityPlayer)caster), RegistryManager.achieveSpellRose);
 							}
 						}
-						targets.get(i).attackEntityFrom(DamageSource.cactus, (int)(7.0+2.0*potency));
+						targets.get(i).attackEntityFrom(DamageSource.cactus, (int)(9.0+2.0*potency));
 						Util.addTickTracking(targets.get(i));
 						targets.get(i).setLastAttacker(caster);
 						targets.get(i).setRevengeTarget((EntityLivingBase)caster);

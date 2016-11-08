@@ -51,7 +51,9 @@ public class ComponentWhiteTulip extends ComponentBase{
 					EntityFrostShard shard = new EntityFrostShard(world);
 					shard.initSpecial(3.0f+2.0f*(float)potency);
 					shard.setPosition(caster.posX, caster.posY+caster.getEyeHeight(), caster.posZ);
-					shard.setVelocity(0.75*(caster.getLookVec().xCoord+0.125*size*(random.nextFloat()-0.5)), 0.75*(caster.getLookVec().yCoord+0.125*size*(random.nextFloat()-0.5)), 0.75*(caster.getLookVec().zCoord+0.125*size*(random.nextFloat()-0.5)));
+					shard.motionX = 0.75*(caster.getLookVec().xCoord+0.25*size*(random.nextFloat()-0.5));
+					shard.motionY = 0.75*(caster.getLookVec().yCoord+0.125*size*(random.nextFloat()-0.5));
+					shard.motionZ = 0.75*(caster.getLookVec().zCoord+0.125*size*(random.nextFloat()-0.5));
 					shard.setPosition(shard.posX+shard.motionX*2.0, shard.posY+shard.motionY*2.0, shard.posZ+shard.motionZ*2.0);
 					world.spawnEntityInWorld(shard);
 				}

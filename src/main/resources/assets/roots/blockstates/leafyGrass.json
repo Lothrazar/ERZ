@@ -1,0 +1,7 @@
+{
+    "variants":{
+        "type=dead_bush":{"model": "roots:leafyGrass"},
+        "type=tall_grass":{"model": "roots:leafyGrass"},
+        "type=fern":{"model": "roots:leafyGrass"}
+    }
+}
