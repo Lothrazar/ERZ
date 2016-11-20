@@ -18,6 +18,7 @@ import elucent.roots.ritual.RitualBase;
 import elucent.roots.ritual.RitualManager;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -64,10 +65,14 @@ public class TileEntityStandingStoneGrower extends TEBase implements ITickable {
 		ticker ++;
 		if (ticker % 5 == 0){
 			if (getWorld().isBlockIndirectlyGettingPowered(getPos().down()) > 0){
-				for (double i = 0; i < 720; i += 45.0){
-					double xShift = 0.5*Math.sin(Math.PI*(i/360.0));
-					double zShift = 0.5*Math.cos(Math.PI*(i/360.0));
-					Roots.proxy.spawnParticleMagicAuraFX(this.getWorld(), this.getPos().getX()+0.5+xShift, this.getPos().getY()+0.5, this.getPos().getZ()+0.5+zShift, 0, 0, 0, 32, 255, 32);
+				if (getWorld().isRemote){
+					if (getWorld().provider.getDimension() == Minecraft.getMinecraft().thePlayer.getEntityWorld().provider.getDimension()){
+						for (double i = 0; i < 720; i += 45.0){
+							double xShift = 0.5*Math.sin(Math.PI*(i/360.0));
+							double zShift = 0.5*Math.cos(Math.PI*(i/360.0));
+							Roots.proxy.spawnParticleMagicAuraFX(this.getWorld(), this.getPos().getX()+0.5+xShift, this.getPos().getY()+0.5, this.getPos().getZ()+0.5+zShift, 0, 0, 0, 32, 255, 32);
+						}
+					}
 				}
 				if (ticker % 50 == 0){
 					if (!worldObj.isRemote){

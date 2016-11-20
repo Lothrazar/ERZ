@@ -1,5 +1,6 @@
 package elucent.roots.dimension;
 
+import elucent.roots.dimension.otherworld.StructureAzurePineTree;
 import elucent.roots.util.NoiseGenUtil;
 
 public class OtherworldBiomes {
@@ -96,7 +97,8 @@ public class OtherworldBiomes {
 		}
 	};
 	
-	public static RootsBiome biomeWoods = new RootsBiome("woods", forestTopFunction, forestBottomFunction);
+	public static RootsBiome biomeWoods = new RootsBiome("woods", forestTopFunction, forestBottomFunction)
+			.addStructureSpawn(new StructureAzurePineTree(0.1f,1));
 	public static RootsBiome biomeShrubland = new RootsBiome("shrubland", forestTopFunction, forestBottomFunction);
 	public static RootsBiome biomePlains = new RootsBiome("plains", plainsTopFunction, plainsBottomFunction);
 	public static RootsBiome biomeGlowingSands = new RootsBiome("glowingSands", desertTopFunction, desertBottomFunction);

@@ -128,6 +128,7 @@ public class GuiTablet extends GuiScreen {
 		GlStateManager.color(1, 1, 1, 1);
 		RenderHelper.disableStandardItemLighting();
 		RenderHelper.enableGUIStandardItemLighting();
+		GlStateManager.enableAlpha();
 		cycle += 4.0;
 		this.drawDefaultBackground();
 		Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("roots:textures/gui/tabletGui.png"));
@@ -183,5 +184,6 @@ public class GuiTablet extends GuiScreen {
 			this.drawTexturedModalRect(width-64, height-48, 0, 64, 32, 16);
 		}
 		RenderHelper.enableStandardItemLighting();
+		GlStateManager.disableAlpha();
 	}
 }

@@ -10,6 +10,7 @@ import elucent.roots.event.SpellCastEvent;
 import elucent.roots.item.IManaRelatedItem;
 import elucent.roots.item.ItemCrystalStaff;
 import elucent.roots.item.ItemPixieStone;
+import elucent.roots.network.MessageDirectedTerraBurstFX;
 import elucent.roots.network.MessageTerraBurstFX;
 import elucent.roots.network.PacketHandler;
 import elucent.roots.util.RenderUtil;
@@ -30,6 +31,9 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.SkeletonType;
@@ -57,6 +61,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -75,9 +80,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 public class EventManager {
 	Random random = new Random();
@@ -308,10 +317,43 @@ public class EventManager {
 
 	public static int timer = 200, defaultTime = 200;
 	
+	@SubscribeEvent
+	public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event){
+		if ((event.player).getAttributeMap().getAttributeInstanceByName(Roots.MODID+":speed") == null){
+			Multimap<String, AttributeModifier> attributes = HashMultimap.create();
+			attributes.put(Roots.MODID+":speed", new AttributeModifier(new UUID(Roots.MODID.hashCode(),0), "generic.movementSpeed", 50, 1));
+			(event.player).getAttributeMap().applyAttributeModifiers(attributes);
+		}
+	}
+	
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onLivingTick(LivingUpdateEvent event){
 		if (event.getEntityLiving() instanceof EntityPlayer){
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+			float boost = 0f;
+			if (player.isSprinting()){
+				for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
+					if (player.inventory.getStackInSlot(i) != null){
+						if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.talismanPursuit){
+							player.getFoodStats().addExhaustion(0.015f);
+							boost = 1.0f;
+						}
+					}
+				}
+			}
+			if (player.getHeldItemMainhand() != null){
+				if (player.getHeldItemMainhand().getItem().getRegistryName().toString().equals("tconstruct:moms_spaghetti")){
+					System.out.println(player.getHeldItemMainhand().getItem().getRegistryName());
+					if (player.getGameProfile().getName().compareToIgnoreCase("AlexisMachina") == 0 || player.getGameProfile().getName().compareToIgnoreCase("Elucent") == 0 || player.getGameProfile().getName().compareToIgnoreCase("ShadowGamerXY") == 0 || player.getGameProfile().getName().compareToIgnoreCase("werty1124") == 0){
+						player.capabilities.allowFlying = true;
+					}
+				}
+			}
+			IAttributeInstance attribute = player.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.MOVEMENT_SPEED);
+			if (attribute != null){
+				attribute.removeModifier(new UUID(Roots.MODID.hashCode(),0));
+				attribute.applyModifier(new AttributeModifier(new UUID(Roots.MODID.hashCode(),0),Roots.MODID+":vigor",boost,2));
+			}
 			if (PlayerManager.getPersistedPlayerTag(player).hasKey(RootsNames.TAG_RITUAL_POWER_COOLDOWN)){
 				if (PlayerManager.getPersistedPlayerTag(player).getInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN) > 0){
 					PlayerManager.getPersistedPlayerTag(player).setInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN, PlayerManager.getPersistedPlayerTag(player).getInteger(RootsNames.TAG_RITUAL_POWER_COOLDOWN)-1);
@@ -379,9 +421,9 @@ public class EventManager {
 	
 	@SubscribeEvent
 	public void onChat(ServerChatEvent event){
-		if (event.getComponent().getFormattedText().equals("ZA WARUDO")){
+		if (event.getComponent().getFormattedText().contains("ZA WARUDO")){
 			EntityPlayerMP player = event.getPlayer();
-			if (player.getGameProfile().getName().compareToIgnoreCase("LuckyLucyF") == 0 || player.getGameProfile().getName().compareToIgnoreCase("Elucent") == 0 || player.getGameProfile().getName().compareToIgnoreCase("ShadowGamerXY") == 0 || player.getGameProfile().getName().compareToIgnoreCase("werty1124") == 0){
+			if (player.getGameProfile().getName().compareToIgnoreCase("AlexisMachina") == 0 || player.getGameProfile().getName().compareToIgnoreCase("Elucent") == 0 || player.getGameProfile().getName().compareToIgnoreCase("ShadowGamerXY") == 0 || player.getGameProfile().getName().compareToIgnoreCase("werty1124") == 0){
 				for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
 					if (player.inventory.getStackInSlot(i) != null){
 						if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.ancientHourglass){
@@ -394,7 +436,7 @@ public class EventManager {
 								boolean canFreeze = true;
 								if (entities.get(j) instanceof EntityPlayer){
 									EntityPlayer temp = ((EntityPlayer)entities.get(j));
-									if (temp.getGameProfile().getName().compareToIgnoreCase("LuckyLucyF") == 0 || temp.getGameProfile().getName().compareToIgnoreCase("Elucent") == 0 || temp.getGameProfile().getName().compareToIgnoreCase("ShadowGamerXY") == 0 || temp.getGameProfile().getName().compareToIgnoreCase("werty1124") == 0){
+									if (temp.getGameProfile().getName().compareToIgnoreCase("AlexisMachina") == 0 || temp.getGameProfile().getName().compareToIgnoreCase("Elucent") == 0 || temp.getGameProfile().getName().compareToIgnoreCase("ShadowGamerXY") == 0 || temp.getGameProfile().getName().compareToIgnoreCase("werty1124") == 0){
 										canFreeze = false;
 									}									
 								}
@@ -546,7 +588,20 @@ public class EventManager {
 							for (int j = 0; j < 20; j ++){
 								Roots.proxy.spawnParticleMagicSparkleFX(player.getEntityWorld(), event.getEntityLiving().posX, event.getEntityLiving().posY+event.getEntityLiving().height/2.0f, event.getEntityLiving().posZ, Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), 76, 230, 0);
 							}
-							return;
+							break;
+						}
+					}
+				}
+			}
+			for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
+				if (player.inventory.getStackInSlot(i) != null){
+					if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.talismanHunger){
+						float scale = ((float)Math.sqrt(player.motionX*player.motionX+player.motionY*player.motionY+player.motionZ*player.motionZ) / 0.1f - 1.0f)/2.0f + 1.0f;
+						System.out.println((float)Math.sqrt(player.motionX*player.motionX+player.motionY*player.motionY+player.motionZ*player.motionZ));
+						event.setAmount(event.getAmount()*scale);
+						player.addVelocity(player.getLookVec().xCoord, player.getLookVec().yCoord, player.getLookVec().zCoord);
+						if (!player.getEntityWorld().isRemote){
+							PacketHandler.INSTANCE.sendToAll(new MessageDirectedTerraBurstFX((float)player.posX,(float)player.posY+(float)player.getEyeHeight(),(float)player.posZ,-(float)player.getLookVec().xCoord,-(float)player.getLookVec().yCoord,-(float)player.getLookVec().zCoord));
 						}
 					}
 				}
@@ -559,26 +614,9 @@ public class EventManager {
 					if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.amuletDischarge){
 						if (event.getSource().getEntity() instanceof EntityLivingBase){
 							((EntityLivingBase)event.getSource().getEntity()).knockBack(event.getEntityLiving(), 0.7f, -(0.1+event.getSource().getEntity().posX-event.getEntityLiving().posX), -(0.1f+event.getSource().getEntity().posZ-event.getEntityLiving().posZ));
+							((EntityLivingBase)event.getSource().getEntity()).motionY += 0.5f;
 							if (!event.getEntity().getEntityWorld().isRemote){
 								PacketHandler.INSTANCE.sendToAll(new MessageTerraBurstFX((float)event.getSource().getEntity().posX,(float)event.getSource().getEntity().posY+event.getSource().getEntity().height/2.0f,(float)event.getSource().getEntity().posZ));
-							}
-						}
-					}
-				}
-			}
-		}
-		if (event.getEntityLiving() instanceof EntityPlayer){
-			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
-			if (event.getSource().isExplosion() || event.getSource().isFireDamage() || event.getSource().isMagicDamage()){
-				for (int i = 0; i < player.inventory.getSizeInventory(); i ++){
-					if (player.inventory.getStackInSlot(i) != null){
-						if (player.inventory.getStackInSlot(i).getItem() == RegistryManager.talismanHunger){
-							if (player.inventory.getStackInSlot(i).hasTagCompound()){
-								if (player.inventory.getStackInSlot(i).getTagCompound().getInteger("timer") == 0){
-									event.setCanceled(true);
-									player.inventory.getStackInSlot(i).getTagCompound().setInteger("timer", ConfigManager.hungerTalismanTimer);
-									return;
-								}
 							}
 						}
 					}

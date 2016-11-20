@@ -25,6 +25,10 @@ public class EntitySummoner extends Entity {
 	public boolean large = false;
 	public SoundEvent spawnSound;
 	
+	public EntitySummoner(World world) {
+		super(world);
+	}
+	
 	public EntitySummoner(World world, Class result, double posX, double posY, double posZ, Vec3d color1, Vec3d color2, boolean large) {
 		super(world);
 		this.result = result;

@@ -9,10 +9,7 @@ import elucent.roots.gui.GuiHandler;
 import elucent.roots.item.ItemHungerTalisman;
 import elucent.roots.item.ItemPursuitTalisman;
 import elucent.roots.network.MessageUpdateMana;
-<<<<<<< HEAD
 import elucent.roots.network.PacketHandler;
-=======
->>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 import elucent.roots.research.ResearchManager;
 import elucent.roots.ritual.RitualManager;
 import net.minecraft.world.World;
@@ -30,19 +27,11 @@ public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		registerEvents();
-<<<<<<< HEAD
 		PacketHandler.registerMessages();
-=======
->>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 		RegistryManager.init();
 		RegistryManager.registerRecipes();
 		RootsCapabilityManager.preInit();
 		RegistryManager.registerAchievements();
-<<<<<<< HEAD
-=======
-		network = NetworkRegistry.INSTANCE.newSimpleChannel("roots");
-		network.registerMessage(MessageUpdateMana.CapsMessageHandler.class, MessageUpdateMana.class, 2, Side.CLIENT);
->>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 	}
 	
 	public void init(FMLInitializationEvent event){
@@ -99,11 +88,8 @@ public class CommonProxy {
 	public void spawnParticleMagicSparklePulseFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b){
 		//
 	}
-<<<<<<< HEAD
 	
 	public void spawnParticleMagicSparkleScalableFX(World world, int lifetime, double x, double y, double z, double vx, double vy, double vz, float scale, double r, double g, double b){
 		//
 	}
-=======
->>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 }

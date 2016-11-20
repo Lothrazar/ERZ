@@ -25,11 +25,15 @@ public class EntityNetherInfection extends Entity {
 	float spinDirection = 1.0f;
 	float angle = 0.0f;
 	
+	public EntityNetherInfection(World world) {
+		super(world);
+	}
+	
 	public EntityNetherInfection(World world, UUID casterId, Entity entity, int potency, int size){
 		super(world);
 		this.casterId = casterId;
 		this.entity = entity;
-		this.damage = 11+2*potency;
+		this.damage = 17+6*potency;
 		this.posX = entity.posX;
 		this.posY = entity.posY;
 		this.posZ = entity.posZ;
@@ -82,8 +86,8 @@ public class EntityNetherInfection extends Entity {
 				}
 			}
 			else {
-				if (entity instanceof EntityLivingBase && ticksExisted % 20 == 0){
-					if (random.nextInt(5) == 0){
+				if (entity instanceof EntityLivingBase && ticksExisted % 8 == 0){
+					if (random.nextInt(6) == 0){
 						this.spinDirection *= -1.0f;
 					}
 					entity.attackEntityFrom(DamageSource.generic, 1.0f);

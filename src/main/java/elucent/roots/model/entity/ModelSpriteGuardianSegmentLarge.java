@@ -127,7 +127,7 @@ public class ModelSpriteGuardianSegmentLarge extends ModelBase
   }
   
   public Vec3d getPosFromIndex(EntitySpriteGuardian guardian, int index, float partialTicks){
-	  return guardian.pastPositions.get(index*2);
+	  return guardian.pastPositions.get(index);
   }   
   
   public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, int index)

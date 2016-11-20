@@ -135,6 +135,7 @@ public class BlockStandingStoneAccelerator extends TEBlockBase implements ITileE
 		((TEBase)world.getTileEntity(pos)).breakBlock(world,pos,state,null);
 		world.setBlockToAir(pos);
 	}
+	
 	public BlockStandingStoneAccelerator(){
 		super(Material.ROCK);
 		setUnlocalizedName("standingStoneAccelerator");

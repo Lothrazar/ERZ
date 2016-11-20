@@ -124,9 +124,9 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
     public void collideWithEntity(Entity entity){
     	if (this.getAttackTarget() != null && this.getHealth() > 0 && !getDataManager().get(pacified).booleanValue()){
     		if (entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0){
-    			((EntityLivingBase)entity).attackEntityFrom(DamageSource.generic, 8.0f);
+    			((EntityLivingBase)entity).attackEntityFrom(DamageSource.generic, 4.0f);
     			float magnitude = (float)Math.sqrt(motionX*motionX+motionZ*motionZ);
-    			((EntityLivingBase)entity).knockBack(this,6.0f*magnitude+0.1f, -motionX/magnitude+0.1, -motionZ/magnitude+0.1);
+    			((EntityLivingBase)entity).knockBack(this,3.0f*magnitude+0.1f, -motionX/magnitude+0.1, -motionZ/magnitude+0.1);
     			((EntityLivingBase)entity).attackEntityAsMob(this);
     			((EntityLivingBase)entity).setRevengeTarget(this);
     		}
@@ -143,17 +143,17 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
     	super.onUpdate();
     	float velocityScale = 1.0f;
     	float addedMotionY = 0.0f;
-    	if (getDataManager().get(pacified) && getDataManager().get(fadeTimer) == 0){
-    		getDataManager().set(pacifiedTimer, getDataManager().get(pacifiedTimer)+1);
-    		getDataManager().setDirty(pacifiedTimer);
+    	if (getDataManager().get(pacified) && getDataManager().get(fadeTimer) > 0){
+    		getDataManager().set(fadeTimer, getDataManager().get(fadeTimer)-1);
+    		getDataManager().setDirty(fadeTimer);
     	}
-    	if (getDataManager().get(pacifiedTimer) > 800){
+    	if (getDataManager().get(fadeTimer) > 0){
     		for (int i = 0; i < 5; i ++){
 				Vec3d location = pastPositions.get(rand.nextInt(20)).add((new Vec3d(rand.nextFloat()-0.5,rand.nextFloat()-0.5,rand.nextFloat()-0.5)).scale(3.0f));
 				Roots.proxy.spawnParticleMagicSmallSparkleFX(getEntityWorld(), location.xCoord, location.yCoord+1.35f, location.zCoord, 0, 0, 0, 107, 255, 28);
     		}
     	}
-    	if (getDataManager().get(pacifiedTimer) > 1000 && getDataManager().get(fadeTimer) == 0){
+    	if (getDataManager().get(fadeTimer) == 0 && getDataManager().get(pacified)){
     		for (int i = 0; i < 20; i ++){
     			for (int j = 0; j < 5; j ++){
     				Vec3d location = pastPositions.get(i).add((new Vec3d(rand.nextFloat()-0.5,rand.nextFloat()-0.5,rand.nextFloat()-0.5)).scale(3.0f));
@@ -215,7 +215,7 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
     		if (!foundPrevious && players.size() > 0){
     			this.setAttackTarget(players.get(rand.nextInt(players.size())));
     		}
-    		else if (!foundPrevious){
+    		else if (!foundPrevious && this.ticksExisted > 100){
     			for (int i = 0; i < 20; i ++){
         			for (int j = 0; j < 5; j ++){
         				Vec3d location = pastPositions.get(i).add((new Vec3d(rand.nextFloat()-0.5,rand.nextFloat()-0.5,rand.nextFloat()-0.5)).scale(3.0f));
@@ -238,10 +238,11 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
 	    		getDataManager().set(hasGuards, false);
 	    		getDataManager().setDirty(hasGuards);
 	    		if (!getEntityWorld().isRemote){
-	    			for (int i = 0; i < 3; i ++){
+	    			for (int i = 0; i < 2; i ++){
 	    				EntityGreaterSprite sprite = new EntityGreaterSprite(getEntityWorld());
-	    				sprite.setPosition(posX, posY, posZ);
+	    				sprite.setPosition(posX+5.0f*(random.nextFloat()-0.5f), posY+5.0f*(random.nextFloat()-0.5f), posZ+5.0f*(random.nextFloat()-0.5f));
 	    				sprite.setHostile();
+	    				sprite.setHealth(sprite.getMaxHealth()/2.0f);
 	    				sprite.setAttackTarget(getAttackTarget());
 	    				sprite.onInitialSpawn(getEntityWorld().getDifficultyForLocation(getPosition()), (IEntityLivingData)null);
 	                    getEntityWorld().spawnEntityInWorld(sprite);
@@ -250,47 +251,46 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
 	    	}
 	    }
 	    if (getHealth() < getMaxHealth()*0.65f){
-		    if (ticksExisted % 400 == 0 && !getDataManager().get(pacified) && getDataManager().get(projectiles) == 0){
+		    if (ticksExisted % 300 == 0 && !getDataManager().get(pacified) && getDataManager().get(projectiles) == 0){
 		    	getDataManager().set(projectiles, 6);
 		    	getDataManager().setDirty(projectiles);
 		    }
-		    if (getDataManager().get(projectiles) > 0 && !getDataManager().get(pacified)){
-		    	for (int i = 0; i < getDataManager().get(projectiles); i ++){
-					Vec3d location = pastPositions.get(1).add((new Vec3d(rand.nextFloat()-0.5,rand.nextFloat()-0.5,rand.nextFloat()-0.5)).scale(3.0f));
-					Roots.proxy.spawnParticleMagicSmallSparkleFX(getEntityWorld(), location.xCoord, location.yCoord+1.35f, location.zCoord, 0, 0, 0, 107, 255, 28);
-					location = pastPositions.get(1).add((new Vec3d(rand.nextFloat()-0.5,rand.nextFloat()-0.5,rand.nextFloat()-0.5)).scale(1.5f));
-					Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), location.xCoord, location.yCoord+1.35f, location.zCoord, 0, 0, 0, 107, 255, 28);
-		    	}
-		    	if (ticksExisted % 60 == 0 && random.nextBoolean() && !getEntityWorld().isRemote){
-		    		getDataManager().set(projectiles,getDataManager().get(projectiles)-1);
-		    		getDataManager().setDirty(projectiles);
-		    		EntitySpriteProjectile proj = new EntitySpriteProjectile(getEntityWorld());
-	    			proj.setPosition(pastPositions.get(1).xCoord, pastPositions.get(1).yCoord, pastPositions.get(1).zCoord);
-	    			proj.onInitialSpawn(getEntityWorld().getDifficultyForLocation(getPosition()), null);
-	    			proj.initSpecial(getAttackTarget(), 6.0f);
-	    			getEntityWorld().spawnEntityInWorld(proj);
-	    			getEntityWorld().playSound(posX, posY, posZ, new SoundEvent(new ResourceLocation("roots:staffCast")), SoundCategory.HOSTILE, 0.95f+random.nextFloat()*0.1f, 0.7f+random.nextFloat()*0.1f, false);
-					for (int i = 0; i < 40; i ++){
-						Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX, posY+height/2.0f, posZ, Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), 107, 255, 28);
-					}
+		    if (getDataManager().get(projectiles) > 0 && !getDataManager().get(pacified) && getAttackTarget() != null){
+		    	float distanceToTarget = (float)Math.sqrt(Math.pow(posX-getAttackTarget().posX, 2)+Math.pow(posZ-getAttackTarget().posZ, 2));
+		    	if (distanceToTarget > 10){
+			    	for (int i = 0; i < getDataManager().get(projectiles); i ++){
+						Vec3d location = pastPositions.get(1).add((new Vec3d(rand.nextFloat()-0.5,rand.nextFloat()-0.5,rand.nextFloat()-0.5)).scale(3.0f));
+						Roots.proxy.spawnParticleMagicSmallSparkleFX(getEntityWorld(), location.xCoord, location.yCoord+1.35f, location.zCoord, 0, 0, 0, 107, 255, 28);
+						location = pastPositions.get(1).add((new Vec3d(rand.nextFloat()-0.5,rand.nextFloat()-0.5,rand.nextFloat()-0.5)).scale(1.5f));
+						Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), location.xCoord, location.yCoord+1.35f, location.zCoord, 0, 0, 0, 107, 255, 28);
+			    	}
+			    	if (ticksExisted % 30 == 0 && random.nextBoolean() && !getEntityWorld().isRemote){
+			    		getDataManager().set(projectiles,getDataManager().get(projectiles)-1);
+			    		getDataManager().setDirty(projectiles);
+			    		EntitySpriteProjectile proj = new EntitySpriteProjectile(getEntityWorld());
+		    			proj.setPosition(pastPositions.get(1).xCoord, pastPositions.get(1).yCoord, pastPositions.get(1).zCoord);
+		    			proj.onInitialSpawn(getEntityWorld().getDifficultyForLocation(getPosition()), null);
+		    			proj.initSpecial(getAttackTarget(), 4.0f);
+		    			getEntityWorld().spawnEntityInWorld(proj);
+		    			getEntityWorld().playSound(posX, posY, posZ, new SoundEvent(new ResourceLocation("roots:staffCast")), SoundCategory.HOSTILE, 0.95f+random.nextFloat()*0.1f, 0.7f+random.nextFloat()*0.1f, false);
+						for (int i = 0; i < 40; i ++){
+							Roots.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX, posY+height/2.0f, posZ, Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), Math.pow(1.15f*(random.nextFloat()-0.5f),3.0), 107, 255, 28);
+						}
+			    	}
 		    	}
 		    }
 	    }
 	    if (getAttackTarget() != null){
 	    	float distanceToTarget = (float)Math.sqrt(Math.pow(posX-getAttackTarget().posX, 2)+Math.pow(posZ-getAttackTarget().posZ, 2));
-	    	if (distanceToTarget < 10 && getDataManager().get(tracking)){
-	    		getDataManager().set(tracking, false);
-	    		getDataManager().setDirty(tracking);
-	    	}
-	    	if (distanceToTarget > 25 && !getDataManager().get(tracking)){
+	    	if (distanceToTarget > 30 && !getDataManager().get(tracking)){
 	    		getDataManager().set(tracking, true);
 	    		getDataManager().setDirty(tracking);
 	    	}
 	    	if (!getDataManager().get(pacified)){
-	    		velocityScale = 1.0f+(25.0f-distanceToTarget)/20.0f;
+	    		velocityScale = 1.0f+Math.max(-0.875f, (25.0f-distanceToTarget)/20.0f);
 	    	}
 	    	else {
-	    		velocityScale = (Math.max(0, 20.0f-(float)getDataManager().get(pacifiedTimer)))/20.0f;
+	    		velocityScale = (Math.max(0, 20.0f-Math.min(20.0f,200.0f-(float)getDataManager().get(fadeTimer))))/200.0f;
 	    	}
 	    }
 	    if (getAttackTarget() != null && getDataManager().get(tracking) && !this.getEntityWorld().isRemote){
@@ -299,7 +299,7 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
 			this.getDataManager().setDirty(targetDirectionX);
 		 	this.getDataManager().setDirty(targetDirectionY);
 	    }
-	    if (getAttackTarget() == null && this.ticksExisted % 50 == 0 && !this.getEntityWorld().isRemote){
+	    if (getAttackTarget() == null && this.ticksExisted % 25 == 0 && !this.getEntityWorld().isRemote){
 			this.getDataManager().set(targetDirectionX, (float)Math.toRadians(random.nextFloat()*360.0f));
 			this.getDataManager().set(targetDirectionY, (float)Math.toRadians(random.nextFloat()*180.0f-90.0f));
 		 	this.getDataManager().setDirty(targetDirectionX);
@@ -308,12 +308,16 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
 	    if (getAttackTarget() != null && getDataManager().get(pacified) && !this.getEntityWorld().isRemote){
 	    	
 	    }
-    	if (this.ticksExisted % 20 == 0){
+	    int interval = 25;
+	    if (this.ticksExisted % 200 >= 180){
+	    	interval = 5;
+	    }
+	    if (this.ticksExisted % interval == 0 || this.ticksExisted < 3){
     		prevMoveVec = moveVec;
-    		moveVec = Util.lookVector(this.getDataManager().get(targetDirectionX),this.getDataManager().get(targetDirectionY)).scale(0.25f*velocityScale);
+    		moveVec = Util.lookVector(this.getDataManager().get(targetDirectionX),this.getDataManager().get(targetDirectionY)).scale(0.45f*velocityScale);
     	}
     	
-    	float motionInterp = ((float)(this.ticksExisted%20))/20.0f;
+    	float motionInterp = ((float)(this.ticksExisted%interval))/interval;
     	
 		this.motionX = (1.0f-motionInterp)*prevMoveVec.xCoord+(motionInterp)*moveVec.xCoord;
 		this.motionY = (1.0f-motionInterp)*prevMoveVec.yCoord+(motionInterp)*moveVec.yCoord;
@@ -322,7 +326,7 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
 		this.rotationYaw = (float)Math.toRadians(Util.yawDegreesBetweenPointsSafe(0, 0, 0, motionX, motionY, motionZ, rotationYaw));
 		this.rotationPitch = (float)Math.toRadians(Util.pitchDegreesBetweenPoints(0, 0, 0, motionX, motionY, motionZ));
 		
-		if (getDataManager().get(pacifiedTimer) < 20){
+		if (getDataManager().get(fadeTimer) > 180 || getDataManager().get(fadeTimer) == 0){
 			for (int i = 1; i < pastPositions.size(); i ++){
 				if (pastPositions.get(i).xCoord == 0 && pastPositions.get(i).yCoord == 0 && pastPositions.get(i).zCoord == 0){
 					pastPositions.set(i, pastPositions.get(i-1));
@@ -332,30 +336,6 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
 				pastPositions.set(i, pastPositions.get(i).scale(0.5).add(pastPositions.get(i-1).scale(0.5)));
 			}
 	    	pastPositions.set(0, new Vec3d(posX,posY,posZ));
-		}
-		
-		if (getDataManager().get(pacifiedTimer) == 200 && getEntityWorld().isRemote){
-			if (getAttackTarget() instanceof EntityPlayer){
-				((EntityPlayer)getAttackTarget()).addChatMessage(new TextComponentString(TextFormatting.ITALIC+I18n.format("roots.dialogue.guardian1")));
-			}
-		}
-		
-		if (getDataManager().get(pacifiedTimer) == 400 && getEntityWorld().isRemote){
-			if (getAttackTarget() instanceof EntityPlayer){
-				((EntityPlayer)getAttackTarget()).addChatMessage(new TextComponentString(TextFormatting.ITALIC+I18n.format("roots.dialogue.guardian2")));
-			}
-		}
-		
-		if (getDataManager().get(pacifiedTimer) == 600 && getEntityWorld().isRemote){
-			if (getAttackTarget() instanceof EntityPlayer){
-				((EntityPlayer)getAttackTarget()).addChatMessage(new TextComponentString(TextFormatting.ITALIC+I18n.format("roots.dialogue.guardian3")));
-			}
-		}
-		
-		if (getDataManager().get(pacifiedTimer) == 800 && getEntityWorld().isRemote){
-			if (getAttackTarget() instanceof EntityPlayer){
-				((EntityPlayer)getAttackTarget()).addChatMessage(new TextComponentString(TextFormatting.ITALIC+I18n.format("roots.dialogue.guardian4")));
-			}
 		}
     }
     
@@ -377,6 +357,8 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
     	getEntityWorld().playSound(posX, posY, posZ, hurtSound, SoundCategory.NEUTRAL, random.nextFloat()*0.1f+0.95f, random.nextFloat()*0.1f+0.95f, false);
     	if (source.getEntity() instanceof EntityLivingBase){
     		this.setAttackTarget((EntityLivingBase)source.getEntity());
+    		EntityLivingBase entity = ((EntityLivingBase)source.getEntity());
+    		this.moveVec.addVector(entity.getLookVec().xCoord,entity.getLookVec().yCoord,entity.getLookVec().zCoord);
     	}
     	return super.attackEntityFrom(source, amount);
     }
@@ -388,6 +370,7 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
     		this.bossInfo.setPercent(0);
     		getDataManager().set(pacified, true);
     		getDataManager().setDirty(pacified);
+    		getDataManager().set(fadeTimer, 200);
     		if (source.getEntity() instanceof EntityPlayer){
     			EntityPlayer player = (EntityPlayer)source.getEntity();
     			if (!player.hasAchievement(RegistryManager.achieveGuardianBoss)){
@@ -431,7 +414,6 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(320.0);
-        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2.0D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0);
@@ -482,7 +464,7 @@ public class EntitySpriteGuardian  extends EntityFlying {// implements IRangedAt
 			return 1.0f;
 		}
 		else {
-			return Math.max(0, (20.0f-((float)getDataManager().get(fadeTimer)+partialTicks))/20.0f);
+			return Math.max(0, (((float)getDataManager().get(fadeTimer)-partialTicks))/200.0f);
 		}
 	}
 	

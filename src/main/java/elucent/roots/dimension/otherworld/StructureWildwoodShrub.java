@@ -4,6 +4,7 @@ import java.util.Random;
 
 import elucent.roots.RegistryManager;
 import elucent.roots.block.BlockLogBase;
+import elucent.roots.dimension.RootsBiome;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -11,10 +12,9 @@ import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-public class StructureWildwoodShrub implements IWorldGenerator {
+public class StructureWildwoodShrub extends RootsStructure {
 	static Random random = new Random();
 	public static void generateShrub(World world, int x, int y, int z){
-<<<<<<< HEAD
 		int height = random.nextInt(2)+1;
 		boolean canSpawn = world.getBlockState(new BlockPos(x,y-1,z)).getBlock() == RegistryManager.otherworldGrass;
 		for (int i = 0; i < height; i ++){
@@ -28,19 +28,23 @@ public class StructureWildwoodShrub implements IWorldGenerator {
 			GenerationUtil.fillBox(world, x-1, y+height+1, z, x+2, y+height+2, z+1, RegistryManager.leavesWildwood.getDefaultState());
 			GenerationUtil.fillBox(world, x, y, z, x+1, y+height+1, z+1, RegistryManager.logWildwood.getDefaultState().withProperty(BlockLogBase.AXIS, EnumFacing.Axis.Y));
 		}
-=======
-		int height = random.nextInt(1)+1;
-		GenerationUtil.fillBox(world, x-1, y+height, z-1, x+2, y+height+1, z+2, RegistryManager.leavesWildwood.getDefaultState());
-		GenerationUtil.fillBox(world, x, y+height+1, z-1, x+1, y+height+2, z+2, RegistryManager.leavesWildwood.getDefaultState());
-		GenerationUtil.fillBox(world, x-1, y+height+1, z, x+2, y+height+2, z+1, RegistryManager.leavesWildwood.getDefaultState());
-		GenerationUtil.fillBox(world, x, y, z, x+1, y+height+1, z+1, RegistryManager.logWildwood.getDefaultState().withProperty(BlockLogBase.AXIS, EnumFacing.Axis.Y));
->>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
+	}
+	
+	public StructureWildwoodShrub(float chance, int count){
+		super(chance, count);
 	}
 
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
-			IChunkProvider chunkProvider) {
-		
+	public void generate(World world, int x, int z, int[][] heights, int[][] bottoms, RootsBiome[][] biomes, float[][] coeffs) {
+		if (random.nextFloat() < this.chancePerChunk){
+			for (int i = 0; i < this.numPerChunk; i ++){
+				int xx = random.nextInt(16);
+				int zz = random.nextInt(16);
+				if (biomes[0][0].equals(biomes[xx][zz])){
+					generateShrub(world, x*16+xx, heights[xx][zz], z*16+zz);
+				}
+			}
+		}
 	}
 
 }

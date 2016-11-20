@@ -143,6 +143,21 @@ public class Util {
 		return new BlockPos(x,y,z);
 	}
 	
+	public static BlockPos getRayTraceNonFull(World world, EntityPlayer player, int reachDistance){
+		double x = player.posX;
+		double y = player.posY + player.getEyeHeight();
+		double z = player.posZ;
+		for (int i = 0; i < reachDistance*4.0; i ++){
+			x += player.getLookVec().xCoord*0.25;
+			y += player.getLookVec().yCoord*0.25;
+			z += player.getLookVec().zCoord*0.25;
+			if (!world.isAirBlock(new BlockPos(x,y,z))){
+				return new BlockPos(x,y,z);
+			}
+		}
+		return new BlockPos(x,y,z);
+	}
+	
 	public static void addTickTracking(Entity entity){
 		if (entity.getEntityData().hasKey(RootsNames.TAG_TRACK_TICKS)){
 			entity.getEntityData().setInteger(RootsNames.TAG_TRACK_TICKS, entity.getEntityData().getInteger(RootsNames.TAG_TRACK_TICKS)+1);

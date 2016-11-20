@@ -27,8 +27,8 @@ public class ComponentPinkTulip extends ComponentBase {
 			ArrayList<EntityLivingBase> targets = (ArrayList<EntityLivingBase>) world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-(2.0+size),y-(2.0+size),z-(2.0+size),x+(2.0+size),y+(2.0+size),z+(2.0+size)));
 			for (int i = 0; i < targets.size(); i ++){
 				if (targets.get(i).getUniqueID() != caster.getUniqueID()){
-					targets.get(i).attackEntityFrom(DamageSource.wither, (int)(3+2*potency));
-					((EntityLivingBase)caster).heal(targets.size()*(float)(2.0+1.0*potency));
+					targets.get(i).attackEntityFrom(DamageSource.wither, (int)(5+3*potency));
+					((EntityLivingBase)caster).heal(targets.size()*(float)(4.0+2.0*potency));
 					targets.get(i).setLastAttacker(caster);
 					targets.get(i).setRevengeTarget((EntityLivingBase)caster);
 				}

@@ -49,7 +49,7 @@ public class ComponentWhiteTulip extends ComponentBase{
 			for (int i = 0; i < 6; i ++){
 				if (!world.isRemote){
 					EntityFrostShard shard = new EntityFrostShard(world);
-					shard.initSpecial(3.0f+2.0f*(float)potency);
+					shard.initSpecial(5.0f+3.0f*(float)potency);
 					shard.setPosition(caster.posX, caster.posY+caster.getEyeHeight(), caster.posZ);
 					shard.motionX = 0.75*(caster.getLookVec().xCoord+0.25*size*(random.nextFloat()-0.5));
 					shard.motionY = 0.75*(caster.getLookVec().yCoord+0.125*size*(random.nextFloat()-0.5));

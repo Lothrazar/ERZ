@@ -65,9 +65,9 @@ public class ParticleMagicSparkleScalable extends Particle {
 	@Override
 	public void onUpdate(){
 		super.onUpdate();
-		this.motionX *= 0.9;
-		this.motionY += 0.003;
-		this.motionZ *= 0.9;
+		/*this.motionX *= 0.9;
+		this.motionY *= 0.9;
+		this.motionZ *= 0.9;*/
 		if (random.nextInt(3) == 0 && this.particleAge < this.particleMaxAge){
 			this.particleAge ++;
 		}

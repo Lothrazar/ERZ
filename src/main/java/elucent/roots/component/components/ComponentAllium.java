@@ -60,11 +60,11 @@ public class ComponentAllium extends ComponentBase{
 						
 					}
 					else {
-						damageDealt += (int)(3+2*potency);
-						targets.get(i).attackEntityFrom(DamageSource.generic, (int)(3+2*potency));
+						damageDealt += (int)(5+3*potency);
+						targets.get(i).attackEntityFrom(DamageSource.generic, (int)(5+3*potency));
 						targets.get(i).setLastAttacker(caster);
 						targets.get(i).setRevengeTarget((EntityLivingBase)caster);
-						targets.get(i).getEntityData().setDouble(RootsNames.TAG_SPELL_VULNERABILITY, 1.0+0.5*potency);
+						targets.get(i).getEntityData().setDouble(RootsNames.TAG_SPELL_VULNERABILITY, 2.0+1.0*potency);
 					}
 				}
 			}

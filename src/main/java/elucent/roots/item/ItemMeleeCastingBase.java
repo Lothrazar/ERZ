@@ -13,11 +13,8 @@ import elucent.roots.component.ComponentBase;
 import elucent.roots.component.ComponentManager;
 import elucent.roots.component.EnumCastType;
 import elucent.roots.event.SpellCastEvent;
-<<<<<<< HEAD
 import elucent.roots.network.MessageSpellCastFX;
 import elucent.roots.network.PacketHandler;
-=======
->>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -147,25 +144,8 @@ public class ItemMeleeCastingBase extends ItemTool {
 						ManaProvider.get((EntityPlayer)player).setMana((EntityPlayer)player, ManaProvider.get((EntityPlayer)player).getMana()-(((float)cost)));
 						this.doEffect(world,(EntityPlayer)player,comp,this.getPotency(stack),this.getEfficiency(stack),this.getSize(stack));
 						decrementUses(stack, stack.getTagCompound().getInteger("spellSlots"), player, hand);
-<<<<<<< HEAD
 						if (!world.isRemote){
 							PacketHandler.INSTANCE.sendToAll(new MessageSpellCastFX(comp.getName(),(float)player.posX,(float)player.posY,(float)player.posZ,player.getLookVec()));
-=======
-						for (int i = 0 ; i < 90; i ++){
-							double offX = random.nextFloat()*0.5-0.25;
-							double offY = random.nextFloat()*0.5-0.25;
-							double offZ = random.nextFloat()*0.5-0.25;
-							double coeff = (offX+offY+offZ)/1.5+0.5;
-							double dx = (player.getLookVec().xCoord+offX)*coeff;
-							double dy = (player.getLookVec().yCoord+offY)*coeff;
-							double dz = (player.getLookVec().zCoord+offZ)*coeff;
-							if (random.nextBoolean()){
-								Roots.proxy.spawnParticleMagicFX(world, player.posX+dx, player.posY+1.5+dy, player.posZ+dz, dx, dy, dz, comp.primaryColor.xCoord, comp.primaryColor.yCoord, comp.primaryColor.zCoord);
-							}
-							else {
-								Roots.proxy.spawnParticleMagicFX(world, player.posX+dx, player.posY+1.5+dy, player.posZ+dz, dx, dy, dz, comp.secondaryColor.xCoord, comp.secondaryColor.yCoord, comp.secondaryColor.zCoord);
-							}
->>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 						}
 					}
 				}

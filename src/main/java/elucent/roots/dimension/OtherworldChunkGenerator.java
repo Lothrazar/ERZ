@@ -7,14 +7,14 @@ import java.util.Random;
 import elucent.roots.RegistryManager;
 import elucent.roots.Util;
 import elucent.roots.dimension.otherworld.StructureFallenLog;
-import elucent.roots.dimension.otherworld.StructureMossyBoulder;
+import elucent.roots.dimension.otherworld.StructureMossyBoulderSmall;
 import elucent.roots.dimension.otherworld.StructureStump;
 import elucent.roots.dimension.otherworld.StructureTowerHelper;
 import elucent.roots.dimension.otherworld.StructureWildwoodShrub;
 import elucent.roots.dimension.otherworld.StructureWildwoodTree;
 import elucent.roots.dimension.otherworld.StructureAzurePineTree;
 import elucent.roots.dimension.otherworld.StructureAzureShrub;
-import elucent.roots.dimension.otherworld.StructureBoulder;
+import elucent.roots.dimension.otherworld.StructureBoulderSmall;
 import elucent.roots.dimension.otherworld.StructureElderPineTree;
 import elucent.roots.entity.EntitySpriteling;
 import elucent.roots.entity.EntitySprite;
@@ -155,7 +155,24 @@ public class OtherworldChunkGenerator implements IChunkGenerator {
 
 	@Override
 	public void populate(int x, int z) {
-		int xx = random.nextInt(16);
+		int[][] heights = new int[16][16];
+		int[][] bottoms = new int[16][16];
+		float[][] coeffs = new float[16][16];
+		RootsBiome[][] biomes = new RootsBiome[16][16];
+		float[][] biomeCoeffs = new float[16][16];
+		for (int i = 0; i < 16; i ++){
+			for (int j = 0; j < 16; j ++){
+				biomes[i][j] = getBiome(x*16+i,z*16+j);
+				coeffs[i][j] = getIslandCoefficient(x*16+i,z*16+j);
+				biomeCoeffs[i][j] = getBiomeCoeff(x*16+i,z*16+j);
+				heights[i][j] = getHeight(biomeCoeffs[i][j],coeffs[i][j],x*16+i,z*16+j);
+				bottoms[i][j] = getBottom(biomeCoeffs[i][j],coeffs[i][j],x*16+i,z*16+j);
+			}
+		}
+		for (int i = 0; i < biomes[0][0].structures.size(); i ++){
+			biomes[0][0].structures.get(i).generate(world,x,z,heights,bottoms,biomes,coeffs);
+		}
+		/*int xx = random.nextInt(16);
 		int zz = random.nextInt(16);
 		RootsBiome b = getBiome(x*16+xx,z*16+zz);
 		if (b.equals(OtherworldBiomes.biomeGlowingSands)){
@@ -387,7 +404,7 @@ public class OtherworldChunkGenerator implements IChunkGenerator {
 					StructureFallenLog.generatelog(world, x*16+xx, getHeight(getBiomeCoeff(x*16+xx,z*16+zz),getIslandCoefficient(x*16+xx,z*16+zz),x*16+xx,z*16+zz), z*16+zz);
 				}
 			}
-		}
+		}*/
 	}
 
 	@Override

@@ -85,17 +85,10 @@ public class RitualSpiritSummoning extends RitualSummoning {
 				}
 			}
 		}
-		List<EntitySpriteling> spritelings = world.getEntitiesWithinAABB(EntitySpriteling.class, new AxisAlignedBB(pos.getX()-14.5,pos.getY()-14.5,pos.getZ()-14.5,pos.getX()+15.5,pos.getY()+22.5,pos.getZ()+15.5));
-		List<EntitySprite> sprites = world.getEntitiesWithinAABB(EntitySprite.class, new AxisAlignedBB(pos.getX()-14.5,pos.getY()-14.5,pos.getZ()-14.5,pos.getX()+15.5,pos.getY()+22.5,pos.getZ()+15.5));
-		List<EntityGreaterSprite> greaterSprites = world.getEntitiesWithinAABB(EntityGreaterSprite.class, new AxisAlignedBB(pos.getX()-14.5,pos.getY()-14.5,pos.getZ()-14.5,pos.getX()+15.5,pos.getY()+22.5,pos.getZ()+15.5));
-		if (spritelings.size() < numSpritelings){
-			return false;
-		}
-		if (sprites.size() < numSprites){
-			return false;
-		}
-		if (greaterSprites.size() < numGreaterSprites){
-			return false;
+		for (int i = 0; i < this.extraCosts.size(); i ++){
+			if (!this.extraCosts.get(i).isValid(world, pos)){
+				return false;
+			}
 		}
 		return uniqueFlowers.size() == numFlowers && Util.itemListsMatchWithSize(ingredients,((TileEntityAltar)world.getTileEntity(pos)).inventory);
 	}

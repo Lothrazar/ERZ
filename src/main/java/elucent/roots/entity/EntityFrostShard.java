@@ -35,6 +35,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -42,6 +44,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.GuiScreenEvent.PotionShiftEvent;
 
 public class EntityFrostShard  extends EntityFlying {// implements IRangedAttackMob {
     public float range = 64;
@@ -66,8 +69,9 @@ public class EntityFrostShard  extends EntityFlying {// implements IRangedAttack
     
     @Override
     public void collideWithEntity(Entity entity){
-    	if (!(entity instanceof EntityFrostShard)){
+    	if ((entity instanceof EntityLivingBase)){
 			entity.attackEntityFrom(DamageSource.generic, damage);
+			((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:slowness"),40,5));
 			this.getEntityWorld().removeEntity(this);
 			for (int i = 0; i < 80; i ++){
 				if (random.nextInt(3) == 0){

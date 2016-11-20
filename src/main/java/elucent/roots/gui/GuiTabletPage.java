@@ -88,12 +88,12 @@ public class GuiTabletPage extends GuiScreen {
 		float basePosX = ((float)width/2.0f)-96;
 		float basePosY = ((float)height/2.0f)-128;
 		if (showLeftArrow){
-			if (mouseX >= basePosX+16 && mouseX < basePosX+48 && mouseY >= basePosY+224 && mouseY < basePosY+240){
+			if (mouseX >= basePosX-16 && mouseX < basePosX+16 && mouseY >= basePosY+224 && mouseY < basePosY+240){
 				this.currentPage --;
 			}
 		}
 		if (showRightArrow){
-			if (mouseX >= basePosX+144 && mouseX < basePosX+176 && mouseY >= basePosY+224 && mouseY < basePosY+240){
+			if (mouseX >= basePosX+176 && mouseX < basePosX+208 && mouseY >= basePosY+224 && mouseY < basePosY+240){
 				this.currentPage ++;
 			}
 		}
@@ -112,8 +112,10 @@ public class GuiTabletPage extends GuiScreen {
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks){
 		GlStateManager.color(1, 1, 1, 1);
+		GlStateManager.disableLighting();
 		RenderHelper.disableStandardItemLighting();
 		RenderHelper.enableGUIStandardItemLighting();
+		GlStateManager.enableAlpha();
 		if (this.currentPage == 0){
 			this.showLeftArrow = false;
 		}
@@ -255,6 +257,10 @@ public class GuiTabletPage extends GuiScreen {
 					this.renderItemStackAt(research.info.get(currentPage).altarRecipe.incenses.get(i), (int)basePosX+76+16*i, (int)basePosY+88, mouseX, mouseY);
 				}
 			}
+			
+			for (int i = 0; i < research.info.get(currentPage).altarRecipe.extraCosts.size(); i ++){
+				research.info.get(currentPage).altarRecipe.extraCosts.get(i).renderInGUI(this, basePosX, basePosY);
+			}
 			String title = I18n.format("roots.research."+group.name+"."+research.name+".page"+(this.currentPage+1)+"title.name");
 			fontRendererObj.drawStringWithShadow(title, basePosX+96-(this.fontRendererObj.getStringWidth(title)/2.0f), basePosY+12, Util.intColor(255, 255, 255));
 		}
@@ -280,19 +286,19 @@ public class GuiTabletPage extends GuiScreen {
 		}
 		Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("roots:textures/gui/tabletGui.png"));
 		if (showLeftArrow){
-			if (mouseX >= basePosX+16 && mouseX < basePosX+48 && mouseY >= basePosY+224 && mouseY < basePosY+240){
-				this.drawTexturedModalRect(basePosX+16, basePosY+224, 32, 80, 32, 16);
+			if (mouseX >= basePosX-16 && mouseX < basePosX+16 && mouseY >= basePosY+224 && mouseY < basePosY+240){
+				this.drawTexturedModalRect(basePosX-16, basePosY+224, 32, 80, 32, 16);
 			}
 			else {
-				this.drawTexturedModalRect(basePosX+16, basePosY+224, 32, 64, 32, 16);
+				this.drawTexturedModalRect(basePosX-16, basePosY+224, 32, 64, 32, 16);
 			}
 		}
 		if (showRightArrow){
-			if (mouseX >= basePosX+144 && mouseX < basePosX+176 && mouseY >= basePosY+224 && mouseY < basePosY+240){
-				this.drawTexturedModalRect(basePosX+144, basePosY+224, 0, 80, 32, 16);
+			if (mouseX >= basePosX+176 && mouseX < basePosX+208 && mouseY >= basePosY+224 && mouseY < basePosY+240){
+				this.drawTexturedModalRect(basePosX+176, basePosY+224, 0, 80, 32, 16);
 			}
 			else {
-				this.drawTexturedModalRect(basePosX+144, basePosY+224, 0, 64, 32, 16);
+				this.drawTexturedModalRect(basePosX+176, basePosY+224, 0, 64, 32, 16);
 			}
 		}
 		
@@ -306,5 +312,7 @@ public class GuiTabletPage extends GuiScreen {
 	    tessellator.draw();
 	    GlStateManager.disableBlend();
 		RenderHelper.enableStandardItemLighting();
+		GlStateManager.enableLighting();
+		GlStateManager.disableAlpha();
 	}
 }

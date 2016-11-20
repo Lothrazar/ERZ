@@ -10,6 +10,7 @@ import elucent.roots.model.entity.ModelSpriteling;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -42,8 +43,8 @@ public class RenderSpriteGuardian extends RenderLiving<EntitySpriteGuardian> {
             }
 
             this.mainModel.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
-            for (int i = 1; i < 10; i ++){
-            	if (i == 9){
+            for (int i = 1; i < 15; i ++){
+            	if (i == 14){
             		((ModelSpriteGuardianTail)ModelHolder.entityModels.get("spriteguardiantail")).render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor,i);
                 }
             	else if (i ==1){
@@ -62,6 +63,11 @@ public class RenderSpriteGuardian extends RenderLiving<EntitySpriteGuardian> {
             }
         }
     }
+	
+	@Override
+	public boolean shouldRender(EntitySpriteGuardian entity, ICamera camera, double camX, double camY, double camZ){
+		return true;
+	}
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntitySpriteGuardian entity) {

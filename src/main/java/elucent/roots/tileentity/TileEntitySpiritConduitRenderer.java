@@ -24,32 +24,30 @@ public class TileEntitySpiritConduitRenderer extends TileEntitySpecialRenderer {
 			float partialTicks, int destroyStage) {
 		if (te instanceof TileEntitySpiritConduit){
 			TileEntitySpiritConduit tef = (TileEntitySpiritConduit)te;
-			if (tef.powered){
-				float angle = tef.angle + 24.0f*partialTicks;
-				this.bindTexture(texture);
-				GlStateManager.disableLighting();
-				GlStateManager.enableBlend();
-				GlStateManager.enableAlpha();
-				GlStateManager.pushMatrix();
-				GlStateManager.translate(x+0.5, y+1.0, z+0.5);
-				GlStateManager.rotate(angle, 0, 1, 0);
-				GlStateManager.translate(-(x+0.5), -(y+1.0), -(z+0.5));
-				GlStateManager.disableCull();
-				
-				Tessellator tess = Tessellator.getInstance();
-				VertexBuffer buffer = tess.getBuffer();
-				buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_LMAP_COLOR);
-				buffer.pos((x+0.5)-0.1875, (y+1.0)+0.1875, z+0.5).tex(0.5, 0.0).lightmap(255, 255).color(255, 255, 255, 255).endVertex();
-				buffer.pos((x+0.5)+0.1875, (y+1.0)+0.1875, z+0.5).tex(0.875, 0.0).lightmap(255, 255).color(255, 255, 255, 255).endVertex();
-				buffer.pos((x+0.5)+0.1875, (y+1.0)-0.1875, z+0.5).tex(0.875, 0.375).lightmap(255, 255).color(255, 255, 255, 255).endVertex();
-				buffer.pos((x+0.5)-0.1875, (y+1.0)-0.1875, z+0.5).tex(0.5, 0.375).lightmap(255, 255).color(255, 255, 255, 255).endVertex();
-				tess.draw();
-				GlStateManager.popMatrix();
-				GlStateManager.enableCull();
-				GlStateManager.enableLighting();
-				GlStateManager.disableBlend();
-				GlStateManager.disableAlpha();
-			}
+			float angle = tef.angle + 24.0f*partialTicks;
+			this.bindTexture(texture);
+			GlStateManager.disableLighting();
+			GlStateManager.enableBlend();
+			GlStateManager.enableAlpha();
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(x+0.5, y+1.0, z+0.5);
+			GlStateManager.rotate(angle, 0, 1, 0);
+			GlStateManager.translate(-(x+0.5), -(y+1.0), -(z+0.5));
+			GlStateManager.disableCull();
+			
+			Tessellator tess = Tessellator.getInstance();
+			VertexBuffer buffer = tess.getBuffer();
+			buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_LMAP_COLOR);
+			buffer.pos((x+0.5)-0.1875, (y+1.0)+0.1875, z+0.5).tex(0.5, 0.0).lightmap(255, 255).color(255, 255, 255, 255).endVertex();
+			buffer.pos((x+0.5)+0.1875, (y+1.0)+0.1875, z+0.5).tex(0.875, 0.0).lightmap(255, 255).color(255, 255, 255, 255).endVertex();
+			buffer.pos((x+0.5)+0.1875, (y+1.0)-0.1875, z+0.5).tex(0.875, 0.375).lightmap(255, 255).color(255, 255, 255, 255).endVertex();
+			buffer.pos((x+0.5)-0.1875, (y+1.0)-0.1875, z+0.5).tex(0.5, 0.375).lightmap(255, 255).color(255, 255, 255, 255).endVertex();
+			tess.draw();
+			GlStateManager.popMatrix();
+			GlStateManager.enableCull();
+			GlStateManager.enableLighting();
+			GlStateManager.disableBlend();
+			GlStateManager.disableAlpha();
 		}
 	}
 	

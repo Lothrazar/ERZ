@@ -48,10 +48,10 @@ public class ComponentSunflower extends ComponentBase{
 						targets.get(i).attackEntityFrom(DamageSource.inFire, (int)(5+2*potency));
 						targets.get(i).setLastAttacker(caster);
 						targets.get(i).setRevengeTarget((EntityLivingBase)caster);
-						damageDealt += (int)(5+2*potency);
+						damageDealt += (int)(7+3*potency);
 						if (targets.get(i).isEntityUndead()){
 							targets.get(i).attackEntityFrom(DamageSource.inFire, (int)(6));
-							damageDealt += (int)(5+2*potency);
+							damageDealt += (int)(7+3*potency);
 							targets.get(i).setFire((int) (3+2*potency));
 							targets.get(i).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:weakness"), 15, 2+(int)potency));
 							targets.get(i).addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("minecraft:slowness"), 15, 2+(int)potency));

@@ -54,7 +54,7 @@ public class ComponentAzureBluet extends ComponentBase{
 				BlockPos pos = Util.getRayTrace(world,(EntityPlayer)caster,6+2*(int)size);
 				ArrayList<BlockPos> positions = new ArrayList<BlockPos>();
 				positions.add(pos);
-				int maxPositions = 3+((int)size)*3;
+				int maxPositions = 6+((int)size)*4;
 				while (positions.size() < maxPositions){
 					int s = positions.size();
 					for (int j = 0; j < s; j ++){
@@ -95,7 +95,7 @@ public class ComponentAzureBluet extends ComponentBase{
 				BlockPos pos =new BlockPos(x,y,z);
 				ArrayList<BlockPos> positions = new ArrayList<BlockPos>();
 				positions.add(pos);
-				int maxPositions = 3+((int)size)*3;
+				int maxPositions = 6+((int)size)*4;
 				while (positions.size() < maxPositions){
 					int s = positions.size();
 					for (int j = 0; j < s; j ++){

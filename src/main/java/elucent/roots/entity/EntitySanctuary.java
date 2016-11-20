@@ -25,6 +25,10 @@ public class EntitySanctuary extends Entity {
 	int lifetime = 100;
 	float radius = 2.0f;
 	
+	public EntitySanctuary(World world){
+		super(world);
+	}
+	
 	public EntitySanctuary(World world, double x, double y, double z, int potency, int size){
 		super(world);
 		this.setPosition(x, y, z);
@@ -62,13 +66,10 @@ public class EntitySanctuary extends Entity {
 				}
 			}
 		}
-<<<<<<< HEAD
 		lifetime --;
 		if (lifetime <= 0){
 			setDead();
 		}
-=======
->>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 	}
 
 	@Override

@@ -57,12 +57,14 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
     public static final DataParameter<Boolean> stunned = EntityDataManager.<Boolean>createKey(EntitySpriteling.class, DataSerializers.BOOLEAN);
     public static final DataParameter<BlockPos> targetBlock = EntityDataManager.<BlockPos>createKey(EntitySpriteling.class, DataSerializers.BLOCK_POS);
     public static final DataParameter<BlockPos> lastTargetBlock = EntityDataManager.<BlockPos>createKey(EntitySpriteling.class, DataSerializers.BLOCK_POS);
+    public static final DataParameter<BlockPos> lastLastTargetBlock = EntityDataManager.<BlockPos>createKey(EntitySpriteling.class, DataSerializers.BLOCK_POS);
     public float addDirectionX = 0;
     public float addDirectionY = 0;
     public float twirlTimer = 0;
     public Vec3d moveVec = new Vec3d(0,0,0);
     public Vec3d prevMoveVec = new Vec3d(0,0,0);
     Random random = new Random();
+    public int offset = random.nextInt(25);
     
     public SoundEvent ambientSound;
     public SoundEvent hurtSound;
@@ -71,6 +73,7 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
     	super(worldIn);
         setSize(0.5f,0.5f);
         this.isAirBorne = true;
+        this.noClip = true;
 		this.experienceValue = 5;
 		ambientSound = new SoundEvent(new ResourceLocation("roots:spiritAmbient"));
 		hurtSound = new SoundEvent(new ResourceLocation("roots:spiritHurt"));
@@ -83,17 +86,18 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
         this.getDataManager().register(targetDirectionX, Float.valueOf(0));
         this.getDataManager().register(targetDirectionY, Float.valueOf(0));
         this.getDataManager().register(dashTimer, Integer.valueOf(0));
-        this.getDataManager().register(happiness, Float.valueOf(5));
+        this.getDataManager().register(happiness, Float.valueOf(0));
         this.getDataManager().register(stunned, Boolean.valueOf(false));
         this.getDataManager().register(targetBlock, new BlockPos(0,-1,0));
         this.getDataManager().register(lastTargetBlock, new BlockPos(0,-1,0));
+        this.getDataManager().register(lastLastTargetBlock, new BlockPos(0,-1,0));
     }
     
     @Override
     public void collideWithEntity(Entity entity){
     	if (this.getAttackTarget() != null && this.getHealth() > 0 && !this.getDataManager().get(stunned).booleanValue()){
     		if (entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0){
-    			((EntityLivingBase)entity).attackEntityFrom(DamageSource.generic, 4.0f);
+    			((EntityLivingBase)entity).attackEntityFrom(DamageSource.generic, 2.0f);
     			float magnitude = (float)Math.sqrt(motionX*motionX+motionZ*motionZ);
     			((EntityLivingBase)entity).knockBack(this,2.0f*magnitude+0.1f, -motionX/magnitude+0.1, -motionZ/magnitude+0.1);
     			((EntityLivingBase)entity).attackEntityAsMob(this);
@@ -123,6 +127,12 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
     @Override
     public void onUpdate(){
     	super.onUpdate();
+    	
+    	if (getDataManager().get(happiness) > 0){
+	    	if (this.ticksExisted % 2 == 0){
+	    		Roots.proxy.spawnParticleMagicSparkleScalableFX(getEntityWorld(), 24, posX+width*0.5f*(random.nextFloat()-0.5f), posY+height*0.5f+height*(random.nextFloat()-0.5f), posZ+width*0.5f*(random.nextFloat()-0.5f), 0, 0, 0, this.getDataManager().get(happiness).floatValue()/20.0f, 107, 255, 28);
+	    	}
+    	}
     	
     	if (this.getDataManager().get(targetBlock).getY() == -1){
     		this.getDataManager().set(targetBlock, this.getPosition());
@@ -170,8 +180,8 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
 	    		}
 	    	}
 	    	else if (getDataManager().get(targetBlock).getY() != -1){
-	    		if (this.ticksExisted % 50 == 0 && !this.getEntityWorld().isRemote){
-	    			Vec3d target = new Vec3d(getDataManager().get(targetBlock).getX()+0.5+(random.nextFloat()-0.5f)*7.0f,getDataManager().get(targetBlock).getY()+9.0+(random.nextFloat()-0.5f)*17.0f,getDataManager().get(targetBlock).getZ()+0.5+(random.nextFloat()-0.5f)*7.0f);
+	    		if (this.ticksExisted % 40 == 0 && !this.getEntityWorld().isRemote){
+	    			Vec3d target = new Vec3d(getDataManager().get(targetBlock).getX()+0.5+(random.nextFloat()-0.5f)*7.0f,getDataManager().get(targetBlock).getY()+4.0+(random.nextFloat()-0.5f)*7.0f,getDataManager().get(targetBlock).getZ()+0.5+(random.nextFloat()-0.5f)*7.0f);
 	    			this.getDataManager().set(targetDirectionX, (float)Math.toRadians(Util.yawDegreesBetweenPointsSafe(posX, posY, posZ, target.xCoord, target.yCoord, target.zCoord, getDataManager().get(targetDirectionX).doubleValue())));
 	    			this.getDataManager().set(targetDirectionY, (float)Math.toRadians(Util.pitchDegreesBetweenPoints(posX, posY, posZ, target.xCoord, target.yCoord, target.zCoord)));
 	    			this.getDataManager().setDirty(targetDirectionX);
@@ -179,7 +189,7 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
 		    	}
 	    	}
 	    	else {
-	    		if (this.ticksExisted % 50 == 0 && !this.getEntityWorld().isRemote){
+	    		if (this.ticksExisted % 40 == 0 && !this.getEntityWorld().isRemote){
 	    			this.getDataManager().set(targetDirectionX, (float)Math.toRadians(random.nextFloat()*360.0f));
 	    			this.getDataManager().set(targetDirectionY, (float)Math.toRadians(random.nextFloat()*180.0f-90.0f));
 	    		 	this.getDataManager().setDirty(targetDirectionX);
@@ -191,7 +201,7 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
 	    	}
 	    	if (this.ticksExisted % 5 == 0){
 	    		prevMoveVec = moveVec;
-	    		moveVec = Util.lookVector(this.getDataManager().get(targetDirectionX),this.getDataManager().get(targetDirectionY)).scale(getAttackTarget() != null ? (getDataManager().get(dashTimer) > 0 ? 0.4 : 0.2) : 0.1);
+	    		moveVec = Util.lookVector(this.getDataManager().get(targetDirectionX),this.getDataManager().get(targetDirectionY)).scale(getAttackTarget() != null ? (getDataManager().get(dashTimer) > 0 ? 0.4 : 0.3) : 0.2);
 	    	}
 	    	
 	    	float motionInterp = ((float)(this.ticksExisted%5))/5.0f;
@@ -223,6 +233,9 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
     		this.motionY = -0.05;
     		this.motionZ = 0.9*motionZ;
     	}
+    	if (this.getHappiness() > 0){
+    		this.setHappiness(getHappiness()-0.001f);
+    	}
     }
     
     @Override
@@ -241,18 +254,6 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
     		this.setAttackTarget((EntityLivingBase)source.getEntity());
     	}
     	return super.attackEntityFrom(source, amount);
-    }
-    
-    @Override
-    public void damageEntity(DamageSource source, float amount){
-    	if (this.getHealth() - amount <= 0 && !getDataManager().get(stunned).booleanValue()){
-    		this.setHealth(1);
-    		getDataManager().set(stunned, true);
-    		getDataManager().setDirty(stunned);
-    	}
-    	else {
-    		super.damageEntity(source, amount);
-    	}
     }
     
     @Override
@@ -304,6 +305,7 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
 		getDataManager().set(stunned, compound.getBoolean("stunned"));
 		getDataManager().set(targetBlock, new BlockPos(compound.getInteger("targetBlockX"),compound.getInteger("targetBlockY"),compound.getInteger("targetBlockZ")));
 		getDataManager().set(lastTargetBlock, new BlockPos(compound.getInteger("lastTargetBlockX"),compound.getInteger("lastTargetBlockY"),compound.getInteger("lastTargetBlockZ")));
+		getDataManager().set(lastLastTargetBlock, new BlockPos(compound.getInteger("lastLastTargetBlockX"),compound.getInteger("lastLastTargetBlockY"),compound.getInteger("lastLastTargetBlockZ")));
 		getDataManager().setDirty(targetDirectionX);
 		getDataManager().setDirty(targetDirectionY);
 		getDataManager().setDirty(dashTimer);
@@ -311,6 +313,7 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
 		getDataManager().setDirty(stunned);
 		getDataManager().setDirty(targetBlock);
 		getDataManager().setDirty(lastTargetBlock);
+		getDataManager().setDirty(lastLastTargetBlock);
 	}
 
 	@Override
@@ -327,6 +330,9 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
 		compound.setInteger("lastTargetBlockX", getDataManager().get(lastTargetBlock).getX());
 		compound.setInteger("lastTargetBlockY", getDataManager().get(lastTargetBlock).getY());
 		compound.setInteger("lastTargetBlockZ", getDataManager().get(lastTargetBlock).getZ());
+		compound.setInteger("lastLastTargetBlockX", getDataManager().get(lastLastTargetBlock).getX());
+		compound.setInteger("lastLastTargetBlockY", getDataManager().get(lastLastTargetBlock).getY());
+		compound.setInteger("lastLastTargetBlockZ", getDataManager().get(lastLastTargetBlock).getZ());
 	}
 
 	@Override
@@ -342,11 +348,18 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
 	
 	@Override
 	public void setTargetPosition(BlockPos pos){
-		if (!pos.equals(getDataManager().get(lastTargetBlock)) && !pos.equals(getDataManager().get(targetBlock))){
+		if (!pos.equals(getDataManager().get(lastLastTargetBlock)) && !pos.equals(getDataManager().get(lastTargetBlock)) && !pos.equals(getDataManager().get(targetBlock))){
+			getDataManager().set(lastLastTargetBlock, getDataManager().get(lastTargetBlock));
+			getDataManager().setDirty(lastLastTargetBlock);
 			getDataManager().set(lastTargetBlock, getDataManager().get(targetBlock));
 			getDataManager().setDirty(lastTargetBlock);
 			getDataManager().set(targetBlock, pos);
 			getDataManager().setDirty(targetBlock);
 		}
+	}
+
+	@Override
+	public BlockPos getTargetPosition() {
+		return getDataManager().get(targetBlock);
 	}
 }

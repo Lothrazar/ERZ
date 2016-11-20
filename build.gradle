@@ -15,15 +15,20 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 
-version = "${minecraft_version}-${mod_version}.${System.getenv("BUILD_NUMBER") ?: 0}"
-group= mod_group 
-archivesBaseName = mod_artifact_basename
+version = "0.205"
+group="elucent.roots"
+archivesBaseName = "roots"
 
 minecraft {
-    version = minecraft_version + "-" + forge_version
+    version = "1.10.2-12.18.1.2076"
     runDir = "run"
-   
-    mappings = mcp_mappings_version
+    
+    // the mappings can be changed at any time, and must be in the following format.
+    // snapshot_YYYYMMDD   snapshot are built nightly.
+    // stable_#            stables are built at the discretion of the MCP team.
+    // Use non-default mappings at your own risk. they may not allways work.
+    // simply re-run your setup task after changing the mappings to update your workspace.
+    mappings = "snapshot_20160518"
 }
 
 sourceCompatibility = 1.8

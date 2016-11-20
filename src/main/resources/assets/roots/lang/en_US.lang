@@ -551,21 +551,6 @@ roots.research.sprite.spellweaverlance.page1title.name=Close-Combat Magic
 roots.research.sprite.spellweaverlance.page1info=Using otherworld leaves, you have managed to create a means of casting spells quickly in the middle of combat. The spellweaver lance can be used as a normal melee weapon, but will cast spells on struck targets that activate about a second after your strike. It can hold two different spells, and is given spells with the same ritual as the crystal staff.
 roots.research.sprite.spellweaverlance.page2title.name=Ritual: Spellweaver Lance
 
-roots.research.sprite.talismanpursuit.name=Pursuit Talisman
-roots.research.sprite.talismanpursuit.page1title.name=Spreading Damage
-roots.research.sprite.talismanpursuit.page1info=The pursuit talisman, when placed in the inventory, will release a homing projectile upon killing an enemy. The projectile will choose a nearby target of the same type as the creature you killed. For example, if you kill a hostile creature, the projectile will look for a nearby hostile target.
-roots.research.sprite.talismanpursuit.page2title.name=Ritual: Pursuit Talisman
-
-roots.research.sprite.amuletconserving.name=Conserving Amulet
-roots.research.sprite.amuletconserving.page1title.name=Saving It For Later
-roots.research.sprite.amuletconserving.page1info=The conserving amulet will absorb some of the chaotic energy released from your spells. Once it starts to glow, your next melee attack will deal a significant amount of armor-piercing damage.
-roots.research.sprite.amuletconserving.page2title.name=Ritual: Conserving Amulet
-
-roots.research.sprite.amuletdischarge.name=Discharge Amulet
-roots.research.sprite.amuletdischarge.page1title.name=Retaliation
-roots.research.sprite.amuletdischarge.page1info=The discharge amulet will release energy in an area around you after you take significant damage. All nearby creatures in the area will take damage.
-roots.research.sprite.amuletdischarge.page2title.name=Ritual: Discharge Amulet
-
 roots.research.sprite.evocation.name=Component: Evocation
 roots.research.sprite.evocation.page1title.name=Tracking
 roots.research.sprite.evocation.page1info=The charm of evocation can be found as a drop from very powerful sprites. It can be substituted for a petal dust in an imbuer, or an imbuing ritual. When cast as a spell, it will create a homing projectile that homes in on a nearby, randomly-chosen target besides the caster.
@@ -589,11 +574,6 @@ roots.research.sprite.guardian.page2title.name=Guardian From Beyond
 roots.research.sprite.guardian.page2info=This ritual will require a whopping twelve unique overworld flowers as incenses, as well as the presence of four lesser sprites, two common sprites, and two greater sprites. You believe that it would be prudent to prepare for combat before activating this ritual.
 roots.research.sprite.guardian.page3title.name=Ritual: Call Sprite Guardian
 
-roots.research.sprite.talismanhunger.name=Hunger Talisman
-roots.research.sprite.talismanhunger.page1title.name=Absorbing Attacks
-roots.research.sprite.talismanhunger.page1info=The hunger talisman is capable of absorbing energy-based attacks. It will block damage from a fiery or explosion-based attack once, after which it will require a ten second cooldown (indicated by the item glowing) before it is functional again.
-roots.research.sprite.talismanhunger.page2title.name=Ritual: Hunger Talisman
-
 roots.research.sprite.hourglass.name=Ancient Hourglass
 roots.research.sprite.hourglass.page1title.name=Death Protection
 roots.research.sprite.hourglass.page1info=The ancient hourglass will block one death. When you are killed with this hourglass in your inventory, the hourglass will shatter, leaving you at half a heart, as well as freezing time for all nearby creatures for about ten seconds.
@@ -601,7 +581,7 @@ roots.research.sprite.hourglass.page2title.name=Ritual: Ancient Hourglass
 
 roots.research.sprite.pixiestone.name=Pixie Stone
 roots.research.sprite.pixiestone.page1title.name=Hop, Skip, And A Jump
-roots.research.sprite.pixiestone.page1info=The pixie stone will prevent you from taking fall damage. Whenever the pixie stone is active (indicated by the item glowing, toggled by right-click), whenever you fall fast enough to take fall damage, the pixie stone will boost you back up a small amount, cushioning your fall.
+roots.research.sprite.pixiestone.page1info=The pixie stone allow you to perform an extremely fast air dash forwards. You can control your motion while dashing, but the use of the stone will quickly drain your terra. If you land while still dashing, you will avoid all fall damage, but if you run out of terra mid-flight you will fall to the ground.
 roots.research.sprite.pixiestone.page2title.name=Ritual: Pixie Stone
 
 roots.research.sprite.spiritblocks.name=Spirit Blocks

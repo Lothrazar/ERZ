@@ -28,10 +28,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-<<<<<<< HEAD
 import net.minecraft.world.Explosion;
-=======
->>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -119,7 +116,6 @@ public class BlockStandingStoneEntangler extends TEBlockBase implements ITileEnt
 		}
 	}
 	
-<<<<<<< HEAD
 	@Override
 	public void onBlockExploded(World world, BlockPos pos, Explosion explosion){
 		if (!world.isRemote){
@@ -136,8 +132,6 @@ public class BlockStandingStoneEntangler extends TEBlockBase implements ITileEnt
 		world.setBlockToAir(pos);
 	}
 	
-=======
->>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 	public BlockStandingStoneEntangler(){
 		super(Material.ROCK);
 		setUnlocalizedName("standingStoneEntangler");

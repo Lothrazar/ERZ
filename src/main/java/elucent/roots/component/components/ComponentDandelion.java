@@ -33,9 +33,9 @@ public class ComponentDandelion extends ComponentBase{
 			ArrayList<EntityLivingBase> targets = (ArrayList<EntityLivingBase>) world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-(4.0+size),y-(4.0+size),z-(4.0+size),x+(4.0+size),y+(4.0+size),z+(4.0+size)));
 			for(int i = 0; i < targets.size();i++){
 				if(targets.get(i).getUniqueID() != caster.getUniqueID()){
-					targets.get(i).motionX = caster.getLookVec().xCoord;
-					targets.get(i).motionY = (float)(potency==0?0.6:0.6+0.3*potency);
-					targets.get(i).motionZ = caster.getLookVec().zCoord;
+					targets.get(i).motionX = caster.getLookVec().xCoord*1.2f+caster.getLookVec().xCoord*0.4*potency;
+					targets.get(i).motionY = (float)(potency==0?0.8:0.8+0.4*potency);
+					targets.get(i).motionZ = caster.getLookVec().zCoord*1.2f+caster.getLookVec().zCoord*0.4*potency;
 					if (targets.get(i) instanceof EntityPlayer){
 						((EntityPlayer)targets.get(i)).velocityChanged = true;
 					}
@@ -52,7 +52,7 @@ public class ComponentDandelion extends ComponentBase{
 				if(targets.get(i).getUniqueID() != casterId){
 					double dist = Math.sqrt((targets.get(i).posX-x)*(targets.get(i).posX-x)+(targets.get(i).posZ-z)*(targets.get(i).posZ-z));
 					targets.get(i).motionX = (targets.get(i).posX-x)/dist;
-					targets.get(i).motionY = (float)(potency==0?0.6:0.6+0.3*potency);
+					targets.get(i).motionY = (float)(potency==0?0.8:0.8+0.4*potency);
 					targets.get(i).motionZ = (targets.get(i).posZ-z)/dist;
 					if (targets.get(i) instanceof EntityPlayer){
 						((EntityPlayer)targets.get(i)).velocityChanged = true;

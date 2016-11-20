@@ -18,6 +18,7 @@ public class RitualBase {
 	public ArrayList<BlockPos> positions = new ArrayList<BlockPos>();
 	public ArrayList<ItemStack> incenses = new ArrayList<ItemStack>();
 	public ArrayList<ItemStack> ingredients = new ArrayList<ItemStack>();
+	public ArrayList<IRitualCost> extraCosts = new ArrayList<IRitualCost>();
 	public Vec3d color = new Vec3d(255,255,255);
 	public Vec3d secondaryColor = new Vec3d(255,255,255);
 	public String name = "";
@@ -52,6 +53,11 @@ public class RitualBase {
 	
 	public void doEffect(World world, BlockPos pos, List<ItemStack> inventory, List<ItemStack> incenses){
 		
+	}
+	
+	public RitualBase addCost(IRitualCost cost){
+		this.extraCosts.add(cost);
+		return this;
 	}
 	
 	public boolean matches(World world, BlockPos pos){

@@ -70,7 +70,7 @@ public class ComponentApple extends ComponentBase{
 					if (effect.getPotion().getName() == "Soul Fray"){
 						(entity).addPotionEffect(effect);
 					}
-					entity.heal(2.0f+2.0f*(float)potency);
+					entity.heal(4.0f+4.0f*(float)potency);
 				}
 			}
 		}

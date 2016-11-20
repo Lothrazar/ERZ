@@ -40,7 +40,9 @@ public class ComponentLilac extends ComponentBase{
 	
 	public boolean growBlockSafe(World world, BlockPos pos, int potency){
 		if (world.getBlockState(pos).getBlock() instanceof IGrowable && random.nextInt(5-(int)potency) < 2){
+			IBlockState prev = world.getBlockState(pos);
 			((IGrowable)world.getBlockState(pos).getBlock()).grow(world, random, pos, world.getBlockState(pos));
+			world.notifyBlockUpdate(pos, prev, world.getBlockState(pos), 8);
 			return true;
 		}
 		if(world.getBlockState(pos).getBlock() == Blocks.NETHER_WART && random.nextInt(5-(int)potency) < 2){
@@ -48,8 +50,9 @@ public class ComponentLilac extends ComponentBase{
 			IBlockState state = world.getBlockState(pos);
 			int age = (Integer)state.getValue(wart.AGE).intValue();
 			if(age < 3){
-				state = state.withProperty(wart.AGE, Integer.valueOf(age + 1));
-				world.setBlockState(pos, state, 2);
+				IBlockState newState = state.withProperty(wart.AGE, Integer.valueOf(age + 1));
+				world.setBlockState(pos, newState, 3);
+				world.notifyBlockUpdate(pos, state, newState, 8);
 				return true;
 			}
 		}
@@ -59,13 +62,18 @@ public class ComponentLilac extends ComponentBase{
 	@Override
 	public void doEffect(World world, Entity caster, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
 		if (type == EnumCastType.SPELL){	
-			if (caster instanceof EntityPlayer && !world.isRemote){
-				BlockPos pos = Util.getRayTrace(world,(EntityPlayer)caster,6+2*(int)size);
-				boolean fullEfficiency = growBlockSafe(world, pos, (int)potency) && growBlockSafe(world, pos.east(), (int)potency) && growBlockSafe(world, pos.west(), (int)potency) &&growBlockSafe(world, pos.north(), (int)potency) &&growBlockSafe(world, pos.south(), (int)potency);
+			if (!world.isRemote){
+				BlockPos pos = Util.getRayTraceNonFull(world, ((EntityPlayer)caster), 6+2*(int)size);
+				for (int i = (-(int)size)-1; i < (int)size+2; i ++){
+					for (int j = (-(int)size)-1; j < (int)size+2; j ++){
+						growBlockSafe(world, pos.add((int)i,0,(int)j), (int)potency);
+					}
+				}
+				boolean fullEfficiency = true;//growBlockSafe(world, pos, (int)potency) && growBlockSafe(world, pos.east(), (int)potency) && growBlockSafe(world, pos.west(), (int)potency) &&growBlockSafe(world, pos.north(), (int)potency) &&growBlockSafe(world, pos.south(), (int)potency);
 				if (fullEfficiency){
 					if (caster instanceof EntityPlayer){
 						if (!((EntityPlayer)caster).hasAchievement(RegistryManager.achieveSpellGrowth)){
-							PlayerManager.addAchievement((EntityPlayer)caster, RegistryManager.achieveSpellGrowth);
+							PlayerManager.addAchievement(((EntityPlayer)caster), RegistryManager.achieveSpellGrowth);
 						}
 					}
 				}
@@ -78,7 +86,12 @@ public class ComponentLilac extends ComponentBase{
 		if (type == EnumCastType.SPELL){	
 			if (!world.isRemote){
 				BlockPos pos = new BlockPos(x,y,z);
-				boolean fullEfficiency = growBlockSafe(world, pos, (int)potency) && growBlockSafe(world, pos.east(), (int)potency) && growBlockSafe(world, pos.west(), (int)potency) &&growBlockSafe(world, pos.north(), (int)potency) &&growBlockSafe(world, pos.south(), (int)potency);
+				for (int i = (-(int)size)-1; i < (int)size+2; i ++){
+					for (int j = (-(int)size)-1; j < (int)size+2; j ++){
+						growBlockSafe(world, pos.add((int)i,0,(int)j), (int)potency);
+					}
+				}
+				boolean fullEfficiency = true;//growBlockSafe(world, pos, (int)potency) && growBlockSafe(world, pos.east(), (int)potency) && growBlockSafe(world, pos.west(), (int)potency) &&growBlockSafe(world, pos.north(), (int)potency) &&growBlockSafe(world, pos.south(), (int)potency);
 				if (fullEfficiency){
 					EntityPlayer player = world.getPlayerEntityByUUID(casterId);
 					if (player != null){

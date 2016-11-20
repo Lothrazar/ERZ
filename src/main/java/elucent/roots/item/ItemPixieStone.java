@@ -2,7 +2,6 @@ package elucent.roots.item;
 
 import elucent.roots.ConfigManager;
 import elucent.roots.Roots;
-<<<<<<< HEAD
 import elucent.roots.capability.mana.ManaProvider;
 import elucent.roots.network.MessageDirectedTerraBurstFX;
 import elucent.roots.network.PacketHandler;
@@ -11,11 +10,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
-=======
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
->>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -36,11 +30,7 @@ import java.util.Random;
 /**
  * Created by SirShadow on 23. 08. 2016.
  */
-<<<<<<< HEAD
 public class ItemPixieStone extends Item implements IManaRelatedItem
-=======
-public class ItemPixieStone extends Item
->>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
 {
 	Random random = new Random();
     public ItemPixieStone()
@@ -52,7 +42,6 @@ public class ItemPixieStone extends Item
     }
     
     @Override
-<<<<<<< HEAD
     public EnumAction getItemUseAction(ItemStack stack){
     	return EnumAction.BOW;
     }
@@ -111,51 +100,6 @@ public class ItemPixieStone extends Item
 			}
     	}
     	return new ActionResult<ItemStack>(EnumActionResult.PASS,stack);
-=======
-    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand){
-    	if (stack.hasTagCompound()){
-    		if (stack.getTagCompound().getBoolean("active")){
-    			stack.getTagCompound().setBoolean("active", false);
-    		}
-    		else {
-    			stack.getTagCompound().setBoolean("active", true);
-    		}
-    	}
-    	return new ActionResult<ItemStack>(EnumActionResult.SUCCESS,stack);
-    }
-
-    @Override
-    public void onUpdate(ItemStack stack, World world, Entity entityIn, int itemSlot, boolean isSelected)
-    {
-    	if (!stack.hasTagCompound()){
-    		stack.setTagCompound(new NBTTagCompound());
-    		stack.getTagCompound().setBoolean("active", false);
-    	}
-    	else {
-    		if (stack.getTagCompound().getBoolean("active")){
-		    	if (entityIn.motionY < -0.65){
-		    		entityIn.motionY = 0.25;
-		    		entityIn.fallDistance = 0;
-		    		for (int j = 0; j < 20; j ++){
-						Roots.proxy.spawnParticleMagicSparkleFX(world, entityIn.posX, entityIn.posY, entityIn.posZ, Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), Math.pow(0.95f*(random.nextFloat()-0.5f),3.0), 76, 230, 0);
-					}
-		    		if (entityIn instanceof EntityPlayer){
-		    			((EntityPlayer)entityIn).velocityChanged = true;
-		    		}
-		    	}
-	    	}
-	    }
-    }
-    
-    @Override
-    public boolean hasEffect(ItemStack stack){
-    	if (stack.hasTagCompound()){
-    		if (stack.getTagCompound().getBoolean("active")){
-    			return true;
-    		}
-    	}
-    	return false;
->>>>>>> 513884af035d63cee30da3c9f8d1ffd5b51b0114
     }
 
     @SideOnly(Side.CLIENT)

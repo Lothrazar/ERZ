@@ -20,6 +20,7 @@ import elucent.roots.item.ItemStaff;
 import elucent.roots.ritual.RitualBase;
 import elucent.roots.ritual.RitualManager;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -69,19 +70,20 @@ public class TileEntitySpiritFont extends TEBase implements ITickable {
 	public void update() {
 		angle += 24.0f;
 		ticker ++;
-		BlockPos pos = getPos().down().add(random.nextInt(11)-5,0,random.nextInt(11)-5);
-		pos = getWorld().getTopSolidOrLiquidBlock(pos);
-		if (getWorld().getBlockState(pos.up()).getBlock() != Blocks.AIR){
-			pos = pos.up();
-		}
-		power += 4.0f*Util.getNatureAmount(getWorld().getBlockState(pos));
-		if (ticker % 2 == 0){
-			Roots.proxy.spawnParticleMagicSmallSparkleFX(getWorld(), getPos().getX()+0.125+random.nextFloat()*0.75, getPos().getY()+0.375+random.nextFloat()*0.75,getPos().getZ()+0.125+random.nextFloat()*0.75, 0, 0, 0, 107, 255, 28);
+		if (getWorld().isRemote){
+			if (getWorld().provider.getDimension() == Minecraft.getMinecraft().thePlayer.getEntityWorld().provider.getDimension()){
+				if (ticker % 2*((150-5*(int)maxPower)/25) == 0){
+					Roots.proxy.spawnParticleMagicAltarLineFX(getWorld(), getPos().getX()+0.5f+11f*(random.nextFloat()-0.5f), getPos().getY()+0.5f+3f*(random.nextFloat()-0.5f), getPos().getZ()+0.5f+11f*(random.nextFloat()-0.5f), getPos().getX()+0.5f, getPos().getY()+0.5f, getPos().getZ()+0.5f, 107, 255, 28);
+				}
+				if (ticker % 2 == 0){
+					Roots.proxy.spawnParticleMagicSmallSparkleFX(getWorld(), getPos().getX()+0.125+random.nextFloat()*0.75, getPos().getY()+0.375+random.nextFloat()*0.75,getPos().getZ()+0.125+random.nextFloat()*0.75, 0, 0, 0, 107, 255, 28);
+				}
+			}
 		}
 		if (ticker % 20 == 0){
 			float sum = 0.0f;
-			for (int i = -5; i < 6; i ++){
-				for (int j = -5; j < 6; j ++){
+			for (int i = -2; i < 3; i ++){
+				for (int j = -2; j < 3; j ++){
 					BlockPos waterPos = getPos().down().add(i,0,j);
 					if (getWorld().getBlockState(waterPos.down()).getBlock() == Blocks.WATER){
 						sum += 1.0f;
@@ -90,21 +92,37 @@ public class TileEntitySpiritFont extends TEBase implements ITickable {
 			}
 			this.maxPower = sum;
 		}
-		if (power > this.maxPower && this.maxPower > 0){
-			List<EntityLivingBase> entities = getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(getPos().getX()-10.0,getPos().getY()-15.0,getPos().getZ()-10.0,getPos().getX()+11.0,getPos().getY()+16.0,getPos().getZ()+11.0));
-			ArrayList<EntityLivingBase> sprites = new ArrayList<EntityLivingBase>();
-			for (int i = 0; i < entities.size(); i ++){
-				if (entities.get(i) instanceof ISprite){
-					sprites.add(entities.get(i));
+		if (ticker % (150-5*(int)maxPower) == 0){
+			this.power = 0;
+			for (int i = -5; i < 6; i ++){
+				for (int j = -5; j < 6; j ++){
+					for (int k = -1; k < 2; k ++){
+						BlockPos pos = getPos().add(i,k,j);
+						if (getWorld().getBlockState(pos.up()).getBlock() != Blocks.AIR){
+							pos = pos.up();
+						}
+						power += Util.getNatureAmount(getWorld().getBlockState(pos));
+					}
 				}
 			}
-			if (sprites.size() > 0 && !getWorld().isRemote){
-				EntityLivingBase target = sprites.get(random.nextInt(sprites.size()));
-				EntitySpritePlacator p = new EntitySpritePlacator(getWorld());
-				p.initSpecial(target, power, getPos());
-				power = 0;
-				p.setPosition(getPos().getX()+0.5, getPos().getY()+0.5, getPos().getZ()+0.5);
-				getWorld().spawnEntityInWorld(p);
+			List<EntityLivingBase> entities = getWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(getPos().getX()-10.0,getPos().getY()-10.0,getPos().getZ()-10.0,getPos().getX()+11.0,getPos().getY()+11.0,getPos().getZ()+11.0));
+			for (int i = 0; i < entities.size(); i ++){
+				if (entities.get(i) instanceof ISprite){
+					if (!((ISprite)entities.get(i)).getTargetPosition().equals(getPos())){
+						((ISprite)entities.get(i)).setTargetPosition(getPos().up());
+						((ISprite)entities.get(i)).setHappiness(this.power);
+						entities.get(i).heal(power/entities.get(i).getMaxHealth());
+						Vec3d velocity = new Vec3d(entities.get(i).posX-(getPos().getX()+0.5),
+								entities.get(i).posY-(getPos().getY()+0.5),
+								entities.get(i).posZ-(getPos().getZ()+0.5));
+						velocity = velocity.scale(1.0/20.0);
+						if (getWorld().isRemote){
+							if (getWorld().provider.getDimension() == Minecraft.getMinecraft().thePlayer.getEntityWorld().provider.getDimension()){
+								Roots.proxy.spawnParticleMagicSparkleScalableFX(getWorld(), 40, getPos().getX()+0.5+0.1*(random.nextDouble()-0.5), getPos().getY()+0.5+0.1*(random.nextDouble()-0.5), getPos().getZ()+0.5+0.1*(random.nextDouble()-0.5), velocity.xCoord, velocity.yCoord, velocity.zCoord, 4.0f, 107, 255, 28);
+							}
+						}
+					}
+				}
 			}
 		}
 	}

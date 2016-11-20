@@ -36,26 +36,28 @@ public class ComponentCharmEvocation extends ComponentBase
         {
         	if(!world.isRemote)
             {
-                List<EntityLivingBase> targets = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-16.0,y-16.0,z-16.0,x+16.0,y+16.0,z+16.0));
-                ArrayList<EntityLivingBase> trimmedTargets = new ArrayList<EntityLivingBase>();
-                for (int i = 0; i < targets.size(); i ++){
-                	if (targets.get(i).getUniqueID().compareTo(caster.getUniqueID()) != 0){
-                		trimmedTargets.add(targets.get(i));
-                	}
-                }
-                if (trimmedTargets.size() > 0){
-                	Vec3d direction = ((EntityPlayer)caster).getLookVec();
-                    EntityHomingProjectile projectile = new EntityHomingProjectile(world);
-                    projectile.setPosition(x, y, z);
-                    projectile.motionX = 0;
-                    projectile.motionY = 0;
-                    projectile.motionZ = 0;
-                    projectile.rotationPitch = 0;
-                    projectile.rotationYaw = 0;
-                    projectile.onInitialSpawn(world.getDifficultyForLocation(projectile.getPosition()), null);
-                    projectile.initSpecial(trimmedTargets.get(random.nextInt(trimmedTargets.size())), 6.0f, new Vec3d(76,230,0));
-                    world.spawnEntityInWorld(projectile);
-                }
+        		for (int k = 0; k < 5; k ++){
+	                List<EntityLivingBase> targets = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-16.0,y-16.0,z-16.0,x+16.0,y+16.0,z+16.0));
+	                ArrayList<EntityLivingBase> trimmedTargets = new ArrayList<EntityLivingBase>();
+	                for (int i = 0; i < targets.size(); i ++){
+	                	if (targets.get(i).getUniqueID().compareTo(caster.getUniqueID()) != 0){
+	                		trimmedTargets.add(targets.get(i));
+	                	}
+	                }
+	                if (trimmedTargets.size() > 0){
+	                	Vec3d direction = ((EntityPlayer)caster).getLookVec();
+	                    EntityHomingProjectile projectile = new EntityHomingProjectile(world);
+	                    projectile.setPosition(x, y, z);
+	                    projectile.motionX = 0;
+	                    projectile.motionY = 0;
+	                    projectile.motionZ = 0;
+	                    projectile.rotationPitch = 0;
+	                    projectile.rotationYaw = 0;
+	                    projectile.onInitialSpawn(world.getDifficultyForLocation(projectile.getPosition()), null);
+	                    projectile.initSpecial(trimmedTargets.get(random.nextInt(trimmedTargets.size())), 6.0f, new Vec3d(76,230,0));
+	                    world.spawnEntityInWorld(projectile);
+	                }
+        		}
             }
         }
     }
@@ -67,25 +69,27 @@ public class ComponentCharmEvocation extends ComponentBase
         {
             if(!world.isRemote)
             {
-            	List<EntityLivingBase> targets = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-16.0,y-16.0,z-16.0,x+16.0,y+16.0,z+16.0));
-                ArrayList<EntityLivingBase> trimmedTargets = new ArrayList<EntityLivingBase>();
-                for (int i = 0; i < targets.size(); i ++){
-                	if (targets.get(i).getUniqueID().compareTo(casterId) != 0){
-                		trimmedTargets.add(targets.get(i));
-                	}
-                }
-                if (trimmedTargets.size() > 0){
-                    EntityHomingProjectile projectile = new EntityHomingProjectile(world);
-                    projectile.setPosition(x, y, z);
-                    projectile.motionX = 0;
-                    projectile.motionY = 0;
-                    projectile.motionZ = 0;
-                    projectile.rotationPitch = 0;
-                    projectile.rotationYaw = 0;
-                    projectile.onInitialSpawn(world.getDifficultyForLocation(projectile.getPosition()), null);
-                    projectile.initSpecial(trimmedTargets.get(random.nextInt(trimmedTargets.size())), 6.0f, new Vec3d(76,230,0));
-                    world.spawnEntityInWorld(projectile);
-                }
+            	for (int k = 0; k < 5; k ++){
+	            	List<EntityLivingBase> targets = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-16.0,y-16.0,z-16.0,x+16.0,y+16.0,z+16.0));
+	                ArrayList<EntityLivingBase> trimmedTargets = new ArrayList<EntityLivingBase>();
+	                for (int i = 0; i < targets.size(); i ++){
+	                	if (targets.get(i).getUniqueID().compareTo(casterId) != 0){
+	                		trimmedTargets.add(targets.get(i));
+	                	}
+	                }
+	                if (trimmedTargets.size() > 0){
+	                    EntityHomingProjectile projectile = new EntityHomingProjectile(world);
+	                    projectile.setPosition(x, y, z);
+	                    projectile.motionX = 0;
+	                    projectile.motionY = 0;
+	                    projectile.motionZ = 0;
+	                    projectile.rotationPitch = 0;
+	                    projectile.rotationYaw = 0;
+	                    projectile.onInitialSpawn(world.getDifficultyForLocation(projectile.getPosition()), null);
+	                    projectile.initSpecial(trimmedTargets.get(random.nextInt(trimmedTargets.size())), 6.0f, new Vec3d(76,230,0));
+	                    world.spawnEntityInWorld(projectile);
+	                }
+            	}
             }
         }
     }

@@ -58,6 +58,7 @@ public class EntitySpriteProjectile  extends EntityFlying {// implements IRanged
 
     public EntitySpriteProjectile(World worldIn) {
     	super(worldIn);
+    	this.noClip = true;
         setSize(1.5f,1.5f);
         this.isAirBorne = true;
         this.setInvisible(true);
@@ -103,7 +104,7 @@ public class EntitySpriteProjectile  extends EntityFlying {// implements IRanged
     	if (target != null){
 			rotationYaw = (float)Math.toRadians(Util.yawDegreesBetweenPoints(posX, posY, posZ, target.posX, target.posY+target.getEyeHeight()/2.0, target.posZ));
 			rotationPitch = (float)Math.toRadians(Util.pitchDegreesBetweenPoints(posX, posY, posZ, target.posX, target.posY+target.getEyeHeight()/2.0, target.posZ));
-		    Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch).scale(0.35f);
+		    Vec3d moveVec = Util.lookVector(this.rotationYaw,this.rotationPitch).scale(0.65f);
 		    this.motionX = 0.5f*motionX+0.5f*moveVec.xCoord;
 			this.motionY = 0.5f*motionY+0.5f*moveVec.yCoord;
 			this.motionZ = 0.5f*motionZ+0.5f*moveVec.zCoord;
