@@ -1,8 +1,0 @@
-{
-    "variants":{
-        "check_decay=false,decayable=false":{"model": "roots:leavesWildwood"},
-        "check_decay=true,decayable=false":{"model": "roots:leavesWildwood"},
-        "check_decay=false,decayable=true":{"model": "roots:leavesWildwood"},
-        "check_decay=true,decayable=true":{"model": "roots:leavesWildwood"}
-    }
-}

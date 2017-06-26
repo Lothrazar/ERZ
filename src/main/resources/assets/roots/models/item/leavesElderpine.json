@@ -1,7 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "roots:blocks/leavesElderpine",
-        "particle": "roots:blocks/leavesElderpine"
-    }
-}

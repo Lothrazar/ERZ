@@ -1,5 +1,5 @@
 {
     "variants":{
-        "normal":{"model": "roots:runeStone"}
+        "normal":  { "model": "roots:runestone" }
     }
 }

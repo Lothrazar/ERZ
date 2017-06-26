@@ -1,9 +1,0 @@
-{
-    "parent": "block/outer_stairs",
-    "textures": {
-        "bottom": "roots:blocks/plankWildwood",
-        "top": "roots:blocks/plankWildwood",
-        "side": "roots:blocks/plankWildwood",
-        "particle": "roots:blocks/plankWildwood"
-    }
-}

@@ -1,7 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "roots:blocks/runeStoneSymbolGlowing",
-        "particle": "roots:blocks/runeStoneSymbolGlowing"
-    }
-}

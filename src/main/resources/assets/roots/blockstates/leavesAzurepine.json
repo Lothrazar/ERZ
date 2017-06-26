@@ -1,8 +1,0 @@
-{
-    "variants":{
-        "check_decay=false,decayable=false":{"model": "roots:leavesAzurepine"},
-        "check_decay=true,decayable=false":{"model": "roots:leavesAzurepine"},
-        "check_decay=false,decayable=true":{"model": "roots:leavesAzurepine"},
-        "check_decay=true,decayable=true":{"model": "roots:leavesAzurepine"}
-    }
-}

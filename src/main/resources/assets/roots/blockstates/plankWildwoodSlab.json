@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "half=bottom": { "model": "roots:plankWildwoodSlabBottom" },
-        "half=top": { "model": "roots:plankWildwoodSlabTop" }
-    }
-}

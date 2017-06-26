@@ -1,15 +1,15 @@
 [
 {
   "modid": "roots",
-  "name": "Roots",
-  "description": "Druidic Magic Mod",
-  "version": "0.205",
-  "mcversion": "1.10.2",
-  "url": "http://minecraft.curseforge.com/projects/roots",
+  "name": "Roots 2",
+  "description": "Druidic magic mod.",
+  "version": "0.020",
+  "mcversion": "1.11.2",
+  "url": "",
   "updateUrl": "",
-  "authorList": ["Elucent","werty1124","AlexisMachina","SirShadow"],
+  "authorList": ["Elucent","AlexisMachina","werty1124","SirShadow"],
   "credits": "",
-  "logoFile": "assets/roots/textures/misc/RootsLogo.png",
+  "logoFile": "",
   "screenshots": [],
   "dependencies": []
 }

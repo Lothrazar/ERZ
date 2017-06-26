@@ -1,5 +1,5 @@
 {
     "variants":{
-        "normal":{"model": "roots:imbuer"}
+        "normal":  { "model": "roots:imbuer" }
     }
 }
