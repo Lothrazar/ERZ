@@ -114,7 +114,7 @@ public class BookRegistry {
 				ItemStack.EMPTY,ItemStack.EMPTY,ItemStack.EMPTY,
 			}, new ItemStack(RegistryManager.dwindle_dust,3)));
 		herblore_book.addPage(new Page(new ItemStack(RegistryManager.totem_fragment,1),"totem_fragment").setCraftingRecipe(new ItemStack[]{
-				new ItemStack(RegistryManager.wood_hammer,1),new ItemStack(Items.TOTEM,1),ItemStack.EMPTY,
+				new ItemStack(RegistryManager.wood_hammer,1),new ItemStack(Items.TOTEM_OF_UNDYING,1),ItemStack.EMPTY,
 				ItemStack.EMPTY,ItemStack.EMPTY,ItemStack.EMPTY,
 				ItemStack.EMPTY,ItemStack.EMPTY,ItemStack.EMPTY,
 			}, new ItemStack(RegistryManager.totem_fragment,3)));

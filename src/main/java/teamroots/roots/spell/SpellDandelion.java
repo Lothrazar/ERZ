@@ -25,13 +25,13 @@ public class SpellDandelion extends SpellBase {
 	@Override
 	public void cast(EntityPlayer player){
 		PacketHandler.INSTANCE.sendToAll(new MessageDandelionCastFX(player.getUniqueID(),player.posX,player.posY+player.getEyeHeight(),player.posZ));
-		List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.posX+player.getLookVec().xCoord*6.0-6.0,player.posY+player.getLookVec().yCoord*6.0-6.0,player.posZ+player.getLookVec().zCoord*6.0-4.0,player.posX+player.getLookVec().xCoord*6.0+6.0,player.posY+player.getLookVec().yCoord*6.0+6.0,player.posZ+player.getLookVec().zCoord*6.0+6.0));
+		List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.posX+player.getLookVec().x*6.0-6.0,player.posY+player.getLookVec().y*6.0-6.0,player.posZ+player.getLookVec().z*6.0-4.0,player.posX+player.getLookVec().x*6.0+6.0,player.posY+player.getLookVec().y*6.0+6.0,player.posZ+player.getLookVec().z*6.0+6.0));
 		if (entities.size() > 0){
 			for (EntityLivingBase e : entities){
 				if (e.getUniqueID().compareTo(player.getUniqueID()) != 0){
-					e.motionX += player.getLookVec().xCoord;
+					e.motionX += player.getLookVec().x;
 					e.motionY += 0.75f;
-					e.motionZ += player.getLookVec().zCoord;
+					e.motionZ += player.getLookVec().z;
 					e.velocityChanged = true;
 				}
 			}

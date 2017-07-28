@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -157,7 +158,7 @@ public class ItemStaff extends ItemBase {
 	
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced){
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced){
 		if (!stack.hasTagCompound()){
 			stack.setTagCompound(new NBTTagCompound());
 			stack.getTagCompound().setInteger("selected", 0);

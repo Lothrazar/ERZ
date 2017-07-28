@@ -17,7 +17,6 @@ public class ItemTerraMossSeed extends ItemSeeds implements IModeledItem {
 		if (addToTab){
 			setCreativeTab(Roots.tab);
 		}
-		GameRegistry.register(this);
 	}
 	
 	@Override

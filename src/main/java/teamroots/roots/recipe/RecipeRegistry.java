@@ -21,6 +21,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.RecipeSorter;
@@ -28,6 +32,7 @@ import net.minecraftforge.oredict.RecipeSorter.Category;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import teamroots.roots.RegistryManager;
+import teamroots.roots.Roots;
 import teamroots.roots.block.BlockAubergine;
 import teamroots.roots.block.BlockMoonglow;
 import teamroots.roots.block.BlockPereskiaFlower;
@@ -92,8 +97,13 @@ public class RecipeRegistry {
 		}
 		return null;
 	}
+    
+    public static ResourceLocation getRL(String s){
+    	return new ResourceLocation(Roots.MODID+":"+s);
+    }
 	
-	public static void init(){
+	@SubscribeEvent
+	public void init(RegistryEvent.Register<IRecipe> event){
 		OreDictionary.registerOre("rootsHerb", RegistryManager.aubergine_seeds);
 		OreDictionary.registerOre("rootsHerb", RegistryManager.moonglow_leaf);
 		OreDictionary.registerOre("rootsHerb", RegistryManager.terra_moss_ball);
@@ -101,145 +111,131 @@ public class RecipeRegistry {
 		OreDictionary.registerOre("rootsHerb", RegistryManager.wildroot_item);
 		OreDictionary.registerOre("rootsHerb", RegistryManager.pereskia_blossom);
 		
-		GameRegistry.addRecipe(new RecipePowderMash());
+		event.getRegistry().register(new RecipePowderMash().setRegistryName(getRL("powder_mash")));
 		
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.pestle,1),true,new Object[]{
+		event.getRegistry().register(new ShapedOreRecipe(getRL("pestle"),new ItemStack(RegistryManager.pestle,1),true,new Object[]{
 				"  X",
 				"XX ",
 				"XX ",
 				'X',new ItemStack(Blocks.STONE,1,EnumType.DIORITE.getMetadata())
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.pestle,1),true,new Object[]{
-				"X  ",
-				" XX",
-				" XX",
-				'X',new ItemStack(Blocks.STONE,1,EnumType.DIORITE.getMetadata())
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.mortar,1),true,new Object[]{
+		}).setMirrored(true).setRegistryName(getRL("pestle")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("mortar"),new ItemStack(RegistryManager.mortar,1),true,new Object[]{
 				"X X",
 				"XCX",
 				" X ",
 				'X',"cobblestone",
 				'C',new ItemStack(Items.COAL,1,1)
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.pouch,1),true,new Object[]{
+		}).setRegistryName(getRL("mortar")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("pouch"),new ItemStack(RegistryManager.pouch,1),true,new Object[]{
 				"S S",
 				"LDL",
 				" L ",
 				'S',"string",
 				'L',new ItemStack(Blocks.WOOL,1,OreDictionary.WILDCARD_VALUE),
 				'D',new ItemStack(Items.DYE,1,OreDictionary.WILDCARD_VALUE)
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.imbuer,1),true,new Object[]{
+		}).setRegistryName(getRL("pouch")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("imbuer"),new ItemStack(RegistryManager.imbuer,1),true,new Object[]{
 				"S S",
 				" B ",
 				"S S",
 				'S',"stickWood",
 				'B',new ItemStack(Blocks.STONE,1,0)
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.staff,1),true,new Object[]{
+		}).setRegistryName(getRL("imbuer")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("staff"),new ItemStack(RegistryManager.staff,1),true,new Object[]{
 				" HL",
 				" SH",
 				"S  ",
 				'L',"logWood",
 				'S',"stickWood",
 				'H',"rootsHerb"
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.staff,1),true,new Object[]{
-				"LH ",
-				"HS ",
-				"  S",
-				'L',"logWood",
-				'S',"stickWood",
-				'H',"rootsHerb"
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.thatch,2),true,new Object[]{
+		}).setMirrored(true).setRegistryName(getRL("staff")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("thatch"),new ItemStack(RegistryManager.thatch,2),true,new Object[]{
 				"SS",
 				"SS",
 				'S',RegistryManager.straw
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.wood_shears,1),true,new Object[]{
+		}).setRegistryName(getRL("thatch")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("wood_shears"),new ItemStack(RegistryManager.wood_shears,1),true,new Object[]{
 				" P ",
 				"P P",
 				"SP ",
 				'S',"stickWood",
 				'P',"plankWood"
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.wood_knife,1),true,new Object[]{
+		}).setMirrored(true).setRegistryName(getRL("wood_shears")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("wood_knife"),new ItemStack(RegistryManager.wood_knife,1),true,new Object[]{
 				"  X",
 				" X ",
 				"S  ",
 				'S',"stickWood",
 				'X',"plankWood"
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.stone_knife,1),true,new Object[]{
+		}).setMirrored(true).setRegistryName(getRL("wood_knife")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("stone_knife"),new ItemStack(RegistryManager.stone_knife,1),true,new Object[]{
 				"  X",
 				" X ",
 				"S  ",
 				'S',"stickWood",
 				'X',"cobblestone"
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.iron_knife,1),true,new Object[]{
+		}).setMirrored(true).setRegistryName(getRL("stone_knife")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("iron_knife"),new ItemStack(RegistryManager.iron_knife,1),true,new Object[]{
 				"  X",
 				" X ",
 				"S  ",
 				'S',"stickWood",
 				'X',"ingotIron"
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.gold_knife,1),true,new Object[]{
+		}).setMirrored(true).setRegistryName(getRL("iron_knife")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("gold_knife"),new ItemStack(RegistryManager.gold_knife,1),true,new Object[]{
 				"  X",
 				" X ",
 				"S  ",
 				'S',"stickWood",
 				'X',"ingotGold"
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.diamond_knife,1),true,new Object[]{
+		}).setMirrored(true).setRegistryName(getRL("gold_knife")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("diamond_knife"),new ItemStack(RegistryManager.diamond_knife,1),true,new Object[]{
 				"  X",
 				" X ",
 				"S  ",
 				'S',"stickWood",
 				'X',"gemDiamond"
-		}));
+		}).setMirrored(true).setRegistryName(getRL("diamond_knife")));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.wood_hammer,1),true,new Object[]{
+		event.getRegistry().register(new ShapedOreRecipe(getRL("wood_hammer"),new ItemStack(RegistryManager.wood_hammer,1),true,new Object[]{
 				"XSX",
 				"XSX",
 				" S ",
 				'S',"stickWood",
 				'X',"plankWood"
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.stone_hammer,1),true,new Object[]{
+		}).setRegistryName(getRL("wood_hammer")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("stone_hammer"),new ItemStack(RegistryManager.stone_hammer,1),true,new Object[]{
 				"XSX",
 				"XSX",
 				" S ",
 				'S',"stickWood",
 				'X',"cobblestone"
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.iron_hammer,1),true,new Object[]{
+		}).setRegistryName(getRL("stone_hammer")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("iron_hammer"),new ItemStack(RegistryManager.iron_hammer,1),true,new Object[]{
 				"XSX",
 				"XSX",
 				" S ",
 				'S',"stickWood",
 				'X',"ingotIron"
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.gold_hammer,1),true,new Object[]{
+		}).setRegistryName(getRL("iron_hammer")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("gold_hammer"),new ItemStack(RegistryManager.gold_hammer,1),true,new Object[]{
 				"XSX",
 				"XSX",
 				" S ",
 				'S',"stickWood",
 				'X',"ingotGold"
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.diamond_hammer,1),true,new Object[]{
+		}).setRegistryName(getRL("gold_hammer")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("diamond_hammer"),new ItemStack(RegistryManager.diamond_hammer,1),true,new Object[]{
 				"XSX",
 				"XSX",
 				" S ",
 				'S',"stickWood",
 				'X',"gemDiamond"
-		}));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(RegistryManager.firestarter,1),new Object[]{
+		}).setRegistryName(getRL("diamond_hammer")));
+		event.getRegistry().register(new ShapelessOreRecipe(getRL("firestarter"),new ItemStack(RegistryManager.firestarter,1),new Object[]{
 				"stickWood","stickWood",new ItemStack(Items.COAL,1,1)
-		}));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.bonfire,1),true,new Object[]{
+		}).setRegistryName(getRL("firestarter")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("bonfire"),new ItemStack(RegistryManager.bonfire,1),true,new Object[]{
 				" L ",
 				"LWL",
 				"SCS",
@@ -247,28 +243,52 @@ public class RecipeRegistry {
 				'L',"logWood",
 				'W',"rootsHerb",
 				'C',new ItemStack(Items.COAL,1,1)
-		}));
-		GameRegistry.addRecipe(new RecipeHammerSmash(new ItemStack(Items.SKULL,1,1), new ItemStack(RegistryManager.dwindle_dust,4)));
-		GameRegistry.addRecipe(new RecipeHammerSmash(new ItemStack(Items.TOTEM,1,1), new ItemStack(RegistryManager.totem_fragment,4)));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(RegistryManager.runestone_brick,4),true,new Object[]{
+		}).setRegistryName(getRL("bonfire")));
+		event.getRegistry().register(new RecipeHammerSmash(new ItemStack(Items.SKULL,1,1), new ItemStack(RegistryManager.dwindle_dust,4)).setRegistryName(getRL("dwindle_dust")));
+		event.getRegistry().register(new RecipeHammerSmash(new ItemStack(Items.TOTEM_OF_UNDYING,1,1), new ItemStack(RegistryManager.totem_fragment,4)).setRegistryName(getRL("totem_fragment")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("runestone_brick"),new ItemStack(RegistryManager.runestone_brick,4),true,new Object[]{
 				"SS",
 				"SS",
 				'S',RegistryManager.runestone
-		}));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(RegistryManager.chiseled_runestone,1),new Object[]{
+		}).setRegistryName(getRL("runestone_brick")));
+		event.getRegistry().register(new ShapelessOreRecipe(getRL("chiseled_runestone"),new ItemStack(RegistryManager.chiseled_runestone,1),new Object[]{
 				new ItemStack(RegistryManager.runestone,1),new ItemStack(Items.FLINT,1)
-		}));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(RegistryManager.book_base,1),new Object[]{
+		}).setRegistryName(getRL("chiseled_runestone")));
+		event.getRegistry().register(new ShapelessOreRecipe(getRL("book_base"),new ItemStack(RegistryManager.book_base,1),new Object[]{
 				new ItemStack(RegistryManager.bark_birch,1),new ItemStack(RegistryManager.bark_birch,1),new ItemStack(RegistryManager.bark_birch,1),new ItemStack(Items.LEATHER,1)
-		}));
-		
-		RecipeSorter.register("recipe_book_copying", RecipeBookCopying.class, Category.SHAPELESS, "");
-		RecipeSorter.register("recipe_powder_mash", RecipePowderMash.class, Category.SHAPELESS, "");
-		RecipeSorter.register("recipe_pouch_clear", RecipePouchClear.class, Category.SHAPELESS, "");
-		RecipeSorter.register("recipe_hammer_smash", RecipeHammerSmash.class, Category.SHAPELESS, "");
-		
-		GameRegistry.addRecipe(new RecipeBookCopying(new ItemStack(RegistryManager.herblore_book,1)));
-		GameRegistry.addRecipe(new RecipeBookCopying(new ItemStack(RegistryManager.spellcraft_book,1)));
+		}).setRegistryName(getRL("book_base")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("herblore_book"),new ItemStack(RegistryManager.herblore_book,1),true,new Object[]{
+				" P ",
+				"FBI",
+				" D ",
+				'P',Blocks.RED_FLOWER,
+				'D',Blocks.YELLOW_FLOWER,
+				'F',Items.FEATHER,
+				'B',RegistryManager.book_base,
+				'I',new ItemStack(Items.DYE,1,0)
+		}).setRegistryName(getRL("herblore_book")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("spellcraft_book"),new ItemStack(RegistryManager.spellcraft_book,1),true,new Object[]{
+				" E ",
+				"FBI",
+				" M ",
+				'E',Items.FERMENTED_SPIDER_EYE,
+				'M',Items.MUTTON,
+				'F',Items.FEATHER,
+				'B',RegistryManager.book_base,
+				'I',new ItemStack(Items.DYE,1,0)
+		}).setRegistryName(getRL("spellcraft_book")));
+		event.getRegistry().register(new ShapedOreRecipe(getRL("ritual_book"),new ItemStack(RegistryManager.ritual_book,1),true,new Object[]{
+				"MRT",
+				"FBI",
+				"TDM",
+				'R',RegistryManager.runestone,
+				'D',new ItemStack(Blocks.SAPLING,1,2),
+				'T',RegistryManager.terra_moss_ball,
+				'M',RegistryManager.moonglow_leaf,
+				'F',Items.FEATHER,
+				'B',RegistryManager.book_base,
+				'I',new ItemStack(Items.DYE,1,0)
+		}).setRegistryName(getRL("ritual_book")));
 		
 		FurnaceRecipes.instance().addSmeltingRecipe(new ItemStack(Blocks.TALLGRASS,1,1), new ItemStack(RegistryManager.straw,2), 1.0f);
 		

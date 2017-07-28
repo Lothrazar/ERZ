@@ -73,7 +73,7 @@ public class ItemRiftWand extends ItemBase {
 				proj.initCustom(player.posX+offX, 
 						player.posY+player.getEyeHeight(), 
 						player.posZ+offZ,  
-						player.getLookVec().xCoord*4.0, player.getLookVec().yCoord*4.0, player.getLookVec().zCoord*4.0, 8.0f, player.getUniqueID());
+						player.getLookVec().x*4.0, player.getLookVec().y*4.0, player.getLookVec().z*4.0, 8.0f, player.getUniqueID());
 				world.spawnEntity(proj);
 			}
 			player.swingArm(hand);

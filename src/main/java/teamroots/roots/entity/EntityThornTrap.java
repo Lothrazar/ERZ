@@ -110,7 +110,7 @@ public class EntityThornTrap extends Entity {
 						if (!(entities.get(j) instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled()) &&
 								entities.get(j).getUniqueID().compareTo(player.getUniqueID()) != 0){
 							entities.get(j).attackEntityFrom((DamageSource.CACTUS).causeMobDamage(player), 6.0f);
-							entities.get(j).setLastAttacker(player);
+							entities.get(j).setLastAttackedEntity(player);
 							entities.get(j).setRevengeTarget(player);
 						}
 					}

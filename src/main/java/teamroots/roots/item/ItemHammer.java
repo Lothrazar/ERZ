@@ -50,7 +50,6 @@ public class ItemHammer extends ItemTool implements IModeledItem {
 		if (addToTab){
 			setCreativeTab(Roots.tab);
 		}
-		GameRegistry.register(this);
 		this.setContainerItem(this);
 	}
 	

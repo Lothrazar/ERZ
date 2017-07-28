@@ -19,10 +19,10 @@ public class SpellRose extends SpellBase {
 		if (!player.world.isRemote){
 			EntityThornTrap trap = new EntityThornTrap(player.world);
 			trap.setPlayer(player.getUniqueID());
-			trap.setPosition(player.posX+player.getLookVec().xCoord, player.posY+player.getEyeHeight()+player.getLookVec().yCoord, player.posZ+player.getLookVec().zCoord);
-			trap.motionX = player.getLookVec().xCoord*0.75f;
-			trap.motionY = player.getLookVec().yCoord*0.75f;
-			trap.motionZ = player.getLookVec().zCoord*0.75f;
+			trap.setPosition(player.posX+player.getLookVec().x, player.posY+player.getEyeHeight()+player.getLookVec().y, player.posZ+player.getLookVec().z);
+			trap.motionX = player.getLookVec().x*0.75f;
+			trap.motionY = player.getLookVec().y*0.75f;
+			trap.motionZ = player.getLookVec().z*0.75f;
 			player.world.spawnEntity(trap);
 		}
 	}

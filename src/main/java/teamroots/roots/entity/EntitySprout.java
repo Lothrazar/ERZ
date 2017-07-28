@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.BlockRedstoneLight;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityCreature;
@@ -56,11 +57,14 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
+import teamroots.roots.ConfigManager;
 import teamroots.roots.Roots;
+import teamroots.roots.util.Misc;
 
 public class EntitySprout extends EntityCreature {
 	public static final DataParameter<Integer> variant = EntityDataManager.<Integer>createKey(EntitySprout.class, DataSerializers.VARINT);
-	
+
+	public SoundEvent ambientSound = new SoundEvent(new ResourceLocation("roots:darkoAmbient"));
 	public EntitySprout(World world){
 		super(world);
 		setSize(0.5f,1.0f);
@@ -108,6 +112,11 @@ public class EntitySprout extends EntityCreature {
     @Override
     public void onUpdate(){
     	super.onUpdate();
+    	if (world.isRemote){
+    		if (Misc.random.nextInt(480) == 0 && ConfigManager.enableSilliness && Minecraft.getMinecraft().player.getGameProfile().getName().equalsIgnoreCase("Darkosto")){
+    			world.playSound(Minecraft.getMinecraft().player, getPosition(), ambientSound, SoundCategory.NEUTRAL, 1.0f, 0.8f+0.4f*Misc.random.nextFloat());
+    		}
+        }
     	this.rotationYaw = this.rotationYawHead;
     }
 

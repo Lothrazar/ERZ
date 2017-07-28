@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -13,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -86,7 +88,7 @@ public class ItemPouch extends ItemBase {
 	
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced){
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced){
 		if (stack.hasTagCompound()){
 			if (stack.getTagCompound().hasKey("quantity")){
 				tooltip.add(I18n.format(stack.getTagCompound().getString("plant")+".name")+I18n.format("roots.tooltip.pouch_divider")+(int)Math.ceil(stack.getTagCompound().getDouble("quantity")));

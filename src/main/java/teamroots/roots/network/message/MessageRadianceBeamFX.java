@@ -98,7 +98,7 @@ public class MessageRadianceBeamFX implements IMessage {
     					if (hitSide.getZ() != 0){
     						zCoeff = -1f;
     					}
-						direction = new Vec3d(direction.xCoord*xCoeff,direction.yCoord*yCoeff,direction.zCoord*zCoeff);
+						direction = new Vec3d(direction.x*xCoeff,direction.y*yCoeff,direction.z*zCoeff);
     					distance -= result.hitVec.subtract(player.getPositionVector()).lengthVector();
     					if (distance > 0){
     						RayTraceResult result2 = player.world.rayTraceBlocks(result.hitVec.add(direction.scale(0.1)), result.hitVec.add(direction.scale(distance)));
@@ -118,7 +118,7 @@ public class MessageRadianceBeamFX implements IMessage {
     		    					if (hitSide.getZ() != 0){
     		    						zCoeff = -1f;
     		    					}
-    								direction = new Vec3d(direction.xCoord*xCoeff,direction.yCoord*yCoeff,direction.zCoord*zCoeff);
+    								direction = new Vec3d(direction.x*xCoeff,direction.y*yCoeff,direction.z*zCoeff);
     								distance -= result2.hitVec.subtract(player.getPositionVector()).lengthVector();
     								if (distance > 0){
     									RayTraceResult result3 = player.world.rayTraceBlocks(result2.hitVec.add(direction.scale(0.1)), result2.hitVec.add(direction.scale(distance)));
@@ -149,9 +149,9 @@ public class MessageRadianceBeamFX implements IMessage {
     				for (int i = 0; i < positions.size()-1; i ++){
     					double dist = positions.get(i).subtract(positions.get(i+1)).lengthVector();
     					for (double j = 0; j < dist; j += 0.15){
-    						double x = positions.get(i).xCoord*(1.0-j/dist)+positions.get(i+1).xCoord*(j/dist);
-    						double y = positions.get(i).yCoord*(1.0-j/dist)+positions.get(i+1).yCoord*(j/dist);
-    						double z = positions.get(i).zCoord*(1.0-j/dist)+positions.get(i+1).zCoord*(j/dist);
+    						double x = positions.get(i).x*(1.0-j/dist)+positions.get(i+1).x*(j/dist);
+    						double y = positions.get(i).y*(1.0-j/dist)+positions.get(i+1).y*(j/dist);
+    						double z = positions.get(i).z*(1.0-j/dist)+positions.get(i+1).z*(j/dist);
     						alphaDist += 0.15;
     						
     						if (random.nextBoolean()){

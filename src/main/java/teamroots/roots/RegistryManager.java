@@ -21,16 +21,19 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.IWorldGenerator;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -75,7 +78,7 @@ public class RegistryManager {
 		blocks.add(runestone_brick = new BlockBase(Material.ROCK,SoundType.STONE,"runestone_brick",true).setIsFullCube(true).setIsOpaqueCube(true).setHardness(1.2f).setLightOpacity(15));
 		blocks.add(chiseled_runestone = new BlockBase(Material.ROCK,SoundType.STONE,"chiseled_runestone",true).setIsFullCube(true).setIsOpaqueCube(true).setHardness(1.2f).setLightOpacity(15));
 		blocks.add(fairy_dust = new BlockFairyDust(Material.CIRCUITS,SoundType.SNOW,"fairy_dust",true).setIsFullCube(false).setIsOpaqueCube(false).setBoundingBox(new AxisAlignedBB(0.3125,0.3125,0.3125,0.6875,0.6875,0.6875)).setHardness(0.1f).setLightOpacity(0).setLightLevel(1.0f));
-		blocks.add(offertory_plate = new BlockOffertoryPlate(Material.ROCK,SoundType.STONE,"offertory_plate",true).setIsFullCube(false).setIsOpaqueCube(false).setBoundingBox(new AxisAlignedBB(0.125,0.0,0.125,0.875,0.875,0.875)).setHardness(1.6f).setLightOpacity(0));
+		//blocks.add(offertory_plate = new BlockOffertoryPlate(Material.ROCK,SoundType.STONE,"offertory_plate",true).setIsFullCube(false).setIsOpaqueCube(false).setBoundingBox(new AxisAlignedBB(0.125,0.0,0.125,0.875,0.875,0.875)).setHardness(1.6f).setLightOpacity(0));
 		
 		items.add(moontinged_seed = new ItemMoonglowSeed("moontinged_seed",true));
 		items.add(moonglow_leaf = new ItemHerb("moonglow_leaf",true));
@@ -116,9 +119,9 @@ public class RegistryManager {
 		items.add(totem_fragment = new ItemSpiritHerb("totem_fragment",true));
 		items.add(book_base = new ItemBase("book_base",true));
 		items.add(ritual_book = new ItemBook("ritual_book",true, 4));
-		items.add(fairy_charm = new ItemFairyCharm("fairy_charm",true));
-		items.add(spritely_brew = new ItemSpritelyBrew("spritely_brew",true));
-		items.add(rift_wand = new ItemRiftWand("rift_wand",true));
+		//items.add(fairy_charm = new ItemFairyCharm("fairy_charm",true));
+		//items.add(spritely_brew = new ItemSpritelyBrew("spritely_brew",true));
+		//items.add(rift_wand = new ItemRiftWand("rift_wand",true));
 		
 		GameRegistry.registerWorldGenerator(worldGenStandingStones = new WorldGenStandingStones(), 100);
 		GameRegistry.registerWorldGenerator(worldGenHut = new WorldGenHut(), 101);
@@ -171,9 +174,29 @@ public class RegistryManager {
 		GameRegistry.registerTileEntity(TileEntityBonfire.class,Roots.MODID+":tile_entity_bonfire");
 		GameRegistry.registerTileEntity(TileEntityOffertoryPlate.class,Roots.MODID+":tile_entity_offertory_plate");
 	}
+    
+    @SubscribeEvent
+    public void registerBlocks(RegistryEvent.Register<Block> event){
+    	for (Block b : blocks){
+    		event.getRegistry().register(b);
+    	}
+    }
+    
+    @SubscribeEvent
+    public void registerItems(RegistryEvent.Register<Item> event){
+    	for (Item i : items){
+    		event.getRegistry().register(i);
+    	}
+    	for (Block b : blocks){
+    		if (b instanceof IBlock){
+    			event.getRegistry().register(((IBlock)b).getItemBlock());
+    		}
+    	}
+    }
 	
 	@SideOnly(Side.CLIENT)
-    public static void registerRendering(){
+	@SubscribeEvent
+    public void registerRendering(ModelRegistryEvent event){
 		for (int i = 0; i < blocks.size(); i ++){
 			if (blocks.get(i) instanceof IModeledBlock){
 				((IModeledBlock)blocks.get(i)).initModel();

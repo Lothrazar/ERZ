@@ -5,12 +5,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import teamroots.roots.RegistryManager;
 import teamroots.roots.item.IHerb;
 import teamroots.roots.item.ItemPestle;
 import teamroots.roots.item.ItemPouch;
 
-public class RecipePowderMash implements IRecipe {
+public class RecipePowderMash extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
 	@Override
 	public boolean matches(InventoryCrafting inv, World worldIn) {
@@ -74,11 +75,6 @@ public class RecipePowderMash implements IRecipe {
 	}
 
 	@Override
-	public int getRecipeSize() {
-		return 4;
-	}
-
-	@Override
 	public ItemStack getRecipeOutput() {
 		return new ItemStack(RegistryManager.pouch,1);
 	}
@@ -98,6 +94,11 @@ public class RecipePowderMash implements IRecipe {
 		}
 		inv.clear();
 		return remaining;
+	}
+
+	@Override
+	public boolean canFit(int width, int height) {
+		return width*height > 2;
 	}
 
 }

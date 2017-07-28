@@ -17,7 +17,6 @@ public class ItemShearsBase extends ItemShears implements IModeledItem {
 			setCreativeTab(Roots.tab);
 		}
 		this.setMaxDamage(durability);
-		GameRegistry.register(this);
 	}
 
 	@Override

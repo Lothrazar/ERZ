@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderEntity;
@@ -65,7 +65,7 @@ public class RenderPetalShell<EntityPetalShell> extends RenderEntity implements 
 			float ref = GL11.glGetFloat(GL11.GL_ALPHA_TEST_REF);
 			GlStateManager.alphaFunc(GL11.GL_ALWAYS, 0);
 	        Tessellator tess = Tessellator.getInstance();
-	        VertexBuffer buff = tess.getBuffer();
+	        BufferBuilder buff = tess.getBuffer();
 	        
 	        buff.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_LMAP_COLOR);
 	        for (float i = 0; i < 2.0f*Math.PI; i += (float)(Math.PI*2.0f)/(float)shell.getDataManager().get(shell.charge)){

@@ -85,21 +85,21 @@ public class EntityFireJet extends Entity {
 				this.posX = player.posX;
 				this.posY = player.posY;
 				this.posZ = player.posZ;
-				motionX = (float)player.getLookVec().xCoord*0.5f;
-				motionY = (float)player.getLookVec().yCoord*0.5f;
-				motionZ = (float)player.getLookVec().zCoord*0.5f;
+				motionX = (float)player.getLookVec().x*0.5f;
+				motionY = (float)player.getLookVec().y*0.5f;
+				motionZ = (float)player.getLookVec().z*0.5f;
 				rotationYaw = -90.0f-player.rotationYaw;
 				for (float i = 0; i < 3; i ++){
-					float vx = (float)player.getLookVec().xCoord*3.0f;
-					float vy = (float)player.getLookVec().yCoord*3.0f;
-					float vz = (float)player.getLookVec().zCoord*3.0f;
+					float vx = (float)player.getLookVec().x*3.0f;
+					float vy = (float)player.getLookVec().y*3.0f;
+					float vz = (float)player.getLookVec().z*3.0f;
 					List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX+vx*i-1.5,posY+vy*i-1.5,posZ+vz*i-1.5,posX+vx*i+1.5,posY+vy*i+1.5,posZ+vz*i+1.5));
 					for (int j = 0; j < entities.size(); j ++){
 						if (!(entities.get(j) instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled()) && 
 								entities.get(j).getUniqueID().compareTo(player.getUniqueID()) != 0){
 							entities.get(j).setFire(4);
 							entities.get(j).attackEntityFrom((DamageSource.IN_FIRE).causeMobDamage(player), 2.0f);
-							entities.get(j).setLastAttacker(player);
+							entities.get(j).setLastAttackedEntity(player);
 							entities.get(j).setRevengeTarget(player);
 						}
 					}

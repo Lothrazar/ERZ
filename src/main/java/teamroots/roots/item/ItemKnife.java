@@ -49,7 +49,6 @@ public class ItemKnife extends ItemTool implements IModeledItem {
 		if (addToTab){
 			setCreativeTab(Roots.tab);
 		}
-		GameRegistry.register(this);
 	}
 	
 	@Override

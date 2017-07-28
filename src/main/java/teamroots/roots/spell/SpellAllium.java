@@ -34,7 +34,7 @@ public class SpellAllium extends SpellBase {
 					e.attackEntityFrom(DamageSource.GENERIC.causeMobDamage(player), 1.0f);
 					e.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("poison"),80,0));
 					e.setRevengeTarget(player);
-					e.setLastAttacker(player);
+					e.setLastAttackedEntity(player);
 				}
 			}
 			PacketHandler.INSTANCE.sendToAll(new MessageAcidCloudFX(player.posX,player.posY+player.getEyeHeight(),player.posZ));

@@ -27,9 +27,9 @@ public class SpellPinkTulip extends SpellBase {
 			boolean foundTarget = false;
 			PacketHandler.INSTANCE.sendToAll(new MessageLifeDrainAbsorbFX(player.getUniqueID(),player.posX,player.posY+player.getEyeHeight(),player.posZ));
 			for (int i = 0; i < 4 && !foundTarget; i ++){
-				double x = player.posX+player.getLookVec().xCoord*3.0*(float)i;
-				double y = player.posY+player.getEyeHeight()+player.getLookVec().yCoord*3.0*(float)i;
-				double z = player.posZ+player.getLookVec().zCoord*3.0*(float)i;
+				double x = player.posX+player.getLookVec().x*3.0*(float)i;
+				double y = player.posY+player.getEyeHeight()+player.getLookVec().y*3.0*(float)i;
+				double z = player.posZ+player.getLookVec().z*3.0*(float)i;
 				List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-2.0,y-2.0,z-2.0,x+2.0,y+2.0,z+2.0));
 				for (EntityLivingBase e : entities){
 					if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled()) &&
@@ -38,7 +38,7 @@ public class SpellPinkTulip extends SpellBase {
 						if (e.hurtTime <= 0 && !e.isDead){
 							e.attackEntityFrom(DamageSource.WITHER.causeMobDamage(player), 1.0f);
 							e.setRevengeTarget(player);
-							e.setLastAttacker(player);
+							e.setLastAttackedEntity(player);
 							player.heal(0.5f);
 						}
 					}

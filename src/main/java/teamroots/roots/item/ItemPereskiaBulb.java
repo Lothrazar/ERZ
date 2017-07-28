@@ -17,7 +17,6 @@ public class ItemPereskiaBulb extends ItemSeeds implements IModeledItem, IHerb {
 		if (addToTab){
 			setCreativeTab(Roots.tab);
 		}
-		GameRegistry.register(this);
 	}
 	
 	@Override

@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL20;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.chunk.RenderChunk;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.math.BlockPos;
@@ -17,7 +17,7 @@ public class RenderUtil {
 	public static final float root2over2 = (float)Math.sqrt(2.0f)/2.0f;
 	public static int lightx = 0xF000F0;
 	public static int lighty = 0xF000F0;
-    public static void renderBeam(VertexBuffer buf, double x1, double y1, double z1, double x2, double y2, double z2, float r, float g, float b, float a, float radius, double angle){
+    public static void renderBeam(BufferBuilder buf, double x1, double y1, double z1, double x2, double y2, double z2, float r, float g, float b, float a, float radius, double angle){
 		double yaw = Misc.yawDegreesBetweenPoints(x1, y1, z1, x2, y2, z2);
         double pitch = Misc.pitchDegreesBetweenPoints(x1, y1, z1, x2, y2, z2);
         
@@ -67,7 +67,7 @@ public class RenderUtil {
     	font.drawStringWithShadow(string, x-font.getStringWidth(string)/2, y, color);
     }
 	
-	public static void renderAlchemyCircle(VertexBuffer buf, double x, double y, double z, float r, float g, float b, float a, double radius, double angle){
+	public static void renderAlchemyCircle(BufferBuilder buf, double x, double y, double z, float r, float g, float b, float a, double radius, double angle){
 		double sign = 1;
 		if (Minecraft.getMinecraft().player.posY+Minecraft.getMinecraft().player.getEyeHeight() < y){
 			sign = -1;
@@ -124,7 +124,7 @@ public class RenderUtil {
 	 * 
 	 * Order the textures and inversions like so: up (pos Y), down (neg Y), north (neg Z), south (pos Z), west (neg X), east (pos X)
 	 */
-	public static void addBox(VertexBuffer b, double x1, double y1, double z1, double x2, double y2, double z2, StructUV[] textures, int[] inversions){
+	public static void addBox(BufferBuilder b, double x1, double y1, double z1, double x2, double y2, double z2, StructUV[] textures, int[] inversions){
 		//BOTTOM FACE
 		b.pos(x1, y1, z1).tex(textures[0].minU,textures[0].minV).color(255, 255, 255, 255).normal(0, -1*inversions[0], 0).endVertex();
 		b.pos(x1, y1, z2).tex(textures[0].maxU,textures[0].minV).color(255, 255, 255, 255).normal(0, -1*inversions[0], 0).endVertex();
@@ -157,7 +157,7 @@ public class RenderUtil {
 		b.pos(x2, y2, z1).tex(textures[5].minU,textures[5].maxV).color(255, 255, 255, 255).normal(1*inversions[5], 0, 0).endVertex();
 	}
 	
-	public static void addBoxWithSprite(VertexBuffer b, double x1, double y1, double z1, double x2, double y2, double z2, TextureAtlasSprite sprite, StructUV[] textures, int[] inversions){
+	public static void addBoxWithSprite(BufferBuilder b, double x1, double y1, double z1, double x2, double y2, double z2, TextureAtlasSprite sprite, StructUV[] textures, int[] inversions){
 		float spriteW = sprite.getMaxU()-sprite.getMinU();
 		float spriteH = sprite.getMaxV()-sprite.getMinV();
 		
@@ -193,7 +193,7 @@ public class RenderUtil {
 		b.pos(x2, y2, z1).tex(sprite.getMinU()+textures[5].minU*spriteW,sprite.getMinV()+textures[5].maxV*spriteH).color(255, 255, 255, 255).normal(1*inversions[5], 0, 0).endVertex();
 	}
 
-	public static void addRune(VertexBuffer buf, double x, double y, double z, double minU, double minV, double maxU, double maxV, float r, float g, float b, float a){
+	public static void addRune(BufferBuilder buf, double x, double y, double z, double minU, double minV, double maxU, double maxV, float r, float g, float b, float a){
 		int lightx = 0xF000F0;
         int lighty = 0xF000F0;
 		buf.pos(x, y, z).tex(minU,minV).lightmap(lightx, lighty).color(r, g, b, a).endVertex();
@@ -202,7 +202,7 @@ public class RenderUtil {
 		buf.pos(x, y, z+1).tex(minU,maxV).lightmap(lightx, lighty).color(r, g, b, a).endVertex();
 	}
 
-	public static void addBoxExt(VertexBuffer b, double x1, double y1, double z1, double x2, double y2, double z2, StructUV[] textures, int[] inversions, boolean[] faceToggles){
+	public static void addBoxExt(BufferBuilder b, double x1, double y1, double z1, double x2, double y2, double z2, StructUV[] textures, int[] inversions, boolean[] faceToggles){
 		//BOTTOM FACE
 		if (faceToggles[0]){
 			b.pos(x1, y1, z1).tex(textures[0].minU,textures[0].minV).color(255, 255, 255, 255).normal(0, -1*inversions[0], 0).endVertex();
@@ -248,7 +248,7 @@ public class RenderUtil {
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public static void drawQuadGui(VertexBuffer vertexbuffer, float z, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, float minU, float minV, float maxU, float maxV, float r, float g, float b, float a){
+	public static void drawQuadGui(BufferBuilder vertexbuffer, float z, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, float minU, float minV, float maxU, float maxV, float r, float g, float b, float a){
 		float f = 0.00390625F;
         float f1 = 0.00390625F;
         vertexbuffer.pos(x1 + 0.0F, y1 + 0.0F, z).tex(minU,maxV).color(r, g, b, a).endVertex();
@@ -258,7 +258,7 @@ public class RenderUtil {
     }
 	
 	@SideOnly(Side.CLIENT)
-	public static void drawQuadGuiExt(VertexBuffer vertexbuffer, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int minU, int minV, int maxU, int maxV, int texW, int texH){
+	public static void drawQuadGuiExt(BufferBuilder vertexbuffer, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int minU, int minV, int maxU, int maxV, int texW, int texH){
 		float mU = (float)minU / (float)texW;
 		float mV = (float)minV / (float)texH;
 		float xU = (float)maxU / (float)texW;
@@ -282,15 +282,15 @@ public class RenderUtil {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static void drawColorRectBatched(VertexBuffer vertexbuffer, double xCoord, double yCoord, double zLevel, double widthIn, double heightIn,
+	public static void drawColorRectBatched(BufferBuilder vertexbuffer, double x, double y, double zLevel, double widthIn, double heightIn,
 			float r1, float g1, float b1, float a1,
 			float r2, float g2, float b2, float a2,
 			float r3, float g3, float b3, float a3,
 			float r4, float g4, float b4, float a4)
     {
-        vertexbuffer.pos((double)(xCoord + 0), (double)(yCoord + heightIn), (double)zLevel).color(r1, g1, b1, a1).endVertex();
-        vertexbuffer.pos((double)(xCoord + widthIn), (double)(yCoord + heightIn), (double)zLevel).color(r2, g2, b2, a2).endVertex();
-        vertexbuffer.pos((double)(xCoord + widthIn), (double)(yCoord + 0), (double)zLevel).color(r3, g3, b3, a3).endVertex();
-        vertexbuffer.pos((double)(xCoord + 0), (double)(yCoord + 0), (double)zLevel).color(r4, g4, b4, a4).endVertex();
+        vertexbuffer.pos((double)(x + 0), (double)(y + heightIn), (double)zLevel).color(r1, g1, b1, a1).endVertex();
+        vertexbuffer.pos((double)(x + widthIn), (double)(y + heightIn), (double)zLevel).color(r2, g2, b2, a2).endVertex();
+        vertexbuffer.pos((double)(x + widthIn), (double)(y + 0), (double)zLevel).color(r3, g3, b3, a3).endVertex();
+        vertexbuffer.pos((double)(x + 0), (double)(y + 0), (double)zLevel).color(r4, g4, b4, a4).endVertex();
     }
 }

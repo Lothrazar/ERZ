@@ -16,13 +16,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.roots.capability.RootsCapabilityManager;
 import teamroots.roots.proxy.CommonProxy;
+import teamroots.roots.recipe.RecipeRegistry;
 
 @Mod(modid = Roots.MODID, name = Roots.MODNAME, version = Roots.VERSION)
 public class Roots
 {
     public static final String MODID = "roots";
     public static final String MODNAME = "Roots";
-    public static final String VERSION = "0.020";
+    public static final String VERSION = "0.025";
 	public static final String DEPENDENCIES = "";
 	
     @SidedProxy(clientSide = "teamroots.roots.proxy.ClientProxy",serverSide = "teamroots.roots.proxy.ServerProxy")
@@ -47,6 +48,8 @@ public class Roots
 	public void preInit(FMLPreInitializationEvent event){
 		MinecraftForge.EVENT_BUS.register(new EventManager());
 		MinecraftForge.EVENT_BUS.register(new ConfigManager());
+		MinecraftForge.EVENT_BUS.register(new RegistryManager());
+		MinecraftForge.EVENT_BUS.register(new RecipeRegistry());
 		MinecraftForge.EVENT_BUS.register(new RootsCapabilityManager());
         ConfigManager.init(event.getSuggestedConfigurationFile());
 		proxy.preInit(event);

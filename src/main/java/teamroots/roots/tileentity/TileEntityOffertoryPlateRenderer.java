@@ -20,8 +20,8 @@ import teamroots.roots.util.NoiseGenUtil;
 public class TileEntityOffertoryPlateRenderer extends TileEntitySpecialRenderer {
 
 	@Override
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z,
-			float partialTicks, int destroyStage) {
+	public void render(TileEntity te, double x, double y, double z,
+			float partialTicks, int destroyStage, float alpha) {
 		if (te instanceof TileEntityOffertoryPlate){
 			TileEntityOffertoryPlate tei = (TileEntityOffertoryPlate)te;
 			if (tei.inventory.getStackInSlot(0) != ItemStack.EMPTY){

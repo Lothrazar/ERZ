@@ -13,8 +13,8 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBonfireRenderer extends TileEntitySpecialRenderer {
 	@Override
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z,
-			float partialTicks, int destroyStage) {
+	public void render(TileEntity te, double x, double y, double z,
+			float partialTicks, int destroyStage, float alpha) {
 		if (te instanceof TileEntityBonfire){
 			TileEntityBonfire tem = (TileEntityBonfire)te;
 			ArrayList<ItemStack> renderItems = new ArrayList<ItemStack>();
@@ -31,7 +31,7 @@ public class TileEntityBonfireRenderer extends TileEntitySpecialRenderer {
 				item.hoverStart = 0;
 				double shifted = tem.ticker + partialTicks + i * (360.0/renderItems.size());
 				Random random = new Random();
-				random.setSeed(item.getEntityItem().hashCode());
+				random.setSeed(item.getItem().hashCode());
 				GL11.glTranslated(x+0.5, y+0.5+0.1*Math.sin(Math.toRadians((shifted*4.0))), z+0.5);
 				GL11.glRotated(shifted, 0, 1, 0);
 				GL11.glTranslated(-0.5,0,0);

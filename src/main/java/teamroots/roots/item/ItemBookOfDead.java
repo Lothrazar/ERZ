@@ -103,13 +103,13 @@ public class ItemBookOfDead extends ItemBase {
 	
 	@Override
 	public boolean onEntityItemUpdate(EntityItem item){
-		if (!item.getEntityItem().hasTagCompound()){
-			item.getEntityItem().setTagCompound(new NBTTagCompound());
+		if (!item.getItem().hasTagCompound()){
+			item.getItem().setTagCompound(new NBTTagCompound());
 		}
-		if (!item.getEntityItem().getTagCompound().hasKey(Constants.BOOK_OF_THE_DEAD_LIST)){
-			item.getEntityItem().getTagCompound().setTag(Constants.BOOK_OF_THE_DEAD_LIST, new NBTTagList());
+		if (!item.getItem().getTagCompound().hasKey(Constants.BOOK_OF_THE_DEAD_LIST)){
+			item.getItem().getTagCompound().setTag(Constants.BOOK_OF_THE_DEAD_LIST, new NBTTagList());
 		}
-		if (item.getEntityItem().getTagCompound().getTagList(Constants.BOOK_OF_THE_DEAD_LIST, 10).tagCount() < 13){
+		if (item.getItem().getTagCompound().getTagList(Constants.BOOK_OF_THE_DEAD_LIST, 10).tagCount() < 13){
 			List<EntityLivingBase> entities = item.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(item.posX-3.5,item.posY,item.posZ-3.5,item.posX+3.5,item.posY+7,item.posZ+3.5));
 			for (EntityLivingBase e : entities){
 				if (e instanceof ISpecter){
@@ -117,11 +117,11 @@ public class ItemBookOfDead extends ItemBase {
 						ParticleUtil.spawnParticleLineGlow(item.world, (float)e.posX+0.5f*(Misc.random.nextFloat()-0.5f), (float)e.posY+e.height/2.0f+0.5f*(Misc.random.nextFloat()-0.5f), (float)e.posZ+0.5f*(Misc.random.nextFloat()-0.5f), (float)item.posX,(float)item.posY+0.5f,(float)item.posZ, 137, 186, 127, 0.5f, 6.0f, 10);
 					}
 					e.knockBack(item, 0.05f, e.posX-item.posX, e.posZ-item.posZ);
-					if (!e.world.isRemote && Math.pow((e.posX-item.posX),2)+Math.pow((e.posY-item.posY),2)+Math.pow((e.posZ-item.posZ),2) < 0.5f && item.getEntityItem().getTagCompound().getTagList(Constants.BOOK_OF_THE_DEAD_LIST, 10).tagCount() < 13){
+					if (!e.world.isRemote && Math.pow((e.posX-item.posX),2)+Math.pow((e.posY-item.posY),2)+Math.pow((e.posZ-item.posZ),2) < 0.5f && item.getItem().getTagCompound().getTagList(Constants.BOOK_OF_THE_DEAD_LIST, 10).tagCount() < 13){
 						NBTTagCompound tag = new NBTTagCompound();
 						tag.setString(Constants.TRAP_PAPER_ENTITY_TAG, EntityRegistry.getEntry(e.getClass()).getRegistryName().toString());
 						tag.setTag(Constants.TRAP_PAPER_ENTITY_DATA_TAG, e.getEntityData());
-						item.getEntityItem().getTagCompound().getTagList(Constants.BOOK_OF_THE_DEAD_LIST, 10).appendTag(tag);
+						item.getItem().getTagCompound().getTagList(Constants.BOOK_OF_THE_DEAD_LIST, 10).appendTag(tag);
 						e.setDead();
 						if (!item.world.isRemote){
 							PacketHandler.INSTANCE.sendToAll(new MessageTrapPaperFX(item.posX,item.posY+0.5f,item.posZ));

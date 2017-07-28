@@ -83,12 +83,12 @@ public class EntityBoost extends Entity {
 				this.posX = player.posX;
 				this.posY = player.posY+1.0;
 				this.posZ = player.posZ;
-				player.motionX = player.getLookVec().xCoord*0.8;
-				player.motionY = player.getLookVec().yCoord*0.8;
-				player.motionZ = player.getLookVec().zCoord*0.8;
-				this.motionX = player.getLookVec().xCoord;
-				this.motionY = player.getLookVec().yCoord;
-				this.motionZ = player.getLookVec().zCoord;
+				player.motionX = player.getLookVec().x*0.8;
+				player.motionY = player.getLookVec().y*0.8;
+				player.motionZ = player.getLookVec().z*0.8;
+				this.motionX = player.getLookVec().x;
+				this.motionY = player.getLookVec().y;
+				this.motionZ = player.getLookVec().z;
 				player.fallDistance = 0;
 				player.velocityChanged = true;
 			}

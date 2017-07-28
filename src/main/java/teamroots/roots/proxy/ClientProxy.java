@@ -17,7 +17,6 @@ public class ClientProxy extends CommonProxy{
 		super.preInit(event);
 		ShaderUtil.init();
 		ModelHolder.init();
-		RegistryManager.registerRendering();
 	}
 	
 	@Override

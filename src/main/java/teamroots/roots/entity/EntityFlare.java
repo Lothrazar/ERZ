@@ -75,12 +75,12 @@ public class EntityFlare extends Entity {
 		lifetime --;
 		if (lifetime <= 0){
 			getEntityWorld().removeEntity(this);
-			this.kill();
+			this.setDead();
 		}
 		getDataManager().set(value, getDataManager().get(value)-0.025f);
 		if (getDataManager().get(value) <= 0){
 			getEntityWorld().removeEntity(this);
-			this.kill();
+			this.setDead();
 		}
 		
 		posX += motionX;

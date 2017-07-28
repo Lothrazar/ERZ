@@ -242,7 +242,7 @@ public class EntityAuspiciousPoint extends Entity implements IEntityRenderingLat
 		//if (!world.isRemote){
 			List<EntityItem> stacks = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(x,height,z,x+1,height+256,z+1));
 			for (int i = 0; i < stacks.size(); i ++){
-				if (Block.getBlockFromItem(stacks.get(i).getEntityItem().getItem()) == Blocks.STONE){
+				if (Block.getBlockFromItem(stacks.get(i).getItem().getItem()) == Blocks.STONE){
 					isShining = true;
 				}
 			}
@@ -250,12 +250,12 @@ public class EntityAuspiciousPoint extends Entity implements IEntityRenderingLat
 				if (stacks.size() > 0){
 					boolean changed = false;
 					for (int i = 0; i < stacks.size() && !changed; i ++){
-						if (Block.getBlockFromItem(stacks.get(i).getEntityItem().getItem()) == Blocks.STONE){
+						if (Block.getBlockFromItem(stacks.get(i).getItem().getItem()) == Blocks.STONE){
 							isShining = true;
 							if (!world.isRemote){
-								ItemStack stack = stacks.get(i).getEntityItem().copy();
+								ItemStack stack = stacks.get(i).getItem().copy();
 								stack.shrink(1);
-								stacks.get(i).setEntityItemStack(stack);
+								stacks.get(i).setItem(stack);
 								world.spawnEntity(new EntityItem(world,stacks.get(i).posX,stacks.get(i).posY,stacks.get(i).posZ,new ItemStack(RegistryManager.runestone,1)));
 								PacketHandler.INSTANCE.sendToAll(new MessageMoonlightSparkleFX(stacks.get(i).posX,stacks.get(i).posY+stacks.get(i).height/2.0f,stacks.get(i).posZ));
 							}

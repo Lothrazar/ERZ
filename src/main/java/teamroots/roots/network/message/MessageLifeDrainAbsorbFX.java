@@ -68,9 +68,9 @@ public class MessageLifeDrainAbsorbFX implements IMessage {
 			EntityPlayer player = world.getPlayerEntityByUUID(message.id);
     		if (player != null){
     			for (int i = 0; i < 4; i ++){
-		    		float x = (float)player.posX+(float)player.getLookVec().xCoord*(6.0f+random.nextFloat()*9.0f)+2.0f*(random.nextFloat()-0.5f);
-		    		float y = (float)player.posY+1.0f+(float)player.getLookVec().yCoord*(6.0f+random.nextFloat()*9.0f)+2.0f*(random.nextFloat()-0.5f);
-		    		float z = (float)player.posZ+(float)player.getLookVec().zCoord*(6.0f+random.nextFloat()*9.0f)+2.0f*(random.nextFloat()-0.5f);
+		    		float x = (float)player.posX+(float)player.getLookVec().x*(6.0f+random.nextFloat()*9.0f)+2.0f*(random.nextFloat()-0.5f);
+		    		float y = (float)player.posY+1.0f+(float)player.getLookVec().y*(6.0f+random.nextFloat()*9.0f)+2.0f*(random.nextFloat()-0.5f);
+		    		float z = (float)player.posZ+(float)player.getLookVec().z*(6.0f+random.nextFloat()*9.0f)+2.0f*(random.nextFloat()-0.5f);
 		    		if (random.nextBoolean()){
 		    			ParticleUtil.spawnParticleLineGlow(world, x, y, z, (float)player.posX, (float)player.posY+1.0f, (float)player.posZ, SpellRegistry.spell_pink_tulip.red1, SpellRegistry.spell_pink_tulip.green1, SpellRegistry.spell_pink_tulip.blue1, 1.0f, 6.0f+6.0f*random.nextFloat(), 40);
 		    		}

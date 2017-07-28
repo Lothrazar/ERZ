@@ -4,9 +4,9 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -121,7 +121,7 @@ public class FeyMagicManager {
 			int y = h/2;
 			
 			Tessellator tess = Tessellator.getInstance();
-			VertexBuffer b = tess.getBuffer();
+			BufferBuilder b = tess.getBuffer();
 			GlStateManager.disableDepth();
 			GlStateManager.disableCull();
 			GlStateManager.enableBlend();

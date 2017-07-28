@@ -14,8 +14,8 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityMortarRenderer extends TileEntitySpecialRenderer {
 
 	@Override
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z,
-			float partialTicks, int destroyStage) {
+	public void render(TileEntity te, double x, double y, double z,
+			float partialTicks, int destroyStage, float alpha) {
 		if (te instanceof TileEntityMortar){
 			TileEntityMortar tem = (TileEntityMortar)te;
 			ArrayList<ItemStack> renderItems = new ArrayList<ItemStack>();
@@ -31,7 +31,7 @@ public class TileEntityMortarRenderer extends TileEntitySpecialRenderer {
 				EntityItem item = new EntityItem(Minecraft.getMinecraft().world,x,y,z,renderItems.get(i));
 				item.hoverStart = 0;
 				Random random = new Random();
-				random.setSeed(item.getEntityItem().hashCode());
+				random.setSeed(item.getItem().hashCode());
 				GL11.glTranslated(x, y, z);
 				GL11.glTranslated(0.475+random.nextFloat()/20.0, 0.05+random.nextFloat()/20.0, 0.475+random.nextFloat()/20.0);
 				GL11.glScaled(0.65,0.65,0.65);

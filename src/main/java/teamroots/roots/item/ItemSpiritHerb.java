@@ -20,7 +20,6 @@ public class ItemSpiritHerb extends ItemSeeds implements IModeledItem {
 		if (addToTab){
 			setCreativeTab(Roots.tab);
 		}
-		GameRegistry.register(this);
 	}
 	
 	@Override

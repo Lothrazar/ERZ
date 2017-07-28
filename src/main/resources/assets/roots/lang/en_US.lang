@@ -98,16 +98,14 @@ roots.book.unknown_title=???
 
 roots.book.herblore_book.intro.title=Tome of Herblore
 roots.book.herblore_book.intro.desc=Within this tome is contained the ancient art of herblore. It bears a listing of the great mystical herbs, their properties, and a description of their synthesis under the moonlight.
-
 roots.book.herblore_book.contents.title=Contents
 roots.book.herblore_book.contents.desc=
-
 roots.book.herblore_book.straw.title=Straw
 roots.book.herblore_book.straw.desc=Straw, the dried and dead form of grass. This hollow substance has none of the life it previously had, nor does it have inherent magical prowess. However, it is a fine material for certain building blocks.
 roots.book.herblore_book.thatch.title=Thatch
 roots.book.herblore_book.thatch.desc=A mass of compounded and tangled straw. It makes a fine roof.
 roots.book.herblore_book.moonlight_circle.title=Moonlight Circle
-roots.book.herblore_book.moonlight_circle.desc=Circles of mossy standing stones may be found. Near midnight, the circle will shine down a moonbeam from the heavens. Growing a certain plant under the central beam, and four other plants under the four smaller beams, will allow the key magical herbs of herblore to be grown. If any of the plants are farmable crops, they must be at the pinnacle of their growth to function.
+roots.book.herblore_book.moonlight_circle.desc=Circles of mossy standing stones may be found. There are small markings on the ground within the circle, four smaller marks and a central symbol. Grow one plant on the central rune, and four other plants on the smaller markings, and a wholly new plant may be grown. Any crops used must be at maximum growth.
 roots.book.herblore_book.wildroot.title=Wildroot
 roots.book.herblore_book.wildroot.desc=Grown under moonlight. Represents capacitance and energy.
 roots.book.herblore_book.moonglow.title=Moonglow
@@ -137,7 +135,7 @@ roots.book.herblore_book.dwindle_dust.desc=Festering ash from a smashed evil sku
 roots.book.herblore_book.totem_fragment.title=Totem Fragments
 roots.book.herblore_book.totem_fragment.desc=Fragmented material from a smashed mystical object. Contains the essence of immortality.
 roots.book.herblore_book.runestone.title=Runestone
-roots.book.herblore_book.runestone.desc=Blued stone, forged from mundane rock under the light of a moonbeam. It bears slight magical properties, and can be carved and chiseled into several forms, detailed in the following pages.
+roots.book.herblore_book.runestone.desc=Blued stone, forged by throwing stone onto the central symbol of a moonlight circle. It bears slight magical properties, and can be carved and chiseled into several forms, detailed in the following pages.
 roots.book.herblore_book.runestone_brick.title=Runestone Bricks
 roots.book.herblore_book.runestone_brick.desc=Simple bricks of runestone.
 roots.book.herblore_book.chiseled_runestone.title=Chiseled Runestone
@@ -193,15 +191,13 @@ roots.book.spellcraft_book.oxeye_daisy.title=Spell: Time Stop
 roots.book.spellcraft_book.oxeye_daisy.desc=Prevents time from progressing in a region around where the spell is cast, for all creatures besides the caster.
 
 roots.book.ritual_book.intro.title=Tome of Natural Arts
-roots.book.ritual_book.intro.desc=Within this tome is contained the knowledge of the natural arts, the great rites of power, and the diplomacy between humanity and the Numena.
+roots.book.ritual_book.intro.desc=Within this tome is contained the knowledge of the natural arts, the great rites of power, and various mystic elements of the world.
 roots.book.ritual_book.contents.title=Contents
 roots.book.ritual_book.contents.desc=
 roots.book.ritual_book.fairy_pools.title=Fairy Circles
 roots.book.ritual_book.fairy_pools.desc=If in your travels you happen across a circle of birch and oak about a shallow pond, take note: such an occurrence is often the sign of a fairy circle. At night these circles come to life with all manner of fairies, glittering in the darkness above the pool.
 roots.book.ritual_book.fairy_dust.title=Fairy Dust
 roots.book.ritual_book.fairy_dust.desc=Dropped from slain fairies, fairy dust possessed myriad mystical powers. The most immediate of these is its luminance: placing a pile of fairy dust on the ground will create a glowing multicolored light. Even more important to the druid, the glow of this light shall reflect the alignment of the nearest Numen, if one exists.
-roots.book.ritual_book.divination_plate.title=Divination Plate
-roots.book.ritual_book.divination_plate.desc=Can display the strength in each alignment, overall alignment, and name of the nearest Numen.
 roots.book.ritual_book.standing_stones.title=Standing Stones
 roots.book.ritual_book.standing_stones.desc=Several powerful rituals require additional measures to keep their magic under a druid's control. In these cases, standing stones are required. Each stone consists of several pieces of ordinary Runestone, capped with a block of Chiseled Runestone. When these stones are necessary, the specific standing stones required and their sizes will be listed in this book.
 roots.book.ritual_book.ritual_life.title=Ritual of Life
@@ -218,13 +214,3 @@ roots.book.ritual_book.ritual_windwall.title=Wall of the Winds
 roots.book.ritual_book.ritual_windwall.desc=Forces away all creatures with a mark of evil with a powerful gust of wind.
 roots.book.ritual_book.ritual_warden.title=Ritual of the Warden
 roots.book.ritual_book.ritual_warden.desc=Perform in a circle of standing stones, with three that are three meters high, and three that are four meters high. Prevents all injury to creatures near it.
-
-roots.book.forbidden_book.intro.title=Tome of the Forbidden Arcane
-roots.book.forbidden_book.intro.desc=Within this tome is contained the knowledge of the control of the shades, the manipulation of souls, and application of hexes, necrotic arcana, and the descent into undeath.
-roots.book.forbidden_book.contents.title=Contents
-roots.book.forbidden_book.contents.desc=
-roots.book.forbidden_book.barrow.title=Barrows
-roots.book.forbidden_book.barrow.desc=Scattered throughout the world may be found ancient abandoned Barrows. While usually tranquil, at night the necrotic energies of the Barrow converge and undead beings may arise. The Barrows are important foci for necromantic rituals.
-roots.book.forbidden_book.ritual_awakening.title=Awakening of the Vile
-roots.book.forbidden_book.ritual_awakening.desc=Perform near to a Barrow. Will call forth Vile Shades from a mysterious plane to the material world.
-dammit=curseforge

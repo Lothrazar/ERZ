@@ -16,6 +16,9 @@ public class ConfigManager {
 	//STRUCTURES
 	public static int gardenChance, fairyPoolChance, stoneCircleChance, hutChance, barrowChance;
 	public static boolean generateLeyMarkers;
+	
+	//MISC
+	public static boolean enableSilliness;
 
 	public static void init(File configFile)
 	{
@@ -36,6 +39,8 @@ public class ConfigManager {
 		fairyPoolChance = config.getInt("fairyPoolChance", "structures", 100, 0, 32767, "Configures the generation chance of the Fairy Pool structure. Higher numbers mean less structures.");
 		gardenChance = config.getInt("gardenChance", "structures", 160, 0, 32767, "Configures the generation chance of the Garden structure. Higher numbers mean less structures.");
 		generateLeyMarkers = config.getBoolean("generateLeyMarkers", "structures", true, "Toggles the generation of Ley Marker structures.");
+		config.addCustomCategoryComment("misc", "Uncategorized settings.");
+		enableSilliness = config.getBoolean("enableSilliness", "misc", true, "Turns various secret silly features on or off. ;)");
 		if (config.hasChanged()){
 			config.save();
 		}

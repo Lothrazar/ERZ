@@ -54,7 +54,7 @@ public class SpellSunflower extends SpellBase {
 					if (hitSide.getZ() != 0){
 						zCoeff = -1f;
 					}
-					direction = new Vec3d(direction.xCoord*xCoeff,direction.yCoord*yCoeff,direction.zCoord*zCoeff);
+					direction = new Vec3d(direction.x*xCoeff,direction.y*yCoeff,direction.z*zCoeff);
 					distance -= result.hitVec.subtract(player.getPositionVector()).lengthVector();
 					if (distance > 0){
 						RayTraceResult result2 = player.world.rayTraceBlocks(result.hitVec, result.hitVec.add(direction.scale(distance)));
@@ -74,7 +74,7 @@ public class SpellSunflower extends SpellBase {
 		    					if (hitSide.getZ() != 0){
 		    						zCoeff = -1f;
 		    					}
-								direction = new Vec3d(direction.xCoord*xCoeff,direction.yCoord*yCoeff,direction.zCoord*zCoeff);
+								direction = new Vec3d(direction.x*xCoeff,direction.y*yCoeff,direction.z*zCoeff);
 								distance -= result2.hitVec.subtract(player.getPositionVector()).lengthVector();
 								if (distance > 0){
 									RayTraceResult result3 = player.world.rayTraceBlocks(result2.hitVec, result2.hitVec.add(direction.scale(distance)));
@@ -98,13 +98,13 @@ public class SpellSunflower extends SpellBase {
 			}
 			if (positions.size() > 1){
 				for (int i = 0; i < positions.size()-1; i ++){
-					double bx = Math.abs(positions.get(i+1).xCoord-positions.get(i).xCoord)*0.1f;
-					double by = Math.abs(positions.get(i+1).yCoord-positions.get(i).yCoord)*0.1f;
-					double bz = Math.abs(positions.get(i+1).zCoord-positions.get(i).zCoord)*0.1f;
+					double bx = Math.abs(positions.get(i+1).x-positions.get(i).x)*0.1f;
+					double by = Math.abs(positions.get(i+1).y-positions.get(i).y)*0.1f;
+					double bz = Math.abs(positions.get(i+1).z-positions.get(i).z)*0.1f;
 					for (float j = 0; j < 1; j += 0.1f){
-						double x = positions.get(i).xCoord*(1.0f-j)+positions.get(i+1).xCoord*j;
-						double y = positions.get(i).yCoord*(1.0f-j)+positions.get(i+1).yCoord*j;
-						double z = positions.get(i).zCoord*(1.0f-j)+positions.get(i+1).zCoord*j;
+						double x = positions.get(i).x*(1.0f-j)+positions.get(i+1).x*j;
+						double y = positions.get(i).y*(1.0f-j)+positions.get(i+1).y*j;
+						double z = positions.get(i).z*(1.0f-j)+positions.get(i+1).z*j;
 						List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-bx,y-by,z-bz,x+bx,y+by,z+bz));
 						for (EntityLivingBase e : entities){
 							if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled()) &&
@@ -114,7 +114,7 @@ public class SpellSunflower extends SpellBase {
 									e.attackEntityFrom(DamageSource.MAGIC.causeMobDamage(player), 2.0f);
 								}
 								e.setRevengeTarget(player);
-								e.setLastAttacker(player);
+								e.setLastAttackedEntity(player);
 							}
 						}
 					}

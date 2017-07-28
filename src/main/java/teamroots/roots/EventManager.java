@@ -143,7 +143,7 @@ public class EventManager {
 		if (event.getEntityLiving() instanceof EntityWitherSkeleton){
 			boolean addSkull = true;
 			for (EntityItem e: event.getDrops()){
-				if (e.getEntityItem().getItem() == Items.SKULL){
+				if (e.getItem().getItem() == Items.SKULL){
 					addSkull = false;
 				}
 			}
@@ -197,6 +197,7 @@ public class EventManager {
 		}
 	}
 	
+	@SideOnly(Side.CLIENT)
     public static void renderEntityStatic(Entity entityIn, float partialTicks, boolean b, Render render){
         if (entityIn.ticksExisted == 0)
         {
@@ -209,7 +210,7 @@ public class EventManager {
         double d1 = entityIn.lastTickPosY + (entityIn.posY - entityIn.lastTickPosY) * (double)partialTicks;
         double d2 = entityIn.lastTickPosZ + (entityIn.posZ - entityIn.lastTickPosZ) * (double)partialTicks;
         float f = entityIn.prevRotationYaw + (entityIn.rotationYaw - entityIn.prevRotationYaw) * partialTicks;
-        int i = entityIn.getBrightnessForRender(partialTicks);
+        int i = entityIn.getBrightnessForRender();
 
         if (entityIn.isBurning())
         {
@@ -336,15 +337,15 @@ public class EventManager {
 			}
 		}
 		if (event.getEntity().getEntityData().hasKey(Constants.MIND_WARD_TAG)){
-			if (event.getSource().getEntity() instanceof EntityLivingBase){
-				if (event.getSource().getEntity().getUniqueID().compareTo(event.getEntity().getUniqueID()) != 0){
+			if (event.getSource().getTrueSource() instanceof EntityLivingBase){
+				if (event.getSource().getTrueSource().getUniqueID().compareTo(event.getEntity().getUniqueID()) != 0){
 					event.getEntity().getEntityData().removeTag(Constants.MIND_WARD_TAG);
 				}
 			}
 		}
-		if (event.getSource().getEntity() instanceof EntityLivingBase){
-			if (event.getSource().getEntity().getEntityData().hasKey(Constants.MIND_WARD_TAG)){
-				EntityLivingBase e = (EntityLivingBase)event.getSource().getEntity();
+		if (event.getSource().getTrueSource() instanceof EntityLivingBase){
+			if (event.getSource().getTrueSource().getEntityData().hasKey(Constants.MIND_WARD_TAG)){
+				EntityLivingBase e = (EntityLivingBase)event.getSource().getTrueSource();
 				e.attackEntityFrom(DamageSource.WITHER, event.getAmount()*2.0f);
 				event.setAmount(0);
 				PacketHandler.INSTANCE.sendToAll(new MessageMindWardRingFX(e.posX,e.posY+1.0,e.posZ));

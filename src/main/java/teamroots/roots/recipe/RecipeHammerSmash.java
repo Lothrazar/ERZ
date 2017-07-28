@@ -7,14 +7,16 @@ import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import teamroots.roots.RegistryManager;
 import teamroots.roots.item.IHerb;
 import teamroots.roots.item.ItemHammer;
 import teamroots.roots.item.ItemPestle;
 import teamroots.roots.item.ItemPouch;
 
-public class RecipeHammerSmash implements IRecipe {
+public class RecipeHammerSmash extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	ItemStack victim = ItemStack.EMPTY;
 	ItemStack result = ItemStack.EMPTY;
 	public RecipeHammerSmash(ItemStack stack, ItemStack result){
@@ -45,11 +47,6 @@ public class RecipeHammerSmash implements IRecipe {
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inv) {
 		return result.copy();
-	}
-
-	@Override
-	public int getRecipeSize() {
-		return 2;
 	}
 
 	@Override
@@ -87,4 +84,8 @@ public class RecipeHammerSmash implements IRecipe {
 		return remaining;
 	}
 
+	@Override
+	public boolean canFit(int width, int height) {
+		return width*height > 2;
+	}
 }

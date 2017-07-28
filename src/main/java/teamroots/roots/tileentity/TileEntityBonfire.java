@@ -200,7 +200,7 @@ public class TileEntityBonfire extends TileEntity implements ITileEntityBase, IT
 		if ((int)this.ticker % 20 == 0 && pickupDelay == 0){
 			List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(getPos().getX(),getPos().getY(),getPos().getZ(),getPos().getX()+1,getPos().getY()+1,getPos().getZ()+1));
 			for (int i = 0; i < items.size(); i ++){
-				ItemStack stack = items.get(i).getEntityItem();
+				ItemStack stack = items.get(i).getItem();
 				boolean isFull = false;
 				boolean isEmpty = false;
 				while (stack.getCount() > 0 && !isFull && !isEmpty){
@@ -249,7 +249,7 @@ public class TileEntityBonfire extends TileEntity implements ITileEntityBase, IT
 						}
 					}
 				}*/
-				items.get(i).setEntityItemStack(stack);
+				items.get(i).setItem(stack);
 				markDirty();
         		PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this));
 			}

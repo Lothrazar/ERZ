@@ -27,7 +27,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import teamroots.roots.RegistryManager;
 import teamroots.roots.Roots;
 
-public class BlockSpiritHerb extends BlockCrops implements IModeledBlock {
+public class BlockSpiritHerb extends BlockCrops implements IModeledBlock, IBlock {
 	public Item itemBlock;
 	public AxisAlignedBB bounds = new AxisAlignedBB(0,0,0,1,1,1);
 	public BlockSpiritHerb(String name, boolean addToTab) {
@@ -35,8 +35,7 @@ public class BlockSpiritHerb extends BlockCrops implements IModeledBlock {
 		setUnlocalizedName(name);
 		setRegistryName(Roots.MODID+":"+name);
 		
-		GameRegistry.register(this);
-        GameRegistry.register(itemBlock = (new ItemBlock(this).setRegistryName(this.getRegistryName())));
+		itemBlock = (new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 	
 	@Override
@@ -74,5 +73,10 @@ public class BlockSpiritHerb extends BlockCrops implements IModeledBlock {
 	@Override
 	public void initModel(){
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName().toString(),"inventory"));
+	}
+
+	@Override
+	public Item getItemBlock() {
+		return itemBlock;
 	}
 }

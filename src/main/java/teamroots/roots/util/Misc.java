@@ -79,11 +79,11 @@ public class Misc {
 		words.add(temp);
 		temp = "";
 		for (int i = 0; i < words.size(); i ++){
-			counter += Minecraft.getMinecraft().fontRendererObj.getStringWidth(words.get(i));
+			counter += Minecraft.getMinecraft().fontRenderer.getStringWidth(words.get(i));
 			if (counter > lineWidth){
 				list.add(temp);
 				temp = words.get(i);
-				counter = Minecraft.getMinecraft().fontRendererObj.getStringWidth(words.get(i));
+				counter = Minecraft.getMinecraft().fontRenderer.getStringWidth(words.get(i));
 			}
 			else {
 				temp += words.get(i);

@@ -26,9 +26,9 @@ public class SpellPoppy extends SpellBase {
 		if (!player.world.isRemote){
 			boolean foundTarget = false;
 			for (int i = 0; i < 4 && !foundTarget; i ++){
-				double x = player.posX+player.getLookVec().xCoord*3.0*(float)i;
-				double y = player.posY+player.getEyeHeight()+player.getLookVec().yCoord*3.0*(float)i;
-				double z = player.posZ+player.getLookVec().zCoord*3.0*(float)i;
+				double x = player.posX+player.getLookVec().x*3.0*(float)i;
+				double y = player.posY+player.getEyeHeight()+player.getLookVec().y*3.0*(float)i;
+				double z = player.posZ+player.getLookVec().z*3.0*(float)i;
 				List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-2.0,y-2.0,z-2.0,x+2.0,y+2.0,z+2.0));
 				for (EntityLivingBase e : entities){
 					if (e.getUniqueID().compareTo(player.getUniqueID()) != 0 && !foundTarget){

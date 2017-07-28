@@ -41,7 +41,6 @@ public class ItemFoodBase extends ItemFood implements IModeledItem {
 		if (addToTab){
 			setCreativeTab(Roots.tab);
 		}
-		GameRegistry.register(this);
 	}
 	
 	@Override

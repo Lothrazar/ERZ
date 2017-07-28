@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -13,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -29,11 +31,13 @@ public class ItemPetalDust extends ItemBase {
 	}
 	
 	@Override
-	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> subItems){
-		for (int i = 0; i < SpellRegistry.spellRegistry.size(); i ++){
-			ItemStack stack = new ItemStack(item,1);
-			createData(stack,SpellRegistry.spellRegistry.keySet().toArray(new String[SpellRegistry.spellRegistry.size()])[i]);
-			subItems.add(stack);
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems){
+		if (tab == this.getCreativeTab()){
+			for (int i = 0; i < SpellRegistry.spellRegistry.size(); i ++){
+				ItemStack stack = new ItemStack(this,1);
+				createData(stack,SpellRegistry.spellRegistry.keySet().toArray(new String[SpellRegistry.spellRegistry.size()])[i]);
+				subItems.add(stack);
+			}
 		}
 	}
 	
@@ -47,7 +51,7 @@ public class ItemPetalDust extends ItemBase {
 	
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced){
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced){
 		if (!stack.hasTagCompound()){
 			tooltip.add(I18n.format("roots.tooltip.petaldust.notag"));
 		}

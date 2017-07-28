@@ -10,7 +10,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
@@ -67,7 +67,7 @@ public class GuiBook extends GuiScreen {
 			RenderHelper.disableStandardItemLighting();
 			RenderHelper.enableGUIStandardItemLighting();
 			this.itemRender.renderItemIntoGUI(stack, x, y);
-			this.itemRender.renderItemOverlayIntoGUI(this.fontRendererObj, stack, x, y, stack.getCount() != 1 ? Integer.toString(stack.getCount()) : "");
+			this.itemRender.renderItemOverlayIntoGUI(this.fontRenderer, stack, x, y, stack.getCount() != 1 ? Integer.toString(stack.getCount()) : "");
 			if (mouseX >= x && mouseY >= y && mouseX < x+16 && mouseY < y+16){
 				this.markTooltipForRender(stack, mouseX, mouseY);
 			}
@@ -81,7 +81,7 @@ public class GuiBook extends GuiScreen {
 			RenderHelper.disableStandardItemLighting();
 			RenderHelper.enableGUIStandardItemLighting();
 			this.itemRender.renderItemIntoGUI(stack, x, y);
-			this.itemRender.renderItemOverlayIntoGUI(this.fontRendererObj, stack, x, y, stack.getCount() != 1 ? Integer.toString(stack.getCount()) : "");
+			this.itemRender.renderItemOverlayIntoGUI(this.fontRenderer, stack, x, y, stack.getCount() != 1 ? Integer.toString(stack.getCount()) : "");
 			RenderHelper.enableStandardItemLighting();
 		}
 		GlStateManager.disableLighting();
@@ -173,10 +173,10 @@ public class GuiBook extends GuiScreen {
 		this.drawTexturedModalRect(basePosX, basePosY, 0, 0, 192, 256);
 		
 		if (satisfiesReqs){
-			RenderUtil.drawCenteredString(this.fontRendererObj, I18n.format("roots.book."+book.name+"."+page.name+".title"), basePosX+96, basePosY+20, 0x2b2b2a);
+			RenderUtil.drawCenteredString(this.fontRenderer, I18n.format("roots.book."+book.name+"."+page.name+".title"), basePosX+96, basePosY+20, 0x2b2b2a);
 		}
 		else {
-			RenderUtil.drawCenteredString(this.fontRendererObj, I18n.format("roots.book.unknown_title"), basePosX+96, basePosY+20, 0x2b2b2a);
+			RenderUtil.drawCenteredString(this.fontRenderer, I18n.format("roots.book.unknown_title"), basePosX+96, basePosY+20, 0x2b2b2a);
 		}
 		GlStateManager.color(1f, 1f, 1f, 1f);
 		
@@ -184,7 +184,7 @@ public class GuiBook extends GuiScreen {
 		if (page.type == Page.EnumPageType.TEXT && satisfiesReqs){
 			List<String> strings = Misc.getLines(I18n.format("roots.book."+book.name+"."+page.name+".desc"), 160);
 			for (int i = 0; i < strings.size(); i ++){
-				fontRendererObj.drawString(strings.get(i), basePosX+20, basePosY+48+12*i, 0x2b2b2a);
+				fontRenderer.drawString(strings.get(i), basePosX+20, basePosY+48+12*i, 0x2b2b2a);
 				GlStateManager.color(1, 1, 1, 1);
 			}
 		}
@@ -193,7 +193,7 @@ public class GuiBook extends GuiScreen {
 			this.renderItemStackAt(page.displayStack, basePosX+88, basePosY+56, mouseX, mouseY);
 			List<String> strings = Misc.getLines(I18n.format("roots.book."+book.name+"."+page.name+".desc"), 160);
 			for (int i = 0; i < strings.size(); i ++){
-				fontRendererObj.drawString(strings.get(i), basePosX+20, basePosY+80+12*i, 0x2b2b2a);
+				fontRenderer.drawString(strings.get(i), basePosX+20, basePosY+80+12*i, 0x2b2b2a);
 				GlStateManager.color(1, 1, 1, 1);
 			}
 		}
@@ -209,7 +209,7 @@ public class GuiBook extends GuiScreen {
 			
 			List<String> strings = Misc.getLines(I18n.format("roots.book."+book.name+"."+page.name+".desc"), 160);
 			for (int i = 0; i < strings.size(); i ++){
-				fontRendererObj.drawString(strings.get(i), basePosX+20, basePosY+166+12*i, 0x2b2b2a);
+				fontRenderer.drawString(strings.get(i), basePosX+20, basePosY+166+12*i, 0x2b2b2a);
 				GlStateManager.color(1, 1, 1, 1);
 			}
 		}
@@ -264,7 +264,7 @@ public class GuiBook extends GuiScreen {
 			
 			List<String> strings = Misc.getLines(I18n.format("roots.book."+book.name+"."+page.name+".desc"), 160);
 			for (int i = 0; i < strings.size(); i ++){
-				fontRendererObj.drawString(strings.get(i), basePosX+20, basePosY+166+12*i, 0x2b2b2a);
+				fontRenderer.drawString(strings.get(i), basePosX+20, basePosY+166+12*i, 0x2b2b2a);
 				GlStateManager.color(1, 1, 1, 1);
 			}
 		}
@@ -277,7 +277,7 @@ public class GuiBook extends GuiScreen {
 			
 			List<String> strings = Misc.getLines(I18n.format("roots.book."+book.name+"."+page.name+".desc"), 160);
 			for (int i = 0; i < strings.size(); i ++){
-				fontRendererObj.drawString(strings.get(i), basePosX+20, basePosY+116+12*i, 0x2b2b2a);
+				fontRenderer.drawString(strings.get(i), basePosX+20, basePosY+116+12*i, 0x2b2b2a);
 				GlStateManager.color(1, 1, 1, 1);
 			}
 		}
@@ -299,7 +299,7 @@ public class GuiBook extends GuiScreen {
 			
 			List<String> strings = Misc.getLines(I18n.format("roots.book."+book.name+"."+page.name+".desc"), 160);
 			for (int i = 0; i < strings.size(); i ++){
-				fontRendererObj.drawString(strings.get(i), basePosX+20, basePosY+176+12*i, 0x2b2b2a);
+				fontRenderer.drawString(strings.get(i), basePosX+20, basePosY+176+12*i, 0x2b2b2a);
 			}
 		}
 		if (page.type == Page.EnumPageType.FURNACE && satisfiesReqs){
@@ -311,7 +311,7 @@ public class GuiBook extends GuiScreen {
 			this.renderItemStackAt(page.furnaceOutput, basePosX+112, basePosY+56, mouseX, mouseY);
 			List<String> strings = Misc.getLines(I18n.format("roots.book."+book.name+"."+page.name+".desc"), 160);
 			for (int i = 0; i < strings.size(); i ++){
-				fontRendererObj.drawString(strings.get(i), basePosX+20, basePosY+104+12*i, 0x2b2b2a);
+				fontRenderer.drawString(strings.get(i), basePosX+20, basePosY+104+12*i, 0x2b2b2a);
 				GlStateManager.color(1, 1, 1, 1);
 			}
 		}

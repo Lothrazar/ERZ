@@ -18,7 +18,6 @@ public class ItemLighterBase extends ItemFlintAndSteel implements IModeledItem {
 			setCreativeTab(Roots.tab);
 		}
 		this.setMaxDamage(durability);
-		GameRegistry.register(this);
 	}
 
 	@Override

@@ -27,7 +27,6 @@ public class CommonProxy {
 		PacketHandler.registerMessages();
 		SpellRegistry.init();
 		RitualRegistry.init();
-		RecipeRegistry.init();
 		OfferingUtil.init();
 		FeyMagicManager.init();
 	}

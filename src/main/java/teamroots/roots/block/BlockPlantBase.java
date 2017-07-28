@@ -20,7 +20,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import teamroots.roots.Roots;
 
-public class BlockPlantBase extends BlockBush implements IModeledBlock {
+public class BlockPlantBase extends BlockBush implements IModeledBlock, IBlock {
 	public Item itemBlock;
 	public AxisAlignedBB bounds = new AxisAlignedBB(0,0,0,1,1,1);
 	public BlockPlantBase(String name, boolean addToTab) {
@@ -30,8 +30,7 @@ public class BlockPlantBase extends BlockBush implements IModeledBlock {
 		if (addToTab){
 			setCreativeTab(Roots.tab);
 		}
-		GameRegistry.register(this);
-        GameRegistry.register(itemBlock = (new ItemBlock(this).setRegistryName(this.getRegistryName())));
+		itemBlock = (new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
 	public BlockPlantBase setBoundingBox(double x1, double y1, double z1, double x2, double y2, double z2){
@@ -47,5 +46,10 @@ public class BlockPlantBase extends BlockBush implements IModeledBlock {
 	@Override
 	public void initModel(){
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName().toString(),"inventory"));
+	}
+
+	@Override
+	public Item getItemBlock() {
+		return itemBlock;
 	}
 }

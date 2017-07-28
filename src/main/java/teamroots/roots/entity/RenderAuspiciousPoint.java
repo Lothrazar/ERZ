@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderEntity;
@@ -62,7 +62,7 @@ public class RenderAuspiciousPoint<EntityAuspiciousPoint> extends RenderEntity i
 		double y = entity.posY+dy;
 		double z = entity.posZ+dz;
         Tessellator tess = Tessellator.getInstance();
-        VertexBuffer buff = tess.getBuffer();
+        BufferBuilder buff = tess.getBuffer();
         buff.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_LMAP_COLOR);
         RenderUtil.renderBeam(buff, x+0.5, y-(6.0f+(entity.posY-entity.getEntityWorld().getTopSolidOrLiquidBlock(entity.getPosition()).getY())), z+0.5, x+0.5, 256, z+0.5, getColorCycle(entity,partialTicks), getColorCycle(entity,partialTicks), 1, 0.4f*solidity, 3.0f, 0.5f*((float)entity.ticksExisted+partialTicks));
         RenderUtil.renderBeam(buff, x+0.5, y-(6.0f+(entity.posY-entity.getEntityWorld().getTopSolidOrLiquidBlock(entity.getPosition()).getY())), z+0.5, x+0.5, 256, z+0.5, 1.0f-getColorCycle(entity,partialTicks), 1.0f-getColorCycle(entity,partialTicks), 1, 0.4f*solidity, 3.0f, 45.0f+0.5f*((float)entity.ticksExisted+partialTicks));
@@ -165,7 +165,7 @@ public class RenderAuspiciousPoint<EntityAuspiciousPoint> extends RenderEntity i
 		GlStateManager.enableLighting();
 	}
 	
-	public void drawRune(VertexBuffer buff, Entity e, BlockPos pos, double dx, double dy, double dz){
+	public void drawRune(BufferBuilder buff, Entity e, BlockPos pos, double dx, double dy, double dz){
 		double dist = 0.001;
 		if (Minecraft.getMinecraft().player != null){
 			if (Minecraft.getMinecraft().player.getDistanceSqToEntity(e) > 256.0){

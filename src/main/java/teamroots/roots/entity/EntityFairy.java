@@ -97,31 +97,37 @@ public class EntityFairy extends EntityFlying {
 	}
 	
 	public float getRed(){
-		switch (getDataManager().get(variant)){
-		case 0: {return 177;}
-		case 1: {return 219;}
-		case 2: {return 255;}
-		case 3: {return 255;}
+		if (getDataManager().get(variant) instanceof Integer){
+			switch (getDataManager().get(variant)){
+			case 0: {return 177;}
+			case 1: {return 219;}
+			case 2: {return 255;}
+			case 3: {return 255;}
+			}
 		}
 		return 0;
 	}
 	
 	public float getGreen(){
-		switch (getDataManager().get(variant)){
-		case 0: {return 255;}
-		case 1: {return 179;}
-		case 2: {return 163;}
-		case 3: {return 223;}
+		if (getDataManager().get(variant) instanceof Integer){
+			switch (getDataManager().get(variant)){
+			case 0: {return 255;}
+			case 1: {return 179;}
+			case 2: {return 163;}
+			case 3: {return 223;}
+			}
 		}
 		return 0;
 	}
 	
 	public float getBlue(){
-		switch (getDataManager().get(variant)){
-		case 0: {return 117;}
-		case 1: {return 255;}
-		case 2: {return 255;}
-		case 3: {return 163;}
+		if (getDataManager().get(variant) instanceof Integer){
+			switch (getDataManager().get(variant)){
+			case 0: {return 117;}
+			case 1: {return 255;}
+			case 2: {return 255;}
+			case 3: {return 163;}
+			}
 		}
 		return 0;
 	}
@@ -172,7 +178,7 @@ public class EntityFairy extends EntityFlying {
         		double targZ = p.posZ;
         		int count = 1;
         		if (this.getDistanceSqToEntity(p) < 16.0f){
-        			List<EntityFairy> list = world.getEntitiesWithinAABB(EntityFairy.class, p.getEntityBoundingBox().expandXyz(4.0));
+        			List<EntityFairy> list = world.getEntitiesWithinAABB(EntityFairy.class, p.getEntityBoundingBox().expand(4.0,4.0,4.0));
         			List<EntityFairy> prunedList = new ArrayList<EntityFairy>();
         			for (EntityFairy f : list){
         				if (f.getDataManager().get(f.tame) && f.owner != null && f.owner.compareTo(p.getUniqueID()) == 0){
@@ -332,7 +338,7 @@ public class EntityFairy extends EntityFlying {
     }
     
     @Override
-    public int getBrightnessForRender(float partialTicks){
+    public int getBrightnessForRender(){
     	return 255;
     }
 
