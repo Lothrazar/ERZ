@@ -18,10 +18,7 @@ import teamroots.roots.entity.EntityRitualLife;
 public class RitualLife extends RitualBase {
 	public RitualLife(String name, int duration, boolean doUpdateValidity){
 		super(name,duration,doUpdateValidity);
-		addIngredient(new ItemStack(RegistryManager.terra_moss_ball,1));
-		addIngredient(new ItemStack(RegistryManager.bark_oak,1));
-		addIngredient(new ItemStack(RegistryManager.bark_birch,1));
-		addIngredient(new ItemStack(RegistryManager.bark_birch,1));
+ 
 		addIngredient(new ItemStack(Blocks.SAPLING,1,2));
 	}
 	

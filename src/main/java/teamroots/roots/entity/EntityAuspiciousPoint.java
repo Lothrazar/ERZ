@@ -26,8 +26,6 @@ import teamroots.roots.network.PacketHandler;
 import teamroots.roots.network.message.MessageMoonlightBurstFX;
 import teamroots.roots.network.message.MessageMoonlightSparkleFX;
 import teamroots.roots.particle.ParticleUtil;
-import teamroots.roots.recipe.MoonlightRecipe;
-import teamroots.roots.recipe.RecipeRegistry;
 import teamroots.roots.util.IEntityRenderingLater;
 import teamroots.roots.util.NBTUtil;
 import teamroots.roots.util.NoiseGenUtil;
@@ -246,23 +244,23 @@ public class EntityAuspiciousPoint extends Entity implements IEntityRenderingLat
 					isShining = true;
 				}
 			}
-			if (this.ticksExisted % (rand.nextInt(20)+1) == 0){
-				if (stacks.size() > 0){
-					boolean changed = false;
-					for (int i = 0; i < stacks.size() && !changed; i ++){
-						if (Block.getBlockFromItem(stacks.get(i).getItem().getItem()) == Blocks.STONE){
-							isShining = true;
-							if (!world.isRemote){
-								ItemStack stack = stacks.get(i).getItem().copy();
-								stack.shrink(1);
-								stacks.get(i).setItem(stack);
-								world.spawnEntity(new EntityItem(world,stacks.get(i).posX,stacks.get(i).posY,stacks.get(i).posZ,new ItemStack(RegistryManager.runestone,1)));
-								PacketHandler.INSTANCE.sendToAll(new MessageMoonlightSparkleFX(stacks.get(i).posX,stacks.get(i).posY+stacks.get(i).height/2.0f,stacks.get(i).posZ));
-							}
-						}
-					}
-				}
-			}
+//			if (this.ticksExisted % (rand.nextInt(20)+1) == 0){
+//				if (stacks.size() > 0){
+//					boolean changed = false;
+//					for (int i = 0; i < stacks.size() && !changed; i ++){
+//						if (Block.getBlockFromItem(stacks.get(i).getItem().getItem()) == Blocks.STONE){
+//							isShining = true;
+//							if (!world.isRemote){
+//								ItemStack stack = stacks.get(i).getItem().copy();
+//								stack.shrink(1);
+//								stacks.get(i).setItem(stack);
+//								world.spawnEntity(new EntityItem(world,stacks.get(i).posX,stacks.get(i).posY,stacks.get(i).posZ,new ItemStack(RegistryManager.runestone,1)));
+//								PacketHandler.INSTANCE.sendToAll(new MessageMoonlightSparkleFX(stacks.get(i).posX,stacks.get(i).posY+stacks.get(i).height/2.0f,stacks.get(i).posZ));
+//							}
+//						}
+//					}
+//				}
+//			}
 			if (true){
 				boolean valid = false;
 				IBlockState core = world.getBlockState(new BlockPos(x,height,z));
@@ -270,10 +268,8 @@ public class EntityAuspiciousPoint extends Entity implements IEntityRenderingLat
 				IBlockState outer2 = world.getBlockState(getDataManager().get(rune2));
 				IBlockState outer3 = world.getBlockState(getDataManager().get(rune3));
 				IBlockState outer4 = world.getBlockState(getDataManager().get(rune4));
-				MoonlightRecipe recipe = RecipeRegistry.getMoonlightRecipe(core, outer1, outer2, outer3, outer4);
-				if (recipe != null){
-					valid = true;
-				}
+ 
+			 
 				if (valid){
 					isShining = true;
 					if (!world.isRemote){
@@ -282,10 +278,7 @@ public class EntityAuspiciousPoint extends Entity implements IEntityRenderingLat
 						if (getDataManager().get(progress) > 200 && !world.isRemote){
 							getDataManager().set(progress, 0f);
 							getDataManager().setDirty(progress);
-		
-							world.setBlockState(new BlockPos(x,height,z), recipe.resultState, 8);
-							world.notifyBlockUpdate(new BlockPos(x,height,z), core, recipe.resultState, 8);
-							
+		 
 							PacketHandler.INSTANCE.sendToAll(new MessageMoonlightBurstFX(x+0.5,height+0.5,z+0.5));
 							
 							world.destroyBlock(getDataManager().get(rune1), false);

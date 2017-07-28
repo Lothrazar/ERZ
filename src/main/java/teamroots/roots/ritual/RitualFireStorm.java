@@ -20,10 +20,10 @@ import teamroots.roots.entity.EntityRitualLight;
 public class RitualFireStorm extends RitualBase {
 	public RitualFireStorm(String name, int duration, boolean doUpdateValidity){
 		super(name,duration,doUpdateValidity);
-		addIngredient(new ItemStack(RegistryManager.wildroot_item,1));
+	//	addIngredient(new ItemStack(RegistryManager.wildroot_item,1));
 		addIngredient(new ItemStack(Items.COAL,1,1));
-		addIngredient(new ItemStack(RegistryManager.bark_acacia,1));
-		addIngredient(new ItemStack(RegistryManager.bark_acacia,1));
+	//	addIngredient(new ItemStack(RegistryManager.bark_acacia,1));
+	//	addIngredient(new ItemStack(RegistryManager.bark_acacia,1));
 		addIngredient(new ItemStack(Items.BLAZE_POWDER,1));
 	}
 	
@@ -33,12 +33,12 @@ public class RitualFireStorm extends RitualBase {
 		for (int i = -6; i < 7; i ++){
 			for (int j = -6; j < 7; j ++){
 				IBlockState state = world.getBlockState(pos.add(i, 2, j));
-				if (state.getBlock() == RegistryManager.chiseled_runestone){
-					if (world.getBlockState(pos.add(i, 1, j)).getBlock() == RegistryManager.runestone
-							&& world.getBlockState(pos.add(i, 0, j)).getBlock() == RegistryManager.runestone){
+		//		if (state.getBlock() == RegistryManager.chiseled_runestone){
+//					if (world.getBlockState(pos.add(i, 1, j)).getBlock() == RegistryManager.runestone
+//							&& world.getBlockState(pos.add(i, 0, j)).getBlock() == RegistryManager.runestone){
 						threeHighCount ++;
-					}
-				}
+			//		}
+				//}
 			}
 		}
 		return threeHighCount == 3;

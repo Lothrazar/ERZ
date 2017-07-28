@@ -19,10 +19,7 @@ import teamroots.roots.entity.EntityRitualLight;
 public class RitualLight extends RitualBase {
 	public RitualLight(String name, int duration, boolean doUpdateValidity){
 		super(name,duration,doUpdateValidity);
-		addIngredient(new ItemStack(RegistryManager.moonglow_leaf,1));
-		addIngredient(new ItemStack(RegistryManager.moontinged_seed,1));
-		addIngredient(new ItemStack(RegistryManager.bark_birch,1));
-		addIngredient(new ItemStack(RegistryManager.bark_acacia,1));
+ 
 		addIngredient(new ItemStack(Blocks.LOG,1,2));
 	}
 	

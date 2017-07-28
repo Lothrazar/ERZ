@@ -18,9 +18,7 @@ import teamroots.roots.entity.EntityRitualRegrowth;
 public class RitualRegrowth extends RitualBase {
 	public RitualRegrowth(String name, int duration, boolean doUpdateValidity){
 		super(name,duration,doUpdateValidity);
-		addIngredient(new ItemStack(RegistryManager.terra_moss_ball,1));
-		addIngredient(new ItemStack(RegistryManager.terra_moss_spore,1));
-		addIngredient(new ItemStack(RegistryManager.bark_spruce,1));
+ 
 		addIngredient(new ItemStack(Blocks.SAPLING,1,1));
 		addIngredient(new ItemStack(Blocks.SAPLING,1));
 	}

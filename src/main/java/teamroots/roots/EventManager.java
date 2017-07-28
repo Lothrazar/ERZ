@@ -82,8 +82,7 @@ import teamroots.roots.effect.EffectManager;
 import teamroots.roots.entity.EntityDeer;
 import teamroots.roots.entity.EntityFairy;
 import teamroots.roots.entity.EntityPetalShell;
-import teamroots.roots.event.SpellEvent;
-import teamroots.roots.item.ItemKnife;
+import teamroots.roots.event.SpellEvent; 
 import teamroots.roots.network.PacketHandler;
 import teamroots.roots.network.message.MessageLightDrifterFX;
 import teamroots.roots.network.message.MessageLightDrifterSync;
@@ -153,50 +152,7 @@ public class EventManager {
 		}
 	}
 	
-	@SubscribeEvent
-	public void onBlockHarvested(HarvestDropsEvent event){
-		if (event.getHarvester() != null){
-			if (event.getHarvester().getHeldItem(EnumHand.MAIN_HAND) != ItemStack.EMPTY){
-				if (event.getHarvester().getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemKnife){
-					if (event.getState().getBlock() instanceof BlockLog){
-						event.getDrops().clear();
-						ItemStack bark = new ItemStack(RegistryManager.bark_oak,1);
-						IBlockState s = event.getState();
-						Block b = s.getBlock();
-						if (b == Blocks.LOG){
-							if (s.getValue(BlockOldLog.VARIANT) == EnumType.OAK){
-								bark = new ItemStack(RegistryManager.bark_oak,1);
-							}
-							if (s.getValue(BlockOldLog.VARIANT) == EnumType.SPRUCE){
-								bark = new ItemStack(RegistryManager.bark_spruce,1);
-							}
-							if (s.getValue(BlockOldLog.VARIANT) == EnumType.BIRCH){
-								bark = new ItemStack(RegistryManager.bark_birch,1);
-							}
-							if (s.getValue(BlockOldLog.VARIANT) == EnumType.JUNGLE){
-								bark = new ItemStack(RegistryManager.bark_jungle,1);
-							}
-						}
-						if (b == Blocks.LOG2){
-							if (s.getValue(BlockNewLog.VARIANT) == EnumType.ACACIA){
-								bark = new ItemStack(RegistryManager.bark_acacia,1);
-							}
-							if (s.getValue(BlockNewLog.VARIANT) == EnumType.DARK_OAK){
-								bark = new ItemStack(RegistryManager.bark_dark_oak,1);
-							}
-						}
-						int count = Misc.random.nextInt(2)+1;
-						for (int i = 0; i < count; i ++){
-							if (!event.getWorld().isRemote){
-								event.getWorld().spawnEntity(new EntityItem(event.getWorld(),event.getPos().getX()+0.5,event.getPos().getY()+0.5,event.getPos().getZ()+0.5,bark));
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	
+ 
 	@SideOnly(Side.CLIENT)
     public static void renderEntityStatic(Entity entityIn, float partialTicks, boolean b, Render render){
         if (entityIn.ticksExisted == 0)

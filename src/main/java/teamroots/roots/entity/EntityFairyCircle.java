@@ -36,10 +36,7 @@ import teamroots.roots.network.PacketHandler;
 import teamroots.roots.network.message.MessageFairyDustBurstFX;
 import teamroots.roots.network.message.MessageMoonlightBurstFX;
 import teamroots.roots.network.message.MessageTEUpdate;
-import teamroots.roots.particle.ParticleUtil;
-import teamroots.roots.recipe.MoonlightRecipe;
-import teamroots.roots.recipe.RecipeRegistry;
-import teamroots.roots.tileentity.TileEntityOffertoryPlate;
+import teamroots.roots.particle.ParticleUtil; 
 import teamroots.roots.util.IEntityRenderingLater;
 import teamroots.roots.util.Misc;
 import teamroots.roots.util.NoiseGenUtil;
@@ -150,54 +147,8 @@ public class EntityFairyCircle extends Entity implements IEntityRenderingLater {
 		else if (world.getTotalWorldTime() > getDataManager().get(time)+24000 || world.getTotalWorldTime() < getDataManager().get(time)){
 			getDataManager().set(time, (int)world.getTotalWorldTime());
 			getDataManager().setDirty(time);
-			List<TileEntityOffertoryPlate> plates = Misc.getTileEntitiesWithin(world, TileEntityOffertoryPlate.class, 
-					getPosition().getX()-32, getPosition().getY()-16, getPosition().getZ()-32, 
-					getPosition().getX()+32, getPosition().getY()+16, getPosition().getZ()+32);
-			for (TileEntityOffertoryPlate p : plates){
-				int value = OfferingUtil.getValue(p.inventory.getStackInSlot(0));
-				if (value > 0){
-					float count = (float)value*0.25f;
-					int size = 0;
-					for (int i = 0; i < count; i ++){
-						int mult = 1;
-						if (count - (double)i < 1.0){
-							mult = Math.round(1.0f/((count-(float)i)));
-						}
-						if (Misc.random.nextInt(4*mult) == 0){
-							size ++;
-						}
-					}
-					if (!world.isRemote){
-						boolean charm = false;
-						if (p.lastPlayer != null){
-							if (!reputation.containsKey(p.lastPlayer)){
-								reputation.put(p.lastPlayer, value);
-							}
-							else {
-								reputation.replace(p.lastPlayer, reputation.get(p.lastPlayer)+value);
-							}
-							if (reputation.get(p.lastPlayer) >= 957 && reputation.get(p.lastPlayer)-value < 2371){
-								charm = true;
-							}
-						}
-						PacketHandler.INSTANCE.sendToAll(new MessageFairyDustBurstFX(p.getPos().getX()+0.5,p.getPos().getY()+1.0,p.getPos().getZ()+0.5));
-						if (size > 0){
-							ItemStack stack = new ItemStack(RegistryManager.fairy_dust,Math.min(64, size));
-							if (charm){
-								stack = new ItemStack(RegistryManager.fairy_charm,1);
-							}
-							p.inventory.setStackInSlot(0, stack);
-							p.markDirty();
-							PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(p));
-						}
-						else {
-							p.inventory.setStackInSlot(0, ItemStack.EMPTY);
-							p.markDirty();
-							PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(p));
-						}
-					}
-				}
-			}
+			 
+			 
 		}
 	}
 

@@ -15,8 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.roots.capability.RootsCapabilityManager;
-import teamroots.roots.proxy.CommonProxy;
-import teamroots.roots.recipe.RecipeRegistry;
+import teamroots.roots.proxy.CommonProxy; 
 
 @Mod(modid = Roots.MODID, name = Roots.MODNAME, version = Roots.VERSION)
 public class Roots
@@ -37,7 +36,7 @@ public class Roots
 		@Override
 		@SideOnly(Side.CLIENT)
 		public ItemStack getTabIconItem(){
-			return new ItemStack(RegistryManager.staff);
+			return new ItemStack(Blocks.MOB_SPAWNER);
 		}
 	};
 	
@@ -49,19 +48,11 @@ public class Roots
 		MinecraftForge.EVENT_BUS.register(new EventManager());
 		MinecraftForge.EVENT_BUS.register(new ConfigManager());
 		MinecraftForge.EVENT_BUS.register(new RegistryManager());
-		MinecraftForge.EVENT_BUS.register(new RecipeRegistry());
+ 
 		MinecraftForge.EVENT_BUS.register(new RootsCapabilityManager());
         ConfigManager.init(event.getSuggestedConfigurationFile());
 		proxy.preInit(event);
 	}
 	
-	@EventHandler
-	public void init(FMLInitializationEvent event){
-		proxy.init(event);
-	}
-	
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event){
-		proxy.postInit(event);
-	}
+ 
 }

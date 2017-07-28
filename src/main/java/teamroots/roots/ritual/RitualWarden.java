@@ -17,11 +17,7 @@ import teamroots.roots.entity.EntityRitualWarden;
 public class RitualWarden extends RitualBase {
 	public RitualWarden(String name, int duration, boolean doUpdateValidity){
 		super(name,duration,doUpdateValidity);
-		addIngredient(new ItemStack(Items.DYE,1,15));
-		addIngredient(new ItemStack(RegistryManager.pereskia_bulb,1));
-		addIngredient(new ItemStack(RegistryManager.spirit_herb_item,1));
-		addIngredient(new ItemStack(RegistryManager.bark_oak,1));
-		addIngredient(new ItemStack(RegistryManager.totem_fragment,1));
+		addIngredient(new ItemStack(Items.DYE,1,15)); 
 	}
 	
 	@Override
@@ -30,23 +26,23 @@ public class RitualWarden extends RitualBase {
 		int fourHighCount = 0;
 		for (int i = -6; i < 7; i ++){
 			for (int j = -6; j < 7; j ++){
-				IBlockState state = world.getBlockState(pos.add(i, 3, j));
-				if (state.getBlock() == RegistryManager.chiseled_runestone){
-					if (world.getBlockState(pos.add(i, 2, j)).getBlock() == RegistryManager.runestone
-							&& world.getBlockState(pos.add(i, 1, j)).getBlock() == RegistryManager.runestone
-							&& world.getBlockState(pos.add(i, 0, j)).getBlock() == RegistryManager.runestone){
-						fourHighCount ++;
-					}
-				}
-				else {
-					state = world.getBlockState(pos.add(i, 2, j));
-					if (state.getBlock() == RegistryManager.chiseled_runestone){
-						if (world.getBlockState(pos.add(i, 1, j)).getBlock() == RegistryManager.runestone
-								&& world.getBlockState(pos.add(i, 0, j)).getBlock() == RegistryManager.runestone){
-							threeHighCount ++;
-						}
-					}
-				}
+//				IBlockState state = world.getBlockState(pos.add(i, 3, j));
+//				if (state.getBlock() == RegistryManager.chiseled_runestone){
+//					if (world.getBlockState(pos.add(i, 2, j)).getBlock() == RegistryManager.runestone
+//							&& world.getBlockState(pos.add(i, 1, j)).getBlock() == RegistryManager.runestone
+//							&& world.getBlockState(pos.add(i, 0, j)).getBlock() == RegistryManager.runestone){
+//						fourHighCount ++;
+//					}
+//				}
+//				else {
+//					state = world.getBlockState(pos.add(i, 2, j));
+//					if (state.getBlock() == RegistryManager.chiseled_runestone){
+//						if (world.getBlockState(pos.add(i, 1, j)).getBlock() == RegistryManager.runestone
+//								&& world.getBlockState(pos.add(i, 0, j)).getBlock() == RegistryManager.runestone){
+//							threeHighCount ++;
+//						}
+//					}
+//				}
 			}
 		}
 		return threeHighCount == 3 && fourHighCount == 3;

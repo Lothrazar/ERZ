@@ -5,13 +5,10 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import teamroots.roots.RegistryManager;
-import teamroots.roots.Roots;
-import teamroots.roots.book.BookRegistry;
+import teamroots.roots.Roots; 
 import teamroots.roots.capability.RootsCapabilityManager;
-import teamroots.roots.effect.EffectManager;
-import teamroots.roots.gui.GuiHandler;
-import teamroots.roots.network.PacketHandler;
-import teamroots.roots.recipe.RecipeRegistry;
+import teamroots.roots.effect.EffectManager; 
+import teamroots.roots.network.PacketHandler; 
 import teamroots.roots.ritual.RitualRegistry;
 import teamroots.roots.spell.SpellRegistry;
 import teamroots.roots.util.FeyMagicManager;
@@ -31,12 +28,5 @@ public class CommonProxy {
 		FeyMagicManager.init();
 	}
 	
-	public void init(FMLInitializationEvent event){
-		
-	}
-	
-	public void postInit(FMLPostInitializationEvent event){
-		BookRegistry.init();
-		NetworkRegistry.INSTANCE.registerGuiHandler(Roots.instance, new GuiHandler());
-	}
+	 
 }

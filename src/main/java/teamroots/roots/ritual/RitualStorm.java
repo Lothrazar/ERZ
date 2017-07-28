@@ -16,10 +16,7 @@ import teamroots.roots.entity.EntityRitualStorm;
 public class RitualStorm extends RitualBase {
 	public RitualStorm(String name, int duration, boolean doUpdateValidity){
 		super(name,duration,doUpdateValidity);
-		addIngredient(new ItemStack(Blocks.WATERLILY,1));
-		addIngredient(new ItemStack(RegistryManager.bark_oak,1));
-		addIngredient(new ItemStack(Blocks.VINE,1));
-		addIngredient(new ItemStack(RegistryManager.wildroot_item,1));
+		addIngredient(new ItemStack(Blocks.WATERLILY,1)); 
 		addIngredient(new ItemStack(Items.BEETROOT_SEEDS,1));
 	}
 	

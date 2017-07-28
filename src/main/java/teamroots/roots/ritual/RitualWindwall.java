@@ -17,11 +17,7 @@ import teamroots.roots.entity.EntityRitualWindwall;
 
 public class RitualWindwall extends RitualBase {
 	public RitualWindwall(String name, int duration, boolean doUpdateValidity){
-		super(name,duration,doUpdateValidity);
-		addIngredient(new ItemStack(RegistryManager.pereskia_blossom,1));
-		addIngredient(new ItemStack(RegistryManager.pereskia_bulb,1));
-		addIngredient(new ItemStack(RegistryManager.bark_spruce,1));
-		addIngredient(new ItemStack(RegistryManager.bark_birch,1));
+		super(name,duration,doUpdateValidity); 
 		addIngredient(new ItemStack(Items.FEATHER,1));
 	}
 	
