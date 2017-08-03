@@ -1,8 +1,10 @@
 package teamroots.emberroot.entity.fairy;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -20,7 +22,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
-import teamroots.emberroot.particle.ParticleUtil;
+import teamroots.emberroot.Roots; 
+import teamroots.emberroot.proxy.ClientProxy;
 
 public class EntityFairy extends EntityFlying {
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityFairy.class, DataSerializers.VARINT);
@@ -115,10 +118,22 @@ public class EntityFairy extends EntityFlying {
         float x = (float) posX + 0.25f * (rand.nextFloat() - 0.5f);
         float y = (float) posY + 0.375f + 0.25f * (rand.nextFloat() - 0.5f);
         float z = (float) posZ + 0.25f * (rand.nextFloat() - 0.5f);
-        ParticleUtil.spawnParticleGlow(world, x, y, z, 0.0375f * (rand.nextFloat() - 0.5f), 0.0375f * (rand.nextFloat() - 0.5f), 0.0375f * (rand.nextFloat() - 0.5f), getRed(), getGreen(), getBlue(), 0.125f, 6.0f + 6.0f * rand.nextFloat(), 20);
+        spawnParticleGlow(world, x, y, z, 0.0375f * (rand.nextFloat() - 0.5f), 0.0375f * (rand.nextFloat() - 0.5f), 0.0375f * (rand.nextFloat() - 0.5f), getRed(), getGreen(), getBlue(), 0.125f, 6.0f + 6.0f * rand.nextFloat(), 20);
       }
     }
   }
+  public static Random random = new Random();
+  public static int counter = 0;
+  public static void spawnParticleGlow(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {
+    if (Roots.proxy instanceof ClientProxy) {
+      counter += random.nextInt(3);
+      if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
+        ClientProxy.particleRenderer.addParticle(new ParticleGlow(world, x, y, z, vx, vy, vz, r, g, b, a, scale, lifetime));
+      }
+    }
+  }
+ 
+  
   protected void updateAITasks() {
     super.updateAITasks();
     if (getDataManager().get(tame) && owner != null) {
