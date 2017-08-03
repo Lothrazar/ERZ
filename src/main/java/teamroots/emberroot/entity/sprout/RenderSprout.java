@@ -13,20 +13,8 @@ public class RenderSprout extends RenderLiving<EntitySprout> {
   }
   @Override
   protected ResourceLocation getEntityTexture(EntitySprout entity) {
-    switch (entity.getDataManager().get(EntitySprout.variant)) {
-      case 0: {
-        return new ResourceLocation(Const.MODID, "textures/entity/sprout_green.png");
-      }
-      case 1: {
-        return new ResourceLocation(Const.MODID, "textures/entity/sprout_tan.png");
-      }
-      case 2: {
-        return new ResourceLocation(Const.MODID, "textures/entity/sprout_red.png");
-      }
-      default: {
-        return new ResourceLocation(Const.MODID, "textures/entity/sprout_green.png");
-      }
-    }
+    String colour = entity.getVariantEnum().nameLower();
+    return new ResourceLocation(Const.MODID, "textures/entity/sprout_" + colour + ".png");
   }
   public static class Factory implements IRenderFactory<EntitySprout> {
     @Override

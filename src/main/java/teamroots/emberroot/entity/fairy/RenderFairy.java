@@ -14,7 +14,7 @@ public class RenderFairy extends RenderLiving<EntityFairy> {
   @Override
   protected ResourceLocation getEntityTexture(EntityFairy entity) {
     String colourName = entity.getVariantEnum().nameLower();
-    return new ResourceLocation(Const.MODID, "textures/entity/" + colourName + "_fairy.png");
+    return new ResourceLocation(Const.MODID, "textures/entity/fairy_" + colourName + ".png");
   }
   public static class Factory implements IRenderFactory<EntityFairy> {
     @Override

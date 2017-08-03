@@ -1,5 +1,6 @@
 package teamroots.emberroot.entity.sprout;
 import java.util.Random;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -18,9 +19,14 @@ import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 
 public class EntitySprout extends EntityCreature {
-  private Random random = new Random();
+  //  private Random random = new Random();
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntitySprout.class, DataSerializers.VARINT);
-  public SoundEvent ambientSound = new SoundEvent(new ResourceLocation(Const.MODID, "darkoAmbient"));
+  public static enum VariantColors {
+    GREEN, TAN, RED;
+    public String nameLower() {
+      return this.name().toLowerCase();
+    } 
+  }
   public EntitySprout(World world) {
     super(world);
     setSize(0.5f, 1.0f);
@@ -29,7 +35,7 @@ public class EntitySprout extends EntityCreature {
   @Override
   protected void entityInit() {
     super.entityInit();
-    this.getDataManager().register(variant, rand.nextInt(3));
+    this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
   }
   protected void initEntityAI() {
     this.tasks.addTask(0, new EntityAISwimming(this));
@@ -48,22 +54,16 @@ public class EntitySprout extends EntityCreature {
     this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224D);
   }
+  public Integer getVariant() {
+    return getDataManager().get(variant);
+  }
+  public VariantColors getVariantEnum() {
+    return VariantColors.values()[getVariant()];
+  }
   @Override
   public ResourceLocation getLootTable() {
-    switch (getDataManager().get(EntitySprout.variant)) {
-      case 0: {
-        return new ResourceLocation(Const.MODID, "entity/sprout_green");
-      }
-      case 1: {
-        return new ResourceLocation(Const.MODID, "entity/sprout_tan");
-      }
-      case 2: {
-        return new ResourceLocation(Const.MODID, "entity/sprout_red");
-      }
-      default: {
-        return new ResourceLocation(Const.MODID, "entity/sprout_green");
-      }
-    }
+    String colour = getVariantEnum().nameLower();
+    return new ResourceLocation(Const.MODID, "entity/sprout_" + colour);
   }
   @Override
   public void onUpdate() {
