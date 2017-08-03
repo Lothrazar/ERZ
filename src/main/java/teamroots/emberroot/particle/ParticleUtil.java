@@ -1,7 +1,6 @@
 package teamroots.emberroot.particle;
 
 import java.util.Random;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import teamroots.emberroot.Roots;

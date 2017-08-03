@@ -8,7 +8,6 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import teamroots.emberroot.Const;
-import teamroots.emberroot.Roots;
 
 public class PlayerDataProvider implements ICapabilityProvider, ICapabilitySerializable<NBTTagCompound>{
 	public DefaultPlayerDataCapability capability;

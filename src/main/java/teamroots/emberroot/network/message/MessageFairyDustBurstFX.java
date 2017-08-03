@@ -5,14 +5,13 @@ import java.util.List;
 import java.util.Random;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly; 
+import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.particle.ParticleUtil;
 import teamroots.emberroot.util.Misc;
 

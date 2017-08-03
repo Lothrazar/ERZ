@@ -1,7 +1,6 @@
 package teamroots.emberroot.util;
 
 import java.lang.reflect.Field;
-
 import net.minecraft.client.renderer.OpenGlHelper;
 
 public class Fields {

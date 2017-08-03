@@ -4,8 +4,12 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import teamroots.emberroot.Const;
-import teamroots.emberroot.Roots;
-import teamroots.emberroot.network.message.*;
+import teamroots.emberroot.network.message.MessageFairyDustBurstFX;
+import teamroots.emberroot.network.message.MessageFairyTameFX;
+import teamroots.emberroot.network.message.MessageMoonlightBurstFX;
+import teamroots.emberroot.network.message.MessageMoonlightSparkleFX;
+import teamroots.emberroot.network.message.MessagePlayerDataUpdate;
+import teamroots.emberroot.network.message.MessageTEUpdate;
 
 public class PacketHandler {
 	public static SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Const.MODID);

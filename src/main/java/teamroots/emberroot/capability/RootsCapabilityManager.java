@@ -2,13 +2,9 @@ package teamroots.emberroot.capability;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import teamroots.emberroot.Roots;
-import teamroots.emberroot.network.PacketHandler;
-import teamroots.emberroot.network.message.MessagePlayerDataUpdate;
 
 public class RootsCapabilityManager {
     public static void register()

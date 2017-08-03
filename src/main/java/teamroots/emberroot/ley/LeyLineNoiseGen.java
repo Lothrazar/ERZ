@@ -1,7 +1,6 @@
 package teamroots.emberroot.ley;
 
 import java.util.Random;
-
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import teamroots.emberroot.util.NoiseGenUtil;

@@ -2,14 +2,11 @@ package teamroots.emberroot.world;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import teamroots.emberroot.util.Misc;
 
 public class StructureBase {
 	public ArrayList<String[]> layers = new ArrayList<String[]>();

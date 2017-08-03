@@ -2,11 +2,9 @@ package teamroots.emberroot.util;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import teamroots.emberroot.RegistryManager;
 
 public class OfferingUtil {
 	public static Map<Item, Integer> values = new HashMap<Item, Integer>();
