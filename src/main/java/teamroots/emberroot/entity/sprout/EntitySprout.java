@@ -1,6 +1,5 @@
 package teamroots.emberroot.entity.sprout;
 import java.util.Random;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -14,10 +13,8 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import teamroots.emberroot.ConfigManager;
 import teamroots.emberroot.Const;
 
 public class EntitySprout extends EntityCreature {
@@ -71,7 +68,6 @@ public class EntitySprout extends EntityCreature {
   @Override
   public void onUpdate() {
     super.onUpdate();
- 
     this.rotationYaw = this.rotationYawHead;
   }
   public float getEyeHeight() {

@@ -12,10 +12,8 @@ public class CommonProxy {
   public static SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Const.MODID);
   public void preInit(FMLPreInitializationEvent event) {
     RegistryManager.registerAll();
-    
     int id = 0;
     INSTANCE.registerMessage(MessageEmberSizedBurstFX.MessageHolder.class, MessageEmberSizedBurstFX.class, id++, Side.CLIENT);
-   
     GolemRegistry.registerAll();
   }
 }

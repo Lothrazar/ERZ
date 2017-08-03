@@ -21,7 +21,6 @@ public class ConfigManager {
     config.addCustomCategoryComment("structures", "Settings related to structures.");
     fairySpawnWeight = config.getInt("fairySpawnWeight", "mobs", 20, 0, 32767, "Configures the generation chance of the Fairy mob. Higher numbers mean more spawns.");
     golemSpawnWeight = config.getInt("golemSpawnWeight", "mobs", 15, 0, 32767, "Configures the generation chance of the Golem mob. Higher numbers mean more spawns.");
- 
     if (config.hasChanged()) {
       config.save();
     }

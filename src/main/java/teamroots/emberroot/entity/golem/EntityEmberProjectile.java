@@ -17,8 +17,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import teamroots.emberroot.proxy.ClientProxy;
-import teamroots.emberroot.proxy.CommonProxy; 
- 
+import teamroots.emberroot.proxy.CommonProxy;
 
 //@Interface(iface = "elucent.albedo.lighting.ILightProvider", modid = "albedo")
 public class EntityEmberProjectile extends Entity/* implements ILightProvider */ {

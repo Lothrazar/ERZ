@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
- 
+
 public class ParticleMote extends Particle implements IEmberParticle {
   public float colorR = 0;
   public float colorG = 0;

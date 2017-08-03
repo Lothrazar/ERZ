@@ -12,7 +12,7 @@ import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import teamroots.emberroot.Const; 
+import teamroots.emberroot.Const;
 
 public class EntityAncientGolem extends EntityMob {
   public EntityAncientGolem(World worldIn) {

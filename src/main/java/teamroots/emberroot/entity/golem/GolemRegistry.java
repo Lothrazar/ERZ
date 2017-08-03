@@ -13,7 +13,7 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
-import net.minecraftforge.common.BiomeManager.BiomeType; 
+import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.ConfigManager;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.Roots;
-import teamroots.emberroot.proxy.ClientProxy; 
+import teamroots.emberroot.proxy.ClientProxy;
 
 public class GolemRegistry {
   public static DamageSource damage_ember;
@@ -32,7 +32,7 @@ public class GolemRegistry {
     return (r * 65536 + g * 256 + b);
   }
   public static void registerAll() {
-     damage_ember = new DamageGolem();
+    damage_ember = new DamageGolem();
     int id = 5;
     //TODO: MERGE WITH registrymanager eh
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "ember_projectile"), EntityEmberProjectile.class, "ember_projectile", id++, Roots.instance, 64, 1, true);

@@ -22,7 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
-import teamroots.emberroot.Roots; 
+import teamroots.emberroot.Roots;
 import teamroots.emberroot.proxy.ClientProxy;
 
 public class EntityFairy extends EntityFlying {
@@ -132,8 +132,6 @@ public class EntityFairy extends EntityFlying {
       }
     }
   }
- 
-  
   protected void updateAITasks() {
     super.updateAITasks();
     if (getDataManager().get(tame) && owner != null) {

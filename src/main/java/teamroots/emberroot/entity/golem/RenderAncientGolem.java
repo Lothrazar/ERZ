@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
- 
 
 public class RenderAncientGolem extends RenderLiving<EntityAncientGolem> {
   public RenderAncientGolem(RenderManager renderManager, ModelBase modelBase, float shadowSize) {
