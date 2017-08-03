@@ -12,8 +12,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import teamroots.emberroot.entity.EntityFairyCircle;
+import net.minecraftforge.fml.relauncher.SideOnly; 
 import teamroots.emberroot.entity.deer.EntityDeer;
 import teamroots.emberroot.entity.deer.RenderDeer;
 import teamroots.emberroot.entity.fairy.EntityFairy;
@@ -33,7 +32,7 @@ public class RegistryManager {
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "sprout"), intColor(136, 189, 33), intColor(165, 232, 42));
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "fairy"), EntityFairy.class, "fairy", id++, Roots.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "fairy"), intColor(255, 208, 255), intColor(209, 255, 173));
-    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "fairy_circle"), EntityFairyCircle.class, "fairy_circle", id++, Roots.instance, 64, 20, true);
+ 
     List<Biome> biomesDeer = new ArrayList<Biome>();
     List<Biome> biomesFairy = new ArrayList<Biome>();
     List<Biome> biomesSprout = new ArrayList<Biome>();
@@ -68,12 +67,8 @@ public class RegistryManager {
   @SubscribeEvent
   public void registerRendering(ModelRegistryEvent event) {
 
-    RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderDeer.Factory());
-    //	RenderingRegistry.registerEntityRenderingHandler(EntityFlare.class, new RenderNull.Factory());
-    RenderingRegistry.registerEntityRenderingHandler(EntitySprout.class, new RenderSprout.Factory());
-    //	RenderingRegistry.registerEntityRenderingHandler(EntityBarrow.class, new RenderNull.Factory());
-    RenderingRegistry.registerEntityRenderingHandler(EntityFairy.class, new RenderFairy.Factory());
-    //RenderingRegistry.registerEntityRenderingHandler(EntityFairyCircle.class, new RenderNull.Factory());
-    //RenderingRegistry.registerEntityRenderingHandler(EntityBlinkProjectile.class, new RenderNull.Factory());
+    RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderDeer.Factory()); 
+    RenderingRegistry.registerEntityRenderingHandler(EntitySprout.class, new RenderSprout.Factory()); 
+    RenderingRegistry.registerEntityRenderingHandler(EntityFairy.class, new RenderFairy.Factory()); 
   }
 }

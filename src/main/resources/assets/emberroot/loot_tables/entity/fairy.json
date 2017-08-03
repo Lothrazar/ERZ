@@ -6,7 +6,7 @@
             "entries": [
                 {
                     "type": "item",
-                    "name": "roots:fairy_dust",
+                    "name": "minecraft:glowstone_dust",
                     "functions": [
                         {
                             "function": "set_count",
