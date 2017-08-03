@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class ConfigManager {
   public static Configuration config;
   //MOBS
-  public static int deerSpawnWeight, sproutSpawnWeight, fairySpawnWeight;
+  public static int deerSpawnWeight, sproutSpawnWeight, fairySpawnWeight, golemSpawnWeight;
   public static void init(File configFile) {
     if (config == null) {
       config = new Configuration(configFile);
@@ -20,7 +20,8 @@ public class ConfigManager {
     sproutSpawnWeight = config.getInt("sproutSpawnWeight", "mobs", 6, 0, 32767, "Configures the spawning frequency of the Sprout mob. Higher numbers mean more spawns.");
     config.addCustomCategoryComment("structures", "Settings related to structures.");
     fairySpawnWeight = config.getInt("fairySpawnWeight", "mobs", 20, 0, 32767, "Configures the generation chance of the Fairy mob. Higher numbers mean more spawns.");
-    config.addCustomCategoryComment("misc", "Uncategorized settings.");
+    golemSpawnWeight = config.getInt("golemSpawnWeight", "mobs", 15, 0, 32767, "Configures the generation chance of the Golem mob. Higher numbers mean more spawns.");
+ 
     if (config.hasChanged()) {
       config.save();
     }

@@ -13,7 +13,7 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
-import net.minecraftforge.common.BiomeManager.BiomeType;
+import net.minecraftforge.common.BiomeManager.BiomeType; 
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -21,6 +21,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import teamroots.emberroot.ConfigManager;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.Roots;
 import teamroots.emberroot.proxy.ClientProxy; 
@@ -47,7 +48,7 @@ public class GolemRegistry {
       biomes.add(b.biome);
     }
     biomes.addAll(BiomeManager.oceanBiomes);
-    EntityRegistry.addSpawn(EntityAncientGolem.class, 25, 1, 1, EnumCreatureType.MONSTER, biomes.toArray(new Biome[biomes.size()]));
+    EntityRegistry.addSpawn(EntityAncientGolem.class, ConfigManager.golemSpawnWeight, 1, 1, EnumCreatureType.MONSTER, biomes.toArray(new Biome[biomes.size()]));
   }
   @SideOnly(Side.CLIENT)
   public static void registerEntityRendering() {
