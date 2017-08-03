@@ -72,7 +72,7 @@ public class EntityEmberProjectile extends Entity {
   public void onUpdate() {
     super.onUpdate();
     if (!getEntityWorld().isRemote && getDataManager().get(lifetime) > 18 && getDataManager().get(dead)) {
-      CommonProxy.INSTANCE.sendToAll(new MessageEmberSizedBurstFX(posX, posY, posZ, getDataManager().get(value) / 1.75f));
+      CommonProxy.INSTANCE.sendToAll(new MessageEmberSizedBurstFX(posX, posY, posZ, getDataManager().get(value) / 1.75f,  this.getRed(),this.getGreen(),this.getBlue()));
     }
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
     getDataManager().setDirty(lifetime);
@@ -91,7 +91,7 @@ public class EntityEmberProjectile extends Entity {
       IBlockState state = getEntityWorld().getBlockState(getPosition());
       if (state.isFullCube() && state.isOpaqueCube()) {
         if (!getEntityWorld().isRemote) {
-          CommonProxy.INSTANCE.sendToAll(new MessageEmberSizedBurstFX(posX, posY, posZ, getDataManager().get(value) / 1.75f));
+          CommonProxy.INSTANCE.sendToAll(new MessageEmberSizedBurstFX(posX, posY, posZ, getDataManager().get(value) / 1.75f,  this.getRed(),this.getGreen(),this.getBlue()));
           getDataManager().set(lifetime, 20);
           getDataManager().setDirty(lifetime);
           this.getDataManager().set(dead, true);
@@ -133,7 +133,10 @@ public class EntityEmberProjectile extends Entity {
             target.attackEntityFrom(source, getDataManager().get(value));
           }
           if (!getEntityWorld().isRemote) {
-            CommonProxy.INSTANCE.sendToAll(new MessageEmberSizedBurstFX(posX, posY, posZ, getDataManager().get(value) / 1.75f));
+            CommonProxy.INSTANCE.sendToAll(new MessageEmberSizedBurstFX(posX, posY, posZ, 
+                getDataManager().get(value) / 1.75f
+              ,  this.getRed(),this.getGreen(),this.getBlue()
+              ));
             getDataManager().set(lifetime, 20);
             getDataManager().setDirty(lifetime);
             this.getDataManager().set(dead, true);
@@ -153,13 +156,13 @@ public class EntityEmberProjectile extends Entity {
  
     return var.getColor();
   }
-  private float getBlue() {
+  private int getBlue() {
     return getColor().getBlue();
   }
-  private float getGreen() {
+  private int getGreen() {
     return getColor().getGreen();
   }
-  private float getRed() {
+  private int getRed() {
     return getColor().getRed();
   }
   private static Random random = new Random();

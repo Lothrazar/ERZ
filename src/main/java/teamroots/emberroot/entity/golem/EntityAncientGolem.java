@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 
 public class EntityAncientGolem extends EntityMob {
-  private static final int FIRE_TICKRATE = 15;//fire every this many ticks (100)
+  private static final int FIRE_TICKRATE = 100;//fire every this many ticks (100)
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityAncientGolem.class, DataSerializers.VARINT);
   public static enum VariantColors {
     ORANGE, BLUE, GREEN, PURPLE, RED;

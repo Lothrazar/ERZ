@@ -14,14 +14,18 @@ public class MessageEmberSizedBurstFX implements IMessage {
   public static Random random = new Random();
   public double posX = 0, posY = 0, posZ = 0;
   public double value = 0;
+  public int r, g, b;
   public MessageEmberSizedBurstFX() {
     super();
   }
-  public MessageEmberSizedBurstFX(double x, double y, double z, double value) {
+  public MessageEmberSizedBurstFX(double x, double y, double z, double value,int r, int g, int b) {
     super();
     this.posX = x;
     this.posY = y;
     this.posZ = z;
+    this.r = r;
+    this.g=g;
+    this.b=b;
     this.value = value;
   }
   @Override
@@ -30,6 +34,9 @@ public class MessageEmberSizedBurstFX implements IMessage {
     posY = buf.readDouble();
     posZ = buf.readDouble();
     value = buf.readDouble();
+    r=buf.readInt();
+    g=buf.readInt();
+    b=buf.readInt();
   }
   @Override
   public void toBytes(ByteBuf buf) {
@@ -37,6 +44,9 @@ public class MessageEmberSizedBurstFX implements IMessage {
     buf.writeDouble(posY);
     buf.writeDouble(posZ);
     buf.writeDouble(value);
+    buf.writeInt(r);
+    buf.writeInt(g);
+    buf.writeInt(b);
   }
   public static class MessageHolder implements IMessageHandler<MessageEmberSizedBurstFX, IMessage> {
     public static Random random = new Random();
@@ -48,7 +58,10 @@ public class MessageEmberSizedBurstFX implements IMessage {
         Minecraft.getMinecraft().addScheduledTask(() -> {
           World world = Minecraft.getMinecraft().world;
           for (int k = 0; k < 80; k++) {
-            spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, ((float) message.value / 3.5f) * 0.125f * (random.nextFloat() - 0.5f), ((float) message.value / 3.5f) * 0.125f * (random.nextFloat() - 0.5f), ((float) message.value / 3.5f) * 0.125f * (random.nextFloat() - 0.5f), 255, 64, 16, 1.0f, (float) message.value, 24);
+            spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, ((float) message.value / 3.5f) * 0.125f * (random.nextFloat() - 0.5f), ((float) message.value / 3.5f) * 0.125f * (random.nextFloat() - 0.5f), ((float) message.value / 3.5f) * 0.125f * (random.nextFloat() - 0.5f), 
+               // 255, 64, 16, 
+                message.r,message.g,message.b,
+                1.0f, (float) message.value, 24);
           }
         });
       }
