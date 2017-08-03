@@ -34,7 +34,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.capability.PlayerDataProvider;
-import teamroots.emberroot.entity.EntityFairy;
+import teamroots.emberroot.entity.fairy.EntityFairy;
 import teamroots.emberroot.network.PacketHandler;
 import teamroots.emberroot.network.message.MessagePlayerDataUpdate;
 import teamroots.emberroot.proxy.ClientProxy;

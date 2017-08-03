@@ -1,4 +1,4 @@
-package teamroots.emberroot.entity;
+package teamroots.emberroot.entity.fairy;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -17,6 +17,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+import teamroots.emberroot.entity.fairy.EntityFairy;
 import teamroots.emberroot.particle.ParticleUtil;
 import teamroots.emberroot.util.IEntityRenderingLater;
 

@@ -1,4 +1,4 @@
-package teamroots.emberroot.entity;
+package teamroots.emberroot.entity.sprout;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityCreature;

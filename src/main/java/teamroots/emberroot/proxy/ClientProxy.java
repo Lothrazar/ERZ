@@ -1,9 +1,9 @@
 package teamroots.emberroot.proxy;
 
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import teamroots.emberroot.model.ModelDeer;
-import teamroots.emberroot.model.ModelFairy; 
-import teamroots.emberroot.model.ModelSprout;
+import teamroots.emberroot.entity.deer.ModelDeer;
+import teamroots.emberroot.entity.fairy.ModelFairy;
+import teamroots.emberroot.entity.sprout.ModelSprout;
 import teamroots.emberroot.particle.ParticleRenderer;
 import teamroots.emberroot.util.ShaderUtil;
 

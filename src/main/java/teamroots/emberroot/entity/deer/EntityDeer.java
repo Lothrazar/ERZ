@@ -1,4 +1,4 @@
-package teamroots.emberroot.entity;
+package teamroots.emberroot.entity.deer;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;

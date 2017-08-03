@@ -1,4 +1,4 @@
-package teamroots.emberroot.model;
+package teamroots.emberroot.entity.deer;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.util.math.Vec3d;
-import teamroots.emberroot.entity.EntityDeer;
 
 public class ModelDeer extends ModelBase
 {
