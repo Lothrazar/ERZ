@@ -79,8 +79,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.capability.PlayerDataProvider; 
 import teamroots.emberroot.entity.EntityDeer;
-import teamroots.emberroot.entity.EntityFairy;
-import teamroots.emberroot.entity.EntityPetalShell; 
+import teamroots.emberroot.entity.EntityFairy; 
 import teamroots.emberroot.network.PacketHandler;
 import teamroots.emberroot.network.message.MessagePlayerDataUpdate;
 import teamroots.emberroot.proxy.ClientProxy;
@@ -263,23 +262,23 @@ public class EventManager {
 		}
 		if (event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().getEntityWorld().isRemote){
 			EntityPlayer p = ((EntityPlayer)event.getEntityLiving());
-			List<EntityPetalShell> shells = p.getEntityWorld().getEntitiesWithinAABB(EntityPetalShell.class, new AxisAlignedBB(p.posX-0.5,p.posY,p.posZ-0.5,p.posX+0.5,p.posY+2.0,p.posZ+0.5));
-			if (shells.size() > 0){
-				for (EntityPetalShell s : shells){
-					if (s.playerId.compareTo(p.getUniqueID()) == 0){
-						if (s.getDataManager().get(s.charge) > 0){
-							event.setAmount(0);
-							event.setCanceled(true);
-							s.getDataManager().set(s.charge, s.getDataManager().get(s.charge)-1);
-							s.getDataManager().setDirty(s.charge);
-						//	PacketHandler.INSTANCE.sendToAll(new MessagePetalShellBurstFX(p.posX,p.posY+1.0f,p.posZ));
-							if (s.getDataManager().get(s.charge) <= 0){
-								p.world.removeEntity(s);
-							}
-						}
-					}
-				}
-			}
+//			List<EntityPetalShell> shells = p.getEntityWorld().getEntitiesWithinAABB(EntityPetalShell.class, new AxisAlignedBB(p.posX-0.5,p.posY,p.posZ-0.5,p.posX+0.5,p.posY+2.0,p.posZ+0.5));
+//			if (shells.size() > 0){
+//				for (EntityPetalShell s : shells){
+//					if (s.playerId.compareTo(p.getUniqueID()) == 0){
+//						if (s.getDataManager().get(s.charge) > 0){
+//							event.setAmount(0);
+//							event.setCanceled(true);
+//							s.getDataManager().set(s.charge, s.getDataManager().get(s.charge)-1);
+//							s.getDataManager().setDirty(s.charge);
+//						//	PacketHandler.INSTANCE.sendToAll(new MessagePetalShellBurstFX(p.posX,p.posY+1.0f,p.posZ));
+//							if (s.getDataManager().get(s.charge) <= 0){
+//								p.world.removeEntity(s);
+//							}
+//						}
+//					}
+//				}
+//			}
 		}
 		if (event.getEntity().getEntityData().hasKey(Const.MIND_WARD_TAG)){
 			if (event.getSource().getTrueSource() instanceof EntityLivingBase){

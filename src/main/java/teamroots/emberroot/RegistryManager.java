@@ -46,7 +46,7 @@ import teamroots.emberroot.world.WorldGenFairyPool;
 
 public class RegistryManager {
  
-	public static IWorldGenerator worldGenGarden, worldGenFairyPool, worldGenBarrow, worldGenStandingStones, worldGenHut, worldGenLeyMarker;
+	public static IWorldGenerator worldGenFairyPool ;
  
 	public static void registerAll(){
 
@@ -54,25 +54,16 @@ public class RegistryManager {
 		GameRegistry.registerWorldGenerator(worldGenFairyPool = new WorldGenFairyPool(), 1);
  
 		int id = 0;
-		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"auspicious_point"), EntityAuspiciousPoint.class, "auspicious_point", id ++, Roots.instance, 64, 20, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"fire_jet"), EntityFireJet.class, "fire_jet", id ++, Roots.instance, 64, 20, true);
-		//EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"thorn_trap"), EntityThornTrap.class, "thorn_trap", id ++, Roots.instance, 64, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"petal_shell"), EntityPetalShell.class, "petal_shell", id ++, Roots.instance, 64, 1, true);
-	//	EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"time_stop"), EntityTimeStop.class, "time_stop", id ++, Roots.instance, 64, 1, true);
+		//EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"auspicious_point"), EntityAuspiciousPoint.class, "auspicious_point", id ++, Roots.instance, 64, 20, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"fire_jet"), EntityFireJet.class, "fire_jet", id ++, Roots.instance, 64, 20, true); 
+//		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"petal_shell"), EntityPetalShell.class, "petal_shell", id ++, Roots.instance, 64, 1, true); 
 		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"boost"), EntityBoost.class, "boost", id ++, Roots.instance, 64, 1, true);
 		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"deer"), EntityDeer.class, "deer", id ++, Roots.instance, 64, 1, true);
-		EntityRegistry.registerEgg(      new ResourceLocation(Const.MODID,"deer"), Misc.intColor(161, 132, 88), Misc.intColor(94, 77, 51));
-		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"ritual_life"), EntityRitualLife.class, "ritual_life", id ++, Roots.instance, 64, 20, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"ritual_storm"), EntityRitualStorm.class, "ritual_storm", id ++, Roots.instance, 64, 20, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"ritual_light"), EntityRitualLight.class, "ritual_light", id ++, Roots.instance, 64, 20, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"ritual_fire_storm"), EntityRitualFireStorm.class, "ritual_fire_storm", id ++, Roots.instance, 64, 20, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"flare"), EntityFlare.class, "flare", id ++, Roots.instance, 64, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"ritual_regrowth"), EntityRitualRegrowth.class, "ritual_regrowth", id ++, Roots.instance, 64, 20, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"ritual_windwall"), EntityRitualWindwall.class, "ritual_windwall", id ++, Roots.instance, 64, 20, true);
+		EntityRegistry.registerEgg(      new ResourceLocation(Const.MODID,"deer"), Misc.intColor(161, 132, 88), Misc.intColor(94, 77, 51)); 
+		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"flare"), EntityFlare.class, "flare", id ++, Roots.instance, 64, 1, true); 
 		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"sprout"), EntitySprout.class, "sprout", id ++, Roots.instance, 64, 1, true);
 		EntityRegistry.registerEgg(      new ResourceLocation(Const.MODID,"sprout"), Misc.intColor(136, 191, 33), Misc.intColor(165, 232, 42));
-		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"barrow"), EntityBarrow.class, "barrow", id ++, Roots.instance, 64, 20, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"ritual_warden"), EntityRitualWarden.class, "ritual_warden", id ++, Roots.instance, 64, 20, true);
+		//EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"barrow"), EntityBarrow.class, "barrow", id ++, Roots.instance, 64, 20, true); 
 		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"fairy"), EntityFairy.class, "fairy", id ++, Roots.instance, 64, 1, true);
 		EntityRegistry.registerEgg(      new ResourceLocation(Const.MODID,"fairy"), Misc.intColor(255, 214, 255), Misc.intColor(209, 255, 173));
 		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"fairy_circle"), EntityFairyCircle.class, "fairy_circle", id ++, Roots.instance, 64, 20, true);
@@ -100,24 +91,17 @@ public class RegistryManager {
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
     public void registerRendering(ModelRegistryEvent event){
- 
-		RenderingRegistry.registerEntityRenderingHandler(EntityAuspiciousPoint.class, new RenderAuspiciousPoint.Factory());
+  
 		RenderingRegistry.registerEntityRenderingHandler(EntityFireJet.class, new RenderNull.Factory());
-		//RenderingRegistry.registerEntityRenderingHandler(EntityThornTrap.class, new RenderNull.Factory());
-//		RenderingRegistry.registerEntityRenderingHandler(EntityPetalShell.class, new RenderPetalShell.Factory());
-//		RenderingRegistry.registerEntityRenderingHandler(EntityTimeStop.class, new RenderNull.Factory());
+ 
 		RenderingRegistry.registerEntityRenderingHandler(EntityBoost.class, new RenderNull.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderDeer.Factory());
-		RenderingRegistry.registerEntityRenderingHandler(EntityRitualLife.class, new RenderNull.Factory());
-		RenderingRegistry.registerEntityRenderingHandler(EntityRitualStorm.class, new RenderNull.Factory());
-		RenderingRegistry.registerEntityRenderingHandler(EntityRitualLight.class, new RenderNull.Factory());
-		RenderingRegistry.registerEntityRenderingHandler(EntityRitualFireStorm.class, new RenderNull.Factory());
+ 
 		RenderingRegistry.registerEntityRenderingHandler(EntityFlare.class, new RenderNull.Factory());
-		RenderingRegistry.registerEntityRenderingHandler(EntityRitualRegrowth.class, new RenderNull.Factory());
-		RenderingRegistry.registerEntityRenderingHandler(EntityRitualWindwall.class, new RenderNull.Factory());
+
 		RenderingRegistry.registerEntityRenderingHandler(EntitySprout.class, new RenderSprout.Factory());
-		RenderingRegistry.registerEntityRenderingHandler(EntityBarrow.class, new RenderNull.Factory());
-		RenderingRegistry.registerEntityRenderingHandler(EntityRitualWarden.class, new RenderNull.Factory());
+	//	RenderingRegistry.registerEntityRenderingHandler(EntityBarrow.class, new RenderNull.Factory());
+
 		RenderingRegistry.registerEntityRenderingHandler(EntityFairy.class, new RenderFairy.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFairyCircle.class, new RenderNull.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlinkProjectile.class, new RenderNull.Factory());

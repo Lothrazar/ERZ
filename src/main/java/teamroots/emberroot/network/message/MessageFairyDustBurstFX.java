@@ -12,9 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import teamroots.emberroot.entity.EntityAuspiciousPoint;
-import teamroots.emberroot.entity.RenderAuspiciousPoint;
+import net.minecraftforge.fml.relauncher.SideOnly; 
 import teamroots.emberroot.particle.ParticleUtil;
 import teamroots.emberroot.util.Misc;
 

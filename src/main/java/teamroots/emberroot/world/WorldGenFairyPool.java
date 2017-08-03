@@ -3,25 +3,19 @@ package teamroots.emberroot.world;
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockGrass;
-import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
-import teamroots.emberroot.ConfigManager;
-import teamroots.emberroot.entity.EntityAuspiciousPoint;
-import teamroots.emberroot.entity.EntityBarrow;
+import teamroots.emberroot.ConfigManager;  
 import teamroots.emberroot.entity.EntityFairyCircle;
 import teamroots.emberroot.util.Misc;
 

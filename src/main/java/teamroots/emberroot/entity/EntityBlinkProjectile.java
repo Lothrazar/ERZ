@@ -18,8 +18,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import teamroots.emberroot.particle.ParticleUtil;
-import teamroots.emberroot.ritual.RitualRegistry;
+import teamroots.emberroot.particle.ParticleUtil; 
 
 public class EntityBlinkProjectile extends Entity {
     public static final DataParameter<Float> value = EntityDataManager.<Float>createKey(EntityBlinkProjectile.class, DataSerializers.FLOAT);
