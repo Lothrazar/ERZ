@@ -61,6 +61,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.Roots;
 import teamroots.emberroot.effect.EffectArcanism;
 import teamroots.emberroot.effect.EffectFireResist;
@@ -329,7 +330,7 @@ public class EntityFairy extends EntityFlying {
 	
 	@Override
 	public ResourceLocation getLootTable(){
-		return new ResourceLocation("roots:entity/fairy");
+		return new ResourceLocation(Const.MODID,"entity/fairy");
 	}
 
     public float getEyeHeight()

@@ -20,7 +20,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.client.event.GuiScreenEvent.PotionShiftEvent;
-import teamroots.emberroot.Constants;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.entity.ai.EntityAIFollow;
 import teamroots.emberroot.particle.ParticleUtil;
 import teamroots.emberroot.util.Misc;
@@ -32,7 +32,7 @@ public class EffectFollow extends Effect {
 	
 	public void onApplied(EntityLivingBase entity){
 		if (entity instanceof EntityLiving){
-			Entity target = entity.world.getEntityByID(entity.getEntityData().getInteger(Constants.FOLLOW_EFFECT_TARGET));
+			Entity target = entity.world.getEntityByID(entity.getEntityData().getInteger(Const.FOLLOW_EFFECT_TARGET));
 			if (target instanceof EntityLivingBase){
 				System.out.println(target.getName());
 				((EntityLiving)entity).tasks.addTask(8, new EntityAIFollow((EntityLiving)entity,(EntityLivingBase)target,entity.getAIMoveSpeed(),0,64));
@@ -51,7 +51,7 @@ public class EffectFollow extends Effect {
 			for (int i = 0; i < aiToDelete.size(); i ++){
 				((EntityLiving)entity).tasks.removeTask(aiToDelete.get(i));
 			}
-			entity.getEntityData().removeTag(Constants.FOLLOW_EFFECT_TARGET);
+			entity.getEntityData().removeTag(Const.FOLLOW_EFFECT_TARGET);
 		}
 	}
 }

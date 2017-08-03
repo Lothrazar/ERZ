@@ -49,7 +49,7 @@ public class ConfigManager {
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
 	{
-		if(event.getModID().equalsIgnoreCase(Roots.MODID))
+		if(event.getModID().equalsIgnoreCase(Const.MODID))
 		{
 			load();
 		}

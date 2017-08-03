@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.util.Misc;
 
 public class ParticleFloatingGlow extends Particle implements IRootsParticle {
@@ -22,7 +23,7 @@ public class ParticleFloatingGlow extends Particle implements IRootsParticle {
 	public double targetMotionZ = 0;
 	
 	public float initScale = 0;
-	public ResourceLocation texture = new ResourceLocation("roots:entity/particle_glow");
+	public ResourceLocation texture = new ResourceLocation(Const.MODID,"entity/particle_glow");
 	public ParticleFloatingGlow(World worldIn, double x, double y, double z, double vx, double vy, double vz, float r, float g, float b, float a, float scale, int lifetime) {
 		super(worldIn, x,y,z,0,0,0);
 		this.colorR = r;

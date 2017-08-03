@@ -8,7 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import teamroots.emberroot.Constants;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.capability.PlayerDataProvider;
 
 public class EffectManager {
@@ -32,22 +32,22 @@ public class EffectManager {
 	
 	public static void assignEffect(EntityLivingBase entity, String effect, int duration, NBTTagCompound data){
 		if (!(entity instanceof EntityPlayer)){
-			if (!entity.getEntityData().hasKey(Constants.EFFECT_TAG)){
-				entity.getEntityData().setTag(Constants.EFFECT_TAG, new NBTTagCompound());
+			if (!entity.getEntityData().hasKey(Const.EFFECT_TAG)){
+				entity.getEntityData().setTag(Const.EFFECT_TAG, new NBTTagCompound());
 			}
 		}
 		else if (entity.hasCapability(PlayerDataProvider.playerDataCapability, null)){
-			if (!entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().hasKey(Constants.EFFECT_TAG)){
-				entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().setTag(Constants.EFFECT_TAG, new NBTTagCompound());
+			if (!entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().hasKey(Const.EFFECT_TAG)){
+				entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().setTag(Const.EFFECT_TAG, new NBTTagCompound());
 				entity.getCapability(PlayerDataProvider.playerDataCapability, null).markDirty();
 			}
 		}
 		NBTTagCompound tag = null;
 		if (!(entity instanceof EntityPlayer)){
-			tag = entity.getEntityData().getCompoundTag(Constants.EFFECT_TAG);
+			tag = entity.getEntityData().getCompoundTag(Const.EFFECT_TAG);
 		}
 		else if (entity.hasCapability(PlayerDataProvider.playerDataCapability, null)){
-			tag = entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Constants.EFFECT_TAG);
+			tag = entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Const.EFFECT_TAG);
 		}
 		if (tag != null){
 			if (!tag.hasKey(effect)){
@@ -64,13 +64,13 @@ public class EffectManager {
 	public static boolean hasEffect(EntityLivingBase entity, String effect){
 		if (entity != null){
 			if (!(entity instanceof EntityPlayer)){
-				if (entity.getEntityData().hasKey(Constants.EFFECT_TAG)){
-					return entity.getEntityData().getCompoundTag(Constants.EFFECT_TAG).hasKey(effect);
+				if (entity.getEntityData().hasKey(Const.EFFECT_TAG)){
+					return entity.getEntityData().getCompoundTag(Const.EFFECT_TAG).hasKey(effect);
 				}
 			}
 			else if (entity.hasCapability(PlayerDataProvider.playerDataCapability, null)){
-				if (entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().hasKey(Constants.EFFECT_TAG)){
-					return entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Constants.EFFECT_TAG).hasKey(effect);
+				if (entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().hasKey(Const.EFFECT_TAG)){
+					return entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Const.EFFECT_TAG).hasKey(effect);
 				}
 			}
 		}
@@ -80,13 +80,13 @@ public class EffectManager {
 	public static void setEffectData(EntityLivingBase entity, String effect, NBTTagCompound data){
 		if (entity != null){
 			if (!(entity instanceof EntityPlayer)){
-				if (entity.getEntityData().hasKey(Constants.EFFECT_TAG)){
-					entity.getEntityData().getCompoundTag(Constants.EFFECT_TAG).setTag(effect+"_data",data);
+				if (entity.getEntityData().hasKey(Const.EFFECT_TAG)){
+					entity.getEntityData().getCompoundTag(Const.EFFECT_TAG).setTag(effect+"_data",data);
 				}
 			}
 			else if (entity.hasCapability(PlayerDataProvider.playerDataCapability, null)){
-				if (entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().hasKey(Constants.EFFECT_TAG)){
-					entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Constants.EFFECT_TAG).setTag(effect+"_data",data);
+				if (entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().hasKey(Const.EFFECT_TAG)){
+					entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Const.EFFECT_TAG).setTag(effect+"_data",data);
 					entity.getCapability(PlayerDataProvider.playerDataCapability, null).markDirty();
 				}
 			}
@@ -96,16 +96,16 @@ public class EffectManager {
 	public static NBTTagCompound getEffectData(EntityLivingBase entity, String effect){
 		if (entity != null){
 			if (!(entity instanceof EntityPlayer)){
-				if (entity.getEntityData().hasKey(Constants.EFFECT_TAG)){
-					if (entity.getEntityData().getCompoundTag(Constants.EFFECT_TAG).hasKey(effect+"_data")){
-						return entity.getEntityData().getCompoundTag(Constants.EFFECT_TAG).getCompoundTag(effect+"_data");
+				if (entity.getEntityData().hasKey(Const.EFFECT_TAG)){
+					if (entity.getEntityData().getCompoundTag(Const.EFFECT_TAG).hasKey(effect+"_data")){
+						return entity.getEntityData().getCompoundTag(Const.EFFECT_TAG).getCompoundTag(effect+"_data");
 					}
 				}
 			}
 			else if (entity.hasCapability(PlayerDataProvider.playerDataCapability, null)){
-				if (entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().hasKey(Constants.EFFECT_TAG)){
-					if (entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Constants.EFFECT_TAG).hasKey(effect+"_data")){
-						return entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Constants.EFFECT_TAG).getCompoundTag(effect+"_data");
+				if (entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().hasKey(Const.EFFECT_TAG)){
+					if (entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Const.EFFECT_TAG).hasKey(effect+"_data")){
+						return entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Const.EFFECT_TAG).getCompoundTag(effect+"_data");
 					}
 				}
 			}
@@ -116,16 +116,16 @@ public class EffectManager {
 	public static int getDuration(EntityLivingBase entity, String effect){
 		if (entity != null){
 			if (!(entity instanceof EntityPlayer)){
-				if (entity.getEntityData().hasKey(Constants.EFFECT_TAG)){
-					if (entity.getEntityData().getCompoundTag(Constants.EFFECT_TAG).hasKey(effect)){
-						return entity.getEntityData().getCompoundTag(Constants.EFFECT_TAG).getInteger(effect);
+				if (entity.getEntityData().hasKey(Const.EFFECT_TAG)){
+					if (entity.getEntityData().getCompoundTag(Const.EFFECT_TAG).hasKey(effect)){
+						return entity.getEntityData().getCompoundTag(Const.EFFECT_TAG).getInteger(effect);
 					}
 				}
 			}
 			else if (entity.hasCapability(PlayerDataProvider.playerDataCapability, null)){
-				if (entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().hasKey(Constants.EFFECT_TAG)){
-					if (entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Constants.EFFECT_TAG).hasKey(effect)){
-						return entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Constants.EFFECT_TAG).getInteger(effect);
+				if (entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().hasKey(Const.EFFECT_TAG)){
+					if (entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Const.EFFECT_TAG).hasKey(effect)){
+						return entity.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Const.EFFECT_TAG).getInteger(effect);
 					}
 				}
 			}
@@ -136,8 +136,8 @@ public class EffectManager {
 	public static void tickEffects(EntityLivingBase entity){
 		if (entity != null){
 			if (!(entity instanceof EntityPlayer)){
-				if (entity.getEntityData().hasKey(Constants.EFFECT_TAG)){
-					NBTTagCompound tag = entity.getEntityData().getCompoundTag(Constants.EFFECT_TAG);
+				if (entity.getEntityData().hasKey(Const.EFFECT_TAG)){
+					NBTTagCompound tag = entity.getEntityData().getCompoundTag(Const.EFFECT_TAG);
 					if (tag != null){
 						ArrayList<String> keys = new ArrayList<String>();
 						for (String s : tag.getKeySet()){
@@ -159,7 +159,7 @@ public class EffectManager {
 							tag.removeTag(s);
 							tag.removeTag(s+"_data");
 							if (tag.getKeySet().size() == 0){
-								entity.getEntityData().removeTag(Constants.EFFECT_TAG);
+								entity.getEntityData().removeTag(Const.EFFECT_TAG);
 							}
 						}
 					}
@@ -168,7 +168,7 @@ public class EffectManager {
 			else {
 				EntityPlayer player = (EntityPlayer)entity;
 				if (player.hasCapability(PlayerDataProvider.playerDataCapability, null)){
-					NBTTagCompound tag = player.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Constants.EFFECT_TAG);
+					NBTTagCompound tag = player.getCapability(PlayerDataProvider.playerDataCapability, null).getData().getCompoundTag(Const.EFFECT_TAG);
 					if (tag != null){
 						ArrayList<String> keys = new ArrayList<String>();
 						for (String s : tag.getKeySet()){
@@ -190,7 +190,7 @@ public class EffectManager {
 							tag.removeTag(s);
 							tag.removeTag(s+"_data");
 							if (tag.getKeySet().size() == 0){
-								player.getCapability(PlayerDataProvider.playerDataCapability, null).getData().removeTag(Constants.EFFECT_TAG);
+								player.getCapability(PlayerDataProvider.playerDataCapability, null).getData().removeTag(Const.EFFECT_TAG);
 							}
 						}
 	    				player.getCapability(PlayerDataProvider.playerDataCapability, null).markDirty();

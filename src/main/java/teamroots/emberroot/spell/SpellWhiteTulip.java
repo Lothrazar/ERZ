@@ -13,7 +13,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
-import teamroots.emberroot.Constants;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.entity.EntityFireJet;
 import teamroots.emberroot.entity.EntityTimeStop;
 import teamroots.emberroot.network.PacketHandler;
@@ -36,15 +36,15 @@ public class SpellWhiteTulip extends SpellBase {
 			player.capabilities.disableDamage = true;
 			player.capabilities.allowFlying = true;
 			player.noClip = true;
-			player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, 100);
-			player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_X, player.posX);
-			player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Y, player.posY);
-			player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Z, player.posZ);
+			player.getEntityData().setInteger(Const.LIGHT_DRIFTER_TAG, 100);
+			player.getEntityData().setDouble(Const.LIGHT_DRIFTER_X, player.posX);
+			player.getEntityData().setDouble(Const.LIGHT_DRIFTER_Y, player.posY);
+			player.getEntityData().setDouble(Const.LIGHT_DRIFTER_Z, player.posZ);
 			if (player.capabilities.isCreativeMode){
-				player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_MODE, GameType.CREATIVE.getID());
+				player.getEntityData().setInteger(Const.LIGHT_DRIFTER_MODE, GameType.CREATIVE.getID());
 			}
 			else {
-				player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_MODE, GameType.SURVIVAL.getID());
+				player.getEntityData().setInteger(Const.LIGHT_DRIFTER_MODE, GameType.SURVIVAL.getID());
 			}
 			player.setGameType(GameType.SPECTATOR);
 			PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterSync(player.getUniqueID(),player.posX,player.posY,player.posZ,true,GameType.SPECTATOR.getID()));

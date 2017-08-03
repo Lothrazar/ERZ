@@ -102,25 +102,25 @@ public class EventManager {
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onTextureStitch(TextureStitchEvent event){
-		ResourceLocation particleGlow = new ResourceLocation("roots:entity/particle_glow");
+		ResourceLocation particleGlow = new ResourceLocation(Const.MODID,"entity/particle_glow");
 		event.getMap().registerSprite(particleGlow);
-		ResourceLocation particleSmoke = new ResourceLocation("roots:entity/particle_smoke");
+		ResourceLocation particleSmoke = new ResourceLocation(Const.MODID,"entity/particle_smoke");
 		event.getMap().registerSprite(particleSmoke);
-		ResourceLocation particleFiery = new ResourceLocation("roots:entity/particle_fiery");
+		ResourceLocation particleFiery = new ResourceLocation(Const.MODID,"entity/particle_fiery");
 		event.getMap().registerSprite(particleFiery);
-		ResourceLocation particlePetal = new ResourceLocation("roots:entity/particle_petal");
+		ResourceLocation particlePetal = new ResourceLocation(Const.MODID,"entity/particle_petal");
 		event.getMap().registerSprite(particlePetal);
-		ResourceLocation particleThorn = new ResourceLocation("roots:entity/particle_thorn");
+		ResourceLocation particleThorn = new ResourceLocation(Const.MODID,"entity/particle_thorn");
 		event.getMap().registerSprite(particleThorn);
-		ResourceLocation particleStar = new ResourceLocation("roots:entity/particle_star");
+		ResourceLocation particleStar = new ResourceLocation(Const.MODID,"entity/particle_star");
 		event.getMap().registerSprite(particleStar);
-		ResourceLocation particleRune1 = new ResourceLocation("roots:entity/particle_rune_1");
+		ResourceLocation particleRune1 = new ResourceLocation(Const.MODID,"entity/particle_rune_1");
 		event.getMap().registerSprite(particleRune1);
-		ResourceLocation particleRune2 = new ResourceLocation("roots:entity/particle_rune_2");
+		ResourceLocation particleRune2 = new ResourceLocation(Const.MODID,"entity/particle_rune_2");
 		event.getMap().registerSprite(particleRune2);
-		ResourceLocation particleRune3 = new ResourceLocation("roots:entity/particle_rune_3");
+		ResourceLocation particleRune3 = new ResourceLocation(Const.MODID,"entity/particle_rune_3");
 		event.getMap().registerSprite(particleRune3);
-		ResourceLocation particleRune4 = new ResourceLocation("roots:entity/particle_rune_4");
+		ResourceLocation particleRune4 = new ResourceLocation(Const.MODID,"entity/particle_rune_4");
 		event.getMap().registerSprite(particleRune4);
 	}
 	
@@ -162,9 +162,9 @@ public class EventManager {
             entityIn.lastTickPosZ = entityIn.posZ;
         }
 
-        double d0 = entityIn.lastTickPosX + (entityIn.posX - entityIn.lastTickPosX) * (double)partialTicks;
-        double d1 = entityIn.lastTickPosY + (entityIn.posY - entityIn.lastTickPosY) * (double)partialTicks;
-        double d2 = entityIn.lastTickPosZ + (entityIn.posZ - entityIn.lastTickPosZ) * (double)partialTicks;
+//        double d0 = entityIn.lastTickPosX + (entityIn.posX - entityIn.lastTickPosX) * (double)partialTicks;
+//        double d1 = entityIn.lastTickPosY + (entityIn.posY - entityIn.lastTickPosY) * (double)partialTicks;
+//        double d2 = entityIn.lastTickPosZ + (entityIn.posZ - entityIn.lastTickPosZ) * (double)partialTicks;
         float f = entityIn.prevRotationYaw + (entityIn.rotationYaw - entityIn.prevRotationYaw) * partialTicks;
         int i = entityIn.getBrightnessForRender();
 
@@ -266,8 +266,8 @@ public class EventManager {
 				event.getEntity().world.spawnEntity(fairy);
 			}
 		}
-		if (event.getEntityLiving().getEntityData().hasKey(Constants.EFFECT_TAG)){
-			NBTTagCompound tag = event.getEntityLiving().getEntityData().getCompoundTag(Constants.EFFECT_TAG);
+		if (event.getEntityLiving().getEntityData().hasKey(Const.EFFECT_TAG)){
+			NBTTagCompound tag = event.getEntityLiving().getEntityData().getCompoundTag(Const.EFFECT_TAG);
 			if (tag.hasKey(EffectManager.effect_invulnerability.name)){
 				event.setCanceled(true);
 			}
@@ -292,15 +292,15 @@ public class EventManager {
 				}
 			}
 		}
-		if (event.getEntity().getEntityData().hasKey(Constants.MIND_WARD_TAG)){
+		if (event.getEntity().getEntityData().hasKey(Const.MIND_WARD_TAG)){
 			if (event.getSource().getTrueSource() instanceof EntityLivingBase){
 				if (event.getSource().getTrueSource().getUniqueID().compareTo(event.getEntity().getUniqueID()) != 0){
-					event.getEntity().getEntityData().removeTag(Constants.MIND_WARD_TAG);
+					event.getEntity().getEntityData().removeTag(Const.MIND_WARD_TAG);
 				}
 			}
 		}
 		if (event.getSource().getTrueSource() instanceof EntityLivingBase){
-			if (event.getSource().getTrueSource().getEntityData().hasKey(Constants.MIND_WARD_TAG)){
+			if (event.getSource().getTrueSource().getEntityData().hasKey(Const.MIND_WARD_TAG)){
 				EntityLivingBase e = (EntityLivingBase)event.getSource().getTrueSource();
 				e.attackEntityFrom(DamageSource.WITHER, event.getAmount()*2.0f);
 				event.setAmount(0);
@@ -320,7 +320,7 @@ public class EventManager {
 	
 	@SubscribeEvent
 	public void onEntityTarget(LivingSetAttackTargetEvent event){
-		if (event.getEntityLiving().getEntityData().hasKey(Constants.MIND_WARD_TAG)){
+		if (event.getEntityLiving().getEntityData().hasKey(Const.MIND_WARD_TAG)){
 			if (event.getEntityLiving() instanceof EntityMob){
 				if (((EntityMob)event.getEntityLiving()).getAttackTarget() != null){
 					((EntityMob)event.getEntityLiving()).setAttackTarget(null);
@@ -343,33 +343,33 @@ public class EventManager {
 		if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.name)){
 			event.setCanceled(true);
 		}
-		if (event.getEntity().getEntityData().hasKey(Constants.MIND_WARD_TAG) && !event.getEntity().getEntityWorld().isRemote){
-			event.getEntity().getEntityData().setInteger(Constants.MIND_WARD_TAG, event.getEntity().getEntityData().getInteger(Constants.MIND_WARD_TAG)-1);
-			if (event.getEntity().getEntityData().getInteger(Constants.MIND_WARD_TAG) <= 0){
-				event.getEntity().getEntityData().removeTag(Constants.MIND_WARD_TAG);
+		if (event.getEntity().getEntityData().hasKey(Const.MIND_WARD_TAG) && !event.getEntity().getEntityWorld().isRemote){
+			event.getEntity().getEntityData().setInteger(Const.MIND_WARD_TAG, event.getEntity().getEntityData().getInteger(Const.MIND_WARD_TAG)-1);
+			if (event.getEntity().getEntityData().getInteger(Const.MIND_WARD_TAG) <= 0){
+				event.getEntity().getEntityData().removeTag(Const.MIND_WARD_TAG);
 			}
 			PacketHandler.INSTANCE.sendToAll(new MessageMindWardFX(event.getEntity().posX,event.getEntity().posY+event.getEntity().getEyeHeight()+0.75f,event.getEntity().posZ));
 		}
-		if (event.getEntity().getEntityData().hasKey(Constants.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote){
-			event.getEntity().getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG)-1);
-			if (event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG) <= 0){
+		if (event.getEntity().getEntityData().hasKey(Const.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote){
+			event.getEntity().getEntityData().setInteger(Const.LIGHT_DRIFTER_TAG, event.getEntity().getEntityData().getInteger(Const.LIGHT_DRIFTER_TAG)-1);
+			if (event.getEntity().getEntityData().getInteger(Const.LIGHT_DRIFTER_TAG) <= 0){
 				EntityPlayer p = ((EntityPlayer)event.getEntity());
-				p.posX = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_X);
-				p.posY = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Y);
-				p.posZ = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Z);
-				PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterSync(event.getEntity().getUniqueID(),p.posX,p.posY,p.posZ,false,event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)));
+				p.posX = event.getEntity().getEntityData().getDouble(Const.LIGHT_DRIFTER_X);
+				p.posY = event.getEntity().getEntityData().getDouble(Const.LIGHT_DRIFTER_Y);
+				p.posZ = event.getEntity().getEntityData().getDouble(Const.LIGHT_DRIFTER_Z);
+				PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterSync(event.getEntity().getUniqueID(),p.posX,p.posY,p.posZ,false,event.getEntity().getEntityData().getInteger(Const.LIGHT_DRIFTER_MODE)));
 				p.capabilities.allowFlying = false;
 				p.capabilities.disableDamage = false;
 				p.noClip = false;
 				p.capabilities.isFlying = false;
-				p.setGameType(GameType.getByID(event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)));
+				p.setGameType(GameType.getByID(event.getEntity().getEntityData().getInteger(Const.LIGHT_DRIFTER_MODE)));
 				p.setPositionAndUpdate(p.posX, p.posY, p.posZ);
 				PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterFX(event.getEntity().posX,event.getEntity().posY+1.0f,event.getEntity().posZ));
-				event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_TAG);
-				event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_X);
-				event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_Y);
-				event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_Z);
-				event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_MODE);
+				event.getEntity().getEntityData().removeTag(Const.LIGHT_DRIFTER_TAG);
+				event.getEntity().getEntityData().removeTag(Const.LIGHT_DRIFTER_X);
+				event.getEntity().getEntityData().removeTag(Const.LIGHT_DRIFTER_Y);
+				event.getEntity().getEntityData().removeTag(Const.LIGHT_DRIFTER_Z);
+				event.getEntity().getEntityData().removeTag(Const.LIGHT_DRIFTER_MODE);
 			}
 		}
 	}

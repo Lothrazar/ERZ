@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.model.ModelHolder;
 
 public class RenderFairy extends RenderLiving<EntityFairy> {
@@ -19,11 +20,11 @@ public class RenderFairy extends RenderLiving<EntityFairy> {
 	@Override
 	protected ResourceLocation getEntityTexture(EntityFairy entity) {
 		switch(entity.getDataManager().get(EntityFairy.variant)){
-			case 0: {return new ResourceLocation("roots:textures/entity/green_fairy.png");}
-			case 1: {return new ResourceLocation("roots:textures/entity/purple_fairy.png");}
-			case 2: {return new ResourceLocation("roots:textures/entity/pink_fairy.png");}
-			case 3: {return new ResourceLocation("roots:textures/entity/orange_fairy.png");}
-			default: {return new ResourceLocation("roots:textures/entity/green_fairy.png");}
+			case 0: { return new ResourceLocation(Const.MODID,"textures/entity/green_fairy.png");}
+			case 1: { return new ResourceLocation(Const.MODID,"textures/entity/purple_fairy.png");}
+			case 2: { return new ResourceLocation(Const.MODID,"textures/entity/pink_fairy.png");}
+			case 3: { return new ResourceLocation(Const.MODID,"textures/entity/orange_fairy.png");}
+			default: {return new ResourceLocation(Const.MODID,"textures/entity/green_fairy.png");}
 		}
 	}
 	

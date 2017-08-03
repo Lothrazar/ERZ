@@ -15,6 +15,7 @@ import org.lwjgl.opengl.GL20;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.Roots;
 
 public class ShaderUtil {
@@ -24,8 +25,8 @@ public class ShaderUtil {
 	public static int lightEntitiesProgram = 0;
 	
 	public static void init(){
-		lightProgram = loadProgram("/assets/"+Roots.MODID+"/shaders/light.vs","/assets/"+Roots.MODID+"/shaders/light.fs");
-		lightEntitiesProgram = loadProgram("/assets/"+Roots.MODID+"/shaders/light_entity.vs","/assets/"+Roots.MODID+"/shaders/light_entity.fs");
+		lightProgram = loadProgram("/assets/"+Const.MODID+"/shaders/light.vs","/assets/"+Const.MODID+"/shaders/light.fs");
+		lightEntitiesProgram = loadProgram("/assets/"+Const.MODID+"/shaders/light_entity.vs","/assets/"+Const.MODID+"/shaders/light_entity.fs");
 	}
 	
 	public static int loadProgram(String vsh, String fsh){

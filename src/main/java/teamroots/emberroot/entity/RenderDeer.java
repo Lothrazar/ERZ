@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.model.ModelHolder;
 
 public class RenderDeer extends RenderLiving<EntityDeer> {
@@ -19,9 +20,9 @@ public class RenderDeer extends RenderLiving<EntityDeer> {
 	@Override
 	protected ResourceLocation getEntityTexture(EntityDeer entity) {
 		if (entity.getDataManager().get(EntityDeer.hasRednose)){
-			return new ResourceLocation("roots:textures/entity/rudolph.png");
+			return new ResourceLocation(Const.MODID,"textures/entity/rudolph.png");
 		}
-		return new ResourceLocation("roots:textures/entity/deer.png");
+		return new ResourceLocation(Const.MODID,"textures/entity/deer.png");
 	}
 	
 	public static class Factory implements IRenderFactory<EntityDeer> {

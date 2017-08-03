@@ -15,7 +15,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.client.event.GuiScreenEvent.PotionShiftEvent;
-import teamroots.emberroot.Constants;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.particle.ParticleUtil;
 import teamroots.emberroot.util.Misc;
 

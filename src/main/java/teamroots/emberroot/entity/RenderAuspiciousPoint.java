@@ -20,15 +20,16 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.util.IRenderEntityLater;
 import teamroots.emberroot.util.RenderUtil;
 
 @SuppressWarnings("hiding")
 public class RenderAuspiciousPoint<EntityAuspiciousPoint> extends RenderEntity implements IRenderEntityLater {
-	public ResourceLocation texture = new ResourceLocation("roots:textures/entity/beam.png");
-	public ResourceLocation texture2 = new ResourceLocation("roots:textures/entity/beam2.png");
-	public ResourceLocation textureMinorBeam = new ResourceLocation("roots:textures/entity/lesserbeam_mark.png");
-	public ResourceLocation textureMajorBeam = new ResourceLocation("roots:textures/entity/majorbeam_mark.png");
+	public ResourceLocation texture = new ResourceLocation(Const.MODID,"textures/entity/beam.png");
+	public ResourceLocation texture2 = new ResourceLocation(Const.MODID,"textures/entity/beam2.png");
+	public ResourceLocation textureMinorBeam = new ResourceLocation(Const.MODID,"textures/entity/lesserbeam_mark.png");
+	public ResourceLocation textureMajorBeam = new ResourceLocation(Const.MODID,"textures/entity/majorbeam_mark.png");
 	
 	public RenderAuspiciousPoint(RenderManager renderManagerIn) {
 		super(renderManagerIn);

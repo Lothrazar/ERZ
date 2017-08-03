@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.util.Misc;
 
 public class ParticleThorn extends Particle implements IRootsParticle {
@@ -19,7 +20,7 @@ public class ParticleThorn extends Particle implements IRootsParticle {
 	public float initAlpha = 1.0f;
 	public float initScale = 0;
 	public boolean isAdditive = false;
-	public ResourceLocation texture = new ResourceLocation("roots:entity/particle_thorn");
+	public ResourceLocation texture = new ResourceLocation(Const.MODID,"entity/particle_thorn");
 	public ParticleThorn(World worldIn, double x, double y, double z, double vx, double vy, double vz, float r, float g, float b, float a, float scale, int lifetime, boolean isAdditive) {
 		super(worldIn, x,y,z,0,0,0);
 		this.colorR = r;

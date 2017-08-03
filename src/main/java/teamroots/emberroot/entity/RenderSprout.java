@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.model.ModelHolder;
 
 public class RenderSprout extends RenderLiving<EntitySprout> {
@@ -19,10 +20,10 @@ public class RenderSprout extends RenderLiving<EntitySprout> {
 	@Override
 	protected ResourceLocation getEntityTexture(EntitySprout entity) {
 		switch(entity.getDataManager().get(EntitySprout.variant)){
-			case 0: {return new ResourceLocation("roots:textures/entity/sprout_green.png");}
-			case 1: {return new ResourceLocation("roots:textures/entity/sprout_tan.png");}
-			case 2: {return new ResourceLocation("roots:textures/entity/sprout_red.png");}
-			default: {return new ResourceLocation("roots:textures/entity/sprout_green.png");}
+			case 0: { return new ResourceLocation(Const.MODID,"textures/entity/sprout_green.png");}
+			case 1: { return new ResourceLocation(Const.MODID,"textures/entity/sprout_tan.png");}
+			case 2: { return new ResourceLocation(Const.MODID,"textures/entity/sprout_red.png");}
+			default: {return new ResourceLocation(Const.MODID,"textures/entity/sprout_green.png");}
 		}
 	}
 	

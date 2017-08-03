@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.util.Misc;
 
 public class ParticleLineRune extends Particle implements IRootsParticle {
@@ -50,7 +51,7 @@ public class ParticleLineRune extends Particle implements IRootsParticle {
 		this.initPosX = x;
 		this.initPosY = y;
 		this.initPosZ = z;
-	    TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(new ResourceLocation("roots:entity/particle_rune_"+(rand.nextInt(4)+1)).toString());
+	    TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(new ResourceLocation(Const.MODID,"entity/particle_rune_"+(rand.nextInt(4)+1)).toString());
 	    this.setParticleTexture(sprite);
 	}
 	/*

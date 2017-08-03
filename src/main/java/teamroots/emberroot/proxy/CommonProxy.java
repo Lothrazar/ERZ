@@ -10,8 +10,7 @@ import teamroots.emberroot.capability.RootsCapabilityManager;
 import teamroots.emberroot.effect.EffectManager; 
 import teamroots.emberroot.network.PacketHandler; 
 import teamroots.emberroot.ritual.RitualRegistry;
-import teamroots.emberroot.spell.SpellRegistry;
-import teamroots.emberroot.util.FeyMagicManager;
+import teamroots.emberroot.spell.SpellRegistry; 
 import teamroots.emberroot.util.Fields;
 import teamroots.emberroot.util.OfferingUtil;
 
@@ -25,7 +24,7 @@ public class CommonProxy {
 		SpellRegistry.init();
 		RitualRegistry.init();
 		OfferingUtil.init();
-		FeyMagicManager.init();
+	//FeyMagicManager.init();
 	}
 	
 	 

@@ -58,13 +58,14 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 import teamroots.emberroot.ConfigManager;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.Roots;
 import teamroots.emberroot.util.Misc;
 
 public class EntitySprout extends EntityCreature {
 	public static final DataParameter<Integer> variant = EntityDataManager.<Integer>createKey(EntitySprout.class, DataSerializers.VARINT);
 
-	public SoundEvent ambientSound = new SoundEvent(new ResourceLocation("roots:darkoAmbient"));
+	public SoundEvent ambientSound = new SoundEvent(new ResourceLocation(Const.MODID,"darkoAmbient"));
 	public EntitySprout(World world){
 		super(world);
 		setSize(0.5f,1.0f);
@@ -102,10 +103,10 @@ public class EntitySprout extends EntityCreature {
 	@Override
 	public ResourceLocation getLootTable(){
 		switch(getDataManager().get(EntitySprout.variant)){
-			case 0: {return new ResourceLocation("roots:entity/sprout_green");}
-			case 1: {return new ResourceLocation("roots:entity/sprout_tan");}
-			case 2: {return new ResourceLocation("roots:entity/sprout_red");}
-			default: {return new ResourceLocation("roots:entity/sprout_green");}
+			case 0: { return new ResourceLocation(Const.MODID,"entity/sprout_green");}
+			case 1: { return new ResourceLocation(Const.MODID,"entity/sprout_tan");}
+			case 2: { return new ResourceLocation(Const.MODID,"entity/sprout_red");}
+			default: {return new ResourceLocation(Const.MODID,"entity/sprout_green");}
 		}
 	}
     

@@ -7,11 +7,12 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.Roots;
 
 public class PlayerDataProvider implements ICapabilityProvider, ICapabilitySerializable<NBTTagCompound>{
 	public DefaultPlayerDataCapability capability;
-	public static final ResourceLocation PLAYER_DATA_CAPABILITY_LOC = new ResourceLocation(Roots.MODID+":player_data_capability");
+	public static final ResourceLocation PLAYER_DATA_CAPABILITY_LOC = new ResourceLocation(Const.MODID+":player_data_capability");
 	
 	public PlayerDataProvider(){
 		

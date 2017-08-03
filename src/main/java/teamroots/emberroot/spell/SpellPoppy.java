@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
-import teamroots.emberroot.Constants;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.entity.EntityFireJet;
 import teamroots.emberroot.entity.EntityThornTrap;
 import teamroots.emberroot.network.PacketHandler;
@@ -33,7 +33,7 @@ public class SpellPoppy extends SpellBase {
 				for (EntityLivingBase e : entities){
 					if (e.getUniqueID().compareTo(player.getUniqueID()) != 0 && !foundTarget){
 						foundTarget = true;
-						e.getEntityData().setInteger(Constants.MIND_WARD_TAG, 400);
+						e.getEntityData().setInteger(Const.MIND_WARD_TAG, 400);
 					}
 				}
 			}

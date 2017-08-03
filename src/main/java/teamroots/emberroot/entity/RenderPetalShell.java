@@ -19,13 +19,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.spell.SpellRegistry;
 import teamroots.emberroot.util.IRenderEntityLater;
 import teamroots.emberroot.util.RenderUtil;
 
 @SuppressWarnings("hiding")
 public class RenderPetalShell<EntityPetalShell> extends RenderEntity implements IRenderEntityLater {
-	public ResourceLocation texture = new ResourceLocation("roots:textures/entity/particle_petal.png");
+	public ResourceLocation texture = new ResourceLocation(Const.MODID,"textures/entity/particle_petal.png");
 	
 	public RenderPetalShell(RenderManager renderManagerIn) {
 		super(renderManagerIn);

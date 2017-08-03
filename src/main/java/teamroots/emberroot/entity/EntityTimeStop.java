@@ -22,7 +22,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import teamroots.emberroot.Constants;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.RegistryManager;
 import teamroots.emberroot.effect.EffectManager;
 import teamroots.emberroot.network.PacketHandler;
