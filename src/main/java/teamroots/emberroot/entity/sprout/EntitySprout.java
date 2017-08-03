@@ -71,11 +71,7 @@ public class EntitySprout extends EntityCreature {
   @Override
   public void onUpdate() {
     super.onUpdate();
-    if (world.isRemote) {
-      if (random.nextInt(480) == 0 && ConfigManager.enableSilliness && Minecraft.getMinecraft().player.getGameProfile().getName().equalsIgnoreCase("Darkosto")) {
-        world.playSound(Minecraft.getMinecraft().player, getPosition(), ambientSound, SoundCategory.NEUTRAL, 1.0f, 0.8f + 0.4f * random.nextFloat());
-      }
-    }
+ 
     this.rotationYaw = this.rotationYawHead;
   }
   public float getEyeHeight() {
