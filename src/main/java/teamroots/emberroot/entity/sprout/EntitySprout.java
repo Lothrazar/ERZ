@@ -14,15 +14,13 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 
 public class EntitySprout extends EntityCreature {
-  //  private Random random = new Random();
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntitySprout.class, DataSerializers.VARINT);
   public static enum VariantColors {
-    GREEN, TAN, RED;
+    GREEN, TAN, RED, PURPLE, BLUE;
     public String nameLower() {
       return this.name().toLowerCase();
     } 

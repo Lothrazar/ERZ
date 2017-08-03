@@ -29,22 +29,22 @@ public class EventManager {
     event.getMap().registerSprite(particleGlow);
     ResourceLocation particleSmoke = new ResourceLocation(Const.MODID, "entity/particle_smoke");
     event.getMap().registerSprite(particleSmoke);
-    ResourceLocation particleFiery = new ResourceLocation(Const.MODID, "entity/particle_fiery");
-    event.getMap().registerSprite(particleFiery);
-    ResourceLocation particlePetal = new ResourceLocation(Const.MODID, "entity/particle_petal");
-    event.getMap().registerSprite(particlePetal);
-    ResourceLocation particleThorn = new ResourceLocation(Const.MODID, "entity/particle_thorn");
-    event.getMap().registerSprite(particleThorn);
+//    ResourceLocation particleFiery = new ResourceLocation(Const.MODID, "entity/particle_fiery");
+//    event.getMap().registerSprite(particleFiery);
+//    ResourceLocation particlePetal = new ResourceLocation(Const.MODID, "entity/particle_petal");
+//    event.getMap().registerSprite(particlePetal);
+//    ResourceLocation particleThorn = new ResourceLocation(Const.MODID, "entity/particle_thorn");
+//    event.getMap().registerSprite(particleThorn);
     ResourceLocation particleStar = new ResourceLocation(Const.MODID, "entity/particle_star");
     event.getMap().registerSprite(particleStar);
-    ResourceLocation particleRune1 = new ResourceLocation(Const.MODID, "entity/particle_rune_1");
-    event.getMap().registerSprite(particleRune1);
-    ResourceLocation particleRune2 = new ResourceLocation(Const.MODID, "entity/particle_rune_2");
-    event.getMap().registerSprite(particleRune2);
-    ResourceLocation particleRune3 = new ResourceLocation(Const.MODID, "entity/particle_rune_3");
-    event.getMap().registerSprite(particleRune3);
-    ResourceLocation particleRune4 = new ResourceLocation(Const.MODID, "entity/particle_rune_4");
-    event.getMap().registerSprite(particleRune4);
+//    ResourceLocation particleRune1 = new ResourceLocation(Const.MODID, "entity/particle_rune_1");
+//    event.getMap().registerSprite(particleRune1);
+//    ResourceLocation particleRune2 = new ResourceLocation(Const.MODID, "entity/particle_rune_2");
+//    event.getMap().registerSprite(particleRune2);
+//    ResourceLocation particleRune3 = new ResourceLocation(Const.MODID, "entity/particle_rune_3");
+//    event.getMap().registerSprite(particleRune3);
+//    ResourceLocation particleRune4 = new ResourceLocation(Const.MODID, "entity/particle_rune_4");
+//    event.getMap().registerSprite(particleRune4);
   }
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public void onTick(TickEvent.ClientTickEvent event) {
