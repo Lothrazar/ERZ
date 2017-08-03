@@ -77,18 +77,11 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import teamroots.emberroot.capability.PlayerDataProvider;
-import teamroots.emberroot.effect.EffectManager;
+import teamroots.emberroot.capability.PlayerDataProvider; 
 import teamroots.emberroot.entity.EntityDeer;
 import teamroots.emberroot.entity.EntityFairy;
-import teamroots.emberroot.entity.EntityPetalShell;
-import teamroots.emberroot.event.SpellEvent; 
+import teamroots.emberroot.entity.EntityPetalShell; 
 import teamroots.emberroot.network.PacketHandler;
-import teamroots.emberroot.network.message.MessageLightDrifterFX;
-import teamroots.emberroot.network.message.MessageLightDrifterSync;
-import teamroots.emberroot.network.message.MessageMindWardFX;
-import teamroots.emberroot.network.message.MessageMindWardRingFX;
-import teamroots.emberroot.network.message.MessagePetalShellBurstFX;
 import teamroots.emberroot.network.message.MessagePlayerDataUpdate;
 import teamroots.emberroot.proxy.ClientProxy;
 import teamroots.emberroot.util.IEntityRenderingLater;
@@ -255,9 +248,7 @@ public class EventManager {
 	
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onDamage(LivingHurtEvent event){
-		if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.name)){
-			event.setAmount(event.getAmount()*0.1f);
-		}
+ 
 		if (event.getEntity() instanceof EntityPlayer){
 			if (!event.getEntity().world.isRemote && ((EntityPlayer)event.getEntity()).getGameProfile().getName().compareToIgnoreCase("ellpeck") == 0 && Misc.random.nextInt(100) == 0){
 				EntityFairy fairy = new EntityFairy(event.getEntity().getEntityWorld());
@@ -268,9 +259,7 @@ public class EventManager {
 		}
 		if (event.getEntityLiving().getEntityData().hasKey(Const.EFFECT_TAG)){
 			NBTTagCompound tag = event.getEntityLiving().getEntityData().getCompoundTag(Const.EFFECT_TAG);
-			if (tag.hasKey(EffectManager.effect_invulnerability.name)){
-				event.setCanceled(true);
-			}
+	 
 		}
 		if (event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().getEntityWorld().isRemote){
 			EntityPlayer p = ((EntityPlayer)event.getEntityLiving());
@@ -283,7 +272,7 @@ public class EventManager {
 							event.setCanceled(true);
 							s.getDataManager().set(s.charge, s.getDataManager().get(s.charge)-1);
 							s.getDataManager().setDirty(s.charge);
-							PacketHandler.INSTANCE.sendToAll(new MessagePetalShellBurstFX(p.posX,p.posY+1.0f,p.posZ));
+						//	PacketHandler.INSTANCE.sendToAll(new MessagePetalShellBurstFX(p.posX,p.posY+1.0f,p.posZ));
 							if (s.getDataManager().get(s.charge) <= 0){
 								p.world.removeEntity(s);
 							}
@@ -304,7 +293,7 @@ public class EventManager {
 				EntityLivingBase e = (EntityLivingBase)event.getSource().getTrueSource();
 				e.attackEntityFrom(DamageSource.WITHER, event.getAmount()*2.0f);
 				event.setAmount(0);
-				PacketHandler.INSTANCE.sendToAll(new MessageMindWardRingFX(e.posX,e.posY+1.0,e.posZ));
+			//	PacketHandler.INSTANCE.sendToAll(new MessageMindWardRingFX(e.posX,e.posY+1.0,e.posZ));
 			}
 		}
 	}
@@ -331,8 +320,7 @@ public class EventManager {
 	
 	@SubscribeEvent
 	public void onEntityTick(LivingUpdateEvent event){
-		EffectManager.tickEffects(event.getEntityLiving());
-		if (event.getEntity() instanceof EntityPlayer){
+		 if (event.getEntity() instanceof EntityPlayer){
 			if (event.getEntity().hasCapability(PlayerDataProvider.playerDataCapability, null)){
 				if (!event.getEntity().world.isRemote && event.getEntity().getCapability(PlayerDataProvider.playerDataCapability, null).isDirty()){
 					PacketHandler.INSTANCE.sendToAll(new MessagePlayerDataUpdate(event.getEntity().getUniqueID(),event.getEntity().getCapability(PlayerDataProvider.playerDataCapability, null).getData()));
@@ -340,15 +328,13 @@ public class EventManager {
 				}
 			}
 		}
-		if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.name)){
-			event.setCanceled(true);
-		}
+ 
 		if (event.getEntity().getEntityData().hasKey(Const.MIND_WARD_TAG) && !event.getEntity().getEntityWorld().isRemote){
 			event.getEntity().getEntityData().setInteger(Const.MIND_WARD_TAG, event.getEntity().getEntityData().getInteger(Const.MIND_WARD_TAG)-1);
 			if (event.getEntity().getEntityData().getInteger(Const.MIND_WARD_TAG) <= 0){
 				event.getEntity().getEntityData().removeTag(Const.MIND_WARD_TAG);
 			}
-			PacketHandler.INSTANCE.sendToAll(new MessageMindWardFX(event.getEntity().posX,event.getEntity().posY+event.getEntity().getEyeHeight()+0.75f,event.getEntity().posZ));
+		//	PacketHandler.INSTANCE.sendToAll(new MessageMindWardFX(event.getEntity().posX,event.getEntity().posY+event.getEntity().getEyeHeight()+0.75f,event.getEntity().posZ));
 		}
 		if (event.getEntity().getEntityData().hasKey(Const.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote){
 			event.getEntity().getEntityData().setInteger(Const.LIGHT_DRIFTER_TAG, event.getEntity().getEntityData().getInteger(Const.LIGHT_DRIFTER_TAG)-1);
@@ -357,14 +343,14 @@ public class EventManager {
 				p.posX = event.getEntity().getEntityData().getDouble(Const.LIGHT_DRIFTER_X);
 				p.posY = event.getEntity().getEntityData().getDouble(Const.LIGHT_DRIFTER_Y);
 				p.posZ = event.getEntity().getEntityData().getDouble(Const.LIGHT_DRIFTER_Z);
-				PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterSync(event.getEntity().getUniqueID(),p.posX,p.posY,p.posZ,false,event.getEntity().getEntityData().getInteger(Const.LIGHT_DRIFTER_MODE)));
+			//	PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterSync(event.getEntity().getUniqueID(),p.posX,p.posY,p.posZ,false,event.getEntity().getEntityData().getInteger(Const.LIGHT_DRIFTER_MODE)));
 				p.capabilities.allowFlying = false;
 				p.capabilities.disableDamage = false;
 				p.noClip = false;
 				p.capabilities.isFlying = false;
 				p.setGameType(GameType.getByID(event.getEntity().getEntityData().getInteger(Const.LIGHT_DRIFTER_MODE)));
 				p.setPositionAndUpdate(p.posX, p.posY, p.posZ);
-				PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterFX(event.getEntity().posX,event.getEntity().posY+1.0f,event.getEntity().posZ));
+				//PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterFX(event.getEntity().posX,event.getEntity().posY+1.0f,event.getEntity().posZ));
 				event.getEntity().getEntityData().removeTag(Const.LIGHT_DRIFTER_TAG);
 				event.getEntity().getEntityData().removeTag(Const.LIGHT_DRIFTER_X);
 				event.getEntity().getEntityData().removeTag(Const.LIGHT_DRIFTER_Y);
@@ -379,10 +365,7 @@ public class EventManager {
 		//event.setCanceled(true);
 	}
 	
-	@SubscribeEvent
-	public void onSpellCast(SpellEvent event){
-	}
-	
+ 
 	public void renderEntityLater(Entity entityIn, float partialTicks, boolean p_188388_3_){
     }
 }

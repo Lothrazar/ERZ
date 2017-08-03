@@ -27,7 +27,6 @@ import teamroots.emberroot.RegistryManager;
 import teamroots.emberroot.network.PacketHandler;
 import teamroots.emberroot.network.message.MessageMoonlightBurstFX;
 import teamroots.emberroot.particle.ParticleUtil; 
-import teamroots.emberroot.spell.SpellRegistry;
 import teamroots.emberroot.util.IEntityRenderingLater;
 import teamroots.emberroot.util.NBTUtil;
 import teamroots.emberroot.util.NoiseGenUtil;
@@ -68,10 +67,10 @@ public class EntityBoost extends Entity {
 		if (world.isRemote){
 			for (int i = 0; i < 4; i ++){
 				if (rand.nextBoolean()){
-					ParticleUtil.spawnParticleStar(world, (float)posX+(rand.nextFloat())-0.5f, (float)posY+(rand.nextFloat())+0.5f, (float)posZ+(rand.nextFloat())-0.5f, -0.125f*(float)motionX, -0.125f*(float)motionY, -0.125f*(float)motionZ, SpellRegistry.spell_blue_orchid.red1, SpellRegistry.spell_blue_orchid.green1, SpellRegistry.spell_blue_orchid.blue1, 0.5f, 5.0f*rand.nextFloat()+5.0f, 40);
+	//				ParticleUtil.spawnParticleStar(world, (float)posX+(rand.nextFloat())-0.5f, (float)posY+(rand.nextFloat())+0.5f, (float)posZ+(rand.nextFloat())-0.5f, -0.125f*(float)motionX, -0.125f*(float)motionY, -0.125f*(float)motionZ, SpellRegistry.spell_blue_orchid.red1, SpellRegistry.spell_blue_orchid.green1, SpellRegistry.spell_blue_orchid.blue1, 0.5f, 5.0f*rand.nextFloat()+5.0f, 40);
 				}
 				else {
-					ParticleUtil.spawnParticleStar(world, (float)posX+(rand.nextFloat())-0.5f, (float)posY+(rand.nextFloat())+0.5f, (float)posZ+(rand.nextFloat())-0.5f, -0.125f*(float)motionX, -0.125f*(float)motionY, -0.125f*(float)motionZ, SpellRegistry.spell_blue_orchid.red2, SpellRegistry.spell_blue_orchid.green2, SpellRegistry.spell_blue_orchid.blue2, 0.5f, 5.0f*rand.nextFloat()+5.0f, 40);
+				//	ParticleUtil.spawnParticleStar(world, (float)posX+(rand.nextFloat())-0.5f, (float)posY+(rand.nextFloat())+0.5f, (float)posZ+(rand.nextFloat())-0.5f, -0.125f*(float)motionX, -0.125f*(float)motionY, -0.125f*(float)motionZ, SpellRegistry.spell_blue_orchid.red2, SpellRegistry.spell_blue_orchid.green2, SpellRegistry.spell_blue_orchid.blue2, 0.5f, 5.0f*rand.nextFloat()+5.0f, 40);
 				}
 			}
 		}

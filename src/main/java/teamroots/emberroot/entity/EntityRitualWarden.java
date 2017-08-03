@@ -23,7 +23,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import teamroots.emberroot.RegistryManager;
-import teamroots.emberroot.effect.EffectManager;
 import teamroots.emberroot.network.PacketHandler;
 import teamroots.emberroot.network.message.MessageMoonlightBurstFX;
 import teamroots.emberroot.particle.ParticleUtil; 
@@ -92,7 +91,7 @@ public class EntityRitualWarden extends Entity implements IRitualEntity {
 		if (this.ticksExisted % 20 == 0){
 			List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX-15.5,posY-15.5,posZ-15.5,posX+15.5,posY+15.5,posZ+15.5));
 			for (EntityLivingBase e : entities){
-				EffectManager.assignEffect(e, EffectManager.effect_invulnerability.name, 22, new NBTTagCompound());
+				//EffectManager.assignEffect(e, EffectManager.effect_invulnerability.name, 22, new NBTTagCompound());
 			}
 		}
 	}

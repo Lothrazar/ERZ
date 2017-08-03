@@ -63,11 +63,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.Roots;
-import teamroots.emberroot.effect.EffectArcanism;
-import teamroots.emberroot.effect.EffectFireResist;
-import teamroots.emberroot.effect.EffectManager;
-import teamroots.emberroot.effect.EffectNaturesCure;
-import teamroots.emberroot.effect.EffectRegen;
 import teamroots.emberroot.particle.ParticleUtil;
 
 public class EntityFairy extends EntityFlying {
@@ -204,32 +199,32 @@ public class EntityFairy extends EntityFlying {
         			}
         		}
         		
-        		switch(getDataManager().get(variant)){
-	        		case 0:{
-	        			if (EffectManager.getDuration(p, EffectManager.effect_naturescure.name) < 2){
-	        				EffectManager.assignEffect(p, EffectManager.effect_naturescure.name, 22, EffectNaturesCure.createData(count));
-	        			}
-	        			break;
-	        		}
-	        		case 1:{
-	        			if (EffectManager.getDuration(p, EffectManager.effect_arcanism.name) < 2){
-	        				EffectManager.assignEffect(p, EffectManager.effect_arcanism.name, 22, EffectArcanism.createData(count));
-	        			}
-	        			break;
-	        		}
-	        		case 2:{
-	        			if (EffectManager.getDuration(p, EffectManager.effect_regen.name) < 2){
-	        				EffectManager.assignEffect(p, EffectManager.effect_regen.name, 22, EffectRegen.createData(count));
-	        			}
-	        			break;
-	        		}
-	        		case 3:{
-	        			if (EffectManager.getDuration(p, EffectManager.effect_fireresist.name) < 2){
-	        				EffectManager.assignEffect(p, EffectManager.effect_fireresist.name, 22, EffectFireResist.createData(count));
-	        			}
-	        			break;
-	        		}
-        		}
+//        		switch(getDataManager().get(variant)){
+//	        		case 0:{
+//	        			if (EffectManager.getDuration(p, EffectManager.effect_naturescure.name) < 2){
+//	        				EffectManager.assignEffect(p, EffectManager.effect_naturescure.name, 22, EffectNaturesCure.createData(count));
+//	        			}
+//	        			break;
+//	        		}
+//	        		case 1:{
+//	        			if (EffectManager.getDuration(p, EffectManager.effect_arcanism.name) < 2){
+//	        				EffectManager.assignEffect(p, EffectManager.effect_arcanism.name, 22, EffectArcanism.createData(count));
+//	        			}
+//	        			break;
+//	        		}
+//	        		case 2:{
+//	        			if (EffectManager.getDuration(p, EffectManager.effect_regen.name) < 2){
+//	        				EffectManager.assignEffect(p, EffectManager.effect_regen.name, 22, EffectRegen.createData(count));
+//	        			}
+//	        			break;
+//	        		}
+//	        		case 3:{
+//	        			if (EffectManager.getDuration(p, EffectManager.effect_fireresist.name) < 2){
+//	        				EffectManager.assignEffect(p, EffectManager.effect_fireresist.name, 22, EffectFireResist.createData(count));
+//	        			}
+//	        			break;
+//	        		}
+//        		}
         		
         		
 		        double dX = targX - this.posX;

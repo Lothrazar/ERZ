@@ -56,9 +56,9 @@ public class RegistryManager {
 		int id = 0;
 		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"auspicious_point"), EntityAuspiciousPoint.class, "auspicious_point", id ++, Roots.instance, 64, 20, true);
 		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"fire_jet"), EntityFireJet.class, "fire_jet", id ++, Roots.instance, 64, 20, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"thorn_trap"), EntityThornTrap.class, "thorn_trap", id ++, Roots.instance, 64, 1, true);
+		//EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"thorn_trap"), EntityThornTrap.class, "thorn_trap", id ++, Roots.instance, 64, 1, true);
 		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"petal_shell"), EntityPetalShell.class, "petal_shell", id ++, Roots.instance, 64, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"time_stop"), EntityTimeStop.class, "time_stop", id ++, Roots.instance, 64, 1, true);
+	//	EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"time_stop"), EntityTimeStop.class, "time_stop", id ++, Roots.instance, 64, 1, true);
 		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"boost"), EntityBoost.class, "boost", id ++, Roots.instance, 64, 1, true);
 		EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID,"deer"), EntityDeer.class, "deer", id ++, Roots.instance, 64, 1, true);
 		EntityRegistry.registerEgg(      new ResourceLocation(Const.MODID,"deer"), Misc.intColor(161, 132, 88), Misc.intColor(94, 77, 51));
@@ -103,9 +103,9 @@ public class RegistryManager {
  
 		RenderingRegistry.registerEntityRenderingHandler(EntityAuspiciousPoint.class, new RenderAuspiciousPoint.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFireJet.class, new RenderNull.Factory());
-		RenderingRegistry.registerEntityRenderingHandler(EntityThornTrap.class, new RenderNull.Factory());
-		RenderingRegistry.registerEntityRenderingHandler(EntityPetalShell.class, new RenderPetalShell.Factory());
-		RenderingRegistry.registerEntityRenderingHandler(EntityTimeStop.class, new RenderNull.Factory());
+		//RenderingRegistry.registerEntityRenderingHandler(EntityThornTrap.class, new RenderNull.Factory());
+//		RenderingRegistry.registerEntityRenderingHandler(EntityPetalShell.class, new RenderPetalShell.Factory());
+//		RenderingRegistry.registerEntityRenderingHandler(EntityTimeStop.class, new RenderNull.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBoost.class, new RenderNull.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderDeer.Factory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityRitualLife.class, new RenderNull.Factory());
