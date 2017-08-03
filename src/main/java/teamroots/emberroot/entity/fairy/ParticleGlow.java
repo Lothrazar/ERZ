@@ -1,12 +1,13 @@
-package teamroots.emberroot.particle;
+package teamroots.emberroot.entity.fairy;
 
+import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
-import teamroots.emberroot.util.Misc;
+import teamroots.emberroot.particle.IRootsParticle; 
 
 public class ParticleGlow extends Particle implements IRootsParticle {
 	public float colorR = 0;
@@ -15,6 +16,7 @@ public class ParticleGlow extends Particle implements IRootsParticle {
 	public float initAlpha = 1.0f;
 	public float initScale = 0;
 	public ResourceLocation texture = new ResourceLocation(Const.MODID,"entity/particle_glow");
+  private Random random = new Random();
 	public ParticleGlow(World worldIn, double x, double y, double z, double vx, double vy, double vz, float r, float g, float b, float a, float scale, int lifetime) {
 		super(worldIn, x,y,z,0,0,0);
 		this.colorR = r;
@@ -68,7 +70,7 @@ public class ParticleGlow extends Particle implements IRootsParticle {
 	@Override
 	public void onUpdate(){
 		super.onUpdate();
-		if (Misc.random.nextInt(6) == 0){
+		if (random .nextInt(6) == 0){
 			this.particleAge ++;
 		}
 		float lifeCoeff = (float)this.particleAge/(float)this.particleMaxAge;

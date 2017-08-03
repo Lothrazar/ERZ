@@ -1,14 +1,15 @@
 package teamroots.emberroot.particle;
 
+import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import teamroots.emberroot.Const;
-import teamroots.emberroot.util.Misc;
+import teamroots.emberroot.Const; 
 
 public class ParticleFloatingGlow extends Particle implements IRootsParticle {
+  private Random random = new Random();
 	public float colorR = 0;
 	public float colorG = 0;
 	public float colorB = 0;
@@ -76,7 +77,7 @@ public class ParticleFloatingGlow extends Particle implements IRootsParticle {
 	@Override
 	public void onUpdate(){
 		super.onUpdate();
-		if (Misc.random.nextInt(6) == 0){
+		if (random.nextInt(6) == 0){
 			this.particleAge ++;
 		}
 		if (this.particleAge % 5 == 0){

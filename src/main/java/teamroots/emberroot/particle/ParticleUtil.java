@@ -4,6 +4,7 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import teamroots.emberroot.Roots;
+import teamroots.emberroot.entity.fairy.ParticleGlow;
 import teamroots.emberroot.proxy.ClientProxy;
 
 public class ParticleUtil {

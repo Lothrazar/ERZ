@@ -1,8 +1,7 @@
 package teamroots.emberroot.proxy;
 
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import teamroots.emberroot.RegistryManager; 
-import teamroots.emberroot.network.PacketHandler;
+import teamroots.emberroot.RegistryManager;  
 import teamroots.emberroot.util.OfferingUtil;
 
 public class CommonProxy {
@@ -11,7 +10,7 @@ public class CommonProxy {
 		//RootsCapabilityManager.register();
 		//EffectManager.init();
 		RegistryManager.registerAll();
-		PacketHandler.registerMessages();
+		//PacketHandler.registerMessages();
 	  
 		OfferingUtil.init();
 	//FeyMagicManager.init();

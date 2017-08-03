@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly; 
+import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.proxy.CommonProxy;
 
 @Mod(modid = Const.MODID, name = Roots.MODNAME, version = Roots.VERSION)
