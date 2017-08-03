@@ -5,5 +5,5 @@ entity.deer.name=Deer
 entity.sprout.name=Sprout
 entity.fairy.name=Fairy 
 
-death.attack.ember=@p was slain by a Golem
+death.attack.ember=Slain by a Golem
 
