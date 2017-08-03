@@ -301,7 +301,8 @@ public class EntityFairy extends EntityFlying {
   }
   @Override
   public ResourceLocation getLootTable() {
-    return new ResourceLocation(Const.MODID, "entity/fairy");
+    String colour = getVariantEnum().nameLower();
+    return new ResourceLocation(Const.MODID, "entity/fairy_" + colour);
   }
   public float getEyeHeight() {
     return this.height;
