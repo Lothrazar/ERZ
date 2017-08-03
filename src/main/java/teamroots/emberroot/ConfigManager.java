@@ -12,7 +12,7 @@ public class ConfigManager {
 	public static int deerSpawnWeight, sproutSpawnWeight;
 	
 	//STRUCTURES
-	public static int gardenChance, fairyPoolChance, stoneCircleChance, hutChance, barrowChance;
+	public static int  fairyPoolChance ;
 	public static boolean generateLeyMarkers;
 	
 	//MISC
@@ -31,11 +31,11 @@ public class ConfigManager {
 		deerSpawnWeight = config.getInt("deerSpawnWeight", "mobs", 10, 0, 32767, "Configures the spawning frequency of the Deer mob. Higher numbers mean more spawns.");
 		sproutSpawnWeight = config.getInt("sproutSpawnWeight", "mobs", 6, 0, 32767, "Configures the spawning frequency of the Sprout mob. Higher numbers mean more spawns.");
 		config.addCustomCategoryComment("structures", "Settings related to structures.");
-		stoneCircleChance = config.getInt("stoneCircleChance", "structures", 240, 0, 32767, "Configures the generation chance of the Moonlight Circle structure. Higher numbers mean less structures.");
-		hutChance = config.getInt("hutChance", "structures", 180, 0, 32767, "Configures the generation chance of the Moonlight Circle structure. Higher numbers mean less structures.");
-		barrowChance = config.getInt("barrowChance", "structures", 200, 0, 32767, "Configures the generation chance of the Barrow structure. Higher numbers mean less structures.");
+		//stoneCircleChance = config.getInt("stoneCircleChance", "structures", 240, 0, 32767, "Configures the generation chance of the Moonlight Circle structure. Higher numbers mean less structures.");
+	//	hutChance = config.getInt("hutChance", "structures", 180, 0, 32767, "Configures the generation chance of the Moonlight Circle structure. Higher numbers mean less structures.");
+		//barrowChance = config.getInt("barrowChance", "structures", 200, 0, 32767, "Configures the generation chance of the Barrow structure. Higher numbers mean less structures.");
 		fairyPoolChance = config.getInt("fairyPoolChance", "structures", 100, 0, 32767, "Configures the generation chance of the Fairy Pool structure. Higher numbers mean less structures.");
-		gardenChance = config.getInt("gardenChance", "structures", 160, 0, 32767, "Configures the generation chance of the Garden structure. Higher numbers mean less structures.");
+	//	gardenChance = config.getInt("gardenChance", "structures", 160, 0, 32767, "Configures the generation chance of the Garden structure. Higher numbers mean less structures.");
 		generateLeyMarkers = config.getBoolean("generateLeyMarkers", "structures", true, "Toggles the generation of Ley Marker structures.");
 		config.addCustomCategoryComment("misc", "Uncategorized settings.");
 		enableSilliness = config.getBoolean("enableSilliness", "misc", true, "Turns various secret silly features on or off. ;)");

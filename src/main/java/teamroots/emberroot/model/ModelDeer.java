@@ -10,7 +10,8 @@ import teamroots.emberroot.entity.EntityDeer;
 
 public class ModelDeer extends ModelBase
 {
-  //fields
+  public static ModelDeer instance;
+    //fields
     ModelRenderer head;
     ModelRenderer ear1;
     ModelRenderer ear2;

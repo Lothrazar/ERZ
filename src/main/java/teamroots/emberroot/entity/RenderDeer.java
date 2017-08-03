@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
-import teamroots.emberroot.model.ModelHolder;
+import teamroots.emberroot.model.ModelDeer; 
 
 public class RenderDeer extends RenderLiving<EntityDeer> {
 
@@ -26,7 +26,7 @@ public class RenderDeer extends RenderLiving<EntityDeer> {
 	public static class Factory implements IRenderFactory<EntityDeer> {
 		@Override
 		public Render<EntityDeer> createRenderFor(RenderManager manager) {
-			return new RenderDeer(manager, ModelHolder.entityModels.get("deer"), 0.35f);
+			return new RenderDeer(manager, ModelDeer.instance, 0.35f);
 		}
 	}
 }

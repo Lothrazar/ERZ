@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
-import teamroots.emberroot.model.ModelHolder;
+import teamroots.emberroot.model.ModelFairy; 
 
 public class RenderFairy extends RenderLiving<EntityFairy> {
 
@@ -29,7 +29,7 @@ public class RenderFairy extends RenderLiving<EntityFairy> {
 	public static class Factory implements IRenderFactory<EntityFairy> {
 		@Override
 		public Render<EntityFairy> createRenderFor(RenderManager manager) {
-			return new RenderFairy(manager, ModelHolder.entityModels.get("fairy"), 0);
+			return new RenderFairy(manager,  ModelFairy.instance, 0);
 		}
 	}
 }

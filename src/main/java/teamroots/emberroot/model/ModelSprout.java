@@ -8,7 +8,8 @@ import net.minecraft.util.math.Vec3d;
 
 public class ModelSprout extends ModelBase
 {
-  //fields
+  public static ModelSprout instance;
+    //fields
     ModelRenderer head;
     ModelRenderer legL;
     ModelRenderer legR;

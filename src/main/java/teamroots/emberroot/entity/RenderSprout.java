@@ -6,8 +6,8 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import teamroots.emberroot.Const;
-import teamroots.emberroot.model.ModelHolder;
+import teamroots.emberroot.Const; 
+import teamroots.emberroot.model.ModelSprout;
 
 public class RenderSprout extends RenderLiving<EntitySprout> {
 
@@ -28,7 +28,7 @@ public class RenderSprout extends RenderLiving<EntitySprout> {
 	public static class Factory implements IRenderFactory<EntitySprout> {
 		@Override
 		public Render<EntitySprout> createRenderFor(RenderManager manager) {
-			return new RenderSprout(manager, ModelHolder.entityModels.get("sprout"), 0.15f);
+			return new RenderSprout(manager,   ModelSprout.instance, 0.15f);
 		}
 	}
 }

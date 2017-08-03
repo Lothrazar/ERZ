@@ -9,7 +9,8 @@ import net.minecraft.util.math.Vec3d;
 
 public class ModelFairy extends ModelBase
 {
-  //fields
+  public static ModelFairy instance;
+    //fields
     ModelRenderer head;
     ModelRenderer chest;
     ModelRenderer armR;
