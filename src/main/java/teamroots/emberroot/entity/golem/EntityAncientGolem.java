@@ -25,6 +25,7 @@ public class EntityAncientGolem extends EntityMob {
     super.entityInit();
     this.isImmuneToFire = true;
   }
+  @Override
   protected void initEntityAI() {
     this.tasks.addTask(0, new EntityAISwimming(this));
     this.tasks.addTask(2, new EntityAIAttackMelee(this, 0.46D, true));
@@ -35,6 +36,7 @@ public class EntityAncientGolem extends EntityMob {
     this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPigZombie.class, true));
     this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
   }
+  @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
@@ -57,6 +59,6 @@ public class EntityAncientGolem extends EntityMob {
   }
   @Override
   public ResourceLocation getLootTable() {
-    return new ResourceLocation(Const.MODID, "entity/ancient_golem");
+    return new ResourceLocation(Const.MODID, "entity/golem");
   }
 }

@@ -68,6 +68,7 @@ public class EntitySprout extends EntityCreature {
     super.onUpdate();
     this.rotationYaw = this.rotationYawHead;
   }
+  @Override
   public float getEyeHeight() {
     return this.isChild() ? this.height : 1.3F;
   }

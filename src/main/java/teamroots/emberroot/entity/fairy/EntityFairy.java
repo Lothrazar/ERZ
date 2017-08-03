@@ -129,11 +129,13 @@ public class EntityFairy extends EntityFlying {
   public float getBlue() {
     return getVariantEnum().blue();
   }
+  @Override
   public boolean canBePushed() {
     return false;
   }
   //  protected void collideWithEntity(Entity entityIn) {}
   //  protected void collideWithNearbyEntities() {}
+  @Override
   public void onUpdate() {
     super.onUpdate();
     if (world.isRemote) {
@@ -155,6 +157,7 @@ public class EntityFairy extends EntityFlying {
       }
     }
   }
+  @Override
   protected void updateAITasks() {
     super.updateAITasks();
     if (getDataManager().get(tame) && owner != null) {
@@ -269,13 +272,17 @@ public class EntityFairy extends EntityFlying {
       this.rotationYaw += f1;
     }
   }
+  @Override
   public boolean doesEntityNotTriggerPressurePlate() {
     return true;
   }
+  @Override
   protected boolean canTriggerWalking() {
     return false;
   }
+  @Override
   public void fall(float distance, float damageMultiplier) {}
+  @Override
   protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {}
   @Override
   protected void entityInit() {
@@ -286,6 +293,7 @@ public class EntityFairy extends EntityFlying {
     this.getDataManager().register(spawnPosition, new BlockPos(0, -1, 0));
     this.getDataManager().register(targetPosition, new BlockPos(0, -1, 0));
   }
+  @Override
   protected void initEntityAI() {
     this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
     this.tasks.addTask(7, new EntityAILookIdle(this));
@@ -304,6 +312,7 @@ public class EntityFairy extends EntityFlying {
     String colour = getVariantEnum().nameLower();
     return new ResourceLocation(Const.MODID, "entity/fairy_" + colour);
   }
+  @Override
   public float getEyeHeight() {
     return this.height;
   }

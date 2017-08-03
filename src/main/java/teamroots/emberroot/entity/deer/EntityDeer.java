@@ -34,6 +34,7 @@ public class EntityDeer extends EntityAnimal {
     this.getDataManager().register(hasHorns, rand.nextBoolean());
     this.getDataManager().register(hasRednose, rand.nextInt(200) == 0 && getDataManager().get(hasHorns));
   }
+  @Override
   protected void initEntityAI() {
     this.tasks.addTask(0, new EntityAISwimming(this));
     this.tasks.addTask(1, new EntityAIPanic(this, 1.5D));
@@ -71,6 +72,7 @@ public class EntityDeer extends EntityAnimal {
   public ResourceLocation getLootTable() {
     return new ResourceLocation(Const.MODID, "entity/deer");
   }
+  @Override
   public float getEyeHeight() {
     return this.isChild() ? this.height : 1.3F;
   }
