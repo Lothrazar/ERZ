@@ -32,11 +32,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import teamroots.emberroot.capability.PlayerDataProvider;
+import net.minecraftforge.fml.relauncher.SideOnly; 
 import teamroots.emberroot.entity.fairy.EntityFairy;
-import teamroots.emberroot.network.PacketHandler;
-import teamroots.emberroot.network.message.MessagePlayerDataUpdate;
+import teamroots.emberroot.network.PacketHandler; 
 import teamroots.emberroot.proxy.ClientProxy;
 import teamroots.emberroot.util.IRenderEntityLater;
 import teamroots.emberroot.util.Misc;
@@ -250,14 +248,7 @@ public class EventManager {
 		}
 	}
 	
-	@SubscribeEvent
-	public void copyCapabilities(PlayerEvent.Clone event){
-		if (event.isWasDeath()){
-			if (event.getOriginal().hasCapability(PlayerDataProvider.playerDataCapability, null)){
-				event.getEntityPlayer().getCapability(PlayerDataProvider.playerDataCapability, null).setData(event.getOriginal().getCapability(PlayerDataProvider.playerDataCapability, null).getData());
-			}
-		}
-	}
+ 
 	
 	@SubscribeEvent
 	public void onEntityTarget(LivingSetAttackTargetEvent event){
@@ -272,15 +263,15 @@ public class EventManager {
 	
 	@SubscribeEvent
 	public void onEntityTick(LivingUpdateEvent event){
-		 if (event.getEntity() instanceof EntityPlayer){
-			if (event.getEntity().hasCapability(PlayerDataProvider.playerDataCapability, null)){
-				if (!event.getEntity().world.isRemote && event.getEntity().getCapability(PlayerDataProvider.playerDataCapability, null).isDirty()){
-					PacketHandler.INSTANCE.sendToAll(new MessagePlayerDataUpdate(event.getEntity().getUniqueID(),event.getEntity().getCapability(PlayerDataProvider.playerDataCapability, null).getData()));
-					event.getEntity().getCapability(PlayerDataProvider.playerDataCapability, null).clean();
-				}
-			}
-		}
- 
+//		 if (event.getEntity() instanceof EntityPlayer){
+//			if (event.getEntity().hasCapability(PlayerDataProvider.playerDataCapability, null)){
+//				if (!event.getEntity().world.isRemote && event.getEntity().getCapability(PlayerDataProvider.playerDataCapability, null).isDirty()){
+//					PacketHandler.INSTANCE.sendToAll(new MessagePlayerDataUpdate(event.getEntity().getUniqueID(),event.getEntity().getCapability(PlayerDataProvider.playerDataCapability, null).getData()));
+//					event.getEntity().getCapability(PlayerDataProvider.playerDataCapability, null).clean();
+//				}
+//			}
+//		}
+// 
 		if (event.getEntity().getEntityData().hasKey(Const.MIND_WARD_TAG) && !event.getEntity().getEntityWorld().isRemote){
 			event.getEntity().getEntityData().setInteger(Const.MIND_WARD_TAG, event.getEntity().getEntityData().getInteger(Const.MIND_WARD_TAG)-1);
 			if (event.getEntity().getEntityData().getInteger(Const.MIND_WARD_TAG) <= 0){

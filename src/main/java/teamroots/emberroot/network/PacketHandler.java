@@ -14,7 +14,7 @@ public class PacketHandler {
     public static void registerMessages(){
         INSTANCE.registerMessage(MessageMoonlightBurstFX.MessageHolder.class,MessageMoonlightBurstFX.class,id ++,Side.CLIENT); 
         INSTANCE.registerMessage(MessageMoonlightSparkleFX.MessageHolder.class,MessageMoonlightSparkleFX.class,id ++,Side.CLIENT);
-        INSTANCE.registerMessage(MessagePlayerDataUpdate.MessageHolder.class,MessagePlayerDataUpdate.class,id ++,Side.CLIENT);
+    //    INSTANCE.registerMessage(MessagePlayerDataUpdate.MessageHolder.class,MessagePlayerDataUpdate.class,id ++,Side.CLIENT);
         INSTANCE.registerMessage(MessageFairyDustBurstFX.MessageHolder.class,MessageFairyDustBurstFX.class,id ++,Side.CLIENT);
         INSTANCE.registerMessage(MessageFairyTameFX.MessageHolder.class,MessageFairyTameFX.class,id ++,Side.CLIENT);
     }

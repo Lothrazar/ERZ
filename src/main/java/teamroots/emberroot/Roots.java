@@ -9,8 +9,7 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import teamroots.emberroot.capability.RootsCapabilityManager;
+import net.minecraftforge.fml.relauncher.SideOnly; 
 import teamroots.emberroot.proxy.CommonProxy;
 
 @Mod(modid = Const.MODID, name = Roots.MODNAME, version = Roots.VERSION)
@@ -38,7 +37,7 @@ public class Roots {
     MinecraftForge.EVENT_BUS.register(new EventManager());
     MinecraftForge.EVENT_BUS.register(new ConfigManager());
     MinecraftForge.EVENT_BUS.register(new RegistryManager());
-    MinecraftForge.EVENT_BUS.register(new RootsCapabilityManager());
+    //MinecraftForge.EVENT_BUS.register(new RootsCapabilityManager());
     ConfigManager.init(event.getSuggestedConfigurationFile());
     proxy.preInit(event);
   }
