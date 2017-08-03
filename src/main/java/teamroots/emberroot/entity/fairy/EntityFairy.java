@@ -31,10 +31,9 @@ public class EntityFairy extends EntityFlying {
   public static final DataParameter<BlockPos> targetPosition = EntityDataManager.<BlockPos> createKey(EntityFairy.class, DataSerializers.BLOCK_POS);
   public static final DataParameter<Boolean> tame = EntityDataManager.<Boolean> createKey(EntityFairy.class, DataSerializers.BOOLEAN);
   public static final DataParameter<Boolean> sitting = EntityDataManager.<Boolean> createKey(EntityFairy.class, DataSerializers.BOOLEAN);
-  //TODO: TAME THEM WITH SOMETHIGN
- 
+  //NEW I added RED YELLOW AND BLUE (lothrazar)
   public static enum VariantColors {
-    GREEN, PURPLE, PINK, ORANGE, BLUE, YELLOW;
+    GREEN, PURPLE, PINK, ORANGE, BLUE, YELLOW, RED;
     public String nameLower() {
       return this.name().toLowerCase();
     }
@@ -53,6 +52,8 @@ public class EntityFairy extends EntityFlying {
           return 163;
         case YELLOW:
           return 255;
+        case RED:
+          return 255;
       }
       return 0;
     }
@@ -70,6 +71,8 @@ public class EntityFairy extends EntityFlying {
           return 221;
         case YELLOW:
           return 242;
+        case RED:
+          return 98;
       }
       return 0;
     }
@@ -87,6 +90,8 @@ public class EntityFairy extends EntityFlying {
           return 255;
         case YELLOW:
           return 179;
+        case RED:
+          return 114;
       }
       return 0;
     }
