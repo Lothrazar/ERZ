@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.golem;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,17 +20,19 @@ import net.minecraft.world.World;
 import teamroots.emberroot.proxy.ClientProxy;
 import teamroots.emberroot.proxy.CommonProxy;
 
-//@Interface(iface = "elucent.albedo.lighting.ILightProvider", modid = "albedo")
-public class EntityEmberProjectile extends Entity/* implements ILightProvider */ {
+public class EntityEmberProjectile extends Entity {
   public static final DataParameter<Float> value = EntityDataManager.createKey(EntityEmberProjectile.class, DataSerializers.FLOAT);
   public static final DataParameter<Boolean> dead = EntityDataManager.createKey(EntityEmberProjectile.class, DataSerializers.BOOLEAN);
   public static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityEmberProjectile.class, DataSerializers.VARINT);
+  public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityEmberProjectile.class, DataSerializers.VARINT);
   public BlockPos dest = new BlockPos(0, 0, 0);
   public UUID id = null;
   BlockPos pos = new BlockPos(0, 0, 0);
+  //private Color colour = null;//new Color(0, 0, 0);
   public EntityEmberProjectile(World worldIn) {
     super(worldIn);
     this.setInvisible(true);
+    this.getDataManager().register(variant, Integer.valueOf(0));
     this.getDataManager().register(value, Float.valueOf(0));
     this.getDataManager().register(dead, false);
     this.getDataManager().register(lifetime, Integer.valueOf(160));
@@ -98,7 +101,11 @@ public class EntityEmberProjectile extends Entity/* implements ILightProvider */
       if (getEntityWorld().isRemote) {
         for (double i = 0; i < 9; i++) {
           double coeff = i / 9.0;
-          spawnParticleGlow(getEntityWorld(), (float) (prevPosX + (posX - prevPosX) * coeff), (float) (prevPosY + (posY - prevPosY) * coeff), (float) (prevPosZ + (posZ - prevPosZ) * coeff), 0.0125f * (rand.nextFloat() - 0.5f), 0.0125f * (rand.nextFloat() - 0.5f), 0.0125f * (rand.nextFloat() - 0.5f), 255, 64, 16, getDataManager().get(value) / 1.75f, 24);
+          spawnParticleGlow(getEntityWorld(),
+              (float) (prevPosX + (posX - prevPosX) * coeff), (float) (prevPosY + (posY - prevPosY) * coeff), (float) (prevPosZ + (posZ - prevPosZ) * coeff),
+              0.0125f * (rand.nextFloat() - 0.5f), 0.0125f * (rand.nextFloat() - 0.5f), 0.0125f * (rand.nextFloat() - 0.5f),
+              getRed(), getGreen(), getBlue(),
+              getDataManager().get(value) / 1.75f, 24);
         }
       }
       List<EntityLivingBase> rawEntities = getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - getDataManager().get(value) * 0.125, posY - getDataManager().get(value) * 0.125, posZ - getDataManager().get(value) * 0.125, posX + getDataManager().get(value) * 0.125, posY + getDataManager().get(value) * 0.125, posZ + getDataManager().get(value) * 0.125));
@@ -141,23 +148,27 @@ public class EntityEmberProjectile extends Entity/* implements ILightProvider */
       motionZ = 0;
     }
   }
-  public static Random random = new Random();
-  public static int counter = 0;
-  public static void spawnParticleGlow(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float scale, int lifetime) {
+  private Color getColor() {
+    EntityAncientGolem.VariantColors var = EntityAncientGolem.VariantColors.values()[getDataManager().get(variant)];
+ 
+    return var.getColor();
+  }
+  private float getBlue() {
+    return getColor().getBlue();
+  }
+  private float getGreen() {
+    return getColor().getGreen();
+  }
+  private float getRed() {
+    return getColor().getRed();
+  }
+  private static Random random = new Random();
+  private static int counter = 0;
+  private static void spawnParticleGlow(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float scale, int lifetime) {
     counter += random.nextInt(3);
+    
     if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
       ClientProxy.particleRendererGolem.addParticle(new ParticleMote(world, x, y, z, vx, vy, vz, r, g, b, 1.0f, scale, lifetime));
     }
   }
-  /*
-   * @Method(modid = "albedo")
-   * 
-   * @Override public Light provideLight() { if (getDataManager().get(dead)){
-   * return new
-   * Light((float)posX,(float)posY,(float)posZ,1.0f,0.5f,0.0625f,1.0f,(
-   * getDataManager().get(value)/2.625f) *
-   * ((float)getDataManager().get(lifetime)/20f)); } return new
-   * Light((float)posX,(float)posY,(float)posZ,1.0f,0.5f,0.0625f,1.0f,(
-   * getDataManager().get(value)/2.625f)); }
-   */
 }

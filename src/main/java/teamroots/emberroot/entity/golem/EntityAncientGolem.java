@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.golem;
+import java.awt.Color;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -19,11 +20,32 @@ import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 
 public class EntityAncientGolem extends EntityMob {
+  private static final int FIRE_TICKRATE = 15;//fire every this many ticks (100)
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityAncientGolem.class, DataSerializers.VARINT);
   public static enum VariantColors {
     ORANGE, BLUE, GREEN, PURPLE, RED;
     public String nameLower() {
       return this.name().toLowerCase();
+    }
+    /**
+     * r,g,b passed into projectile shot
+     * 
+     * @return
+     */
+    public Color getColor() {
+      switch (this) {
+        case BLUE:
+          return new Color(0, 173, 255);
+        case GREEN:
+          return new Color(57, 255, 56);
+        case ORANGE:
+          return new Color(255, 64, 16);
+        case PURPLE:
+          return new Color(255, 56, 249);
+        case RED:
+           return new Color(179, 3, 2);
+      }
+      return null;//new Color(0, 0, 0);
     }
   }
   public EntityAncientGolem(World worldIn) {
@@ -67,9 +89,10 @@ public class EntityAncientGolem extends EntityMob {
   public void onUpdate() {
     super.onUpdate();
     this.rotationYaw = this.rotationYawHead;
-    if (this.ticksExisted % 100 == 0 && this.getAttackTarget() != null) {
+    if (this.ticksExisted % FIRE_TICKRATE == 0 && this.getAttackTarget() != null) {
       if (!getEntityWorld().isRemote) {
         EntityEmberProjectile proj = new EntityEmberProjectile(getEntityWorld());
+        proj.getDataManager().set(EntityEmberProjectile.variant, this.getVariant());
         proj.initCustom(posX, posY + 1.6, posZ, getLookVec().x * 0.5, getLookVec().y * 0.5, getLookVec().z * 0.5, 4.0f, this.getUniqueID());
         getEntityWorld().spawnEntity(proj);
       }
