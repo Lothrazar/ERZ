@@ -15,7 +15,7 @@ public class ConfigManager {
     }
   }
   public static void load() {
-    config.addCustomCategoryComment("mobs", "Settings related to mobs.");
+//    config.addCustomCategoryComment("mobs", "Settings related to mobs.");
     deerSpawnWeight = config.getInt("deerSpawnWeight", "mobs", 10, 0, 32767, "Configures the spawning frequency of the Deer mob. Higher numbers mean more spawns.");
     sproutSpawnWeight = config.getInt("sproutSpawnWeight", "mobs", 6, 0, 32767, "Configures the spawning frequency of the Sprout mob. Higher numbers mean more spawns.");
     config.addCustomCategoryComment("structures", "Settings related to structures.");

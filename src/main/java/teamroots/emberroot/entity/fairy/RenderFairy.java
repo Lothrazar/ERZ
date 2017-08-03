@@ -13,23 +13,8 @@ public class RenderFairy extends RenderLiving<EntityFairy> {
   }
   @Override
   protected ResourceLocation getEntityTexture(EntityFairy entity) {
-    switch (entity.getDataManager().get(EntityFairy.variant)) {
-      case 0: {
-        return new ResourceLocation(Const.MODID, "textures/entity/green_fairy.png");
-      }
-      case 1: {
-        return new ResourceLocation(Const.MODID, "textures/entity/purple_fairy.png");
-      }
-      case 2: {
-        return new ResourceLocation(Const.MODID, "textures/entity/pink_fairy.png");
-      }
-      case 3: {
-        return new ResourceLocation(Const.MODID, "textures/entity/orange_fairy.png");
-      }
-      default: {
-        return new ResourceLocation(Const.MODID, "textures/entity/green_fairy.png");
-      }
-    }
+    String colourName = entity.getVariantEnum().nameLower();
+    return new ResourceLocation(Const.MODID, "textures/entity/" + colourName + "_fairy.png");
   }
   public static class Factory implements IRenderFactory<EntityFairy> {
     @Override

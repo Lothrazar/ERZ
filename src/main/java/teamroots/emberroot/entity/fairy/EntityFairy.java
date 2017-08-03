@@ -31,6 +31,66 @@ public class EntityFairy extends EntityFlying {
   public static final DataParameter<BlockPos> targetPosition = EntityDataManager.<BlockPos> createKey(EntityFairy.class, DataSerializers.BLOCK_POS);
   public static final DataParameter<Boolean> tame = EntityDataManager.<Boolean> createKey(EntityFairy.class, DataSerializers.BOOLEAN);
   public static final DataParameter<Boolean> sitting = EntityDataManager.<Boolean> createKey(EntityFairy.class, DataSerializers.BOOLEAN);
+  //TODO: TAME THEM WITH SOMETHIGN
+ 
+  public static enum VariantColors {
+    GREEN, PURPLE, PINK, ORANGE, BLUE, YELLOW;
+    public String nameLower() {
+      return this.name().toLowerCase();
+    }
+    //not related to actual enum, we just have RGB for each color
+    public int red() {
+      switch (this) {
+        case GREEN://0
+          return 177;
+        case PURPLE://1
+          return 219;
+        case PINK://2
+          return 255;
+        case ORANGE://3
+          return 255;
+        case BLUE:
+          return 163;
+        case YELLOW:
+          return 255;
+      }
+      return 0;
+    }
+    public int green() {
+      switch (this) {
+        case GREEN://0
+          return 255;
+        case PURPLE://1
+          return 179;
+        case PINK://2
+          return 163;
+        case ORANGE://3
+          return 223;
+        case BLUE:
+          return 221;
+        case YELLOW:
+          return 242;
+      }
+      return 0;
+    }
+    public int blue() {
+      switch (this) {
+        case GREEN://0
+          return 117;
+        case PURPLE://1
+          return 255;
+        case PINK://2
+          return 255;
+        case ORANGE://3
+          return 163;
+        case BLUE:
+          return 255;
+        case YELLOW:
+          return 179;
+      }
+      return 0;
+    }
+  }
   public static UUID owner = null;
   public EntityFairy(World world) {
     super(world);
@@ -49,68 +109,26 @@ public class EntityFairy extends EntityFlying {
   public enum FairyType {
     GREEN, PURPLE, PINK, ORANGE
   }
+  public Integer getVariant() {
+    return getDataManager().get(variant);
+  }
+  public VariantColors getVariantEnum() {
+    return VariantColors.values()[getVariant()];
+  }
   public float getRed() {
-    if (getDataManager().get(variant) instanceof Integer) {
-      switch (getDataManager().get(variant)) {
-        case 0: {
-          return 177;
-        }
-        case 1: {
-          return 219;
-        }
-        case 2: {
-          return 255;
-        }
-        case 3: {
-          return 255;
-        }
-      }
-    }
-    return 0;
+    return getVariantEnum().red();
   }
   public float getGreen() {
-    if (getDataManager().get(variant) instanceof Integer) {
-      switch (getDataManager().get(variant)) {
-        case 0: {
-          return 255;
-        }
-        case 1: {
-          return 179;
-        }
-        case 2: {
-          return 163;
-        }
-        case 3: {
-          return 223;
-        }
-      }
-    }
-    return 0;
+    return getVariantEnum().green();
   }
   public float getBlue() {
-    if (getDataManager().get(variant) instanceof Integer) {
-      switch (getDataManager().get(variant)) {
-        case 0: {
-          return 117;
-        }
-        case 1: {
-          return 255;
-        }
-        case 2: {
-          return 255;
-        }
-        case 3: {
-          return 163;
-        }
-      }
-    }
-    return 0;
+    return getVariantEnum().blue();
   }
   public boolean canBePushed() {
     return false;
   }
-  protected void collideWithEntity(Entity entityIn) {}
-  protected void collideWithNearbyEntities() {}
+  //  protected void collideWithEntity(Entity entityIn) {}
+  //  protected void collideWithNearbyEntities() {}
   public void onUpdate() {
     super.onUpdate();
     if (world.isRemote) {
@@ -233,7 +251,7 @@ public class EntityFairy extends EntityFlying {
         getDataManager().setDirty(targetPosition);
       }
       BlockPos blockpos = new BlockPos(this);
-      BlockPos blockpos1 = blockpos.up();
+      // BlockPos blockpos1 = blockpos.up();
       double dX = (double) this.getDataManager().get(targetPosition).getX() + 0.5D - this.posX;
       double dY = (double) this.getDataManager().get(targetPosition).getY() + 0.1D - this.posY;
       double dZ = (double) this.getDataManager().get(targetPosition).getZ() + 0.5D - this.posZ;
@@ -259,7 +277,7 @@ public class EntityFairy extends EntityFlying {
     super.entityInit();
     this.getDataManager().register(tame, false);
     this.getDataManager().register(sitting, false);
-    this.getDataManager().register(variant, rand.nextInt(4));
+    this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
     this.getDataManager().register(spawnPosition, new BlockPos(0, -1, 0));
     this.getDataManager().register(targetPosition, new BlockPos(0, -1, 0));
   }
