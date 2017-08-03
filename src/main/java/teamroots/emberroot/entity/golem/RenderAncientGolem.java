@@ -17,7 +17,7 @@ public class RenderAncientGolem extends RenderLiving<EntityAncientGolem> {
   }
   @Override
   protected ResourceLocation getEntityTexture(EntityAncientGolem entity) {
-    return new ResourceLocation(Const.MODID, "textures/entity/golem.png");
+    return new ResourceLocation(Const.MODID, "textures/entity/golem_" + entity.getVariantEnum().nameLower() + ".png");
   }
   public static ModelBase model;
   public static class Factory implements IRenderFactory<EntityAncientGolem> {

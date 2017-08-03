@@ -10,20 +10,38 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 
 public class EntityAncientGolem extends EntityMob {
+  public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityAncientGolem.class, DataSerializers.VARINT);
+  public static enum VariantColors {
+    ORANGE, BLUE, GREEN, PURPLE, RED;
+    public String nameLower() {
+      return this.name().toLowerCase();
+    }
+  }
   public EntityAncientGolem(World worldIn) {
     super(worldIn);
     setSize(0.6f, 1.8f);
     this.experienceValue = 10;
   }
+  public Integer getVariant() {
+    return getDataManager().get(variant);
+  }
+  public VariantColors getVariantEnum() {
+    return VariantColors.values()[getVariant()];
+  }
   @Override
   protected void entityInit() {
     super.entityInit();
     this.isImmuneToFire = true;
+    this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
   }
   @Override
   protected void initEntityAI() {
@@ -58,7 +76,17 @@ public class EntityAncientGolem extends EntityMob {
     }
   }
   @Override
+  public void readEntityFromNBT(NBTTagCompound compound) {
+    super.readEntityFromNBT(compound);
+    getDataManager().set(variant, compound.getInteger("variant"));
+  }
+  @Override
+  public void writeEntityToNBT(NBTTagCompound compound) {
+    super.writeEntityToNBT(compound);
+    compound.setInteger("variant", getDataManager().get(variant));
+  }
+  @Override
   public ResourceLocation getLootTable() {
-    return new ResourceLocation(Const.MODID, "entity/golem");
+    return new ResourceLocation(Const.MODID, "entity/golem_" + getVariantEnum().nameLower());
   }
 }
