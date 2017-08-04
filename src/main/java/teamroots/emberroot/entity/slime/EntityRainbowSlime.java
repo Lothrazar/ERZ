@@ -1,13 +1,20 @@
 package teamroots.emberroot.entity.slime;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionType;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -18,7 +25,7 @@ import teamroots.emberroot.Const;
 public class EntityRainbowSlime extends EntitySlime {
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntitySlime.class, DataSerializers.VARINT);
   public static enum VariantColors {
-    BLUE, GREY, WHITE;//water, snow, clay
+    BLUE, GREY, WHITE, PURPLE;//water, snow, clay
     public String nameLower() {
       return this.name().toLowerCase();
     }
@@ -58,6 +65,7 @@ public class EntityRainbowSlime extends EntitySlime {
       //skip setting block if mob griefing is false
       setBlockOnDeath();
     }
+    setPotionsOnDeath();
     spawnChildSlimes();
     this.isDead = true;
   }
@@ -82,12 +90,39 @@ public class EntityRainbowSlime extends EntitySlime {
         if (current.getBlock() == Blocks.SNOW_LAYER)
           setBlock = Blocks.SNOW.getDefaultState();
       break;
+      case PURPLE:
+      break;
     }
     if (setBlock != null) {
       this.world.setBlockState(this.getPosition(), setBlock);
       //doesnt make it flow. idk
       // this.world.notifyBlockUpdate(this.getPosition(), setBlock, setBlock, 3);//make tha water flowwwwwww
     }
+  }
+  public void setPotionsOnDeath() {
+    switch (this.getVariantEnum()) {
+      case BLUE:
+      break;
+      case GREY:
+      break;
+      case PURPLE:
+        this.makeAreaOfEffectCloud(PotionType.getPotionTypeForName("poison"));
+      break;
+      case WHITE:
+      break;
+    }
+  }
+  private void makeAreaOfEffectCloud(PotionType type) {
+    EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(this.world, this.posX, this.posY, this.posZ);
+    entityareaeffectcloud.setOwner(this);
+    entityareaeffectcloud.setRadius(3.0F);
+    entityareaeffectcloud.setRadiusOnUse(-0.5F);
+    entityareaeffectcloud.setWaitTime(10);
+    entityareaeffectcloud.setRadiusPerTick(-entityareaeffectcloud.getRadius() / (float) entityareaeffectcloud.getDuration());
+    entityareaeffectcloud.setPotion(type);
+    for (PotionEffect e : type.getEffects())
+      entityareaeffectcloud.addEffect(e);// new PotionEffect(MobEffects.POISON)
+    this.world.spawnEntity(entityareaeffectcloud);
   }
   @Override
   public String getName() {
