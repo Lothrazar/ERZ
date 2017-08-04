@@ -3,6 +3,7 @@ itemGroup.roots=Roots
 entity.ancient_golem.name=Golem
 entity.ancient_golem.blue.name=Ice Golem
 entity.ancient_golem.green.name=Nature Golem
+entity.ancient_golem.yellow.name=Gilded Golem
 entity.ancient_golem.orange.name=Flame Golem
 entity.ancient_golem.purple.name=Gemstone Golem
 entity.ancient_golem.red.name=Magma Golem

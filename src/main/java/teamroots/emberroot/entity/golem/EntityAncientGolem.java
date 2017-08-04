@@ -14,6 +14,7 @@ import net.minecraft.entity.monster.EntityGuardian;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -115,7 +116,7 @@ public class EntityAncientGolem extends EntityMob {
     this.tasks.addTask(8, new EntityAILookIdle(this));
     switch (this.getVariantEnum()) {
       case BLUE:
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityGuardian.class, true));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySlime.class, true));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
       break;
       case GREEN:
