@@ -1,13 +1,13 @@
 [
 {
-  "modid": "roots",
-  "name": "Roots 2",
-  "description": "Druidic magic mod.",
-  "version": "0.025",
+  "modid": "emberroot",
+  "name": "EmberRoot Zoo",
+  "description": "Golems, Fairies, Sprouts, and Deer.",
+  "version": "1.0.0",
   "mcversion": "1.12",
   "url": "",
   "updateUrl": "",
-  "authorList": ["Elucent","AlexisMachina","werty1124","SirShadow"],
+  "authorList": ["Lothrazar","Elucent","AlexisMachina","werty1124","SirShadow"],
   "credits": "",
   "logoFile": "",
   "screenshots": [],

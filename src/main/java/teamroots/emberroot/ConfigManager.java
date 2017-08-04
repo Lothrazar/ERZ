@@ -16,11 +16,11 @@ public class ConfigManager {
   }
   public static void load() {
 //    config.addCustomCategoryComment("mobs", "Settings related to mobs.");
-    deerSpawnWeight = config.getInt("deerSpawnWeight", "mobs", 10, 0, 32767, "Configures the spawning frequency of the Deer mob. Higher numbers mean more spawns.");
+    deerSpawnWeight = config.getInt("deerSpawnWeight", "mobs", 20, 0, 32767, "Configures the spawning frequency of the Deer mob. Higher numbers mean more spawns.");
     sproutSpawnWeight = config.getInt("sproutSpawnWeight", "mobs", 6, 0, 32767, "Configures the spawning frequency of the Sprout mob. Higher numbers mean more spawns.");
     config.addCustomCategoryComment("structures", "Settings related to structures.");
     fairySpawnWeight = config.getInt("fairySpawnWeight", "mobs", 20, 0, 32767, "Configures the generation chance of the Fairy mob. Higher numbers mean more spawns.");
-    golemSpawnWeight = config.getInt("golemSpawnWeight", "mobs", 15, 0, 32767, "Configures the generation chance of the Golem mob. Higher numbers mean more spawns.");
+    golemSpawnWeight = config.getInt("golemSpawnWeight", "mobs", 25, 0, 32767, "Configures the generation chance of the Golem mob. Higher numbers mean more spawns.");
     if (config.hasChanged()) {
       config.save();
     }
