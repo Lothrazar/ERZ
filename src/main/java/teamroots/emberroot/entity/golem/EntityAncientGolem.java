@@ -1,13 +1,16 @@
 package teamroots.emberroot.entity.golem;
 import java.awt.Color;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander; 
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityGuardian;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -18,6 +21,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 
@@ -45,7 +49,7 @@ public class EntityAncientGolem extends EntityMob {
         case PURPLE:
           return new Color(255, 56, 249);
         case RED:
-           return new Color(179, 3, 2);
+          return new Color(179, 3, 2);
       }
       return null;//new Color(0, 0, 0);
     }
@@ -68,6 +72,20 @@ public class EntityAncientGolem extends EntityMob {
     this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
   }
   @Override
+  public String getName() {
+    if (this.hasCustomName()) {
+      return this.getCustomNameTag();
+    }
+    else {
+      String s = EntityList.getEntityString(this);
+      if (s == null) {
+        s = "generic";
+      }
+      String var = this.getVariantEnum().nameLower();
+      return I18n.translateToLocal("entity." + s + "."+var + ".name");
+    }
+  }
+  @Override
   protected void initEntityAI() {
     this.tasks.addTask(0, new EntityAISwimming(this));
     this.tasks.addTask(2, new EntityAIAttackMelee(this, 0.46D, true));
@@ -75,10 +93,25 @@ public class EntityAncientGolem extends EntityMob {
     this.tasks.addTask(7, new EntityAIWander(this, 0.46D));
     this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     this.tasks.addTask(8, new EntityAILookIdle(this));
-   
-    this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityZombie.class, true));
-    this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntitySkeleton.class, true));
+    System.out.println("!Entity golem ai " + this.getVariantEnum());
     this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+    switch (this.getVariantEnum()) {
+      case BLUE:
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityGuardian.class, true));
+      break;
+      case GREEN:
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityZombie.class, true));
+      break;
+      case ORANGE:
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySkeleton.class, true));
+      break;
+      case PURPLE:
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityEnderman.class, true));
+      break;
+      case RED:
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPigZombie.class, true));
+      break;
+    }
   }
   @Override
   protected void applyEntityAttributes() {
