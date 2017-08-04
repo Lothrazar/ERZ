@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -44,6 +45,10 @@ public class EntityDeer extends EntityAnimal {
     this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
     this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
     this.tasks.addTask(7, new EntityAILookIdle(this));
+  }
+  @Override
+  public boolean isBreedingItem(ItemStack stack) {
+    return stack.getItem() == Items.WHEAT;
   }
   @Override
   public void onUpdate() {

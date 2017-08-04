@@ -9,8 +9,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.datasync.DataParameter;
@@ -23,6 +26,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.Roots;
+import teamroots.emberroot.entity.ai.EntityAITemptFlying;
 import teamroots.emberroot.proxy.ClientProxy;
 
 public class EntityFairy extends EntityFlying {
@@ -31,7 +35,7 @@ public class EntityFairy extends EntityFlying {
   public static final DataParameter<BlockPos> targetPosition = EntityDataManager.<BlockPos> createKey(EntityFairy.class, DataSerializers.BLOCK_POS);
   public static final DataParameter<Boolean> tame = EntityDataManager.<Boolean> createKey(EntityFairy.class, DataSerializers.BOOLEAN);
   public static final DataParameter<Boolean> sitting = EntityDataManager.<Boolean> createKey(EntityFairy.class, DataSerializers.BOOLEAN);
-  //NEW I added RED YELLOW AND BLUE (lothrazar)
+ 
   public static enum VariantColors {
     GREEN, PURPLE, PINK, ORANGE, BLUE, YELLOW, RED;
     public String nameLower() {
@@ -294,10 +298,18 @@ public class EntityFairy extends EntityFlying {
     this.getDataManager().register(targetPosition, new BlockPos(0, -1, 0));
   }
   @Override
-  protected void initEntityAI() {
+  protected void initEntityAI() {  
+    
+    this.tasks.addTask(0, new EntityAITemptFlying(this, 66.95D, Items.GLOWSTONE_DUST, false));
+  
+  
     this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
     this.tasks.addTask(7, new EntityAILookIdle(this));
+
+ 
+    
   }
+  
   @Override
   public boolean isAIDisabled() {
     return false;
