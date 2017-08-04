@@ -21,14 +21,15 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 
 public class EntityAncientGolem extends EntityMob {
   private static final double MAX_HEALTH = 25.0D;
-  private static final int FIRE_TICKRATE = 100;//fire every this many ticks (100)
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityAncientGolem.class, DataSerializers.VARINT);
+  public static final DataParameter<Integer> FIRESPEED = EntityDataManager.<Integer> createKey(EntityAncientGolem.class, DataSerializers.VARINT);
   public static enum VariantColors {
     ORANGE, BLUE, GREEN, PURPLE, RED;
     public String nameLower() {
@@ -69,8 +70,20 @@ public class EntityAncientGolem extends EntityMob {
   @Override
   protected void entityInit() {
     super.entityInit();
-    this.isImmuneToFire = true;
+    this.getDataManager().register(FIRESPEED, MathHelper.getInt(rand, 40, 110));
     this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
+    switch (this.getVariantEnum()) {
+      case ORANGE:
+      case RED:
+      case PURPLE:
+        this.isImmuneToFire = true;
+      break;
+      case BLUE:
+      case GREEN:
+      default:
+        this.isImmuneToFire = false;
+      break;
+    }
   }
   @Override
   public String getName() {
@@ -83,7 +96,7 @@ public class EntityAncientGolem extends EntityMob {
         s = "generic";
       }
       String var = this.getVariantEnum().nameLower();
-      return I18n.translateToLocal("entity." + s + "."+var + ".name");
+      return I18n.translateToLocal("entity." + s + "." + var + ".name");
     }
   }
   @Override
@@ -94,7 +107,6 @@ public class EntityAncientGolem extends EntityMob {
     this.tasks.addTask(7, new EntityAIWander(this, 0.46D));
     this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     this.tasks.addTask(8, new EntityAILookIdle(this));
- 
     this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
     switch (this.getVariantEnum()) {
       case BLUE:
@@ -117,17 +129,17 @@ public class EntityAncientGolem extends EntityMob {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
+    this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
-    this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
+    this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
     this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(MAX_HEALTH);
   }
   @Override
   public void onUpdate() {
     super.onUpdate();
     this.rotationYaw = this.rotationYawHead;
-    if (this.ticksExisted % FIRE_TICKRATE == 0 && this.getAttackTarget() != null) {
+    if (this.ticksExisted % getDataManager().get(FIRESPEED) == 0 && this.getAttackTarget() != null) {
       if (!getEntityWorld().isRemote) {
         EntityEmberProjectile proj = new EntityEmberProjectile(getEntityWorld());
         proj.getDataManager().set(EntityEmberProjectile.variant, this.getVariant());
