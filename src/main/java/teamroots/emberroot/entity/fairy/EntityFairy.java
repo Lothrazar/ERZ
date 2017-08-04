@@ -42,7 +42,7 @@ public class EntityFairy extends EntityFlying {
   public static final DataParameter<BlockPos> spawnPosition = EntityDataManager.<BlockPos> createKey(EntityFairy.class, DataSerializers.BLOCK_POS);
   public static final DataParameter<BlockPos> targetPosition = EntityDataManager.<BlockPos> createKey(EntityFairy.class, DataSerializers.BLOCK_POS);
   public static final DataParameter<Boolean> tame = EntityDataManager.<Boolean> createKey(EntityFairy.class, DataSerializers.BOOLEAN);
-  public static final DataParameter<Boolean> sitting = EntityDataManager.<Boolean> createKey(EntityFairy.class, DataSerializers.BOOLEAN);
+  //public static final DataParameter<Boolean> sitting = EntityDataManager.<Boolean> createKey(EntityFairy.class, DataSerializers.BOOLEAN);
   protected static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.<Optional<UUID>> createKey(EntityFairy.class, DataSerializers.OPTIONAL_UNIQUE_ID);
   public static enum VariantColors {
     GREEN, PURPLE, PINK, ORANGE, BLUE, YELLOW, RED;
@@ -116,7 +116,7 @@ public class EntityFairy extends EntityFlying {
   }
   @Override
   protected void initEntityAI() {
-    //  this.tasks.addTask(0, new EntityAITemptFlying(this, 66.95D, Items.GLOWSTONE_DUST, false));
+     this.tasks.addTask(0, new EntityAITemptFlying(this, 66.95D, Items.GLOWSTONE_DUST, false));
     this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
     this.tasks.addTask(7, new EntityAILookIdle(this));
   }
@@ -127,28 +127,52 @@ public class EntityFairy extends EntityFlying {
   public UUID getOwnerId() {
     return (UUID) ((Optional) this.dataManager.get(OWNER_UNIQUE_ID)).orNull();
   }
+  public void setTamed(boolean tamed){
+    
+    getDataManager().set(tame, tamed);
+  }
+  public boolean isTamed(){
+    return getDataManager().get(tame);
+  }
   @Override
   public boolean processInteract(EntityPlayer player, EnumHand hand) {
-    if (!getDataManager().get(tame) && player.getHeldItem(hand).isItemEqualIgnoreDurability(new ItemStack(Items.GLOWSTONE_DUST))) {
-      //if i am not tame, AND you give me glowstone
-      getDataManager().set(tame, true);
-      this.setOwnerId(player.getUniqueID());
-      getDataManager().setDirty(tame);
-      this.playTameEffect(7);
-      System.out.println("TAMED ME ");
-      player.getHeldItem(hand).shrink(1);
+    if ( player.getHeldItem(hand).isItemEqualIgnoreDurability(new ItemStack(Items.GLOWSTONE_DUST))) {
+      if(isTamed()){
+        getDataManager().set(tame, false);
+
+        this.setOwnerId(null);
+        this.playUnTameEffect(7);
+      }
+      else{
+
+        //if i am not tame, AND you give me glowstone
+        getDataManager().set(tame, true);
+        this.setOwnerId(player.getUniqueID());
+        getDataManager().setDirty(tame);
+        this.playTameEffect(7); 
+        player.getHeldItem(hand).shrink(1);
+      }
       return true;
     }
-    if (getDataManager().get(tame) && player.getHeldItem(hand).isEmpty() && player.world.isRemote == false) {
-      //i am tame, and im being told to sit
-      System.out.println("sit toggle ME " + !getDataManager().get(sitting));
-      getDataManager().set(sitting, !getDataManager().get(sitting));
-      getDataManager().setDirty(sitting);
-    }
+//    if (getDataManager().get(tame) && player.getHeldItem(hand).isEmpty() && player.world.isRemote == false) {
+//      //i am tame, and im being told to sit
+//      System.out.println("sit toggle ME " + !getDataManager().get(sitting));
+//      getDataManager().set(sitting, !getDataManager().get(sitting));
+//      getDataManager().setDirty(sitting);
+//    }
     return false;
   }
   protected void playTameEffect(int count) {
     EnumParticleTypes enumparticletypes = EnumParticleTypes.HEART;
+    for (int i = 0; i < count; ++i) {
+      double d0 = this.rand.nextGaussian() * 0.02D;
+      double d1 = this.rand.nextGaussian() * 0.02D;
+      double d2 = this.rand.nextGaussian() * 0.02D;
+      this.world.spawnParticle(enumparticletypes, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d0, d1, d2);
+    }
+  }
+  protected void playUnTameEffect(int count) {
+    EnumParticleTypes enumparticletypes = EnumParticleTypes.SMOKE_LARGE;
     for (int i = 0; i < count; ++i) {
       double d0 = this.rand.nextGaussian() * 0.02D;
       double d1 = this.rand.nextGaussian() * 0.02D;
@@ -338,7 +362,7 @@ public class EntityFairy extends EntityFlying {
     super.entityInit();
     this.dataManager.register(OWNER_UNIQUE_ID, Optional.absent());
     this.getDataManager().register(tame, false);
-    this.getDataManager().register(sitting, false);
+//    this.getDataManager().register(sitting, false);
     this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
     this.getDataManager().register(spawnPosition, new BlockPos(0, -1, 0));
     this.getDataManager().register(targetPosition, new BlockPos(0, -1, 0));
@@ -383,8 +407,8 @@ public class EntityFairy extends EntityFlying {
     }
     getDataManager().set(tame, compound.getBoolean("tame"));
     getDataManager().setDirty(tame);
-    getDataManager().set(sitting, compound.getBoolean("sitting"));
-    getDataManager().setDirty(sitting);
+//    getDataManager().set(sitting, compound.getBoolean("sitting"));
+//    getDataManager().setDirty(sitting);
     getDataManager().set(variant, compound.getInteger("variant"));
     getDataManager().setDirty(variant);
     getDataManager().set(spawnPosition, new BlockPos(compound.getInteger("spawnX"), compound.getInteger("spawnY"), compound.getInteger("spawnZ")));
@@ -402,7 +426,7 @@ public class EntityFairy extends EntityFlying {
       compound.setString("OwnerUUID", this.getOwnerId().toString());
     }
     compound.setBoolean("tame", getDataManager().get(tame));
-    compound.setBoolean("sitting", getDataManager().get(sitting));
+//    compound.setBoolean("sitting", getDataManager().get(sitting));
     compound.setInteger("variant", getDataManager().get(variant));
     compound.setInteger("spawnX", getDataManager().get(spawnPosition).getX());
     compound.setInteger("spawnY", getDataManager().get(spawnPosition).getY());
