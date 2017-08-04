@@ -26,6 +26,7 @@ import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 
 public class EntityAncientGolem extends EntityMob {
+  private static final double MAX_HEALTH = 25.0D;
   private static final int FIRE_TICKRATE = 100;//fire every this many ticks (100)
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityAncientGolem.class, DataSerializers.VARINT);
   public static enum VariantColors {
@@ -93,7 +94,7 @@ public class EntityAncientGolem extends EntityMob {
     this.tasks.addTask(7, new EntityAIWander(this, 0.46D));
     this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     this.tasks.addTask(8, new EntityAILookIdle(this));
-    System.out.println("!Entity golem ai " + this.getVariantEnum());
+ 
     this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
     switch (this.getVariantEnum()) {
       case BLUE:
@@ -120,7 +121,7 @@ public class EntityAncientGolem extends EntityMob {
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
     this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
-    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
+    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(MAX_HEALTH);
   }
   @Override
   public void onUpdate() {

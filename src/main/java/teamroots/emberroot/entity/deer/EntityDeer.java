@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 
 public class EntityDeer extends EntityAnimal {
+  public static int chanceRudolf = 200;//in config now, defaults 120;
   public static final DataParameter<Boolean> hasHorns = EntityDataManager.<Boolean> createKey(EntityDeer.class, DataSerializers.BOOLEAN);
   public static final DataParameter<Boolean> hasRednose = EntityDataManager.<Boolean> createKey(EntityDeer.class, DataSerializers.BOOLEAN);
   public EntityDeer(World world) {
@@ -33,7 +34,8 @@ public class EntityDeer extends EntityAnimal {
   protected void entityInit() {
     super.entityInit();
     this.getDataManager().register(hasHorns, rand.nextBoolean());
-    this.getDataManager().register(hasRednose, rand.nextInt(200) == 0 && getDataManager().get(hasHorns));
+    boolean red = rand.nextInt(chanceRudolf) == 0;
+    this.getDataManager().register(hasRednose, red);
   }
   @Override
   protected void initEntityAI() {

@@ -3,6 +3,7 @@ import java.io.File;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import teamroots.emberroot.entity.deer.EntityDeer;
 
 public class ConfigManager {
   public static Configuration config;
@@ -16,6 +17,9 @@ public class ConfigManager {
   }
   public static void load() {
 //    config.addCustomCategoryComment("mobs", "Settings related to mobs.");
+    EntityDeer.chanceRudolf = config.getInt("chanceRudolf", "mobs", 120, 1, 32767, "The odds of a deer having a red nose.  Lower is more likely to be red.");
+    
+    
     deerSpawnWeight = config.getInt("deerSpawnWeight", "mobs", 20, 0, 32767, "Configures the spawning frequency of the Deer mob. Higher numbers mean more spawns.");
     sproutSpawnWeight = config.getInt("sproutSpawnWeight", "mobs", 6, 0, 32767, "Configures the spawning frequency of the Sprout mob. Higher numbers mean more spawns.");
     config.addCustomCategoryComment("structures", "Settings related to structures.");
