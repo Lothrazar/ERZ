@@ -17,7 +17,7 @@ import teamroots.emberroot.entity.deer.EntityDeer;
 import teamroots.emberroot.entity.deer.RenderDeer;
 import teamroots.emberroot.entity.fairy.EntityFairy;
 import teamroots.emberroot.entity.fairy.RenderFairy;
-import teamroots.emberroot.entity.slime.EntityWaterSlime;
+import teamroots.emberroot.entity.slime.EntityRainbowSlime;
 import teamroots.emberroot.entity.slime.RenderWaterSlime;
 import teamroots.emberroot.entity.sprout.EntitySprout;
 import teamroots.emberroot.entity.sprout.RenderSprout;
@@ -37,8 +37,8 @@ public class RegistryManager {
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "fairy"), EntityFairy.class, "fairy", id++, Roots.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "fairy"), intColor(255, 208, 255), intColor(209, 255, 173));
 
-    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "wslime"), EntityWaterSlime.class, "wslime", id++, Roots.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "wslime"), intColor(111, 208, 22), intColor(111, 255, 173));
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "rainbowslime"), EntityRainbowSlime.class, "rainbowslime", id++, Roots.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "rainbowslime"), intColor(111, 208, 22), intColor(111, 255, 173));
     
     
     List<Biome> biomesDeer = new ArrayList<Biome>();
@@ -77,6 +77,6 @@ public class RegistryManager {
     RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderDeer.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntitySprout.class, new RenderSprout.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityFairy.class, new RenderFairy.Factory());
-    RenderingRegistry.registerEntityRenderingHandler(EntityWaterSlime.class, new RenderWaterSlime.Factory());
+    RenderingRegistry.registerEntityRenderingHandler(EntityRainbowSlime.class, new RenderWaterSlime.Factory());
   }
 }

@@ -7,6 +7,11 @@ entity.ancient_golem.yellow.name=Gilded Golem
 entity.ancient_golem.orange.name=Flame Golem
 entity.ancient_golem.purple.name=Gemstone Golem
 entity.ancient_golem.red.name=Magma Golem
+
+entity.rainbowslime.name=Rainbow Slime
+entity.rainbowslime.blue.name=Water Slime
+entity.rainbowslime.clay.name=Clay Slime
+entity.rainbowslime.white.name=Snow Slime
 entity.deer.name=Deer
 entity.sprout.name=Sprout
 entity.fairy.name=Fairy 

@@ -44,12 +44,12 @@ public class RenderWaterSlime extends RenderLiving<EntitySlime>{//RenderSlime {
 
   @Override
   protected ResourceLocation getEntityTexture(EntitySlime entity) {
-    EntityWaterSlime slime = (EntityWaterSlime)entity;
+    EntityRainbowSlime slime = (EntityRainbowSlime)entity;
     String colour = slime.getVariantEnum().nameLower();
     return new ResourceLocation(Const.MODID, "textures/entity/slime_" + colour + ".png");
   }
 
-  public static class Factory implements IRenderFactory<EntityWaterSlime> {
+  public static class Factory implements IRenderFactory<EntityRainbowSlime> {
     @Override
     public RenderWaterSlime createRenderFor(RenderManager manager) {
       return new RenderWaterSlime(manager, ModelWaterSlime.instance, 0);
