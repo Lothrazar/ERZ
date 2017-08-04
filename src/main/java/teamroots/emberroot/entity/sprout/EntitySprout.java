@@ -20,10 +20,10 @@ import teamroots.emberroot.Const;
 public class EntitySprout extends EntityCreature {
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntitySprout.class, DataSerializers.VARINT);
   public static enum VariantColors {
-    GREEN, TAN, RED, PURPLE, BLUE;
+    RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE;
     public String nameLower() {
       return this.name().toLowerCase();
-    } 
+    }
   }
   public EntitySprout(World world) {
     super(world);
