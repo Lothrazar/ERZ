@@ -35,6 +35,7 @@ public class ParticleRenderer {
       //somehow the "onUpdate" in ParticleMote class gives AbstractMethodError
       //but ITS NOT ABSTRACT!!! ITS RIGHT THER EIN THE CLASS PUBLIC VOID ONUPDATE() 
       //shhheesh
+      e.printStackTrace();
     }
   }
   public void renderParticles(EntityPlayer dumbplayer, float partialTicks) {
