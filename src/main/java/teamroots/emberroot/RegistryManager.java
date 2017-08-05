@@ -23,6 +23,8 @@ import teamroots.emberroot.entity.golem.EntityAncientGolem;
 import teamroots.emberroot.entity.golem.EntityEmberProjectile;
 import teamroots.emberroot.entity.golem.RenderAncientGolem;
 import teamroots.emberroot.entity.golem.RenderEmberPacket;
+import teamroots.emberroot.entity.hero.EntityFallenHero;
+import teamroots.emberroot.entity.hero.RenderFallenHero;
 import teamroots.emberroot.entity.slime.EntityRainbowSlime;
 import teamroots.emberroot.entity.slime.RenderWaterSlime;
 import teamroots.emberroot.entity.sprout.EntitySprout;
@@ -46,6 +48,12 @@ public class RegistryManager {
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "ember_projectile"), EntityEmberProjectile.class, "ember_projectile", id++, Roots.instance, 64, 1, true);
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "ancient_golem"), EntityAncientGolem.class, "ancient_golem", id++, Roots.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "ancient_golem"), intColor(48, 38, 35), intColor(79, 66, 61));
+    
+
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "hero"), EntityFallenHero.class, "hero", id++, Roots.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "hero"), intColor(159, 255, 222), intColor(222, 111, 51));
+    
+    
     List<Biome> biomesDeer = new ArrayList<Biome>();
     List<Biome> biomesFairy = new ArrayList<Biome>();
     List<Biome> biomesSprout = new ArrayList<Biome>();
@@ -97,6 +105,7 @@ public class RegistryManager {
     RenderingRegistry.registerEntityRenderingHandler(EntityRainbowSlime.class, new RenderWaterSlime.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityEmberProjectile.class, new RenderEmberPacket(Minecraft.getMinecraft().getRenderManager()));
     RenderingRegistry.registerEntityRenderingHandler(EntityAncientGolem.class, new RenderAncientGolem.Factory());
+    RenderingRegistry.registerEntityRenderingHandler(EntityFallenHero.class, new RenderFallenHero.Factory());
   }
   
   
