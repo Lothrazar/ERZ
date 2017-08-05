@@ -1,7 +1,7 @@
 package teamroots.emberroot.proxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import teamroots.emberroot.entity.deer.ModelDeer;
-import teamroots.emberroot.entity.fairy.ModelFairy; 
+import teamroots.emberroot.entity.fairy.ModelFairy;
 import teamroots.emberroot.entity.golem.ModelGolem;
 import teamroots.emberroot.entity.golem.ParticleRendererGolem;
 import teamroots.emberroot.entity.golem.RenderAncientGolem;
@@ -20,6 +20,6 @@ public class ClientProxy extends CommonProxy {
     ModelSprout.instance = new ModelSprout();
     ModelFairy.instance = new ModelFairy();
     ModelWaterSlime.instance = new ModelWaterSlime(16);
-    RenderAncientGolem.model = new ModelGolem(); 
+    RenderAncientGolem.model = new ModelGolem();
   }
 }

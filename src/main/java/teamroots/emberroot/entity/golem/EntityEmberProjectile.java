@@ -73,7 +73,7 @@ public class EntityEmberProjectile extends Entity {
   public void onUpdate() {
     super.onUpdate();
     if (!getEntityWorld().isRemote && getDataManager().get(lifetime) > 18 && getDataManager().get(dead)) {
-      CommonProxy.INSTANCE.sendToAll(new MessageEmberSizedBurstFX(posX, posY, posZ, getDataManager().get(value) / 1.75f,  this.getRed(),this.getGreen(),this.getBlue()));
+      CommonProxy.INSTANCE.sendToAll(new MessageEmberSizedBurstFX(posX, posY, posZ, getDataManager().get(value) / 1.75f, this.getRed(), this.getGreen(), this.getBlue()));
     }
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
     getDataManager().setDirty(lifetime);
@@ -92,7 +92,7 @@ public class EntityEmberProjectile extends Entity {
       IBlockState state = getEntityWorld().getBlockState(getPosition());
       if (state.isFullCube() && state.isOpaqueCube()) {
         if (!getEntityWorld().isRemote) {
-          CommonProxy.INSTANCE.sendToAll(new MessageEmberSizedBurstFX(posX, posY, posZ, getDataManager().get(value) / 1.75f,  this.getRed(),this.getGreen(),this.getBlue()));
+          CommonProxy.INSTANCE.sendToAll(new MessageEmberSizedBurstFX(posX, posY, posZ, getDataManager().get(value) / 1.75f, this.getRed(), this.getGreen(), this.getBlue()));
           getDataManager().set(lifetime, 20);
           getDataManager().setDirty(lifetime);
           this.getDataManager().set(dead, true);
@@ -134,10 +134,8 @@ public class EntityEmberProjectile extends Entity {
             target.attackEntityFrom(source, getDataManager().get(value));
           }
           if (!getEntityWorld().isRemote) {
-            CommonProxy.INSTANCE.sendToAll(new MessageEmberSizedBurstFX(posX, posY, posZ, 
-                getDataManager().get(value) / 1.75f
-              ,  this.getRed(),this.getGreen(),this.getBlue()
-              ));
+            CommonProxy.INSTANCE.sendToAll(new MessageEmberSizedBurstFX(posX, posY, posZ,
+                getDataManager().get(value) / 1.75f, this.getRed(), this.getGreen(), this.getBlue()));
             getDataManager().set(lifetime, 20);
             getDataManager().setDirty(lifetime);
             this.getDataManager().set(dead, true);
@@ -154,7 +152,6 @@ public class EntityEmberProjectile extends Entity {
   }
   private Color getColor() {
     EntityAncientGolem.VariantColors var = EntityAncientGolem.VariantColors.values()[getDataManager().get(variant)];
- 
     return var.getColor();
   }
   private int getBlue() {
@@ -170,7 +167,6 @@ public class EntityEmberProjectile extends Entity {
   private static int counter = 0;
   private static void spawnParticleGlow(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float scale, int lifetime) {
     counter += random.nextInt(3);
-    
     if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
       ClientProxy.particleRendererGolem.addParticle(new ParticleMote(world, x, y, z, vx, vy, vz, r, g, b, 1.0f, scale, lifetime));
     }

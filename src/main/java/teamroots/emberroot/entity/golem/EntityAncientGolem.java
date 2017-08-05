@@ -57,7 +57,7 @@ public class EntityAncientGolem extends EntityMob {
         case YELLOW:
           return new Color(227, 225, 2);
         default:
-          break;
+        break;
       }
       return null;//new Color(0, 0, 0);
     }
@@ -78,7 +78,6 @@ public class EntityAncientGolem extends EntityMob {
     super.entityInit();
     this.getDataManager().register(FIRESPEED, MathHelper.getInt(rand, 40, 110));
     this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
-    
     switch (this.getVariantEnum()) {
       case ORANGE:
       case RED:
@@ -137,9 +136,9 @@ public class EntityAncientGolem extends EntityMob {
       break;
       case YELLOW://gold is the only one starting passive to the player
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityDeer.class, true));
-        break;
+      break;
       default:
-        break;
+      break;
     }
   }
   @Override

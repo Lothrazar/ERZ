@@ -48,42 +48,13 @@ public class RegistryManager {
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "ember_projectile"), EntityEmberProjectile.class, "ember_projectile", id++, Roots.instance, 64, 1, true);
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "ancient_golem"), EntityAncientGolem.class, "ancient_golem", id++, Roots.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "ancient_golem"), intColor(48, 38, 35), intColor(79, 66, 61));
-    
-
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "hero"), EntityFallenHero.class, "hero", id++, Roots.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "hero"), intColor(159, 255, 222), intColor(222, 111, 51));
-    
-    
     List<Biome> biomesDeer = new ArrayList<Biome>();
     List<Biome> biomesFairy = new ArrayList<Biome>();
     List<Biome> biomesSprout = new ArrayList<Biome>();
     List<Biome> biomesSlimes = new ArrayList<Biome>();
-    for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.COOL)) {
-      biomesDeer.add(b.biome);
-      biomesSprout.add(b.biome);
-      biomesSlimes.add(b.biome);
-    }
-    for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.DESERT)) {
-      biomesFairy.add(b.biome);
-      biomesSprout.add(b.biome);
-      biomesSlimes.add(b.biome);
-    }
-    for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.ICY)) {
-      biomesDeer.add(b.biome);
-      biomesSlimes.add(b.biome);
-    }
-    for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.WARM)) {
-      biomesDeer.add(b.biome);
-      biomesFairy.add(b.biome);
-      biomesSprout.add(b.biome);
-    }
-    biomesFairy.addAll(BiomeManager.oceanBiomes);
-    biomesDeer.addAll(BiomeManager.oceanBiomes);
-    biomesSprout.addAll(BiomeManager.oceanBiomes);
-    EntityRegistry.addSpawn(EntityDeer.class, ConfigManager.deerSpawnWeight, 3, 7, EnumCreatureType.CREATURE, biomesDeer.toArray(new Biome[0]));
-    EntityRegistry.addSpawn(EntitySprout.class, ConfigManager.sproutSpawnWeight, 3, 7, EnumCreatureType.CREATURE, biomesSprout.toArray(new Biome[0]));
-    EntityRegistry.addSpawn(EntityFairy.class, ConfigManager.fairySpawnWeight, 3, 7, EnumCreatureType.CREATURE, biomesFairy.toArray(new Biome[0]));
-    EntityRegistry.addSpawn(EntityRainbowSlime.class, ConfigManager.slimeSpawnWeight, 1, 3, EnumCreatureType.MONSTER, biomesSlimes.toArray(new Biome[0]));
+    List<Biome> heroBiomes = new ArrayList<Biome>();
     List<BiomeEntry> biomeGolems = new ArrayList<BiomeEntry>();
     biomeGolems.addAll(BiomeManager.getBiomes(BiomeType.COOL));
     biomeGolems.addAll(BiomeManager.getBiomes(BiomeType.DESERT));
@@ -94,6 +65,35 @@ public class RegistryManager {
       biomes.add(b.biome);
     }
     biomes.addAll(BiomeManager.oceanBiomes);
+    for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.COOL)) {
+      biomesDeer.add(b.biome);
+      biomesSprout.add(b.biome);
+      biomesSlimes.add(b.biome);
+    }
+    for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.DESERT)) {
+      biomesFairy.add(b.biome);
+      biomesSprout.add(b.biome);
+      biomesSlimes.add(b.biome);
+      heroBiomes.add(b.biome);
+    }
+    for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.ICY)) {
+      biomesDeer.add(b.biome);
+      biomesSlimes.add(b.biome);
+    }
+    for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.WARM)) {
+      biomesDeer.add(b.biome);
+      biomesFairy.add(b.biome);
+      biomesSprout.add(b.biome);
+      heroBiomes.add(b.biome);
+    }
+    biomesFairy.addAll(BiomeManager.oceanBiomes);
+    biomesDeer.addAll(BiomeManager.oceanBiomes);
+    biomesSprout.addAll(BiomeManager.oceanBiomes);
+    EntityRegistry.addSpawn(EntityFallenHero.class, ConfigManager.heroSpawn, 3, 7, EnumCreatureType.AMBIENT, heroBiomes.toArray(new Biome[0]));
+    EntityRegistry.addSpawn(EntityDeer.class, ConfigManager.deerSpawnWeight, 3, 7, EnumCreatureType.CREATURE, biomesDeer.toArray(new Biome[0]));
+    EntityRegistry.addSpawn(EntitySprout.class, ConfigManager.sproutSpawnWeight, 3, 7, EnumCreatureType.CREATURE, biomesSprout.toArray(new Biome[0]));
+    EntityRegistry.addSpawn(EntityFairy.class, ConfigManager.fairySpawnWeight, 3, 7, EnumCreatureType.CREATURE, biomesFairy.toArray(new Biome[0]));
+    EntityRegistry.addSpawn(EntityRainbowSlime.class, ConfigManager.slimeSpawnWeight, 1, 3, EnumCreatureType.MONSTER, biomesSlimes.toArray(new Biome[0]));
     EntityRegistry.addSpawn(EntityAncientGolem.class, ConfigManager.golemSpawnWeight, 1, 1, EnumCreatureType.MONSTER, biomes.toArray(new Biome[0]));
   }
   @SideOnly(Side.CLIENT)
@@ -107,7 +107,4 @@ public class RegistryManager {
     RenderingRegistry.registerEntityRenderingHandler(EntityAncientGolem.class, new RenderAncientGolem.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityFallenHero.class, new RenderFallenHero.Factory());
   }
-  
-  
-  
 }

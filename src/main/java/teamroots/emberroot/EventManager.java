@@ -22,7 +22,7 @@ import teamroots.emberroot.proxy.ClientProxy;
 import teamroots.emberroot.util.IRenderEntityLater;
 
 public class EventManager {
-  public static long ticks = 0; 
+  public static long ticks = 0;
   @SideOnly(Side.CLIENT)
   @SubscribeEvent
   public void onTextureStitch(TextureStitchEvent event) {
@@ -30,10 +30,8 @@ public class EventManager {
     event.getMap().registerSprite(particleGlow);
     ResourceLocation particleSmoke = new ResourceLocation(Const.MODID, "entity/particle_smoke");
     event.getMap().registerSprite(particleSmoke);
- 
     ResourceLocation particleStar = new ResourceLocation(Const.MODID, "entity/particle_star");
     event.getMap().registerSprite(particleStar);
-
     event.getMap().registerSprite(ParticleMote.texture);
   }
   @SideOnly(Side.CLIENT)
@@ -42,7 +40,7 @@ public class EventManager {
     if (event.side == Side.CLIENT) {
       ClientProxy.particleRenderer.updateParticles();
       ticks++;
-    }  
+    }
     if (event.side == Side.CLIENT && event.phase == TickEvent.Phase.START) {
       ticks++;
       ClientProxy.particleRendererGolem.updateParticles();
@@ -74,15 +72,12 @@ public class EventManager {
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
   public void onRenderAfterWorld(RenderWorldLastEvent event) {
-    
     tickCounter++;
     if (Roots.proxy instanceof ClientProxy) {
       GlStateManager.pushMatrix();
       ClientProxy.particleRendererGolem.renderParticles(clientPlayer, event.getPartialTicks());
       GlStateManager.popMatrix();
     }
-    
-    
     //OpenGlHelper.glUseProgram(ShaderUtil.lightProgram);
     GlStateManager.pushMatrix();
     for (Entity e : Minecraft.getMinecraft().world.getLoadedEntityList()) {

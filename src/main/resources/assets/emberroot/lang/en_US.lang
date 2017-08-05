@@ -17,5 +17,7 @@ entity.deer.name=Deer
 entity.sprout.name=Sprout
 entity.fairy.name=Fairy 
 
+entity.hero.name=Fallen Hero
+
 death.attack.ember=Slain by a Golem Flame
 
