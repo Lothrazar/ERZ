@@ -15,6 +15,7 @@ public class ParticleRenderer {
   ArrayList<Particle> particles = new ArrayList<Particle>();
   public void updateParticles() {
     boolean doRemove = false;
+    try {
     for (int i = 0; i < particles.size(); i++) {
       doRemove = true;
       if (particles.get(i) != null) {
@@ -28,6 +29,12 @@ public class ParticleRenderer {
       if (doRemove) {
         particles.remove(i);
       }
+    }
+    }
+    catch (Exception e) {
+      //somehow the "onUpdate" in ParticleMote class gives AbstractMethodError
+      //but ITS NOT ABSTRACT!!! ITS RIGHT THER EIN THE CLASS PUBLIC VOID ONUPDATE() 
+      //shhheesh
     }
   }
   public void renderParticles(EntityPlayer dumbplayer, float partialTicks) {

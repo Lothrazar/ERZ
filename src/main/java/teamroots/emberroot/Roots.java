@@ -13,10 +13,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.proxy.CommonProxy;
 
-@Mod(modid = Const.MODID, name = Roots.MODNAME, version = Roots.VERSION)
+@Mod(modid = Const.MODID, name = Roots.MODNAME)
 public class Roots {
-  public static final String MODNAME = "emberRoot";
-  public static final String VERSION = "0.025";
+  public static final String MODNAME = "EmberRootZoo";
   public static final String DEPENDENCIES = "";
   @SidedProxy(clientSide = "teamroots." + Const.MODID + ".proxy.ClientProxy", serverSide = "teamroots." + Const.MODID + ".proxy.ServerProxy")
   public static CommonProxy proxy;

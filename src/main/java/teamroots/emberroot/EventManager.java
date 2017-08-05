@@ -37,14 +37,14 @@ public class EventManager {
   @SideOnly(Side.CLIENT)
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public void onTick(TickEvent.ClientTickEvent event) {
-    if (event.side == Side.CLIENT) {
+    if (event.side == Side.CLIENT&& event.phase == TickEvent.Phase.START) {
       ClientProxy.particleRenderer.updateParticles();
       ticks++;
     }
-    if (event.side == Side.CLIENT && event.phase == TickEvent.Phase.START) {
-      ticks++;
-      ClientProxy.particleRendererGolem.updateParticles();
-    }
+//    if (event.side == Side.CLIENT && event.phase == TickEvent.Phase.START) {
+//      ticks++;
+//      ClientProxy.particleRendererGolem.updateParticles();
+//    }
   }
   @SideOnly(Side.CLIENT)
   public static void renderEntityStatic(Entity entityIn, float partialTicks, boolean b, Render render) {
@@ -73,11 +73,11 @@ public class EventManager {
   @SideOnly(Side.CLIENT)
   public void onRenderAfterWorld(RenderWorldLastEvent event) {
     tickCounter++;
-    if (Roots.proxy instanceof ClientProxy) {
-      GlStateManager.pushMatrix();
-      ClientProxy.particleRendererGolem.renderParticles(clientPlayer, event.getPartialTicks());
-      GlStateManager.popMatrix();
-    }
+//    if (Roots.proxy instanceof ClientProxy) {
+//      GlStateManager.pushMatrix();
+//      ClientProxy.particleRendererGolem.renderParticles(clientPlayer, event.getPartialTicks());
+//      GlStateManager.popMatrix();
+//    }
     //OpenGlHelper.glUseProgram(ShaderUtil.lightProgram);
     GlStateManager.pushMatrix();
     for (Entity e : Minecraft.getMinecraft().world.getLoadedEntityList()) {

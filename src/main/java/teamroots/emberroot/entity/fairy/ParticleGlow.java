@@ -2,7 +2,9 @@ package teamroots.emberroot.entity.fairy;
 import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
@@ -86,5 +88,15 @@ public class ParticleGlow extends Particle implements IRootsParticle {
   @Override
   public boolean ignoreDepth() {
     return false;
+  }
+  @Override
+  public boolean renderThroughBlocks() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+  @Override
+  public void renderParticle(BufferBuilder buffer, EntityPlayer player, float partialTicks, float f, float f4, float f1, float f2, float f3) {
+    super.renderParticle(buffer, player, partialTicks, f, f4, f1, f2, f3);
+
   }
 }

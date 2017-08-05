@@ -70,7 +70,7 @@ public class MessageEmberSizedBurstFX implements IMessage {
     public static void spawnParticleGlow(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {
       counter += random.nextInt(3);
       if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
-        ClientProxy.particleRendererGolem.addParticle(new ParticleMote(world, x, y, z, vx, vy, vz, r, g, b, a, scale, lifetime));
+        ClientProxy.particleRenderer.addParticle(new ParticleMote(world, x, y, z, vx, vy, vz, r, g, b, a, scale, lifetime));
       }
     }
   }

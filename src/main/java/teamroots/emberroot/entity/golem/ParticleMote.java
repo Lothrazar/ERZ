@@ -8,8 +8,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
+import teamroots.emberroot.particle.IRootsParticle;
 
-public class ParticleMote extends Particle implements IEmberParticle {
+public class ParticleMote extends Particle implements IRootsParticle {
   public float colorR = 0;
   public float colorG = 0;
   public float colorB = 0;
@@ -82,5 +83,9 @@ public class ParticleMote extends Particle implements IEmberParticle {
   @Override
   public void renderParticle(BufferBuilder buffer, EntityPlayer player, float partialTicks, float f, float f4, float f1, float f2, float f3) {
     super.renderParticle(buffer, player, partialTicks, f, f4, f1, f2, f3);
+  }
+  @Override
+  public boolean ignoreDepth() { 
+    return false;
   }
 }
