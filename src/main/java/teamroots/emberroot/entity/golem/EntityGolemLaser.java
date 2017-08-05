@@ -17,20 +17,20 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import teamroots.emberroot.Roots;
+import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.proxy.ClientProxy;
 import teamroots.emberroot.proxy.CommonProxy;
 
-public class EntityEmberProjectile extends Entity {
-  public static final DataParameter<Float> value = EntityDataManager.createKey(EntityEmberProjectile.class, DataSerializers.FLOAT);
-  public static final DataParameter<Boolean> dead = EntityDataManager.createKey(EntityEmberProjectile.class, DataSerializers.BOOLEAN);
-  public static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityEmberProjectile.class, DataSerializers.VARINT);
-  public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityEmberProjectile.class, DataSerializers.VARINT);
+public class EntityGolemLaser extends Entity {
+  public static final DataParameter<Float> value = EntityDataManager.createKey(EntityGolemLaser.class, DataSerializers.FLOAT);
+  public static final DataParameter<Boolean> dead = EntityDataManager.createKey(EntityGolemLaser.class, DataSerializers.BOOLEAN);
+  public static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityGolemLaser.class, DataSerializers.VARINT);
+  public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityGolemLaser.class, DataSerializers.VARINT);
   public BlockPos dest = new BlockPos(0, 0, 0);
   public UUID id = null;
   BlockPos pos = new BlockPos(0, 0, 0);
   //private Color colour = null;//new Color(0, 0, 0);
-  public EntityEmberProjectile(World worldIn) {
+  public EntityGolemLaser(World worldIn) {
     super(worldIn);
     this.setInvisible(true);
     this.getDataManager().register(variant, Integer.valueOf(0));
@@ -46,8 +46,8 @@ public class EntityEmberProjectile extends Entity {
     this.motionY = vy;
     this.motionZ = vz;
     setSize((float) value / 10.0f, (float) value / 10.0f);
-    getDataManager().set(EntityEmberProjectile.value, (float) value);
-    getDataManager().setDirty(EntityEmberProjectile.value);
+    getDataManager().set(EntityGolemLaser.value, (float) value);
+    getDataManager().setDirty(EntityGolemLaser.value);
     setSize((float) value / 10.0f, (float) value / 10.0f);
     this.id = playerId;
   }
@@ -55,8 +55,8 @@ public class EntityEmberProjectile extends Entity {
   protected void entityInit() {}
   @Override
   protected void readEntityFromNBT(NBTTagCompound compound) {
-    getDataManager().set(EntityEmberProjectile.value, compound.getFloat("value"));
-    getDataManager().setDirty(EntityEmberProjectile.value);
+    getDataManager().set(EntityGolemLaser.value, compound.getFloat("value"));
+    getDataManager().setDirty(EntityGolemLaser.value);
     if (compound.hasKey("UUIDmost")) {
       id = new UUID(compound.getLong("UUIDmost"), compound.getLong("UUIDleast"));
     }
@@ -73,7 +73,7 @@ public class EntityEmberProjectile extends Entity {
   public void onUpdate() {
     super.onUpdate();
     if (!getEntityWorld().isRemote && getDataManager().get(lifetime) > 18 && getDataManager().get(dead)) {
-      CommonProxy.INSTANCE.sendToAll(new MessageEmberSizedBurstFX(posX, posY, posZ, getDataManager().get(value) / 1.75f, this.getRed(), this.getGreen(), this.getBlue()));
+      CommonProxy.INSTANCE.sendToAll(new MessageGolemLaserFX(posX, posY, posZ, getDataManager().get(value) / 1.75f, this.getRed(), this.getGreen(), this.getBlue()));
     }
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
     getDataManager().setDirty(lifetime);
@@ -92,7 +92,7 @@ public class EntityEmberProjectile extends Entity {
       IBlockState state = getEntityWorld().getBlockState(getPosition());
       if (state.isFullCube() && state.isOpaqueCube()) {
         if (!getEntityWorld().isRemote) {
-          CommonProxy.INSTANCE.sendToAll(new MessageEmberSizedBurstFX(posX, posY, posZ, getDataManager().get(value) / 1.75f, this.getRed(), this.getGreen(), this.getBlue()));
+          CommonProxy.INSTANCE.sendToAll(new MessageGolemLaserFX(posX, posY, posZ, getDataManager().get(value) / 1.75f, this.getRed(), this.getGreen(), this.getBlue()));
           getDataManager().set(lifetime, 20);
           getDataManager().setDirty(lifetime);
           this.getDataManager().set(dead, true);
@@ -120,7 +120,7 @@ public class EntityEmberProjectile extends Entity {
       }
       if (entities.size() > 0) {
         for (EntityLivingBase target : entities) {
-          DamageSource source = Roots.damage_ember;
+          DamageSource source = EmberRootZoo.damage_ember;
           if (getEntityWorld().getPlayerEntityByUUID(id) != null) {
             EntityPlayer player = getEntityWorld().getPlayerEntityByUUID(id);
             source = DamageSource.causePlayerDamage(player);
@@ -134,7 +134,7 @@ public class EntityEmberProjectile extends Entity {
             target.attackEntityFrom(source, getDataManager().get(value));
           }
           if (!getEntityWorld().isRemote) {
-            CommonProxy.INSTANCE.sendToAll(new MessageEmberSizedBurstFX(posX, posY, posZ,
+            CommonProxy.INSTANCE.sendToAll(new MessageGolemLaserFX(posX, posY, posZ,
                 getDataManager().get(value) / 1.75f, this.getRed(), this.getGreen(), this.getBlue()));
             getDataManager().set(lifetime, 20);
             getDataManager().setDirty(lifetime);
@@ -168,7 +168,7 @@ public class EntityEmberProjectile extends Entity {
   private static void spawnParticleGlow(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float scale, int lifetime) {
     counter += random.nextInt(3);
     if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
-      ClientProxy.particleRenderer.addParticle(new ParticleMote(world, x, y, z, vx, vy, vz, r, g, b, 1.0f, scale, lifetime));
+      ClientProxy.particleRenderer.addParticle(new ParticleGolemLaser(world, x, y, z, vx, vy, vz, r, g, b, 1.0f, scale, lifetime));
     }
   }
 }

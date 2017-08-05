@@ -10,15 +10,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.proxy.ClientProxy;
 
-public class MessageEmberSizedBurstFX implements IMessage {
+public class MessageGolemLaserFX implements IMessage {
   public static Random random = new Random();
   public double posX = 0, posY = 0, posZ = 0;
   public double value = 0;
   public int r, g, b;
-  public MessageEmberSizedBurstFX() {
+  public MessageGolemLaserFX() {
     super();
   }
-  public MessageEmberSizedBurstFX(double x, double y, double z, double value, int r, int g, int b) {
+  public MessageGolemLaserFX(double x, double y, double z, double value, int r, int g, int b) {
     super();
     this.posX = x;
     this.posY = y;
@@ -48,12 +48,12 @@ public class MessageEmberSizedBurstFX implements IMessage {
     buf.writeInt(g);
     buf.writeInt(b);
   }
-  public static class MessageHolder implements IMessageHandler<MessageEmberSizedBurstFX, IMessage> {
+  public static class MessageHolder implements IMessageHandler<MessageGolemLaserFX, IMessage> {
     public static Random random = new Random();
     public static int counter = 0;
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageEmberSizedBurstFX message, final MessageContext ctx) {
+    public IMessage onMessage(final MessageGolemLaserFX message, final MessageContext ctx) {
       if (ctx.side == Side.CLIENT) {
         Minecraft.getMinecraft().addScheduledTask(() -> {
           World world = Minecraft.getMinecraft().world;
@@ -70,7 +70,7 @@ public class MessageEmberSizedBurstFX implements IMessage {
     public static void spawnParticleGlow(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {
       counter += random.nextInt(3);
       if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
-        ClientProxy.particleRenderer.addParticle(new ParticleMote(world, x, y, z, vx, vy, vz, r, g, b, a, scale, lifetime));
+        ClientProxy.particleRenderer.addParticle(new ParticleGolemLaser(world, x, y, z, vx, vy, vz, r, g, b, a, scale, lifetime));
       }
     }
   }

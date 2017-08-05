@@ -19,8 +19,8 @@ public class ParticleRenderer {
     for (int i = 0; i < particles.size(); i++) {
       doRemove = true;
       if (particles.get(i) != null) {
-        if (particles.get(i) instanceof IRootsParticle) {
-          if (((IRootsParticle) particles.get(i)).alive()) {
+        if (particles.get(i) instanceof IParticleTracked) {
+          if (((IParticleTracked) particles.get(i)).alive()) {
             particles.get(i).onUpdate();
             doRemove = false;
           }
@@ -61,7 +61,7 @@ public class ParticleRenderer {
       GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
       buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
       for (int i = 0; i < particles.size(); i++) {
-        if (!((IRootsParticle) particles.get(i)).isAdditive()) {
+        if (!((IParticleTracked) particles.get(i)).isAdditive()) {
           particles.get(i).renderParticle(buffer, player, partialTicks, f, f4, f1, f2, f3);
         }
       }
@@ -69,7 +69,7 @@ public class ParticleRenderer {
       GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
       buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
       for (int i = 0; i < particles.size(); i++) {
-        if (((IRootsParticle) particles.get(i)).isAdditive()) {
+        if (((IParticleTracked) particles.get(i)).isAdditive()) {
           particles.get(i).renderParticle(buffer, player, partialTicks, f, f4, f1, f2, f3);
         }
       }
@@ -77,7 +77,7 @@ public class ParticleRenderer {
       GlStateManager.disableDepth();
       buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
       for (int i = 0; i < particles.size(); i++) {
-        if (((IRootsParticle) particles.get(i)).ignoreDepth()) {
+        if (((IParticleTracked) particles.get(i)).ignoreDepth()) {
           particles.get(i).renderParticle(buffer, player, partialTicks, f, f4, f1, f2, f3);
         }
       }

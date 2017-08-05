@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import teamroots.emberroot.entity.golem.ParticleMote;
+import teamroots.emberroot.entity.golem.ParticleGolemLaser;
 import teamroots.emberroot.proxy.ClientProxy;
 import teamroots.emberroot.util.IRenderEntityLater;
 
@@ -32,7 +32,7 @@ public class EventManager {
     event.getMap().registerSprite(particleSmoke);
     ResourceLocation particleStar = new ResourceLocation(Const.MODID, "entity/particle_star");
     event.getMap().registerSprite(particleStar);
-    event.getMap().registerSprite(ParticleMote.texture);
+    event.getMap().registerSprite(ParticleGolemLaser.texture);
   }
   @SideOnly(Side.CLIENT)
   @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -41,10 +41,7 @@ public class EventManager {
       ClientProxy.particleRenderer.updateParticles();
       ticks++;
     }
-//    if (event.side == Side.CLIENT && event.phase == TickEvent.Phase.START) {
-//      ticks++;
-//      ClientProxy.particleRendererGolem.updateParticles();
-//    }
+ 
   }
   @SideOnly(Side.CLIENT)
   public static void renderEntityStatic(Entity entityIn, float partialTicks, boolean b, Render render) {
@@ -87,7 +84,7 @@ public class EventManager {
       }
     }
     GlStateManager.popMatrix();
-    if (Roots.proxy instanceof ClientProxy && Minecraft.getMinecraft().player != null) {
+    if (EmberRootZoo.proxy instanceof ClientProxy && Minecraft.getMinecraft().player != null) {
       ClientProxy.particleRenderer.renderParticles(Minecraft.getMinecraft().player, event.getPartialTicks());
     }
     //OpenGlHelper.glUseProgram(0);

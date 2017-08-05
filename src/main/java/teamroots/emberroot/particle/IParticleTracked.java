@@ -3,7 +3,7 @@ package teamroots.emberroot.particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.entity.player.EntityPlayer;
 
-public interface IRootsParticle {
+public interface IParticleTracked {
   public boolean alive();
   public boolean isAdditive();
   public boolean ignoreDepth();

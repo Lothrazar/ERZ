@@ -8,16 +8,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
-import teamroots.emberroot.particle.IRootsParticle;
+import teamroots.emberroot.particle.IParticleTracked;
 
-public class ParticleMote extends Particle implements IRootsParticle {
+public class ParticleGolemLaser extends Particle implements IParticleTracked {
   public float colorR = 0;
   public float colorG = 0;
   public float colorB = 0;
   public float initScale = 0;
   public float initAlpha = 0;
   public static ResourceLocation texture = new ResourceLocation(Const.MODID, "entity/particle_mote");
-  public ParticleMote(World worldIn, double x, double y, double z, double vx, double vy, double vz, float r, float g, float b, float a, float scale, int lifetime) {
+  public ParticleGolemLaser(World worldIn, double x, double y, double z, double vx, double vy, double vz, float r, float g, float b, float a, float scale, int lifetime) {
     super(worldIn, x, y, z, 0, 0, 0);
     this.colorR = r;
     this.colorG = g;

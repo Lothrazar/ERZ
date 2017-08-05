@@ -13,8 +13,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.proxy.CommonProxy;
 
-@Mod(modid = Const.MODID, name = Roots.MODNAME)
-public class Roots {
+@Mod(modid = Const.MODID, name = EmberRootZoo.MODNAME)
+public class EmberRootZoo {
   public static final String MODNAME = "EmberRootZoo";
   public static final String DEPENDENCIES = "";
   @SidedProxy(clientSide = "teamroots." + Const.MODID + ".proxy.ClientProxy", serverSide = "teamroots." + Const.MODID + ".proxy.ServerProxy")
@@ -31,7 +31,7 @@ public class Roots {
     }
   };
   @Instance(Const.MODID)
-  public static Roots instance;
+  public static EmberRootZoo instance;
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
     MinecraftForge.EVENT_BUS.register(new EventManager());
