@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
@@ -16,12 +17,12 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import teamroots.emberroot.entity.golem.ParticleMote;
 import teamroots.emberroot.proxy.ClientProxy;
 import teamroots.emberroot.util.IRenderEntityLater;
 
 public class EventManager {
-  public static long ticks = 0;
-  EntityLivingBase playerMorph = null;
+  public static long ticks = 0; 
   @SideOnly(Side.CLIENT)
   @SubscribeEvent
   public void onTextureStitch(TextureStitchEvent event) {
@@ -32,13 +33,19 @@ public class EventManager {
  
     ResourceLocation particleStar = new ResourceLocation(Const.MODID, "entity/particle_star");
     event.getMap().registerSprite(particleStar);
- 
+
+    event.getMap().registerSprite(ParticleMote.texture);
   }
+  @SideOnly(Side.CLIENT)
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public void onTick(TickEvent.ClientTickEvent event) {
     if (event.side == Side.CLIENT) {
       ClientProxy.particleRenderer.updateParticles();
       ticks++;
+    }  
+    if (event.side == Side.CLIENT && event.phase == TickEvent.Phase.START) {
+      ticks++;
+      ClientProxy.particleRendererGolem.updateParticles();
     }
   }
   @SideOnly(Side.CLIENT)
@@ -62,9 +69,20 @@ public class EventManager {
     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     ((IRenderEntityLater) render).renderLater(entityIn, -TileEntityRendererDispatcher.staticPlayerX, -TileEntityRendererDispatcher.staticPlayerY, -TileEntityRendererDispatcher.staticPlayerZ, f, partialTicks);
   }
+  static float tickCounter = 0;
+  static EntityPlayer clientPlayer = null;
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
   public void onRenderAfterWorld(RenderWorldLastEvent event) {
+    
+    tickCounter++;
+    if (Roots.proxy instanceof ClientProxy) {
+      GlStateManager.pushMatrix();
+      ClientProxy.particleRendererGolem.renderParticles(clientPlayer, event.getPartialTicks());
+      GlStateManager.popMatrix();
+    }
+    
+    
     //OpenGlHelper.glUseProgram(ShaderUtil.lightProgram);
     GlStateManager.pushMatrix();
     for (Entity e : Minecraft.getMinecraft().world.getLoadedEntityList()) {

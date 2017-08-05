@@ -2,30 +2,23 @@ package teamroots.emberroot.entity.slime;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
-import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-import teamroots.emberroot.Const;
 
 public class EntityRainbowSlime extends EntitySlime {
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntitySlime.class, DataSerializers.VARINT);
   public static enum VariantColors {
-    BLUE, GREY, WHITE, PURPLE;//water, snow, clay
+    BLUE, GREY, WHITE, PURPLE, RED;//water, snow, clay
     public String nameLower() {
       return this.name().toLowerCase();
     }
@@ -92,6 +85,10 @@ public class EntityRainbowSlime extends EntitySlime {
       break;
       case PURPLE:
       break;
+      case RED:
+      break;
+      default:
+      break;
     }
     if (setBlock != null) {
       this.world.setBlockState(this.getPosition(), setBlock);
@@ -109,6 +106,9 @@ public class EntityRainbowSlime extends EntitySlime {
         this.makeAreaOfEffectCloud(PotionType.getPotionTypeForName("poison"));
       break;
       case WHITE:
+      break;
+      case RED:
+        this.makeAreaOfEffectCloud(PotionType.getPotionTypeForName("regeneration"));
       break;
     }
   }

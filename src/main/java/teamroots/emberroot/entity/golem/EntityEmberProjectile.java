@@ -17,6 +17,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import teamroots.emberroot.Roots;
 import teamroots.emberroot.proxy.ClientProxy;
 import teamroots.emberroot.proxy.CommonProxy;
 
@@ -119,7 +120,7 @@ public class EntityEmberProjectile extends Entity {
       }
       if (entities.size() > 0) {
         for (EntityLivingBase target : entities) {
-          DamageSource source = GolemRegistry.damage_ember;
+          DamageSource source = Roots.damage_ember;
           if (getEntityWorld().getPlayerEntityByUUID(id) != null) {
             EntityPlayer player = getEntityWorld().getPlayerEntityByUUID(id);
             source = DamageSource.causePlayerDamage(player);

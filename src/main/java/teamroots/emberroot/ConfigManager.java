@@ -8,7 +8,7 @@ import teamroots.emberroot.entity.deer.EntityDeer;
 public class ConfigManager {
   public static Configuration config;
   //MOBS
-  public static int deerSpawnWeight, sproutSpawnWeight, fairySpawnWeight, golemSpawnWeight;
+  public static int deerSpawnWeight, sproutSpawnWeight, fairySpawnWeight, golemSpawnWeight, slimeSpawnWeight;
   public static void init(File configFile) {
     if (config == null) {
       config = new Configuration(configFile);
@@ -25,6 +25,7 @@ public class ConfigManager {
     config.addCustomCategoryComment("structures", "Settings related to structures.");
     fairySpawnWeight = config.getInt("fairySpawnWeight", "mobs", 20, 0, 32767, "Configures the generation chance of the Fairy mob. Higher numbers mean more spawns.");
     golemSpawnWeight = config.getInt("golemSpawnWeight", "mobs", 25, 0, 32767, "Configures the generation chance of the Golem mob. Higher numbers mean more spawns.");
+    slimeSpawnWeight = config.getInt("rainbowSlimeWeight", "mobs", 3, 0, 32767, "Configures the generation chance of the alternate slime mobs. Higher numbers mean more spawns.");
     if (config.hasChanged()) {
       config.save();
     }
