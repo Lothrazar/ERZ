@@ -23,6 +23,7 @@ public class EntityRainbowSlime extends EntitySlime {
       return this.name().toLowerCase();
     }
   }
+  public static boolean canPlaceBlocks;
   public EntityRainbowSlime(World worldIn) {
     super(worldIn);
   }
@@ -52,9 +53,10 @@ public class EntityRainbowSlime extends EntitySlime {
   @Override
   public void setDead() {
     if (this.world.isRemote == false
+        && canPlaceBlocks
+        && this.world.getGameRules().getBoolean("mobGriefing")
         && this.isBaby()
-        && this.getHealth() <= 0
-        && this.world.getGameRules().getBoolean("mobGriefing")) {
+        && this.getHealth() <= 0) {
       //skip setting block if mob griefing is false
       setBlockOnDeath();
     }

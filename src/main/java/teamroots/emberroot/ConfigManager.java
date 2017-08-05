@@ -4,6 +4,7 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import teamroots.emberroot.entity.deer.EntityDeer;
+import teamroots.emberroot.entity.slime.EntityRainbowSlime;
 
 public class ConfigManager {
   private static final String category = "mobs";
@@ -27,6 +28,7 @@ public class ConfigManager {
     golemSpawnWeight = config.getInt("golemSpawnWeight", category, 25, 0, 32767, "Configures the generation chance of the Golem mob. Higher numbers mean more spawns.");
     slimeSpawnWeight = config.getInt("rainbowSlimeWeight", category, 3, 0, 32767, "Configures the generation chance of the alternate slime mobs. Higher numbers mean more spawns.");
     heroSpawn = config.getInt("heroSpawnWeigcategory", category, 3, 0, 32767, "Configures the generation chance of the Fallen Hero. Higher numbers mean more spawns.");
+    EntityRainbowSlime.canPlaceBlocks = config.getBoolean("SlimesCanPlaceBlocks", category, true, "True means slimes can place blocks on death (water, clay, snow, depends on the color type).  This also gets disabled using mobGriefing gamerule.  ");
     if (config.hasChanged()) {
       config.save();
     }
