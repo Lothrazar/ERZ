@@ -31,6 +31,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.entity.ai.EntityAITemptFlying;
@@ -159,6 +161,7 @@ public class EntityFairy extends EntityFlying {
     //    }
     return false;
   }
+  @SideOnly(Side.CLIENT)
   protected void playTameEffect(int count) {
     EnumParticleTypes enumparticletypes = EnumParticleTypes.HEART;
     for (int i = 0; i < count; ++i) {
@@ -168,6 +171,7 @@ public class EntityFairy extends EntityFlying {
       this.world.spawnParticle(enumparticletypes, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d0, d1, d2);
     }
   }
+  @SideOnly(Side.CLIENT)
   protected void playUnTameEffect(int count) {
     EnumParticleTypes enumparticletypes = EnumParticleTypes.SMOKE_LARGE;
     for (int i = 0; i < count; ++i) {
@@ -212,6 +216,7 @@ public class EntityFairy extends EntityFlying {
   }
   public static Random random = new Random();
   public static int counter = 0;
+  @SideOnly(Side.CLIENT)
   public static void spawnParticleGlow(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {
     if (EmberRootZoo.proxy instanceof ClientProxy) {
       counter += random.nextInt(3);

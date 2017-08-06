@@ -17,6 +17,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.proxy.ClientProxy;
 import teamroots.emberroot.proxy.CommonProxy;
@@ -165,6 +167,7 @@ public class EntityGolemLaser extends Entity {
   }
   private static Random random = new Random();
   private static int counter = 0;
+  @SideOnly(Side.CLIENT)
   private static void spawnParticleGlow(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float scale, int lifetime) {
     counter += random.nextInt(3);
     if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
