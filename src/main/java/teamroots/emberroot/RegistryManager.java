@@ -14,6 +14,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import teamroots.emberroot.config.ConfigManager;
+import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.deer.EntityDeer;
 import teamroots.emberroot.entity.deer.RenderDeer;
 import teamroots.emberroot.entity.fairy.EntityFairy;
@@ -50,51 +52,33 @@ public class RegistryManager {
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "ancient_golem"), intColor(48, 38, 35), intColor(79, 66, 61));
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "hero"), EntityFallenHero.class, "hero", id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "hero"), intColor(159, 255, 222), intColor(222, 111, 51));
-    List<Biome> biomesDeer = new ArrayList<Biome>();
-    List<Biome> biomesFairy = new ArrayList<Biome>();
-    List<Biome> biomesSprout = new ArrayList<Biome>();
-    List<Biome> biomesSlimes = new ArrayList<Biome>();
-    List<Biome> heroBiomes = new ArrayList<Biome>();
-    List<BiomeEntry> biomeGolems = new ArrayList<BiomeEntry>();
-    biomeGolems.addAll(BiomeManager.getBiomes(BiomeType.COOL));
-    biomeGolems.addAll(BiomeManager.getBiomes(BiomeType.DESERT));
-    biomeGolems.addAll(BiomeManager.getBiomes(BiomeType.ICY));
-    biomeGolems.addAll(BiomeManager.getBiomes(BiomeType.WARM));
-    List<Biome> biomes = new ArrayList<Biome>();
-    for (BiomeEntry b : biomeGolems) {
-      biomes.add(b.biome);
-    }
-    biomes.addAll(BiomeManager.oceanBiomes);
+ 
+    List<Biome> allBiomes = new ArrayList<Biome>();
     for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.COOL)) {
-      biomesDeer.add(b.biome);
-      biomesSprout.add(b.biome);
-      biomesSlimes.add(b.biome);
+      allBiomes.add(b.biome);
     }
     for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.DESERT)) {
-      biomesFairy.add(b.biome);
-      biomesSprout.add(b.biome);
-      biomesSlimes.add(b.biome);
-      heroBiomes.add(b.biome);
+      allBiomes.add(b.biome);
     }
     for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.ICY)) {
-      biomesDeer.add(b.biome);
-      biomesSlimes.add(b.biome);
+      allBiomes.add(b.biome);
     }
     for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.WARM)) {
-      biomesDeer.add(b.biome);
-      biomesFairy.add(b.biome);
-      biomesSprout.add(b.biome);
-      heroBiomes.add(b.biome);
+      allBiomes.add(b.biome);
     }
-    biomesFairy.addAll(BiomeManager.oceanBiomes);
-    biomesDeer.addAll(BiomeManager.oceanBiomes);
-    biomesSprout.addAll(BiomeManager.oceanBiomes);
-    EntityRegistry.addSpawn(EntityFallenHero.class, ConfigManager.heroSpawn, 3, 7, EnumCreatureType.AMBIENT, heroBiomes.toArray(new Biome[0]));
-    EntityRegistry.addSpawn(EntityDeer.class, ConfigManager.deerSpawnWeight, 3, 7, EnumCreatureType.CREATURE, biomesDeer.toArray(new Biome[0]));
-    EntityRegistry.addSpawn(EntitySprout.class, ConfigManager.sproutSpawnWeight, 3, 7, EnumCreatureType.CREATURE, biomesSprout.toArray(new Biome[0]));
-    EntityRegistry.addSpawn(EntityFairy.class, ConfigManager.fairySpawnWeight, 3, 7, EnumCreatureType.CREATURE, biomesFairy.toArray(new Biome[0]));
-    EntityRegistry.addSpawn(EntityRainbowSlime.class, ConfigManager.slimeSpawnWeight, 1, 3, EnumCreatureType.MONSTER, biomesSlimes.toArray(new Biome[0]));
-    EntityRegistry.addSpawn(EntityAncientGolem.class, ConfigManager.golemSpawnWeight, 1, 1, EnumCreatureType.MONSTER, biomes.toArray(new Biome[0]));
+    allBiomes.addAll(BiomeManager.oceanBiomes);
+    for (ConfigSpawnEntity cfg : ConfigManager.entityConfigs) {
+      if(cfg.useAllBiomes){
+
+        EntityRegistry.addSpawn(cfg.entityClass, cfg.weightedProb, cfg.min, cfg.max, cfg.typeOfCreature,allBiomes.toArray(new Biome[0]));
+      }
+      else{
+        EntityRegistry.addSpawn(cfg.entityClass, cfg.weightedProb, cfg.min, cfg.max, cfg.typeOfCreature, cfg.getBiomeFilter());
+        
+      }
+      
+    }
+ 
   }
   @SideOnly(Side.CLIENT)
   @SubscribeEvent

@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import teamroots.emberroot.config.ConfigManager;
 import teamroots.emberroot.proxy.CommonProxy;
 
 @Mod(modid = Const.MODID, name = EmberRootZoo.MODNAME)
@@ -34,10 +35,10 @@ public class EmberRootZoo {
   public static EmberRootZoo instance;
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
+    ConfigManager.init(event.getSuggestedConfigurationFile());
     MinecraftForge.EVENT_BUS.register(new EventManager());
     MinecraftForge.EVENT_BUS.register(new ConfigManager());
     MinecraftForge.EVENT_BUS.register(new RegistryManager());
-    ConfigManager.init(event.getSuggestedConfigurationFile());
     proxy.preInit(event);
   }
   public static DamageSource damage_ember;
