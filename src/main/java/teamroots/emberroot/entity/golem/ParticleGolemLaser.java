@@ -88,7 +88,7 @@ public class ParticleGolemLaser extends Particle implements IParticleTracked {
     super.renderParticle(buffer, player, partialTicks, f, f4, f1, f2, f3);
   }
   @Override
-  public boolean ignoreDepth() { 
+  public boolean ignoreDepth() {
     return false;
   }
 }

@@ -100,6 +100,5 @@ public class ParticleFairyGlow extends Particle implements IParticleTracked {
   @Override
   public void renderParticle(BufferBuilder buffer, EntityPlayer player, float partialTicks, float f, float f4, float f1, float f2, float f3) {
     super.renderParticle(buffer, player, partialTicks, f, f4, f1, f2, f3);
-
   }
 }

@@ -19,20 +19,20 @@ public class ParticleRenderer {
   public void updateParticles() {
     boolean doRemove = false;
     try {
-    for (int i = 0; i < particles.size(); i++) {
-      doRemove = true;
-      if (particles.get(i) != null) {
-        if (particles.get(i) instanceof IParticleTracked) {
-          if (((IParticleTracked) particles.get(i)).alive()) {
-            particles.get(i).onUpdate();
-            doRemove = false;
+      for (int i = 0; i < particles.size(); i++) {
+        doRemove = true;
+        if (particles.get(i) != null) {
+          if (particles.get(i) instanceof IParticleTracked) {
+            if (((IParticleTracked) particles.get(i)).alive()) {
+              particles.get(i).onUpdate();
+              doRemove = false;
+            }
           }
         }
+        if (doRemove) {
+          particles.remove(i);
+        }
       }
-      if (doRemove) {
-        particles.remove(i);
-      }
-    }
     }
     catch (Exception e) {
       //somehow the "onUpdate" in ParticleMote class gives AbstractMethodError

@@ -52,7 +52,6 @@ public class RegistryManager {
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "ancient_golem"), intColor(48, 38, 35), intColor(79, 66, 61));
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "hero"), EntityFallenHero.class, "hero", id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "hero"), intColor(159, 255, 222), intColor(222, 111, 51));
- 
     List<Biome> allBiomes = new ArrayList<Biome>();
     for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.COOL)) {
       allBiomes.add(b.biome);
@@ -68,17 +67,13 @@ public class RegistryManager {
     }
     allBiomes.addAll(BiomeManager.oceanBiomes);
     for (ConfigSpawnEntity cfg : ConfigManager.entityConfigs) {
-      if(cfg.useAllBiomes){
-
-        EntityRegistry.addSpawn(cfg.entityClass, cfg.weightedProb, cfg.min, cfg.max, cfg.typeOfCreature,allBiomes.toArray(new Biome[0]));
+      if (cfg.useAllBiomes) {
+        EntityRegistry.addSpawn(cfg.entityClass, cfg.weightedProb, cfg.min, cfg.max, cfg.typeOfCreature, allBiomes.toArray(new Biome[0]));
       }
-      else{
+      else {
         EntityRegistry.addSpawn(cfg.entityClass, cfg.weightedProb, cfg.min, cfg.max, cfg.typeOfCreature, cfg.getBiomeFilter());
-        
       }
-      
     }
- 
   }
   @SideOnly(Side.CLIENT)
   @SubscribeEvent

@@ -1,4 +1,7 @@
 package teamroots.emberroot.proxy;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -13,5 +16,8 @@ public class CommonProxy {
     RegistryManager.registerAll();
     int id = 0;
     INSTANCE.registerMessage(MessageGolemLaserFX.MessageHolder.class, MessageGolemLaserFX.class, id++, Side.CLIENT);
+  }
+  public void setInstantConfusionOnPlayer(EntityPlayer ent, int duration) {
+    ent.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, duration, 1, false, true));
   }
 }
