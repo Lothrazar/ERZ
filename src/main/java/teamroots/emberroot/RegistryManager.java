@@ -26,6 +26,8 @@ import teamroots.emberroot.entity.deer.EntityDeer;
 import teamroots.emberroot.entity.deer.RenderDeer;
 import teamroots.emberroot.entity.dirtslime.EntityDireSlime;
 import teamroots.emberroot.entity.dirtslime.RenderDireSlime;
+import teamroots.emberroot.entity.endermini.EntityEnderminy;
+import teamroots.emberroot.entity.endermini.RenderEnderminy;
 import teamroots.emberroot.entity.fairy.EntityFairy;
 import teamroots.emberroot.entity.fairy.RenderFairy;
 import teamroots.emberroot.entity.golem.DamageGolem;
@@ -35,6 +37,10 @@ import teamroots.emberroot.entity.golem.RenderAncientGolem;
 import teamroots.emberroot.entity.golem.RenderEmberPacket;
 import teamroots.emberroot.entity.hero.EntityFallenHero;
 import teamroots.emberroot.entity.hero.RenderFallenHero;
+import teamroots.emberroot.entity.knight.EntityFallenKnight;
+import teamroots.emberroot.entity.knight.RenderFallenKnight;
+import teamroots.emberroot.entity.mount.EntityFallenMount;
+import teamroots.emberroot.entity.mount.RenderFallenMount;
 import teamroots.emberroot.entity.owl.EntityOwl;
 import teamroots.emberroot.entity.owl.EntityOwlEgg;
 import teamroots.emberroot.entity.owl.RenderOwl;
@@ -108,6 +114,12 @@ public class RegistryManager {
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityWitherCat.NAME), 0x303030, 0xFFFFFF);
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityWitherWitch.NAME), EntityWitherWitch.class, EntityWitherWitch.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityWitherWitch.NAME), 0x26520D, 0x905E43);
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityEnderminy.NAME), EntityEnderminy.class, EntityEnderminy.NAME, id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityEnderminy.NAME), 0x27624D, 0x212121);
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityFallenKnight.NAME), EntityFallenKnight.class, EntityFallenKnight.NAME, id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityFallenKnight.NAME), 0x365A25, 0xA0A0A0);
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityFallenMount.NAME), EntityFallenMount.class, EntityFallenMount.NAME, id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityFallenMount.NAME), 0x365A25, 0xA0A0A0);
   }
   public static void registerDamageSources() {
     EmberRootZoo.damage_ember = new DamageGolem();
@@ -133,5 +145,8 @@ public class RegistryManager {
     RenderingRegistry.registerEntityRenderingHandler(EntityDireWolf.class, new RenderDirewolf.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityWitherCat.class, new RenderWitherCat.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityWitherWitch.class, new RenderWitherWitch.Factory());
+    RenderingRegistry.registerEntityRenderingHandler(EntityEnderminy.class, new RenderEnderminy.Factory());
+    RenderingRegistry.registerEntityRenderingHandler(EntityFallenKnight.class, new RenderFallenKnight.Factory());
+    RenderingRegistry.registerEntityRenderingHandler(EntityFallenMount.class, new RenderFallenMount.Factory());
   }
 }
