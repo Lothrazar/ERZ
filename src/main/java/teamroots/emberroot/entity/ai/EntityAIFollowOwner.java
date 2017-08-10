@@ -10,6 +10,13 @@ public class EntityAIFollowOwner extends EntityAIBase {
   private int pathingTimer;
   private double minDistanceSq;
   private double maxDistanceSq;
+  /**
+   * TODO: has same name as vanilla class so i should rename
+   * @param owned
+   * @param minDist
+   * @param maxDist
+   * @param followSpeed
+   */
   public EntityAIFollowOwner(IOwnable<? extends EntityCreature, ? extends EntityLivingBase> owned, double minDist, double maxDist, double followSpeed) {
     this.owned = owned;
     minDistanceSq = minDist * minDist;

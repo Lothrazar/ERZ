@@ -1,7 +1,5 @@
 package teamroots.emberroot.entity.wolf;
-/**
- * Original author: https://github.com/CrazyPants
- */
+
 import java.util.List;
 import javax.annotation.Nullable;
 import net.minecraft.block.Block;
@@ -32,7 +30,9 @@ import teamroots.emberroot.Const;
 import teamroots.emberroot.EntityUtil;
 import teamroots.emberroot.entity.ai.EntityAIAttackOnCollideAggressive;
 import teamroots.emberroot.entity.ai.EntityAINearestAttackableTargetBounded;
-
+/**
+ * Original author: https://github.com/CrazyPants
+ */
 public class EntityDireWolf extends EntityMob {
   public static final String NAME = "dire_wolf";
   public static final SoundEvent SND_HURT = new SoundEvent(new ResourceLocation(Const.MODID, "direwolf.hurt"));
