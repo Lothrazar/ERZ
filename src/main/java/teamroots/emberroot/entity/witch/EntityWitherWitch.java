@@ -20,11 +20,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -34,8 +37,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
-import teamroots.emberroot.BrewingUtil;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent; 
+import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.EntityUtil;
 import teamroots.emberroot.Point3i;
 import teamroots.emberroot.SpawnUtil;
@@ -192,21 +195,23 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob  {
     if(shouldStartHeal()) {
       ItemStack potion;
       if(rand.nextFloat() > 0.75) {
-        potion = BrewingUtil.createRegenerationPotion(false, true, true);
+        potion =PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.STRONG_REGENERATION); //BrewingUtil.createRegenerationPotion(false, true, true);
       } else {
-        potion = BrewingUtil.createHealthPotion(false, false, true);
+        potion =PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.STRONG_HEALING);// BrewingUtil.createHealthPotion(false, false, true);
       }
       setItemStackToSlot(EntityEquipmentSlot.MAINHAND, potion);
       healTimer = 10;
       isHealing = true;
     } else if(target != null && getHeldItem(EnumHand.MAIN_HAND).isEmpty()) {
       ItemStack potion;
-      if(getActiveTarget().isPotionActive(MobEffects.WITHER)) {
-        potion = BrewingUtil.createHarmingPotion(EntityUtil.isHardDifficulty(world), true);
+      if(getActiveTarget().isPotionActive(MobEffects.SLOWNESS)) {
+        potion = PotionUtils.addPotionToItemStack(new ItemStack(Items.SPLASH_POTION), PotionTypes.HARMING);
       } else {
-        potion = BrewingUtil.createWitherPotion(false, true);
+        potion =  PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), PotionTypes.LONG_SLOWNESS);
       }
+      
       setItemStackToSlot(EntityEquipmentSlot.MAINHAND, potion);
+
       attackTimer = 10;
       healTimer = 40;
     } else if(noActiveTargetTime > 40 && !isHealing && getHeldItem(EnumHand.MAIN_HAND).isEmpty() == false) {
@@ -238,7 +243,12 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob  {
   @Override
   public void attackEntityWithRangedAttack(EntityLivingBase entity, float rangeRatio) {   
     //the EntityPotion class validates if this potion is throwable, and if not it logs error "ThrownPotion entity {} has no item?!
-    if(attackTimer <= 0 && getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.SPLASH_POTION && !isHealing) {
+    Item heldItem = getHeldItem(EnumHand.MAIN_HAND).getItem();
+    if(attackTimer <= 0 &&
+        (heldItem == Items.SPLASH_POTION ||
+          heldItem == Items.LINGERING_POTION 
+        )
+        && !isHealing) {
 
       attackedWithPotion = entity;
 
