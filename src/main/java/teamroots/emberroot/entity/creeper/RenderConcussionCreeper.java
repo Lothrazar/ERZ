@@ -8,8 +8,8 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
 
 public class RenderConcussionCreeper extends RenderCreeper {
-  public static final Factory FACTORY = new Factory();
-  private static final ResourceLocation creeperTextures = new ResourceLocation(Const.MODID, "textures/entity/concussion_creeper.png");
+//  public static final Factory FACTORY = new Factory();
+  private static final ResourceLocation creeperTextures = new ResourceLocation(Const.MODID, "textures/entity/creeper_zoo.png");
   public RenderConcussionCreeper(RenderManager p_i46186_1_) {
     super(p_i46186_1_);
   }

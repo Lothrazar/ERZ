@@ -16,8 +16,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.config.ConfigManager;
 import teamroots.emberroot.config.ConfigSpawnEntity;
+import teamroots.emberroot.entity.creeper.EntityConcussionCreeper;
+import teamroots.emberroot.entity.creeper.RenderConcussionCreeper;
 import teamroots.emberroot.entity.deer.EntityDeer;
 import teamroots.emberroot.entity.deer.RenderDeer;
+import teamroots.emberroot.entity.dirtslime.EntityDireSlime;
+import teamroots.emberroot.entity.dirtslime.RenderDireSlime;
 import teamroots.emberroot.entity.fairy.EntityFairy;
 import teamroots.emberroot.entity.fairy.RenderFairy;
 import teamroots.emberroot.entity.golem.DamageGolem;
@@ -52,6 +56,29 @@ public class RegistryManager {
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "ancient_golem"), intColor(48, 38, 35), intColor(79, 66, 61));
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "hero"), EntityFallenHero.class, "hero", id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "hero"), intColor(159, 255, 222), intColor(222, 111, 51));
+    
+    
+    
+    
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "creeper"), EntityConcussionCreeper.class, "creeper", id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "creeper"), 0x56FF8E, 0xFF0A22);
+    
+    
+
+    
+    
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "slime"), EntityDireSlime.class, "slime", id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "slime"), 0xb9855c, 0x593d29);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     List<Biome> allBiomes = new ArrayList<Biome>();
     for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.COOL)) {
       allBiomes.add(b.biome);
@@ -85,5 +112,7 @@ public class RegistryManager {
     RenderingRegistry.registerEntityRenderingHandler(EntityGolemLaser.class, new RenderEmberPacket(Minecraft.getMinecraft().getRenderManager()));
     RenderingRegistry.registerEntityRenderingHandler(EntityAncientGolem.class, new RenderAncientGolem.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityFallenHero.class, new RenderFallenHero.Factory());
+    RenderingRegistry.registerEntityRenderingHandler(EntityConcussionCreeper.class, new RenderConcussionCreeper.Factory());
+    RenderingRegistry.registerEntityRenderingHandler(EntityDireSlime.class, new RenderDireSlime.Factory());
   }
 }

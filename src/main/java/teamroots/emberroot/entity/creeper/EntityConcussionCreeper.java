@@ -19,8 +19,8 @@ import teamroots.emberroot.TeleportHelper;
 
 public class EntityConcussionCreeper extends EntityCreeper {
   public static final String NAME = "concussioncreeper";
-  public static final int EGG_BG_COL = 0x56FF8E;
-  public static final int EGG_FG_COL = 0xFF0A22;
+//  public static final int EGG_BG_COL = 0x56FF8E;
+//  public static final int EGG_FG_COL = 0xFF0A22;
   private static final int concussionCreeperExplosionRange = 16;//TODO: CONFIGS FOR THESE
   private static final int concussionCreeperMaxTeleportRange = 16;
   private static final int concussionCreeperConfusionDuration = 600;
