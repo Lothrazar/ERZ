@@ -25,16 +25,16 @@
       "enderzoo:direwolf/howl"
     ]
   },
-  "owl.hootDouble": {
+  "owl.hoot_double": {
     "category": "neutral",
     "sounds": [
-      "enderzoo:owl/hootDouble"
+      "enderzoo:owl/hoot_double"
     ]
   },
-  "owl.hootSingle": {
+  "owl.hoot_single": {
     "category": "neutral",
     "sounds": [
-      "enderzoo:owl/hootSingle"
+      "enderzoo:owl/hoot_single"
     ]
   },
    "owl.hurt": {

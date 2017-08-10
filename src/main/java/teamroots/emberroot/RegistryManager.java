@@ -1,11 +1,15 @@
 package teamroots.emberroot;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List; 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
@@ -31,6 +35,9 @@ import teamroots.emberroot.entity.golem.RenderAncientGolem;
 import teamroots.emberroot.entity.golem.RenderEmberPacket;
 import teamroots.emberroot.entity.hero.EntityFallenHero;
 import teamroots.emberroot.entity.hero.RenderFallenHero;
+import teamroots.emberroot.entity.owl.EntityOwl;
+import teamroots.emberroot.entity.owl.EntityOwlEgg;
+import teamroots.emberroot.entity.owl.RenderOwl;
 import teamroots.emberroot.entity.slime.EntityRainbowSlime;
 import teamroots.emberroot.entity.slime.RenderWaterSlime;
 import teamroots.emberroot.entity.sprout.EntitySprout;
@@ -56,29 +63,14 @@ public class RegistryManager {
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "ancient_golem"), intColor(48, 38, 35), intColor(79, 66, 61));
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "hero"), EntityFallenHero.class, "hero", id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "hero"), intColor(159, 255, 222), intColor(222, 111, 51));
-    
-    
-    
-    
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "creeper"), EntityConcussionCreeper.class, "creeper", id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "creeper"), 0x56FF8E, 0xFF0A22);
-    
-    
-
-    
-    
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "owl"), EntityOwl.class, "owl", id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "owl"), 0xC17949, 0xFFDDC6);
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "slime"), EntityDireSlime.class, "slime", id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "slime"), 0xb9855c, 0x593d29);
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "EntityOwlEgg"),
+        EntityOwlEgg.class, "EntityOwlEgg", id++, EmberRootZoo.instance, 64, 10, true);
     List<Biome> allBiomes = new ArrayList<Biome>();
     for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.COOL)) {
       allBiomes.add(b.biome);
@@ -105,6 +97,11 @@ public class RegistryManager {
   @SideOnly(Side.CLIENT)
   @SubscribeEvent
   public void registerRendering(ModelRegistryEvent event) {
+    //item hax
+    for (Item item : EmberRootZoo.instance.items) {
+      String name = Const.MODID + ":" + item.getUnlocalizedName().replaceAll("item.", "");
+      ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(name, "inventory"));
+    }
     RenderingRegistry.registerEntityRenderingHandler(EntityDeer.class, new RenderDeer.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntitySprout.class, new RenderSprout.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityFairy.class, new RenderFairy.Factory());
@@ -114,5 +111,6 @@ public class RegistryManager {
     RenderingRegistry.registerEntityRenderingHandler(EntityFallenHero.class, new RenderFallenHero.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityConcussionCreeper.class, new RenderConcussionCreeper.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityDireSlime.class, new RenderDireSlime.Factory());
+    RenderingRegistry.registerEntityRenderingHandler(EntityOwl.class, new RenderOwl.Factory());
   }
 }
