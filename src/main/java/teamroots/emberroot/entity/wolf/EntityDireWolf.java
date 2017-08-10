@@ -139,26 +139,11 @@ public class EntityDireWolf extends EntityMob {
   protected float getSoundVolume() {
     return 0.4F;
   }
+
   @Override
-  protected Item getDropItem() {
-    /*
-     * 
-     * 
-     * 
-     * TODO: LOOT TABLE
-     */
-    return Items.ROTTEN_FLESH;
-  }
-  @Override
-  @Nullable
   protected ResourceLocation getLootTable() {
-    /*
-     * 
-     * 
-     * 
-     * TODO: LOOT TABLE
-     */
-    return null; // use getDropItem() instead
+
+    return new ResourceLocation(Const.MODID, "entity/wolf" );
   }
   public float getTailRotation() {
     if (isAngry()) { return (float) Math.PI / 2; }

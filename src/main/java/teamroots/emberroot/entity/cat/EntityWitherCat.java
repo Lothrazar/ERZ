@@ -23,9 +23,11 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.EntityUtil;
 import teamroots.emberroot.entity.ai.EntityAIAttackOnCollideOwned;
 import teamroots.emberroot.entity.ai.EntityAIFollowOwner;
@@ -83,6 +85,11 @@ public class EntityWitherCat extends EntityMob implements IOwnable<EntityWitherC
     setSize(DEF_WIDTH, DEF_HEIGHT);
   }
 
+  @Override
+  protected ResourceLocation getLootTable() {
+
+    return new ResourceLocation(Const.MODID, "entity/cat" );
+  }
   @Override
   protected void entityInit() {
     super.entityInit();

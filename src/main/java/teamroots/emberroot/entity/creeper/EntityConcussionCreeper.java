@@ -14,6 +14,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.TeleportHelper;
 
@@ -77,25 +78,12 @@ public class EntityConcussionCreeper extends EntityCreeper {
     }
     super.onUpdate();
   }
+ 
+
   @Override
-  protected void dropFewItems(boolean hitByPlayer, int looting) {
-    int j = rand.nextInt(3);
-    if (looting > 0) {
-      j += rand.nextInt(looting + 1);
-    }
-    for (int k = 0; k < j; ++k) {
-      dropItem(getDropItem(), 1);
-    }
-  }
-  @Override
-  protected Item getDropItem() {
-    //TODO: LOOT TABLE
-    return Items.GUNPOWDER;
-  }
-  @Override
-  @Nullable
   protected ResourceLocation getLootTable() {
-    return null; // use getDropItem() instead
+
+    return new ResourceLocation(Const.MODID, "entity/creeper" );
   }
   private void setTimeSinceIgnited(int i) {
     if (fTimeSinceIgnited == null) { return; }

@@ -17,6 +17,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.SpawnUtil;
 
 /**
@@ -107,14 +108,11 @@ public class EntityDireSlime extends EntityMagmaCube {
   protected EntitySlime createInstance() {
     return new EntityDireSlime(this.world);
   }
+ 
   @Override
-  protected Item getDropItem() {
-    return this.getSlimeSize() == 4 ? Item.getItemFromBlock(Blocks.CLAY) : Items.CLAY_BALL;
-  }
-  @Override
-  @Nullable
   protected ResourceLocation getLootTable() {
-    return null; // use getDropItem() instead
+
+    return new ResourceLocation(Const.MODID, "entity/slime_dirt" );
   }
   @Override
   @SideOnly(Side.CLIENT)

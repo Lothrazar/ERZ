@@ -318,13 +318,9 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
     playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
   }
   @Override
-  protected Item getDropItem() {
-    return Items.FEATHER;
-  }
-  @Override
-  @Nullable
   protected ResourceLocation getLootTable() {
-    return null; // use getDropItem() instead
+
+    return new ResourceLocation(Const.MODID, "entity/owl" );
   }
   @Override
   public float getMaxTurnRate() {

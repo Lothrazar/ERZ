@@ -1,0 +1,36 @@
+{
+    "pools": [
+        {
+			"name": "main",
+            "rolls": 2,
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:gunpowder",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 0,
+                                "max": 3
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "name": "enderroot:sand",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 0,
+                                "max": 1
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
