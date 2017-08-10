@@ -1,6 +1,6 @@
 package teamroots.emberroot;
 import java.util.ArrayList;
-import java.util.List; 
+import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EnumCreatureType;
@@ -42,35 +42,19 @@ import teamroots.emberroot.entity.slime.EntityRainbowSlime;
 import teamroots.emberroot.entity.slime.RenderWaterSlime;
 import teamroots.emberroot.entity.sprout.EntitySprout;
 import teamroots.emberroot.entity.sprout.RenderSprout;
+import teamroots.emberroot.entity.wolf.EntityDireWolf;
+import teamroots.emberroot.entity.wolf.RenderDirewolf;
 
 public class RegistryManager {
   public static int intColor(int r, int g, int b) {
     return (r * 65536 + g * 256 + b);
   }
   public static void registerAll() {
-    EmberRootZoo.damage_ember = new DamageGolem();
-    int id = 0;
-    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "deer"), EntityDeer.class, "deer", id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "deer"), intColor(159, 132, 88), intColor(94, 77, 51));
-    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "sprout"), EntitySprout.class, "sprout", id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "sprout"), intColor(136, 189, 33), intColor(165, 232, 42));
-    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "fairy"), EntityFairy.class, "fairy", id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "fairy"), intColor(255, 208, 255), intColor(209, 255, 173));
-    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "rainbowslime"), EntityRainbowSlime.class, "rainbowslime", id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "rainbowslime"), intColor(111, 208, 22), intColor(111, 255, 173));
-    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "ember_projectile"), EntityGolemLaser.class, "ember_projectile", id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "ancient_golem"), EntityAncientGolem.class, "ancient_golem", id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "ancient_golem"), intColor(48, 38, 35), intColor(79, 66, 61));
-    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "hero"), EntityFallenHero.class, "hero", id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "hero"), intColor(159, 255, 222), intColor(222, 111, 51));
-    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "creeper"), EntityConcussionCreeper.class, "creeper", id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "creeper"), 0x56FF8E, 0xFF0A22);
-    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "owl"), EntityOwl.class, "owl", id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "owl"), 0xC17949, 0xFFDDC6);
-    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "slime"), EntityDireSlime.class, "slime", id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "slime"), 0xb9855c, 0x593d29);
-    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "EntityOwlEgg"),
-        EntityOwlEgg.class, "EntityOwlEgg", id++, EmberRootZoo.instance, 64, 10, true);
+    registerDamageSources();
+    registerEntities();
+    registerSpawning();
+  }
+  public static void registerSpawning() {
     List<Biome> allBiomes = new ArrayList<Biome>();
     for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.COOL)) {
       allBiomes.add(b.biome);
@@ -94,6 +78,34 @@ public class RegistryManager {
       }
     }
   }
+  public static void registerEntities() {
+    int id = 0;
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "deer"), EntityDeer.class, "deer", id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "deer"), intColor(159, 132, 88), intColor(94, 77, 51));
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "sprout"), EntitySprout.class, "sprout", id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "sprout"), intColor(136, 189, 33), intColor(165, 232, 42));
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "fairy"), EntityFairy.class, "fairy", id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "fairy"), intColor(255, 208, 255), intColor(209, 255, 173));
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "rainbowslime"), EntityRainbowSlime.class, "rainbowslime", id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "rainbowslime"), intColor(111, 208, 22), intColor(111, 255, 173));
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "ember_projectile"), EntityGolemLaser.class, "ember_projectile", id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "ancient_golem"), EntityAncientGolem.class, "ancient_golem", id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "ancient_golem"), intColor(48, 38, 35), intColor(79, 66, 61));
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "hero"), EntityFallenHero.class, "hero", id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "hero"), intColor(159, 255, 222), intColor(222, 111, 51));
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "creeper"), EntityConcussionCreeper.class, "creeper", id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "creeper"), 0x56FF8E, 0xFF0A22);
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "owl"), EntityOwl.class, "owl", id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "owl"), 0xC17949, 0xFFDDC6);
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "slime"), EntityDireSlime.class, "slime", id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, "slime"), 0xb9855c, 0x593d29);
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, "EntityOwlEgg"), EntityOwlEgg.class, "EntityOwlEgg", id++, EmberRootZoo.instance, 64, 10, true);
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityDireWolf.NAME), EntityDireWolf.class, EntityDireWolf.NAME, id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityDireWolf.NAME), 0x606060, 0xA0A0A0);
+  }
+  public static void registerDamageSources() {
+    EmberRootZoo.damage_ember = new DamageGolem();
+  }
   @SideOnly(Side.CLIENT)
   @SubscribeEvent
   public void registerRendering(ModelRegistryEvent event) {
@@ -112,5 +124,6 @@ public class RegistryManager {
     RenderingRegistry.registerEntityRenderingHandler(EntityConcussionCreeper.class, new RenderConcussionCreeper.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityDireSlime.class, new RenderDireSlime.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityOwl.class, new RenderOwl.Factory());
+    RenderingRegistry.registerEntityRenderingHandler(EntityDireWolf.class, new RenderDirewolf.Factory());
   }
 }

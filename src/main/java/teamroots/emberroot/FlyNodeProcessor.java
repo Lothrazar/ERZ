@@ -1,5 +1,4 @@
 package teamroots.emberroot;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -13,20 +12,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
 public class FlyNodeProcessor extends WalkNodeProcessor {
- 
   @Override
-  public PathPoint getStart() {    
+  public PathPoint getStart() {
     EntityLiving entityIn = entity;
     return openPoint(MathHelper.floor(entityIn.getEntityBoundingBox().minX), MathHelper.floor(entityIn.getEntityBoundingBox().minY + 0.5D),
         MathHelper.floor(entityIn.getEntityBoundingBox().minZ));
   }
-
   @Override
   public PathPoint getPathPointToCoords(double x, double y, double z) {
-    EntityLiving entityIn = entity;    
-    return openPoint(MathHelper.floor(x - entityIn.width / 2.0F), MathHelper.floor(y), MathHelper.floor(z - entityIn.width / 2.0F));       
+    EntityLiving entityIn = entity;
+    return openPoint(MathHelper.floor(x - entityIn.width / 2.0F), MathHelper.floor(y), MathHelper.floor(z - entityIn.width / 2.0F));
   }
-
   @Override
   public int findPathOptions(PathPoint[] pathOptions, PathPoint currentPoint, PathPoint targetPoint, float maxDistance) {
     EntityLiving entityIn = entity;
@@ -40,14 +36,11 @@ public class FlyNodeProcessor extends WalkNodeProcessor {
     }
     return i;
   }
-
   private PathPoint getSafePoint(Entity entityIn, int x, int y, int z) {
     boolean i = entityFits(entityIn, x, y, z);
     return i ? openPoint(x, y, z) : null;
   }
-
   private boolean entityFits(Entity entityIn, int x, int y, int z) {
-
     BlockPos.MutableBlockPos mutableblockpos = new BlockPos.MutableBlockPos();
     for (int i = x; i < x + entitySizeX; ++i) {
       for (int j = y; j < y + entitySizeY; ++j) {
@@ -56,15 +49,11 @@ public class FlyNodeProcessor extends WalkNodeProcessor {
           Block block = bs.getBlock();
           if (block.getMaterial(bs) != Material.AIR) {
             AxisAlignedBB bb = block.getCollisionBoundingBox(bs, entityIn.world, mutableblockpos);
-            if(bb != null) {
-              return false;
-            }
+            if (bb != null) { return false; }
           }
         }
       }
     }
-
     return true;
   }
-
 }

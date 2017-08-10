@@ -1,6 +1,6 @@
 package teamroots.emberroot;
 import java.util.ArrayList;
-import java.util.List; 
+import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
@@ -28,6 +28,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import teamroots.emberroot.config.ConfigManager;
 import teamroots.emberroot.entity.owl.EntityOwl;
 import teamroots.emberroot.entity.owl.ItemOwlEgg;
+import teamroots.emberroot.entity.wolf.EntityDireWolf;
 import teamroots.emberroot.proxy.CommonProxy;
 
 @Mod(modid = Const.MODID, name = EmberRootZoo.MODNAME)
@@ -57,54 +58,47 @@ public class EmberRootZoo {
     MinecraftForge.EVENT_BUS.register(new EventManager());
     MinecraftForge.EVENT_BUS.register(new ConfigManager());
     MinecraftForge.EVENT_BUS.register(new RegistryManager());
-    MinecraftForge.EVENT_BUS.register(   EmberRootZoo.instance);
+    MinecraftForge.EVENT_BUS.register(EmberRootZoo.instance);
     proxy.preInit(event);
-    
-    
-    
-
     EmberRootZoo.itemOwlEgg = new ItemOwlEgg();
-    EmberRootZoo.instance.register( EmberRootZoo.itemOwlEgg);
- 
-    EntityOwl.SOUND_HOOT.setRegistryName(EntityOwl.SOUND_HOOT.getSoundName());
- 
-    EntityOwl.SOUND_HOOT_DOUBLE.setRegistryName(EntityOwl.SOUND_HOOT_DOUBLE.getSoundName());
- 
-    EntityOwl.SOUND_HURT.setRegistryName(EntityOwl.SOUND_HURT.getSoundName());
+    EmberRootZoo.instance.register(EmberRootZoo.itemOwlEgg);
     EmberRootZoo.instance.register(EntityOwl.SOUND_HOOT);
     EmberRootZoo.instance.register(EntityOwl.SOUND_HOOT_DOUBLE);
     EmberRootZoo.instance.register(EntityOwl.SOUND_HURT);
-    
-    
+    EmberRootZoo.instance.register(EntityDireWolf.SND_HURT);
+    EmberRootZoo.instance.register(EntityDireWolf.SND_HOWL);
+    EmberRootZoo.instance.register(EntityDireWolf.SND_GROWL);
+    EmberRootZoo.instance.register(EntityDireWolf.SND_DEATH);
   }
   public static DamageSource damage_ember;
   public static Item itemOwlEgg;
   public static int intColor(int r, int g, int b) {
     return (r * 65536 + g * 256 + b);
-  }  private void addRecipes() {
-//    ResourceLocation rl;
-//    //OreDictionary.registerOre("sand", new ItemStack(Blocks.SAND, 1, OreDictionary.WILDCARD_VALUE));//sand is already in dict by default
-//    if (Config.confusingChargeEnabled) {
-//      ItemStack cc = new ItemStack(blockConfusingCharge);
-//      rl = new ResourceLocation(MODID, "recipe" + resourceLocationCounter);
-//      addRecipe(new ShapedOreRecipe(rl, cc, "csc", "sgs", "csc", 'c', itemConfusingDust, 's', "sand", 'g', Items.GUNPOWDER), rl);
-//      resourceLocationCounter++;
-//    }
-//    if (Config.enderChargeEnabled) {
-//      ItemStack cc = new ItemStack(blockEnderCharge);
-//      rl = new ResourceLocation(MODID, "recipe" + resourceLocationCounter);
-//      addRecipe(new ShapedOreRecipe(rl, cc, "csc", "sgs", "csc", 'c', itemEnderFragment, 's', "sand", 'g', Items.GUNPOWDER), rl);
-//      resourceLocationCounter++;
-//    }
-//    if (Config.concussionChargeEnabled) {
-//      ItemStack cc = new ItemStack(blockConcussionCharge);
-//      rl = new ResourceLocation(MODID, "recipe" + resourceLocationCounter);
-//      addRecipe(new ShapedOreRecipe(rl, cc, "eee", "sgs", "ccc", 'c', itemConfusingDust, 'e', itemEnderFragment, 's', "sand", 'g', Items.GUNPOWDER), rl);
-//      resourceLocationCounter++;
-//    }
-//    rl = new ResourceLocation(MODID, "recipe" + resourceLocationCounter);
-//    addRecipe(new ShapedOreRecipe(rl, new ItemStack(Items.ENDER_PEARL), " f ", "fff", " f ", 'f', itemEnderFragment), rl);
-//    resourceLocationCounter++;
+  }
+  private void addRecipes() {
+    //    ResourceLocation rl;
+    //    //OreDictionary.registerOre("sand", new ItemStack(Blocks.SAND, 1, OreDictionary.WILDCARD_VALUE));//sand is already in dict by default
+    //    if (Config.confusingChargeEnabled) {
+    //      ItemStack cc = new ItemStack(blockConfusingCharge);
+    //      rl = new ResourceLocation(MODID, "recipe" + resourceLocationCounter);
+    //      addRecipe(new ShapedOreRecipe(rl, cc, "csc", "sgs", "csc", 'c', itemConfusingDust, 's', "sand", 'g', Items.GUNPOWDER), rl);
+    //      resourceLocationCounter++;
+    //    }
+    //    if (Config.enderChargeEnabled) {
+    //      ItemStack cc = new ItemStack(blockEnderCharge);
+    //      rl = new ResourceLocation(MODID, "recipe" + resourceLocationCounter);
+    //      addRecipe(new ShapedOreRecipe(rl, cc, "csc", "sgs", "csc", 'c', itemEnderFragment, 's', "sand", 'g', Items.GUNPOWDER), rl);
+    //      resourceLocationCounter++;
+    //    }
+    //    if (Config.concussionChargeEnabled) {
+    //      ItemStack cc = new ItemStack(blockConcussionCharge);
+    //      rl = new ResourceLocation(MODID, "recipe" + resourceLocationCounter);
+    //      addRecipe(new ShapedOreRecipe(rl, cc, "eee", "sgs", "ccc", 'c', itemConfusingDust, 'e', itemEnderFragment, 's', "sand", 'g', Items.GUNPOWDER), rl);
+    //      resourceLocationCounter++;
+    //    }
+    //    rl = new ResourceLocation(MODID, "recipe" + resourceLocationCounter);
+    //    addRecipe(new ShapedOreRecipe(rl, new ItemStack(Items.ENDER_PEARL), " f ", "fff", " f ", 'f', itemEnderFragment), rl);
+    //    resourceLocationCounter++;
   }
   private int resourceLocationCounter = 0;
   private List<IRecipe> recipes = new ArrayList<IRecipe>();
@@ -128,6 +122,7 @@ public class EmberRootZoo {
     this.enchants.add(r);
   }
   public void register(SoundEvent r) {
+    r.setRegistryName(r.getSoundName());
     this.sounds.add(r);
   }
   public void register(Potion r) {
@@ -138,7 +133,7 @@ public class EmberRootZoo {
   }
   @SubscribeEvent
   public void onRegisterRecipe(RegistryEvent.Register<IRecipe> event) {
-      event.getRegistry().registerAll(this.recipes.toArray(new IRecipe[0]));
+    event.getRegistry().registerAll(this.recipes.toArray(new IRecipe[0]));
   }
   @SubscribeEvent
   public void onRegisterItems(RegistryEvent.Register<Item> event) {

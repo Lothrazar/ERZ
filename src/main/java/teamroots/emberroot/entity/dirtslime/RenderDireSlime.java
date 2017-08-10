@@ -30,8 +30,6 @@ public class RenderDireSlime extends RenderLiving<EntityDireSlime> {
   }
   @Override
   protected void applyRotations(EntityDireSlime entity, float f, float rotationYaw, float partialTicks) {
-
-     
     //    this.rotateCorpse(entityLiving, p_77043_2_, p_77043_3_, partialTicks);
     if (entity.deathTime > 0) {
       float f3 = (entity.deathTime + partialTicks - 1.0F) / 20.0F * 1.6F;

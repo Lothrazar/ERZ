@@ -19,6 +19,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.SpawnUtil;
 
+/**
+ * Original author: https://github.com/CrazyPants
+ */
 public class EntityDireSlime extends EntityMagmaCube {
   public static final String NAME = "direslime";
   public static final int EGG_BG_COL = 0xb9855c;

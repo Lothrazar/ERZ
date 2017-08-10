@@ -36,6 +36,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+/**
+ * Original author: https://github.com/CrazyPants
+ */
 public class EntityOwl extends EntityAnimal implements IFlyingMob {//
   public static final String NAME = "owl";
   public static final SoundEvent SOUND_HOOT = new SoundEvent(new ResourceLocation(Const.MODID, "owl.hoot_single"));

@@ -1,5 +1,4 @@
 package teamroots.emberroot.entity.owl;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -10,7 +9,6 @@ import net.minecraft.util.math.MathHelper;
  * ModelOwl - Yulife Created using Tabula 5.1.0
  */
 public class ModelOwl extends ModelBase {
-
   public ModelRenderer body;
   public ModelRenderer head;
   public ModelRenderer legL;
@@ -23,15 +21,11 @@ public class ModelOwl extends ModelBase {
   public ModelRenderer earL;
   public ModelRenderer earR;
   public ModelRenderer beak;
-
   public ModelRenderer tail1;
   public ModelRenderer tail2;
   public ModelRenderer tail3;
-
   private boolean useEars = true;
-
   public ModelOwl() {
-
     textureWidth = 64;
     textureHeight = 32;
     wingR = new ModelRenderer(this, 23, 0);
@@ -105,10 +99,8 @@ public class ModelOwl extends ModelBase {
     tailBase.addChild(tail3);
     body.addChild(legR);
     legL.addChild(footL);
-
     head.addChild(beak);
   }
-
   /**
    * This is a helper function from Tabula to set the rotation of model parts
    */
@@ -117,20 +109,15 @@ public class ModelOwl extends ModelBase {
     modelRenderer.rotateAngleY = y;
     modelRenderer.rotateAngleZ = z;
   }
-
   @Override
   public void render(Entity entity, float time, float limbSwing, float f2, float headY, float headX, float scale) {
     super.render(entity, time, limbSwing, f2, headY, headX, scale);
-
     setRotationAngles(time, limbSwing, f2, headY, headX, scale, entity);
-
     float height = 25;
     // float owlScale = 0.65f;
     float owlScale = 1f;
     float transFactor = 1 - owlScale;
-
     if (isChild) {
-
       float headScale = owlScale * 0.6f;
       owlScale *= 0.5f;
       float translateScale = 1 - owlScale;
@@ -139,51 +126,44 @@ public class ModelOwl extends ModelBase {
       GlStateManager.scale(headScale, headScale, headScale);
       head.render(scale);
       GlStateManager.popMatrix();
-
       GlStateManager.pushMatrix();
       GlStateManager.translate(0.0F, translateScale * height * scale, 0.0F);
       GlStateManager.scale(owlScale, owlScale, owlScale);
-
       body.render(scale);
       GlStateManager.popMatrix();
-    } else {
-
+    }
+    else {
       GlStateManager.pushMatrix();
       GlStateManager.translate(0.0F, transFactor * height * scale, 0.0F);
       GlStateManager.scale(owlScale, owlScale, owlScale);
-
       head.render(scale);
       body.render(scale);
-
       GlStateManager.popMatrix();
     }
   }
-
   @Override
   public void setRotationAngles(float limbSwing1, float limbSwing2, float rotationAngle, float headY, float headX, float yOffset, Entity entity) {
-
     head.rotateAngleX = headX / (180F / (float) Math.PI);
     head.rotateAngleY = headY / (180F / (float) Math.PI);
-
     if (entity instanceof EntityOwl) {
       EntityOwl owl = (EntityOwl) entity;
       body.rotateAngleX = owl.getBodyAngle();
       wingL.rotateAngleZ = -owl.getWingAngle();
       wingR.rotateAngleZ = owl.getWingAngle();
-    } else {
+    }
+    else {
       body.rotateAngleX = 0;
       wingL.rotateAngleZ = 0;
       wingR.rotateAngleZ = 0;
     }
-
     if (!entity.isAirBorne) {
       float limbSpeed = 2.5f;
       legR.rotateAngleX = MathHelper.cos(limbSwing1 * limbSpeed) * 1.4F * limbSwing2;
       legL.rotateAngleX = MathHelper.cos(limbSwing1 * limbSpeed + (float) Math.PI) * 1.4F * limbSwing2;
-    } else {
+    }
+    else {
       legR.rotateAngleX = 0;
       legL.rotateAngleX = 0;
     }
-
   }
 }
