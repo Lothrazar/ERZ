@@ -1,16 +1,23 @@
 package teamroots.emberroot;
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -132,7 +139,7 @@ public class RegistryManager {
   @SubscribeEvent
   public void registerRendering(ModelRegistryEvent event) {
     //item hax
-    for (Item item : EmberRootZoo.instance.items) {
+    for (Item item : items) {
       String name = Const.MODID + ":" + item.getUnlocalizedName().replaceAll("item.", "");
       ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(name, "inventory"));
     }
@@ -153,5 +160,93 @@ public class RegistryManager {
     RenderingRegistry.registerEntityRenderingHandler(EntityFallenKnight.class, new RenderFallenKnight.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityFallenMount.class, new RenderFallenMount.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityOwlEgg.class, new RenderEntityOwlEgg.Factory());
+  }
+  
+  
+
+  private void addRecipes() {
+    //    ResourceLocation rl;
+    //    //OreDictionary.registerOre("sand", new ItemStack(Blocks.SAND, 1, OreDictionary.WILDCARD_VALUE));//sand is already in dict by default
+    //    if (Config.confusingChargeEnabled) {
+    //      ItemStack cc = new ItemStack(blockConfusingCharge);
+    //      rl = new ResourceLocation(MODID, "recipe" + resourceLocationCounter);
+    //      addRecipe(new ShapedOreRecipe(rl, cc, "csc", "sgs", "csc", 'c', itemConfusingDust, 's', "sand", 'g', Items.GUNPOWDER), rl);
+    //      resourceLocationCounter++;
+    //    }
+    //    if (Config.enderChargeEnabled) {
+    //      ItemStack cc = new ItemStack(blockEnderCharge);
+    //      rl = new ResourceLocation(MODID, "recipe" + resourceLocationCounter);
+    //      addRecipe(new ShapedOreRecipe(rl, cc, "csc", "sgs", "csc", 'c', itemEnderFragment, 's', "sand", 'g', Items.GUNPOWDER), rl);
+    //      resourceLocationCounter++;
+    //    }
+    //    if (Config.concussionChargeEnabled) {
+    //      ItemStack cc = new ItemStack(blockConcussionCharge);
+    //      rl = new ResourceLocation(MODID, "recipe" + resourceLocationCounter);
+    //      addRecipe(new ShapedOreRecipe(rl, cc, "eee", "sgs", "ccc", 'c', itemConfusingDust, 'e', itemEnderFragment, 's', "sand", 'g', Items.GUNPOWDER), rl);
+    //      resourceLocationCounter++;
+    //    }
+    //    rl = new ResourceLocation(MODID, "recipe" + resourceLocationCounter);
+    //    addRecipe(new ShapedOreRecipe(rl, new ItemStack(Items.ENDER_PEARL), " f ", "fff", " f ", 'f', itemEnderFragment), rl);
+    //    resourceLocationCounter++;
+  }
+  private int resourceLocationCounter = 0;
+  private List<IRecipe> recipes = new ArrayList<IRecipe>();
+  List<Item> items = new ArrayList<Item>();
+  private List<Block> blocks = new ArrayList<Block>();
+  private List<Enchantment> enchants = new ArrayList<Enchantment>();
+  private List<SoundEvent> sounds = new ArrayList<SoundEvent>();
+  private List<Potion> potionlist = new ArrayList<Potion>();
+  private List<PotionType> potiontype = new ArrayList<PotionType>();
+  private void addRecipe(IRecipe r, ResourceLocation rl) {
+    r.setRegistryName(rl);
+    this.recipes.add(r);
+  }
+  public void register(Item r) {
+    this.items.add(r);
+  }
+  public void register(Block r) {
+    this.blocks.add(r);
+  }
+  public void register(Enchantment r) {
+    this.enchants.add(r);
+  }
+  public void register(SoundEvent r) {
+    r.setRegistryName(r.getSoundName());
+    this.sounds.add(r);
+  }
+  public void register(Potion r) {
+    this.potionlist.add(r);
+  }
+  public void register(PotionType r) {
+    this.potiontype.add(r);
+  }
+  @SubscribeEvent
+  public void onRegisterRecipe(RegistryEvent.Register<IRecipe> event) {
+    event.getRegistry().registerAll(this.recipes.toArray(new IRecipe[0]));
+  }
+  @SubscribeEvent
+  public void onRegisterItems(RegistryEvent.Register<Item> event) {
+    event.getRegistry().registerAll(this.items.toArray(new Item[0]));
+    addRecipes();
+  }
+  @SubscribeEvent
+  public void onRegisterBlocks(RegistryEvent.Register<Block> event) {
+    event.getRegistry().registerAll(this.blocks.toArray(new Block[0]));
+  }
+  @SubscribeEvent
+  public void onRegisterEnchantments(RegistryEvent.Register<Enchantment> event) {
+    event.getRegistry().registerAll(this.enchants.toArray(new Enchantment[0]));
+  }
+  @SubscribeEvent
+  public void onRegisterSoundEvent(RegistryEvent.Register<SoundEvent> event) {
+    event.getRegistry().registerAll(this.sounds.toArray(new SoundEvent[0]));
+  }
+  @SubscribeEvent
+  public void onRegisterPotion(RegistryEvent.Register<Potion> event) {
+    event.getRegistry().registerAll(this.potionlist.toArray(new Potion[0]));
+  }
+  @SubscribeEvent
+  public void onRegisterPotionType(RegistryEvent.Register<PotionType> event) {
+    event.getRegistry().registerAll(this.potiontype.toArray(new PotionType[0]));
   }
 }
