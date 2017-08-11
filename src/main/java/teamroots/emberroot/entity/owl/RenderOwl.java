@@ -5,6 +5,9 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
+import teamroots.emberroot.config.ConfigManager;
+import teamroots.emberroot.entity.dirtslime.EntityDireSlime;
+import teamroots.emberroot.util.RenderUtil;
 
 public class RenderOwl extends RenderLiving<EntityOwl> {
   private static final ResourceLocation TEX = new ResourceLocation(Const.MODID, "textures/entity/owl.png");
@@ -23,9 +26,12 @@ public class RenderOwl extends RenderLiving<EntityOwl> {
     }
     entity.calculateAngles(partialTicks);
     super.doRender(entity, x, y, z, entityYaw, partialTicks);
+    if (ConfigManager.renderDebugHitboxes)
+      RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
+ 
   @Override
-  protected ResourceLocation getEntityTexture(EntityOwl p_110775_1_) {
+  protected ResourceLocation getEntityTexture(EntityOwl e) {
     return TEX;
   }
   public static class Factory implements IRenderFactory<EntityOwl> {

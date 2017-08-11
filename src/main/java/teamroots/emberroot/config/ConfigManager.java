@@ -26,6 +26,7 @@ import teamroots.emberroot.entity.wolf.EntityDireWolf;
 public class ConfigManager {
   public static Configuration config;
   public static List<ConfigSpawnEntity> entityConfigs;
+  public static boolean renderDebugHitboxes;
   public static void init(File configFile) {
     config = new Configuration(configFile);
     entityConfigs = new ArrayList<ConfigSpawnEntity>();
@@ -55,6 +56,8 @@ public class ConfigManager {
     }
     EntityDeer.chanceRudolf = config.getInt("ChanceRudolf", EntityDeer.config.category, 120, 1, 32767, "The odds of a deer having a red nose.  Lower is more likely to be red.");
     EntityRainbowSlime.canPlaceBlocks = config.getBoolean("CanPlacelocks", EntityRainbowSlime.config.category, true, "True means slimes can place blocks on death (water, clay, snow, depends on the color type).  This also gets disabled using mobGriefing gamerule.  ");
+    
+    renderDebugHitboxes = config.getBoolean("renderDebugHitboxes", "global", false, "For TESTING purposes only: This renders a very ugly white shape along with the mob to show its physical hitbox.");
     if (config.hasChanged()) {
       config.save();
     }

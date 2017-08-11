@@ -12,6 +12,9 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
+import teamroots.emberroot.config.ConfigManager;
+import teamroots.emberroot.entity.dirtslime.EntityDireSlime;
+import teamroots.emberroot.util.RenderUtil;
 
 public class RenderFallenHero extends RenderBiped<EntityFallenHero> {
   private static final ResourceLocation texture = new ResourceLocation(Const.MODID, "textures/entity/hero.png");
@@ -24,6 +27,12 @@ public class RenderFallenHero extends RenderBiped<EntityFallenHero> {
       }
     };
     this.addLayer(layerbipedarmor);
+  }
+  @Override
+  public void doRender(EntityFallenHero entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    super.doRender(entity, x, y, z, entityYaw, partialTicks);
+    if (ConfigManager.renderDebugHitboxes)
+      RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
   @Override
   protected ResourceLocation getEntityTexture(EntityFallenHero entity) {

@@ -15,6 +15,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
+import teamroots.emberroot.config.ConfigManager;
+import teamroots.emberroot.util.RenderUtil;
 
 //Pretty much a copy / paste from RenderWitch
 public class RenderWitherWitch extends RenderLiving<EntityWitherWitch> {
@@ -29,6 +31,8 @@ public class RenderWitherWitch extends RenderLiving<EntityWitherWitch> {
     ItemStack itemstack = entity.getHeldItem(EnumHand.MAIN_HAND);
     this.witchModel.holdingItem = !itemstack.isEmpty();
     super.doRender(entity, x, y, z, yaw, partialTicks);
+    if (ConfigManager.renderDebugHitboxes)
+      RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
   protected void func_82410_b() {
     GL11.glTranslatef(0.0F, 0.1875F, 0.0F);

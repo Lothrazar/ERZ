@@ -11,6 +11,8 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
+import teamroots.emberroot.config.ConfigManager;
+import teamroots.emberroot.util.RenderUtil;
 
 public class RenderEnderminy extends RenderLiving<EntityEnderminy> {
   private static final ResourceLocation endermanEyesTexture = new ResourceLocation(Const.MODID, "textures/entity/enderminy_eyes.png");
@@ -22,14 +24,16 @@ public class RenderEnderminy extends RenderLiving<EntityEnderminy> {
     endermanModel = (ModelEnderman) super.mainModel;
     addLayer(new EyesLayer());
   }
-  public void doRender(EntityEnderminy p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_) {
-    endermanModel.isAttacking = p_76986_1_.isScreaming();
-    if (p_76986_1_.isScreaming()) {
+  public void doRender(EntityEnderminy entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    endermanModel.isAttacking = entity.isScreaming();
+    if (entity.isScreaming()) {
       double d3 = 0.02D;
-      p_76986_2_ += rnd.nextGaussian() * d3;
-      p_76986_6_ += rnd.nextGaussian() * d3;
+      x += rnd.nextGaussian() * d3;
+      z += rnd.nextGaussian() * d3;
     }
-    super.doRender(p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
+    super.doRender(entity, x, y, z, entityYaw, partialTicks);
+    if (ConfigManager.renderDebugHitboxes)
+      RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
   protected ResourceLocation getEntityTexture(EntityEnderminy p_110775_1_) {
     return endermanTextures;

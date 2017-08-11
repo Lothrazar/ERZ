@@ -6,6 +6,9 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
+import teamroots.emberroot.config.ConfigManager;
+import teamroots.emberroot.entity.sprout.EntitySprout;
+import teamroots.emberroot.util.RenderUtil;
 
 public class RenderConcussionCreeper extends RenderCreeper {
   //  public static final Factory FACTORY = new Factory();
@@ -20,6 +23,12 @@ public class RenderConcussionCreeper extends RenderCreeper {
   @Override
   protected ResourceLocation getEntityTexture(EntityCreeper c) {
     return creeperTextures;
+  }
+  @Override
+  public void doRender(EntityCreeper entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    super.doRender(entity, x, y, z, entityYaw, partialTicks);
+    if (ConfigManager.renderDebugHitboxes)
+      RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
   public static class Factory implements IRenderFactory<EntityCreeper> {
     @Override

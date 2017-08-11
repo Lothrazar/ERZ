@@ -41,7 +41,6 @@ import teamroots.emberroot.entity.ai.EntityAITemptFlying;
 import teamroots.emberroot.proxy.ClientProxy;
 
 public class EntityFairy extends EntityFlying {
-  private static final float FOLLOW_OWNER_RANGE = 4.0f;
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityFairy.class, DataSerializers.VARINT);
   public static final DataParameter<BlockPos> spawnPosition = EntityDataManager.<BlockPos> createKey(EntityFairy.class, DataSerializers.BLOCK_POS);
   public static final DataParameter<BlockPos> targetPosition = EntityDataManager.<BlockPos> createKey(EntityFairy.class, DataSerializers.BLOCK_POS);
@@ -250,9 +249,10 @@ public class EntityFairy extends EntityFlying {
         double targY = p.posY + p.height;
         double targZ = p.posZ;
         int count = 1;
-        if (this.getDistanceSqToEntity(p) < FOLLOW_OWNER_RANGE) {
+        double followRange = config.settings.followRange;
+        if (this.getDistanceSqToEntity(p) < followRange) {
           this.playTameEffect(2);
-          List<EntityFairy> list = world.getEntitiesWithinAABB(EntityFairy.class, p.getEntityBoundingBox().expand(FOLLOW_OWNER_RANGE, FOLLOW_OWNER_RANGE, FOLLOW_OWNER_RANGE));
+          List<EntityFairy> list = world.getEntitiesWithinAABB(EntityFairy.class, p.getEntityBoundingBox().expand(followRange, followRange, followRange));
           List<EntityFairy> prunedList = new ArrayList<EntityFairy>();
           for (EntityFairy f : list) {
             if (f.getDataManager().get(tame) && f.getOwnerId() != null && f.getOwnerId().compareTo(p.getUniqueID()) == 0) {

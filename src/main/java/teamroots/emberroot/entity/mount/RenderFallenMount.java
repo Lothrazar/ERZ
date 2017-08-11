@@ -9,6 +9,9 @@ import net.minecraft.client.renderer.texture.LayeredTexture;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import teamroots.emberroot.config.ConfigManager;
+import teamroots.emberroot.entity.dirtslime.EntityDireSlime;
+import teamroots.emberroot.util.RenderUtil;
 
 public class RenderFallenMount extends RenderHorse {
   private static final String[] horseArmorTextures = new String[] {
@@ -23,6 +26,12 @@ public class RenderFallenMount extends RenderHorse {
   public RenderFallenMount(RenderManager rm) {
     super(rm);
     //    super(rm, new ModelHorse(), 0.75F);
+  }
+  @Override
+  public void doRender(EntityHorse entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    super.doRender(entity, x, y, z, entityYaw, partialTicks);
+    if (ConfigManager.renderDebugHitboxes)
+      RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
   @Override
   protected ResourceLocation getEntityTexture(EntityHorse horse) {

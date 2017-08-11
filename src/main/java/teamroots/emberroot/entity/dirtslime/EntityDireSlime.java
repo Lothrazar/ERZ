@@ -27,8 +27,7 @@ import teamroots.emberroot.util.SpawnUtil;
  */
 public class EntityDireSlime extends EntityMagmaCube {
   public static final String NAME = "direslime";
-  public static final int EGG_BG_COL = 0xb9855c;
-  public static final int EGG_FG_COL = 0x593d29;
+ 
   public enum SlimeConf {
     SMALL(1, 4, 3, 0.4), MEDIUM(2, 8, 5, 0.2), LARGE(4, 20, 8, 0.4);
     public final int size;

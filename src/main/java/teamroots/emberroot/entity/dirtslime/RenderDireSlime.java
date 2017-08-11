@@ -9,6 +9,9 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.Const;
+import teamroots.emberroot.config.ConfigManager;
+import teamroots.emberroot.entity.deer.EntityDeer;
+import teamroots.emberroot.util.RenderUtil;
 
 @SideOnly(Side.CLIENT)
 public class RenderDireSlime extends RenderLiving<EntityDireSlime> {
@@ -23,6 +26,12 @@ public class RenderDireSlime extends RenderLiving<EntityDireSlime> {
     float f2 = 1.0F / (f1 + 1.0F);
     float f3 = i;
     GL11.glScalef(f2 * f3, 1.0F / f2 * f3, f2 * f3);
+  }
+  @Override
+  public void doRender(EntityDireSlime entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    super.doRender(entity, x, y, z, entityYaw, partialTicks);
+    if (ConfigManager.renderDebugHitboxes)
+      RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
   @Override
   protected ResourceLocation getEntityTexture(EntityDireSlime p_110775_1_) {

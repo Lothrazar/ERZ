@@ -6,6 +6,8 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
+import teamroots.emberroot.config.ConfigManager;
+import teamroots.emberroot.util.RenderUtil;
 
 public class RenderDirewolf extends RenderLiving<EntityDireWolf> {
   private ResourceLocation wolfTextures = new ResourceLocation(Const.MODID, "textures/entity/dire_wolf.png");
@@ -44,10 +46,11 @@ public class RenderDirewolf extends RenderLiving<EntityDireWolf> {
   //    }
   //  }
   @Override
-  public void doRender(EntityDireWolf entity, double x, double y, double z, float p_76986_8_, float p_76986_9_) {
-    super.doRender(entity, x, y, z, p_76986_8_, p_76986_9_);
+  public void doRender(EntityDireWolf entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    super.doRender(entity, x, y, z, entityYaw, partialTicks);
     GL11.glPopMatrix();
-    //RenderUtil.renderEntityBoundingBox((EntityLiving) entity, x, y, z);
+    if (ConfigManager.renderDebugHitboxes)
+      RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
   @Override
   protected ResourceLocation getEntityTexture(EntityDireWolf p_110775_1_) {
