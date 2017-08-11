@@ -47,6 +47,7 @@ public class EntityFairy extends EntityFlying {
   public static final DataParameter<Boolean> tame = EntityDataManager.<Boolean> createKey(EntityFairy.class, DataSerializers.BOOLEAN);
   //public static final DataParameter<Boolean> sitting = EntityDataManager.<Boolean> createKey(EntityFairy.class, DataSerializers.BOOLEAN);
   protected static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.<Optional<UUID>> createKey(EntityFairy.class, DataSerializers.OPTIONAL_UNIQUE_ID);
+  public static final String NAME = "fairy";
   public static enum VariantColors {
     GREEN, PURPLE, PINK, ORANGE, BLUE, YELLOW, RED;
     public String nameLower() {

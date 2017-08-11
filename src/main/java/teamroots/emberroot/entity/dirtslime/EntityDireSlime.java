@@ -26,7 +26,7 @@ import teamroots.emberroot.util.SpawnUtil;
  * Original author: https://github.com/CrazyPants
  */
 public class EntityDireSlime extends EntityMagmaCube {
-  public static final String NAME = "direslime";
+  public static final String NAME =  "slime";
  
   public enum SlimeConf {
     SMALL(1, 4, 3, 0.4), MEDIUM(2, 8, 5, 0.2), LARGE(4, 20, 8, 0.4);

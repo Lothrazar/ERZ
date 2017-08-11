@@ -19,6 +19,7 @@ import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntityRainbowSlime extends EntitySlime {
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntitySlime.class, DataSerializers.VARINT);
+  public static final String NAME =  "rainbowslime";
   public static enum VariantColors {
     BLUE, GREY, WHITE, PURPLE, RED;//water, snow, clay
     public String nameLower() {

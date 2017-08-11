@@ -34,6 +34,7 @@ public class EntityAncientGolem extends EntityMob {
   
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityAncientGolem.class, DataSerializers.VARINT);
   public static final DataParameter<Integer> FIRESPEED = EntityDataManager.<Integer> createKey(EntityAncientGolem.class, DataSerializers.VARINT);
+  public static final String NAME =  "ancient_golem";
   public static enum VariantColors {
     RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE;
     public String nameLower() {

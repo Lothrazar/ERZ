@@ -36,6 +36,7 @@ import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntityFallenHero extends EntityMob {
+  public static final String NAME =  "hero";
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFallenHero.class, EnumCreatureType.CREATURE);;
   public EntityFallenHero(World worldIn) {
     super(worldIn);

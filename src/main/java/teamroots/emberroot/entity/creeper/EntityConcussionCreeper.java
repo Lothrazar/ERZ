@@ -24,7 +24,7 @@ import teamroots.emberroot.config.ConfigSpawnEntity;
  * Original author: https://github.com/CrazyPants
  */
 public class EntityConcussionCreeper extends EntityCreeper {
-  public static final String NAME = "concussioncreeper";
+  public static final String NAME =  "creeper";
   private static final int concussionCreeperExplosionRange = 16;//TODO: CONFIGS FOR THESE
   private static final int concussionCreeperMaxTeleportRange = 16;
   private static final int concussionCreeperConfusionDuration = 600;
