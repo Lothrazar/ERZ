@@ -14,8 +14,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
-import teamroots.emberroot.TeleportHelper;
 import teamroots.emberroot.config.ConfigSpawnEntity;
+import teamroots.emberroot.util.TeleportUtil;
 
 /**
  * Original author: https://github.com/CrazyPants
@@ -59,7 +59,7 @@ public class EntityConcussionCreeper extends EntityCreeper {
             if (!world.isRemote) {
               boolean done = false;
               for (int i = 0; i < 20 && !done; i++) {
-                done = TeleportHelper.teleportRandomly(ent, concussionCreeperMaxTeleportRange);
+                done = TeleportUtil.teleportRandomly(ent, concussionCreeperMaxTeleportRange);
               }
             }
             if (ent instanceof EntityPlayer) {

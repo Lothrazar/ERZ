@@ -1,4 +1,4 @@
-package teamroots.emberroot;
+package teamroots.emberroot.util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 

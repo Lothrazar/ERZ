@@ -31,8 +31,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
-import teamroots.emberroot.FlyingMoveHelper;
-import teamroots.emberroot.FlyingPathNavigate;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.ai.EntityAIFlyingAttackOnCollide;
 import teamroots.emberroot.entity.ai.EntityAIFlyingFindPerch;

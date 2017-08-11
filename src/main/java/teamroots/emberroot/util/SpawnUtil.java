@@ -7,8 +7,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
-import teamroots.emberroot.Point3i;
-import teamroots.emberroot.VecUtil;
+import teamroots.emberroot.data.Point3i;
 
 public class SpawnUtil {
   public static boolean findClearGround(World world, Point3i startingLocation, Point3i clearLocation) {

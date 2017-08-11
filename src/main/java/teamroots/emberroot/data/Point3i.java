@@ -1,4 +1,4 @@
-package teamroots.emberroot;
+package teamroots.emberroot.data;
 public class Point3i {
   public int x;
   public int y;

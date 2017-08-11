@@ -1,10 +1,9 @@
-package teamroots.emberroot;
+package teamroots.emberroot.entity.owl;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityLookHelper;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.util.math.MathHelper;
-import teamroots.emberroot.entity.owl.IFlyingMob;
 
 public class FlyingMoveHelper extends EntityMoveHelper {
   private EntityLiving entity;

@@ -8,10 +8,10 @@ import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import teamroots.emberroot.Point3i;
-import teamroots.emberroot.VecUtil;
+import teamroots.emberroot.data.Point3i;
 import teamroots.emberroot.util.EntityUtil;
 import teamroots.emberroot.util.SpawnUtil;
+import teamroots.emberroot.util.VecUtil;
 
 public class EntityAIMountedArrowAttack extends EntityAIBase {
   private final EntityLiving entityHost;

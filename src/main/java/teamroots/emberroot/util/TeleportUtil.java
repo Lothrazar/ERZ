@@ -1,4 +1,4 @@
-package teamroots.emberroot;
+package teamroots.emberroot.util;
 import java.util.Random;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 
-public class TeleportHelper {
+public class TeleportUtil {
   private static final int DEFAULT_RND_TP_DISTANCE = 16;
   private static Random rand = new Random();
   public static boolean teleportRandomly(EntityLivingBase entity, int distance) {

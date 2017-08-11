@@ -1,4 +1,4 @@
-package teamroots.emberroot;
+package teamroots.emberroot.entity.owl;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.pathfinding.Path;

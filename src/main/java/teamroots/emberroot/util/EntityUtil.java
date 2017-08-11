@@ -22,8 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import teamroots.emberroot.Point3i;
-import teamroots.emberroot.VecUtil;
+import teamroots.emberroot.data.Point3i;
 
 public class EntityUtil {
   public static boolean isHardDifficulty(World worldObj) {
