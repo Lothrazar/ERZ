@@ -11,7 +11,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntityGuardian;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -31,10 +30,9 @@ import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.deer.EntityDeer;
 
 public class EntityAncientGolem extends EntityMob {
-  
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityAncientGolem.class, DataSerializers.VARINT);
   public static final DataParameter<Integer> FIRESPEED = EntityDataManager.<Integer> createKey(EntityAncientGolem.class, DataSerializers.VARINT);
-  public static final String NAME =  "ancient_golem";
+  public static final String NAME = "ancient_golem";
   public static enum VariantColors {
     RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE;
     public String nameLower() {

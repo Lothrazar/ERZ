@@ -1,14 +1,11 @@
 package teamroots.emberroot.entity.creeper;
 import java.lang.reflect.Field;
 import java.util.List;
-import javax.annotation.Nullable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -24,7 +21,7 @@ import teamroots.emberroot.config.ConfigSpawnEntity;
  * Original author: https://github.com/CrazyPants
  */
 public class EntityConcussionCreeper extends EntityCreeper {
-  public static final String NAME =  "creeper";
+  public static final String NAME = "creeper";
   private static final int concussionCreeperExplosionRange = 16;//TODO: CONFIGS FOR THESE
   private static final int concussionCreeperMaxTeleportRange = 16;
   private static final int concussionCreeperConfusionDuration = 600;

@@ -10,7 +10,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigManager;
-import teamroots.emberroot.entity.deer.EntityDeer;
 import teamroots.emberroot.util.RenderUtil;
 
 @SideOnly(Side.CLIENT)

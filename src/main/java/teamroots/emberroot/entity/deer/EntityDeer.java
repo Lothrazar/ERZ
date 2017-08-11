@@ -1,7 +1,6 @@
 package teamroots.emberroot.entity.deer;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;

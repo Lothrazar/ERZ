@@ -3,17 +3,11 @@ import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderSkeleton;
-import net.minecraft.client.renderer.entity.RenderZombie;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
-import net.minecraft.entity.monster.AbstractSkeleton;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigManager;
-import teamroots.emberroot.entity.dirtslime.EntityDireSlime;
 import teamroots.emberroot.util.RenderUtil;
 
 public class RenderFallenHero extends RenderBiped<EntityFallenHero> {

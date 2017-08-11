@@ -1,5 +1,4 @@
 package teamroots.emberroot.entity.dirtslime;
-import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -7,9 +6,7 @@ import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
@@ -26,8 +23,7 @@ import teamroots.emberroot.util.SpawnUtil;
  * Original author: https://github.com/CrazyPants
  */
 public class EntityDireSlime extends EntityMagmaCube {
-  public static final String NAME =  "slime";
- 
+  public static final String NAME = "slime";
   public enum SlimeConf {
     SMALL(1, 4, 3, 0.4), MEDIUM(2, 8, 5, 0.2), LARGE(4, 20, 8, 0.4);
     public final int size;

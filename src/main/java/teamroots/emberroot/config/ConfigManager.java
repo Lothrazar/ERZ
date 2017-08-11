@@ -2,7 +2,6 @@ package teamroots.emberroot.config;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -56,7 +55,6 @@ public class ConfigManager {
     }
     EntityDeer.chanceRudolf = config.getInt("ChanceRudolf", EntityDeer.config.category, 120, 1, 32767, "The odds of a deer having a red nose.  Lower is more likely to be red.");
     EntityRainbowSlime.canPlaceBlocks = config.getBoolean("CanPlacelocks", EntityRainbowSlime.config.category, true, "True means slimes can place blocks on death (water, clay, snow, depends on the color type).  This also gets disabled using mobGriefing gamerule.  ");
-    
     renderDebugHitboxes = config.getBoolean("renderDebugHitboxes", "global", false, "For TESTING purposes only: This renders a very ugly white shape along with the mob to show its physical hitbox.");
     if (config.hasChanged()) {
       config.save();

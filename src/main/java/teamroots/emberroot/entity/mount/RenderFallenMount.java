@@ -10,7 +10,6 @@ import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.config.ConfigManager;
-import teamroots.emberroot.entity.dirtslime.EntityDireSlime;
 import teamroots.emberroot.util.RenderUtil;
 
 public class RenderFallenMount extends RenderHorse {

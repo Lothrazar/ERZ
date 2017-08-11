@@ -28,7 +28,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
-import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.ai.EntityAIAttackOnCollideOwned;
 import teamroots.emberroot.entity.ai.EntityAIFollowOwner;

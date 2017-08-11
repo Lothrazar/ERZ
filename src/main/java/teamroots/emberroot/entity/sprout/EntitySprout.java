@@ -1,9 +1,6 @@
 package teamroots.emberroot.entity.sprout;
-import java.util.Random;
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -17,7 +14,6 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
-import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntitySprout extends EntityCreature {
@@ -32,7 +28,7 @@ public class EntitySprout extends EntityCreature {
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntitySprout.class, EnumCreatureType.AMBIENT);;
   public EntitySprout(World world) {
     super(world);
-    setSize(0.5f, 1.0f );
+    setSize(0.5f, 1.0f);
     this.experienceValue = 3;
   }
   @Override

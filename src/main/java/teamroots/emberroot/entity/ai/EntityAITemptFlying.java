@@ -1,14 +1,11 @@
 package teamroots.emberroot.entity.ai;
-import com.google.common.collect.Sets;
 import java.util.Set;
-import net.minecraft.entity.EntityCreature;
+import com.google.common.collect.Sets;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-//import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.pathfinding.PathNavigateFlying;
 
 public class EntityAITemptFlying extends EntityAIBase {
   private static final double RANGE = 64.0D;

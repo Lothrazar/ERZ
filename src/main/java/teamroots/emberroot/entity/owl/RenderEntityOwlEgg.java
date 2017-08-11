@@ -12,7 +12,6 @@ import teamroots.emberroot.EmberRootZoo;
 
 @SideOnly(Side.CLIENT)
 public class RenderEntityOwlEgg extends RenderSnowball<EntityOwlEgg> {
- 
   public RenderEntityOwlEgg(RenderManager renderManagerIn, RenderItem itemRendererIn) {
     super(renderManagerIn, EmberRootZoo.itemOwlEgg, itemRendererIn);
   }

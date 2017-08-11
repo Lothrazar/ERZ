@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigManager;
-import teamroots.emberroot.entity.dirtslime.EntityDireSlime;
 import teamroots.emberroot.util.RenderUtil;
 
 public class RenderOwl extends RenderLiving<EntityOwl> {
@@ -29,7 +28,6 @@ public class RenderOwl extends RenderLiving<EntityOwl> {
     if (ConfigManager.renderDebugHitboxes)
       RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
- 
   @Override
   protected ResourceLocation getEntityTexture(EntityOwl e) {
     return TEX;
