@@ -6,10 +6,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigManager;
+import teamroots.emberroot.entity.sprout.EntitySprout;
 import teamroots.emberroot.util.RenderUtil;
 
 public class RenderOwl extends RenderLiving<EntityOwl> {
-  private static final ResourceLocation TEX = new ResourceLocation(Const.MODID, "textures/entity/owl.png");
   private int debug1 = 0;
   private int debug2 = 1;
   public RenderOwl(RenderManager renderManager) {
@@ -28,9 +28,11 @@ public class RenderOwl extends RenderLiving<EntityOwl> {
     if (ConfigManager.renderDebugHitboxes)
       RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
+
   @Override
-  protected ResourceLocation getEntityTexture(EntityOwl e) {
-    return TEX;
+  protected ResourceLocation getEntityTexture(EntityOwl entity) {
+    String colour = entity.getVariantEnum().nameLower();
+    return new ResourceLocation(Const.MODID, "textures/entity/owl_" + colour + ".png");
   }
   public static class Factory implements IRenderFactory<EntityOwl> {
     @Override

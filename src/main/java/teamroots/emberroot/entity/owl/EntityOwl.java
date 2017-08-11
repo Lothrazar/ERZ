@@ -20,6 +20,9 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -38,17 +41,27 @@ import teamroots.emberroot.entity.ai.EntityAIFlyingLand;
 import teamroots.emberroot.entity.ai.EntityAIFlyingPanic;
 import teamroots.emberroot.entity.ai.EntityAIFlyingShortWander;
 import teamroots.emberroot.entity.ai.EntityAINearestAttackableTargetBounded;
+import teamroots.emberroot.entity.sprout.EntitySprout;
+import teamroots.emberroot.entity.sprout.EntitySprout.VariantColors;
 
 /**
  * Original author: https://github.com/CrazyPants
  */
 public class EntityOwl extends EntityAnimal implements IFlyingMob {//
   public static final String NAME = "owl";
+  public static enum VariantColors {
+    PLAIN, SILVER, BROWN, COPPER;
+    public String nameLower() {
+      return this.name().toLowerCase();
+    }
+  }  public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityOwl.class, DataSerializers.VARINT);
+  
   public static final SoundEvent SOUND_HOOT = new SoundEvent(new ResourceLocation(Const.MODID, "owl.hoot_single"));
   public static final SoundEvent SOUND_HOOT_DOUBLE = new SoundEvent(new ResourceLocation(Const.MODID, "owl.hoot_double"));
   public static final SoundEvent SOUND_HURT = new SoundEvent(new ResourceLocation(Const.MODID, "owl.hurt"));
   private static final int owlTimeBetweenEggsMin = 11;
   private static final int owlTimeBetweenEggsMax = 77;
+  
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityOwl.class, EnumCreatureType.CREATURE);
   private float wingRotation;
   private float prevWingRotation;
@@ -85,6 +98,17 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
     targetTasks.addTask(0, targetSpiders);
     moveHelper = new FlyingMoveHelper(this);
     timeUntilNextEgg = getNextLayingTime();
+  }
+  public Integer getVariant() {
+    return getDataManager().get(variant);
+  }
+  public VariantColors getVariantEnum() {
+    return VariantColors.values()[getVariant()];
+  }
+  @Override
+  protected void entityInit() {
+    super.entityInit();
+    this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
   }
   @Override
   protected void applyEntityAttributes() {
@@ -340,16 +364,19 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
     return owlTimeBetweenEggsMin + rand.nextInt(dif);
   }
   @Override
-  public void readEntityFromNBT(NBTTagCompound tagCompund) {
-    super.readEntityFromNBT(tagCompund);
-    if (tagCompund.hasKey("EggLayTime")) {
-      this.timeUntilNextEgg = tagCompund.getInteger("EggLayTime");
+  public void readEntityFromNBT(NBTTagCompound compound) {
+    super.readEntityFromNBT(compound);
+    if (compound.hasKey("EggLayTime")) {
+      this.timeUntilNextEgg = compound.getInteger("EggLayTime");
+      getDataManager().set(variant, compound.getInteger("variant"));
+      getDataManager().setDirty(variant);
     }
   }
   @Override
-  public void writeEntityToNBT(NBTTagCompound tagCompound) {
-    super.writeEntityToNBT(tagCompound);
-    tagCompound.setInteger("EggLayTime", this.timeUntilNextEgg);
+  public void writeEntityToNBT(NBTTagCompound compound) {
+    super.writeEntityToNBT(compound);
+    compound.setInteger("EggLayTime", this.timeUntilNextEgg);
+    compound.setInteger("variant", getDataManager().get(variant));
   }
   @Override
   public boolean canBeLeashedTo(EntityPlayer player) {

@@ -25,7 +25,8 @@ import teamroots.emberroot.config.ConfigSpawnEntity;
 public class EntityDeer extends EntityAnimal {
   public static final DataParameter<Boolean> hasHorns = EntityDataManager.<Boolean> createKey(EntityDeer.class, DataSerializers.BOOLEAN);
   public static final DataParameter<Boolean> hasRednose = EntityDataManager.<Boolean> createKey(EntityDeer.class, DataSerializers.BOOLEAN);
-  public static final String NAME = "deer";
+  public static final String NAME = "deer";  
+
   public static int chanceRudolf = 200;//in config now, defaults 120;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityDeer.class, EnumCreatureType.CREATURE);
   public EntityDeer(World world) {
