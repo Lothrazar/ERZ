@@ -12,6 +12,7 @@ public class EntityAIFollowOwner extends EntityAIBase {
   private double maxDistanceSq;
   /**
    * TODO: has same name as vanilla class so i should rename
+   * 
    * @param owned
    * @param minDist
    * @param maxDist

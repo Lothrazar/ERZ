@@ -25,7 +25,7 @@ import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntityDeer extends EntityAnimal {
   public static int chanceRudolf = 200;//in config now, defaults 120;
-  public static ConfigSpawnEntity config =  new ConfigSpawnEntity(EntityDeer.class, EnumCreatureType.CREATURE);
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityDeer.class, EnumCreatureType.CREATURE);
   public static final DataParameter<Boolean> hasHorns = EntityDataManager.<Boolean> createKey(EntityDeer.class, DataSerializers.BOOLEAN);
   public static final DataParameter<Boolean> hasRednose = EntityDataManager.<Boolean> createKey(EntityDeer.class, DataSerializers.BOOLEAN);
   public EntityDeer(World world) {
@@ -71,8 +71,6 @@ public class EntityDeer extends EntityAnimal {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-//    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
-//    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224D);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override

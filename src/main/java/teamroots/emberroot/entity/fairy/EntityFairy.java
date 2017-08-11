@@ -379,7 +379,7 @@ public class EntityFairy extends EntityFlying {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(18.0D);
+    ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
   public ResourceLocation getLootTable() {

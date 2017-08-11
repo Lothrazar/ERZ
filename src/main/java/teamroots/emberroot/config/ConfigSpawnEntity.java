@@ -105,8 +105,12 @@ public class ConfigSpawnEntity {
    */
   public static void syncInstance(EntityLivingBase living, MobProperties settings) {
     EntityUtil.setMaxHealth(living, settings.maxHealth);
-    EntityUtil.setSpeed(living, settings.speed);
-    EntityUtil.setBaseDamage(living, settings.attack);
+    if (settings.speed >= 0)
+      EntityUtil.setSpeed(living, settings.speed);
+    if (settings.attack >= 0)
+      EntityUtil.setBaseDamage(living, settings.attack);
+    if (settings.followRange >= 0)
+      EntityUtil.setFollow(living, settings.followRange);
   }
   /**
    * just a simple struct

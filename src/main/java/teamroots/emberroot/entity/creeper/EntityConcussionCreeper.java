@@ -25,12 +25,10 @@ import teamroots.emberroot.config.ConfigSpawnEntity;
  */
 public class EntityConcussionCreeper extends EntityCreeper {
   public static final String NAME = "concussioncreeper";
- 
   private static final int concussionCreeperExplosionRange = 16;//TODO: CONFIGS FOR THESE
   private static final int concussionCreeperMaxTeleportRange = 16;
   private static final int concussionCreeperConfusionDuration = 600;
-
-  public static ConfigSpawnEntity config= new ConfigSpawnEntity(EntityConcussionCreeper.class, EnumCreatureType.MONSTER);
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityConcussionCreeper.class, EnumCreatureType.MONSTER);
   private Field fTimeSinceIgnited;
   private Field fFuseTime;
   public EntityConcussionCreeper(World world) {
@@ -47,7 +45,7 @@ public class EntityConcussionCreeper extends EntityCreeper {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    //    MobInfo.CONCUSSION_CREEPER.applyAttributes(this);
+    ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
   public void onUpdate() {
@@ -81,12 +79,9 @@ public class EntityConcussionCreeper extends EntityCreeper {
     }
     super.onUpdate();
   }
- 
-
   @Override
   protected ResourceLocation getLootTable() {
-
-    return new ResourceLocation(Const.MODID, "entity/creeper" );
+    return new ResourceLocation(Const.MODID, "entity/creeper");
   }
   private void setTimeSinceIgnited(int i) {
     if (fTimeSinceIgnited == null) { return; }

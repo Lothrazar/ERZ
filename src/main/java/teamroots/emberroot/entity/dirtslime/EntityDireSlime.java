@@ -111,11 +111,9 @@ public class EntityDireSlime extends EntityMagmaCube {
   protected EntitySlime createInstance() {
     return new EntityDireSlime(this.world);
   }
- 
   @Override
   protected ResourceLocation getLootTable() {
-
-    return new ResourceLocation(Const.MODID, "entity/slime_dirt" );
+    return new ResourceLocation(Const.MODID, "entity/slime_dirt");
   }
   @Override
   @SideOnly(Side.CLIENT)
@@ -147,7 +145,7 @@ public class EntityDireSlime extends EntityMagmaCube {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+    ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
   protected int getAttackStrength() {

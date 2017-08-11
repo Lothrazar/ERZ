@@ -158,6 +158,9 @@ public class EntityUtil {
     AxisAlignedBB collides = block.getCollisionBoundingBox(bs, world, bellow);
     return collides != null;
   }
+  public static void setFollow(EntityLivingBase entity, double s) {
+    entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(s);
+  }
   public static void setSpeed(EntityLivingBase entity, double s) {
     entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(s);
   }

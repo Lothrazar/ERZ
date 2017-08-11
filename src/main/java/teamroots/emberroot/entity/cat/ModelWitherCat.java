@@ -1,5 +1,4 @@
 package teamroots.emberroot.entity.cat;
-
 import org.lwjgl.opengl.GL11;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -9,7 +8,6 @@ import net.minecraft.util.math.MathHelper;
 
 //Copied straight from ModelOelot to remove the casts
 public class ModelWitherCat extends ModelBase {
-
   /** The back left leg model for the Ocelot. */
   ModelRenderer ocelotBackLeftLeg;
   /** The back right leg model for the Ocelot. */
@@ -27,7 +25,6 @@ public class ModelWitherCat extends ModelBase {
   /** The body model for the Ocelot. */
   ModelRenderer ocelotBody;
   int field_78163_i = 1;
-  
   public ModelWitherCat() {
     setTextureOffset("head.main", 0, 0);
     setTextureOffset("head.nose", 0, 24);
@@ -62,14 +59,12 @@ public class ModelWitherCat extends ModelBase {
     ocelotFrontRightLeg.addBox(-1.0F, 0.0F, 0.0F, 2, 10, 2);
     ocelotFrontRightLeg.setRotationPoint(-1.2F, 13.8F, -5.0F);
   }
-
   /**
    * Sets the models various rotation angles then renders the model.
    */
   @Override
   public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
     setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, p_78088_7_, p_78088_1_);
-
     if (isChild) {
       float f6 = 2.0F;
       GL11.glPushMatrix();
@@ -88,7 +83,8 @@ public class ModelWitherCat extends ModelBase {
       ocelotTail.render(p_78088_7_);
       ocelotTail2.render(p_78088_7_);
       GL11.glPopMatrix();
-    } else {
+    }
+    else {
       ocelotHead.render(p_78088_7_);
       ocelotBody.render(p_78088_7_);
       ocelotTail.render(p_78088_7_);
@@ -99,7 +95,6 @@ public class ModelWitherCat extends ModelBase {
       ocelotFrontRightLeg.render(p_78088_7_);
     }
   }
-
   /**
    * Sets the model's various rotation angles. For bipeds, par1 and par2 are
    * used for animating the movement of arms and legs, where par1 represents the
@@ -108,34 +103,31 @@ public class ModelWitherCat extends ModelBase {
    */
   @Override
   public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity p_78087_7_) {
-
     ocelotHead.rotateAngleX = p_78087_5_ / (180F / (float) Math.PI);
     ocelotHead.rotateAngleY = p_78087_4_ / (180F / (float) Math.PI);
-
     if (field_78163_i != 3) {
       ocelotBody.rotateAngleX = ((float) Math.PI / 2F);
-
       if (field_78163_i == 2) {
         ocelotBackLeftLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F) * 1.0F * p_78087_2_;
         ocelotBackRightLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F + 0.3F) * 1.0F * p_78087_2_;
         ocelotFrontLeftLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F + (float) Math.PI + 0.3F) * 1.0F * p_78087_2_;
         ocelotFrontRightLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F + (float) Math.PI) * 1.0F * p_78087_2_;
         ocelotTail2.rotateAngleX = 1.7278761F + ((float) Math.PI / 10F) * MathHelper.cos(p_78087_1_) * p_78087_2_;
-      } else {
+      }
+      else {
         ocelotBackLeftLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F) * 1.0F * p_78087_2_;
         ocelotBackRightLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F + (float) Math.PI) * 1.0F * p_78087_2_;
         ocelotFrontLeftLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F + (float) Math.PI) * 1.0F * p_78087_2_;
         ocelotFrontRightLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F) * 1.0F * p_78087_2_;
-
         if (field_78163_i == 1) {
           ocelotTail2.rotateAngleX = 1.7278761F + ((float) Math.PI / 4F) * MathHelper.cos(p_78087_1_) * p_78087_2_;
-        } else {
+        }
+        else {
           ocelotTail2.rotateAngleX = 1.7278761F + 0.47123894F * MathHelper.cos(p_78087_1_) * p_78087_2_;
         }
       }
     }
   }
-
   /**
    * Used for easily adding entity-dependent animations. The second and third
    * float params here are the same second and third as in the setRotationAngles
@@ -157,7 +149,6 @@ public class ModelWitherCat extends ModelBase {
     ocelotBackLeftLeg.rotationPointY = ocelotBackRightLeg.rotationPointY = 18.0F;
     ocelotBackLeftLeg.rotationPointZ = ocelotBackRightLeg.rotationPointZ = 5.0F;
     ocelotTail.rotateAngleX = 0.9F;
-
     if (entityocelot.isSneaking()) {
       ++ocelotBody.rotationPointY;
       ocelotHead.rotationPointY += 2.0F;
@@ -167,7 +158,8 @@ public class ModelWitherCat extends ModelBase {
       ocelotTail.rotateAngleX = ((float) Math.PI / 2F);
       ocelotTail2.rotateAngleX = ((float) Math.PI / 2F);
       field_78163_i = 0;
-    } else if (entityocelot.isSprinting()) {
+    }
+    else if (entityocelot.isSprinting()) {
       ocelotTail2.rotationPointY = ocelotTail.rotationPointY;
       ocelotTail2.rotationPointZ += 2.0F;
       ocelotTail.rotateAngleX = ((float) Math.PI / 2F);
@@ -199,5 +191,4 @@ public class ModelWitherCat extends ModelBase {
       field_78163_i = 1;
     }
   }
-
 }

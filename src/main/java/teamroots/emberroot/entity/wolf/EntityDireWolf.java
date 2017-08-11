@@ -1,5 +1,4 @@
 package teamroots.emberroot.entity.wolf;
-
 import java.util.List;
 import javax.annotation.Nullable;
 import net.minecraft.block.Block;
@@ -32,6 +31,7 @@ import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.ai.EntityAIAttackOnCollideAggressive;
 import teamroots.emberroot.entity.ai.EntityAINearestAttackableTargetBounded;
 import teamroots.emberroot.util.EntityUtil;
+
 /**
  * Original author: https://github.com/CrazyPants
  */
@@ -93,9 +93,7 @@ public class EntityDireWolf extends EntityMob {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
-    getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
-    //MobInfo.DIRE_WOLF.applyAttributes(this);
+    ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
   protected void playStepSound(BlockPos bp, Block p_145780_4_) {
@@ -142,11 +140,9 @@ public class EntityDireWolf extends EntityMob {
   protected float getSoundVolume() {
     return 0.4F;
   }
-
   @Override
   protected ResourceLocation getLootTable() {
-
-    return new ResourceLocation(Const.MODID, "entity/wolf" );
+    return new ResourceLocation(Const.MODID, "entity/wolf");
   }
   public float getTailRotation() {
     if (isAngry()) { return (float) Math.PI / 2; }

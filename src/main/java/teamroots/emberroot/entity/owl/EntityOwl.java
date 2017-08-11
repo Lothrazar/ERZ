@@ -48,7 +48,7 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
   public static final SoundEvent SOUND_HURT = new SoundEvent(new ResourceLocation(Const.MODID, "owl.hurt"));
   private static final int owlTimeBetweenEggsMin = 11;
   private static final int owlTimeBetweenEggsMax = 77;
-  public static ConfigSpawnEntity config= new ConfigSpawnEntity(EntityOwl.class, EnumCreatureType.CREATURE);
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityOwl.class, EnumCreatureType.CREATURE);
   private float wingRotation;
   private float prevWingRotation;
   private float wingRotDelta = 1.0F;
@@ -88,9 +88,7 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
-    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-    //  MobInfo.OWL.applyAttributes(this);
+    ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
   protected PathNavigate createNavigator(World worldIn) {
@@ -322,8 +320,7 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
   }
   @Override
   protected ResourceLocation getLootTable() {
-
-    return new ResourceLocation(Const.MODID, "entity/owl" );
+    return new ResourceLocation(Const.MODID, "entity/owl");
   }
   @Override
   public float getMaxTurnRate() {

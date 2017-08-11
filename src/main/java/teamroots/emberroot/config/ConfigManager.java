@@ -32,9 +32,9 @@ public class ConfigManager {
     //spawn is min,max,weight.      props is health, attack, speed, followRange
     //-1 means unlisted from config
     //?? is this true? # Attack damage of Enderminies. 7=Enderman damage, 3=Zombie damage
-    entityConfigs.add(EntityWitherCat.config.setDefaultSpawns(0, 0, 0).setDefaultProperties(20, 2, 0.25F,32));
+    entityConfigs.add(EntityWitherCat.config.setDefaultSpawns(0, 0, 0).setDefaultProperties(20, 2, 0.25F, 32));
     entityConfigs.add(EntityConcussionCreeper.config.setDefaultSpawns(1, 1, 17).setDefaultProperties(20, -1, 0.25F, 32));
-    entityConfigs.add(EntityDeer.config.setDefaultSpawns(3, 7, 20).setDefaultProperties(15, -1, 0.20000000298023224F,32));
+    entityConfigs.add(EntityDeer.config.setDefaultSpawns(3, 7, 20).setDefaultProperties(15, -1, 0.20000000298023224F, 32));
     entityConfigs.add(EntityDireSlime.config.setDefaultSpawns(1, 1, 17).setDefaultProperties(12, -1, 0.3F, 32));
     entityConfigs.add(EntityEnderminy.config.setDefaultSpawns(1, 1, 17).setDefaultProperties(15, 10, 0.3F, 32));
     entityConfigs.add(EntityFairy.config.setDefaultSpawns(5, 10, 20).setDefaultProperties(18, -1, -1, 16));
@@ -46,7 +46,7 @@ public class ConfigManager {
     entityConfigs.add(EntityOwl.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(10, -1, -1, -1));
     entityConfigs.add(EntityFallenMount.config.setDefaultSpawns(0, 0, 0).setDefaultProperties(30, -1, -1, -1));
     entityConfigs.add(EntityFallenKnight.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(20, 4, -1, 32));
-    entityConfigs.add(EntitySprout.config.setDefaultSpawns(2, 4, 1).setDefaultProperties(6, 0, 0.2F,32));
+    entityConfigs.add(EntitySprout.config.setDefaultSpawns(2, 4, 1).setDefaultProperties(6, 0, 0.2F, 32));
     load();
   }
   public static void load() {

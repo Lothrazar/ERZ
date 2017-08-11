@@ -36,7 +36,7 @@ import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntityFallenHero extends EntityMob {
-  public static ConfigSpawnEntity config= new ConfigSpawnEntity(EntityFallenHero.class, EnumCreatureType.CREATURE);;
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFallenHero.class, EnumCreatureType.CREATURE);;
   public EntityFallenHero(World worldIn) {
     super(worldIn);
     // TODO Auto-generated constructor stub
@@ -62,18 +62,8 @@ public class EntityFallenHero extends EntityMob {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(75.0D);
-    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
-    this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
     this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-    
-//
-//    EmberRootZoo.instance.logger.info(this.getName()+" health"+  getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).getBaseValue());//20
-//    EmberRootZoo.instance.logger.info(this.getName()+" dmg"+  getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue());//2
-//      
-    
-    
-    
+    ConfigSpawnEntity.syncInstance(this, config.settings);
     //      this.getAttributeMap().registerAttribute(SPAWN_REINFORCEMENTS_CHANCE).setBaseValue(this.rand.nextDouble() * net.minecraftforge.common.ForgeModContainer.zombieSummonBaseChance);
   }
   @Override

@@ -52,9 +52,7 @@ import teamroots.emberroot.util.SpawnUtil;
  */
 public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
   public static final String NAME = "witherwitch";
-
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityWitherWitch.class, EnumCreatureType.MONSTER);
-
   private int attackTimer;
   private EntityLivingBase attackedWithPotion;
   private int healTimer;
@@ -82,18 +80,7 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-    //   MobInfo.WITHER_WITCH.applyAttributes(this);
-    /*
-     * entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.
-     * MAX_HEALTH).setBaseValue(maxHealth); IAttributeInstance ai =
-     * entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.
-     * ATTACK_DAMAGE); if(ai == null) {
-     * entity.getAttributeMap().registerAttribute(SharedMonsterAttributes.
-     * ATTACK_DAMAGE); ai =
-     * entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.
-     * ATTACK_DAMAGE); } ai.setBaseValue(attackDamage);
-     */
+    ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
   protected float applyPotionDamageCalculations(DamageSource damageSource, float damage) {
@@ -107,18 +94,16 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
     }
     return damage;
   }
-  
   @Override
   public boolean isPotionApplicable(PotionEffect potion) {
-//    if(potion.getPotion().isBadEffect())
+    //    if(potion.getPotion().isBadEffect())
     //TODO: make witch immune to ALL bad effect?s? WE COULD ?> yeah
     return potion.getPotion() != MobEffects.WITHER && super.isPotionApplicable(potion);
   }
-
   @Override
   public ResourceLocation getLootTable() {
-//    String colour = getVariantEnum().nameLower();
-    return new ResourceLocation(Const.MODID, "entity/witch" );
+    //    String colour = getVariantEnum().nameLower();
+    return new ResourceLocation(Const.MODID, "entity/witch");
   }
   @Override
   public void setRevengeTarget(EntityLivingBase target) {
@@ -352,7 +337,4 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
   }
   @Override
   public void setSwingingArms(boolean swingingArms) {}
-  
-  
-
 }

@@ -1,5 +1,4 @@
 package teamroots.emberroot.entity.endermini;
-
 import java.util.Random;
 import org.lwjgl.opengl.GL11;
 import net.minecraft.client.model.ModelEnderman;
@@ -14,23 +13,16 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
 
 public class RenderEnderminy extends RenderLiving<EntityEnderminy> {
-
-   
   private static final ResourceLocation endermanEyesTexture = new ResourceLocation(Const.MODID, "textures/entity/enderminy_eyes.png");
   private static final ResourceLocation endermanTextures = new ResourceLocation(Const.MODID, "textures/entity/enderminy.png");
-
-
   private ModelEnderman endermanModel;
   private Random rnd = new Random();
-
   public RenderEnderminy(RenderManager rm) {
     super(rm, new ModelEnderman(0), 0.5F);
     endermanModel = (ModelEnderman) super.mainModel;
     addLayer(new EyesLayer());
   }
-
   public void doRender(EntityEnderminy p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_) {
-
     endermanModel.isAttacking = p_76986_1_.isScreaming();
     if (p_76986_1_.isScreaming()) {
       double d3 = 0.02D;
@@ -39,22 +31,17 @@ public class RenderEnderminy extends RenderLiving<EntityEnderminy> {
     }
     super.doRender(p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
   }
-
   protected ResourceLocation getEntityTexture(EntityEnderminy p_110775_1_) {
     return endermanTextures;
   }
-
   @Override
   protected void preRenderCallback(EntityEnderminy p_77041_1_, float p_77041_2_) {
     GL11.glScalef(0.5F, 0.25F, 0.5F);
   }
-
   private class EyesLayer implements LayerRenderer<EntityEnderminy> {
-
     @Override
     public void doRenderLayer(EntityEnderminy em, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
         float headPitch, float scale) {
-
       bindTexture(endermanEyesTexture);
       GlStateManager.enableBlend();
       GlStateManager.disableAlpha();
@@ -64,7 +51,7 @@ public class RenderEnderminy extends RenderLiving<EntityEnderminy> {
       int i = 61680;
       int j = i % 65536;
       int k = i / 65536;
-      OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j, (float)k);
+      OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j, (float) k);
       GlStateManager.enableLighting();
       GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
       getMainModel().render(em, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
@@ -72,22 +59,16 @@ public class RenderEnderminy extends RenderLiving<EntityEnderminy> {
       GlStateManager.depthMask(true);
       GlStateManager.disableBlend();
       GlStateManager.enableAlpha();
-
     }
-
     @Override
     public boolean shouldCombineTextures() {
       return false;
     }
-
   }
-  
   public static class Factory implements IRenderFactory<EntityEnderminy> {
-
     @Override
     public Render<? super EntityEnderminy> createRenderFor(RenderManager manager) {
       return new RenderEnderminy(manager);
     }
   }
-
 }

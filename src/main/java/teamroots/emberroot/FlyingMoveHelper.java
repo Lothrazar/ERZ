@@ -7,7 +7,6 @@ import net.minecraft.util.math.MathHelper;
 import teamroots.emberroot.entity.owl.IFlyingMob;
 
 public class FlyingMoveHelper extends EntityMoveHelper {
- 
   private EntityLiving entity;
   private IFlyingMob mob;
   private double maxDescentSpeed = 0.1;

@@ -64,7 +64,7 @@ public class EntityAncientGolem extends EntityMob {
       return null;//new Color(0, 0, 0);
     }
   }
-  public static ConfigSpawnEntity config =  new ConfigSpawnEntity(EntityAncientGolem.class, EnumCreatureType.MONSTER);
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityAncientGolem.class, EnumCreatureType.MONSTER);
   public EntityAncientGolem(World worldIn) {
     super(worldIn);
     setSize(0.6f, 1.8f);
@@ -149,10 +149,7 @@ public class EntityAncientGolem extends EntityMob {
     super.applyEntityAttributes();
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     //props
-    this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
-    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
-    this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
-    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(MAX_HEALTH);
+    ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
   public void onUpdate() {

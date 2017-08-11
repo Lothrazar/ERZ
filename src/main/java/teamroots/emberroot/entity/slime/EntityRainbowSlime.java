@@ -26,9 +26,14 @@ public class EntityRainbowSlime extends EntitySlime {
     }
   }
   public static boolean canPlaceBlocks;
-  public static ConfigSpawnEntity config= new ConfigSpawnEntity(EntityRainbowSlime.class, EnumCreatureType.MONSTER);
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityRainbowSlime.class, EnumCreatureType.MONSTER);
   public EntityRainbowSlime(World worldIn) {
     super(worldIn);
+  }
+  @Override
+  protected void applyEntityAttributes() {
+    super.applyEntityAttributes();
+    ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
   protected void entityInit() {
@@ -45,11 +50,6 @@ public class EntityRainbowSlime extends EntitySlime {
   protected void initEntityAI() {
     super.initEntityAI();
   }
-  //  @Override
-  //  public ResourceLocation getLootTable() {
-  //    String colour = getVariantEnum().nameLower();
-  //    return new ResourceLocation(Const.MODID, "entity/slime_" + colour);
-  //  }
   private boolean isBaby() {
     return this.getSlimeSize() == 1;
   }

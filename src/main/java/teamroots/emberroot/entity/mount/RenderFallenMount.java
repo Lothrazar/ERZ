@@ -1,5 +1,4 @@
 package teamroots.emberroot.entity.mount;
-
 import java.util.Map;
 import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
@@ -12,8 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 public class RenderFallenMount extends RenderHorse {
-
-  
   private static final String[] horseArmorTextures = new String[] {
       null,
       "textures/entity/horse/armor/horse_armor_iron.png",
@@ -23,38 +20,33 @@ public class RenderFallenMount extends RenderHorse {
   private static final String textureName = "textures/entity/horse/horse_zombie.png";
   private static final ResourceLocation zombieHorseTexture = new ResourceLocation(textureName);
   private static final Map<String, ResourceLocation> textureCache = Maps.newHashMap();
-
   public RenderFallenMount(RenderManager rm) {
     super(rm);
-//    super(rm, new ModelHorse(), 0.75F);
+    //    super(rm, new ModelHorse(), 0.75F);
   }
-
   @Override
   protected ResourceLocation getEntityTexture(EntityHorse horse) {
-    if(horse.getTotalArmorValue() == 0) {
+    if (horse.getTotalArmorValue() == 0) {
       return zombieHorseTexture;
-    } else {
+    }
+    else {
       return getArmoredTexture(horse);
     }
   }
-
   private ResourceLocation getArmoredTexture(EntityHorse horse) {
     String s = horseArmorTextures[horse.getHorseArmorType().ordinal()];
     ResourceLocation resourcelocation = textureCache.get(s);
-    if(resourcelocation == null) {
+    if (resourcelocation == null) {
       resourcelocation = new ResourceLocation("Layered:" + s);
       Minecraft.getMinecraft().getTextureManager().loadTexture(resourcelocation, new LayeredTexture(textureName, s));
       textureCache.put(s, resourcelocation);
     }
     return resourcelocation;
   }
-  
   public static class Factory implements IRenderFactory<EntityHorse> {
-
     @Override
     public Render<? super EntityHorse> createRenderFor(RenderManager manager) {
       return new RenderFallenMount(manager);
     }
   }
-
 }

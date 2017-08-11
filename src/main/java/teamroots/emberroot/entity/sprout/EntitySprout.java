@@ -28,7 +28,7 @@ public class EntitySprout extends EntityCreature {
       return this.name().toLowerCase();
     }
   }
-  public static ConfigSpawnEntity config=new ConfigSpawnEntity(EntitySprout.class, EnumCreatureType.AMBIENT);;
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntitySprout.class, EnumCreatureType.AMBIENT);;
   public EntitySprout(World world) {
     super(world);
     setSize(0.5f, 1.0f);
@@ -53,11 +53,7 @@ public class EntitySprout extends EntityCreature {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
-    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224D);
-
-   
-     
+    ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   public Integer getVariant() {
     return getDataManager().get(variant);
