@@ -3,6 +3,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import javax.annotation.Nullable;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -17,17 +18,19 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.TeleportHelper;
+import teamroots.emberroot.config.ConfigSpawnEntity;
 
 /**
  * Original author: https://github.com/CrazyPants
  */
 public class EntityConcussionCreeper extends EntityCreeper {
   public static final String NAME = "concussioncreeper";
-  //  public static final int EGG_BG_COL = 0x56FF8E;
-  //  public static final int EGG_FG_COL = 0xFF0A22;
+ 
   private static final int concussionCreeperExplosionRange = 16;//TODO: CONFIGS FOR THESE
   private static final int concussionCreeperMaxTeleportRange = 16;
   private static final int concussionCreeperConfusionDuration = 600;
+
+  public static ConfigSpawnEntity config= new ConfigSpawnEntity(EntityConcussionCreeper.class, EnumCreatureType.MONSTER);
   private Field fTimeSinceIgnited;
   private Field fFuseTime;
   public EntityConcussionCreeper(World world) {

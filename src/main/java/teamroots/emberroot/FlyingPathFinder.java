@@ -13,6 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
+import teamroots.emberroot.util.PPUtil;
+import teamroots.emberroot.util.SpawnUtil;
 
 public class FlyingPathFinder extends PathFinder {
   private PathHeap path = new PathHeap();

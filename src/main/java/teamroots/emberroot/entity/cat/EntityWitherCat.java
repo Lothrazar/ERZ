@@ -4,6 +4,7 @@ import java.util.UUID;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -28,11 +29,13 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
-import teamroots.emberroot.EntityUtil;
+import teamroots.emberroot.EmberRootZoo;
+import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.ai.EntityAIAttackOnCollideOwned;
 import teamroots.emberroot.entity.ai.EntityAIFollowOwner;
 import teamroots.emberroot.entity.ai.IOwnable;
 import teamroots.emberroot.entity.witch.EntityWitherWitch;
+import teamroots.emberroot.util.EntityUtil;
 /**
  * Original author: https://github.com/CrazyPants
  */
@@ -61,6 +64,9 @@ public class EntityWitherCat extends EntityMob implements IOwnable<EntityWitherC
   private static final UUID ATTACK_BOOST_MOD_UID = UUID.fromString("B9662B59-9566-4402-BC1F-2ED2B276D846");
   private static final UUID HEALTH_BOOST_MOD_UID = UUID.fromString("B9662B29-9467-3302-1D1A-2ED2B276D846");
   private static   int witherCatAngryAttackDamageHardModifier = 2;
+
+
+  public static ConfigSpawnEntity config= new ConfigSpawnEntity(EntityWitherCat.class, EnumCreatureType.MONSTER);
 
   private float lastScale = 1f;
   private EntityWitherWitch owner;
@@ -157,9 +163,37 @@ public class EntityWitherCat extends EntityMob implements IOwnable<EntityWitherC
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-    //MobInfo.WITHER_CAT.applyAttributes(this);
+//    //MobInfo.WITHER_CAT.applyAttributes(this);
+// 
   }
 
+  protected void updateAttackDamage(float growthRatio) {
+    IAttributeInstance att = EntityUtil.removeModifier(this, SharedMonsterAttributes.ATTACK_DAMAGE, ATTACK_BOOST_MOD_UID);
+    if (growthRatio == 0) {
+      return;
+    }
+    double damageInc = EntityUtil.isHardDifficulty(world) ? witherCatAngryAttackDamageHardModifier : 0;
+    double attackDif = (damageInc + 1) ;
+    double toAdd = attackDif * growthRatio;
+    AttributeModifier mod = new AttributeModifier(ATTACK_BOOST_MOD_UID, "Transformed Attack Modifier", toAdd, 0);
+    att.applyModifier(mod);
+  }
+
+//  protected void updateHealth(float growthRatio) {
+//    IAttributeInstance att = EntityUtil.removeModifier(this, SharedMonsterAttributes.MAX_HEALTH, HEALTH_BOOST_MOD_UID);
+//    if (growthRatio == 0) {
+//      return;
+//    }
+//    double currentRatio = getHealth() / getMaxHealth();
+//    double healthDif = .witherCatAngryHealth - Config.witherCatHealth;
+//    double toAdd = healthDif * growthRatio;
+//    AttributeModifier mod = new AttributeModifier(HEALTH_BOOST_MOD_UID, "Transformed Attack Modifier", toAdd, 0);
+//    att.applyModifier(mod);
+//
+//    double newHealth = currentRatio * getMaxHealth();
+//    setHealth((float) newHealth);
+//
+//  }
   @Override
   public boolean isPotionApplicable(PotionEffect potion) {
     return potion.getPotion() != MobEffects.WITHER && super.isPotionApplicable(potion);
@@ -259,33 +293,6 @@ public class EntityWitherCat extends EntityMob implements IOwnable<EntityWitherC
     }
   }
 
-  protected void updateAttackDamage(float growthRatio) {
-    IAttributeInstance att = EntityUtil.removeModifier(this, SharedMonsterAttributes.ATTACK_DAMAGE, ATTACK_BOOST_MOD_UID);
-    if (growthRatio == 0) {
-      return;
-    }
-    double damageInc = EntityUtil.isHardDifficulty(world) ? witherCatAngryAttackDamageHardModifier : 0;
-    double attackDif = (damageInc + 1) ;
-    double toAdd = attackDif * growthRatio;
-    AttributeModifier mod = new AttributeModifier(ATTACK_BOOST_MOD_UID, "Transformed Attack Modifier", toAdd, 0);
-    att.applyModifier(mod);
-  }
-
-//  protected void updateHealth(float growthRatio) {
-//    IAttributeInstance att = EntityUtil.removeModifier(this, SharedMonsterAttributes.MAX_HEALTH, HEALTH_BOOST_MOD_UID);
-//    if (growthRatio == 0) {
-//      return;
-//    }
-//    double currentRatio = getHealth() / getMaxHealth();
-//    double healthDif = .witherCatAngryHealth - Config.witherCatHealth;
-//    double toAdd = healthDif * growthRatio;
-//    AttributeModifier mod = new AttributeModifier(HEALTH_BOOST_MOD_UID, "Transformed Attack Modifier", toAdd, 0);
-//    att.applyModifier(mod);
-//
-//    double newHealth = currentRatio * getMaxHealth();
-//    setHealth((float) newHealth);
-//
-//  }
 
   private void spawnParticles() {
     double startX = posX;

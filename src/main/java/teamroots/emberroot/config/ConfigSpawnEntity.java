@@ -2,10 +2,12 @@ package teamroots.emberroot.config;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.config.Configuration;
+import teamroots.emberroot.util.EntityUtil;
 
 /**
  * for use with config files and linkin to EntityRegistry.addSpawn
@@ -30,45 +32,98 @@ public class ConfigSpawnEntity {
       "minecraft:forest_hills", "minecraft:jungle", "minecraft:birch_forest", "minecraft:roofed_forest", "minecraft:savanna", "minecraft:mesa"
   };
   public Class<? extends EntityLiving> entityClass;
-  public int weightedProb;
-  public int min;
-  public int max;
   public EnumCreatureType typeOfCreature;
-  public String[] biomes;
-  private int defaultMin;
-  private int defaultMax;
-  private int defaultWeight;
+  /**
+   * defualts set by mod, defaults for config values before config file applies
+   */
+  public MobProperties defaults = new MobProperties();
+  /**
+   * values read from config files
+   */
+  public MobProperties settings = new MobProperties();
   String category;
-  public boolean useAllBiomes;
   public ConfigSpawnEntity(Class<? extends EntityLiving> clz, EnumCreatureType type) {
     this.entityClass = clz;
     this.typeOfCreature = type;
     category = clz.getSimpleName();
   }
-  public void setDefaults(int pmin, int pmax, int pweight) {
-    defaultMin = pmin;
-    defaultMax = pmax;
-    defaultWeight = pweight;
+  public ConfigSpawnEntity setDefaultProperties(int dhealth, float attack, float speed, int follow) {
+    this.defaults.maxHealth = dhealth;
+    this.defaults.attack = attack;
+    this.defaults.speed = speed;
+    this.defaults.followRange = follow;
+    return this;
+  }
+  public ConfigSpawnEntity setDefaultSpawns(int pmin, int pmax, int pweight) {
+    return setDefaultSpawns(pmin, pmax, pweight, true);
+  }
+  public ConfigSpawnEntity setDefaultSpawns(int pmin, int pmax, int pweight, boolean useAllBiomes) {
+    defaults.min = pmin;
+    defaults.max = pmax;
+    defaults.weightedProb = pweight;
+    defaults.useAllBiomes = useAllBiomes;
+    return this;
   }
   public void syncConfig(Configuration config) {
-    min = config.getInt("minSpawnCount", category, defaultMin, 0, 500, "Smallest spawn group.");
-    max = config.getInt("maxSpawnCount", category, defaultMax, 0, 500, "Biggest spawn group.");
-    if (max < min) {
-      max = min + 1;//the least we could do
+    settings.min = config.getInt("minSpawnCount", category, defaults.min, 0, 500, "Smallest spawn group.");
+    settings.max = config.getInt("maxSpawnCount", category, defaults.max, 0, 500, "Biggest spawn group.");
+    if (settings.max < settings.min) {
+      settings.max = settings.min + 1;//the least we could do
     }
-    weightedProb = config.getInt("weightProbability", category, defaultWeight, 0, 500, "Configures the spawning frequency. Higher numbers mean more spawns.");
-    useAllBiomes = config.getBoolean("allBiomes", category, true, "Try to spawn in every biome.  If false, it will use the whitelist in this config ");
-    biomes = config.getStringList("biomeWhitelist", category, defaultBiomes, "Biomes this will spawn into.  Add support for any modded biome here.  Ignored whenever allBiomes is true. ");
+    settings.weightedProb = config.getInt("weightProbability", category, defaults.weightedProb, 0, 500, "Configures the spawning frequency. Higher numbers mean more spawns.");
+    settings.useAllBiomes = config.getBoolean("allBiomes", category, defaults.useAllBiomes, "Try to spawn in every biome.  If false, it will use the whitelist in this config ");
+    settings.biomes = config.getStringList("biomeWhitelist", category, defaultBiomes, "Biomes this will spawn into.  Add support for any modded biome here.  Ignored whenever allBiomes is true. ");
+    settings.maxHealth = config.getInt("maxHealth", category, defaults.maxHealth, 1, 100, "Max health of the mob");
+    if (settings.followRange >= 0) {
+      settings.followRange = config.getInt("followRange", category, defaults.followRange, 0, 2, "Base follow range");
+    }
+    //-1 means either property is invalid, or is locked
+    if (defaults.speed >= 0) {
+      settings.speed = config.getFloat("baseSpeed", category, defaults.speed, 0, 2, "Base speed before buffs");
+    }
+    if (defaults.attack >= 0) {
+      settings.attack = config.getFloat("baseDamage", category, defaults.attack, 0, 100, "Base attack, before weapons and buffs");
+    }
   }
   public Biome[] getBiomeFilter() {
     List<Biome> allBiomes = new ArrayList<Biome>();
     Biome found;
-    for (String b : biomes) {
+    for (String b : settings.biomes) {
       found = Biome.REGISTRY.getObject(new ResourceLocation(b));
       if (found != null) {
         allBiomes.add(found);
       }
     }
     return allBiomes.toArray(new Biome[0]);
+  }
+  /**
+   * some settings arent set in a static registration way, they must be set for
+   * each instance spawned such as attack, health, speed
+   * 
+   * @param living
+   * @param settings
+   */
+  public static void syncInstance(EntityLivingBase living, MobProperties settings) {
+    EntityUtil.setMaxHealth(living, settings.maxHealth);
+    EntityUtil.setSpeed(living, settings.speed);
+    EntityUtil.setBaseDamage(living, settings.attack);
+  }
+  /**
+   * just a simple struct
+   *
+   * TODO: would be better with getter/setter pattern BUT its not so bad, the
+   * config system enforces min/max/valid values for us already just dont ever
+   * set them again at runtime
+   */
+  public static class MobProperties {
+    public int weightedProb;
+    public int min;
+    public int max;
+    public String[] biomes;
+    public int maxHealth;
+    public float attack;
+    public boolean useAllBiomes;
+    public float speed;
+    public int followRange;
   }
 }

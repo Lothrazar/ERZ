@@ -2,6 +2,7 @@ package teamroots.emberroot.entity.slime;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,6 +15,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntityRainbowSlime extends EntitySlime {
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntitySlime.class, DataSerializers.VARINT);
@@ -24,6 +26,7 @@ public class EntityRainbowSlime extends EntitySlime {
     }
   }
   public static boolean canPlaceBlocks;
+  public static ConfigSpawnEntity config= new ConfigSpawnEntity(EntityRainbowSlime.class, EnumCreatureType.MONSTER);
   public EntityRainbowSlime(World worldIn) {
     super(worldIn);
   }

@@ -4,6 +4,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -27,9 +28,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
-import teamroots.emberroot.EntityUtil;
+import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.ai.EntityAIAttackOnCollideAggressive;
 import teamroots.emberroot.entity.ai.EntityAINearestAttackableTargetBounded;
+import teamroots.emberroot.util.EntityUtil;
 /**
  * Original author: https://github.com/CrazyPants
  */
@@ -49,6 +51,7 @@ public class EntityDireWolf extends EntityMob {
   private int maxSpawnedInChunk = 6;
   private static int packHowl = 0;
   private static long lastHowl = 0;
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityDireWolf.class, EnumCreatureType.MONSTER);
   public EntityDireWolf(World world) {
     super(world);
     setSize(0.8F, 1.2F);

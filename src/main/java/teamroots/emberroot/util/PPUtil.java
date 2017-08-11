@@ -1,4 +1,4 @@
-package teamroots.emberroot;
+package teamroots.emberroot.util;
 import java.lang.reflect.Field;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;

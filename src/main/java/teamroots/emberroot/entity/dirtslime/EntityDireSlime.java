@@ -1,6 +1,7 @@
 package teamroots.emberroot.entity.dirtslime;
 import javax.annotation.Nullable;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntitySlime;
@@ -18,7 +19,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.Const;
-import teamroots.emberroot.SpawnUtil;
+import teamroots.emberroot.config.ConfigSpawnEntity;
+import teamroots.emberroot.util.SpawnUtil;
 
 /**
  * Original author: https://github.com/CrazyPants
@@ -51,6 +53,7 @@ public class EntityDireSlime extends EntityMagmaCube {
       return values()[index];
     }
   }
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityDireSlime.class, EnumCreatureType.MONSTER);
   public EntityDireSlime(World world) {
     super(world);
     setSlimeSize(1, false);

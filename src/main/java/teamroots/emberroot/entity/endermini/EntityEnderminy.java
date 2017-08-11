@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -42,6 +43,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+import teamroots.emberroot.config.ConfigSpawnEntity;
 /**
  * Original author: https://github.com/CrazyPants
  */
@@ -58,6 +60,9 @@ public class EntityEnderminy extends EntityMob  {
   private static final UUID attackingSpeedBoostModifierUUID = UUID.fromString("020E0DFB-87AE-4653-9556-831010E291B0");
   private static final AttributeModifier attackingSpeedBoostModifier = (new AttributeModifier(attackingSpeedBoostModifierUUID, "Attacking speed boost",
       6.2, 0)).setSaved(false);
+
+
+  public static ConfigSpawnEntity config=  new ConfigSpawnEntity(EntityEnderminy.class, EnumCreatureType.MONSTER);
 
   private boolean isAggressive;
 

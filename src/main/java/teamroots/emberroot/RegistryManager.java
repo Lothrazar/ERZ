@@ -78,11 +78,14 @@ public class RegistryManager {
     }
     allBiomes.addAll(BiomeManager.oceanBiomes);
     for (ConfigSpawnEntity cfg : ConfigManager.entityConfigs) {
-      if (cfg.useAllBiomes) {
-        EntityRegistry.addSpawn(cfg.entityClass, cfg.weightedProb, cfg.min, cfg.max, cfg.typeOfCreature, allBiomes.toArray(new Biome[0]));
+      if (cfg.settings.weightedProb <= 0 || cfg.settings.max <= 0) {
+        continue;
+      }
+      if (cfg.settings.useAllBiomes) {
+        EntityRegistry.addSpawn(cfg.entityClass, cfg.settings.weightedProb, cfg.settings.min, cfg.settings.max, cfg.typeOfCreature, allBiomes.toArray(new Biome[0]));
       }
       else {
-        EntityRegistry.addSpawn(cfg.entityClass, cfg.weightedProb, cfg.min, cfg.max, cfg.typeOfCreature, cfg.getBiomeFilter());
+        EntityRegistry.addSpawn(cfg.entityClass, cfg.settings.weightedProb, cfg.settings.min, cfg.settings.max, cfg.typeOfCreature, cfg.getBiomeFilter());
       }
     }
   }

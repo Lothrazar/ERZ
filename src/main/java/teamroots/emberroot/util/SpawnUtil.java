@@ -1,4 +1,4 @@
-package teamroots.emberroot;
+package teamroots.emberroot.util;
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -7,6 +7,8 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+import teamroots.emberroot.Point3i;
+import teamroots.emberroot.VecUtil;
 
 public class SpawnUtil {
   public static boolean findClearGround(World world, Point3i startingLocation, Point3i clearLocation) {

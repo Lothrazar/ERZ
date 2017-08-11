@@ -3,6 +3,7 @@ package teamroots.emberroot.entity.knight;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBreakDoor;
@@ -24,11 +25,12 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import teamroots.emberroot.EntityUtil;
-import teamroots.emberroot.SpawnUtil;
+import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.ai.EntityAIMountedArrowAttack;
 import teamroots.emberroot.entity.ai.EntityAIMountedAttackOnCollide;
 import teamroots.emberroot.entity.mount.EntityFallenMount;
+import teamroots.emberroot.util.EntityUtil;
+import teamroots.emberroot.util.SpawnUtil;
 /**
  * Original author: https://github.com/CrazyPants
  */
@@ -38,6 +40,7 @@ public class EntityFallenKnight extends EntitySkeleton  {
   public static final String NAME = "fallenknight";
 //TODO: MORE STUFF TO CONFIGGGGGGGGGGGG
   private static  double ATTACK_MOVE_SPEED = 1.2;
+  public static ConfigSpawnEntity config= new ConfigSpawnEntity(EntityFallenKnight.class, EnumCreatureType.MONSTER);
 
   private EntityAIMountedArrowAttack aiArrowAttack;
   private EntityAIMountedAttackOnCollide aiAttackOnCollide;

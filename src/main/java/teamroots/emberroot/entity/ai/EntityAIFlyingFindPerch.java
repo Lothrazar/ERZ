@@ -6,7 +6,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
-import teamroots.emberroot.EntityUtil;
+import teamroots.emberroot.util.EntityUtil;
 
 public class EntityAIFlyingFindPerch extends EntityAIBase {
   private EntityCreature entity;

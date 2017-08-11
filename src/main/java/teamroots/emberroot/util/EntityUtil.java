@@ -1,4 +1,4 @@
-package teamroots.emberroot;
+package teamroots.emberroot.util;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -21,6 +22,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import teamroots.emberroot.Point3i;
+import teamroots.emberroot.VecUtil;
 
 public class EntityUtil {
   public static boolean isHardDifficulty(World worldObj) {
@@ -154,5 +157,19 @@ public class EntityUtil {
     if (!block.getMaterial(bs).isSolid()) { return false; }
     AxisAlignedBB collides = block.getCollisionBoundingBox(bs, world, bellow);
     return collides != null;
+  }
+  public static void setSpeed(EntityLivingBase entity, double s) {
+    entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(s);
+  }
+  public static void setMaxHealth(EntityLivingBase entity, double maxHealth) {
+    entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(maxHealth);
+  }
+  public static void setBaseDamage(EntityLivingBase entity, double attackDamage) {
+    IAttributeInstance ai = entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);
+    if (ai == null) {
+      entity.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+      ai = entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);
+    }
+    ai.setBaseValue(attackDamage);
   }
 }

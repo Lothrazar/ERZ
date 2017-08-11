@@ -24,6 +24,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import teamroots.emberroot.config.ConfigSpawnEntity;
 /**
  * Original author: https://github.com/CrazyPants
  */
@@ -32,6 +33,8 @@ public class EntityFallenMount extends EntityHorse   {
   public static final String NAME = "fallenmount";
 
   public static final double MOUNTED_ATTACK_MOVE_SPEED = 2.5;
+
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFallenMount.class, EnumCreatureType.MONSTER);
 
   private boolean wasRidden = false;
   private final EntityAINearestAttackableTarget<EntityPlayer> findTargetAI;

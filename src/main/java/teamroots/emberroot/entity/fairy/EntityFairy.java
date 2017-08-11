@@ -9,6 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -35,6 +36,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
+import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.ai.EntityAITemptFlying;
 import teamroots.emberroot.proxy.ClientProxy;
 
@@ -110,6 +112,9 @@ public class EntityFairy extends EntityFlying {
       return 0;
     }
   }
+  public static Random random = new Random();
+  public static int counter = 0;
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFairy.class, EnumCreatureType.CREATURE);
   //public UUID owner = null;
   public EntityFairy(World world) {
     super(world);
@@ -214,8 +219,6 @@ public class EntityFairy extends EntityFlying {
       }
     }
   }
-  public static Random random = new Random();
-  public static int counter = 0;
   @SideOnly(Side.CLIENT)
   public static void spawnParticleGlow(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {
     if (EmberRootZoo.proxy instanceof ClientProxy) {

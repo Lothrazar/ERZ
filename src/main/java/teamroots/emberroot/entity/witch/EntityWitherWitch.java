@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -38,18 +39,21 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
-import teamroots.emberroot.EntityUtil;
 import teamroots.emberroot.Point3i;
-import teamroots.emberroot.SpawnUtil;
+import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.ai.EntityAIRangedAttack;
 import teamroots.emberroot.entity.cat.EntityWitherCat;
 import teamroots.emberroot.entity.cat.EntityWitherCat.GrowthMode;
+import teamroots.emberroot.util.EntityUtil;
+import teamroots.emberroot.util.SpawnUtil;
 
 /**
  * Original author: https://github.com/CrazyPants
  */
 public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
   public static final String NAME = "witherwitch";
+
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityWitherWitch.class, EnumCreatureType.MONSTER);
 
   private int attackTimer;
   private EntityLivingBase attackedWithPotion;
