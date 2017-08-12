@@ -37,7 +37,14 @@ public class EntityDireWolf extends EntityMob {
   public static final SoundEvent SND_HOWL = new SoundEvent(new ResourceLocation(Const.MODID, "direwolf.howl"));
   public static final SoundEvent SND_GROWL = new SoundEvent(new ResourceLocation(Const.MODID, "direwolf.growl"));
   public static final SoundEvent SND_DEATH = new SoundEvent(new ResourceLocation(Const.MODID, "direwolf.death"));
-  //  private static final int ANGRY_INDEX = 12;
+  public static enum VariantColors {
+    WHITE, GREY, BLACK;
+    public String nameLower() {
+      return this.name().toLowerCase();
+    }
+  }
+  public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityDireWolf.class, DataSerializers.VARINT);
+ 
   private static final DataParameter<Boolean> ANGRY_INDEX = EntityDataManager.<Boolean> createKey(EntityDireWolf.class, DataSerializers.BOOLEAN);
   private static final int direWolfAggresiveRange = 8;
   private static final int direWolfPackHowlAmount = 3;
@@ -70,7 +77,15 @@ public class EntityDireWolf extends EntityMob {
   protected void entityInit() {
     super.entityInit();
     dataManager.register(ANGRY_INDEX, Boolean.FALSE);
-    updateAngry();
+    updateAngry();   
+    this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
+
+  }
+  public Integer getVariant() {
+    return getDataManager().get(variant);
+  }
+  public VariantColors getVariantEnum() {
+    return VariantColors.values()[getVariant()];
   }
   public boolean isAngry() {
     return dataManager.get(ANGRY_INDEX);
