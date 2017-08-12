@@ -7,6 +7,9 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
@@ -17,6 +20,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
+import teamroots.emberroot.entity.owl.EntityOwl;
+import teamroots.emberroot.entity.owl.EntityOwl.VariantColors;
 import teamroots.emberroot.util.SpawnUtil;
 
 /**
@@ -24,6 +29,13 @@ import teamroots.emberroot.util.SpawnUtil;
  */
 public class EntityDireSlime extends EntityMagmaCube {
   public static final String NAME = "slime";
+  public static enum VariantColors {
+    DIRT, SAND, STONE, GRAVEL, NETHER, SNOW;
+    public String nameLower() {
+      return this.name().toLowerCase();
+    }
+  }
+  public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityDireSlime.class, DataSerializers.VARINT);
   public enum SlimeConf {
     SMALL(1, 4, 3, 0.4), MEDIUM(2, 8, 5, 0.2), LARGE(4, 20, 8, 0.4);
     public final int size;
@@ -52,6 +64,17 @@ public class EntityDireSlime extends EntityMagmaCube {
   public EntityDireSlime(World world) {
     super(world);
     setSlimeSize(1, false);
+  }
+  public Integer getVariant() {
+    return getDataManager().get(variant);
+  }
+  public VariantColors getVariantEnum() {
+    return VariantColors.values()[getVariant()];
+  }
+  @Override
+  protected void entityInit() {
+    super.entityInit();
+    this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
   }
   @Override
   public void setSlimeSize(int size, boolean doFullHeal) {

@@ -10,11 +10,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigManager;
+import teamroots.emberroot.entity.owl.EntityOwl;
 import teamroots.emberroot.util.RenderUtil;
 
 @SideOnly(Side.CLIENT)
 public class RenderDireSlime extends RenderLiving<EntityDireSlime> {
-  private static final ResourceLocation magmaCubeTextures = new ResourceLocation(Const.MODID, "textures/entity/slime_dirt.png");
   public RenderDireSlime(RenderManager rm) {
     super(rm, new ModelDireSlime(), 0.25F);
   }
@@ -33,8 +33,9 @@ public class RenderDireSlime extends RenderLiving<EntityDireSlime> {
       RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
   @Override
-  protected ResourceLocation getEntityTexture(EntityDireSlime p_110775_1_) {
-    return magmaCubeTextures;
+  protected ResourceLocation getEntityTexture(EntityDireSlime entity) {
+    String colour = entity.getVariantEnum().nameLower();
+    return new ResourceLocation(Const.MODID, "textures/entity/slime_" + colour + ".png");
   }
   @Override
   protected void applyRotations(EntityDireSlime entity, float f, float rotationYaw, float partialTicks) {
