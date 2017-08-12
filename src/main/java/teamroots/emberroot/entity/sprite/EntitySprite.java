@@ -46,6 +46,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.util.Util;
 
@@ -76,17 +77,15 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
     Random random = new Random();
     public int offset = random.nextInt(25);
     
-    public SoundEvent ambientSound;
-    public SoundEvent hurtSound;
-
+    public static SoundEvent ambientSound= new SoundEvent(new ResourceLocation(Const.MODID,"spiritambient"));
+    public static SoundEvent hurtSound = new SoundEvent(new ResourceLocation(Const.MODID,"spirithurt"));
+ 
     public EntitySprite(World worldIn) {
     	super(worldIn);
         this.noClip = true;
         setSize(0.75f,0.75f);
         this.isAirBorne = true;
 		this.experienceValue = 10;
-		ambientSound = new SoundEvent(new ResourceLocation("roots:spiritAmbient"));
-		hurtSound = new SoundEvent(new ResourceLocation("roots:spiritHurt"));
 		this.rotationYaw = rand.nextInt(240)+60;
     }
     

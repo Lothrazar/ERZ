@@ -42,5 +42,57 @@
     "sounds": [
       "emberroot:owl/hurt"
     ]
-  }
+  },
+  
+  
+      "spiritAmbient":
+    { 
+    "category": "neutral",
+    "sounds": [ "emberroot:spiritambient" ] 
+    },
+    "spiritHurt":
+    { 
+    "category": "neutral",
+    "sounds": [ "emberroot:spirithurt" ] 
+    },
+    "bossAmbient":
+    { 
+    "category": "hostile",
+    "sounds": [ "emberroot:bossambient" ] 
+    },
+    "bossHurt":
+    { 
+    "category": "hostile",
+    "sounds": [ "emberroot:bosshurt" ] 
+    },
+    "bossDeath":
+    { 
+    "category": "hostile",
+    "sounds": [ "emberroot:bossdeath" ] 
+    },
+    "staffCast":
+    { 
+    "category": "player",
+    "sounds": [ "emberroot:staffcast" ] 
+    },
+    "meleeCast":
+    { 
+    "category": "player",
+    "sounds": [ "emberroot:meleecast" ] 
+    },
+    "ritualCast":
+    { 
+    "category": "emberroot:player",
+    "sounds": [ "emberroot:ritualprocess" ] 
+    },
+    "chargingStart":
+    { 
+    "category": "emberroot:player",
+    "sounds": [ "emberroot:chargingstart" ] 
+    },
+    "charging":
+    { 
+    "category": "emberroot:player",
+    "sounds": [ "emberroot:charging" ] 
+    }
 }

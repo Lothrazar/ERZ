@@ -4,6 +4,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -15,6 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.config.ConfigManager;
 import teamroots.emberroot.entity.owl.EntityOwl;
 import teamroots.emberroot.entity.owl.ItemOwlEgg;
+import teamroots.emberroot.entity.sprite.EntitySprite;
 import teamroots.emberroot.entity.wolf.EntityDireWolf;
 import teamroots.emberroot.proxy.CommonProxy;
 
@@ -57,6 +60,11 @@ public class EmberRootZoo {
     registry.register(EntityDireWolf.SND_HOWL);
     registry.register(EntityDireWolf.SND_GROWL);
     registry.register(EntityDireWolf.SND_DEATH);
+    registry.register(EntitySprite.ambientSound);
+    registry.register(EntitySprite.hurtSound);
+    
+    
+ 
   }
   public static DamageSource damage_ember;
   public static Item itemOwlEgg;
