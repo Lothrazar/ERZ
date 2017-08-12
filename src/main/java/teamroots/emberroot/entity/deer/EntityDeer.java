@@ -25,8 +25,14 @@ import teamroots.emberroot.config.ConfigSpawnEntity;
 public class EntityDeer extends EntityAnimal {
   public static final DataParameter<Boolean> hasHorns = EntityDataManager.<Boolean> createKey(EntityDeer.class, DataSerializers.BOOLEAN);
   public static final DataParameter<Boolean> hasRednose = EntityDataManager.<Boolean> createKey(EntityDeer.class, DataSerializers.BOOLEAN);
-  public static final String NAME = "deer";  
-
+  public static final String NAME = "deer";
+  public static enum VariantColors {
+    PLAIN, GREY, BROWN, COPPER;
+    public String nameLower() {
+      return this.name().toLowerCase();
+    }
+  }
+  public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityDeer.class, DataSerializers.VARINT);
   public static int chanceRudolf = 200;//in config now, defaults 120;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityDeer.class, EnumCreatureType.CREATURE);
   public EntityDeer(World world) {
@@ -40,6 +46,13 @@ public class EntityDeer extends EntityAnimal {
     this.getDataManager().register(hasHorns, rand.nextBoolean());
     boolean red = rand.nextInt(chanceRudolf) == 0;
     this.getDataManager().register(hasRednose, red);
+    this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
+  }
+  public Integer getVariant() {
+    return getDataManager().get(variant);
+  }
+  public VariantColors getVariantEnum() {
+    return VariantColors.values()[getVariant()];
   }
   @Override
   protected void initEntityAI() {

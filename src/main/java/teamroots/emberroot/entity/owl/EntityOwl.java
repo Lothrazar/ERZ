@@ -54,14 +54,13 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
     public String nameLower() {
       return this.name().toLowerCase();
     }
-  }  public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityOwl.class, DataSerializers.VARINT);
-  
+  }
+  public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityOwl.class, DataSerializers.VARINT);
   public static final SoundEvent SOUND_HOOT = new SoundEvent(new ResourceLocation(Const.MODID, "owl.hoot_single"));
   public static final SoundEvent SOUND_HOOT_DOUBLE = new SoundEvent(new ResourceLocation(Const.MODID, "owl.hoot_double"));
   public static final SoundEvent SOUND_HURT = new SoundEvent(new ResourceLocation(Const.MODID, "owl.hurt"));
   private static final int owlTimeBetweenEggsMin = 11;
   private static final int owlTimeBetweenEggsMax = 77;
-  
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityOwl.class, EnumCreatureType.CREATURE);
   private float wingRotation;
   private float prevWingRotation;
