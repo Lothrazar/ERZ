@@ -56,6 +56,8 @@ import teamroots.emberroot.entity.slime.EntityRainbowSlime;
 import teamroots.emberroot.entity.slime.RenderWaterSlime;
 import teamroots.emberroot.entity.sprout.EntitySprout;
 import teamroots.emberroot.entity.sprout.RenderSprout;
+import teamroots.emberroot.entity.timberwolf.EntityTimberWolf;
+import teamroots.emberroot.entity.timberwolf.RenderTimberWolf;
 import teamroots.emberroot.entity.witch.EntityWitherWitch;
 import teamroots.emberroot.entity.witch.RenderWitherWitch;
 import teamroots.emberroot.entity.wolf.EntityDireWolf;
@@ -131,6 +133,11 @@ public class RegistryManager {
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityFallenKnight.NAME), 0x365A25, 0xA0A0A0);
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityFallenMount.NAME), EntityFallenMount.class, EntityFallenMount.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityFallenMount.NAME), 0x365A25, 0xA0A0A0);
+  
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityTimberWolf.NAME), EntityTimberWolf.class, EntityTimberWolf.NAME, id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityTimberWolf.NAME), 0x696969, 0xA5A5A5);
+    
+  
   }
   public static void registerDamageSources() {
     EmberRootZoo.damage_ember = new DamageGolem();
@@ -160,6 +167,9 @@ public class RegistryManager {
     RenderingRegistry.registerEntityRenderingHandler(EntityFallenKnight.class, new RenderFallenKnight.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityFallenMount.class, new RenderFallenMount.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityOwlEgg.class, new RenderEntityOwlEgg.Factory());
+    
+
+    RenderingRegistry.registerEntityRenderingHandler(EntityTimberWolf.class, new RenderTimberWolf.Factory());
   }
   
   

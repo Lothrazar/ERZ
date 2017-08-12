@@ -6,6 +6,7 @@ import teamroots.emberroot.entity.golem.ModelGolem;
 import teamroots.emberroot.entity.golem.RenderAncientGolem;
 import teamroots.emberroot.entity.slime.ModelWaterSlime;
 import teamroots.emberroot.entity.sprout.ModelSprout;
+import teamroots.emberroot.entity.timberwolf.ModelTimberWolf;
 import teamroots.emberroot.particle.ParticleRenderer;
 
 public class ClientProxy extends CommonProxy {
@@ -19,5 +20,6 @@ public class ClientProxy extends CommonProxy {
     ModelFairy.instance = new ModelFairy();
     ModelWaterSlime.instance = new ModelWaterSlime(16);
     RenderAncientGolem.model = new ModelGolem();
+    ModelTimberWolf.instance = new ModelTimberWolf();
   }
 }
