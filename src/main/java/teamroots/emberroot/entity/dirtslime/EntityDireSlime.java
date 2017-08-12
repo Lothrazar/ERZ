@@ -5,8 +5,10 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -16,8 +18,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.owl.EntityOwl;
@@ -75,6 +79,42 @@ public class EntityDireSlime extends EntityMagmaCube {
   protected void entityInit() {
     super.entityInit();
     this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
+  }
+  private boolean blockBelowMatches(Block target) {
+    Block blockBelow = this.world.getBlockState(this.getPosition().down()).getBlock();
+    return OreDictionary.itemMatches(new ItemStack(target), new ItemStack(blockBelow), false);
+  }
+  @Override
+  public void onUpdate() {
+    super.onUpdate();
+    Biome biome = this.world.getBiome(this.getPosition());
+    int newVariant = -1;
+    if (biome.equals(Biomes.HELL) || blockBelowMatches(Blocks.NETHERRACK)) {
+      newVariant = VariantColors.NETHER.ordinal();
+      newVariant = VariantColors.NETHER.ordinal();
+    }
+    else if (biome.equals(Biomes.SKY) || blockBelowMatches(Blocks.END_STONE)) {
+      newVariant = VariantColors.END.ordinal();
+    }
+    else if (blockBelowMatches(Blocks.DIRT) || blockBelowMatches(Blocks.GRASS)) {
+      newVariant = VariantColors.DIRT.ordinal();
+    }
+    else if (blockBelowMatches(Blocks.SAND) || blockBelowMatches(Blocks.SANDSTONE)) {
+      newVariant = VariantColors.SAND.ordinal();
+    }
+    else if (blockBelowMatches(Blocks.STONE) || blockBelowMatches(Blocks.COBBLESTONE)) {
+      newVariant = VariantColors.STONE.ordinal();
+    }
+    else if (blockBelowMatches(Blocks.GRAVEL)) {
+      newVariant = VariantColors.GRAVEL.ordinal();
+    }
+    else if (biome.isSnowyBiome() || blockBelowMatches(Blocks.SNOW)) {
+      newVariant = VariantColors.SNOW.ordinal();
+    }
+    if (newVariant >= 0 && newVariant != this.getVariant()) { //dont change from SAME -> SAME
+      dataManager.set(variant, newVariant);
+      dataManager.setDirty(variant);
+    }
   }
   @Override
   public void setSlimeSize(int size, boolean doFullHeal) {
@@ -170,23 +210,22 @@ public class EntityDireSlime extends EntityMagmaCube {
     int res = (int) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
     return res;
   }
-  // This is called every tick on onUpdate(), so avoid moving the slime around twice per tick.
   @Override
   protected void setSize(float p_70105_1_, float p_70105_2_) {
     int i = this.getSlimeSize();
     super.setSize(i, i);
   }
   @Override
-  public void onCollideWithPlayer(EntityPlayer p_70100_1_) {
+  public void onCollideWithPlayer(EntityPlayer player) {
     int i = getSlimeSize();
-    if (canEntityBeSeen(p_70100_1_) && this.getDistanceSqToEntity(p_70100_1_) < (double) i * (double) i
-        && p_70100_1_.attackEntityFrom(DamageSource.causeMobDamage(this), getAttackStrength())) {
+    if (canEntityBeSeen(player) && this.getDistanceSqToEntity(player) < (double) i * (double) i
+        && player.attackEntityFrom(DamageSource.causeMobDamage(this), getAttackStrength())) {
       playSound(SoundEvents.ENTITY_SLIME_ATTACK, 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
     }
   }
   @Override
-  protected float applyArmorCalculations(DamageSource p_70655_1_, float p_70655_2_) {
-    if (!p_70655_1_.isUnblockable()) { return Math.min(Math.max(p_70655_2_ - 3 - this.getSlimeSize(), this.getSlimeSize()) / 2, p_70655_2_); }
-    return p_70655_2_;
+  protected float applyArmorCalculations(DamageSource ds, float dmg) {
+    if (!ds.isUnblockable()) { return Math.min(Math.max(dmg - 3 - this.getSlimeSize(), this.getSlimeSize()) / 2, dmg); }
+    return dmg;
   }
 }
