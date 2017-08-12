@@ -56,6 +56,8 @@ import teamroots.emberroot.entity.slime.EntityRainbowSlime;
 import teamroots.emberroot.entity.slime.RenderWaterSlime;
 import teamroots.emberroot.entity.sprite.EntitySprite;
 import teamroots.emberroot.entity.sprite.RenderSprite;
+import teamroots.emberroot.entity.spriteling.EntitySpriteling;
+import teamroots.emberroot.entity.spriteling.RenderSpriteling;
 import teamroots.emberroot.entity.sprout.EntitySprout;
 import teamroots.emberroot.entity.sprout.RenderSprout;
 import teamroots.emberroot.entity.timberwolf.EntityTimberWolf;
@@ -64,6 +66,7 @@ import teamroots.emberroot.entity.witch.EntityWitherWitch;
 import teamroots.emberroot.entity.witch.RenderWitherWitch;
 import teamroots.emberroot.entity.wolf.EntityDireWolf;
 import teamroots.emberroot.entity.wolf.RenderDirewolf;
+import teamroots.emberroot.util.Util;
 
 public class RegistryManager {
   public static int intColor(int r, int g, int b) {
@@ -139,7 +142,10 @@ public class RegistryManager {
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityTimberWolf.NAME), EntityTimberWolf.class, EntityTimberWolf.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityTimberWolf.NAME), 0x696969, 0xA5A5A5);
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntitySprite.NAME), EntitySprite.class, EntitySprite.NAME, id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntitySprite.NAME), 0x365A25, 0xA0A0A0);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntitySprite.NAME),  Util.intColor(130, 255, 60),  Util.intColor(130, 255, 60));
+    
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntitySpriteling.NAME), EntitySpriteling.class, EntitySpriteling.NAME, id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntitySpriteling.NAME),  Util.intColor(130, 255, 60),  Util.intColor(130, 255, 60));
     
   
   }
@@ -175,6 +181,7 @@ public class RegistryManager {
 
     RenderingRegistry.registerEntityRenderingHandler(EntityTimberWolf.class, new RenderTimberWolf.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntitySprite.class, new RenderSprite.Factory());
+    RenderingRegistry.registerEntityRenderingHandler(EntitySpriteling.class, new RenderSpriteling.Factory());
   }
   
   

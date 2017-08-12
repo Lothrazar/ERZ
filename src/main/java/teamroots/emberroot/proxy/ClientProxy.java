@@ -11,6 +11,7 @@ import teamroots.emberroot.entity.slime.ModelWaterSlime;
 import teamroots.emberroot.entity.sprite.ModelSprite;
 import teamroots.emberroot.entity.sprite.particle.ParticleMagicSparkle;
 import teamroots.emberroot.entity.sprite.particle.ParticleMagicSparkleScalable;
+import teamroots.emberroot.entity.spriteling.ModelSpriteling;
 import teamroots.emberroot.entity.sprout.ModelSprout;
 import teamroots.emberroot.entity.timberwolf.ModelTimberWolf;
 import teamroots.emberroot.particle.ParticleRenderer;
@@ -28,6 +29,7 @@ public class ClientProxy extends CommonProxy {
     RenderAncientGolem.model = new ModelGolem();
     ModelTimberWolf.instance = new ModelTimberWolf();
     ModelSprite.instance = new ModelSprite();
+    ModelSpriteling.instance = new ModelSpriteling();
   }
   
   
