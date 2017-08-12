@@ -41,12 +41,22 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import teamroots.emberroot.config.ConfigSpawnEntity;
+import teamroots.emberroot.entity.owl.EntityOwl;
+import teamroots.emberroot.entity.owl.EntityOwl.VariantColors;
 
 /**
  * Original author: https://github.com/CrazyPants
  */
 public class EntityEnderminy extends EntityMob {
   public static final String NAME = "enderminy";
+  public static enum VariantColors {
+    GREEN,BLUE,PURPLE;
+    public String nameLower() {
+      return this.name().toLowerCase();
+    }
+  }
+  public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityEnderminy.class, DataSerializers.VARINT);
+ 
   private static final int MAX_RND_TP_DISTANCE = 32;
   //  private static final int SCREAMING_INDEX = 30;
   private static final DataParameter<Boolean> SCREAMING_INDEX = EntityDataManager.<Boolean> createKey(EntityEnderminy.class, DataSerializers.BOOLEAN);
@@ -84,6 +94,8 @@ public class EntityEnderminy extends EntityMob {
   protected void entityInit() {
     super.entityInit();
     dataManager.register(SCREAMING_INDEX, Boolean.valueOf(false));
+
+    dataManager.register(variant, rand.nextInt(VariantColors.values().length));
   }
   //  @Override
   //  public boolean getCanSpawnHere() {
@@ -96,6 +108,13 @@ public class EntityEnderminy extends EntityMob {
   //    }
   //    return passedGrassCheck && posY > Config.enderminyMinSpawnY && super.getCanSpawnHere();
   //  }
+  public Integer getVariant() {
+    return dataManager.get(variant);
+  }
+  public VariantColors getVariantEnum() {
+    return VariantColors.values()[getVariant()];
+  }
+ 
   /**
    * Checks to see if this enderman should be attacking this player
    */

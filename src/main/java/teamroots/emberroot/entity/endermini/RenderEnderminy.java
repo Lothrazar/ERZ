@@ -12,11 +12,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigManager;
+import teamroots.emberroot.entity.owl.EntityOwl;
 import teamroots.emberroot.util.RenderUtil;
 
 public class RenderEnderminy extends RenderLiving<EntityEnderminy> {
   private static final ResourceLocation endermanEyesTexture = new ResourceLocation(Const.MODID, "textures/entity/enderminy_eyes.png");
-  private static final ResourceLocation endermanTextures = new ResourceLocation(Const.MODID, "textures/entity/enderminy.png");
   private ModelEnderman endermanModel;
   private Random rnd = new Random();
   public RenderEnderminy(RenderManager rm) {
@@ -35,11 +35,13 @@ public class RenderEnderminy extends RenderLiving<EntityEnderminy> {
     if (ConfigManager.renderDebugHitboxes)
       RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
-  protected ResourceLocation getEntityTexture(EntityEnderminy p_110775_1_) {
-    return endermanTextures;
+  @Override
+  protected ResourceLocation getEntityTexture(EntityEnderminy entity) {
+    String colour = entity.getVariantEnum().nameLower();
+    return new ResourceLocation(Const.MODID, "textures/entity/endermini_" + colour + ".png");
   }
   @Override
-  protected void preRenderCallback(EntityEnderminy p_77041_1_, float p_77041_2_) {
+  protected void preRenderCallback(EntityEnderminy entity, float partialTickTime) {
     GL11.glScalef(0.5F, 0.25F, 0.5F);
   }
   private class EyesLayer implements LayerRenderer<EntityEnderminy> {
