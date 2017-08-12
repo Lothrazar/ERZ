@@ -30,7 +30,7 @@ import teamroots.emberroot.util.SpawnUtil;
 public class EntityDireSlime extends EntityMagmaCube {
   public static final String NAME = "slime";
   public static enum VariantColors {
-    DIRT, SAND, STONE, GRAVEL, NETHER, SNOW;
+    DIRT, SAND, STONE, GRAVEL, NETHER, SNOW, END;
     public String nameLower() {
       return this.name().toLowerCase();
     }
