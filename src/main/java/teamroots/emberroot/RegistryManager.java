@@ -54,6 +54,8 @@ import teamroots.emberroot.entity.owl.RenderEntityOwlEgg;
 import teamroots.emberroot.entity.owl.RenderOwl;
 import teamroots.emberroot.entity.slime.EntityRainbowSlime;
 import teamroots.emberroot.entity.slime.RenderWaterSlime;
+import teamroots.emberroot.entity.sprite.EntitySprite;
+import teamroots.emberroot.entity.sprite.RenderSprite;
 import teamroots.emberroot.entity.sprout.EntitySprout;
 import teamroots.emberroot.entity.sprout.RenderSprout;
 import teamroots.emberroot.entity.timberwolf.EntityTimberWolf;
@@ -136,6 +138,8 @@ public class RegistryManager {
   
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityTimberWolf.NAME), EntityTimberWolf.class, EntityTimberWolf.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityTimberWolf.NAME), 0x696969, 0xA5A5A5);
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntitySprite.NAME), EntitySprite.class, EntitySprite.NAME, id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntitySprite.NAME), 0x365A25, 0xA0A0A0);
     
   
   }
@@ -170,6 +174,7 @@ public class RegistryManager {
     
 
     RenderingRegistry.registerEntityRenderingHandler(EntityTimberWolf.class, new RenderTimberWolf.Factory());
+    RenderingRegistry.registerEntityRenderingHandler(EntitySprite.class, new RenderSprite.Factory());
   }
   
   
