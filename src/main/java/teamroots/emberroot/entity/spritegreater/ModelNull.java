@@ -12,6 +12,6 @@ public class ModelNull extends ModelBase {
   }
   @Override
   public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-    //
+
   }
 }

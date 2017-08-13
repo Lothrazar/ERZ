@@ -16,7 +16,7 @@ public class ParticleMagicSparkle extends Particle {
   public double colorG = 0;
   public double colorB = 0;
   public int lifetime = 80;
-  public ResourceLocation texture = new ResourceLocation(Const.MODID, "textures/entity/sparkle");
+  public static final ResourceLocation texture = new ResourceLocation(Const.MODID, "entity/particle_star");
   public ParticleMagicSparkle(World worldIn, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b) {
     super(worldIn, x, y, z, 0, 0, 0);
     this.colorR = r;
