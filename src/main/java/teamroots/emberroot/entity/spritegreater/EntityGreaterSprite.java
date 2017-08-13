@@ -203,7 +203,7 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
           proj.onInitialSpawn(getEntityWorld().getDifficultyForLocation(getPosition()), null);
           proj.initSpecial(getAttackTarget(), 4.0f);
           getEntityWorld().spawnEntity(proj);
-          getEntityWorld().playSound(posX, posY, posZ, new SoundEvent(new ResourceLocation("staffcast")), SoundCategory.HOSTILE, 0.95f + random.nextFloat() * 0.1f, 0.7f + random.nextFloat() * 0.1f, false);
+          getEntityWorld().playSound(posX, posY, posZ, EntitySprite.staffcast, SoundCategory.HOSTILE, 0.95f + random.nextFloat() * 0.1f, 0.7f + random.nextFloat() * 0.1f, false);
           for (int i = 0; i < 40; i++) {
           EmberRootZoo.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX, posY + height / 2.0f, posZ, Math.pow(1.15f * (random.nextFloat() - 0.5f), 3.0), Math.pow(1.15f * (random.nextFloat() - 0.5f), 3.0), Math.pow(1.15f * (random.nextFloat() - 0.5f), 3.0), 107, 255, 28);
           }

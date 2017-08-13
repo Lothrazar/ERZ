@@ -75,6 +75,7 @@ public class EntitySprite extends EntityFlying implements ISprite {// implements
   public int offset = random.nextInt(25);
   public static SoundEvent ambientSound = new SoundEvent(new ResourceLocation(Const.MODID, "spiritambient"));
   public static SoundEvent hurtSound = new SoundEvent(new ResourceLocation(Const.MODID, "spirithurt"));
+  public static SoundEvent staffcast = new SoundEvent(new ResourceLocation(Const.MODID,"staffcast"));
   public EntitySprite(World worldIn) {
     super(worldIn);
     this.noClip = true;
