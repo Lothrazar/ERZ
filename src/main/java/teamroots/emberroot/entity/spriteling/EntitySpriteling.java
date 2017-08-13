@@ -46,6 +46,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import teamroots.emberroot.EmberRootZoo;
+import teamroots.emberroot.entity.sprite.EntitySprite;
 import teamroots.emberroot.entity.sprite.ISprite;
 import teamroots.emberroot.util.Util;
 
@@ -68,17 +69,14 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
     Random random = new Random();
     public int offset = random.nextInt(25);
     
-    public SoundEvent ambientSound;
-    public SoundEvent hurtSound;
+ 
 
     public EntitySpriteling(World worldIn) {
     	super(worldIn);
         setSize(0.5f,0.5f);
         this.isAirBorne = true;
         this.noClip = true;
-		this.experienceValue = 5;
-		ambientSound = new SoundEvent(new ResourceLocation("roots:spiritAmbient"));
-		hurtSound = new SoundEvent(new ResourceLocation("roots:spiritHurt"));
+		this.experienceValue = 5; 
 		this.rotationYaw = rand.nextInt(240)+60;
     }
     
@@ -154,7 +152,7 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
     	if (!getDataManager().get(stunned).booleanValue()){
 		    if (this.ticksExisted % 20 == 0){
 		    	if (random.nextInt(4) == 0 && this.getDataManager().get(stunned).booleanValue() == false){
-		    		getEntityWorld().playSound(posX, posY, posZ, ambientSound, SoundCategory.NEUTRAL, random.nextFloat()*0.1f+0.95f, random.nextFloat()*0.1f+1.45f, false);
+		    		getEntityWorld().playSound(posX, posY, posZ, EntitySprite.ambientSound, SoundCategory.NEUTRAL, random.nextFloat()*0.1f+0.95f, random.nextFloat()*0.1f+1.45f, false);
 		    	}
 		    }
 	    	if (twirlTimer > 0){
@@ -262,7 +260,7 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
     
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount){
-    	getEntityWorld().playSound(posX, posY, posZ, hurtSound, SoundCategory.NEUTRAL, random.nextFloat()*0.1f+0.95f, random.nextFloat()*0.1f+1.7f, false);
+    	getEntityWorld().playSound(posX, posY, posZ, EntitySprite.hurtSound, SoundCategory.NEUTRAL, random.nextFloat()*0.1f+0.95f, random.nextFloat()*0.1f+1.7f, false);
     	getDataManager().set(happiness, getDataManager().get(happiness)-5);
     	if (source.getTrueSource() instanceof EntityLivingBase){
     		this.setAttackTarget((EntityLivingBase)source.getTrueSource());
@@ -281,7 +279,7 @@ public class EntitySpriteling  extends EntityFlying implements ISprite {// imple
     @Override
     public void setDead(){
     	super.setDead();
-    	getEntityWorld().playSound(posX, posY, posZ, hurtSound, SoundCategory.NEUTRAL, random.nextFloat()*0.1f+0.95f, (random.nextFloat()*0.1f+1.7f)/2.0f, false);
+    	getEntityWorld().playSound(posX, posY, posZ, EntitySprite.hurtSound, SoundCategory.NEUTRAL, random.nextFloat()*0.1f+0.95f, (random.nextFloat()*0.1f+1.7f)/2.0f, false);
     }
 
     @Override
