@@ -19,7 +19,8 @@ public class RenderSpriteProjectile extends RenderLiving<EntitySpriteProjectile>
   }
   @Override
   protected ResourceLocation getEntityTexture(EntitySpriteProjectile entity) {
-    System.out.println("EH" + Const.MODID + "textures/entity/sparkle.png");
+//    System.out.println("EH" + Const.MODID + "textures/entity/sparkle.png");
+    //TODO: hmm somehow this still renders broken texture. but the file exists AND its used other places. revisit later!?!?!
     return new ResourceLocation(Const.MODID, "textures/entity/sparkle.png");
   }
   public static class Factory implements IRenderFactory<EntitySpriteProjectile> {
