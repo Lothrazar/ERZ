@@ -27,6 +27,14 @@ entity.withercat.name=Demon Cat
 entity.slime.name=Block Slime
 entity.owl.name=Owl
 
+entity.timberwolf.name=Timberwolf
+entity.rootsonespriteboss.name=Guardian of Sprites
+entity.rootsonespritegreater.name=Greater Sprite
+entity.rootsonesprite.name=Sprite
+entity.rootsonespriteling.name=Spriteling
+
+
+
 item.owl_egg.name=Owl Egg
 death.attack.ember=Slain by a Golem Flame
 
