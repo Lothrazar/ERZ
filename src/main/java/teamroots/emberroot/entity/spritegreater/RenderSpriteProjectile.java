@@ -13,7 +13,7 @@ import teamroots.emberroot.Const;
 public class RenderSpriteProjectile extends RenderLiving<EntitySpriteProjectile> {
 
 	public RenderSpriteProjectile(RenderManager renderManager, ModelBase modelBase, float shadowSize) {
-		super(renderManager, modelBase, shadowSize);
+		super(renderManager, modelBase, shadowSize );
 	}
 	
 	@Override
@@ -25,4 +25,12 @@ public class RenderSpriteProjectile extends RenderLiving<EntitySpriteProjectile>
 	protected ResourceLocation getEntityTexture(EntitySpriteProjectile entity) {
 		return new ResourceLocation(Const.MODID,"textures/entity/spriteling/spirit.png");
 	}
+	
+	
+	public static class Factory implements IRenderFactory<EntitySpriteProjectile> {
+    @Override
+    public RenderSpriteProjectile createRenderFor(RenderManager manager) {
+      return new RenderSpriteProjectile(manager, ModelNull.instance, 0.5f);
+    }
+  }
 }
