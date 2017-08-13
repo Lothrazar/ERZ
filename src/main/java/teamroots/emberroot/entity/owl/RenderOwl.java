@@ -28,7 +28,6 @@ public class RenderOwl extends RenderLiving<EntityOwl> {
     if (ConfigManager.renderDebugHitboxes)
       RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
-
   @Override
   protected ResourceLocation getEntityTexture(EntityOwl entity) {
     String colour = entity.getVariantEnum().nameLower();

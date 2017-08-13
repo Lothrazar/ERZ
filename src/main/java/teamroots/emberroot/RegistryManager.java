@@ -1,7 +1,6 @@
 package teamroots.emberroot;
 import java.util.ArrayList;
 import java.util.List;
- 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -144,20 +143,15 @@ public class RegistryManager {
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityFallenKnight.NAME), 0x365A25, 0xA0A0A0);
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityFallenMount.NAME), EntityFallenMount.class, EntityFallenMount.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityFallenMount.NAME), 0x365A25, 0xA0A0A0);
-  
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityTimberWolf.NAME), EntityTimberWolf.class, EntityTimberWolf.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityTimberWolf.NAME), 0x696969, 0xA5A5A5);
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntitySprite.NAME), EntitySprite.class, EntitySprite.NAME, id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntitySprite.NAME),  Util.intColor(130, 255, 60),  Util.intColor(130, 255, 60));
-    
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntitySprite.NAME), Util.intColor(130, 255, 60), Util.intColor(130, 255, 60));
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntitySpriteling.NAME), EntitySpriteling.class, EntitySpriteling.NAME, id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntitySpriteling.NAME),  Util.intColor(130, 255, 60),  Util.intColor(130, 255, 60));
- 
-    
-
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntitySpriteling.NAME), Util.intColor(130, 255, 60), Util.intColor(130, 255, 60));
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntitySpriteProjectile.NAME), EntitySpriteProjectile.class, EntitySpriteProjectile.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityGreaterSprite.NAME), EntityGreaterSprite.class, EntityGreaterSprite.NAME, id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityGreaterSprite.NAME),  Util.intColor(130, 255, 60),  Util.intColor(130, 255, 60));
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityGreaterSprite.NAME), Util.intColor(130, 255, 60), Util.intColor(130, 255, 60));
   }
   public static void registerDamageSources() {
     EmberRootZoo.damage_ember = new DamageGolem();
@@ -187,21 +181,13 @@ public class RegistryManager {
     RenderingRegistry.registerEntityRenderingHandler(EntityFallenKnight.class, new RenderFallenKnight.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityFallenMount.class, new RenderFallenMount.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityOwlEgg.class, new RenderEntityOwlEgg.Factory());
-    
-
     RenderingRegistry.registerEntityRenderingHandler(EntityTimberWolf.class, new RenderTimberWolf.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntitySprite.class, new RenderSprite.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntitySpriteling.class, new RenderSpriteling.Factory());
-
     RenderingRegistry.registerEntityRenderingHandler(EntityGreaterSprite.class, new RenderGreaterSprite.Factory());
-
     RenderingRegistry.registerEntityRenderingHandler(EntitySpriteProjectile.class, new RenderSpriteProjectile.Factory());
-//    RenderingRegistry.registerEntityRenderingHandler(EntitySpriteProjectile.class, new RenderSpriteProjectile(Minecraft.getMinecraft().getRenderManager(),ModelNull.instance,0.5f));//
-    
+    //    RenderingRegistry.registerEntityRenderingHandler(EntitySpriteProjectile.class, new RenderSpriteProjectile(Minecraft.getMinecraft().getRenderManager(),ModelNull.instance,0.5f));//
   }
-  
-  
-
   private void addRecipes() {
     //    ResourceLocation rl;
     //    //OreDictionary.registerOre("sand", new ItemStack(Blocks.SAND, 1, OreDictionary.WILDCARD_VALUE));//sand is already in dict by default

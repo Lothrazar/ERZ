@@ -50,13 +50,12 @@ import teamroots.emberroot.entity.owl.EntityOwl.VariantColors;
 public class EntityEnderminy extends EntityMob {
   public static final String NAME = "enderminy";
   public static enum VariantColors {
-    GREEN,BLUE,PURPLE;
+    GREEN, BLUE, PURPLE;
     public String nameLower() {
       return this.name().toLowerCase();
     }
   }
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityEnderminy.class, DataSerializers.VARINT);
- 
   private static final int MAX_RND_TP_DISTANCE = 32;
   //  private static final int SCREAMING_INDEX = 30;
   private static final DataParameter<Boolean> SCREAMING_INDEX = EntityDataManager.<Boolean> createKey(EntityEnderminy.class, DataSerializers.BOOLEAN);
@@ -94,7 +93,6 @@ public class EntityEnderminy extends EntityMob {
   protected void entityInit() {
     super.entityInit();
     dataManager.register(SCREAMING_INDEX, Boolean.valueOf(false));
-
     dataManager.register(variant, rand.nextInt(VariantColors.values().length));
   }
   //  @Override
@@ -114,7 +112,6 @@ public class EntityEnderminy extends EntityMob {
   public VariantColors getVariantEnum() {
     return VariantColors.values()[getVariant()];
   }
- 
   /**
    * Checks to see if this enderman should be attacking this player
    */

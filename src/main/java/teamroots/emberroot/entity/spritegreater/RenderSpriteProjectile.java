@@ -19,7 +19,7 @@ public class RenderSpriteProjectile extends RenderLiving<EntitySpriteProjectile>
   }
   @Override
   protected ResourceLocation getEntityTexture(EntitySpriteProjectile entity) {
-    System.out.println("EH"+Const.MODID+     "textures/entity/sparkle.png");
+    System.out.println("EH" + Const.MODID + "textures/entity/sparkle.png");
     return new ResourceLocation(Const.MODID, "textures/entity/sparkle.png");
   }
   public static class Factory implements IRenderFactory<EntitySpriteProjectile> {

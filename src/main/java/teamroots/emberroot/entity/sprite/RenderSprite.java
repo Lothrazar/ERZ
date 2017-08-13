@@ -1,5 +1,4 @@
 package teamroots.emberroot.entity.sprite;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -14,20 +13,17 @@ import teamroots.emberroot.entity.timberwolf.ModelTimberWolf;
 import teamroots.emberroot.entity.timberwolf.RenderTimberWolf;
 
 public class RenderSprite extends RenderLiving<EntitySprite> {
-
-	public RenderSprite(RenderManager renderManager, ModelBase modelBase, float shadowSize) {
-		super(renderManager, modelBase, shadowSize);
-	}
-
-	@Override
-	protected ResourceLocation getEntityTexture(EntitySprite entity) {
-		return new ResourceLocation(Const.MODID,"textures/entity/spriteling/spirit.png");
-	}
-  
+  public RenderSprite(RenderManager renderManager, ModelBase modelBase, float shadowSize) {
+    super(renderManager, modelBase, shadowSize);
+  }
+  @Override
+  protected ResourceLocation getEntityTexture(EntitySprite entity) {
+    return new ResourceLocation(Const.MODID, "textures/entity/spriteling/spirit.png");
+  }
   public static class Factory implements IRenderFactory<EntitySprite> {
-     @Override
-     public RenderSprite createRenderFor(RenderManager manager) {
-       return new RenderSprite(manager, ModelSprite.instance, 0);
-     }
-   }
+    @Override
+    public RenderSprite createRenderFor(RenderManager manager) {
+      return new RenderSprite(manager, ModelSprite.instance, 0);
+    }
+  }
 }

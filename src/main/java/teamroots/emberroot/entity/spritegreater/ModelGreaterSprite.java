@@ -1,6 +1,4 @@
 package teamroots.emberroot.entity.spritegreater;
-
- 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -8,38 +6,34 @@ import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 import teamroots.emberroot.util.Util;
 
-public class ModelGreaterSprite extends ModelBase
-{
+public class ModelGreaterSprite extends ModelBase {
   public static ModelGreaterSprite instance;
-    //fields
-    ModelRenderer stonehead1;
-    ModelRenderer stonehead2;
-    ModelRenderer stonehead3;
-    ModelRenderer head1;
-    ModelRenderer head2;
-    ModelRenderer head3;
-    ModelRenderer head4;
-    ModelRenderer crest1;
-    ModelRenderer crest2;
-    ModelRenderer crest3;
-    ModelRenderer crest4;
-    ModelRenderer body1;
-    ModelRenderer body2;
-    ModelRenderer body3;
-    ModelRenderer body4;
-    ModelRenderer body5;
-    ModelRenderer leg1;
-    ModelRenderer leg2;
-    ModelRenderer leg3;
-    ModelRenderer leg4;
-    ModelRenderer leg5;
-    ModelRenderer leg6;
-  
-  public ModelGreaterSprite()
-  {
+  //fields
+  ModelRenderer stonehead1;
+  ModelRenderer stonehead2;
+  ModelRenderer stonehead3;
+  ModelRenderer head1;
+  ModelRenderer head2;
+  ModelRenderer head3;
+  ModelRenderer head4;
+  ModelRenderer crest1;
+  ModelRenderer crest2;
+  ModelRenderer crest3;
+  ModelRenderer crest4;
+  ModelRenderer body1;
+  ModelRenderer body2;
+  ModelRenderer body3;
+  ModelRenderer body4;
+  ModelRenderer body5;
+  ModelRenderer leg1;
+  ModelRenderer leg2;
+  ModelRenderer leg3;
+  ModelRenderer leg4;
+  ModelRenderer leg5;
+  ModelRenderer leg6;
+  public ModelGreaterSprite() {
     textureWidth = 128;
     textureHeight = 128;
-    
     stonehead1 = new ModelRenderer(this, 16, 32);
     stonehead1.addBox(-3F, -3F, -3F, 6, 6, 6);
     stonehead1.setRotationPoint(0F, 0F, -1F);
@@ -172,7 +166,6 @@ public class ModelGreaterSprite extends ModelBase
     leg6.setTextureSize(128, 128);
     leg6.mirror = true;
     setRotation(leg6, 1.047198F, 0F, -0.5235988F);
-    
     stonehead1.addChild(stonehead2);
     stonehead1.addChild(stonehead3);
     head1.addChild(head2);
@@ -194,75 +187,72 @@ public class ModelGreaterSprite extends ModelBase
     head1.addChild(leg5);
     head1.addChild(leg6);
   }
-  
   @Override
-  public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale){
-	  float pTicks = ageInTicks-(int)ageInTicks;
-	  float pitch1 = (float)Util.interpolate(((EntityGreaterSprite)entity).prevPitch2, ((EntityGreaterSprite)entity).prevPitch1, pTicks);
-	  float pitch2 = (float)Util.interpolate(((EntityGreaterSprite)entity).prevPitch3, ((EntityGreaterSprite)entity).prevPitch2, pTicks);
-	  float pitch3 = (float)Util.interpolate(((EntityGreaterSprite)entity).prevPitch4, ((EntityGreaterSprite)entity).prevPitch3, pTicks);
-	  float pitch4 = (float)Util.interpolate(((EntityGreaterSprite)entity).prevPitch5, ((EntityGreaterSprite)entity).prevPitch4, pTicks);
-	  float yaw1 = (float)Util.interpolate(((EntityGreaterSprite)entity).prevYaw2, ((EntityGreaterSprite)entity).prevYaw1, pTicks);
-	  float yaw2 = (float)Util.interpolate(((EntityGreaterSprite)entity).prevYaw3, ((EntityGreaterSprite)entity).prevYaw2, pTicks);
-	  float yaw3 = (float)Util.interpolate(((EntityGreaterSprite)entity).prevYaw4, ((EntityGreaterSprite)entity).prevYaw3, pTicks);
-	  float yaw4 = (float)Util.interpolate(((EntityGreaterSprite)entity).prevYaw5, ((EntityGreaterSprite)entity).prevYaw4, pTicks);
-	  GlStateManager.pushAttrib();
-	  GlStateManager.color(1f, 1f, 1f, 1f);
-	  GlStateManager.translate(0, 1.25, 0);
-	  setRotation(stonehead1, 0, 0, 0);
-	  GlStateManager.rotate(-0.5f*(float)Math.PI-(float)Math.toDegrees(entity.rotationYaw), 0, 1, 0);
-	  GlStateManager.rotate((float)Math.toDegrees(-entity.rotationPitch/2.0f), 1, 0, 0);
-	  if (((EntityGreaterSprite)entity).twirlTimer > 0){
-		  GlStateManager.rotate((float)18.0f*(20.0f-(float)((EntityGreaterSprite)entity).twirlTimer),0,0,1);
-	  }
-	  if (!((EntityGreaterSprite)entity).getDataManager().get(((EntityGreaterSprite)entity).stunned).booleanValue()){
-		  GlStateManager.rotate((float)(15.0f*Math.sin(Math.PI*2.0*(((double)(entity.ticksExisted%20))/20.0))), 0, 0, 1);
-	  }
-	  stonehead1.render(1.0f/16.0f);
-	  if (!((EntityGreaterSprite)entity).getDataManager().get(((EntityGreaterSprite)entity).stunned).booleanValue()){
-		  GlStateManager.rotate((float)(-15.0f*Math.sin(Math.PI*2.0*(((double)(entity.ticksExisted%20))/20.0))), 0, 0, 1);
-	  }
-	  if (((EntityGreaterSprite)entity).twirlTimer > 0){
-		  GlStateManager.rotate((float)-18.0f*(20.0f-(float)((EntityGreaterSprite)entity).twirlTimer),0,0,1);
-	  }
-	  GlStateManager.rotate(-(float)Math.toDegrees(-entity.rotationPitch/2.0f), 1, 0, 0);
-	  GlStateManager.rotate((float)Math.toDegrees(entity.rotationYaw)+0.5f*(float)Math.PI, 0, 1, 0);
-	  GlStateManager.enableAlpha();
-	  GlStateManager.enableBlend();
-	  GlStateManager.disableLighting();
-	  GlStateManager.color(1, 1, 1, 0.75f);
-	  setRotation(head1, 0, 0, 0);
-	  setRotation(body2, -2.0f*(pitch1-((EntityGreaterSprite)entity).rotationPitch), -2.0f*(yaw1-((EntityGreaterSprite)entity).rotationYaw), 0);
-	  setRotation(body3, 0.5f*(float)Math.PI-2.0f*(pitch2-pitch1), -2.0f*(yaw2-yaw1), 0);
-	  setRotation(body4, -2.0f*(pitch3-pitch2), 0, 2.0f*(yaw3-yaw2));
-	  setRotation(body5, -2.0f*(pitch4-pitch3), 0, 2.0f*(yaw4-yaw3));
-	  GlStateManager.rotate(-0.5f*(float)Math.PI-(float)Math.toDegrees(entity.rotationYaw), 0, 1, 0);
-	  GlStateManager.rotate((float)Math.toDegrees(-entity.rotationPitch/2.0f), 1, 0, 0);
-	  if (((EntityGreaterSprite)entity).twirlTimer > 0){
-		  GlStateManager.rotate((float)18.0f*(20.0f-(float)((EntityGreaterSprite)entity).twirlTimer),0,0,1);
-	  }
-	  if (!((EntityGreaterSprite)entity).getDataManager().get(((EntityGreaterSprite)entity).stunned).booleanValue()){
-		  GlStateManager.rotate((float)(15.0f*Math.sin(Math.PI*2.0*(((double)(entity.ticksExisted%20))/20.0))), 0, 0, 1);
-	  }
-	  head1.render(1.0f/16.0f);
-	  if (!((EntityGreaterSprite)entity).getDataManager().get(((EntityGreaterSprite)entity).stunned).booleanValue()){
-		  GlStateManager.rotate((float)(-15.0f*Math.sin(Math.PI*2.0*(((double)(entity.ticksExisted%20))/20.0))), 0, 0, 1);
-	  }
-	  if (((EntityGreaterSprite)entity).twirlTimer > 0){
-		  GlStateManager.rotate((float)-18.0f*(20.0f-(float)((EntityGreaterSprite)entity).twirlTimer),0,0,1);
-	  }
-	  GlStateManager.rotate(-(float)Math.toDegrees(-entity.rotationPitch/2.0f), 1, 0, 0);
-	  GlStateManager.rotate((float)(entity.rotationYaw)+0.5f*(float)Math.PI, 0, 1, 0);
-	  GlStateManager.translate(0, -(1.25), 0);
-	  GlStateManager.color(1f, 1f, 1f, 1f);
-	  GlStateManager.disableAlpha();
-	  GlStateManager.disableBlend();
-	  GlStateManager.enableLighting();
-	  GlStateManager.popAttrib();
+  public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+    float pTicks = ageInTicks - (int) ageInTicks;
+    float pitch1 = (float) Util.interpolate(((EntityGreaterSprite) entity).prevPitch2, ((EntityGreaterSprite) entity).prevPitch1, pTicks);
+    float pitch2 = (float) Util.interpolate(((EntityGreaterSprite) entity).prevPitch3, ((EntityGreaterSprite) entity).prevPitch2, pTicks);
+    float pitch3 = (float) Util.interpolate(((EntityGreaterSprite) entity).prevPitch4, ((EntityGreaterSprite) entity).prevPitch3, pTicks);
+    float pitch4 = (float) Util.interpolate(((EntityGreaterSprite) entity).prevPitch5, ((EntityGreaterSprite) entity).prevPitch4, pTicks);
+    float yaw1 = (float) Util.interpolate(((EntityGreaterSprite) entity).prevYaw2, ((EntityGreaterSprite) entity).prevYaw1, pTicks);
+    float yaw2 = (float) Util.interpolate(((EntityGreaterSprite) entity).prevYaw3, ((EntityGreaterSprite) entity).prevYaw2, pTicks);
+    float yaw3 = (float) Util.interpolate(((EntityGreaterSprite) entity).prevYaw4, ((EntityGreaterSprite) entity).prevYaw3, pTicks);
+    float yaw4 = (float) Util.interpolate(((EntityGreaterSprite) entity).prevYaw5, ((EntityGreaterSprite) entity).prevYaw4, pTicks);
+    GlStateManager.pushAttrib();
+    GlStateManager.color(1f, 1f, 1f, 1f);
+    GlStateManager.translate(0, 1.25, 0);
+    setRotation(stonehead1, 0, 0, 0);
+    GlStateManager.rotate(-0.5f * (float) Math.PI - (float) Math.toDegrees(entity.rotationYaw), 0, 1, 0);
+    GlStateManager.rotate((float) Math.toDegrees(-entity.rotationPitch / 2.0f), 1, 0, 0);
+    if (((EntityGreaterSprite) entity).twirlTimer > 0) {
+      GlStateManager.rotate((float) 18.0f * (20.0f - (float) ((EntityGreaterSprite) entity).twirlTimer), 0, 0, 1);
+    }
+    if (!((EntityGreaterSprite) entity).getDataManager().get(((EntityGreaterSprite) entity).stunned).booleanValue()) {
+      GlStateManager.rotate((float) (15.0f * Math.sin(Math.PI * 2.0 * (((double) (entity.ticksExisted % 20)) / 20.0))), 0, 0, 1);
+    }
+    stonehead1.render(1.0f / 16.0f);
+    if (!((EntityGreaterSprite) entity).getDataManager().get(((EntityGreaterSprite) entity).stunned).booleanValue()) {
+      GlStateManager.rotate((float) (-15.0f * Math.sin(Math.PI * 2.0 * (((double) (entity.ticksExisted % 20)) / 20.0))), 0, 0, 1);
+    }
+    if (((EntityGreaterSprite) entity).twirlTimer > 0) {
+      GlStateManager.rotate((float) -18.0f * (20.0f - (float) ((EntityGreaterSprite) entity).twirlTimer), 0, 0, 1);
+    }
+    GlStateManager.rotate(-(float) Math.toDegrees(-entity.rotationPitch / 2.0f), 1, 0, 0);
+    GlStateManager.rotate((float) Math.toDegrees(entity.rotationYaw) + 0.5f * (float) Math.PI, 0, 1, 0);
+    GlStateManager.enableAlpha();
+    GlStateManager.enableBlend();
+    GlStateManager.disableLighting();
+    GlStateManager.color(1, 1, 1, 0.75f);
+    setRotation(head1, 0, 0, 0);
+    setRotation(body2, -2.0f * (pitch1 - ((EntityGreaterSprite) entity).rotationPitch), -2.0f * (yaw1 - ((EntityGreaterSprite) entity).rotationYaw), 0);
+    setRotation(body3, 0.5f * (float) Math.PI - 2.0f * (pitch2 - pitch1), -2.0f * (yaw2 - yaw1), 0);
+    setRotation(body4, -2.0f * (pitch3 - pitch2), 0, 2.0f * (yaw3 - yaw2));
+    setRotation(body5, -2.0f * (pitch4 - pitch3), 0, 2.0f * (yaw4 - yaw3));
+    GlStateManager.rotate(-0.5f * (float) Math.PI - (float) Math.toDegrees(entity.rotationYaw), 0, 1, 0);
+    GlStateManager.rotate((float) Math.toDegrees(-entity.rotationPitch / 2.0f), 1, 0, 0);
+    if (((EntityGreaterSprite) entity).twirlTimer > 0) {
+      GlStateManager.rotate((float) 18.0f * (20.0f - (float) ((EntityGreaterSprite) entity).twirlTimer), 0, 0, 1);
+    }
+    if (!((EntityGreaterSprite) entity).getDataManager().get(((EntityGreaterSprite) entity).stunned).booleanValue()) {
+      GlStateManager.rotate((float) (15.0f * Math.sin(Math.PI * 2.0 * (((double) (entity.ticksExisted % 20)) / 20.0))), 0, 0, 1);
+    }
+    head1.render(1.0f / 16.0f);
+    if (!((EntityGreaterSprite) entity).getDataManager().get(((EntityGreaterSprite) entity).stunned).booleanValue()) {
+      GlStateManager.rotate((float) (-15.0f * Math.sin(Math.PI * 2.0 * (((double) (entity.ticksExisted % 20)) / 20.0))), 0, 0, 1);
+    }
+    if (((EntityGreaterSprite) entity).twirlTimer > 0) {
+      GlStateManager.rotate((float) -18.0f * (20.0f - (float) ((EntityGreaterSprite) entity).twirlTimer), 0, 0, 1);
+    }
+    GlStateManager.rotate(-(float) Math.toDegrees(-entity.rotationPitch / 2.0f), 1, 0, 0);
+    GlStateManager.rotate((float) (entity.rotationYaw) + 0.5f * (float) Math.PI, 0, 1, 0);
+    GlStateManager.translate(0, -(1.25), 0);
+    GlStateManager.color(1f, 1f, 1f, 1f);
+    GlStateManager.disableAlpha();
+    GlStateManager.disableBlend();
+    GlStateManager.enableLighting();
+    GlStateManager.popAttrib();
   }
-  
-  private void setRotation(ModelRenderer model, float x, float y, float z)
-  {
+  private void setRotation(ModelRenderer model, float x, float y, float z) {
     model.rotateAngleX = x;
     model.rotateAngleY = y;
     model.rotateAngleZ = z;

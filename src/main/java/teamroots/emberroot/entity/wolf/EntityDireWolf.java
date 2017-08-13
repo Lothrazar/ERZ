@@ -44,7 +44,6 @@ public class EntityDireWolf extends EntityMob {
     }
   }
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityDireWolf.class, DataSerializers.VARINT);
- 
   private static final DataParameter<Boolean> ANGRY_INDEX = EntityDataManager.<Boolean> createKey(EntityDireWolf.class, DataSerializers.BOOLEAN);
   private static final int direWolfAggresiveRange = 8;
   private static final int direWolfPackHowlAmount = 3;
@@ -77,9 +76,8 @@ public class EntityDireWolf extends EntityMob {
   protected void entityInit() {
     super.entityInit();
     dataManager.register(ANGRY_INDEX, Boolean.FALSE);
-    updateAngry();   
+    updateAngry();
     this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
-
   }
   public Integer getVariant() {
     return getDataManager().get(variant);

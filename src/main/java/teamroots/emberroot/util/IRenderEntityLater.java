@@ -1,7 +1,9 @@
 package teamroots.emberroot.util;
 import net.minecraft.entity.Entity;
+
 /**
  * TODO i think this is never used
+ * 
  * @author Sam
  *
  */

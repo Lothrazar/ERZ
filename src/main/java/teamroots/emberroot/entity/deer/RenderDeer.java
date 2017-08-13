@@ -16,9 +16,8 @@ public class RenderDeer extends RenderLiving<EntityDeer> {
   @Override
   protected ResourceLocation getEntityTexture(EntityDeer entity) {
     if (entity.getDataManager().get(EntityDeer.hasRednose)) { return new ResourceLocation(Const.MODID, "textures/entity/deer_rudolph.png"); }
-
     String colour = entity.getVariantEnum().nameLower();
-    return new ResourceLocation(Const.MODID, "textures/entity/deer_"+colour+".png");
+    return new ResourceLocation(Const.MODID, "textures/entity/deer_" + colour + ".png");
   }
   @Override
   public void doRender(EntityDeer entity, double x, double y, double z, float entityYaw, float partialTicks) {

@@ -62,9 +62,6 @@ public class EmberRootZoo {
     registry.register(EntityDireWolf.SND_DEATH);
     registry.register(EntitySprite.ambientSound);
     registry.register(EntitySprite.hurtSound);
-    
-    
- 
   }
   public static DamageSource damage_ember;
   public static Item itemOwlEgg;
