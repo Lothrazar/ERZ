@@ -257,7 +257,19 @@ public class EntitySprite  extends EntityFlying implements ISprite {// implement
     	if (getDataManager().get(stunned).booleanValue()){
     		return 128;
     	}
-    	return 255;
+      float f = 0.5F;
+      f = MathHelper.clamp(f, 0.0F, 1.0F);
+      int i = super.getBrightnessForRender( );
+      int j = i & 255;
+      int k = i >> 16 & 255;
+      j = j + (int)(f * 15.0F * 16.0F);
+
+      if (j > 240)
+      {
+          j = 240;
+      }
+
+      return j | k << 16;
     }
     
     @Override

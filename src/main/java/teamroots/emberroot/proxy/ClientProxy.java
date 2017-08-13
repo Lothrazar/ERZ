@@ -11,6 +11,8 @@ import teamroots.emberroot.entity.slime.ModelWaterSlime;
 import teamroots.emberroot.entity.sprite.ModelSprite;
 import teamroots.emberroot.entity.sprite.particle.ParticleMagicSparkle;
 import teamroots.emberroot.entity.sprite.particle.ParticleMagicSparkleScalable;
+import teamroots.emberroot.entity.spritegreater.ModelGreaterSprite;
+import teamroots.emberroot.entity.spritegreater.ModelNull;
 import teamroots.emberroot.entity.spriteling.ModelSpriteling;
 import teamroots.emberroot.entity.sprout.ModelSprout;
 import teamroots.emberroot.entity.timberwolf.ModelTimberWolf;
@@ -30,6 +32,8 @@ public class ClientProxy extends CommonProxy {
     ModelTimberWolf.instance = new ModelTimberWolf();
     ModelSprite.instance = new ModelSprite();
     ModelSpriteling.instance = new ModelSpriteling();
+    ModelNull.instance = new ModelNull();
+    ModelGreaterSprite.instance = new ModelGreaterSprite();
   }
   
   
