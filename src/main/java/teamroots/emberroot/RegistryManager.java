@@ -61,6 +61,8 @@ import teamroots.emberroot.entity.spritegreater.EntitySpriteProjectile;
 import teamroots.emberroot.entity.spritegreater.ModelNull;
 import teamroots.emberroot.entity.spritegreater.RenderGreaterSprite;
 import teamroots.emberroot.entity.spritegreater.RenderSpriteProjectile;
+import teamroots.emberroot.entity.spriteguardian.EntitySpriteGuardianBoss;
+import teamroots.emberroot.entity.spriteguardian.RenderSpriteGuardian;
 import teamroots.emberroot.entity.spriteling.EntitySpriteling;
 import teamroots.emberroot.entity.spriteling.RenderSpriteling;
 import teamroots.emberroot.entity.sprout.EntitySprout;
@@ -152,6 +154,13 @@ public class RegistryManager {
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntitySpriteProjectile.NAME), EntitySpriteProjectile.class, EntitySpriteProjectile.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityGreaterSprite.NAME), EntityGreaterSprite.class, EntityGreaterSprite.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityGreaterSprite.NAME), Util.intColor(130, 255, 60), Util.intColor(130, 255, 60));
+  
+  
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntitySpriteGuardianBoss.NAME), EntitySpriteGuardianBoss.class, EntitySpriteGuardianBoss.NAME, id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntitySpriteGuardianBoss.NAME), Util.intColor(120, 245, 50), Util.intColor(160, 255, 60));
+    
+    
+  
   }
   public static void registerDamageSources() {
     EmberRootZoo.damage_ember = new DamageGolem();
@@ -186,7 +195,7 @@ public class RegistryManager {
     RenderingRegistry.registerEntityRenderingHandler(EntitySpriteling.class, new RenderSpriteling.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityGreaterSprite.class, new RenderGreaterSprite.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntitySpriteProjectile.class, new RenderSpriteProjectile.Factory());
-    //    RenderingRegistry.registerEntityRenderingHandler(EntitySpriteProjectile.class, new RenderSpriteProjectile(Minecraft.getMinecraft().getRenderManager(),ModelNull.instance,0.5f));//
+    RenderingRegistry.registerEntityRenderingHandler(EntitySpriteGuardianBoss.class, new RenderSpriteGuardian.Factory());
   }
   private void addRecipes() {
     //    ResourceLocation rl;

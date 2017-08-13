@@ -18,6 +18,7 @@ import teamroots.emberroot.config.ConfigManager;
 import teamroots.emberroot.entity.owl.EntityOwl;
 import teamroots.emberroot.entity.owl.ItemOwlEgg;
 import teamroots.emberroot.entity.sprite.EntitySprite;
+import teamroots.emberroot.entity.spriteguardian.EntitySpriteGuardianBoss;
 import teamroots.emberroot.entity.wolf.EntityDireWolf;
 import teamroots.emberroot.proxy.CommonProxy;
 
@@ -63,6 +64,9 @@ public class EmberRootZoo {
     registry.register(EntitySprite.ambientSound);
     registry.register(EntitySprite.hurtSound);
     registry.register(EntitySprite.staffcast);
+    registry.register(EntitySpriteGuardianBoss.ambientSound);
+    registry.register(EntitySpriteGuardianBoss.hurtSound);
+    registry.register(EntitySpriteGuardianBoss.departureSound);
     
     
   }

@@ -12,6 +12,11 @@ import teamroots.emberroot.entity.sprite.particle.ParticleMagicSparkle;
 import teamroots.emberroot.entity.sprite.particle.ParticleMagicSparkleScalable;
 import teamroots.emberroot.entity.spritegreater.ModelGreaterSprite;
 import teamroots.emberroot.entity.spritegreater.ModelNull;
+import teamroots.emberroot.entity.spriteguardian.ModelSpriteGuardianHead;
+import teamroots.emberroot.entity.spriteguardian.ModelSpriteGuardianSegment;
+import teamroots.emberroot.entity.spriteguardian.ModelSpriteGuardianSegmentFirst;
+import teamroots.emberroot.entity.spriteguardian.ModelSpriteGuardianSegmentLarge;
+import teamroots.emberroot.entity.spriteguardian.ModelSpriteGuardianTail;
 import teamroots.emberroot.entity.spriteling.ModelSpriteling;
 import teamroots.emberroot.entity.sprout.ModelSprout;
 import teamroots.emberroot.entity.timberwolf.ModelTimberWolf;
@@ -33,6 +38,12 @@ public class ClientProxy extends CommonProxy {
     ModelSpriteling.instance = new ModelSpriteling();
     ModelNull.instance = new ModelNull();
     ModelGreaterSprite.instance = new ModelGreaterSprite();
+    
+    ModelSpriteGuardianHead.instance = new ModelSpriteGuardianHead();
+    ModelSpriteGuardianSegment.instance = new ModelSpriteGuardianSegment();
+    ModelSpriteGuardianSegmentFirst.instance = new ModelSpriteGuardianSegmentFirst();
+    ModelSpriteGuardianSegmentLarge.instance = new ModelSpriteGuardianSegmentLarge();
+    ModelSpriteGuardianTail.instance = new ModelSpriteGuardianTail();
   }
   @Override
   public void spawnParticleMagicFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b) {
