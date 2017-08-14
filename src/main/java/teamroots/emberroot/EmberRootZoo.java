@@ -44,6 +44,7 @@ public class EmberRootZoo {
   public org.apache.logging.log4j.Logger logger;
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
+ 
     this.logger = event.getModLog();
     ConfigManager.init(event.getSuggestedConfigurationFile());
     MinecraftForge.EVENT_BUS.register(new EventManager());

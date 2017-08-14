@@ -1,15 +1,33 @@
 package teamroots.emberroot;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.BlockWorldState;
+import net.minecraft.block.state.pattern.BlockMaterialMatcher;
+import net.minecraft.block.state.pattern.BlockPattern;
+import net.minecraft.block.state.pattern.BlockStateMatcher;
+import net.minecraft.block.state.pattern.FactoryBlockPattern;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.event.world.BlockEvent.PlaceEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
@@ -17,10 +35,71 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.entity.golem.ParticleGolemLaser;
+import teamroots.emberroot.entity.spriteguardian.EntitySpriteGuardianBoss;
 import teamroots.emberroot.proxy.ClientProxy;
 import teamroots.emberroot.util.IRenderEntityLater;
 
 public class EventManager {
+  private BlockPattern golemPattern;
+  @SubscribeEvent
+  public void onBlockPlace(PlaceEvent event) {
+    trySpawnByPattern(event.getWorld(),event.getPos());
+  }
+  protected BlockPattern getGolemPattern()
+  { 
+    //HAHA! it works. learned this from BlockPumpkin
+        //Blocks.STAINED_HARDENED_CLAY.getStateFromMeta(EnumDyeColor.GREEN.getMetadata()  ) )
+      if (this.golemPattern == null)
+      {
+          this.golemPattern = FactoryBlockPattern.start().aisle("~^~", "###", "~#~").where(
+              '^', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.EMERALD_BLOCK)     )).where(
+              '#', BlockWorldState.hasState(  BlockStateMatcher.forBlock(Blocks.END_STONE ))    ).where(
+              '~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).build();
+      }
+
+      return this.golemPattern;
+  }
+  private void trySpawnByPattern(World worldIn, BlockPos pos){
+    BlockPattern.PatternHelper  blockpattern$patternhelper = this.getGolemPattern().match(worldIn, pos);
+
+    if (blockpattern$patternhelper != null)
+    {
+        for (int j = 0; j < this.getGolemPattern().getPalmLength(); ++j)
+        {
+            for (int k = 0; k < this.getGolemPattern().getThumbLength(); ++k)
+            {
+                worldIn.setBlockState(blockpattern$patternhelper.translateOffset(j, k, 0).getPos(), Blocks.AIR.getDefaultState(), 2);
+            }
+        }
+
+        BlockPos blockpos = blockpattern$patternhelper.translateOffset(1, 2, 0).getPos();
+        EntitySpriteGuardianBoss entityirongolem = new EntitySpriteGuardianBoss (worldIn);
+        //EntityIronGolem entityirongolem = new EntityIronGolem(worldIn);
+//        entityirongolem.setPlayerCreated(true);
+        entityirongolem.setLocationAndAngles((double)blockpos.getX() + 0.5D, (double)blockpos.getY() + 0.05D, (double)blockpos.getZ() + 0.5D, 0.0F, 0.0F);
+        worldIn.spawnEntity(entityirongolem);
+
+        for (EntityPlayerMP entityplayermp1 : worldIn.getEntitiesWithinAABB(EntityPlayerMP.class, entityirongolem.getEntityBoundingBox().grow(5.0D)))
+        {
+            CriteriaTriggers.SUMMONED_ENTITY.trigger(entityplayermp1, entityirongolem);
+        }
+
+        for (int j1 = 0; j1 < 120; ++j1)
+        {
+            worldIn.spawnParticle(EnumParticleTypes.SNOWBALL, (double)blockpos.getX() + worldIn.rand.nextDouble(), (double)blockpos.getY() + worldIn.rand.nextDouble() * 3.9D, (double)blockpos.getZ() + worldIn.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
+        }
+
+        for (int k1 = 0; k1 < this.getGolemPattern().getPalmLength(); ++k1)
+        {
+            for (int l1 = 0; l1 < this.getGolemPattern().getThumbLength(); ++l1)
+            {
+                BlockWorldState blockworldstate1 = blockpattern$patternhelper.translateOffset(k1, l1, 0);
+                worldIn.notifyNeighborsRespectDebug(blockworldstate1.getPos(), Blocks.AIR, false);
+            }
+        }
+    }
+  }
+  
   public static long ticks = 0;
   @SideOnly(Side.CLIENT)
   @SubscribeEvent
