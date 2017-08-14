@@ -35,7 +35,10 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.entity.golem.ParticleGolemLaser;
+import teamroots.emberroot.entity.sprite.EntitySprite;
+import teamroots.emberroot.entity.spritegreater.EntityGreaterSprite;
 import teamroots.emberroot.entity.spriteguardian.EntitySpriteGuardianBoss;
+import teamroots.emberroot.entity.spriteling.EntitySpriteling;
 import teamroots.emberroot.proxy.ClientProxy;
 import teamroots.emberroot.util.IRenderEntityLater;
 
@@ -61,6 +64,24 @@ public class EventManager {
       worldIn.spawnEntity(entityirongolem);
       for (EntityPlayerMP entityplayermp1 : worldIn.getEntitiesWithinAABB(EntityPlayerMP.class, entityirongolem.getEntityBoundingBox().grow(5.0D))) {
         CriteriaTriggers.SUMMONED_ENTITY.trigger(entityplayermp1, entityirongolem);
+      }
+      int numSpritelings = 4;//TODO: config or constants for these
+      int numSprites = 2;
+      int numSpriteGreater = 1;
+      for (int i = 0; i < numSpritelings; i++) {
+        EntitySpriteling e = new EntitySpriteling(worldIn);
+        e.setLocationAndAngles((double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 0.05D, (double) blockpos.getZ() + 0.5D, 0.0F, 0.0F);
+        worldIn.spawnEntity(e);
+      }
+      for (int i = 0; i < numSpriteGreater; i++) {
+        EntityGreaterSprite e = new EntityGreaterSprite(worldIn);
+        e.setLocationAndAngles((double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 0.05D, (double) blockpos.getZ() + 0.5D, 0.0F, 0.0F);
+        worldIn.spawnEntity(e);
+      }
+      for (int i = 0; i < numSprites; i++) {
+        EntitySprite e = new EntitySprite(worldIn);
+        e.setLocationAndAngles((double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 0.05D, (double) blockpos.getZ() + 0.5D, 0.0F, 0.0F);
+        worldIn.spawnEntity(e);
       }
       //summon particles
       for (int j1 = 0; j1 < 120; ++j1) {

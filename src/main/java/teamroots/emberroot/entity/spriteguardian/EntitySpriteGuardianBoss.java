@@ -436,14 +436,17 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
   }
   public static BlockPattern golemPattern;
   public static BlockPattern getGolemPattern() {
-    if (golemPattern == null) {
-      golemPattern = FactoryBlockPattern.start().aisle("~^~", "###", "~#~").where(
-          '^', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.EMERALD_BLOCK))).where(
-              '#', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.END_STONE)))
-          .where(
-              '~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR)))
-          .build();
-    }
+    // if (golemPattern == null) {
+    golemPattern = FactoryBlockPattern.start().aisle("$^$", "~#~", "###", "#~#").where(
+        '^', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.EMERALD_BLOCK)))
+        .where(
+            '$', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.IRON_BLOCK)))
+        .where(
+            '#', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.END_STONE)))
+        .where(
+            '~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR)))
+        .build();
+    //   }
     return golemPattern;
   }
 }
