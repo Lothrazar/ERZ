@@ -40,66 +40,41 @@ import teamroots.emberroot.proxy.ClientProxy;
 import teamroots.emberroot.util.IRenderEntityLater;
 
 public class EventManager {
-  private BlockPattern golemPattern;
   @SubscribeEvent
   public void onBlockPlace(PlaceEvent event) {
-    trySpawnByPattern(event.getWorld(),event.getPos());
+    trySpawnBoss(event.getWorld(), event.getPos());
   }
-  protected BlockPattern getGolemPattern()
-  { 
-    //HAHA! it works. learned this from BlockPumpkin
-        //Blocks.STAINED_HARDENED_CLAY.getStateFromMeta(EnumDyeColor.GREEN.getMetadata()  ) )
-      if (this.golemPattern == null)
-      {
-          this.golemPattern = FactoryBlockPattern.start().aisle("~^~", "###", "~#~").where(
-              '^', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.EMERALD_BLOCK)     )).where(
-              '#', BlockWorldState.hasState(  BlockStateMatcher.forBlock(Blocks.END_STONE ))    ).where(
-              '~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).build();
+  private void trySpawnBoss(World worldIn, BlockPos pos) {
+    BlockPattern pattern = EntitySpriteGuardianBoss.getGolemPattern();
+    BlockPattern.PatternHelper blockpattern$patternhelper = pattern.match(worldIn, pos);
+    if (blockpattern$patternhelper != null) {
+      //delete blocks
+      for (int j = 0; j < pattern.getPalmLength(); ++j) {
+        for (int k = 0; k < pattern.getThumbLength(); ++k) {
+          worldIn.setBlockState(blockpattern$patternhelper.translateOffset(j, k, 0).getPos(), Blocks.AIR.getDefaultState(), 2);
+        }
       }
-
-      return this.golemPattern;
-  }
-  private void trySpawnByPattern(World worldIn, BlockPos pos){
-    BlockPattern.PatternHelper  blockpattern$patternhelper = this.getGolemPattern().match(worldIn, pos);
-
-    if (blockpattern$patternhelper != null)
-    {
-        for (int j = 0; j < this.getGolemPattern().getPalmLength(); ++j)
-        {
-            for (int k = 0; k < this.getGolemPattern().getThumbLength(); ++k)
-            {
-                worldIn.setBlockState(blockpattern$patternhelper.translateOffset(j, k, 0).getPos(), Blocks.AIR.getDefaultState(), 2);
-            }
+      //then spawn entity
+      BlockPos blockpos = blockpattern$patternhelper.translateOffset(1, 2, 0).getPos();
+      EntitySpriteGuardianBoss entityirongolem = new EntitySpriteGuardianBoss(worldIn);
+      entityirongolem.setLocationAndAngles((double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 0.05D, (double) blockpos.getZ() + 0.5D, 0.0F, 0.0F);
+      worldIn.spawnEntity(entityirongolem);
+      for (EntityPlayerMP entityplayermp1 : worldIn.getEntitiesWithinAABB(EntityPlayerMP.class, entityirongolem.getEntityBoundingBox().grow(5.0D))) {
+        CriteriaTriggers.SUMMONED_ENTITY.trigger(entityplayermp1, entityirongolem);
+      }
+      //summon particles
+      for (int j1 = 0; j1 < 120; ++j1) {
+        worldIn.spawnParticle(EnumParticleTypes.SNOWBALL, (double) blockpos.getX() + worldIn.rand.nextDouble(), (double) blockpos.getY() + worldIn.rand.nextDouble() * 3.9D, (double) blockpos.getZ() + worldIn.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
+      }
+      //send block updates for the setblockstoair above
+      for (int k1 = 0; k1 < pattern.getPalmLength(); ++k1) {
+        for (int l1 = 0; l1 < pattern.getThumbLength(); ++l1) {
+          BlockWorldState blockworldstate1 = blockpattern$patternhelper.translateOffset(k1, l1, 0);
+          worldIn.notifyNeighborsRespectDebug(blockworldstate1.getPos(), Blocks.AIR, false);
         }
-
-        BlockPos blockpos = blockpattern$patternhelper.translateOffset(1, 2, 0).getPos();
-        EntitySpriteGuardianBoss entityirongolem = new EntitySpriteGuardianBoss (worldIn);
-        //EntityIronGolem entityirongolem = new EntityIronGolem(worldIn);
-//        entityirongolem.setPlayerCreated(true);
-        entityirongolem.setLocationAndAngles((double)blockpos.getX() + 0.5D, (double)blockpos.getY() + 0.05D, (double)blockpos.getZ() + 0.5D, 0.0F, 0.0F);
-        worldIn.spawnEntity(entityirongolem);
-
-        for (EntityPlayerMP entityplayermp1 : worldIn.getEntitiesWithinAABB(EntityPlayerMP.class, entityirongolem.getEntityBoundingBox().grow(5.0D)))
-        {
-            CriteriaTriggers.SUMMONED_ENTITY.trigger(entityplayermp1, entityirongolem);
-        }
-
-        for (int j1 = 0; j1 < 120; ++j1)
-        {
-            worldIn.spawnParticle(EnumParticleTypes.SNOWBALL, (double)blockpos.getX() + worldIn.rand.nextDouble(), (double)blockpos.getY() + worldIn.rand.nextDouble() * 3.9D, (double)blockpos.getZ() + worldIn.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
-        }
-
-        for (int k1 = 0; k1 < this.getGolemPattern().getPalmLength(); ++k1)
-        {
-            for (int l1 = 0; l1 < this.getGolemPattern().getThumbLength(); ++l1)
-            {
-                BlockWorldState blockworldstate1 = blockpattern$patternhelper.translateOffset(k1, l1, 0);
-                worldIn.notifyNeighborsRespectDebug(blockworldstate1.getPos(), Blocks.AIR, false);
-            }
-        }
+      }
     }
   }
-  
   public static long ticks = 0;
   @SideOnly(Side.CLIENT)
   @SubscribeEvent

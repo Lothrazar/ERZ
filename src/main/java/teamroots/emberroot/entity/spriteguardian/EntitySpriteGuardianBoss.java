@@ -2,6 +2,12 @@ package teamroots.emberroot.entity.spriteguardian;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockWorldState;
+import net.minecraft.block.state.pattern.BlockMaterialMatcher;
+import net.minecraft.block.state.pattern.BlockPattern;
+import net.minecraft.block.state.pattern.BlockStateMatcher;
+import net.minecraft.block.state.pattern.FactoryBlockPattern;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,6 +15,7 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -49,10 +56,9 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
   Random random = new Random();
   public Vec3d moveVec = new Vec3d(0, 0, 0);
   public Vec3d prevMoveVec = new Vec3d(0, 0, 0);
-  public static SoundEvent ambientSound = new SoundEvent(new ResourceLocation(Const.MODID,"bossambient"));
-  public static  SoundEvent hurtSound= new SoundEvent(new ResourceLocation(Const.MODID,"bosshurt"));
-  public static  SoundEvent departureSound = new SoundEvent(new ResourceLocation(Const.MODID,"bossdeath"));
- 
+  public static SoundEvent ambientSound = new SoundEvent(new ResourceLocation(Const.MODID, "bossambient"));
+  public static SoundEvent hurtSound = new SoundEvent(new ResourceLocation(Const.MODID, "bosshurt"));
+  public static SoundEvent departureSound = new SoundEvent(new ResourceLocation(Const.MODID, "bossdeath"));
   private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
   public EntitySpriteGuardianBoss(World worldIn) {
     super(worldIn);
@@ -65,10 +71,10 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
     }
     this.rotationYaw = rand.nextInt(240) + 60;
   }
-//  @Override
-//  public ITextComponent getDisplayName() {
-//    return new TextComponentString("Guardian of Sprites:LANG FILE");
-//  }
+  //  @Override
+  //  public ITextComponent getDisplayName() {
+  //    return new TextComponentString("Guardian of Sprites:LANG FILE");
+  //  }
   @Override
   public boolean isNonBoss() {
     return false;
@@ -129,39 +135,39 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
       }
       getEntityWorld().playSound(posX, posY, posZ, departureSound, SoundCategory.NEUTRAL, random.nextFloat() * 0.1f + 0.95f, random.nextFloat() * 0.1f + 0.95f, false);
       if (!getEntityWorld().isRemote) {
-//        getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.otherworldLeaf, 1)));
-//        for (int i = 0; i < 24; i++) {
-//          if (rand.nextInt(2) == 0) {
-//            getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.otherworldLeaf, 1)));
-//          }
-//        }
-//        for (int i = 0; i < 5; i++) {
-//          getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.otherworldSubstance, 1)));
-//        }
-//        for (int i = 0; i < 8; i++) {
-//          if (rand.nextInt(2) == 0) {
-//            getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.otherworldSubstance, 1)));
-//          }
-//        }
-//        getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.runeStone, 1)));
-//        for (int i = 0; i < 5; i++) {
-//          if (rand.nextInt(2) == 0) {
-//            getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.runeStone, 1)));
-//          }
-//        }
-//        int chance = rand.nextInt(4);
-//        if (chance == 0) {
-//          getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.itemCharmConjuration, 1)));
-//        }
-//        if (chance == 1) {
-//          getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.itemCharmEvocation, 1)));
-//        }
-//        if (chance == 2) {
-//          getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.itemCharmIllusion, 1)));
-//        }
-//        if (chance == 3) {
-//          getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.itemCharmRestoration, 1)));
-//        }
+        //        getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.otherworldLeaf, 1)));
+        //        for (int i = 0; i < 24; i++) {
+        //          if (rand.nextInt(2) == 0) {
+        //            getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.otherworldLeaf, 1)));
+        //          }
+        //        }
+        //        for (int i = 0; i < 5; i++) {
+        //          getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.otherworldSubstance, 1)));
+        //        }
+        //        for (int i = 0; i < 8; i++) {
+        //          if (rand.nextInt(2) == 0) {
+        //            getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.otherworldSubstance, 1)));
+        //          }
+        //        }
+        //        getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.runeStone, 1)));
+        //        for (int i = 0; i < 5; i++) {
+        //          if (rand.nextInt(2) == 0) {
+        //            getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.runeStone, 1)));
+        //          }
+        //        }
+        //        int chance = rand.nextInt(4);
+        //        if (chance == 0) {
+        //          getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.itemCharmConjuration, 1)));
+        //        }
+        //        if (chance == 1) {
+        //          getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.itemCharmEvocation, 1)));
+        //        }
+        //        if (chance == 2) {
+        //          getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.itemCharmIllusion, 1)));
+        //        }
+        //        if (chance == 3) {
+        //          getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.itemCharmRestoration, 1)));
+        //        }
       }
       setDead();
     }
@@ -333,9 +339,9 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
       getDataManager().set(fadeTimer, 200);
       if (source.getTrueSource() instanceof EntityPlayer) {
         EntityPlayer player = (EntityPlayer) source.getTrueSource();
-//        if (!player.hasAchievement(RegistryManager.achieveGuardianBoss)) {
-//          PlayerManager.addAchievement(player, RegistryManager.achieveGuardianBoss);
-//        }
+        //        if (!player.hasAchievement(RegistryManager.achieveGuardianBoss)) {
+        //          PlayerManager.addAchievement(player, RegistryManager.achieveGuardianBoss);
+        //        }
       }
     }
     else {
@@ -427,5 +433,17 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
   public void removeTrackingPlayer(EntityPlayerMP player) {
     super.removeTrackingPlayer(player);
     bossInfo.removePlayer(player);
+  }
+  public static BlockPattern golemPattern;
+  public static BlockPattern getGolemPattern() {
+    if (golemPattern == null) {
+      golemPattern = FactoryBlockPattern.start().aisle("~^~", "###", "~#~").where(
+          '^', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.EMERALD_BLOCK))).where(
+              '#', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.END_STONE)))
+          .where(
+              '~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR)))
+          .build();
+    }
+    return golemPattern;
   }
 }
