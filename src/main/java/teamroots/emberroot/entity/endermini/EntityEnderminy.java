@@ -53,6 +53,7 @@ public class EntityEnderminy extends EntityMob {
       return this.name().toLowerCase();
     }
   }
+  public static final float SIZE_FACTOR = 0.5F;
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityEnderminy.class, DataSerializers.VARINT);
   private static final int MAX_RND_TP_DISTANCE = 32;
   //  private static final int SCREAMING_INDEX = 30;
@@ -67,7 +68,7 @@ public class EntityEnderminy extends EntityMob {
   private boolean groupAgroEnabled = true;
   public EntityEnderminy(World world) {
     super(world);
-    setSize(0.6F * 0.5F, 2.9F * 0.25F);
+    setSize(0.6F * SIZE_FACTOR, 2.9F * 0.25F);
     stepHeight = 1.0F;
     tasks.addTask(0, new EntityAISwimming(this));
     tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));

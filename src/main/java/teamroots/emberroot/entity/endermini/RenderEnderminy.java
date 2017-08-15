@@ -41,7 +41,7 @@ public class RenderEnderminy extends RenderLiving<EntityEnderminy> {
   }
   @Override
   protected void preRenderCallback(EntityEnderminy entity, float partialTickTime) {
-    GL11.glScalef(0.5F, 0.25F, 0.5F);
+    GL11.glScalef(EntityEnderminy.SIZE_FACTOR, 0.25F, EntityEnderminy.SIZE_FACTOR);
   }
   private class EyesLayer implements LayerRenderer<EntityEnderminy> {
     @Override
