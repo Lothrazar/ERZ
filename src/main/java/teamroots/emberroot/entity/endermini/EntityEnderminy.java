@@ -68,7 +68,7 @@ public class EntityEnderminy extends EntityMob {
   private boolean groupAgroEnabled = true;
   public EntityEnderminy(World world) {
     super(world);
-    setSize(0.6F * SIZE_FACTOR, 2.9F * 0.25F);
+    setSize(0.6F * SIZE_FACTOR, 2.9F * (SIZE_FACTOR/2));
     stepHeight = 1.0F;
     tasks.addTask(0, new EntityAISwimming(this));
     tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));

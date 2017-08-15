@@ -19,7 +19,7 @@ public class RenderEnderminy extends RenderLiving<EntityEnderminy> {
   private ModelEnderman endermanModel;
   private Random rnd = new Random();
   public RenderEnderminy(RenderManager rm) {
-    super(rm, new ModelEnderman(0), 0.5F);
+    super(rm, new ModelEnderman(0), EntityEnderminy.SIZE_FACTOR);
     endermanModel = (ModelEnderman) super.mainModel;
     addLayer(new EyesLayer());
   }
@@ -41,7 +41,7 @@ public class RenderEnderminy extends RenderLiving<EntityEnderminy> {
   }
   @Override
   protected void preRenderCallback(EntityEnderminy entity, float partialTickTime) {
-    GL11.glScalef(EntityEnderminy.SIZE_FACTOR, 0.25F, EntityEnderminy.SIZE_FACTOR);
+    GL11.glScalef(EntityEnderminy.SIZE_FACTOR, EntityEnderminy.SIZE_FACTOR/2, EntityEnderminy.SIZE_FACTOR);
   }
   private class EyesLayer implements LayerRenderer<EntityEnderminy> {
     @Override
