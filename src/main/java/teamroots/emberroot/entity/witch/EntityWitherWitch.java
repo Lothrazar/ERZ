@@ -204,7 +204,9 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
       EntityPotion entitypotion = new EntityPotion(world, this, potion);
       entitypotion.rotationPitch -= -20.0F;
       entitypotion.setThrowableHeading(x, y + groundDistance * 0.2F, z, 0.75F, 8.0F);
-      world.spawnEntity(entitypotion);
+      if (world.isRemote == false) {
+        world.spawnEntity(entitypotion);
+      }
       setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
     }
   }

@@ -72,16 +72,16 @@ public class EntityConcussionCreeper extends EntityCreeper {
   protected void entityInit() {
     super.entityInit();
     dataManager.register(variant, rand.nextInt(VariantColors.values().length));
-    
   }
-  private void spawnLingeringPotion(PotionType type){
-    ItemStack       potion = PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), type);
-    
+  private void spawnLingeringPotion(PotionType type) {
+    ItemStack potion = PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), type);
     EntityPotion entitypotion = new EntityPotion(world, this, potion);
-//    Vec3d lookVec = getLookVec();
-//    entitypotion.rotationPitch -= -20.0F;
+    //    Vec3d lookVec = getLookVec();
+    //    entitypotion.rotationPitch -= -20.0F;
     entitypotion.setThrowableHeading(0, 1, 0, 0.75F, 1.0F);
-    world.spawnEntity(entitypotion);
+    if (world.isRemote == false) {
+      world.spawnEntity(entitypotion);
+    }
   }
   @Override
   public void onUpdate() {
@@ -91,17 +91,13 @@ public class EntityConcussionCreeper extends EntityCreeper {
       if (timeSinceIgnited >= fuseTime - 1) {
         setTimeSinceIgnited(0);
         int range = concussionCreeperExplosionRange;
-        
-        switch(this.getVariantEnum()){
+        switch (this.getVariantEnum()) {
           case POISON:
             spawnLingeringPotion(PotionTypes.LONG_POISON);
-            
-           
-            break;
+          break;
           case REGEN:
-
             spawnLingeringPotion(PotionTypes.LONG_REGENERATION);
-            break;
+          break;
           case TP:
             AxisAlignedBB bb = new AxisAlignedBB(posX - range, posY - range, posZ - range, posX + range, posY + range, posZ + range);
             List<EntityLivingBase> ents = world.getEntitiesWithinAABB(EntityLivingBase.class, bb);
@@ -119,12 +115,10 @@ public class EntityConcussionCreeper extends EntityCreeper {
                 }
               }
             }
-            break;
+          break;
           default:
-            break;
-          
+          break;
         }
-        
         world.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.HOSTILE, 4.0F,
             (1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F) * 0.7F, false);
         world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, posX, posY, posZ, 1.0D, 0.0D, 0.0D);
