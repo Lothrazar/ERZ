@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -45,10 +46,12 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
+import teamroots.emberroot.config.ConfigSpawnEntity;
+import teamroots.emberroot.entity.spriteling.EntitySpriteling;
 import teamroots.emberroot.util.Util;
 
 public class EntitySprite extends EntityFlying implements ISprite {// implements IRangedAttackMob {
-  public float range = 64;
+
   public static final DataParameter<Float> targetDirectionX = EntityDataManager.<Float> createKey(EntitySprite.class, DataSerializers.FLOAT);
   public static final DataParameter<Float> targetDirectionY = EntityDataManager.<Float> createKey(EntitySprite.class, DataSerializers.FLOAT);
   public static final DataParameter<Integer> dashTimer = EntityDataManager.<Integer> createKey(EntitySprite.class, DataSerializers.VARINT);
@@ -58,6 +61,8 @@ public class EntitySprite extends EntityFlying implements ISprite {// implements
   public static final DataParameter<BlockPos> lastTargetBlock = EntityDataManager.<BlockPos> createKey(EntitySprite.class, DataSerializers.BLOCK_POS);
   public static final DataParameter<BlockPos> lastLastTargetBlock = EntityDataManager.<BlockPos> createKey(EntitySprite.class, DataSerializers.BLOCK_POS);
   public static final String NAME = "rootsonesprite";
+  public float range = 64;
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntitySprite.class,EnumCreatureType.MONSTER);
   public float addDirectionX = 0;
   public float addDirectionY = 0;
   public float twirlTimer = 0;
@@ -276,11 +281,15 @@ public class EntitySprite extends EntityFlying implements ISprite {// implements
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0);
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
-    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2.0D);
-    this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-    this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0);
+    
+   
+    ConfigSpawnEntity.syncInstance(this, config.settings);
+//    
+//    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0);
+//    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2.0D);
+//    this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+//    this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0);
   }
   @Override
   public void onLivingUpdate() {

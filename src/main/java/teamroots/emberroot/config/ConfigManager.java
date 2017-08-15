@@ -18,6 +18,8 @@ import teamroots.emberroot.entity.mount.EntityFallenMount;
 import teamroots.emberroot.entity.owl.EntityOwl;
 import teamroots.emberroot.entity.slime.EntityRainbowSlime;
 import teamroots.emberroot.entity.slimedirt.EntityDireSlime;
+import teamroots.emberroot.entity.sprite.EntitySprite;
+import teamroots.emberroot.entity.spritegreater.EntityGreaterSprite;
 import teamroots.emberroot.entity.spriteling.EntitySpriteling;
 import teamroots.emberroot.entity.sprout.EntitySprout;
 import teamroots.emberroot.entity.witch.EntityWitherWitch;
@@ -51,8 +53,13 @@ public class ConfigManager {
     entityConfigs.add(EntitySprout.config.setDefaultSpawns(2, 4, 1).setDefaultProperties(6, 0, 0.2F, 32));
     //roots1 direwolf
     entityConfigs.add(EntityTimberWolf.config.setDefaultSpawns(2,5, 10).setDefaultProperties(32, 4, 0.20000000298023224F, 32).setDefaultBiome(false, new String[]{ "minecraft:ice_flats","minecraft:extreme_hills", "minecraft:savanna", "minecraft:mesa", "minecraft:roofed_forest", "minecraft:taiga","minecraft:taiga_cold","minecraft:ice_mountains"}));
-    
+    //smallest ones get a bit of a wider spawn
     entityConfigs.add(EntitySpriteling.config.setDefaultSpawns(4, 6, 2).setDefaultProperties(16, 4, 2, 32).setDefaultBiome(false, new String[]{"minecraft:hell", "minecraft:sky", "minecraft:jungle_hills"}));
+    
+    //these babies only spawn in end
+    entityConfigs.add(EntitySprite.config.setDefaultSpawns(1, 2, 2).setDefaultProperties(40, 6, 2, 32).setDefaultBiome(false, new String[]{"minecraft:sky"}));
+    
+    entityConfigs.add(EntityGreaterSprite.config.setDefaultSpawns(1, 1, 1).setDefaultProperties(80, 6, 2, 32).setDefaultBiome(false, new String[]{"minecraft:sky"}));
     
     //sprites 
     load();

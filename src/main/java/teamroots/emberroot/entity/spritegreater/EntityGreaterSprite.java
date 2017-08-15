@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -43,6 +44,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import teamroots.emberroot.EmberRootZoo;
+import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.sprite.EntitySprite;
 import teamroots.emberroot.entity.sprite.ISprite;
 import teamroots.emberroot.util.Util;
@@ -60,6 +62,7 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
   public static final DataParameter<BlockPos> lastLastTargetBlock = EntityDataManager.<BlockPos> createKey(EntityGreaterSprite.class, DataSerializers.BLOCK_POS);
   public static final DataParameter<Boolean> hostile = EntityDataManager.<Boolean> createKey(EntityGreaterSprite.class, DataSerializers.BOOLEAN);
   public static final String NAME = "rootsonespritegreater";
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityGreaterSprite.class,EnumCreatureType.MONSTER);
   public float addDirectionX = 0;
   public float addDirectionY = 0;
   public float twirlTimer = 0;
@@ -332,11 +335,12 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0);
+//    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0);
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
-    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2.0D);
-    this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-    this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0);
+    
+
+    
+    ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
   public void onLivingUpdate() {
