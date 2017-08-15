@@ -53,7 +53,6 @@ public class EntityEnderminy extends EntityMob {
       return this.name().toLowerCase();
     }
   }
-  // public static final float SIZE_FACTOR = 0.5F;
   public static final DataParameter<Float> size = EntityDataManager.<Float> createKey(EntityEnderminy.class, DataSerializers.FLOAT);
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityEnderminy.class, DataSerializers.VARINT);
   private static final int MAX_RND_TP_DISTANCE = 32;
