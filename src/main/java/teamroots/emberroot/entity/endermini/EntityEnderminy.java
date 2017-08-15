@@ -53,7 +53,8 @@ public class EntityEnderminy extends EntityMob {
       return this.name().toLowerCase();
     }
   }
-  public static final float SIZE_FACTOR = 0.5F;
+  // public static final float SIZE_FACTOR = 0.5F;
+  public static final DataParameter<Float> size = EntityDataManager.<Float> createKey(EntityEnderminy.class, DataSerializers.FLOAT);
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityEnderminy.class, DataSerializers.VARINT);
   private static final int MAX_RND_TP_DISTANCE = 32;
   //  private static final int SCREAMING_INDEX = 30;
@@ -68,7 +69,6 @@ public class EntityEnderminy extends EntityMob {
   private boolean groupAgroEnabled = true;
   public EntityEnderminy(World world) {
     super(world);
-    setSize(0.6F * SIZE_FACTOR, 2.9F * (SIZE_FACTOR/2));
     stepHeight = 1.0F;
     tasks.addTask(0, new EntityAISwimming(this));
     tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
@@ -93,6 +93,9 @@ public class EntityEnderminy extends EntityMob {
     super.entityInit();
     dataManager.register(SCREAMING_INDEX, Boolean.valueOf(false));
     dataManager.register(variant, rand.nextInt(VariantColors.values().length));
+    float sizeRand = MathHelper.nextFloat(world.rand, 0.45F, 1F);
+    dataManager.register(size, sizeRand);
+    setSize(0.6F * sizeRand, 2.9F * (sizeRand / 2));
   }
   //  @Override
   //  public boolean getCanSpawnHere() {
@@ -107,6 +110,9 @@ public class EntityEnderminy extends EntityMob {
   //  }
   public Integer getVariant() {
     return dataManager.get(variant);
+  }
+  public Float getSizeSaved() {
+    return dataManager.get(size);
   }
   public VariantColors getVariantEnum() {
     return VariantColors.values()[getVariant()];
