@@ -9,7 +9,6 @@ import teamroots.emberroot.Const;
 import teamroots.emberroot.entity.cat.EntityWitherCat;
 import teamroots.emberroot.entity.creeper.EntityConcussionCreeper;
 import teamroots.emberroot.entity.deer.EntityDeer;
-import teamroots.emberroot.entity.dirtslime.EntityDireSlime;
 import teamroots.emberroot.entity.endermini.EntityEnderminy;
 import teamroots.emberroot.entity.fairy.EntityFairy;
 import teamroots.emberroot.entity.golem.EntityAncientGolem;
@@ -18,9 +17,10 @@ import teamroots.emberroot.entity.knight.EntityFallenKnight;
 import teamroots.emberroot.entity.mount.EntityFallenMount;
 import teamroots.emberroot.entity.owl.EntityOwl;
 import teamroots.emberroot.entity.slime.EntityRainbowSlime;
+import teamroots.emberroot.entity.slimedirt.EntityDireSlime;
 import teamroots.emberroot.entity.sprout.EntitySprout;
 import teamroots.emberroot.entity.witch.EntityWitherWitch;
-import teamroots.emberroot.entity.wolf.EntityDireWolf;
+import teamroots.emberroot.entity.wolfdire.EntityDireWolf;
 
 public class ConfigManager {
   public static Configuration config;
@@ -47,6 +47,8 @@ public class ConfigManager {
     entityConfigs.add(EntityFallenMount.config.setDefaultSpawns(0, 0, 0).setDefaultProperties(30, -1, -1, -1));
     entityConfigs.add(EntityFallenKnight.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(20, 4, -1, 32));
     entityConfigs.add(EntitySprout.config.setDefaultSpawns(2, 4, 1).setDefaultProperties(6, 0, 0.2F, 32));
+    //roots1 direwolf
+    //sprites 
     load();
   }
   public static void load() {

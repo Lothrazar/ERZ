@@ -1,4 +1,4 @@
-package teamroots.emberroot.entity.timberwolf;
+package teamroots.emberroot.entity.wolftimber;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.Nullable;

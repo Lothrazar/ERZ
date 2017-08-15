@@ -13,7 +13,7 @@ import teamroots.emberroot.config.ConfigManager;
 import teamroots.emberroot.entity.sprite.EntitySprite;
 import teamroots.emberroot.entity.sprite.ModelSprite;
 import teamroots.emberroot.entity.sprite.RenderSprite;
-import teamroots.emberroot.entity.timberwolf.EntityTimberWolf;
+import teamroots.emberroot.entity.wolftimber.EntityTimberWolf;
 import teamroots.emberroot.util.RenderUtil;
 
 public class RenderSpriteling extends RenderLiving<EntitySpriteling> {

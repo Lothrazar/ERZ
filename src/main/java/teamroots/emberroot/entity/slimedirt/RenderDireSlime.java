@@ -1,4 +1,4 @@
-package teamroots.emberroot.entity.dirtslime;
+package teamroots.emberroot.entity.slimedirt;
 import org.lwjgl.opengl.GL11;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;

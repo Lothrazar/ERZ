@@ -19,7 +19,7 @@ import teamroots.emberroot.entity.owl.EntityOwl;
 import teamroots.emberroot.entity.owl.ItemOwlEgg;
 import teamroots.emberroot.entity.sprite.EntitySprite;
 import teamroots.emberroot.entity.spriteguardian.EntitySpriteGuardianBoss;
-import teamroots.emberroot.entity.wolf.EntityDireWolf;
+import teamroots.emberroot.entity.wolfdire.EntityDireWolf;
 import teamroots.emberroot.proxy.CommonProxy;
 
 @Mod(modid = Const.MODID, name = EmberRootZoo.MODNAME)

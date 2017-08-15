@@ -19,7 +19,7 @@ import teamroots.emberroot.entity.spriteguardian.ModelSpriteGuardianSegmentLarge
 import teamroots.emberroot.entity.spriteguardian.ModelSpriteGuardianTail;
 import teamroots.emberroot.entity.spriteling.ModelSpriteling;
 import teamroots.emberroot.entity.sprout.ModelSprout;
-import teamroots.emberroot.entity.timberwolf.ModelTimberWolf;
+import teamroots.emberroot.entity.wolftimber.ModelTimberWolf;
 import teamroots.emberroot.particle.ParticleRenderer;
 
 public class ClientProxy extends CommonProxy {

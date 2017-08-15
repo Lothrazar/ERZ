@@ -4,7 +4,7 @@
 // (created by Elucent)
 // Keep in mind that you still need to fill in some blanks
 // - ZeuX
-package teamroots.emberroot.entity.timberwolf;
+package teamroots.emberroot.entity.wolftimber;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;

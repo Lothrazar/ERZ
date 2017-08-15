@@ -1,4 +1,4 @@
-package teamroots.emberroot.entity.wolf;
+package teamroots.emberroot.entity.wolfdire;
 import org.lwjgl.opengl.GL11;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;

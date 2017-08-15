@@ -1,4 +1,4 @@
-package teamroots.emberroot.entity.wolf;
+package teamroots.emberroot.entity.wolfdire;
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;

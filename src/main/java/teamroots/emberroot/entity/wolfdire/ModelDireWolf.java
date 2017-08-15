@@ -1,4 +1,4 @@
-package teamroots.emberroot.entity.wolf;
+package teamroots.emberroot.entity.wolfdire;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

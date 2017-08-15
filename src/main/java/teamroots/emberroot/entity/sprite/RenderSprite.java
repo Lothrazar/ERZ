@@ -10,9 +10,9 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigManager;
 import teamroots.emberroot.entity.spritegreater.EntityGreaterSprite;
-import teamroots.emberroot.entity.timberwolf.EntityTimberWolf;
-import teamroots.emberroot.entity.timberwolf.ModelTimberWolf;
-import teamroots.emberroot.entity.timberwolf.RenderTimberWolf;
+import teamroots.emberroot.entity.wolftimber.EntityTimberWolf;
+import teamroots.emberroot.entity.wolftimber.ModelTimberWolf;
+import teamroots.emberroot.entity.wolftimber.RenderTimberWolf;
 import teamroots.emberroot.util.RenderUtil;
 
 public class RenderSprite extends RenderLiving<EntitySprite> {

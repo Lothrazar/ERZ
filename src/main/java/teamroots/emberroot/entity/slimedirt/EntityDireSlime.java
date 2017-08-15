@@ -1,4 +1,4 @@
-package teamroots.emberroot.entity.dirtslime;
+package teamroots.emberroot.entity.slimedirt;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
