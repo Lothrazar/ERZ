@@ -80,35 +80,40 @@ public class EntityDireSlime extends EntityMagmaCube {
     super.entityInit();
     this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
   }
-  private boolean blockBelowMatches(Block target) {
-    Block blockBelow = this.world.getBlockState(this.getPosition().down()).getBlock();
+  private boolean blockHereMatches(Block target, BlockPos pos) { //
+    Block blockBelow = this.world.getBlockState(pos).getBlock();
     return OreDictionary.itemMatches(new ItemStack(target), new ItemStack(blockBelow), false);
   }
   @Override
   public void onUpdate() {
     super.onUpdate();
     Biome biome = this.world.getBiome(this.getPosition());
+    BlockPos posHere = this.getPosition();
+    BlockPos posDown = posHere.down();
     int newVariant = -1;
-    if (biome.equals(Biomes.HELL) || blockBelowMatches(Blocks.NETHERRACK)) {
+    if (biome.equals(Biomes.HELL) || blockHereMatches(Blocks.NETHERRACK, posDown)) {
       newVariant = VariantColors.NETHER.ordinal();
       newVariant = VariantColors.NETHER.ordinal();
     }
-    else if (biome.equals(Biomes.SKY) || blockBelowMatches(Blocks.END_STONE)) {
+    else if (biome.equals(Biomes.SKY) || blockHereMatches(Blocks.END_STONE, posDown)) {
       newVariant = VariantColors.END.ordinal();
     }
-    else if (blockBelowMatches(Blocks.DIRT) || blockBelowMatches(Blocks.GRASS)) {
+    else if (blockHereMatches(Blocks.SNOW, posHere) || blockHereMatches(Blocks.SNOW_LAYER, posHere)) {
+      newVariant = VariantColors.SNOW.ordinal();
+    }
+    else if (blockHereMatches(Blocks.DIRT, posDown) || blockHereMatches(Blocks.GRASS, posDown)) {
       newVariant = VariantColors.DIRT.ordinal();
     }
-    else if (blockBelowMatches(Blocks.SAND) || blockBelowMatches(Blocks.SANDSTONE)) {
+    else if (blockHereMatches(Blocks.SAND, posDown) || blockHereMatches(Blocks.SANDSTONE, posDown)) {
       newVariant = VariantColors.SAND.ordinal();
     }
-    else if (blockBelowMatches(Blocks.STONE) || blockBelowMatches(Blocks.COBBLESTONE)) {
+    else if (blockHereMatches(Blocks.STONE, posDown) || blockHereMatches(Blocks.COBBLESTONE, posDown)) {
       newVariant = VariantColors.STONE.ordinal();
     }
-    else if (blockBelowMatches(Blocks.GRAVEL)) {
+    else if (blockHereMatches(Blocks.GRAVEL, posDown)) {
       newVariant = VariantColors.GRAVEL.ordinal();
     }
-    else if (biome.isSnowyBiome() || blockBelowMatches(Blocks.SNOW)) {
+    else if (biome.isSnowyBiome() || blockHereMatches(Blocks.SNOW, posDown)) {
       newVariant = VariantColors.SNOW.ordinal();
     }
     if (newVariant >= 0 && newVariant != this.getVariant()) { //dont change from SAME -> SAME
