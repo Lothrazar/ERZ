@@ -15,21 +15,12 @@ import teamroots.emberroot.util.EntityUtil;
  * Add a spawn entry for the supplied entity in the supplied {@link Biome} list
  * entityClass Entity class added weightedProb Probability min Min spawn count
  * max Max spawn count typeOfCreature Type of spawn biomes List of biomes
+ * 
+ * https://minecraft.gamepedia.com/Data_values#Biome_IDs
  */
 public class ConfigSpawnEntity {
   public static final String[] defaultBiomes = new String[] {
-      "minecraft:ocean",
-      "minecraft:plains",
-      "minecraft:desert",
-      "minecraft:extreme_hills",
-      "minecraft:forest",
-      "minecraft:taiga",
-      "minecraft:swampland",
-      "minecraft:river",
-      "minecraft:hell",
-      "minecraft:ice_flats",
-      "minecraft:beaches",
-      "minecraft:forest_hills", "minecraft:jungle", "minecraft:birch_forest", "minecraft:roofed_forest", "minecraft:savanna", "minecraft:mesa"
+      "minecraft:plains", "minecraft:forest", "minecraft:swampland", "minecraft:savanna", "minecraft:mesa"
   };
   public Class<? extends EntityLiving> entityClass;
   public EnumCreatureType typeOfCreature;
@@ -64,6 +55,11 @@ public class ConfigSpawnEntity {
     defaults.useAllBiomes = useAllBiomes;
     return this;
   }
+  public ConfigSpawnEntity setDefaultBiome(boolean all, String[] biomelist) {
+    defaults.useAllBiomes = all;
+    defaults.biomes = biomelist;
+    return this;
+  }
   public void syncConfig(Configuration config) {
     settings.min = config.getInt("minSpawnCount", category, defaults.min, 0, 500, "Smallest spawn group.");
     settings.max = config.getInt("maxSpawnCount", category, defaults.max, 0, 500, "Biggest spawn group.");
@@ -72,7 +68,7 @@ public class ConfigSpawnEntity {
     }
     settings.weightedProb = config.getInt("weightProbability", category, defaults.weightedProb, 0, 500, "Configures the spawning frequency. Higher numbers mean more spawns.");
     settings.useAllBiomes = config.getBoolean("allBiomes", category, defaults.useAllBiomes, "Try to spawn in every biome.  If false, it will use the whitelist in this config ");
-    settings.biomes = config.getStringList("biomeWhitelist", category, defaultBiomes, "Biomes this will spawn into.  Add support for any modded biome here.  Ignored whenever allBiomes is true. ");
+    settings.biomes = config.getStringList("biomeWhitelist", category, defaultBiomes, "Biomes this will spawn into.  Add support for any modded biome here.  Ignored whenever allBiomes is true. https://minecraft.gamepedia.com/Data_values#Biome_IDs");
     settings.maxHealth = config.getInt("maxHealth", category, defaults.maxHealth, 1, 100, "Max health of the mob");
     if (settings.followRange >= 0) {
       settings.followRange = config.getInt("followRange", category, defaults.followRange, 0, 2, "Base follow range");

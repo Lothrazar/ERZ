@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -43,12 +44,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import teamroots.emberroot.EmberRootZoo;
+import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.sprite.EntitySprite;
 import teamroots.emberroot.entity.sprite.ISprite;
 import teamroots.emberroot.util.Util;
 
 public class EntitySpriteling extends EntityFlying implements ISprite {// implements IRangedAttackMob {
-  public float range = 64;
+  
   public static final DataParameter<Float> targetDirectionX = EntityDataManager.<Float> createKey(EntitySpriteling.class, DataSerializers.FLOAT);
   public static final DataParameter<Float> targetDirectionY = EntityDataManager.<Float> createKey(EntitySpriteling.class, DataSerializers.FLOAT);
   public static final DataParameter<Integer> dashTimer = EntityDataManager.<Integer> createKey(EntitySpriteling.class, DataSerializers.VARINT);
@@ -58,7 +60,9 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
   public static final DataParameter<BlockPos> lastTargetBlock = EntityDataManager.<BlockPos> createKey(EntitySpriteling.class, DataSerializers.BLOCK_POS);
   public static final DataParameter<BlockPos> lastLastTargetBlock = EntityDataManager.<BlockPos> createKey(EntitySpriteling.class, DataSerializers.BLOCK_POS);
   public static final String NAME = "rootsonespriteling";
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntitySpriteling.class,EnumCreatureType.MONSTER);
   public float addDirectionX = 0;
+  public float range = 64;
   public float addDirectionY = 0;
   public float twirlTimer = 0;
   public Vec3d moveVec = new Vec3d(0, 0, 0);
@@ -263,11 +267,14 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16.0);
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
-    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2.0D);
-    this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-    this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0);
+
+    ConfigSpawnEntity.syncInstance(this, config.settings);
+//    
+//    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16.0);
+//    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2.0D);
+//    this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+//    this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0);
   }
   @Override
   public void onLivingUpdate() {
