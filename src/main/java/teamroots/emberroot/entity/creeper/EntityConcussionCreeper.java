@@ -35,7 +35,7 @@ import teamroots.emberroot.util.TeleportUtil;
 public class EntityConcussionCreeper extends EntityCreeper {
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityConcussionCreeper.class, DataSerializers.VARINT);
   public static enum VariantColors {
-    TP, POISON, REGEN;
+    TP, POISON, REGEN, BLUE;
     public String nameLower() {
       return this.name().toLowerCase();
     }
@@ -93,10 +93,13 @@ public class EntityConcussionCreeper extends EntityCreeper {
         int range = concussionCreeperExplosionRange;
         switch (this.getVariantEnum()) {
           case POISON:
-            spawnLingeringPotion(PotionTypes.LONG_POISON);
+            spawnLingeringPotion(PotionTypes.POISON);
           break;
           case REGEN:
             spawnLingeringPotion(PotionTypes.LONG_REGENERATION);
+          break;
+          case BLUE:
+            spawnLingeringPotion(PotionTypes.LONG_WEAKNESS);
           break;
           case TP:
             AxisAlignedBB bb = new AxisAlignedBB(posX - range, posY - range, posZ - range, posX + range, posY + range, posZ + range);
