@@ -12,9 +12,11 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntityRainbowSlime extends EntitySlime {
@@ -189,5 +191,10 @@ public class EntityRainbowSlime extends EntitySlime {
   public void writeEntityToNBT(NBTTagCompound compound) {
     super.writeEntityToNBT(compound);
     compound.setInteger("variant", getDataManager().get(variant));
+  }
+  @Override
+  public ResourceLocation getLootTable() {
+    String colour = getVariantEnum().nameLower();
+    return new ResourceLocation(Const.MODID, "entity/slime_" + colour);
   }
 }

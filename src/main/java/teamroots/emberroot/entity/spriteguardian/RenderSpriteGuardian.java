@@ -3,17 +3,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.culling.ICamera;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
-import teamroots.emberroot.entity.spritegreater.EntitySpriteProjectile;
 import teamroots.emberroot.entity.spritegreater.ModelNull;
-import teamroots.emberroot.entity.spritegreater.RenderSpriteProjectile;
 
 public class RenderSpriteGuardian extends RenderLiving<EntitySpriteGuardianBoss> {
   public RenderSpriteGuardian(RenderManager renderManager, ModelBase modelBase, float shadowSize) {

@@ -92,10 +92,6 @@ public class EntityDeer extends EntityAnimal {
     return new EntityDeer(ageable.world);
   }
   @Override
-  public ResourceLocation getLootTable() {
-    return new ResourceLocation(Const.MODID, "entity/deer");
-  }
-  @Override
   public float getEyeHeight() {
     return this.isChild() ? this.height : 1.3F;
   }
@@ -112,5 +108,9 @@ public class EntityDeer extends EntityAnimal {
     super.writeEntityToNBT(compound);
     compound.setBoolean("hasHorns", getDataManager().get(hasHorns));
     compound.setBoolean("hasRednose", getDataManager().get(hasRednose));
+  }
+  @Override
+  public ResourceLocation getLootTable() {
+    return new ResourceLocation(Const.MODID, "entity/deer");
   }
 }

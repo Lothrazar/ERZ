@@ -24,8 +24,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
-import teamroots.emberroot.entity.owl.EntityOwl;
-import teamroots.emberroot.entity.owl.EntityOwl.VariantColors;
 import teamroots.emberroot.util.SpawnUtil;
 
 /**
@@ -175,10 +173,6 @@ public class EntityDireSlime extends EntityMagmaCube {
     return new EntityDireSlime(this.world);
   }
   @Override
-  protected ResourceLocation getLootTable() {
-    return new ResourceLocation(Const.MODID, "entity/slime_dirt");
-  }
-  @Override
   @SideOnly(Side.CLIENT)
   public int getBrightnessForRender() {
     int i = MathHelper.floor(this.posX);
@@ -232,5 +226,9 @@ public class EntityDireSlime extends EntityMagmaCube {
   protected float applyArmorCalculations(DamageSource ds, float dmg) {
     if (!ds.isUnblockable()) { return Math.min(Math.max(dmg - 3 - this.getSlimeSize(), this.getSlimeSize()) / 2, dmg); }
     return dmg;
+  }
+  @Override
+  protected ResourceLocation getLootTable() {
+    return new ResourceLocation(Const.MODID, "entity/slime_block");
   }
 }

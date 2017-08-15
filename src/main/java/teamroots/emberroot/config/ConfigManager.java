@@ -52,15 +52,12 @@ public class ConfigManager {
     entityConfigs.add(EntityFallenKnight.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(20, 4, -1, 32));
     entityConfigs.add(EntitySprout.config.setDefaultSpawns(2, 4, 1).setDefaultProperties(6, 0, 0.2F, 32));
     //roots1 direwolf
-    entityConfigs.add(EntityTimberWolf.config.setDefaultSpawns(2,5, 10).setDefaultProperties(32, 4, 0.20000000298023224F, 32).setDefaultBiome(false, new String[]{ "minecraft:ice_flats","minecraft:extreme_hills", "minecraft:savanna", "minecraft:mesa", "minecraft:roofed_forest", "minecraft:taiga","minecraft:taiga_cold","minecraft:ice_mountains"}));
+    entityConfigs.add(EntityTimberWolf.config.setDefaultSpawns(2, 5, 10).setDefaultProperties(32, 4, 0.20000000298023224F, 32).setDefaultBiome(false, new String[] { "minecraft:ice_flats", "minecraft:extreme_hills", "minecraft:savanna", "minecraft:mesa", "minecraft:roofed_forest", "minecraft:taiga", "minecraft:taiga_cold", "minecraft:ice_mountains" }));
     //smallest ones get a bit of a wider spawn
-    entityConfigs.add(EntitySpriteling.config.setDefaultSpawns(4, 6, 2).setDefaultProperties(16, 4, 2, 32).setDefaultBiome(false, new String[]{"minecraft:hell", "minecraft:sky", "minecraft:jungle_hills"}));
-    
+    entityConfigs.add(EntitySpriteling.config.setDefaultSpawns(4, 6, 2).setDefaultProperties(16, 4, 2, 32).setDefaultBiome(false, new String[] { "minecraft:hell", "minecraft:sky", "minecraft:jungle_hills" }));
     //these babies only spawn in end
-    entityConfigs.add(EntitySprite.config.setDefaultSpawns(1, 2, 2).setDefaultProperties(40, 6, 2, 32).setDefaultBiome(false, new String[]{"minecraft:sky"}));
-    
-    entityConfigs.add(EntityGreaterSprite.config.setDefaultSpawns(1, 1, 1).setDefaultProperties(80, 6, 2, 32).setDefaultBiome(false, new String[]{"minecraft:sky"}));
-    
+    entityConfigs.add(EntitySprite.config.setDefaultSpawns(1, 3, 5).setDefaultProperties(40, 6, 2, 32).setDefaultBiome(false, new String[] { "minecraft:sky" }));
+    entityConfigs.add(EntityGreaterSprite.config.setDefaultSpawns(1, 3, 2).setDefaultProperties(80, 6, 2, 32).setDefaultBiome(false, new String[] { "minecraft:sky" }));
     //sprites 
     load();
   }

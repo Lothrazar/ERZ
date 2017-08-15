@@ -1,0 +1,22 @@
+{
+    "pools": [
+        {
+			"name": "main",
+            "rolls": 2,
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "minecraft:glowstone"
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:obsidian"
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:emerald"
+                }
+            ]
+        }
+    ]
+}

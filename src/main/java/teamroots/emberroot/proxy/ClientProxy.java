@@ -38,7 +38,6 @@ public class ClientProxy extends CommonProxy {
     ModelSpriteling.instance = new ModelSpriteling();
     ModelNull.instance = new ModelNull();
     ModelGreaterSprite.instance = new ModelGreaterSprite();
-    
     ModelSpriteGuardianHead.instance = new ModelSpriteGuardianHead();
     ModelSpriteGuardianSegment.instance = new ModelSpriteGuardianSegment();
     ModelSpriteGuardianSegmentFirst.instance = new ModelSpriteGuardianSegmentFirst();
@@ -77,7 +76,6 @@ public class ClientProxy extends CommonProxy {
   }
   @Override
   public void spawnParticleMagicSparkleFX(World world, double x, double y, double z, double vx, double vy, double vz, double r, double g, double b) {
-
     ParticleMagicSparkle particle = new ParticleMagicSparkle(world, x, y, z, vx, vy, vz, r, g, b);
     Minecraft.getMinecraft().effectRenderer.addEffect(particle);
   }

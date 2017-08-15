@@ -76,10 +76,6 @@ public class EntityConcussionCreeper extends EntityCreeper {
     }
     super.onUpdate();
   }
-  @Override
-  protected ResourceLocation getLootTable() {
-    return new ResourceLocation(Const.MODID, "entity/creeper");
-  }
   private void setTimeSinceIgnited(int i) {
     if (fTimeSinceIgnited == null) { return; }
     try {
@@ -108,5 +104,9 @@ public class EntityConcussionCreeper extends EntityCreeper {
       e.printStackTrace();
       return 0;
     }
+  }
+  @Override
+  public ResourceLocation getLootTable() {
+    return new ResourceLocation(Const.MODID, "entity/creeper_concussion");
   }
 }

@@ -41,8 +41,6 @@ import teamroots.emberroot.entity.ai.EntityAIFlyingLand;
 import teamroots.emberroot.entity.ai.EntityAIFlyingPanic;
 import teamroots.emberroot.entity.ai.EntityAIFlyingShortWander;
 import teamroots.emberroot.entity.ai.EntityAINearestAttackableTargetBounded;
-import teamroots.emberroot.entity.sprout.EntitySprout;
-import teamroots.emberroot.entity.sprout.EntitySprout.VariantColors;
 
 /**
  * Original author: https://github.com/CrazyPants

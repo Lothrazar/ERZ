@@ -1,35 +1,13 @@
 package teamroots.emberroot.entity.spriteling;
 import java.util.List;
 import java.util.Random;
-import net.minecraft.block.BlockRedstoneLight;
+import javax.annotation.Nullable;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityFlying;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIRestrictSun;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITarget;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.EntityAIZombieAttack;
-import net.minecraft.entity.ai.RandomPositionGenerator;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -37,12 +15,12 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.sprite.EntitySprite;
@@ -50,7 +28,6 @@ import teamroots.emberroot.entity.sprite.ISprite;
 import teamroots.emberroot.util.Util;
 
 public class EntitySpriteling extends EntityFlying implements ISprite {// implements IRangedAttackMob {
-  
   public static final DataParameter<Float> targetDirectionX = EntityDataManager.<Float> createKey(EntitySpriteling.class, DataSerializers.FLOAT);
   public static final DataParameter<Float> targetDirectionY = EntityDataManager.<Float> createKey(EntitySpriteling.class, DataSerializers.FLOAT);
   public static final DataParameter<Integer> dashTimer = EntityDataManager.<Integer> createKey(EntitySpriteling.class, DataSerializers.VARINT);
@@ -60,7 +37,7 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
   public static final DataParameter<BlockPos> lastTargetBlock = EntityDataManager.<BlockPos> createKey(EntitySpriteling.class, DataSerializers.BLOCK_POS);
   public static final DataParameter<BlockPos> lastLastTargetBlock = EntityDataManager.<BlockPos> createKey(EntitySpriteling.class, DataSerializers.BLOCK_POS);
   public static final String NAME = "rootsonespriteling";
-  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntitySpriteling.class,EnumCreatureType.MONSTER);
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntitySpriteling.class, EnumCreatureType.MONSTER);
   public float addDirectionX = 0;
   public float range = 64;
   public float addDirectionY = 0;
@@ -268,13 +245,12 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
-
     ConfigSpawnEntity.syncInstance(this, config.settings);
-//    
-//    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16.0);
-//    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2.0D);
-//    this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-//    this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0);
+    //    
+    //    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16.0);
+    //    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2.0D);
+    //    this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+    //    this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0);
   }
   @Override
   public void onLivingUpdate() {
@@ -341,5 +317,9 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
   @Override
   public BlockPos getTargetPosition() {
     return getDataManager().get(targetBlock);
+  }
+  @Nullable
+  protected ResourceLocation getLootTable() {
+    return new ResourceLocation(Const.MODID, "entity/sprite_mini");
   }
 }

@@ -73,10 +73,6 @@ public class EntityWitherCat extends EntityMob implements IOwnable<EntityWitherC
     setSize(DEF_WIDTH, DEF_HEIGHT);
   }
   @Override
-  protected ResourceLocation getLootTable() {
-    return new ResourceLocation(Const.MODID, "entity/cat");
-  }
-  @Override
   protected void entityInit() {
     super.entityInit();
     dataManager.register(SCALE_INDEX, Float.valueOf(1));
@@ -317,5 +313,9 @@ public class EntityWitherCat extends EntityMob implements IOwnable<EntityWitherC
     if (root.hasKey("growthMode")) {
       setGrowthMode(root.getByte("growthMode"));
     }
+  }
+  @Override
+  protected ResourceLocation getLootTable() {
+    return new ResourceLocation(Const.MODID, "entity/cat_wither");
   }
 }

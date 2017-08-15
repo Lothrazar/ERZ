@@ -58,7 +58,6 @@ import teamroots.emberroot.entity.sprite.EntitySprite;
 import teamroots.emberroot.entity.sprite.RenderSprite;
 import teamroots.emberroot.entity.spritegreater.EntityGreaterSprite;
 import teamroots.emberroot.entity.spritegreater.EntitySpriteProjectile;
-import teamroots.emberroot.entity.spritegreater.ModelNull;
 import teamroots.emberroot.entity.spritegreater.RenderGreaterSprite;
 import teamroots.emberroot.entity.spritegreater.RenderSpriteProjectile;
 import teamroots.emberroot.entity.spriteguardian.EntitySpriteGuardianBoss;
@@ -154,13 +153,8 @@ public class RegistryManager {
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntitySpriteProjectile.NAME), EntitySpriteProjectile.class, EntitySpriteProjectile.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityGreaterSprite.NAME), EntityGreaterSprite.class, EntityGreaterSprite.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityGreaterSprite.NAME), Util.intColor(130, 255, 60), Util.intColor(130, 255, 60));
-  
-  
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntitySpriteGuardianBoss.NAME), EntitySpriteGuardianBoss.class, EntitySpriteGuardianBoss.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntitySpriteGuardianBoss.NAME), Util.intColor(120, 245, 50), Util.intColor(160, 255, 60));
-    
-    
-  
   }
   public static void registerDamageSources() {
     EmberRootZoo.damage_ember = new DamageGolem();

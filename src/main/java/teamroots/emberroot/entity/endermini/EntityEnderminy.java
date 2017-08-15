@@ -19,7 +19,6 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -40,9 +39,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
-import teamroots.emberroot.entity.owl.EntityOwl;
-import teamroots.emberroot.entity.owl.EntityOwl.VariantColors;
 
 /**
  * Original author: https://github.com/CrazyPants
@@ -238,14 +236,6 @@ public class EntityEnderminy extends EntityMob {
   protected SoundEvent getDeathSound() {
     return SoundEvents.ENTITY_ENDERMEN_DEATH;
   }
-  @Override
-  protected Item getDropItem() {
-    return Items.ENDER_PEARL;
-  }
-  @Override
-  protected ResourceLocation getLootTable() {
-    return null; // use getDropItem() instead
-  }
   /**
    * Called when the entity is attacked.
    */
@@ -414,5 +404,9 @@ public class EntityEnderminy extends EntityMob {
         super.updateTask();
       }
     }
+  }
+  @Override
+  public ResourceLocation getLootTable() {
+    return new ResourceLocation(Const.MODID, "entity/ender_mini");//TODO: rng ender pearl
   }
 }

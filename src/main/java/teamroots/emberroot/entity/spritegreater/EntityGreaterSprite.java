@@ -1,35 +1,13 @@
 package teamroots.emberroot.entity.spritegreater;
-import java.util.Random;
 import java.util.List;
-import net.minecraft.block.BlockRedstoneLight;
+import java.util.Random;
+import javax.annotation.Nullable;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityFlying;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIRestrictSun;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITarget;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.EntityAIZombieAttack;
-import net.minecraft.entity.ai.RandomPositionGenerator;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -37,12 +15,12 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.sprite.EntitySprite;
@@ -62,7 +40,7 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
   public static final DataParameter<BlockPos> lastLastTargetBlock = EntityDataManager.<BlockPos> createKey(EntityGreaterSprite.class, DataSerializers.BLOCK_POS);
   public static final DataParameter<Boolean> hostile = EntityDataManager.<Boolean> createKey(EntityGreaterSprite.class, DataSerializers.BOOLEAN);
   public static final String NAME = "rootsonespritegreater";
-  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityGreaterSprite.class,EnumCreatureType.MONSTER);
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityGreaterSprite.class, EnumCreatureType.MONSTER);
   public float addDirectionX = 0;
   public float addDirectionY = 0;
   public float twirlTimer = 0;
@@ -335,11 +313,8 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-//    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0);
+    //    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0);
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
-    
-
-    
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
@@ -413,5 +388,9 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
   @Override
   public BlockPos getTargetPosition() {
     return getDataManager().get(targetBlock);
+  }
+  @Nullable
+  protected ResourceLocation getLootTable() {
+    return new ResourceLocation(Const.MODID, "entity/sprite_greater");
   }
 }

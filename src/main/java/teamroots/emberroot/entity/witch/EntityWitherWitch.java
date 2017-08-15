@@ -98,11 +98,6 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
     return potion.getPotion() != MobEffects.WITHER && super.isPotionApplicable(potion);
   }
   @Override
-  public ResourceLocation getLootTable() {
-    //    String colour = getVariantEnum().nameLower();
-    return new ResourceLocation(Const.MODID, "entity/witch");
-  }
-  @Override
   public void setRevengeTarget(EntityLivingBase target) {
     EntityLivingBase curTarget = this.getAttackTarget();
     super.setRevengeTarget(target);
@@ -334,4 +329,9 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
   }
   @Override
   public void setSwingingArms(boolean swingingArms) {}
+  @Override
+  public ResourceLocation getLootTable() {
+    //    String colour = getVariantEnum().nameLower();
+    return new ResourceLocation(Const.MODID, "entity/witch");
+  }
 }

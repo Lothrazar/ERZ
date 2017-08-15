@@ -151,7 +151,7 @@ public class EntityDireWolf extends EntityMob {
   }
   @Override
   protected ResourceLocation getLootTable() {
-    return new ResourceLocation(Const.MODID, "entity/wolf");
+    return new ResourceLocation(Const.MODID, "entity/wolf_dire");
   }
   public float getTailRotation() {
     if (isAngry()) { return (float) Math.PI / 2; }

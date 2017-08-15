@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigManager;
-import teamroots.emberroot.entity.sprout.EntitySprout;
 import teamroots.emberroot.util.RenderUtil;
 
 public class RenderOwl extends RenderLiving<EntityOwl> {

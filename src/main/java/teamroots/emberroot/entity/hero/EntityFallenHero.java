@@ -20,8 +20,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntityFallenHero extends EntityMob {
@@ -85,12 +87,12 @@ public class EntityFallenHero extends EntityMob {
   //  protected boolean shouldBurnInDay() {
   //    return false;
   //  }
-  //  @Override
-  //  public ResourceLocation getLootTable() {
-  //    return new ResourceLocation(Const.MODID, "entity/deer");
-  //  }
   @Override
   public void onLivingUpdate() {
     super.onLivingUpdate();
+  }
+  @Override
+  public ResourceLocation getLootTable() {
+    return new ResourceLocation(Const.MODID, "entity/hero");
   }
 }

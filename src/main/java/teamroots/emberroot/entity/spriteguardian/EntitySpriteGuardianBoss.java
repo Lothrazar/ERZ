@@ -1,7 +1,8 @@
 package teamroots.emberroot.entity.spriteguardian;
-import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import javax.annotation.Nullable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.pattern.BlockMaterialMatcher;
@@ -27,8 +28,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
@@ -448,5 +447,9 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
         .build();
     //   }
     return golemPattern;
+  }
+  @Nullable
+  protected ResourceLocation getLootTable() {
+    return new ResourceLocation(Const.MODID, "entity/sprite_boss");
   }
 }

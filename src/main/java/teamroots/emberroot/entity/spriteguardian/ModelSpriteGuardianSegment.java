@@ -4,7 +4,6 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 import teamroots.emberroot.util.Util;
 
 public class ModelSpriteGuardianSegment extends ModelBase {

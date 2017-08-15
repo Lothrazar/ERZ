@@ -20,10 +20,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.ai.EntityAIMountedArrowAttack;
 import teamroots.emberroot.entity.ai.EntityAIMountedAttackOnCollide;
@@ -274,5 +276,9 @@ public class EntityFallenKnight extends EntitySkeleton {
         tasks.removeTask(breakDoorAI);
       }
     }
+  }
+  @Override
+  protected ResourceLocation getLootTable() {
+    return new ResourceLocation(Const.MODID, "entity/knight_fallen");
   }
 }

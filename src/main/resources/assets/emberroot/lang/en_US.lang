@@ -33,6 +33,7 @@ entity.rootsonespritegreater.name=Greater Sprite
 entity.rootsonesprite.name=Sprite
 entity.rootsonespriteling.name=Spriteling
 
+entity.creeper.name=Cursed Creeper
 
 
 item.owl_egg.name=Owl Egg

@@ -4,18 +4,9 @@
 			"name": "main",
             "rolls": 1,
             "entries": [
-                {
-                    "type": "item",
-                    "name": "minecraft:glowstone_dust",
-                    "functions": [
-                        {
-                            "function": "set_count",
-                            "count": {
-                                "min": 1,
-                                "max": 2
-                            }
-                        }
-                    ]
+                { 
+                    "type": "empty",
+                    "weight": 5
                 },
                 {
                     "type": "item",
@@ -31,7 +22,7 @@
                         },
                         {
                             "function": "set_data",
-                            "data": 10
+                            "data": 0
                         },
                         {
                             "function": "looting_enchant",

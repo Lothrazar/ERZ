@@ -1,17 +1,11 @@
 package teamroots.emberroot.entity.spritegreater;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigManager;
-import teamroots.emberroot.entity.spriteling.EntitySpriteling;
-import teamroots.emberroot.entity.spriteling.ModelSpriteling;
-import teamroots.emberroot.entity.spriteling.RenderSpriteling;
 import teamroots.emberroot.util.RenderUtil;
 
 public class RenderGreaterSprite extends RenderLiving<EntityGreaterSprite> {
@@ -21,7 +15,8 @@ public class RenderGreaterSprite extends RenderLiving<EntityGreaterSprite> {
   @Override
   protected ResourceLocation getEntityTexture(EntityGreaterSprite entity) {
     return new ResourceLocation(Const.MODID, "textures/entity/spriteling/spirit.png");
-  }  @Override
+  }
+  @Override
   public void doRender(EntityGreaterSprite entity, double x, double y, double z, float entityYaw, float partialTicks) {
     super.doRender(entity, x, y, z, entityYaw, partialTicks);
     if (ConfigManager.renderDebugHitboxes)
