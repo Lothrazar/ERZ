@@ -315,6 +315,8 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
     super.applyEntityAttributes();
     //    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0);
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
+    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2);
+    //SPEED 2
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override

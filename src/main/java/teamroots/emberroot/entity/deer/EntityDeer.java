@@ -1,6 +1,7 @@
 package teamroots.emberroot.entity.deer;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
@@ -85,8 +86,10 @@ public class EntityDeer extends EntityAnimal {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
+    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224D);
+    
     ConfigSpawnEntity.syncInstance(this, config.settings);
-  }
+ }
   @Override
   public EntityAgeable createChild(EntityAgeable ageable) {
     return new EntityDeer(ageable.world);

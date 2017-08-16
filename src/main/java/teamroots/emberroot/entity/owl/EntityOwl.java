@@ -110,6 +110,7 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
+    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override

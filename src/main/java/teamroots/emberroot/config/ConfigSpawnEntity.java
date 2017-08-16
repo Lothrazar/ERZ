@@ -4,6 +4,7 @@ import java.util.List;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.config.Configuration;
@@ -38,10 +39,9 @@ public class ConfigSpawnEntity {
     this.typeOfCreature = type;
     category = clz.getSimpleName();
   }
-  public ConfigSpawnEntity setDefaultProperties(int dhealth, float attack, float speed, int follow) {
+  public ConfigSpawnEntity setDefaultProperties(int dhealth, float attack,  int follow) {
     this.defaults.maxHealth = dhealth;
     this.defaults.attack = attack;
-    this.defaults.speed = speed;
     this.defaults.followRange = follow;
     return this;
   }
@@ -74,9 +74,7 @@ public class ConfigSpawnEntity {
       settings.followRange = config.getInt("followRange", category, defaults.followRange, 0, 2, "Base follow range");
     }
     //-1 means either property is invalid, or is locked
-    if (defaults.speed >= 0) {
-      settings.speed = (double) config.getFloat("baseSpeed", category, (float) defaults.speed, 0.1F, 2, "Base speed before buffs");
-    }
+
     if (defaults.attack >= 0) {
       settings.attack = config.getFloat("baseDamage", category, defaults.attack, 0, 100, "Base attack, before weapons and buffs");
     }
@@ -102,12 +100,14 @@ public class ConfigSpawnEntity {
   public static void syncInstance(EntityLivingBase living, MobProperties settings) {
     EntityUtil.setMaxHealth(living, settings.maxHealth);
   //  System.out.println("syncInstance SET SPEED " + living.getName() + " " + settings.speed);
-    if (settings.speed > 0)
-      EntityUtil.setSpeed(living, settings.speed);
+//    if (settings.speed > 0)
+//      EntityUtil.setSpeed(living, settings.speed);
     if (settings.attack >= 0)
       EntityUtil.setBaseDamage(living, settings.attack);
     if (settings.followRange >= 0)
-      EntityUtil.setFollow(living, settings.followRange);
+      EntityUtil.setFollow(living, settings.followRange);  
+//    entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(s);
+      
   }
   /**
    * just a simple struct
@@ -124,7 +124,7 @@ public class ConfigSpawnEntity {
     public int maxHealth;
     public float attack;
     public boolean useAllBiomes;
-    public double speed;
+   // public double speed;
     public int followRange;
   }
 }

@@ -57,10 +57,14 @@ public class EntityFallenHero extends EntityMob {
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-   //  System.out.println("HERO BEEFFFF"+this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue());
-     ConfigSpawnEntity.syncInstance(this, config.settings);
-   // System.out.println("HERO AFFFTER"+this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue());
-    //      this.getAttributeMap().registerAttribute(SPAWN_REINFORCEMENTS_CHANCE).setBaseValue(this.rand.nextDouble() * net.minecraftforge.common.ForgeModContainer.zombieSummonBaseChance);
+
+
+    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.33000000417232513D);
+    
+    ConfigSpawnEntity.syncInstance(this, config.settings);
+
+
+  
   }
   @Override
 

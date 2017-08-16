@@ -158,12 +158,12 @@ public class EntityUtil {
     return collides != null;
   }
   public static void setFollow(EntityLivingBase entity, double s) {
-    entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(s);
+    entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32);
   }
-  public static void setSpeed(EntityLivingBase entity, double s) { 
-    entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(s);
-//    entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).notifyAll();
-  }
+//  public static void setSpeed(EntityLivingBase entity, double s) { 
+//    entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(s);
+////    entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).notifyAll();
+//  }
   public static void setMaxHealth(EntityLivingBase entity, double maxHealth) {
     entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(maxHealth);
 //    entity.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).notifyAll();
