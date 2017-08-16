@@ -37,7 +37,7 @@ import teamroots.emberroot.util.SpawnUtil;
  * Original author: https://github.com/CrazyPants
  */
 public class EntityFallenKnight extends EntitySkeleton {
-  public static final String NAME = "fallenknight";
+  public static final String NAME = "knight_fallen";
   //TODO: MORE STUFF TO CONFIGGGGGGGGGGGG
   private static double ATTACK_MOVE_SPEED = 1.2;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFallenKnight.class, EnumCreatureType.MONSTER);
@@ -57,34 +57,25 @@ public class EntityFallenKnight extends EntitySkeleton {
   private float fallenKnightChanceMounted = 0.75f;
   private float fallenKnightChancePerArmorPiece = 0.66f;
   private float fallenKnightChanceArmorUpgrade = 0.2f;
-  private float fallenKnightRangedRatio = 0.5f;
+ 
   private double fallenKnightChanceShield = 0.5f;
   public EntityFallenKnight(World world) {
     super(world);
-    targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
-  }
+ }
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
-  //  private float getAttackRange() {
-  //    if(isRiding()) {
-  //      return 3;
-  //    }
-  //    return 2;
-  //  }
+
   @Override
-  public void setCombatTask() {
-    tasks.removeTask(getAiAttackOnCollide());
-    tasks.removeTask(getAiArrowAttack());
-    if (isRanged()) {
-      tasks.addTask(4, getAiArrowAttack());
-    }
-    else {
-      tasks.addTask(4, getAiAttackOnCollide());
-    }
+  protected void initEntityAI() {
+    super.initEntityAI();
+    targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
+
+    tasks.addTask(4, getAiArrowAttack());
   }
+ 
   public EntityAIMountedArrowAttack getAiArrowAttack() {
     if (aiArrowAttack == null) {
       aiArrowAttack = new EntityAIMountedArrowAttack(this, ATTACK_MOVE_SPEED, EntityFallenMount.MOUNTED_ATTACK_MOVE_SPEED,
@@ -197,15 +188,9 @@ public class EntityFallenKnight extends EntitySkeleton {
         }
       }
     }
-    if (rand.nextFloat() > fallenKnightRangedRatio) {
-      setItemStackToSlot(EntityEquipmentSlot.MAINHAND, getSwordForLevel(equipmentLevel));
-      if (Math.random() <= fallenKnightChanceShield) {
-        setItemStackToSlot(EntityEquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
-      }
-    }
-    else {
+ 
       setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
-    }
+     
   }
   private int getRandomEquipmentLevel() {
     return getRandomEquipmentLevel(EntityUtil.getDifficultyMultiplierForLocation(world, posX, posY, posZ));

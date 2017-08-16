@@ -35,6 +35,8 @@ import teamroots.emberroot.entity.endermini.EntityEnderminy;
 import teamroots.emberroot.entity.endermini.RenderEnderminy;
 import teamroots.emberroot.entity.fairy.EntityFairy;
 import teamroots.emberroot.entity.fairy.RenderFairy;
+import teamroots.emberroot.entity.frozen.EntityFrozenKnight;
+import teamroots.emberroot.entity.frozen.RenderFrozenKnight;
 import teamroots.emberroot.entity.golem.DamageGolem;
 import teamroots.emberroot.entity.golem.EntityAncientGolem;
 import teamroots.emberroot.entity.golem.EntityGolemLaser;
@@ -155,6 +157,9 @@ public class RegistryManager {
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityGreaterSprite.NAME), Util.intColor(130, 255, 60), Util.intColor(130, 255, 60));
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntitySpriteGuardianBoss.NAME), EntitySpriteGuardianBoss.class, EntitySpriteGuardianBoss.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntitySpriteGuardianBoss.NAME), Util.intColor(120, 245, 50), Util.intColor(160, 255, 60));
+    EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityFrozenKnight.NAME), EntityFrozenKnight.class, EntityFrozenKnight.NAME, id++, EmberRootZoo.instance, 64, 1, true);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityFrozenKnight.NAME), intColor(87,58,134), 0xA0A0A0);
+   
   }
   public static void registerDamageSources() {
     EmberRootZoo.damage_ember = new DamageGolem();
@@ -190,6 +195,7 @@ public class RegistryManager {
     RenderingRegistry.registerEntityRenderingHandler(EntityGreaterSprite.class, new RenderGreaterSprite.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntitySpriteProjectile.class, new RenderSpriteProjectile.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntitySpriteGuardianBoss.class, new RenderSpriteGuardian.Factory());
+    RenderingRegistry.registerEntityRenderingHandler(EntityFrozenKnight.class, new RenderFrozenKnight.Factory());
   }
   private void addRecipes() {
     //    ResourceLocation rl;

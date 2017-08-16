@@ -11,6 +11,7 @@ import teamroots.emberroot.entity.creeper.EntityConcussionCreeper;
 import teamroots.emberroot.entity.deer.EntityDeer;
 import teamroots.emberroot.entity.endermini.EntityEnderminy;
 import teamroots.emberroot.entity.fairy.EntityFairy;
+import teamroots.emberroot.entity.frozen.EntityFrozenKnight;
 import teamroots.emberroot.entity.golem.EntityAncientGolem;
 import teamroots.emberroot.entity.hero.EntityFallenHero;
 import teamroots.emberroot.entity.knight.EntityFallenKnight;
@@ -56,9 +57,18 @@ public class ConfigManager {
     //smallest ones get a bit of a wider spawn
     entityConfigs.add(EntitySpriteling.config.setDefaultSpawns(4, 6, 2).setDefaultProperties(16, 4, 2, 32).setDefaultBiome(false, new String[] { "minecraft:hell", "minecraft:sky", "minecraft:jungle_hills" }));
     //these babies only spawn in end
-    entityConfigs.add(EntitySprite.config.setDefaultSpawns(1, 3, 5).setDefaultProperties(40, 6, 2, 32).setDefaultBiome(false, new String[] { "minecraft:sky" }));
+    entityConfigs.add(EntitySprite.config.setDefaultSpawns(1, 3, 5).setDefaultProperties(40, 6, 2, 32)
+        .setDefaultBiome(false, new String[] { "minecraft:ice_mountains", "minecraft:taiga"
+            ,"minecraft:ice_mountains" ,"minecraft:ice_flats" ,"minecraft:frozen_river" ,"minecraft:frozen_ocean" 
+            ,"minecraft:taiga_cold","minecraft:taiga_cold_hills","minecraft:mutated_ice_flats","minecraft:mutated_taiga_cold"
+        }));
     entityConfigs.add(EntityGreaterSprite.config.setDefaultSpawns(1, 3, 2).setDefaultProperties(80, 6, 2, 32).setDefaultBiome(false, new String[] { "minecraft:sky" }));
-    //sprites 
+
+
+    
+
+    entityConfigs.add(EntityFrozenKnight.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(20, 4, -1, 32)
+        .setDefaultBiome(false, new String[] { "minecraft:sky" }));
     load();
   }
   public static void load() {

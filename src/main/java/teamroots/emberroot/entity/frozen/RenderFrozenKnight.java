@@ -1,4 +1,4 @@
-package teamroots.emberroot.entity.knight;
+package teamroots.emberroot.entity.frozen;
 import org.lwjgl.opengl.GL11;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -12,9 +12,9 @@ import teamroots.emberroot.config.ConfigManager;
 import teamroots.emberroot.entity.endermini.EntityEnderminy;
 import teamroots.emberroot.util.RenderUtil;
 
-public class RenderFallenKnight extends RenderSkeleton {
-  private static final ResourceLocation texture = new ResourceLocation(Const.MODID, "textures/entity/knight_fallen.png");
-  public RenderFallenKnight(RenderManager rm) {
+public class RenderFrozenKnight extends RenderSkeleton {
+  private static final ResourceLocation texture = new ResourceLocation(Const.MODID, "textures/entity/skeleton_frozen.png");
+  public RenderFrozenKnight(RenderManager rm) {
     super(rm);
    
   }
@@ -37,7 +37,7 @@ public class RenderFallenKnight extends RenderSkeleton {
   public static class Factory implements IRenderFactory<EntitySkeleton> {
     @Override
     public Render<? super EntitySkeleton> createRenderFor(RenderManager manager) {
-      return new RenderFallenKnight(manager);
+      return new RenderFrozenKnight(manager);
     }
   }
 }

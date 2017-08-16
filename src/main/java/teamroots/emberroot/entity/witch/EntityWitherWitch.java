@@ -66,7 +66,6 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
     super(world);
     rangedAttackAI = new EntityAIRangedAttack(this, 1, 60, 10);
     tasks.addTask(1, new EntityAISwimming(this));
-    tasks.addTask(1, new EntityAISwimming(this));
     tasks.addTask(2, rangedAttackAI);
     tasks.addTask(2, new EntityAIWander(this, 1.0D));
     tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));

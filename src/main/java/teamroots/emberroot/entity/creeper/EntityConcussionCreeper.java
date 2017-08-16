@@ -49,6 +49,7 @@ public class EntityConcussionCreeper extends EntityCreeper {
   private Field fFuseTime;
   public EntityConcussionCreeper(World world) {
     super(world);
+    
     try {
       fTimeSinceIgnited = ReflectionHelper.findField(EntityCreeper.class, "timeSinceIgnited", "field_70833_d");
       fFuseTime = ReflectionHelper.findField(EntityCreeper.class, "fuseTime", "field_82225_f");
