@@ -16,19 +16,6 @@
                             }
                         }
                     ]
-                },
-                {
-                    "type": "item",
-                    "name": "minecraft:sand",
-                    "functions": [
-                        {
-                            "function": "set_count",
-                            "count": {
-                                "min": 0,
-                                "max": 1
-                            }
-                        }
-                    ]
                 }
             ]
         },
