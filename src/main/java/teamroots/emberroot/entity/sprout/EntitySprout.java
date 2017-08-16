@@ -1,6 +1,7 @@
 package teamroots.emberroot.entity.sprout;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -50,7 +51,10 @@ public class EntitySprout extends EntityCreature {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    ConfigSpawnEntity.syncInstance(this, config.settings);
+    //ConfigSpawnEntity.syncInstance(this, config.settings);
+
+    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
+    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224D);
   }
   public Integer getVariant() {
     return getDataManager().get(variant);
