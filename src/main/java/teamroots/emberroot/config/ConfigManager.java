@@ -44,7 +44,7 @@ public class ConfigManager {
     entityConfigs.add(EntityEnderminy.config.setDefaultSpawns(1, 1, 17).setDefaultProperties(15, 10, 0.3F, 32));
     entityConfigs.add(EntityFairy.config.setDefaultSpawns(5, 10, 20).setDefaultProperties(18, -1, -1, 16));
     entityConfigs.add(EntityAncientGolem.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(25, 5, 0.5F, 16));
-    entityConfigs.add(EntityFallenHero.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(25, 4, 0.23F, 75));
+    entityConfigs.add(EntityFallenHero.config.setDefaultSpawns(1, 1, 1).setDefaultProperties(25, 4, 0.43F, 75));
     entityConfigs.add(EntityRainbowSlime.config.setDefaultSpawns(1, 1, 1).setDefaultProperties(-1, -1, 0.2F, 32));
     entityConfigs.add(EntityDireWolf.config.setDefaultSpawns(1, 1, 22).setDefaultProperties(20, 10, 0.5F, 40));
     entityConfigs.add(EntityWitherWitch.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(30, -1, 0.22F, 16));
@@ -67,7 +67,7 @@ public class ConfigManager {
 
     
 
-    entityConfigs.add(EntityFrozenKnight.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(20, 4, -1, 32)
+    entityConfigs.add(EntityFrozenKnight.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(20, 4, 0.2F, 32)
         .setDefaultBiome(false, new String[] { "minecraft:sky" }));
     load();
   }

@@ -75,7 +75,7 @@ public class ConfigSpawnEntity {
     }
     //-1 means either property is invalid, or is locked
     if (defaults.speed >= 0) {
-      settings.speed = config.getFloat("baseSpeed", category, defaults.speed, 0, 2, "Base speed before buffs");
+      settings.speed = (double) config.getFloat("baseSpeed", category, (float) defaults.speed, 0.1F, 2, "Base speed before buffs");
     }
     if (defaults.attack >= 0) {
       settings.attack = config.getFloat("baseDamage", category, defaults.attack, 0, 100, "Base attack, before weapons and buffs");
@@ -101,7 +101,8 @@ public class ConfigSpawnEntity {
    */
   public static void syncInstance(EntityLivingBase living, MobProperties settings) {
     EntityUtil.setMaxHealth(living, settings.maxHealth);
-    if (settings.speed >= 0)
+  //  System.out.println("syncInstance SET SPEED " + living.getName() + " " + settings.speed);
+    if (settings.speed > 0)
       EntityUtil.setSpeed(living, settings.speed);
     if (settings.attack >= 0)
       EntityUtil.setBaseDamage(living, settings.attack);
@@ -123,7 +124,7 @@ public class ConfigSpawnEntity {
     public int maxHealth;
     public float attack;
     public boolean useAllBiomes;
-    public float speed;
+    public double speed;
     public int followRange;
   }
 }

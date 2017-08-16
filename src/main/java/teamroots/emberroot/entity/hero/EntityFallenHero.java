@@ -3,6 +3,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -10,6 +11,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -28,18 +30,19 @@ import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntityFallenHero extends EntityMob {
   public static final String NAME = "hero";
-  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFallenHero.class, EnumCreatureType.CREATURE);;
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFallenHero.class, EnumCreatureType.CREATURE);
   public EntityFallenHero(World worldIn) {
     super(worldIn);
-    // TODO Auto-generated constructor stub
   }
   @Override
   protected void initEntityAI() {
+    super.initEntityAI();
     this.tasks.addTask(1, new EntityAISwimming(this));//can swim but does not like it
     this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D, 0.0F));
     this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
-    //    this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityCreeper.class, 8.0F, 1.0D, 1.2D));
-    this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0D));
+    this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityCreeper.class, 8.0F, 1.0D, 1.2D));
+    //   this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityPlayer.class, 8.0F, 1.0D, 1.2D));
+    //this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0D));
     this.tasks.addTask(3, new EntityAITempt(this, 1.25D, Items.GOLD_INGOT, false));
     this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
     this.tasks.addTask(8, new EntityAILookIdle(this));
@@ -49,14 +52,23 @@ public class EntityFallenHero extends EntityMob {
     this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySpider.class, true));
     this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVindicator.class, true));
     this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySilverfish.class, true));
-    super.initEntityAI();
   }
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-    ConfigSpawnEntity.syncInstance(this, config.settings);
+   //  System.out.println("HERO BEEFFFF"+this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue());
+     ConfigSpawnEntity.syncInstance(this, config.settings);
+   // System.out.println("HERO AFFFTER"+this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue());
     //      this.getAttributeMap().registerAttribute(SPAWN_REINFORCEMENTS_CHANCE).setBaseValue(this.rand.nextDouble() * net.minecraftforge.common.ForgeModContainer.zombieSummonBaseChance);
+  }
+  @Override
+
+  public void onEntityUpdate()
+  {
+    // System.out.println("HERO onEntityUpdate "+this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue());
+    
+    super.onEntityUpdate();
   }
   @Override
   public IEntityLivingData onInitialSpawn(DifficultyInstance di, IEntityLivingData livingData) {
@@ -83,16 +95,12 @@ public class EntityFallenHero extends EntityMob {
     }
     return super.onInitialSpawn(di, livingData);
   }
-  //  @Override
-  //  protected boolean shouldBurnInDay() {
-  //    return false;
-  //  }
-  @Override
-  public void onLivingUpdate() {
-    super.onLivingUpdate();
-  }
   @Override
   public ResourceLocation getLootTable() {
     return new ResourceLocation(Const.MODID, "entity/hero");
+  }
+  @Override
+  public boolean isPreventingPlayerRest(EntityPlayer playerIn) {
+    return false;
   }
 }

@@ -160,11 +160,13 @@ public class EntityUtil {
   public static void setFollow(EntityLivingBase entity, double s) {
     entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(s);
   }
-  public static void setSpeed(EntityLivingBase entity, double s) {
+  public static void setSpeed(EntityLivingBase entity, double s) { 
     entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(s);
+//    entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).notifyAll();
   }
   public static void setMaxHealth(EntityLivingBase entity, double maxHealth) {
     entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(maxHealth);
+//    entity.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).notifyAll();
   }
   public static void setBaseDamage(EntityLivingBase entity, double attackDamage) {
     IAttributeInstance ai = entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);

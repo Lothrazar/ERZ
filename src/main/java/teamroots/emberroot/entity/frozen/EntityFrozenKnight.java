@@ -44,8 +44,7 @@ import teamroots.emberroot.util.EntityUtil;
 public class EntityFrozenKnight extends EntitySkeleton {
   public static final String NAME = "skeleton_frozen";
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFrozenKnight.class, EnumCreatureType.MONSTER);
-  private final EntityAIBreakDoor breakDoorAI = new EntityAIBreakDoor(this);
-  private boolean canBreakDoors = false;
+ 
   private float fallenKnightChancePerArmorPiece = 0.66f;
   private float fallenKnightChanceArmorUpgrade = 0.2f;
   private double fallenKnightChanceShield = 0.5f;
