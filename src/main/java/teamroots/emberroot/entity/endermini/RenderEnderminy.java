@@ -19,9 +19,9 @@ public class RenderEnderminy extends RenderLiving<EntityEnderminy> {
   private ModelEnderman endermanModel;
   private Random rnd = new Random();
   //private float size;
-  public RenderEnderminy(RenderManager rm ) {
+  public RenderEnderminy(RenderManager rm) {
     super(rm, new ModelEnderman(0), 0.5F);//shadow size changed later
-   // this.size=s;
+    // this.size=s;
     endermanModel = (ModelEnderman) super.mainModel;
     addLayer(new EyesLayer());
   }
@@ -38,15 +38,14 @@ public class RenderEnderminy extends RenderLiving<EntityEnderminy> {
   }
   @Override
   protected ResourceLocation getEntityTexture(EntityEnderminy entity) {
-    
     String colour = entity.getVariantEnum().nameLower();
     return new ResourceLocation(Const.MODID, "textures/entity/endermini_" + colour + ".png");
   }
   @Override
   protected void preRenderCallback(EntityEnderminy entity, float partialTickTime) {
-    float s = entity.getSizeSaved() ;
+    float s = entity.getSizeSaved();
     this.shadowSize = s;
-    GL11.glScalef(s, s/2, s);
+    GL11.glScalef(s, s / 2, s);
   }
   private class EyesLayer implements LayerRenderer<EntityEnderminy> {
     @Override
@@ -78,7 +77,7 @@ public class RenderEnderminy extends RenderLiving<EntityEnderminy> {
   public static class Factory implements IRenderFactory<EntityEnderminy> {
     @Override
     public Render<? super EntityEnderminy> createRenderFor(RenderManager manager) {
-      return new RenderEnderminy(manager );
+      return new RenderEnderminy(manager);
     }
   }
 }

@@ -12,7 +12,7 @@ import teamroots.emberroot.util.RenderUtil;
 
 public class RenderConcussionCreeper extends RenderCreeper {
   //  public static final Factory FACTORY = new Factory();
- public RenderConcussionCreeper(RenderManager rm) {
+  public RenderConcussionCreeper(RenderManager rm) {
     super(rm);
   }
   /**
@@ -21,8 +21,7 @@ public class RenderConcussionCreeper extends RenderCreeper {
    */
   @Override
   protected ResourceLocation getEntityTexture(EntityCreeper entity) {
-    
-    String colour = ((EntityConcussionCreeper)entity).getVariantEnum().nameLower();
+    String colour = ((EntityConcussionCreeper) entity).getVariantEnum().nameLower();
     return new ResourceLocation(Const.MODID, "textures/entity/creeper_" + colour + ".png");
   }
   @Override

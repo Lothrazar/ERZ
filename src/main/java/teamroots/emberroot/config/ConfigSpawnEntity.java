@@ -39,7 +39,7 @@ public class ConfigSpawnEntity {
     this.typeOfCreature = type;
     category = clz.getSimpleName();
   }
-  public ConfigSpawnEntity setDefaultProperties(int dhealth, float attack,  int follow) {
+  public ConfigSpawnEntity setDefaultProperties(int dhealth, float attack, int follow) {
     this.defaults.maxHealth = dhealth;
     this.defaults.attack = attack;
     this.defaults.followRange = follow;
@@ -74,7 +74,6 @@ public class ConfigSpawnEntity {
       settings.followRange = config.getInt("followRange", category, defaults.followRange, 0, 2, "Base follow range");
     }
     //-1 means either property is invalid, or is locked
-
     if (defaults.attack >= 0) {
       settings.attack = config.getFloat("baseDamage", category, defaults.attack, 0, 100, "Base attack, before weapons and buffs");
     }
@@ -99,15 +98,14 @@ public class ConfigSpawnEntity {
    */
   public static void syncInstance(EntityLivingBase living, MobProperties settings) {
     EntityUtil.setMaxHealth(living, settings.maxHealth);
-  //  System.out.println("syncInstance SET SPEED " + living.getName() + " " + settings.speed);
-//    if (settings.speed > 0)
-//      EntityUtil.setSpeed(living, settings.speed);
+    //  System.out.println("syncInstance SET SPEED " + living.getName() + " " + settings.speed);
+    //    if (settings.speed > 0)
+    //      EntityUtil.setSpeed(living, settings.speed);
     if (settings.attack >= 0)
       EntityUtil.setBaseDamage(living, settings.attack);
     if (settings.followRange >= 0)
-      EntityUtil.setFollow(living, settings.followRange);  
-//    entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(s);
-      
+      EntityUtil.setFollow(living, settings.followRange);
+    //    entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(s);
   }
   /**
    * just a simple struct
@@ -124,7 +122,7 @@ public class ConfigSpawnEntity {
     public int maxHealth;
     public float attack;
     public boolean useAllBiomes;
-   // public double speed;
+    // public double speed;
     public int followRange;
   }
 }

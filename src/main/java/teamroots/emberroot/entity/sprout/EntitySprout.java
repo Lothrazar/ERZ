@@ -51,9 +51,8 @@ public class EntitySprout extends EntityCreature {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-   ConfigSpawnEntity.syncInstance(this, config.settings);
-
-//    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
+    ConfigSpawnEntity.syncInstance(this, config.settings);
+    //    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224D);
   }
   public Integer getVariant() {

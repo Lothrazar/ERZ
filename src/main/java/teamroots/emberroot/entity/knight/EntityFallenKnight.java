@@ -57,25 +57,21 @@ public class EntityFallenKnight extends EntitySkeleton {
   private float fallenKnightChanceMounted = 0.75f;
   private float fallenKnightChancePerArmorPiece = 0.66f;
   private float fallenKnightChanceArmorUpgrade = 0.2f;
- 
   private double fallenKnightChanceShield = 0.5f;
   public EntityFallenKnight(World world) {
     super(world);
- }
+  }
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
-
   @Override
   protected void initEntityAI() {
     super.initEntityAI();
     targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
-
     tasks.addTask(4, getAiArrowAttack());
   }
- 
   public EntityAIMountedArrowAttack getAiArrowAttack() {
     if (aiArrowAttack == null) {
       aiArrowAttack = new EntityAIMountedArrowAttack(this, ATTACK_MOVE_SPEED, EntityFallenMount.MOUNTED_ATTACK_MOVE_SPEED,
@@ -188,9 +184,7 @@ public class EntityFallenKnight extends EntitySkeleton {
         }
       }
     }
- 
-      setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
-     
+    setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
   }
   private int getRandomEquipmentLevel() {
     return getRandomEquipmentLevel(EntityUtil.getDifficultyMultiplierForLocation(world, posX, posY, posZ));

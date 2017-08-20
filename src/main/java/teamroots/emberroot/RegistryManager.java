@@ -158,8 +158,7 @@ public class RegistryManager {
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntitySpriteGuardianBoss.NAME), EntitySpriteGuardianBoss.class, EntitySpriteGuardianBoss.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntitySpriteGuardianBoss.NAME), Util.intColor(120, 245, 50), Util.intColor(160, 255, 60));
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityFrozenKnight.NAME), EntityFrozenKnight.class, EntityFrozenKnight.NAME, id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityFrozenKnight.NAME), intColor(87,58,134), 0xA0A0A0);
-   
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityFrozenKnight.NAME), intColor(87, 58, 134), 0xA0A0A0);
   }
   public static void registerDamageSources() {
     EmberRootZoo.damage_ember = new DamageGolem();
@@ -243,17 +242,17 @@ public class RegistryManager {
   public void register(Enchantment r) {
     this.enchants.add(r);
   }
-  public SoundEvent registerSound(String name){
+  public SoundEvent registerSound(String name) {
     final ResourceLocation res = new ResourceLocation(Const.MODID, name);//new ResourceLocation(Const.MODID, "sounds/" + UtilSound.Own.crackle+".ogg");
     SoundEvent sound = new SoundEvent(res);
     sound.setRegistryName(res);
     sounds.add(sound);
     return sound;
   }
-//  public void register(SoundEvent r) {
-//    r.setRegistryName(r.getSoundName());
-//    this.sounds.add(r);
-//  }
+  //  public void register(SoundEvent r) {
+  //    r.setRegistryName(r.getSoundName());
+  //    this.sounds.add(r);
+  //  }
   public void register(Potion r) {
     this.potionlist.add(r);
   }

@@ -87,9 +87,8 @@ public class EntityDeer extends EntityAnimal {
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224D);
-    
     ConfigSpawnEntity.syncInstance(this, config.settings);
- }
+  }
   @Override
   public EntityAgeable createChild(EntityAgeable ageable) {
     return new EntityDeer(ageable.world);

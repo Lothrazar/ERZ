@@ -55,9 +55,9 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
   Random random = new Random();
   public Vec3d moveVec = new Vec3d(0, 0, 0);
   public Vec3d prevMoveVec = new Vec3d(0, 0, 0);
-  public static SoundEvent ambientSound ;//= new SoundEvent(new ResourceLocation(Const.MODID, "bossambient"));
-  public static SoundEvent hurtSound ;//= new SoundEvent(new ResourceLocation(Const.MODID, "bosshurt"));
-  public static SoundEvent departureSound ;//= new SoundEvent(new ResourceLocation(Const.MODID, "bossdeath"));
+  public static SoundEvent ambientSound;//= new SoundEvent(new ResourceLocation(Const.MODID, "bossambient"));
+  public static SoundEvent hurtSound;//= new SoundEvent(new ResourceLocation(Const.MODID, "bosshurt"));
+  public static SoundEvent departureSound;//= new SoundEvent(new ResourceLocation(Const.MODID, "bossdeath"));
   private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
   public EntitySpriteGuardianBoss(World worldIn) {
     super(worldIn);

@@ -44,7 +44,6 @@ import teamroots.emberroot.util.EntityUtil;
 public class EntityFrozenKnight extends EntitySkeleton {
   public static final String NAME = "skeleton_frozen";
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFrozenKnight.class, EnumCreatureType.MONSTER);
- 
   private float fallenKnightChancePerArmorPiece = 0.66f;
   private float fallenKnightChanceArmorUpgrade = 0.2f;
   private double fallenKnightChanceShield = 0.5f;
@@ -53,9 +52,8 @@ public class EntityFrozenKnight extends EntitySkeleton {
   }
   @Override
   protected void applyEntityAttributes() {
-    super.applyEntityAttributes(); 
-    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue( 0.2F);
-    
+    super.applyEntityAttributes();
+    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2F);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
@@ -64,9 +62,9 @@ public class EntityFrozenKnight extends EntitySkeleton {
     this.tasks.addTask(1, new EntityAISwimming(this));
     // this.tasks.addTask(2, new EntityAIRestrictSun(this));
     // this.tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
-//    
-//    
-//    this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityWolf.class, 6.0F, 1.0D, 1.2D));
+    //    
+    //    
+    //    this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityWolf.class, 6.0F, 1.0D, 1.2D));
     this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0D));
     this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     this.tasks.addTask(6, new EntityAILookIdle(this));
@@ -159,18 +157,17 @@ public class EntityFrozenKnight extends EntitySkeleton {
     setEnchantmentBasedOnDifficulty(di); //enchantEquipment();
     float f = di.getClampedAdditionalDifficulty();
     this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * f);
-    setCanPickUpLoot(rand.nextFloat() < 0.55F * f); 
+    setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
     return livingData;
   }
   @Override
   public void writeEntityToNBT(NBTTagCompound root) {
-    super.writeEntityToNBT(root); 
+    super.writeEntityToNBT(root);
   }
   @Override
   public void readEntityFromNBT(NBTTagCompound root) {
-    super.readEntityFromNBT(root); 
+    super.readEntityFromNBT(root);
   }
- 
   @Override
   protected ResourceLocation getLootTable() {
     return new ResourceLocation(Const.MODID, "entity/skeleton_frozen");

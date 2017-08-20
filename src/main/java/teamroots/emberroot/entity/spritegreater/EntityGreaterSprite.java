@@ -136,7 +136,7 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
   @Override
   public void onUpdate() {
     super.onUpdate();
-    if(this.world.getDifficulty() == EnumDifficulty.PEACEFUL){
+    if (this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
       this.setDead();
     }
     prevYaw5 = prevYaw4;

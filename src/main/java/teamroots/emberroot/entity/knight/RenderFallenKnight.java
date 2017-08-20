@@ -16,7 +16,6 @@ public class RenderFallenKnight extends RenderSkeleton {
   private static final ResourceLocation texture = new ResourceLocation(Const.MODID, "textures/entity/knight_fallen.png");
   public RenderFallenKnight(RenderManager rm) {
     super(rm);
-   
   }
   @Override
   protected ResourceLocation getEntityTexture(AbstractSkeleton entity) {

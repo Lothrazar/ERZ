@@ -50,7 +50,6 @@ public class EntityConcussionCreeper extends EntityCreeper {
   private Field fFuseTime;
   public EntityConcussionCreeper(World world) {
     super(world);
-    
     try {
       fTimeSinceIgnited = ReflectionHelper.findField(EntityCreeper.class, "timeSinceIgnited", "field_70833_d");
       fFuseTime = ReflectionHelper.findField(EntityCreeper.class, "fuseTime", "field_82225_f");
@@ -68,7 +67,7 @@ public class EntityConcussionCreeper extends EntityCreeper {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue( 0.25F);
+    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25F);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override

@@ -57,21 +57,12 @@ public class EntityFallenHero extends EntityMob {
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-
-
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.33000000417232513D);
-    
     ConfigSpawnEntity.syncInstance(this, config.settings);
-
-
-  
   }
   @Override
-
-  public void onEntityUpdate()
-  {
+  public void onEntityUpdate() {
     // System.out.println("HERO onEntityUpdate "+this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getBaseValue());
-    
     super.onEntityUpdate();
   }
   @Override
