@@ -26,7 +26,7 @@ import teamroots.emberroot.config.ConfigSpawnEntity;
 public class EntityDeer extends EntityAnimal {
   public static final DataParameter<Boolean> hasHorns = EntityDataManager.<Boolean> createKey(EntityDeer.class, DataSerializers.BOOLEAN);
   public static final DataParameter<Boolean> hasRednose = EntityDataManager.<Boolean> createKey(EntityDeer.class, DataSerializers.BOOLEAN);
-  public static final String NAME = "deer";
+  public static final String NAME = "deers";
   public static enum VariantColors {
     PLAIN, GREY, BROWN, COPPER;
     public String nameLower() {

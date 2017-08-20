@@ -19,7 +19,7 @@ import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntitySprout extends EntityCreature {
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntitySprout.class, DataSerializers.VARINT);
-  public static final String NAME = "sprout";
+  public static final String NAME = "sprouts";
   public static enum VariantColors {
     RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE;
     public String nameLower() {
