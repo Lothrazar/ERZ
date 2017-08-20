@@ -19,6 +19,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
@@ -135,6 +136,9 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
   @Override
   public void onUpdate() {
     super.onUpdate();
+    if(this.world.getDifficulty() == EnumDifficulty.PEACEFUL){
+      this.setDead();
+    }
     prevYaw5 = prevYaw4;
     prevYaw4 = prevYaw3;
     prevYaw3 = prevYaw2;

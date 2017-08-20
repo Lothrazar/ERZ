@@ -19,6 +19,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
@@ -97,6 +98,9 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
   @Override
   public void onUpdate() {
     super.onUpdate();
+    if (this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
+      this.setDead();
+    }
     if (getDataManager().get(happiness) > 0) {
       if (this.ticksExisted % 2 == 0) {
         EmberRootZoo.proxy.spawnParticleMagicSparkleScalableFX(getEntityWorld(), 24, posX + width * 0.5f * (random.nextFloat() - 0.5f), posY + height * 0.5f + height * (random.nextFloat() - 0.5f), posZ + width * 0.5f * (random.nextFloat() - 0.5f), 0, 0, 0, this.getDataManager().get(happiness).floatValue() / 20.0f, 107, 255, 28);

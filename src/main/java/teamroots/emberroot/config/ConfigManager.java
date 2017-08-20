@@ -40,7 +40,7 @@ public class ConfigManager {
     entityConfigs.add(EntityWitherCat.config.setDefaultSpawns(1, 1, 1).setDefaultProperties(20, 2, 32));
     entityConfigs.add(EntityConcussionCreeper.config.setDefaultSpawns(1, 1, 17).setDefaultProperties(20, -1, 32));
     entityConfigs.add(EntityDeer.config.setDefaultSpawns(3, 7, 20).setDefaultProperties(15, -1, 32));
-    entityConfigs.add(EntityDireSlime.config.setDefaultSpawns(1, 1, 12).setDefaultProperties(12, -1, 32));//0.3F,
+    entityConfigs.add(EntityDireSlime.config.setDefaultSpawns(1, 1, 3).setDefaultProperties(12, -1, 32));//0.3F,
     entityConfigs.add(EntityEnderminy.config.setDefaultSpawns(1, 1, 17).setDefaultProperties(15, 10, 32));//0.3F,
     entityConfigs.add(EntityFairy.config.setDefaultSpawns(5, 10, 20).setDefaultProperties(18, -1, 16));
     entityConfigs.add(EntityAncientGolem.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(25, 5, 16));
@@ -53,14 +53,14 @@ public class ConfigManager {
     entityConfigs.add(EntityFallenKnight.config.setDefaultSpawns(1, 3, 20).setDefaultProperties(20, 4, 32));
     entityConfigs.add(EntitySprout.config.setDefaultSpawns(2, 4, 1).setDefaultProperties(6, 0, 32));//0.2F,
     //roots1 direwolf
-    entityConfigs.add(EntityTimberWolf.config.setDefaultSpawns(2, 5, 10).setDefaultProperties(32, 4, 32).setDefaultBiome(false, new String[] { "minecraft:ice_flats", "minecraft:extreme_hills", "minecraft:savanna", "minecraft:mesa", "minecraft:roofed_forest", "minecraft:taiga", "minecraft:taiga_cold", "minecraft:ice_mountains" }));
+    entityConfigs.add(EntityTimberWolf.config.setDefaultSpawns(2, 5, 3).setDefaultProperties(32, 4, 32).setDefaultBiome(false, new String[] { "minecraft:ice_flats", "minecraft:extreme_hills", "minecraft:savanna", "minecraft:mesa", "minecraft:roofed_forest", "minecraft:taiga", "minecraft:taiga_cold", "minecraft:ice_mountains" }));
     //smallest ones get a bit of a wider spawn
-    entityConfigs.add(EntitySpriteling.config.setDefaultSpawns(1, 4, 2).setDefaultProperties(16, 4, 32).setDefaultBiome(false, new String[] { "minecraft:hell", "minecraft:sky", "minecraft:jungle_hills" }));
+    entityConfigs.add(EntitySpriteling.config.setDefaultSpawns(1, 4, 1).setDefaultProperties(16, 4, 32).setDefaultBiome(false, new String[] { "minecraft:hell", "minecraft:sky", "minecraft:jungle_hills" }));
     //these babies only spawn in end
-    entityConfigs.add(EntitySprite.config.setDefaultSpawns(1, 3, 5).setDefaultProperties(40, 6, 32)
+    entityConfigs.add(EntitySprite.config.setDefaultSpawns(1, 3, 0).setDefaultProperties(40, 6, 32)
         .setDefaultBiome(false, new String[] { "minecraft:ice_mountains", "minecraft:taiga", "minecraft:ice_mountains", "minecraft:ice_flats", "minecraft:frozen_river", "minecraft:frozen_ocean", "minecraft:taiga_cold", "minecraft:taiga_cold_hills", "minecraft:mutated_ice_flats", "minecraft:mutated_taiga_cold"
         }));
-    entityConfigs.add(EntityGreaterSprite.config.setDefaultSpawns(1, 1, 1).setDefaultProperties(80, 6, 32).setDefaultBiome(false, new String[] { "minecraft:sky" }));
+    entityConfigs.add(EntityGreaterSprite.config.setDefaultSpawns(1, 1, 0).setDefaultProperties(80, 6, 32).setDefaultBiome(false, new String[] { "minecraft:sky" }));
     entityConfigs.add(EntityFrozenKnight.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(20, 4, 32)
         .setDefaultBiome(false, new String[] { "minecraft:sky" }));
     load();

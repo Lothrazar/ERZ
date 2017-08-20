@@ -243,10 +243,17 @@ public class RegistryManager {
   public void register(Enchantment r) {
     this.enchants.add(r);
   }
-  public void register(SoundEvent r) {
-    r.setRegistryName(r.getSoundName());
-    this.sounds.add(r);
+  public SoundEvent registerSound(String name){
+    final ResourceLocation res = new ResourceLocation(Const.MODID, name);//new ResourceLocation(Const.MODID, "sounds/" + UtilSound.Own.crackle+".ogg");
+    SoundEvent sound = new SoundEvent(res);
+    sound.setRegistryName(res);
+    sounds.add(sound);
+    return sound;
   }
+//  public void register(SoundEvent r) {
+//    r.setRegistryName(r.getSoundName());
+//    this.sounds.add(r);
+//  }
   public void register(Potion r) {
     this.potionlist.add(r);
   }
