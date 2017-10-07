@@ -39,14 +39,13 @@ import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.deer.EntityDeer;
 
 public class EntityTimberWolf extends EntityTameable {
-  public static final DataParameter<Boolean> hasHorns = EntityDataManager.<Boolean> createKey(EntityTimberWolf.class, DataSerializers.BOOLEAN);
+ // public static final DataParameter<Boolean> hasHorns = EntityDataManager.<Boolean> createKey(EntityTimberWolf.class, DataSerializers.BOOLEAN);
   public static final String NAME = "timberwolf";
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityTimberWolf.class, EnumCreatureType.MONSTER);
   public EntityTimberWolf(World world) {
     super(world);
     setSize(1.5f, 1.5f);
     this.experienceValue = 3;
-    //		EntityWolf wolf;
   }
   //	@Override
   //	public boolean getCanSpawnHere(){
@@ -58,10 +57,7 @@ public class EntityTimberWolf extends EntityTameable {
   //		}
   //		return false;
   //	}
-  //    public static void func_189790_b(DataFixer p_189790_0_)
-  //    {
-  //        EntityLiving.func_189752_a(p_189790_0_, "DireWolf");
-  //    }
+
   protected void initEntityAI() {
     this.aiSit = new EntityAISit(this);
     this.tasks.addTask(1, new EntityAISwimming(this));

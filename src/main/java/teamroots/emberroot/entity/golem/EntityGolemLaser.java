@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -16,6 +17,8 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -39,6 +42,8 @@ public class EntityGolemLaser extends Entity {
     this.getDataManager().register(value, Float.valueOf(0));
     this.getDataManager().register(dead, false);
     this.getDataManager().register(lifetime, Integer.valueOf(160));
+    
+     
   }
   public void initCustom(double x, double y, double z, double vx, double vy, double vz, double value, UUID playerId) {
     this.posX = x;
@@ -71,9 +76,15 @@ public class EntityGolemLaser extends Entity {
       compound.setLong("UUIDleast", id.getLeastSignificantBits());
     }
   }
+//  @Override
+//  protected void onImpact(RayTraceResult mop) {
+//    
+//    
+//  }
   @Override
   public void onUpdate() {
     super.onUpdate();
+    
     if (!getEntityWorld().isRemote && getDataManager().get(lifetime) > 18 && getDataManager().get(dead)) {
       CommonProxy.INSTANCE.sendToAll(new MessageGolemLaserFX(posX, posY, posZ, getDataManager().get(value) / 1.75f, this.getRed(), this.getGreen(), this.getBlue()));
     }
@@ -84,6 +95,32 @@ public class EntityGolemLaser extends Entity {
       this.setDead();
     }
     if (!getDataManager().get(dead)) {
+      
+      
+
+      Vec3d vec3d = new Vec3d(this.posX, this.posY, this.posZ);
+      Vec3d vec3d1 = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+      RayTraceResult raytraceresult = this.world.rayTraceBlocks(vec3d, vec3d1);
+
+      if (raytraceresult != null)
+      {
+          if (raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK && this.world.getBlockState(raytraceresult.getBlockPos()).getBlock() == Blocks.PORTAL)
+          {
+              this.setPortal(raytraceresult.getBlockPos());
+          }
+          else
+          {
+//              if(!net.minecraftforge.common.ForgeHooks.onThrowableImpact(this, raytraceresult))
+//             EmberRootZoo.log("LASER IMPACT YOOOO");
+             getEntityWorld().removeEntity(this);
+             this.setDead();
+             return;
+          }
+      }
+      
+      
+      
+      
       getDataManager().set(value, getDataManager().get(value) - 0.025f);
       if (getDataManager().get(value) <= 0) {
         getEntityWorld().removeEntity(this);

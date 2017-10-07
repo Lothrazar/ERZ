@@ -53,7 +53,7 @@ public class ConfigManager {
     entityConfigs.add(EntityFallenKnight.config.setDefaultSpawns(1, 3, 20).setDefaultProperties(20, 4, 32));
     entityConfigs.add(EntitySprout.config.setDefaultSpawns(2, 4, 1).setDefaultProperties(6, 0, 32));//0.2F,
     //roots1 direwolf
-    entityConfigs.add(EntityTimberWolf.config.setDefaultSpawns(2, 5, 3).setDefaultProperties(32, 4, 32).setDefaultBiome(false, new String[] { "minecraft:ice_flats", "minecraft:extreme_hills", "minecraft:savanna", "minecraft:mesa", "minecraft:roofed_forest", "minecraft:taiga", "minecraft:taiga_cold", "minecraft:ice_mountains" }));
+    entityConfigs.add(EntityTimberWolf.config.setDefaultSpawns(1, 1, 3).setDefaultProperties(32, 4, 32).setDefaultBiome(false, new String[] { "minecraft:ice_flats", "minecraft:extreme_hills", "minecraft:savanna", "minecraft:mesa", "minecraft:roofed_forest", "minecraft:taiga", "minecraft:taiga_cold", "minecraft:ice_mountains" }));
     //smallest ones get a bit of a wider spawn
     entityConfigs.add(EntitySpriteling.config.setDefaultSpawns(1, 4, 1).setDefaultProperties(16, 4, 32).setDefaultBiome(false, new String[] { "minecraft:hell", "minecraft:sky", "minecraft:jungle_hills" }));
     //these babies only spawn in end
