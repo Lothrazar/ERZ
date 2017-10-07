@@ -68,4 +68,7 @@ public class EmberRootZoo {
   }
   public static DamageSource damage_ember;
   public static Item itemOwlEgg;
+  public static void log(String string) {
+    System.out.println("[EmberRootZoo]" + string);
+  }
 }

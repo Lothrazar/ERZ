@@ -26,7 +26,7 @@ public class EntitySprout extends EntityCreature {
       return this.name().toLowerCase();
     }
   }
-  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntitySprout.class, EnumCreatureType.AMBIENT);;
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntitySprout.class, EnumCreatureType.CREATURE);
   public EntitySprout(World world) {
     super(world);
     setSize(0.5f, 1.0f);
