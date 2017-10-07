@@ -93,12 +93,19 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
   @Override
   public void collideWithEntity(Entity entity) {
     if (this.getAttackTarget() != null && this.getHealth() > 0 && !getDataManager().get(pacified).booleanValue()) {
-      if (entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0) {
-        ((EntityLivingBase) entity).attackEntityFrom(DamageSource.GENERIC, 4.0f);
+      if (entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0 && entity instanceof EntityLivingBase) {
+        EntityLivingBase living = ((EntityLivingBase) entity);
+        if (living instanceof EntityPlayer) {
+          EntityPlayer pl = (EntityPlayer) living;
+          if (pl.isCreative()) {
+            return; //dont push players in creative, its just annoying
+          }
+        }
+        living.attackEntityFrom(DamageSource.GENERIC, 4.0f);
         float magnitude = (float) Math.sqrt(motionX * motionX + motionZ * motionZ);
-        ((EntityLivingBase) entity).knockBack(this, 3.0f * magnitude + 0.1f, -motionX / magnitude + 0.1, -motionZ / magnitude + 0.1);
-        ((EntityLivingBase) entity).attackEntityAsMob(this);
-        ((EntityLivingBase) entity).setRevengeTarget(this);
+        living.knockBack(this, 3.0f * magnitude + 0.1f, -motionX / magnitude + 0.1, -motionZ / magnitude + 0.1);
+        living.attackEntityAsMob(this);
+        living.setRevengeTarget(this);
       }
     }
   }
@@ -302,7 +309,9 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
   }
   @Override
   public boolean isEntityInvulnerable(DamageSource source) {
-    if (getDataManager().get(pacified)) { return true; }
+    if (getDataManager().get(pacified)) {
+      return true;
+    }
     return false;
   }
   @Override
