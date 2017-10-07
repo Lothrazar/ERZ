@@ -30,6 +30,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
@@ -70,10 +71,7 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
     }
     this.rotationYaw = rand.nextInt(240) + 60;
   }
-  //  @Override
-  //  public ITextComponent getDisplayName() {
-  //    return new TextComponentString("Guardian of Sprites:LANG FILE");
-  //  }
+ 
   @Override
   public boolean isNonBoss() {
     return false;
@@ -116,6 +114,12 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
   @Override
   public void onUpdate() {
     super.onUpdate();
+    
+    if(this.world.getDifficulty() == EnumDifficulty.PEACEFUL){
+      this.setDead();
+      return;
+    }
+    
     float velocityScale = 1.0f;
     float addedMotionY = 0.0f;
     if (getDataManager().get(pacified) && getDataManager().get(fadeTimer) > 0) {
@@ -140,41 +144,7 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
         }
       }
       getEntityWorld().playSound(posX, posY, posZ, departureSound, SoundCategory.NEUTRAL, random.nextFloat() * 0.1f + 0.95f, random.nextFloat() * 0.1f + 0.95f, false);
-      if (!getEntityWorld().isRemote) {
-        //        getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.otherworldLeaf, 1)));
-        //        for (int i = 0; i < 24; i++) {
-        //          if (rand.nextInt(2) == 0) {
-        //            getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.otherworldLeaf, 1)));
-        //          }
-        //        }
-        //        for (int i = 0; i < 5; i++) {
-        //          getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.otherworldSubstance, 1)));
-        //        }
-        //        for (int i = 0; i < 8; i++) {
-        //          if (rand.nextInt(2) == 0) {
-        //            getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.otherworldSubstance, 1)));
-        //          }
-        //        }
-        //        getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.runeStone, 1)));
-        //        for (int i = 0; i < 5; i++) {
-        //          if (rand.nextInt(2) == 0) {
-        //            getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.runeStone, 1)));
-        //          }
-        //        }
-        //        int chance = rand.nextInt(4);
-        //        if (chance == 0) {
-        //          getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.itemCharmConjuration, 1)));
-        //        }
-        //        if (chance == 1) {
-        //          getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.itemCharmEvocation, 1)));
-        //        }
-        //        if (chance == 2) {
-        //          getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.itemCharmIllusion, 1)));
-        //        }
-        //        if (chance == 3) {
-        //          getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(), posX, posY + 0.5, posZ, new ItemStack(RegistryManager.itemCharmRestoration, 1)));
-        //        }
-      }
+    
       setDead();
     }
     if (this.ticksExisted % 20 == 0) {
