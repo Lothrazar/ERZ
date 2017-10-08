@@ -98,7 +98,9 @@ public class EntityAIMountedArrowAttack extends EntityAIBase {
     }
     entityHost.getLookHelper().setLookPositionWithEntity(attackTarget, 30.0F, 30.0F);
     if (--timeUntilNextAttack == 0) {
-      if (distToTargetSq > attackRangeSq || !canSeeTarget) { return; }
+      if (distToTargetSq > attackRangeSq || !canSeeTarget) {
+        return;
+      }
       float rangeRatio = MathHelper.sqrt(distToTargetSq) / attackRange;
       rangeRatio = MathHelper.clamp(rangeRatio, 0.1f, 1);
       rangedAttackEntityHost.attackEntityWithRangedAttack(attackTarget, rangeRatio);
@@ -110,7 +112,9 @@ public class EntityAIMountedArrowAttack extends EntityAIBase {
     }
   }
   private boolean isRunningAway() {
-    if (runningAwayTo == null) { return false; }
+    if (runningAwayTo == null) {
+      return false;
+    }
     if (getNavigator().noPath()) {
       runningAwayTo = null;
       return false;
@@ -119,7 +123,9 @@ public class EntityAIMountedArrowAttack extends EntityAIBase {
     return dest.equals(runningAwayTo);
   }
   private boolean runAway() {
-    if (!useRunAwayTactic) { return false; }
+    if (!useRunAwayTactic) {
+      return false;
+    }
     runAwayTimer = 40;
     Vec3d targetDir = new Vec3d(attackTarget.posX, attackTarget.getEntityBoundingBox().minY, attackTarget.posZ);
     Vec3d entityPos = EntityUtil.getEntityPosition(entityHost);
@@ -132,7 +138,9 @@ public class EntityAIMountedArrowAttack extends EntityAIBase {
     Point3i probePoint = new Point3i((int) Math.round(targetDir.x), (int) Math.round(entityHost.posY), (int) Math.round(targetDir.z));
     Point3i target = new Point3i(probePoint);
     World world = entityHost.getEntityWorld();
-    if (!SpawnUtil.findClearGround(world, target, probePoint)) { return false; }
+    if (!SpawnUtil.findClearGround(world, target, probePoint)) {
+      return false;
+    }
     boolean res = getNavigator().tryMoveToXYZ(probePoint.x, probePoint.y, probePoint.z, mountedEntityMoveSpeed);
     if (getNavigator().noPath()) {
       runningAwayTo = null;
@@ -143,7 +151,9 @@ public class EntityAIMountedArrowAttack extends EntityAIBase {
     return res;
   }
   private double getMoveSpeed() {
-    if (entityHost.isRiding()) { return mountedEntityMoveSpeed; }
+    if (entityHost.isRiding()) {
+      return mountedEntityMoveSpeed;
+    }
     return entityMoveSpeed;
   }
   protected PathNavigate getNavigator() {

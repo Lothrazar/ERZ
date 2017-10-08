@@ -45,7 +45,9 @@ public class EntityAIFlyingAttackOnCollide extends EntityAIBase {
     else if (!entitylivingbase.isEntityAlive()) {
       return false;
     }
-    else if (classTarget != null && !classTarget.isAssignableFrom(entitylivingbase.getClass())) { return false; }
+    else if (classTarget != null && !classTarget.isAssignableFrom(entitylivingbase.getClass())) {
+      return false;
+    }
     if (canPenalize) {
       if (--delayCounter <= 0) {
         setPathTo(entitylivingbase);
@@ -67,7 +69,9 @@ public class EntityAIFlyingAttackOnCollide extends EntityAIBase {
   @Override
   public boolean shouldContinueExecuting() {
     EntityLivingBase target = attacker.getAttackTarget();
-    if (target == null || !target.isEntityAlive()) { return false; }
+    if (target == null || !target.isEntityAlive()) {
+      return false;
+    }
     return !longMemory ? !attacker.getNavigator().noPath() : attacker.isWithinHomeDistanceFromPosition(new BlockPos(target));
   }
   @Override

@@ -79,7 +79,9 @@ public class FlyingPathNavigate extends PathNavigateGround {
       pathFollow(); // follow it
       if (!noPath()) { // if we haven't finished, then set the new move point
         Vec3d targetPos = currentPath.getPosition(this.entity);
-        if (targetPos == null) { return; }
+        if (targetPos == null) {
+          return;
+        }
         double y = targetPos.y;
         if (forceFlying) {
           double aboveBlock = y - (int) y;
@@ -119,10 +121,14 @@ public class FlyingPathNavigate extends PathNavigateGround {
   @Override
   protected boolean isDirectPathBetweenPoints(Vec3d startPos, Vec3d endPos, int sizeX, int sizeY, int sizeZ) {
     Vec3d target = new Vec3d(endPos.x, endPos.y + this.entity.height * 0.5D, endPos.z);
-    if (!isClear(startPos, target)) { return false; }
+    if (!isClear(startPos, target)) {
+      return false;
+    }
     AxisAlignedBB bb = this.entity.getEntityBoundingBox();
     startPos = new Vec3d(bb.maxX, bb.maxY, bb.maxZ);
-    if (!isClear(startPos, target)) { return false; }
+    if (!isClear(startPos, target)) {
+      return false;
+    }
     return true;
   }
   private boolean isClear(Vec3d startPos, Vec3d target) {

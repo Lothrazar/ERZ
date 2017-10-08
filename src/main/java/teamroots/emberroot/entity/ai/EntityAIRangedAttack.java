@@ -36,7 +36,9 @@ public class EntityAIRangedAttack extends EntityAIBase {
   @Override
   public boolean shouldExecute() {
     EntityLivingBase target = entityHost.getAttackTarget();
-    if (target == null) { return false; }
+    if (target == null) {
+      return false;
+    }
     attackTarget = target;
     return true;
   }
@@ -75,7 +77,9 @@ public class EntityAIRangedAttack extends EntityAIBase {
     }
     entityHost.getLookHelper().setLookPositionWithEntity(attackTarget, 30.0F, 30.0F);
     if (--timeUntilNextAttack <= 0) {
-      if (distToTargetSq > attackRangeSq || !canSee) { return; }
+      if (distToTargetSq > attackRangeSq || !canSee) {
+        return;
+      }
       float rangeRatio = MathHelper.sqrt(distToTargetSq) / attackRange;
       if (rangeRatio < 0.1F) {
         rangeRatio = 0.1F;

@@ -7,7 +7,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigManager;
-import teamroots.emberroot.entity.endermini.EntityEnderminy;
 import teamroots.emberroot.util.RenderUtil;
 
 public class RenderConcussionCreeper extends RenderCreeper {

@@ -40,7 +40,6 @@ import teamroots.emberroot.entity.ai.EntityAIFlyingFindPerch;
 import teamroots.emberroot.entity.ai.EntityAIFlyingLand;
 import teamroots.emberroot.entity.ai.EntityAIFlyingPanic;
 import teamroots.emberroot.entity.ai.EntityAIFlyingShortWander;
-import teamroots.emberroot.entity.ai.EntityAINearestAttackableTargetBounded;
 
 /**
  * Original author: https://github.com/CrazyPants

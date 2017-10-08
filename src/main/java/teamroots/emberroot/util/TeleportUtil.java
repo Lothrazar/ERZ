@@ -38,7 +38,9 @@ public class TeleportUtil {
   public static boolean teleportTo(EntityLivingBase entity, double x, double y, double z, boolean fireEndermanEvent) {
     EnderTeleportEvent event = new EnderTeleportEvent(entity, x, y, z, 0);
     if (fireEndermanEvent) {
-      if (MinecraftForge.EVENT_BUS.post(event)) { return false; }
+      if (MinecraftForge.EVENT_BUS.post(event)) {
+        return false;
+      }
     }
     double origX = entity.posX;
     double origY = entity.posY;

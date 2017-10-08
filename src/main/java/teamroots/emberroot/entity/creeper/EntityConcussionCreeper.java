@@ -75,7 +75,6 @@ public class EntityConcussionCreeper extends EntityCreeper {
   private void spawnLingeringPotion(PotionType type) {
     ItemStack potion = PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), type);
     EntityPotion entitypotion = new EntityPotion(world, this, potion);
- 
     entitypotion.setThrowableHeading(0, 1, 0, 0.75F, 1.0F);
     if (world.isRemote == false) {
       world.spawnEntity(entitypotion);
@@ -129,7 +128,9 @@ public class EntityConcussionCreeper extends EntityCreeper {
     super.onUpdate();
   }
   private void setTimeSinceIgnited(int i) {
-    if (fTimeSinceIgnited == null) { return; }
+    if (fTimeSinceIgnited == null) {
+      return;
+    }
     try {
       fTimeSinceIgnited.setInt(this, i);
     }
@@ -138,7 +139,9 @@ public class EntityConcussionCreeper extends EntityCreeper {
     }
   }
   private int getTimeSinceIgnited() {
-    if (fTimeSinceIgnited == null) { return 0; }
+    if (fTimeSinceIgnited == null) {
+      return 0;
+    }
     try {
       return fTimeSinceIgnited.getInt(this);
     }
@@ -148,7 +151,9 @@ public class EntityConcussionCreeper extends EntityCreeper {
     }
   }
   private int getFuseTime() {
-    if (fFuseTime == null) { return 0; }
+    if (fFuseTime == null) {
+      return 0;
+    }
     try {
       return fFuseTime.getInt(this);
     }

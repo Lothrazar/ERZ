@@ -49,7 +49,9 @@ public class FlyNodeProcessor extends WalkNodeProcessor {
           Block block = bs.getBlock();
           if (block.getMaterial(bs) != Material.AIR) {
             AxisAlignedBB bb = block.getCollisionBoundingBox(bs, entityIn.world, mutableblockpos);
-            if (bb != null) { return false; }
+            if (bb != null) {
+              return false;
+            }
           }
         }
       }

@@ -52,13 +52,17 @@ public class EntityDireSlime extends EntityMagmaCube {
     }
     static SlimeConf getConfForSize(int size) {
       for (SlimeConf conf : values()) {
-        if (conf.size == size) { return conf; }
+        if (conf.size == size) {
+          return conf;
+        }
       }
       return SMALL;
     }
     SlimeConf bigger() {
       int index = ordinal() + 1;
-      if (index >= values().length) { return null; }
+      if (index >= values().length) {
+        return null;
+      }
       return values()[index];
     }
   }
@@ -224,7 +228,9 @@ public class EntityDireSlime extends EntityMagmaCube {
   }
   @Override
   protected float applyArmorCalculations(DamageSource ds, float dmg) {
-    if (!ds.isUnblockable()) { return Math.min(Math.max(dmg - 3 - this.getSlimeSize(), this.getSlimeSize()) / 2, dmg); }
+    if (!ds.isUnblockable()) {
+      return Math.min(Math.max(dmg - 3 - this.getSlimeSize(), this.getSlimeSize()) / 2, dmg);
+    }
     return dmg;
   }
   @Override

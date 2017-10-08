@@ -101,7 +101,9 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
   public void setRevengeTarget(EntityLivingBase target) {
     EntityLivingBase curTarget = this.getAttackTarget();
     super.setRevengeTarget(target);
-    if (curTarget == target || world.isRemote || target == null) { return; }
+    if (curTarget == target || world.isRemote || target == null) {
+      return;
+    }
     float distToSrc = getDistanceToEntity(target);
     if (distToSrc > getNavigator().getPathSearchRange() && distToSrc < 50) {
       getAttributeMap().getAttributeInstance(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(distToSrc + 2);
@@ -183,7 +185,9 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
     return res;
   }
   protected boolean shouldStartHeal() {
-    if (isPotionActive(MobEffects.REGENERATION)) { return false; }
+    if (isPotionActive(MobEffects.REGENERATION)) {
+      return false;
+    }
     return getHealth() < getMaxHealth() * 0.75 && rand.nextFloat() > 0.5 && healTimer <= 0;
   }
   @Override
@@ -247,15 +251,21 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
     cat.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(this)), null);
     cat.setOwner(this);
     cat.setPositionAndRotation(spawnLoc.x + 0.5, spawnLoc.y + 0.5, spawnLoc.z + 0.5, rotationYaw, 0);
-    if (MinecraftForge.EVENT_BUS.post(new LivingSpawnEvent.CheckSpawn(cat, world, (float) cat.posX, (float) cat.posY, (float) cat.posZ))) { return; }
-    if (!cat.getCanSpawnHere()) { return; }
+    if (MinecraftForge.EVENT_BUS.post(new LivingSpawnEvent.CheckSpawn(cat, world, (float) cat.posX, (float) cat.posY, (float) cat.posZ))) {
+      return;
+    }
+    if (!cat.getCanSpawnHere()) {
+      return;
+    }
     cats.add(cat);
     world.spawnEntity(cat);
   }
   @Override
   public void writeEntityToNBT(NBTTagCompound root) {
     super.writeEntityToNBT(root);
-    if (cats.isEmpty()) { return; }
+    if (cats.isEmpty()) {
+      return;
+    }
     NBTTagList catsList = new NBTTagList();
     for (EntityWitherCat cat : cats) {
       if (!cat.isDead) {
@@ -271,7 +281,9 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
   @Override
   public void readEntityFromNBT(NBTTagCompound root) {
     super.readEntityFromNBT(root);
-    if (!root.hasKey("cats")) { return; }
+    if (!root.hasKey("cats")) {
+      return;
+    }
     NBTTagList catsList = (NBTTagList) root.getTag("cats");
     loadedCats = new ArrayList<NBTTagCompound>(catsList.tagCount());
     for (int i = 0; i < catsList.tagCount(); i++) {
@@ -282,7 +294,9 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
     }
   }
   private void loadCats() {
-    if (loadedCats == null) { return; }
+    if (loadedCats == null) {
+      return;
+    }
     for (NBTTagCompound catRoot : loadedCats) {
       if (catRoot != null) {
         EntityWitherCat cat = new EntityWitherCat(world);
@@ -294,7 +308,9 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
     }
   }
   protected void manageCats() {
-    if (cats.isEmpty()) { return; }
+    if (cats.isEmpty()) {
+      return;
+    }
     if (noActiveTargetTime > 40) {
       pacifyCats();
       return;

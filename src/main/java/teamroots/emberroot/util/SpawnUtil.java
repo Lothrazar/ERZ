@@ -49,7 +49,9 @@ public class SpawnUtil {
         if (!onGround) {
           target.y--;
         }
-        else if (checkForLivingEntities && containsLiving(world, target)) { return false; }
+        else if (checkForLivingEntities && containsLiving(world, target)) {
+          return false;
+        }
       }
     }
     return foundY && onGround;
@@ -61,16 +63,28 @@ public class SpawnUtil {
   }
   public static boolean isLiquid(World world, int x, int y, int z) {
     IBlockState bs = world.getBlockState(VecUtil.bpos(x, y, z));
-    if (bs == null || bs.getBlock() == null) { return false; }
+    if (bs == null || bs.getBlock() == null) {
+      return false;
+    }
     Block block = bs.getBlock();
-    if (block.getMaterial(bs).isLiquid()) { return true; }
+    if (block.getMaterial(bs).isLiquid()) {
+      return true;
+    }
     return false;
   }
   public static boolean isSpaceAvailableForSpawn(World worldObj, EntityLiving entity, EntityCreature asCreature, boolean checkEntityCollisions, boolean canSpawnInLiquid) {
-    if (asCreature != null && asCreature.getBlockPathWeight(entity.getPosition()) < 0) { return false; }
-    if (checkEntityCollisions && !worldObj.checkNoEntityCollision(entity.getEntityBoundingBox())) { return false; }
-    if (!worldObj.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty()) { return false; }
-    if (!canSpawnInLiquid && worldObj.containsAnyLiquid(entity.getEntityBoundingBox())) { return false; }
+    if (asCreature != null && asCreature.getBlockPathWeight(entity.getPosition()) < 0) {
+      return false;
+    }
+    if (checkEntityCollisions && !worldObj.checkNoEntityCollision(entity.getEntityBoundingBox())) {
+      return false;
+    }
+    if (!worldObj.getCollisionBoxes(entity, entity.getEntityBoundingBox()).isEmpty()) {
+      return false;
+    }
+    if (!canSpawnInLiquid && worldObj.containsAnyLiquid(entity.getEntityBoundingBox())) {
+      return false;
+    }
     return true;
   }
   public static boolean isSpaceAvailableForSpawn(World worldObj, EntityCreature entityCreature, boolean checkEntityCollisions, boolean canSpawnInLiquid) {

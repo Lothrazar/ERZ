@@ -33,11 +33,15 @@ public class EntityAIFlyingFindPerch extends EntityAIBase {
       chance *= 10;
     }
     //    chance = 5;
-    if (entity.getRNG().nextInt(chance) != 0) { return false; }
+    if (entity.getRNG().nextInt(chance) != 0) {
+      return false;
+    }
     BlockPos targetPos = EntityUtil.findRandomLandingSurface(entity, searchRange, entity.getPosition().getY() + 1, 250, searchAttempts);
     if (targetPos != null) {
       List<EntityCreature> others = entity.getEntityWorld().getEntitiesWithinAABB(entity.getClass(), EntityUtil.getBoundsAround(targetPos, 4));
-      if (others != null && others.size() > 1) { return false; }
+      if (others != null && others.size() > 1) {
+        return false;
+      }
       xPosition = targetPos.getX() + 0.5;
       yPosition = targetPos.getY();
       zPosition = targetPos.getZ() + 0.5;

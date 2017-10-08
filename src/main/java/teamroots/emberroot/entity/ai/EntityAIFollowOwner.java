@@ -26,17 +26,23 @@ public class EntityAIFollowOwner extends EntityAIBase {
   }
   @Override
   public boolean shouldExecute() {
-    if (owned.getOwner() == null) { return false; }
+    if (owned.getOwner() == null) {
+      return false;
+    }
     return getDistanceSqFromOwner() > maxDistanceSq;
   }
   @Override
   public boolean shouldContinueExecuting() {
     EntityLivingBase owner = owned.getOwner();
-    if (owner == null || !owner.isEntityAlive()) { return false; }
+    if (owner == null || !owner.isEntityAlive()) {
+      return false;
+    }
     return !owned.asEntity().getNavigator().noPath();
   }
   public boolean isWithinTargetDistanceFromOwner() {
-    if (owned.getOwner() == null) { return true; }
+    if (owned.getOwner() == null) {
+      return true;
+    }
     double distance = getDistanceSqFromOwner();
     return distance >= minDistanceSq && distance <= maxDistanceSq;
   }
@@ -53,7 +59,9 @@ public class EntityAIFollowOwner extends EntityAIBase {
   @Override
   public void updateTask() {
     EntityLivingBase owner = owned.getOwner();
-    if (owner == null) { return; }
+    if (owner == null) {
+      return;
+    }
     double distance = getDistanceSqFromOwner();
     if (distance < minDistanceSq) {
       owned.asEntity().getNavigator().clearPathEntity();

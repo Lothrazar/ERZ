@@ -112,8 +112,12 @@ public class EntityDireWolf extends EntityMob {
   }
   @Override
   protected SoundEvent getAmbientSound() {
-    if (isAngry()) { return SND_GROWL; }
-    if (EntityUtil.isPlayerWithinRange(this, 12)) { return SND_GROWL; }
+    if (isAngry()) {
+      return SND_GROWL;
+    }
+    if (EntityUtil.isPlayerWithinRange(this, 12)) {
+      return SND_GROWL;
+    }
     boolean howl = (packHowl > 0 || rand.nextFloat() <= direWolfHowlChance) && world.getTotalWorldTime() > (lastHowl + 10);
     if (howl) {
       if (packHowl <= 0 && rand.nextFloat() <= 0.6) {
@@ -156,7 +160,9 @@ public class EntityDireWolf extends EntityMob {
     return new ResourceLocation(Const.MODID, "entity/wolf_dire");
   }
   public float getTailRotation() {
-    if (isAngry()) { return (float) Math.PI / 2; }
+    if (isAngry()) {
+      return (float) Math.PI / 2;
+    }
     return (float) Math.PI / 4;
   }
   @Override
@@ -185,7 +191,9 @@ public class EntityDireWolf extends EntityMob {
     }
   }
   private void doGroupArgo(EntityLivingBase curTarget) {
-    if (!direWolfPackAttackEnabled) { return; }
+    if (!direWolfPackAttackEnabled) {
+      return;
+    }
     int range = 16;
     AxisAlignedBB bb = new AxisAlignedBB(posX - range, posY - range, posZ - range, posX + range, posY + range, posZ + range);
     List<EntityDireWolf> pack = world.getEntitiesWithinAABB(EntityDireWolf.class, bb);

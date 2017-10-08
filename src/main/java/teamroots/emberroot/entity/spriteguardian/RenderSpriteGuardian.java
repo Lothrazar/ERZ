@@ -25,7 +25,9 @@ public class RenderSpriteGuardian extends RenderLiving<EntitySpriteGuardianBoss>
     boolean flag = !entity.isInvisible() || this.renderOutlines;
     boolean flag1 = !flag && !entity.isInvisibleToPlayer(Minecraft.getMinecraft().player);
     if (flag || flag1) {
-      if (!this.bindEntityTexture(entity)) { return; }
+      if (!this.bindEntityTexture(entity)) {
+        return;
+      }
       if (flag1) {
         GlStateManager.enableBlendProfile(GlStateManager.Profile.TRANSPARENT_MODEL);
       }

@@ -71,42 +71,23 @@ public class ConfigManager {
     }
     EntityDeer.chanceRudolf = config.getInt("ChanceRudolf", EntityDeer.config.category, 120, 1, 32767, "The odds of a deer having a red nose.  Lower is more likely to be red.");
     EntityRainbowSlime.canPlaceBlocks = config.getBoolean("CanPlacelocks", EntityRainbowSlime.config.category, true, "True means slimes can place blocks on death (water, clay, snow, depends on the color type).  This also gets disabled using mobGriefing gamerule.  ");
-   
-    
     EntityRainbowSlime.canPotionsDeath = config.getBoolean("CanSpawnPotions", EntityRainbowSlime.config.category, true, "True means slimes can spawn lingering potions on death (not all, depends on the color type).  ");
     EntityDeer.lureWithWheat = config.getBoolean("LureWithWheat", EntityDeer.config.category, true, "You can lure deer to follow you with wheat.");
-    
-    
     EntityEnderminy.attackIfLookingAtPlayer = config.getBoolean("AttackIfLookedAt", EntityEnderminy.config.category, false, "Changing this to true means looking at this mob will cause it to attack just like a regular enderman.");
-    
-    EntityFairy.tameWithGlowstone  = config.getBoolean("Tameable", EntityFairy.config.category, true, "You can tame this with glowstone so it follows you.");
-    
+    EntityFairy.tameWithGlowstone = config.getBoolean("Tameable", EntityFairy.config.category, true, "You can tame this with glowstone so it follows you.");
     EntityFrozenKnight.attacksVillagers = config.getBoolean("AttacksVillagers", EntityFrozenKnight.config.category, false, "This will hunt out and slay villagers.");
     EntityFrozenKnight.avoidWolves = config.getBoolean("AvoidWolves", EntityFrozenKnight.config.category, true, "This will avoid wolves.");
     EntityFrozenKnight.spawnsWithArmor = config.getBoolean("SpawnsWithArmor", EntityFrozenKnight.config.category, true, "This spawns with random armor.");
-    
     EntityFrozenKnight.appliesSlowPotion = config.getBoolean("AppliesSlowPotion", EntityFrozenKnight.config.category, true, "Applies slowness to player on attack.");
-    
-    EntityAncientGolem.attacksSomeMobs= config.getBoolean("AttacksMobs", EntityAncientGolem.config.category, true, "Sometimes attacks hostile mobs.");
-    
+    EntityAncientGolem.attacksSomeMobs = config.getBoolean("AttacksMobs", EntityAncientGolem.config.category, true, "Sometimes attacks hostile mobs.");
     EntityFallenHero.avoidCreepers = config.getBoolean("AvoidsCreepers", EntityFallenHero.config.category, true, "Avoids Creepers.");
-    
-    EntityFallenHero.temptWithGold= config.getBoolean("TemptWithGold", EntityFallenHero.config.category, true, "Lure this with gold ingots (remember it is passive to the player initially, and fights off some hostiles).");
-    
-    
-    EntityFallenKnight.attackVillagers =config.getBoolean("AttackVillagers", EntityFallenKnight.config.category, false, "Attacks Villagers.");
+    EntityFallenHero.temptWithGold = config.getBoolean("TemptWithGold", EntityFallenHero.config.category, true, "Lure this with gold ingots (remember it is passive to the player initially, and fights off some hostiles).");
+    EntityFallenKnight.attackVillagers = config.getBoolean("AttackVillagers", EntityFallenKnight.config.category, false, "Attacks Villagers.");
     EntityFallenKnight.fallenKnightChanceMounted = config.getFloat("ChanceSpawnsWithMount", EntityFallenKnight.config.category, 0.75F, 0, 1, "Percentage chance this spawns with a mount.");
-    
     EntityOwl.temptSpiderEye = config.getBoolean("TemptAndBreedSpiderEye", EntityOwl.config.category, true, "Spider Eye used to tempt and breed.");
-    
     EntitySprout.canTempt = config.getBoolean("CanTempt", EntitySprout.config.category, true, "Tempt this with seeds.");
-    EntityDireWolf.direWolfPackAttackEnabled= config.getBoolean("PackAttack", EntityDireWolf.config.category, true, "They attack as a pack.");
-    
-    
+    EntityDireWolf.direWolfPackAttackEnabled = config.getBoolean("PackAttack", EntityDireWolf.config.category, true, "They attack as a pack.");
     EntityTimberWolf.attackSkeleton = config.getBoolean("AttackSkeleton", EntityTimberWolf.config.category, true, "Attacks Skeletons.");
-    
-    
-    
     renderDebugHitboxes = config.getBoolean("renderDebugHitboxes", "global", false, "For TESTING purposes only: This renders a very ugly white shape along with the mob to show its physical hitbox.");
     if (config.hasChanged()) {
       config.save();

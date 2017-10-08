@@ -66,7 +66,9 @@ public class Util {
     int[] ids = OreDictionary.getOreIDs(stack);
     for (int i = 0; i < ids.length; i++) {
       if (OreDictionary.getOreName(ids[i]).length() >= dict.length()) {
-        if (OreDictionary.getOreName(ids[i]).substring(0, dict.length()).compareTo(dict.substring(0, dict.length())) == 0) { return true; }
+        if (OreDictionary.getOreName(ids[i]).substring(0, dict.length()).compareTo(dict.substring(0, dict.length())) == 0) {
+          return true;
+        }
       }
     }
     return false;
@@ -119,7 +121,9 @@ public class Util {
       x += player.getLookVec().x * 0.25;
       y += player.getLookVec().y * 0.25;
       z += player.getLookVec().z * 0.25;
-      if (world.getBlockState(new BlockPos(x, y, z)).isFullCube()) { return new BlockPos(x, y, z); }
+      if (world.getBlockState(new BlockPos(x, y, z)).isFullCube()) {
+        return new BlockPos(x, y, z);
+      }
     }
     return new BlockPos(x, y, z);
   }
@@ -131,7 +135,9 @@ public class Util {
       x += player.getLookVec().x * 0.25;
       y += player.getLookVec().y * 0.25;
       z += player.getLookVec().z * 0.25;
-      if (!world.isAirBlock(new BlockPos(x, y, z))) { return new BlockPos(x, y, z); }
+      if (!world.isAirBlock(new BlockPos(x, y, z))) {
+        return new BlockPos(x, y, z);
+      }
     }
     return new BlockPos(x, y, z);
   }
@@ -162,7 +168,9 @@ public class Util {
       z += player.getLookVec().z * 0.01;
       List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(x - 0.1, y - 0.1, z - 0.1, x + 0.1, y + 0.1, z + 0.1));
       if (entities.size() > 0) {
-        if (entities.get(0).getUniqueID() != player.getUniqueID()) { return entities.get(0); }
+        if (entities.get(0).getUniqueID() != player.getUniqueID()) {
+          return entities.get(0);
+        }
       }
     }
     return null;
@@ -193,7 +201,9 @@ public class Util {
   public static boolean containsItem(List<ItemStack> list, Item item) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i) != null) {
-        if (list.get(i).getItem() == item) { return true; }
+        if (list.get(i).getItem() == item) {
+          return true;
+        }
       }
     }
     return false;
@@ -201,7 +211,9 @@ public class Util {
   public static boolean containsItem(List<ItemStack> list, Block item) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i) != null) {
-        if (Block.getBlockFromItem(list.get(i).getItem()) == item) { return true; }
+        if (Block.getBlockFromItem(list.get(i).getItem()) == item) {
+          return true;
+        }
       }
     }
     return false;
@@ -209,7 +221,9 @@ public class Util {
   public static boolean containsItem(List<ItemStack> list, Item item, int meta) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i) != null) {
-        if (list.get(i).getItem() == item && list.get(i).getMetadata() == meta) { return true; }
+        if (list.get(i).getItem() == item && list.get(i).getMetadata() == meta) {
+          return true;
+        }
       }
     }
     return false;
@@ -217,7 +231,9 @@ public class Util {
   public static boolean containsItem(List<ItemStack> list, Block item, int meta) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i) != null) {
-        if (Block.getBlockFromItem(list.get(i).getItem()) == item && list.get(i).getMetadata() == meta) { return true; }
+        if (Block.getBlockFromItem(list.get(i).getItem()) == item && list.get(i).getMetadata() == meta) {
+          return true;
+        }
       }
     }
     return false;
@@ -232,7 +248,9 @@ public class Util {
     else {
       int[] oreIds = OreDictionary.getOreIDs(stack1);
       for (int i = 0; i < oreIds.length; i++) {
-        if (OreDictionary.containsMatch(true, OreDictionary.getOres(OreDictionary.getOreName(oreIds[i])), stack2)) { return true; }
+        if (OreDictionary.containsMatch(true, OreDictionary.getOres(OreDictionary.getOreName(oreIds[i])), stack2)) {
+          return true;
+        }
       }
     }
     return false;
@@ -242,7 +260,9 @@ public class Util {
   }
   public static boolean isNaturalBlock(Block block) {
     for (int i = 0; i < naturalBlocks.size(); i++) {
-      if (naturalBlocks.get(i) == block) { return true; }
+      if (naturalBlocks.get(i) == block) {
+        return true;
+      }
     }
     return false;
   }
@@ -313,17 +333,39 @@ public class Util {
     return recipe.size() == 0;
   }
   public static float getNatureAmount(IBlockState state) {
-    if (state.getBlock() == Blocks.DIRT) { return 0.04f; }
-    if (state.getBlock() == Blocks.GRASS) { return 0.16f; }
-    if (state.getBlock() == Blocks.TALLGRASS) { return 0.24f; }
-    if (state.getBlock() == Blocks.RED_FLOWER) { return 0.64f; }
-    if (state.getBlock() == Blocks.YELLOW_FLOWER) { return 0.64f; }
-    if (state.getBlock() == Blocks.DOUBLE_PLANT) { return 0.8f; }
-    if (state.getBlock() == Blocks.WATER) { return 0.16f; }
-    if (state.getBlock() == Blocks.LEAVES || state.getBlock() == Blocks.LEAVES2) { return 0.32f; }
-    if (state.getBlock() == Blocks.LOG || state.getBlock() == Blocks.LOG2) { return 0.24f; }
-    if (state.getBlock() == Blocks.WATERLILY) { return 0.56f; }
-    if (state.getBlock() == Blocks.CACTUS) { return 0.72f; }
+    if (state.getBlock() == Blocks.DIRT) {
+      return 0.04f;
+    }
+    if (state.getBlock() == Blocks.GRASS) {
+      return 0.16f;
+    }
+    if (state.getBlock() == Blocks.TALLGRASS) {
+      return 0.24f;
+    }
+    if (state.getBlock() == Blocks.RED_FLOWER) {
+      return 0.64f;
+    }
+    if (state.getBlock() == Blocks.YELLOW_FLOWER) {
+      return 0.64f;
+    }
+    if (state.getBlock() == Blocks.DOUBLE_PLANT) {
+      return 0.8f;
+    }
+    if (state.getBlock() == Blocks.WATER) {
+      return 0.16f;
+    }
+    if (state.getBlock() == Blocks.LEAVES || state.getBlock() == Blocks.LEAVES2) {
+      return 0.32f;
+    }
+    if (state.getBlock() == Blocks.LOG || state.getBlock() == Blocks.LOG2) {
+      return 0.24f;
+    }
+    if (state.getBlock() == Blocks.WATERLILY) {
+      return 0.56f;
+    }
+    if (state.getBlock() == Blocks.CACTUS) {
+      return 0.72f;
+    }
     return 0;
   }
   public static EnumFacing getRayFace(World world, EntityPlayer player, int reachDistance) {

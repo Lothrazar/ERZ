@@ -17,9 +17,13 @@ public class EntityAIFlyingPanic extends EntityAIBase {
   }
   @Override
   public boolean shouldExecute() {
-    if (theEntityCreature.getAttackTarget() == null && !theEntityCreature.isBurning()) { return false; }
+    if (theEntityCreature.getAttackTarget() == null && !theEntityCreature.isBurning()) {
+      return false;
+    }
     Vec3d vec3 = RandomPositionGenerator.findRandomTarget(theEntityCreature, 5, 4);
-    if (vec3 == null) { return false; }
+    if (vec3 == null) {
+      return false;
+    }
     double yOffset = 1 + theEntityCreature.getEntityWorld().rand.nextInt(3);
     //double yOffset = 0;
     randPosX = vec3.x;

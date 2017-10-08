@@ -93,7 +93,6 @@ public class EntitySprite extends EntityFlying implements ISprite {// implements
   public void updateAITasks() {
     super.updateAITasks();
   }
- 
   @Override
   public void onUpdate() {
     super.onUpdate();
@@ -204,7 +203,9 @@ public class EntitySprite extends EntityFlying implements ISprite {// implements
   }
   @Override
   public int getBrightnessForRender() {
-    if (getDataManager().get(stunned).booleanValue()) { return 128; }
+    if (getDataManager().get(stunned).booleanValue()) {
+      return 128;
+    }
     float f = 0.5F;
     f = MathHelper.clamp(f, 0.0F, 1.0F);
     int i = super.getBrightnessForRender();
@@ -251,9 +252,7 @@ public class EntitySprite extends EntityFlying implements ISprite {// implements
     super.applyEntityAttributes();
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
     ConfigSpawnEntity.syncInstance(this, config.settings);
- 
   }
- 
   @Override
   public void readEntityFromNBT(NBTTagCompound compound) {
     super.readEntityFromNBT(compound);

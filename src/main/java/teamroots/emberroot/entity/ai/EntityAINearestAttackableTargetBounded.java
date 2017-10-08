@@ -38,7 +38,9 @@ public class EntityAINearestAttackableTargetBounded<T extends EntityLivingBase> 
   }
   @Override
   protected double getTargetDistance() {
-    if (distanceOverride > 0) { return distanceOverride; }
+    if (distanceOverride > 0) {
+      return distanceOverride;
+    }
     return super.getTargetDistance();
   }
   @Override
@@ -63,7 +65,9 @@ public class EntityAINearestAttackableTargetBounded<T extends EntityLivingBase> 
     }
   }
   private double getVerticalDistance() {
-    if (vertDistOverride > 0) { return vertDistOverride; }
+    if (vertDistOverride > 0) {
+      return vertDistOverride;
+    }
     return 4;
   }
 }

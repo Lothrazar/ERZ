@@ -49,7 +49,9 @@ public class EntityAIAttackOnCollideOwned extends EntityAIAttackMelee {
     super.updateTask();
   }
   private boolean isTooFarFromOwner() {
-    if (ownable.getOwner() == null) { return false; }
+    if (ownable.getOwner() == null) {
+      return false;
+    }
     double distance = getDistanceSqFromOwner();
     double maxRange = ownable.asEntity().getNavigator().getPathSearchRange();
     maxRange = maxRange * maxRange;

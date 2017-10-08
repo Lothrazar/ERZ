@@ -65,7 +65,9 @@ public class EntityFallenMount extends EntityHorse {
   @Override
   public boolean processInteract(EntityPlayer player, EnumHand hand) {
     ItemStack itemstack = player.inventory.getCurrentItem();
-    if (itemstack.getItem() == Items.SPAWN_EGG) { return super.processInteract(player, hand); }
+    if (itemstack.getItem() == Items.SPAWN_EGG) {
+      return super.processInteract(player, hand);
+    }
     return false;
   }
   @Override
@@ -86,7 +88,9 @@ public class EntityFallenMount extends EntityHorse {
   }
   @Override
   public boolean isCreatureType(EnumCreatureType type, boolean forSpawnCount) {
-    if (type == EnumCreatureType.MONSTER) { return true; }
+    if (type == EnumCreatureType.MONSTER) {
+      return true;
+    }
     return false;
   }
   @Override
@@ -157,8 +161,12 @@ public class EntityFallenMount extends EntityHorse {
     }
   }
   private boolean burnInSun() {
-    if (!isRidden()) { return getTotalArmorValue() == 0; }
-    if (fallenMountShadedByRider) { return false; }
+    if (!isRidden()) {
+      return getTotalArmorValue() == 0;
+    }
+    if (fallenMountShadedByRider) {
+      return false;
+    }
     return getTotalArmorValue() > 0;
   }
   protected boolean isRidden() {
@@ -174,7 +182,9 @@ public class EntityFallenMount extends EntityHorse {
   }
   @Override
   public boolean attackEntityAsMob(Entity target) {
-    if (isRidden() || isDead) { return false; }
+    if (isRidden() || isDead) {
+      return false;
+    }
     super.attackEntityAsMob(target);
     if (!isRearing()) {
       makeMad();

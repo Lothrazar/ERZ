@@ -180,7 +180,9 @@ public class EntityEnderminy extends EntityMob {
   }
   protected boolean teleportTo(double x, double y, double z) {
     EnderTeleportEvent event = new EnderTeleportEvent(this, x, y, z, 0);
-    if (MinecraftForge.EVENT_BUS.post(event)) { return false; }
+    if (MinecraftForge.EVENT_BUS.post(event)) {
+      return false;
+    }
     double d3 = posX;
     double d4 = posY;
     double d5 = posZ;
@@ -247,12 +249,16 @@ public class EntityEnderminy extends EntityMob {
    */
   @Override
   public boolean attackEntityFrom(DamageSource damageSource, float p_70097_2_) {
-    if (isEntityInvulnerable(damageSource)) { return false; }
+    if (isEntityInvulnerable(damageSource)) {
+      return false;
+    }
     setScreaming(true);
     if (damageSource instanceof EntityDamageSourceIndirect) {
       isAggressive = false;
       for (int i = 0; i < 64; ++i) {
-        if (teleportRandomly()) { return true; }
+        if (teleportRandomly()) {
+          return true;
+        }
       }
       return super.attackEntityFrom(damageSource, p_70097_2_);
     }
@@ -278,8 +284,12 @@ public class EntityEnderminy extends EntityMob {
     return res;
   }
   private void doGroupArgo() {
-    if (!groupAgroEnabled) { return; }
-    if (!(getAttackTarget() instanceof EntityPlayer)) { return; }
+    if (!groupAgroEnabled) {
+      return;
+    }
+    if (!(getAttackTarget() instanceof EntityPlayer)) {
+      return;
+    }
     int range = 16;
     AxisAlignedBB bb = new AxisAlignedBB(posX - range, posY - range, posZ - range, posX + range, posY + range, posZ + range);
     List<EntityEnderminy> minies = world.getEntitiesWithinAABB(EntityEnderminy.class, bb);
@@ -297,7 +307,6 @@ public class EntityEnderminy extends EntityMob {
   public void setScreaming(boolean p_70819_1_) {
     dataManager.set(SCREAMING_INDEX, Boolean.valueOf(p_70819_1_));
   }
-
   class AIFindPlayer extends EntityAINearestAttackableTarget<EntityPlayer> {
     private EntityPlayer targetPlayer;
     private int stareTimer;

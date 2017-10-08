@@ -29,12 +29,16 @@ public class EntityAIFollow extends EntityAIBase {
     this.minDist = minDistIn;
     this.maxDist = maxDistIn;
     this.setMutexBits(7);
-    if (!(entity.getNavigator() instanceof PathNavigateGround)) { throw new IllegalArgumentException("Unsupported mob type for FollowOwnerGoal"); }
+    if (!(entity.getNavigator() instanceof PathNavigateGround)) {
+      throw new IllegalArgumentException("Unsupported mob type for FollowOwnerGoal");
+    }
   }
   @Override
   public boolean shouldExecute() {
     if (this.entity != null && this.target != null) {
-      if (this.entity.getDistanceSqToEntity(target) < (double) (this.minDist * this.minDist)) { return false; }
+      if (this.entity.getDistanceSqToEntity(target) < (double) (this.minDist * this.minDist)) {
+        return false;
+      }
       return true;
     }
     return false;

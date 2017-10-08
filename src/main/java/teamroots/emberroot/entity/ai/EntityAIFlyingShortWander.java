@@ -26,9 +26,13 @@ public class EntityAIFlyingShortWander extends EntityAIBase {
     if (isOnLeaves()) {
       chance *= 2;
     }
-    if (entity.getRNG().nextInt(chance) != 0) { return false; }
+    if (entity.getRNG().nextInt(chance) != 0) {
+      return false;
+    }
     Vec3d vec3 = RandomPositionGenerator.findRandomTarget(entity, 4, 2);
-    if (vec3 == null || entity.posY - vec3.y < -2) { return false; }
+    if (vec3 == null || entity.posY - vec3.y < -2) {
+      return false;
+    }
     randPosX = vec3.x;
     randPosY = vec3.y;
     randPosZ = vec3.z;

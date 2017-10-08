@@ -1,43 +1,22 @@
 package teamroots.emberroot.entity.wolftimber;
 import javax.annotation.Nullable;
-import com.google.common.base.Predicate;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
-import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
-import net.minecraft.entity.ai.EntityAISit;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityRabbit;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
-import teamroots.emberroot.entity.deer.EntityDeer;
 
 public class EntityTimberWolf extends EntityMob {
   // public static final DataParameter<Boolean> hasHorns = EntityDataManager.<Boolean> createKey(EntityTimberWolf.class, DataSerializers.BOOLEAN);
@@ -57,7 +36,6 @@ public class EntityTimberWolf extends EntityMob {
     this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     this.tasks.addTask(9, new EntityAILookIdle(this));
     this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true, new Class[0]));
-    
     if (attackSkeleton) {
       this.targetTasks.addTask(5, new EntityAINearestAttackableTarget<EntitySkeleton>(this, EntitySkeleton.class, false));
     }

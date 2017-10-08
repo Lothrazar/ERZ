@@ -272,7 +272,9 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
   }
   @Override
   public int getBrightnessForRender() {
-    if (getDataManager().get(stunned).booleanValue()) { return 128; }
+    if (getDataManager().get(stunned).booleanValue()) {
+      return 128;
+    }
     float f = 0.5F;
     f = MathHelper.clamp(f, 0.0F, 1.0F);
     int i = super.getBrightnessForRender();

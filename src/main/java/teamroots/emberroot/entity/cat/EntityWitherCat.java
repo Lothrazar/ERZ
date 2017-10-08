@@ -45,13 +45,11 @@ public class EntityWitherCat extends EntityMob implements IOwnable<EntityWitherC
   public static final String NAME = "withercat";
   private static final float DEF_HEIGHT = 0.8F;
   private static final float DEF_WIDTH = 0.6F;
- 
   private static final DataParameter<Float> SCALE_INDEX = EntityDataManager.<Float> createKey(EntityWitherCat.class, DataSerializers.FLOAT);
   private static final DataParameter<Integer> GROWTH_MODE_INDEX = EntityDataManager.<Integer> createKey(EntityWitherCat.class, DataSerializers.VARINT);
   private static final float ANGRY_SCALE = 2;
   private static final float SCALE_INC = 0.05f;
   private static final UUID ATTACK_BOOST_MOD_UID = UUID.fromString("B9662B59-9566-4402-BC1F-2ED2B276D846");
- 
   private static int witherCatAngryAttackDamageHardModifier = 2;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityWitherCat.class, EnumCreatureType.MONSTER);
   private float lastScale = 1f;
@@ -128,7 +126,9 @@ public class EntityWitherCat extends EntityMob implements IOwnable<EntityWitherC
   }
   protected void updateAttackDamage(float growthRatio) {
     IAttributeInstance att = EntityUtil.removeModifier(this, SharedMonsterAttributes.ATTACK_DAMAGE, ATTACK_BOOST_MOD_UID);
-    if (growthRatio == 0) { return; }
+    if (growthRatio == 0) {
+      return;
+    }
     double damageInc = EntityUtil.isHardDifficulty(world) ? witherCatAngryAttackDamageHardModifier : 0;
     double attackDif = (damageInc + 1);
     double toAdd = attackDif * growthRatio;
@@ -156,7 +156,9 @@ public class EntityWitherCat extends EntityMob implements IOwnable<EntityWitherC
   }
   @Override
   public boolean attackEntityFrom(DamageSource source, float amount) {
-    if (owner != null && source.getTrueSource() == owner) { return false; }
+    if (owner != null && source.getTrueSource() == owner) {
+      return false;
+    }
     boolean res = super.attackEntityFrom(source, amount);
     if (!world.isRemote) {
       if (source.getTrueSource() instanceof EntityLivingBase) {
@@ -218,7 +220,9 @@ public class EntityWitherCat extends EntityMob implements IOwnable<EntityWitherC
   }
   public void updateScale() {
     GrowthMode curMode = getGrowthMode();
-    if (curMode == GrowthMode.NONE) { return; }
+    if (curMode == GrowthMode.NONE) {
+      return;
+    }
     float scale = getScale();
     if (curMode == GrowthMode.GROW) {
       if (scale < ANGRY_SCALE) {
@@ -295,7 +299,9 @@ public class EntityWitherCat extends EntityMob implements IOwnable<EntityWitherC
   }
   @Override
   public boolean writeToNBTOptional(NBTTagCompound root) {
-    if (getOwner() == null) { return super.writeToNBTOptional(root); }
+    if (getOwner() == null) {
+      return super.writeToNBTOptional(root);
+    }
     return false;
   }
   @Override

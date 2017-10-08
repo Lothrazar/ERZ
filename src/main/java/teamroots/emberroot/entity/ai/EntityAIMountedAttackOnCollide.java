@@ -134,7 +134,9 @@ public class EntityAIMountedAttackOnCollide extends EntityAIBase {
     }
   }
   private double getAttackSpeed() {
-    if (attacker.isRiding()) { return speedTowardsTargetMounted; }
+    if (attacker.isRiding()) {
+      return speedTowardsTargetMounted;
+    }
     return speedTowardsTarget;
   }
   protected PathNavigate getNavigator() {

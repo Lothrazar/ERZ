@@ -23,7 +23,9 @@ public class EntityAIFlyingLand extends EntityAIBase {
   }
   @Override
   public boolean shouldExecute() {
-    if (entity.onGround || !entity.getNavigator().noPath()) { return false; }
+    if (entity.onGround || !entity.getNavigator().noPath()) {
+      return false;
+    }
     BlockPos target = null;
     BlockPos ep = entity.getPosition();
     // Land just bellow us if we can

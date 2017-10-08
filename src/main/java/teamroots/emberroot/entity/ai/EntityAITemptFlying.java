@@ -80,8 +80,12 @@ public class EntityAITemptFlying extends EntityAIBase {
   public boolean shouldContinueExecuting() {
     if (this.scaredByPlayerMovement) {
       if (this.temptedEntity.getDistanceSqToEntity(this.temptingPlayer) < RANGE) {
-        if (this.temptingPlayer.getDistanceSq(this.targetX, this.targetY, this.targetZ) > 0.010000000000000002D) { return false; }
-        if (Math.abs((double) this.temptingPlayer.rotationPitch - this.pitch) > 5.0D || Math.abs((double) this.temptingPlayer.rotationYaw - this.yaw) > 5.0D) { return false; }
+        if (this.temptingPlayer.getDistanceSq(this.targetX, this.targetY, this.targetZ) > 0.010000000000000002D) {
+          return false;
+        }
+        if (Math.abs((double) this.temptingPlayer.rotationPitch - this.pitch) > 5.0D || Math.abs((double) this.temptingPlayer.rotationYaw - this.yaw) > 5.0D) {
+          return false;
+        }
       }
       else {
         this.targetX = this.temptingPlayer.posX;

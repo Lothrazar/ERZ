@@ -71,7 +71,6 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
     }
     this.rotationYaw = rand.nextInt(240) + 60;
   }
- 
   @Override
   public boolean isNonBoss() {
     return false;
@@ -114,12 +113,10 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
   @Override
   public void onUpdate() {
     super.onUpdate();
-    
-    if(this.world.getDifficulty() == EnumDifficulty.PEACEFUL){
+    if (this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
       this.setDead();
       return;
     }
-    
     float velocityScale = 1.0f;
     float addedMotionY = 0.0f;
     if (getDataManager().get(pacified) && getDataManager().get(fadeTimer) > 0) {
@@ -144,7 +141,6 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
         }
       }
       getEntityWorld().playSound(posX, posY, posZ, departureSound, SoundCategory.NEUTRAL, random.nextFloat() * 0.1f + 0.95f, random.nextFloat() * 0.1f + 0.95f, false);
-    
       setDead();
     }
     if (this.ticksExisted % 20 == 0) {
