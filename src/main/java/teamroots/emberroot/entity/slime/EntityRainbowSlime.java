@@ -4,13 +4,18 @@ import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -20,6 +25,7 @@ import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntityRainbowSlime extends EntitySlime {
+  private static final int LINGER_SECONDS = 10;
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntitySlime.class, DataSerializers.VARINT);
   public static final String NAME = "rainbowslime";
   public static enum VariantColors {
@@ -111,26 +117,28 @@ public class EntityRainbowSlime extends EntitySlime {
       case GREY:
       break;
       case PURPLE:
-        this.makeAreaOfEffectCloud(PotionType.getPotionTypeForName("poison"));
+
+        this.spawnLingeringPotion(PotionType.getPotionTypeForName("poison"));
       break;
       case WHITE:
       break;
       case RED:
-        this.makeAreaOfEffectCloud(PotionType.getPotionTypeForName("regeneration"));
+
+        this.spawnLingeringPotion(PotionType.getPotionTypeForName("regeneration"));
       break;
     }
   }
-  private void makeAreaOfEffectCloud(PotionType type) {
-    EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(this.world, this.posX, this.posY, this.posZ);
-    entityareaeffectcloud.setOwner(this);
-    entityareaeffectcloud.setRadius(3.0F);
-    entityareaeffectcloud.setRadiusOnUse(-0.5F);
-    entityareaeffectcloud.setWaitTime(10);
-    entityareaeffectcloud.setRadiusPerTick(-entityareaeffectcloud.getRadius() / (float) entityareaeffectcloud.getDuration());
-    entityareaeffectcloud.setPotion(type);
-    for (PotionEffect e : type.getEffects())
-      entityareaeffectcloud.addEffect(e);// new PotionEffect(MobEffects.POISON)
-    this.world.spawnEntity(entityareaeffectcloud);
+  private void spawnLingeringPotion(PotionType type) {
+    
+    
+    EntityPotion entitypotion = new EntityPotion(world, this, PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), type));
+ 
+    entitypotion.setThrowableHeading(0, 1, 0, 0.05F, 1.0F);
+    if (world.isRemote == false) {
+      world.spawnEntity(entitypotion);
+    }
+    
+ 
   }
   @Override
   public String getName() {

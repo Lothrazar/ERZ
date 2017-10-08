@@ -78,8 +78,7 @@ public class EntityConcussionCreeper extends EntityCreeper {
   private void spawnLingeringPotion(PotionType type) {
     ItemStack potion = PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), type);
     EntityPotion entitypotion = new EntityPotion(world, this, potion);
-    //    Vec3d lookVec = getLookVec();
-    //    entitypotion.rotationPitch -= -20.0F;
+ 
     entitypotion.setThrowableHeading(0, 1, 0, 0.75F, 1.0F);
     if (world.isRemote == false) {
       world.spawnEntity(entitypotion);
