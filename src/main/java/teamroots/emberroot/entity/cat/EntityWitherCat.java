@@ -45,14 +45,13 @@ public class EntityWitherCat extends EntityMob implements IOwnable<EntityWitherC
   public static final String NAME = "withercat";
   private static final float DEF_HEIGHT = 0.8F;
   private static final float DEF_WIDTH = 0.6F;
-  //  private static final int SCALE_INDEX = 20;
-  //  private static final int GROWTH_MODE_INDEX = 21;
+ 
   private static final DataParameter<Float> SCALE_INDEX = EntityDataManager.<Float> createKey(EntityWitherCat.class, DataSerializers.FLOAT);
   private static final DataParameter<Integer> GROWTH_MODE_INDEX = EntityDataManager.<Integer> createKey(EntityWitherCat.class, DataSerializers.VARINT);
   private static final float ANGRY_SCALE = 2;
   private static final float SCALE_INC = 0.05f;
   private static final UUID ATTACK_BOOST_MOD_UID = UUID.fromString("B9662B59-9566-4402-BC1F-2ED2B276D846");
-  private static final UUID HEALTH_BOOST_MOD_UID = UUID.fromString("B9662B29-9467-3302-1D1A-2ED2B276D846");
+ 
   private static int witherCatAngryAttackDamageHardModifier = 2;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityWitherCat.class, EnumCreatureType.MONSTER);
   private float lastScale = 1f;

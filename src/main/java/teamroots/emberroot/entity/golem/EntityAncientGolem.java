@@ -64,6 +64,7 @@ public class EntityAncientGolem extends EntityMob {
     }
   }
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityAncientGolem.class, EnumCreatureType.MONSTER);
+  public static boolean attacksSomeMobs;
   public EntityAncientGolem(World worldIn) {
     super(worldIn);
     setSize(0.6f, 1.8f);
@@ -115,32 +116,30 @@ public class EntityAncientGolem extends EntityMob {
     this.tasks.addTask(7, new EntityAIWander(this, 0.46D));
     this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     this.tasks.addTask(8, new EntityAILookIdle(this));
-    switch (this.getVariantEnum()) {
-      case BLUE:
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySlime.class, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-      break;
-      case GREEN:
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityZombie.class, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-      break;
-      case ORANGE:
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySkeleton.class, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-      break;
-      case PURPLE:
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityEnderman.class, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-      break;
-      case RED:
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPigZombie.class, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-      break;
-      case YELLOW://gold is the only one starting passive to the player
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityDeer.class, true));
-      break;
-      default:
-      break;
+    this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+    if (attacksSomeMobs) {
+      switch (this.getVariantEnum()) {
+        case BLUE:
+          this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySlime.class, true));
+        break;
+        case GREEN:
+          this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityZombie.class, true));
+        break;
+        case ORANGE:
+          this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySkeleton.class, true));
+        break;
+        case PURPLE:
+          this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityEnderman.class, true));
+        break;
+        case RED:
+          this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPigZombie.class, true));
+        break;
+        case YELLOW://gold is the only one starting passive to the player
+          this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityDeer.class, true));
+        break;
+        default:
+        break;
+      }
     }
   }
   @Override

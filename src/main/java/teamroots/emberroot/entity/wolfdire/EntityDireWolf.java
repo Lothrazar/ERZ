@@ -50,7 +50,7 @@ public class EntityDireWolf extends EntityMob {
   private static final int direWolfPackHowlAmount = 3;
   private EntityLivingBase previsousAttackTarget;
   private float direWolfHowlChance = 0.1F;
-  private boolean direWolfPackAttackEnabled = true;
+  public static boolean direWolfPackAttackEnabled = true;
   private int maxSpawnedInChunk = 6;
   private static int packHowl = 0;
   private static long lastHowl = 0;

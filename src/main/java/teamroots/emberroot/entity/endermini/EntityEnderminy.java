@@ -63,7 +63,7 @@ public class EntityEnderminy extends EntityMob {
       6.2, 0)).setSaved(false);
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityEnderminy.class, EnumCreatureType.MONSTER);
   private boolean isAggressive;
-  private boolean attackIfLookingAtPlayer = false;
+  public static boolean attackIfLookingAtPlayer = false;
   //  private boolean attackCreepers = Config.enderminyAttacksCreepers;
   private boolean groupAgroEnabled = true;
   public EntityEnderminy(World world) {
@@ -297,26 +297,7 @@ public class EntityEnderminy extends EntityMob {
   public void setScreaming(boolean p_70819_1_) {
     dataManager.set(SCREAMING_INDEX, Boolean.valueOf(p_70819_1_));
   }
-  //  private final class ClosestEntityComparator implements Comparator<EntityCreeper> {
-  //
-  //    Vec3 pos = new Vec3(0, 0, 0);
-  //
-  //    @Override
-  //    public int compare(EntityCreeper o1, EntityCreeper o2) {
-  //      pos = new Vec3(posX, posY, posZ);
-  //      double d1 = distanceSquared(o1.posX, o1.posY, o1.posZ, pos);
-  //      double d2 = distanceSquared(o2.posX, o2.posY, o2.posZ, pos);
-  //      return Double.compare(d1, d2);
-  //    }
-  //  }
-  //
-  //  public double distanceSquared(double x, double y, double z, Vec3 v2) {
-  //    double dx, dy, dz;
-  //    dx = x - v2.xCoord;
-  //    dy = y - v2.yCoord;
-  //    dz = z - v2.zCoord;
-  //    return (dx * dx + dy * dy + dz * dz);
-  //  }
+
   class AIFindPlayer extends EntityAINearestAttackableTarget<EntityPlayer> {
     private EntityPlayer targetPlayer;
     private int stareTimer;

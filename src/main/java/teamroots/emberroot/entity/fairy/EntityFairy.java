@@ -107,6 +107,7 @@ public class EntityFairy extends EntityFlying {
   public static Random random = new Random();
   public static int counter = 0;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFairy.class, EnumCreatureType.CREATURE);
+  public static boolean tameWithGlowstone;
   //public UUID owner = null;
   public EntityFairy(World world) {
     super(world);
@@ -134,7 +135,7 @@ public class EntityFairy extends EntityFlying {
   }
   @Override
   public boolean processInteract(EntityPlayer player, EnumHand hand) {
-    if (player.getHeldItem(hand).isItemEqualIgnoreDurability(new ItemStack(Items.GLOWSTONE_DUST))) {
+    if (tameWithGlowstone && player.getHeldItem(hand).isItemEqualIgnoreDurability(new ItemStack(Items.GLOWSTONE_DUST))) {
       if (isTamed()) {
         getDataManager().set(tame, false);
         this.setOwnerId(null);

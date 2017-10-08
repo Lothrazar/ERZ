@@ -57,9 +57,10 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
   public static SoundEvent SOUND_HOOT;// = new SoundEvent(new ResourceLocation(Const.MODID, "owl.hoot_single"));
   public static SoundEvent SOUND_HOOT_DOUBLE;//= new SoundEvent(new ResourceLocation(Const.MODID, "owl.hoot_double"));
   public static SoundEvent SOUND_HURT;//= new SoundEvent(new ResourceLocation(Const.MODID, "owl.hurt"));
-  private static final int owlTimeBetweenEggsMin = 500*20;
-  private static final int owlTimeBetweenEggsMax = 900*20;
+  private static final int owlTimeBetweenEggsMin = 500 * 20;
+  private static final int owlTimeBetweenEggsMax = 900 * 20;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityOwl.class, EnumCreatureType.CREATURE);
+  public static boolean temptSpiderEye;
   private float wingRotation;
   private float prevWingRotation;
   private float wingRotDelta = 1.0F;
@@ -81,18 +82,20 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
     tasks.addTask(++pri, new EntityAIFlyingPanic(this, 2));
     tasks.addTask(++pri, new EntityAIFlyingAttackOnCollide(this, 2.5, false));
     tasks.addTask(++pri, new EntityAIMate(this, 1.0));
-    tasks.addTask(++pri, new EntityAITempt(this, 1.0D, Items.SPIDER_EYE, false));
+    if (temptSpiderEye) {
+      tasks.addTask(++pri, new EntityAITempt(this, 1.0D, Items.SPIDER_EYE, false));
+    }
     tasks.addTask(++pri, new EntityAIFollowParent(this, 1.5));
     tasks.addTask(++pri, new EntityAIFlyingLand(this, 2));
     tasks.addTask(++pri, new EntityAIFlyingFindPerch(this, 2, 80));
     tasks.addTask(++pri, new EntityAIFlyingShortWander(this, 2, 150));
     tasks.addTask(++pri, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
     tasks.addTask(++pri, new EntityAILookIdle(this));
-    EntityAINearestAttackableTargetBounded<EntitySpider> targetSpiders = new EntityAINearestAttackableTargetBounded<EntitySpider>(this, EntitySpider.class,
-        true, true);
-    targetSpiders.setMaxDistanceToTarget(12);
-    targetSpiders.setMaxVerticalDistanceToTarget(24);
-    targetTasks.addTask(0, targetSpiders);
+    //    EntityAINearestAttackableTargetBounded<EntitySpider> targetSpiders = new EntityAINearestAttackableTargetBounded<EntitySpider>(this, EntitySpider.class,
+    //        true, true);
+    //    targetSpiders.setMaxDistanceToTarget(12);
+    //    targetSpiders.setMaxVerticalDistanceToTarget(24);
+    //    targetTasks.addTask(0, targetSpiders);
     moveHelper = new FlyingMoveHelper(this);
     timeUntilNextEgg = getNextLayingTime();
   }
@@ -243,7 +246,9 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
         int z = MathHelper.floor(posZ + ((i >> 2) % 2 - 0.5F) * width * 0.8F);
         if (pos.getX() != x || pos.getY() != y || pos.getZ() != z) {
           pos.setPos(x, y, z);
-          if (world.getBlockState(pos).getBlock().isOpaqueCube(world.getBlockState(pos))) { return true; }
+          if (world.getBlockState(pos).getBlock().isOpaqueCube(world.getBlockState(pos))) {
+            return true;
+          }
         }
       }
       return false;
@@ -269,7 +274,9 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
     // normalise between 0 - 0.1
     speed = Math.min(1, speed * 10);
     targetBodyAngle = 20 + ((float) speed * 30);
-    if (targetBodyAngle == bodyAngle) { return; }
+    if (targetBodyAngle == bodyAngle) {
+      return;
+    }
     if (targetBodyAngle > bodyAngle) {
       bodyAngle += (2 * partialTicks);
       if (bodyAngle > targetBodyAngle) {
@@ -306,8 +313,12 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
   @Override
   public void playLivingSound() {
     SoundEvent snd = getAmbientSound();
-    if (snd == null) { return; }
-    if (world != null && !world.isRemote && (world.isDaytime() || getAttackTarget() != null)) { return; }
+    if (snd == null) {
+      return;
+    }
+    if (world != null && !world.isRemote && (world.isDaytime() || getAttackTarget() != null)) {
+      return;
+    }
     float volume = getSoundVolume() * 0.5f;//Config.owlHootVolumeMult;
     float pitch = 0.8f * getSoundPitch();
     playSound(snd, volume, pitch);
@@ -335,6 +346,9 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
   }
   @Override
   public boolean isBreedingItem(ItemStack stack) {
+    if (temptSpiderEye == false) {
+      return false;
+    }
     return stack != null && stack.getItem() == Items.SPIDER_EYE;
   }
   @Override

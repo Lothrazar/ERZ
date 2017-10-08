@@ -44,9 +44,13 @@ import teamroots.emberroot.util.EntityUtil;
 public class EntityFrozenKnight extends EntitySkeleton {
   public static final String NAME = "skeleton_frozen";
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFrozenKnight.class, EnumCreatureType.MONSTER);
+  public static boolean attacksVillagers;
+  public static boolean avoidWolves;
   private float fallenKnightChancePerArmorPiece = 0.66f;
   private float fallenKnightChanceArmorUpgrade = 0.2f;
   private double fallenKnightChanceShield = 0.5f;
+  public static boolean spawnsWithArmor;
+  public static boolean appliesSlowPotion;
   public EntityFrozenKnight(World world) {
     super(world);
   }
@@ -60,18 +64,20 @@ public class EntityFrozenKnight extends EntitySkeleton {
   protected void initEntityAI() {
     //super.initEntityAI();
     this.tasks.addTask(1, new EntityAISwimming(this));
-    // this.tasks.addTask(2, new EntityAIRestrictSun(this));
-    // this.tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
-    //    
-    //    
-    //    this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityWolf.class, 6.0F, 1.0D, 1.2D));
+    this.tasks.addTask(2, new EntityAIRestrictSun(this));
+    this.tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
+    if (avoidWolves) {
+      this.tasks.addTask(3, new EntityAIAvoidEntity<EntityWolf>(this, EntityWolf.class, 6.0F, 1.0D, 1.2D));
+    }
     this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0D));
     this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     this.tasks.addTask(6, new EntityAILookIdle(this));
     this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
     this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
     //    this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityIronGolem.class, true));
-    //targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
+    if (attacksVillagers) {
+      targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
+    }
   }
   @Override
   protected SoundEvent getAmbientSound() {
@@ -152,9 +158,10 @@ public class EntityFrozenKnight extends EntitySkeleton {
   public IEntityLivingData onInitialSpawn(DifficultyInstance di, IEntityLivingData livingData) {
     //From base entity living class
     getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).applyModifier(new AttributeModifier("Random spawn bonus", rand.nextGaussian() * 0.05D, 1));
-    //    func_189768_a(SkeletonType.NORMAL);//skeleton types do not exist anymore in 1.11.2. so its always normal.
-    addRandomArmor();
-    setEnchantmentBasedOnDifficulty(di); //enchantEquipment();
+    if (spawnsWithArmor) {
+      addRandomArmor();
+      setEnchantmentBasedOnDifficulty(di);
+    }
     float f = di.getClampedAdditionalDifficulty();
     this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * f);
     setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
@@ -179,10 +186,10 @@ public class EntityFrozenKnight extends EntitySkeleton {
   //  }
   @Override
   public boolean attackEntityAsMob(Entity entityIn) {
-    if (entityIn instanceof EntityPlayer) {
+    if (appliesSlowPotion && entityIn instanceof EntityPlayer) {
       EntityPlayer p = (EntityPlayer) entityIn;
       if (p.isPotionActive(MobEffects.SLOWNESS) == false) {
-        p.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 0));
+        p.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 0)); // is 10seconds
       }
     }
     return super.attackEntityAsMob(entityIn);

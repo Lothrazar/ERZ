@@ -93,18 +93,7 @@ public class EntitySprite extends EntityFlying implements ISprite {// implements
   public void updateAITasks() {
     super.updateAITasks();
   }
-  @Override
-  public void dropLoot(boolean wasRecentlyHit, int lootingModifier, DamageSource source) {
-    super.dropLoot(wasRecentlyHit, lootingModifier, source);
-    //    	if (!getEntityWorld().isRemote){
-    //    		getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.otherworldLeaf,1)));
-    //    		for (int i = 0; i < 8+lootingModifier; i ++){
-    //	    		if (rand.nextInt(2) == 0){
-    //	    			getEntityWorld().spawnEntity(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.otherworldLeaf,1)));
-    //	    		}
-    //	    	}
-    //    	}
-  }
+ 
   @Override
   public void onUpdate() {
     super.onUpdate();
@@ -262,16 +251,9 @@ public class EntitySprite extends EntityFlying implements ISprite {// implements
     super.applyEntityAttributes();
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
     ConfigSpawnEntity.syncInstance(this, config.settings);
-    //    
-    //    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0);
-    //    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2.0D);
-    //    this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-    //    this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0);
+ 
   }
-  @Override
-  public void onLivingUpdate() {
-    super.onLivingUpdate();
-  }
+ 
   @Override
   public void readEntityFromNBT(NBTTagCompound compound) {
     super.readEntityFromNBT(compound);

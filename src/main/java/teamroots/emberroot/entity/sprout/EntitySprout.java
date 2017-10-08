@@ -5,9 +5,11 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -27,6 +29,7 @@ public class EntitySprout extends EntityCreature {
     }
   }
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntitySprout.class, EnumCreatureType.CREATURE);
+  public static boolean canTempt;
   public EntitySprout(World world) {
     super(world);
     setSize(0.5f, 1.0f);
@@ -43,6 +46,12 @@ public class EntitySprout extends EntityCreature {
     this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
     this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
     this.tasks.addTask(7, new EntityAILookIdle(this));
+    if (canTempt) {
+      tasks.addTask(4, new EntityAITempt(this, 1.0D, Items.WHEAT_SEEDS, false));
+      tasks.addTask(4, new EntityAITempt(this, 1.0D, Items.BEETROOT_SEEDS, false));
+      tasks.addTask(4, new EntityAITempt(this, 1.0D, Items.MELON_SEEDS, false));
+      tasks.addTask(4, new EntityAITempt(this, 1.0D, Items.PUMPKIN_SEEDS, false));
+    }
   }
   @Override
   public boolean isAIDisabled() {

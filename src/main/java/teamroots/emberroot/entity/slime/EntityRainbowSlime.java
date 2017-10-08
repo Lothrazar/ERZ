@@ -34,6 +34,7 @@ public class EntityRainbowSlime extends EntitySlime {
     }
   }
   public static boolean canPlaceBlocks;
+  public static boolean canPotionsDeath;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityRainbowSlime.class, EnumCreatureType.MONSTER);
   public EntityRainbowSlime(World worldIn) {
     super(worldIn);
@@ -71,7 +72,9 @@ public class EntityRainbowSlime extends EntitySlime {
       //skip setting block if mob griefing is false
       setBlockOnDeath();
     }
-    setPotionsOnDeath();
+    if (canPotionsDeath) {
+      setPotionsOnDeath();
+    }
     spawnChildSlimes();
     this.isDead = true;
   }

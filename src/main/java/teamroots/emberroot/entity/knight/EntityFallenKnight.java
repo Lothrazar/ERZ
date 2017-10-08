@@ -41,6 +41,7 @@ public class EntityFallenKnight extends EntitySkeleton {
   //TODO: MORE STUFF TO CONFIGGGGGGGGGGGG
   private static double ATTACK_MOVE_SPEED = 1.2;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFallenKnight.class, EnumCreatureType.MONSTER);
+  public static boolean attackVillagers;
   private EntityAIMountedArrowAttack aiArrowAttack;
   private EntityAIMountedAttackOnCollide aiAttackOnCollide;
   private final EntityAIBreakDoor breakDoorAI = new EntityAIBreakDoor(this);
@@ -54,10 +55,10 @@ public class EntityFallenKnight extends EntitySkeleton {
   private int fallenKnightRangedMaxAttackPause = 60;
   private float fallenKnightRangedMaxRange = 15f;
   private boolean fallenKnightArchersSwitchToMelee = true;
-  private float fallenKnightChanceMounted = 0.75f;
+  public static float fallenKnightChanceMounted = 0.75f;
   private float fallenKnightChancePerArmorPiece = 0.66f;
   private float fallenKnightChanceArmorUpgrade = 0.2f;
-  private double fallenKnightChanceShield = 0.5f;
+  //  private double fallenKnightChanceShield = 0.5f;
   public EntityFallenKnight(World world) {
     super(world);
   }
@@ -69,7 +70,9 @@ public class EntityFallenKnight extends EntitySkeleton {
   @Override
   protected void initEntityAI() {
     super.initEntityAI();
-    targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
+    if (attackVillagers) {
+      targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
+    }
     tasks.addTask(4, getAiArrowAttack());
   }
   public EntityAIMountedArrowAttack getAiArrowAttack() {
@@ -138,7 +141,9 @@ public class EntityFallenKnight extends EntitySkeleton {
     }
   }
   private void spawnMount() {
-    if (isRiding() || !spawned) { return; }
+    if (isRiding() || !spawned) {
+      return;
+    }
     EntityFallenMount mount = null;
     if (rand.nextFloat() <= fallenKnightChanceMounted) {
       mount = new EntityFallenMount(world);

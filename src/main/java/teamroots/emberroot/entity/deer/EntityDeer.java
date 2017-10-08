@@ -36,6 +36,7 @@ public class EntityDeer extends EntityAnimal {
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityDeer.class, DataSerializers.VARINT);
   public static int chanceRudolf = 200;//in config now, defaults 120;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityDeer.class, EnumCreatureType.CREATURE);
+  public static boolean lureWithWheat;
   public EntityDeer(World world) {
     super(world);
     setSize(1.0f, 1.0f);
@@ -60,7 +61,9 @@ public class EntityDeer extends EntityAnimal {
     this.tasks.addTask(0, new EntityAISwimming(this));
     this.tasks.addTask(1, new EntityAIPanic(this, 1.5D));
     this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-    this.tasks.addTask(3, new EntityAITempt(this, 1.25D, Items.WHEAT, false));
+    if (lureWithWheat) {
+      this.tasks.addTask(3, new EntityAITempt(this, 1.25D, Items.WHEAT, false));
+    }
     this.tasks.addTask(4, new EntityAIFollowParent(this, 1.25D));
     this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
     this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
