@@ -150,10 +150,10 @@ public class ModelTimberWolf extends ModelBase {
     float speed = (float) ((new Vec3d(entity.motionX, 0, entity.motionZ)).lengthVector() * 2.0f);
     super.render(entity, f, f1, age, f3, f4, f5);
     setRotationAngles(f, f1, age, f3, f4, f5);
-    if (((EntityAnimal) entity).getGrowingAge() < 0) {
-      GlStateManager.scale(0.5, 0.5, 0.5);
-      GlStateManager.translate(0, 1.5, 0);
-    }
+//    if (((EntityAnimal) entity).getGrowingAge() < 0) {
+//      GlStateManager.scale(0.5, 0.5, 0.5);
+//      GlStateManager.translate(0, 1.5, 0);
+//    }
     legRF1.rotateAngleX = (float) Math.toRadians(speed * 240f * (float) Math.sin(Math.toRadians(age % 360) * 24F));
     legLF1.rotateAngleX = -(float) Math.toRadians(speed * 240f * (float) Math.sin(Math.toRadians(age % 360) * 24F));
     legLB1.rotateAngleX = (float) Math.toRadians(speed * 240f * (float) Math.sin(Math.toRadians(age % 360) * 24F));

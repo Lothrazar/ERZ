@@ -20,14 +20,11 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.config.ConfigSpawnEntity;
-import teamroots.emberroot.entity.endermini.EntityEnderminy;
-import teamroots.emberroot.entity.endermini.EntityEnderminy.VariantColors;
 import teamroots.emberroot.util.TeleportUtil;
 
 /**

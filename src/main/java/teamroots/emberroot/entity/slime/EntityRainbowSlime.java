@@ -25,7 +25,6 @@ import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntityRainbowSlime extends EntitySlime {
-  private static final int LINGER_SECONDS = 10;
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntitySlime.class, DataSerializers.VARINT);
   public static final String NAME = "rainbowslime";
   public static enum VariantColors {
@@ -106,8 +105,6 @@ public class EntityRainbowSlime extends EntitySlime {
     }
     if (setBlock != null) {
       this.world.setBlockState(this.getPosition(), setBlock);
-      //doesnt make it flow. idk
-      // this.world.notifyBlockUpdate(this.getPosition(), setBlock, setBlock, 3);//make tha water flowwwwwww
     }
   }
   public void setPotionsOnDeath() {
@@ -117,28 +114,21 @@ public class EntityRainbowSlime extends EntitySlime {
       case GREY:
       break;
       case PURPLE:
-
         this.spawnLingeringPotion(PotionType.getPotionTypeForName("poison"));
       break;
       case WHITE:
       break;
       case RED:
-
         this.spawnLingeringPotion(PotionType.getPotionTypeForName("regeneration"));
       break;
     }
   }
   private void spawnLingeringPotion(PotionType type) {
-    
-    
     EntityPotion entitypotion = new EntityPotion(world, this, PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), type));
- 
     entitypotion.setThrowableHeading(0, 1, 0, 0.05F, 1.0F);
     if (world.isRemote == false) {
       world.spawnEntity(entitypotion);
     }
-    
- 
   }
   @Override
   public String getName() {
