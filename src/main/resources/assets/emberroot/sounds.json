@@ -1,0 +1,98 @@
+{
+  "direwolf.hurt": {
+    "category": "hostile",
+    "sounds": [
+      "emberroot:direwolf/hurt"
+    ]
+  },
+  "direwolf.death": {
+    "category": "hostile",
+    "sounds": [
+      "emberroot:direwolf/death"
+    ]
+  },
+  "direwolf.growl": {
+    "category": "hostile",
+    "sounds": [
+      "emberroot:direwolf/growl1",
+      "emberroot:direwolf/growl2",
+      "emberroot:direwolf/growl3"
+    ]
+  },
+  "direwolf.howl": {
+    "category": "hostile",
+    "sounds": [
+      "emberroot:direwolf/howl"
+    ]
+  },
+  "owl.hoot_double": {
+    "category": "neutral",
+    "sounds": [
+      "emberroot:owl/hoot_double"
+    ]
+  },
+  "owl.hoot_single": {
+    "category": "neutral",
+    "sounds": [
+      "emberroot:owl/hoot_single"
+    ]
+  },
+   "owl.hurt": {
+    "category": "neutral",
+    "sounds": [
+      "emberroot:owl/hurt"
+    ]
+  },
+  
+  
+      "spiritAmbient":
+    { 
+    "category": "neutral",
+    "sounds": [ "emberroot:spiritambient" ] 
+    },
+    "spiritHurt":
+    { 
+    "category": "neutral",
+    "sounds": [ "emberroot:spirithurt" ] 
+    },
+    "bossAmbient":
+    { 
+    "category": "hostile",
+    "sounds": [ "emberroot:bossambient" ] 
+    },
+    "bossHurt":
+    { 
+    "category": "hostile",
+    "sounds": [ "emberroot:bosshurt" ] 
+    },
+    "bossDeath":
+    { 
+    "category": "hostile",
+    "sounds": [ "emberroot:bossdeath" ] 
+    },
+    "staffCast":
+    { 
+    "category": "player",
+    "sounds": [ "emberroot:staffcast" ] 
+    },
+    "meleeCast":
+    { 
+    "category": "player",
+    "sounds": [ "emberroot:meleecast" ] 
+    },
+    "ritualCast":
+    { 
+    "category": "emberroot:player",
+    "sounds": [ "emberroot:ritualprocess" ] 
+    },
+    "chargingStart":
+    { 
+    "category": "emberroot:player",
+    "sounds": [ "emberroot:chargingstart" ] 
+    },
+    "charging":
+    { 
+    "category": "emberroot:player",
+    "sounds": [ "emberroot:charging" ] 
+    }
+}

@@ -1,0 +1,4 @@
+Config file controls all mob spawning as well as biomes
+
+
+Summon boss building a shape of endstone and emerald (TODO: screenshot)

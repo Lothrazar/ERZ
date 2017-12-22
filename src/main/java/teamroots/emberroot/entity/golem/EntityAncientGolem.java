@@ -1,6 +1,7 @@
 package teamroots.emberroot.entity.golem;
 import java.awt.Color;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -10,7 +11,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntityGuardian;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -26,12 +26,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
+import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.deer.EntityDeer;
 
 public class EntityAncientGolem extends EntityMob {
-  private static final double MAX_HEALTH = 25.0D;
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityAncientGolem.class, DataSerializers.VARINT);
   public static final DataParameter<Integer> FIRESPEED = EntityDataManager.<Integer> createKey(EntityAncientGolem.class, DataSerializers.VARINT);
+  public static final String NAME = "rainbow_golem";
   public static enum VariantColors {
     RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE;
     public String nameLower() {
@@ -57,11 +58,13 @@ public class EntityAncientGolem extends EntityMob {
         case YELLOW:
           return new Color(227, 225, 2);
         default:
-          break;
+        break;
       }
       return null;//new Color(0, 0, 0);
     }
   }
+  public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityAncientGolem.class, EnumCreatureType.MONSTER);
+  public static boolean attacksSomeMobs;
   public EntityAncientGolem(World worldIn) {
     super(worldIn);
     setSize(0.6f, 1.8f);
@@ -78,7 +81,6 @@ public class EntityAncientGolem extends EntityMob {
     super.entityInit();
     this.getDataManager().register(FIRESPEED, MathHelper.getInt(rand, 40, 110));
     this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
-    
     switch (this.getVariantEnum()) {
       case ORANGE:
       case RED:
@@ -114,42 +116,38 @@ public class EntityAncientGolem extends EntityMob {
     this.tasks.addTask(7, new EntityAIWander(this, 0.46D));
     this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     this.tasks.addTask(8, new EntityAILookIdle(this));
-    switch (this.getVariantEnum()) {
-      case BLUE:
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySlime.class, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-      break;
-      case GREEN:
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityZombie.class, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-      break;
-      case ORANGE:
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySkeleton.class, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-      break;
-      case PURPLE:
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityEnderman.class, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-      break;
-      case RED:
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPigZombie.class, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-      break;
-      case YELLOW://gold is the only one starting passive to the player
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityDeer.class, true));
+    this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+    if (attacksSomeMobs) {
+      switch (this.getVariantEnum()) {
+        case BLUE:
+          this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySlime.class, true));
         break;
-      default:
+        case GREEN:
+          this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityZombie.class, true));
         break;
+        case ORANGE:
+          this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySkeleton.class, true));
+        break;
+        case PURPLE:
+          this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityEnderman.class, true));
+        break;
+        case RED:
+          this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPigZombie.class, true));
+        break;
+        case YELLOW://gold is the only one starting passive to the player
+          this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityDeer.class, true));
+        break;
+        default:
+        break;
+      }
     }
   }
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
-    this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
-    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(MAX_HEALTH);
+    ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
   public void onUpdate() {
@@ -157,8 +155,8 @@ public class EntityAncientGolem extends EntityMob {
     this.rotationYaw = this.rotationYawHead;
     if (this.ticksExisted % getDataManager().get(FIRESPEED) == 0 && this.getAttackTarget() != null) {
       if (!getEntityWorld().isRemote) {
-        EntityEmberProjectile proj = new EntityEmberProjectile(getEntityWorld());
-        proj.getDataManager().set(EntityEmberProjectile.variant, this.getVariant());
+        EntityGolemLaser proj = new EntityGolemLaser(getEntityWorld());
+        proj.getDataManager().set(EntityGolemLaser.variant, this.getVariant());
         proj.initCustom(posX, posY + 1.6, posZ, getLookVec().x * 0.5, getLookVec().y * 0.5, getLookVec().z * 0.5, 4.0f, this.getUniqueID());
         getEntityWorld().spawnEntity(proj);
       }
