@@ -17,6 +17,8 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -338,8 +340,11 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
   }
   @Override
   public void setDead() {
+    if (this.isDead == false && this.world.isRemote == false) {
+      this.entityDropItem(new ItemStack(Items.TOTEM_OF_UNDYING), 4.0F);
+    }
     super.setDead();
-    getEntityWorld().playSound(posX, posY, posZ, hurtSound, SoundCategory.NEUTRAL, random.nextFloat() * 0.1f + 0.95f, (random.nextFloat() * 0.1f + 0.7f) / 2.0f, false);
+    world.playSound(posX, posY, posZ, hurtSound, SoundCategory.NEUTRAL, random.nextFloat() * 0.1f + 0.95f, (random.nextFloat() * 0.1f + 0.7f) / 2.0f, false);
   }
   @Override
   protected boolean canDespawn() {

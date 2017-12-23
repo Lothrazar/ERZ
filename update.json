@@ -6,4 +6,5 @@
  
  
  "1.3.3":"Fixed issues with the mod using biomeWhitelist config and spawn weight configs.   Changed several default config values changed for balance reasons; does not change existing config files (Attack damage and health reduced for several mobs; Sprites have lower spawn rates, and come in groups of 1 not 4).
-Changed timberwolf egg color slightly.  Added spawn eggs to a creative tab.   Bigger sprites are now a different color to help tell the difference from smaller ones. "
+Changed timberwolf egg color slightly.  Added spawn eggs to a creative tab.  Fixed Mini enderman not loading its loot table.    Bigger sprites are now a different color to help tell the difference from smaller ones.  
+Guardian of Sprites fixed it not dropping Totem of Undying.  "
