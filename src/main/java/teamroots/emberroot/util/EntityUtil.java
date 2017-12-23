@@ -184,6 +184,14 @@ public class EntityUtil {
     entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(maxHealth);
     //    entity.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).notifyAll();
   }
+  public static void setAttackSpeed(EntityLivingBase entity, double sp) {
+    IAttributeInstance ai = entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_SPEED);
+    if (ai == null) {
+      entity.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_SPEED);
+      ai = entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_SPEED);
+    }
+    ai.setBaseValue(sp);
+  }
   public static void setBaseDamage(EntityLivingBase entity, double attackDamage) {
     IAttributeInstance ai = entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);
     if (ai == null) {
@@ -191,5 +199,21 @@ public class EntityUtil {
       ai = entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);
     }
     ai.setBaseValue(attackDamage);
+  }
+  public static boolean isCreativePlayer(EntityLivingBase e){
+    if(e instanceof EntityPlayer){
+      return ((EntityPlayer)e).isCreative();
+    }
+    return false;
+  }
+  public static List<EntityPlayer> getNonCreativePlayers(World world, AxisAlignedBB box) {
+    List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, box);
+    List<EntityPlayer> playersValid = new ArrayList<EntityPlayer>();
+    for (EntityPlayer p : players) {
+      if (p.isCreative() == false) {
+        playersValid.add(p);
+      }
+    }
+    return playersValid;
   }
 }

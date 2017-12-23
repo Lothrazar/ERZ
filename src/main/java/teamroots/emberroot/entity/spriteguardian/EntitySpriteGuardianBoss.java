@@ -17,6 +17,8 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -37,9 +39,11 @@ import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.entity.sprite.EntitySprite;
 import teamroots.emberroot.entity.spritegreater.EntityGreaterSprite;
 import teamroots.emberroot.entity.spritegreater.EntitySpriteProjectile;
+import teamroots.emberroot.util.EntityUtil;
 import teamroots.emberroot.util.Util;
 
 public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRangedAttackMob {
+  private static final int RANGE_ATTACK = 72;
   public float range = 64;
   public ArrayList<Vec3d> pastPositions = new ArrayList<Vec3d>();
   public static final DataParameter<Float> targetDirectionX = EntityDataManager.<Float> createKey(EntitySpriteGuardianBoss.class, DataSerializers.FLOAT);
@@ -56,9 +60,9 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
   Random random = new Random();
   public Vec3d moveVec = new Vec3d(0, 0, 0);
   public Vec3d prevMoveVec = new Vec3d(0, 0, 0);
-  public static SoundEvent ambientSound;//= new SoundEvent(new ResourceLocation(Const.MODID, "bossambient"));
-  public static SoundEvent hurtSound;//= new SoundEvent(new ResourceLocation(Const.MODID, "bosshurt"));
-  public static SoundEvent departureSound;//= new SoundEvent(new ResourceLocation(Const.MODID, "bossdeath"));
+  public static SoundEvent ambientSound;
+  public static SoundEvent hurtSound;
+  public static SoundEvent departureSound;
   private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
   public EntitySpriteGuardianBoss(World worldIn) {
     super(worldIn);
@@ -92,12 +96,10 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
     if (this.getAttackTarget() != null && this.getHealth() > 0 && !getDataManager().get(pacified).booleanValue()) {
       if (entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0 && entity instanceof EntityLivingBase) {
         EntityLivingBase living = ((EntityLivingBase) entity);
-        if (living instanceof EntityPlayer) {
-          EntityPlayer pl = (EntityPlayer) living;
-          if (pl.isCreative()) {
-            return; //dont push players in creative, its just annoying
-          }
+        if (EntityUtil.isCreativePlayer(living)) {
+          return;
         }
+        //TODO: NO CONFIG? HUH HMM WAT
         living.attackEntityFrom(DamageSource.GENERIC, 4.0f);
         float magnitude = (float) Math.sqrt(motionX * motionX + motionZ * motionZ);
         living.knockBack(this, 3.0f * magnitude + 0.1f, -motionX / magnitude + 0.1, -motionZ / magnitude + 0.1);
@@ -133,7 +135,7 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
       for (int i = 0; i < 20; i++) {
         for (int j = 0; j < 5; j++) {
           Vec3d location = pastPositions.get(i).add((new Vec3d(rand.nextFloat() - 0.5, rand.nextFloat() - 0.5, rand.nextFloat() - 0.5)).scale(3.0f));
-          EmberRootZoo.proxy.spawnParticleMagicSmallSparkleFX(getEntityWorld(), location.x, location.y + 1.35f, location.z, 0, 0, 0, 107, 255, 28);
+          EmberRootZoo.proxy.spawnParticleMagicSmallSparkleFX(getEntityWorld(), location.x, location.y + 1.35f, location.z, 0, 0, 0, 107, 255, 28);//RGB last 3
         }
         for (int j = 0; j < 2; j++) {
           Vec3d location = pastPositions.get(i).add((new Vec3d(rand.nextFloat() - 0.5, rand.nextFloat() - 0.5, rand.nextFloat() - 0.5)).scale(1.5f));
@@ -144,17 +146,17 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
       setDead();
     }
     if (this.ticksExisted % 20 == 0) {
-      List<EntityPlayer> players = getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX - 72, posY - 72, posZ - 72, posX + 72, posY + 72, posZ + 72));
+      List<EntityPlayer> playersValid = EntityUtil.getNonCreativePlayers(world, new AxisAlignedBB(posX - RANGE_ATTACK, posY - RANGE_ATTACK, posZ - RANGE_ATTACK, posX + RANGE_ATTACK, posY + RANGE_ATTACK, posZ + RANGE_ATTACK));
       boolean foundPrevious = false;
       if (this.getAttackTarget() != null) {
-        for (int i = 0; i < players.size(); i++) {
-          if (players.get(i).getUniqueID().compareTo(getAttackTarget().getUniqueID()) == 0) {
+        for (int i = 0; i < playersValid.size(); i++) {
+          if (playersValid.get(i).getUniqueID().compareTo(getAttackTarget().getUniqueID()) == 0) {
             foundPrevious = true;
           }
         }
       }
-      if (!foundPrevious && players.size() > 0) {
-        this.setAttackTarget(players.get(rand.nextInt(players.size())));
+      if (!foundPrevious && playersValid.size() > 0) {
+        this.setAttackTarget(playersValid.get(rand.nextInt(playersValid.size())));
       }
       else if (!foundPrevious && this.ticksExisted > 100) {
         for (int i = 0; i < 20; i++) {
@@ -338,12 +340,15 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
   }
   @Override
   public void setDead() {
+    if (this.isDead == false && this.world.isRemote == false) {
+      this.entityDropItem(new ItemStack(Items.TOTEM_OF_UNDYING), 4.0F);
+    }
     super.setDead();
-    getEntityWorld().playSound(posX, posY, posZ, hurtSound, SoundCategory.NEUTRAL, random.nextFloat() * 0.1f + 0.95f, (random.nextFloat() * 0.1f + 0.7f) / 2.0f, false);
+    world.playSound(posX, posY, posZ, hurtSound, SoundCategory.NEUTRAL, random.nextFloat() * 0.1f + 0.95f, (random.nextFloat() * 0.1f + 0.7f) / 2.0f, false);
   }
   @Override
   protected boolean canDespawn() {
-    return false;
+    return true;
   }
   @Override
   protected void applyEntityAttributes() {

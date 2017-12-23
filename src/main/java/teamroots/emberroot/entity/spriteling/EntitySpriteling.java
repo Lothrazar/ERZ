@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -23,12 +24,15 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
+import teamroots.emberroot.config.ConfigManager;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.sprite.EntitySprite;
 import teamroots.emberroot.entity.sprite.ISprite;
+import teamroots.emberroot.util.EntityUtil;
 import teamroots.emberroot.util.Util;
 
 public class EntitySpriteling extends EntityFlying implements ISprite {// implements IRangedAttackMob {
+  private static final double RANGE_ATTACK = 16.0;
   public static final DataParameter<Float> targetDirectionX = EntityDataManager.<Float> createKey(EntitySpriteling.class, DataSerializers.FLOAT);
   public static final DataParameter<Float> targetDirectionY = EntityDataManager.<Float> createKey(EntitySpriteling.class, DataSerializers.FLOAT);
   public static final DataParameter<Integer> dashTimer = EntityDataManager.<Integer> createKey(EntitySpriteling.class, DataSerializers.VARINT);
@@ -66,16 +70,40 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
     this.getDataManager().register(targetBlock, new BlockPos(0, -1, 0));
     this.getDataManager().register(lastTargetBlock, new BlockPos(0, -1, 0));
     this.getDataManager().register(lastLastTargetBlock, new BlockPos(0, -1, 0));
+    this.random = this.world.rand;
+  }
+  @Override
+  public int getMaxSpawnedInChunk() {
+    return config.settings.max;
+  }
+  @Override
+  public boolean getCanSpawnHere() {
+    int i = MathHelper.floor(this.posX);
+    int j = MathHelper.floor(this.getEntityBoundingBox().minY);
+    int k = MathHelper.floor(this.posZ);
+    BlockPos blockpos = new BlockPos(i, j, k);
+//    this.world.getBlockState(blockpos.down()).getBlock() != Blocks.AIR
+        
+    boolean canSpawn = this.world.getLight(blockpos) < ConfigManager.LIGHT_LEVEL
+        && super.getCanSpawnHere()
+        && this.rand.nextInt(config.settings.weightedProb) == 0
+        ;
+  
+    return canSpawn;
   }
   @Override
   public void collideWithEntity(Entity entity) {
     if (this.getAttackTarget() != null && this.getHealth() > 0 && !this.getDataManager().get(stunned).booleanValue()) {
-      if (entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0) {
-        ((EntityLivingBase) entity).attackEntityFrom(DamageSource.GENERIC, 2.0f);
+      if (entity instanceof EntityLivingBase && entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0) {
+        EntityLivingBase living = ((EntityLivingBase) entity);
+        if (EntityUtil.isCreativePlayer(living)) {
+          return;
+        }
+        living.attackEntityFrom(DamageSource.GENERIC, config.settings.attack);
         float magnitude = (float) Math.sqrt(motionX * motionX + motionZ * motionZ);
-        ((EntityLivingBase) entity).knockBack(this, 2.0f * magnitude + 0.1f, -motionX / magnitude + 0.1, -motionZ / magnitude + 0.1);
-        ((EntityLivingBase) entity).attackEntityAsMob(this);
-        ((EntityLivingBase) entity).setRevengeTarget(this);
+        living.knockBack(this, 2.0f * magnitude + 0.1f, -motionX / magnitude + 0.1, -motionZ / magnitude + 0.1);
+        living.attackEntityAsMob(this);
+        living.setRevengeTarget(this);
       }
     }
   }
@@ -83,18 +111,6 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
   public void updateAITasks() {
     super.updateAITasks();
   }
-  //    @Override
-  //    public void dropLoot(boolean wasRecentlyHit, int lootingModifier, DamageSource source){
-  //    	super.dropLoot(wasRecentlyHit,lootingModifier,source);
-  //    	if (!getEntityWorld().isRemote){
-  //    		getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.otherworldLeaf,1)));
-  //    		for (int i = 0; i < 4+lootingModifier; i ++){
-  //	    		if (rand.nextInt(2) == 0){
-  //	    			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.otherworldLeaf,1)));
-  //	    		}
-  //	    	}
-  //    	}
-  //    }
   @Override
   public void onUpdate() {
     super.onUpdate();
@@ -182,9 +198,9 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
         EmberRootZoo.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX + ((random.nextDouble()) - 0.5) * 0.2, posY + 0.25 + ((random.nextDouble()) - 0.5) * 0.2, posZ + ((random.nextDouble()) - 0.5) * 0.2, -0.25 * moveVec.x, -0.25 * moveVec.y, -0.25 * moveVec.z, 107, 255, 28);
       }
       if (getDataManager().get(happiness) < -25 && this.ticksExisted % 20 == 0 && this.getAttackTarget() == null) {
-        List<EntityPlayer> players = (List<EntityPlayer>) getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX - 16.0, posY - 16.0, posZ - 16.0, posX + 16.0, posY + 16.0, posZ + 16.0));
-        if (players.size() > 0) {
-          this.setAttackTarget(players.get(0));
+        List<EntityPlayer> playersValid = EntityUtil.getNonCreativePlayers(getEntityWorld(), new AxisAlignedBB(posX - RANGE_ATTACK, posY - RANGE_ATTACK, posZ - RANGE_ATTACK, posX + RANGE_ATTACK, posY + RANGE_ATTACK, posZ + RANGE_ATTACK));
+        if (playersValid.size() > 0) {
+          this.setAttackTarget(playersValid.get(rand.nextInt(playersValid.size())));
         }
       }
     }
@@ -245,7 +261,7 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
   }
   @Override
   protected boolean canDespawn() {
-    return false;
+    return true;
   }
   @Override
   protected void applyEntityAttributes() {
@@ -253,11 +269,6 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2);
     ConfigSpawnEntity.syncInstance(this, config.settings);
-    //    
-    //    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16.0);
-    //    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2.0D);
-    //    this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-    //    this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0);
   }
   @Override
   public void onLivingUpdate() {

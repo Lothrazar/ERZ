@@ -1,9 +1,14 @@
 package teamroots.emberroot;
+import java.util.Iterator;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -13,11 +18,28 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamroots.emberroot.config.ConfigManager;
+import teamroots.emberroot.entity.cat.EntityWitherCat;
+import teamroots.emberroot.entity.creeper.EntityConcussionCreeper;
+import teamroots.emberroot.entity.deer.EntityDeer;
+import teamroots.emberroot.entity.endermini.EntityEnderminy;
+import teamroots.emberroot.entity.fairy.EntityFairy;
+import teamroots.emberroot.entity.frozen.EntityFrozenKnight;
+import teamroots.emberroot.entity.golem.EntityAncientGolem;
+import teamroots.emberroot.entity.hero.EntityFallenHero;
+import teamroots.emberroot.entity.knight.EntityFallenKnight;
+import teamroots.emberroot.entity.mount.EntityFallenMount;
 import teamroots.emberroot.entity.owl.EntityOwl;
 import teamroots.emberroot.entity.owl.ItemOwlEgg;
+import teamroots.emberroot.entity.slime.EntityRainbowSlime;
+import teamroots.emberroot.entity.slimedirt.EntityDireSlime;
 import teamroots.emberroot.entity.sprite.EntitySprite;
+import teamroots.emberroot.entity.spritegreater.EntityGreaterSprite;
 import teamroots.emberroot.entity.spriteguardian.EntitySpriteGuardianBoss;
+import teamroots.emberroot.entity.spriteling.EntitySpriteling;
+import teamroots.emberroot.entity.sprout.EntitySprout;
+import teamroots.emberroot.entity.witch.EntityWitherWitch;
 import teamroots.emberroot.entity.wolfdire.EntityDireWolf;
+import teamroots.emberroot.entity.wolftimber.EntityTimberWolf;
 import teamroots.emberroot.proxy.CommonProxy;
 
 @Mod(modid = Const.MODID, name = EmberRootZoo.MODNAME)
@@ -35,6 +57,43 @@ public class EmberRootZoo {
     @SideOnly(Side.CLIENT)
     public ItemStack getTabIconItem() {
       return new ItemStack(Blocks.MOB_SPAWNER);
+    }
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void displayAllRelevantItems(NonNullList<ItemStack> list) {
+      Iterator<ItemStack> i = list.iterator();
+      while (i.hasNext()) {
+        Item s = i.next().getItem(); // must be called before you can call i.remove()
+        if (s == Items.SPAWN_EGG) {
+          i.remove();
+        }
+      }
+      //now add
+      list.add(addEntity(EntityDeer.NAME)); 
+      list.add(addEntity(EntityFairy.NAME));
+      list.add(addEntity(EntityRainbowSlime.NAME));
+      list.add(addEntity(EntityAncientGolem.NAME));
+      list.add(addEntity(EntityFallenHero.NAME));
+      list.add(addEntity(EntityConcussionCreeper.NAME));
+      list.add(addEntity(EntityOwl.NAME));
+      list.add(addEntity(EntityDireSlime.NAME));
+      list.add(addEntity(EntityDireWolf.NAME));
+      list.add(addEntity(EntityWitherCat.NAME));
+      list.add(addEntity(EntityWitherWitch.NAME));
+      list.add(addEntity(EntityEnderminy.NAME));
+      list.add(addEntity(EntityFallenKnight.NAME));
+      list.add(addEntity(EntityFallenMount.NAME));
+      list.add(addEntity(EntityTimberWolf.NAME));
+      list.add(addEntity(EntitySprite.NAME));
+      list.add(addEntity(EntitySpriteling.NAME));
+      list.add(addEntity(EntityGreaterSprite.NAME));
+      list.add(addEntity(EntitySpriteGuardianBoss.NAME));
+      list.add(addEntity(EntityFrozenKnight.NAME));
+    }
+    private ItemStack addEntity(String name) {
+      ItemStack s = new ItemStack(Items.SPAWN_EGG);
+      ItemMonsterPlacer.applyEntityIdToItemStack(s, new ResourceLocation(Const.MODID, name));
+      return s;
     }
   };
   @Instance(Const.MODID)
@@ -68,7 +127,11 @@ public class EmberRootZoo {
   }
   public static DamageSource damage_ember;
   public static Item itemOwlEgg;
+  private static boolean doLog = true;
   public static void log(String string) {
+    if (doLog == false) {
+      return;
+    }
     System.out.println("[EmberRootZoo]" + string);
   }
 }

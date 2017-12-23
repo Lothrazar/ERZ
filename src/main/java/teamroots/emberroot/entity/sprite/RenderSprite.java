@@ -14,7 +14,7 @@ public class RenderSprite extends RenderLiving<EntitySprite> {
   }
   @Override
   protected ResourceLocation getEntityTexture(EntitySprite entity) {
-    return new ResourceLocation(Const.MODID, "textures/entity/spriteling/spirit.png");
+    return new ResourceLocation(Const.MODID, "textures/entity/sprite.png");
   }
   @Override
   public void doRender(EntitySprite entity, double x, double y, double z, float entityYaw, float partialTicks) {

@@ -57,6 +57,6 @@ public class RenderSpriteGuardian extends RenderLiving<EntitySpriteGuardianBoss>
   }
   @Override
   protected ResourceLocation getEntityTexture(EntitySpriteGuardianBoss entity) {
-    return new ResourceLocation(Const.MODID, "textures/entity/spriteling/spirit.png");
+    return new ResourceLocation(Const.MODID, "textures/entity/sprite_guardian.png");
   }
 }
