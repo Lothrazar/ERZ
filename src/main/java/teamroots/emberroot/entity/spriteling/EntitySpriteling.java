@@ -241,7 +241,7 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
   }
   @Override
   protected boolean canDespawn() {
-    return false;
+    return true;
   }
   @Override
   protected void applyEntityAttributes() {
@@ -249,11 +249,7 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2);
     ConfigSpawnEntity.syncInstance(this, config.settings);
-    //    
-    //    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(16.0);
-    //    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2.0D);
-    //    this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-    //    this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0);
+ 
   }
   @Override
   public void onLivingUpdate() {

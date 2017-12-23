@@ -320,12 +320,12 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
   }
   @Override
   protected boolean canDespawn() {
-    return false;
+    return true;
   }
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    //    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0);
+  
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2);
     //SPEED 2

@@ -251,7 +251,7 @@ public class EntitySprite extends EntityFlying implements ISprite {// implements
   }
   @Override
   protected boolean canDespawn() {
-    return false;
+    return true;
   }
   @Override
   protected void applyEntityAttributes() {
