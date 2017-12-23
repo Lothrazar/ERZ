@@ -25,6 +25,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.EmberRootZoo;
+import teamroots.emberroot.config.ConfigManager;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.util.EntityUtil;
 import teamroots.emberroot.util.Util;
@@ -79,7 +80,7 @@ public class EntitySprite extends EntityFlying implements ISprite {// implements
     int k = MathHelper.floor(this.posZ);
     BlockPos blockpos = new BlockPos(i, j, k);
     boolean canSpawn = this.world.getBlockState(blockpos.down()).getBlock() != Blocks.AIR
-        && this.world.getLight(blockpos) > 8
+        && this.world.getLight(blockpos) < ConfigManager.LIGHT_LEVEL
         && super.getCanSpawnHere()
         && this.rand.nextInt(config.settings.weightedProb) == 0
     ;

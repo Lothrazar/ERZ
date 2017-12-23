@@ -33,6 +33,7 @@ import teamroots.emberroot.util.EntityUtil;
  * Original author: https://github.com/CrazyPants
  */
 public class EntityDireWolf extends EntityMob {
+  private static final double ATTACK_SPEED = 0.8D;
   public static final String NAME = "dire_wolf";
   public static SoundEvent SND_HURT;//= new SoundEvent(new ResourceLocation(Const.MODID, "direwolf.hurt"));
   public static SoundEvent SND_HOWL;//= new SoundEvent(new ResourceLocation(Const.MODID, "direwolf.howl"));
@@ -62,15 +63,15 @@ public class EntityDireWolf extends EntityMob {
     //    ((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
     tasks.addTask(1, new EntityAISwimming(this));
     tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-    tasks.addTask(4, new EntityAIAttackOnCollideAggressive(this, 1.1D, true).setAttackFrequency(20));
+    tasks.addTask(4, new EntityAIAttackOnCollideAggressive(this, ATTACK_SPEED, true).setAttackFrequency(60));
     tasks.addTask(7, new EntityAIWander(this, 0.5D));
     tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     tasks.addTask(9, new EntityAILookIdle(this));
-    targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+    targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
     if (direWolfAggresiveRange > 0) {
       EntityAINearestAttackableTargetBounded<EntityPlayer> nearTarg = new EntityAINearestAttackableTargetBounded<EntityPlayer>(this, EntityPlayer.class, true);
       nearTarg.setMaxDistanceToTarget(direWolfAggresiveRange);
-      targetTasks.addTask(2, nearTarg);
+      targetTasks.addTask(6, nearTarg);
     }
   }
   @Override

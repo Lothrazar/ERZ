@@ -35,7 +35,7 @@ public class EntityTimberWolf extends EntityMob {
     this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
     this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     this.tasks.addTask(9, new EntityAILookIdle(this));
-    this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true, new Class[0]));
+    this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, false, new Class[0]));
     if (attackSkeleton) {
       this.targetTasks.addTask(5, new EntityAINearestAttackableTarget<EntitySkeleton>(this, EntitySkeleton.class, false));
     }

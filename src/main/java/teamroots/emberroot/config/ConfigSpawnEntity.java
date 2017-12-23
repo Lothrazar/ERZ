@@ -39,20 +39,21 @@ public class ConfigSpawnEntity {
     this.defaults.maxHealth = dhealth;
     this.defaults.attack = attack;
     this.defaults.followRange = follow;
+    this.defaults.useAllBiomes = true;// just the default
     return this;
   }
   public ConfigSpawnEntity setDefaultSpawns(int pmin, int pmax, int pweight) {
-    return setDefaultSpawns(pmin, pmax, pweight, true);
-  }
-  public ConfigSpawnEntity setDefaultSpawns(int pmin, int pmax, int pweight, boolean useAllBiomes) {
     defaults.min = pmin;
     defaults.max = pmax;
     defaults.weightedProb = pweight;
-    defaults.useAllBiomes = useAllBiomes;
     return this;
   }
-  public ConfigSpawnEntity setDefaultBiome(boolean all, String[] biomelist) {
-    defaults.useAllBiomes = all;
+  public ConfigSpawnEntity setDefaultBiomesAll() {
+    defaults.useAllBiomes = true;
+    return this;
+  }
+  public ConfigSpawnEntity setDefaultBiome(String[] biomelist) {
+    defaults.useAllBiomes = false;
     defaults.biomes = biomelist;
     return this;
   }
@@ -115,7 +116,7 @@ public class ConfigSpawnEntity {
     public String[] biomes = new String[0];
     public int maxHealth;
     public float attack;
-    public boolean useAllBiomes;
+    public boolean useAllBiomes = true;
     public int followRange;
     @Override
     public String toString() {

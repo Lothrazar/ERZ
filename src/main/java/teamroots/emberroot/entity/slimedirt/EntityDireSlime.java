@@ -23,6 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import teamroots.emberroot.Const;
+import teamroots.emberroot.config.ConfigManager;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.util.SpawnUtil;
 
@@ -39,15 +40,17 @@ public class EntityDireSlime extends EntityMagmaCube {
   }
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityDireSlime.class, DataSerializers.VARINT);
   public enum SlimeConf {
-    SMALL(1, 4, 3, 0.4), MEDIUM(2, 8, 5, 0.2), LARGE(4, 20, 8, 0.4);
+    //WAS attack damage
+    //small , 4, 3,, medium 8,5, large 20,8
+    SMALL(1 ,0.4), MEDIUM(2, 0.2), LARGE(4,   0.4);
     public final int size;
-    public final double health;
-    public final double attackDamage;
+ //   public final double health;
+   // public final double attackDamage;
     public final double chance;
-    private SlimeConf(int size, double health, double attackDamage, double chance) {
+    private SlimeConf(int size,  double chance) {
       this.size = size;
-      this.health = health;
-      this.attackDamage = attackDamage;
+     // this.health = health;
+      //this.attackDamage = attackDamage;
       this.chance = chance;
     }
     static SlimeConf getConfForSize(int size) {
@@ -77,7 +80,7 @@ public class EntityDireSlime extends EntityMagmaCube {
     int k = MathHelper.floor(this.posZ);
     BlockPos blockpos = new BlockPos(i, j, k);
     boolean canSpawn = this.world.getBlockState(blockpos.down()).getBlock() != Blocks.AIR
-        && this.world.getLight(blockpos) > 8
+        && this.world.getLight(blockpos) < ConfigManager.LIGHT_LEVEL
         && super.getCanSpawnHere()
         && this.rand.nextInt(config.settings.weightedProb) == 0;
     return canSpawn;
@@ -143,8 +146,8 @@ public class EntityDireSlime extends EntityMagmaCube {
   public void setSlimeSize(int size, boolean doFullHeal) {
     super.setSlimeSize(size, doFullHeal);
     SlimeConf conf = SlimeConf.getConfForSize(size);
-    getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(conf.attackDamage);
-    getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(conf.health);
+//    getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(conf.attackDamage);
+//    getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(conf.health);
     setHealth(getMaxHealth());
   }
   @Override
@@ -223,6 +226,7 @@ public class EntityDireSlime extends EntityMagmaCube {
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     ConfigSpawnEntity.syncInstance(this, config.settings);
+ 
   }
   @Override
   protected int getAttackStrength() {
