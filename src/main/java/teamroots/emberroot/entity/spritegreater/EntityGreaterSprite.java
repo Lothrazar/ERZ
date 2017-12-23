@@ -26,6 +26,7 @@ import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.sprite.EntitySprite;
 import teamroots.emberroot.entity.sprite.ISprite;
+import teamroots.emberroot.util.EntityUtil;
 import teamroots.emberroot.util.Util;
 
 public class EntityGreaterSprite extends EntityFlying implements ISprite {// implements IRangedAttackMob {
@@ -41,6 +42,7 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
   public static final DataParameter<BlockPos> lastLastTargetBlock = EntityDataManager.<BlockPos> createKey(EntityGreaterSprite.class, DataSerializers.BLOCK_POS);
   public static final DataParameter<Boolean> hostile = EntityDataManager.<Boolean> createKey(EntityGreaterSprite.class, DataSerializers.BOOLEAN);
   public static final String NAME = "rootsonespritegreater";
+  private static final double RANGE_ATTACK = 16;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityGreaterSprite.class, EnumCreatureType.MONSTER);
   public float addDirectionX = 0;
   public float addDirectionY = 0;
@@ -88,12 +90,16 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
   @Override
   public void collideWithEntity(Entity entity) {
     if (this.getAttackTarget() != null && this.getHealth() > 0 && !getDataManager().get(stunned).booleanValue()) {
-      if (entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0) {
-        ((EntityLivingBase) entity).attackEntityFrom(DamageSource.GENERIC, 4.0f);
+      if (entity instanceof EntityLivingBase && entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0) {
+        EntityLivingBase living = ((EntityLivingBase) entity);
+        if (EntityUtil.isCreativePlayer(living)) {
+          return;
+        }
+        living.attackEntityFrom(DamageSource.GENERIC, config.settings.attack);
         float magnitude = (float) Math.sqrt(motionX * motionX + motionZ * motionZ);
-        ((EntityLivingBase) entity).knockBack(this, 4.0f * magnitude + 0.1f, -motionX / magnitude + 0.1, -motionZ / magnitude + 0.1);
-        ((EntityLivingBase) entity).attackEntityAsMob(this);
-        ((EntityLivingBase) entity).setRevengeTarget(this);
+        living.knockBack(this, 4.0f * magnitude + 0.1f, -motionX / magnitude + 0.1, -motionZ / magnitude + 0.1);
+        living.attackEntityAsMob(this);
+        living.setRevengeTarget(this);
       }
     }
   }
@@ -246,9 +252,9 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
         EmberRootZoo.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX + ((random.nextDouble()) - 0.5), posY + 0.25 + ((random.nextDouble()) - 0.5), posZ + ((random.nextDouble()) - 0.5), -0.25 * moveVec.x, -0.25 * moveVec.y, -0.25 * moveVec.z, 76, 230, 0);
       }
       if (getDataManager().get(happiness) < -25 && this.ticksExisted % 20 == 0 && this.getAttackTarget() == null) {
-        List<EntityPlayer> players = (List<EntityPlayer>) getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX - 16.0, posY - 16.0, posZ - 16.0, posX + 16.0, posY + 16.0, posZ + 16.0));
-        if (players.size() > 0) {
-          this.setAttackTarget(players.get(0));
+        List<EntityPlayer> playersValid = EntityUtil.getNonCreativePlayers(getEntityWorld(), new AxisAlignedBB(posX - RANGE_ATTACK, posY - RANGE_ATTACK, posZ - RANGE_ATTACK, posX + RANGE_ATTACK, posY + RANGE_ATTACK, posZ + RANGE_ATTACK));
+        if (playersValid.size() > 0) {
+          this.setAttackTarget(playersValid.get(rand.nextInt(playersValid.size())));
         }
       }
     }

@@ -26,9 +26,11 @@ import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.sprite.EntitySprite;
 import teamroots.emberroot.entity.sprite.ISprite;
+import teamroots.emberroot.util.EntityUtil;
 import teamroots.emberroot.util.Util;
 
 public class EntitySpriteling extends EntityFlying implements ISprite {// implements IRangedAttackMob {
+  private static final double RANGE_ATTACK = 16.0;
   public static final DataParameter<Float> targetDirectionX = EntityDataManager.<Float> createKey(EntitySpriteling.class, DataSerializers.FLOAT);
   public static final DataParameter<Float> targetDirectionY = EntityDataManager.<Float> createKey(EntitySpriteling.class, DataSerializers.FLOAT);
   public static final DataParameter<Integer> dashTimer = EntityDataManager.<Integer> createKey(EntitySpriteling.class, DataSerializers.VARINT);
@@ -70,12 +72,17 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
   @Override
   public void collideWithEntity(Entity entity) {
     if (this.getAttackTarget() != null && this.getHealth() > 0 && !this.getDataManager().get(stunned).booleanValue()) {
-      if (entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0) {
-        ((EntityLivingBase) entity).attackEntityFrom(DamageSource.GENERIC, 2.0f);
+      if (entity instanceof EntityLivingBase &&entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0) {
+        EntityLivingBase living = ((EntityLivingBase) entity);
+        if (EntityUtil.isCreativePlayer(living)) {
+          return;
+        }
+        
+        living.attackEntityFrom(DamageSource.GENERIC, config.settings.attack);
         float magnitude = (float) Math.sqrt(motionX * motionX + motionZ * motionZ);
-        ((EntityLivingBase) entity).knockBack(this, 2.0f * magnitude + 0.1f, -motionX / magnitude + 0.1, -motionZ / magnitude + 0.1);
-        ((EntityLivingBase) entity).attackEntityAsMob(this);
-        ((EntityLivingBase) entity).setRevengeTarget(this);
+        living.knockBack(this, 2.0f * magnitude + 0.1f, -motionX / magnitude + 0.1, -motionZ / magnitude + 0.1);
+        living.attackEntityAsMob(this);
+        living.setRevengeTarget(this);
       }
     }
   }
@@ -83,18 +90,7 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
   public void updateAITasks() {
     super.updateAITasks();
   }
-  //    @Override
-  //    public void dropLoot(boolean wasRecentlyHit, int lootingModifier, DamageSource source){
-  //    	super.dropLoot(wasRecentlyHit,lootingModifier,source);
-  //    	if (!getEntityWorld().isRemote){
-  //    		getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.otherworldLeaf,1)));
-  //    		for (int i = 0; i < 4+lootingModifier; i ++){
-  //	    		if (rand.nextInt(2) == 0){
-  //	    			getEntityWorld().spawnEntityInWorld(new EntityItem(getEntityWorld(),posX,posY+0.5,posZ,new ItemStack(RegistryManager.otherworldLeaf,1)));
-  //	    		}
-  //	    	}
-  //    	}
-  //    }
+ 
   @Override
   public void onUpdate() {
     super.onUpdate();
@@ -182,9 +178,9 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
         EmberRootZoo.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX + ((random.nextDouble()) - 0.5) * 0.2, posY + 0.25 + ((random.nextDouble()) - 0.5) * 0.2, posZ + ((random.nextDouble()) - 0.5) * 0.2, -0.25 * moveVec.x, -0.25 * moveVec.y, -0.25 * moveVec.z, 107, 255, 28);
       }
       if (getDataManager().get(happiness) < -25 && this.ticksExisted % 20 == 0 && this.getAttackTarget() == null) {
-        List<EntityPlayer> players = (List<EntityPlayer>) getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX - 16.0, posY - 16.0, posZ - 16.0, posX + 16.0, posY + 16.0, posZ + 16.0));
-        if (players.size() > 0) {
-          this.setAttackTarget(players.get(0));
+        List<EntityPlayer> playersValid = EntityUtil.getNonCreativePlayers(getEntityWorld(), new AxisAlignedBB(posX - RANGE_ATTACK, posY - RANGE_ATTACK, posZ - RANGE_ATTACK, posX + RANGE_ATTACK, posY + RANGE_ATTACK, posZ +RANGE_ATTACK));
+        if (playersValid.size() > 0) {
+          this.setAttackTarget(playersValid.get(rand.nextInt(playersValid.size())));
         }
       }
     }

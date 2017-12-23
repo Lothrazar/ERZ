@@ -200,4 +200,20 @@ public class EntityUtil {
     }
     ai.setBaseValue(attackDamage);
   }
+  public static boolean isCreativePlayer(EntityLivingBase e){
+    if(e instanceof EntityPlayer){
+      return ((EntityPlayer)e).isCreative();
+    }
+    return false;
+  }
+  public static List<EntityPlayer> getNonCreativePlayers(World world, AxisAlignedBB box) {
+    List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, box);
+    List<EntityPlayer> playersValid = new ArrayList<EntityPlayer>();
+    for (EntityPlayer p : players) {
+      if (p.isCreative() == false) {
+        playersValid.add(p);
+      }
+    }
+    return playersValid;
+  }
 }
