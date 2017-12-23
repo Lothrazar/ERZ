@@ -57,17 +57,17 @@ public class ConfigSpawnEntity {
     return this;
   }
   public void syncConfig(Configuration config) {
-    settings.min = config.getInt("minSpawnCount", category, defaults.min, 0, 500, "Smallest spawn group.");
-    settings.max = config.getInt("maxSpawnCount", category, defaults.max, 0, 500, "Biggest spawn group.");
+    settings.min = config.getInt("minSpawnCount", category, defaults.min, 0, 32, "Smallest spawn group.");
+    settings.max = config.getInt("maxSpawnCount", category, defaults.max, 0, 32, "Biggest spawn group.");
     if (settings.max < settings.min) {
       settings.max = settings.min + 1;//the least we could do
     }
-    settings.weightedProb = config.getInt("weightProbability", category, defaults.weightedProb, 0, 500, "Configures the spawning frequency. Higher numbers mean more spawns.");
+    settings.weightedProb = config.getInt("weightProbability", category, defaults.weightedProb, 0, 100, "Configures the spawning frequency. Higher numbers mean more spawns.");
     settings.useAllBiomes = config.getBoolean("allBiomes", category, defaults.useAllBiomes, "Try to spawn in every biome.  If false, it will use the whitelist in this config ");
     settings.biomes = config.getStringList("biomeWhitelist", category, defaults.biomes, "Biomes this will spawn into.  Add support for any modded biome here.  Ignored whenever allBiomes is true. https://minecraft.gamepedia.com/Data_values#Biome_IDs");
     settings.maxHealth = config.getInt("maxHealth", category, defaults.maxHealth, 1, 100, "Max health of the mob");
     if (settings.followRange >= 0) {
-      settings.followRange = config.getInt("followRange", category, defaults.followRange, 0, 2, "Base follow range");
+      settings.followRange = config.getInt("followRange", category, defaults.followRange, 0, 32, "Base follow range");
     }
     //-1 means either property is invalid, or is locked
     if (defaults.attack >= 0) {
@@ -97,7 +97,6 @@ public class ConfigSpawnEntity {
    */
   public static void syncInstance(EntityLivingBase living, MobProperties settings) {
     EntityUtil.setMaxHealth(living, settings.maxHealth);
-   EmberRootZoo.log("syncInstance SET AttackDamage " + living.getName() + " " + settings.attack);
  
     if (settings.attack >= 0)
       EntityUtil.setBaseDamage(living, settings.attack);

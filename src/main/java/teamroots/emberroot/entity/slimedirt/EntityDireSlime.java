@@ -66,6 +66,22 @@ public class EntityDireSlime extends EntityMagmaCube {
       return values()[index];
     }
   }
+  @Override
+  public int getMaxSpawnedInChunk() {
+    return config.settings.max;
+  }
+  @Override
+  public boolean getCanSpawnHere() {
+    int i = MathHelper.floor(this.posX);
+    int j = MathHelper.floor(this.getEntityBoundingBox().minY);
+    int k = MathHelper.floor(this.posZ);
+    BlockPos blockpos = new BlockPos(i, j, k);
+    boolean canSpawn = this.world.getBlockState(blockpos.down()).getBlock() != Blocks.AIR
+        && this.world.getLight(blockpos) > 8
+        && super.getCanSpawnHere()
+        && this.rand.nextInt(config.settings.weightedProb) == 0;
+    return canSpawn;
+  }
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityDireSlime.class, EnumCreatureType.MONSTER);
   public EntityDireSlime(World world) {
     super(world);

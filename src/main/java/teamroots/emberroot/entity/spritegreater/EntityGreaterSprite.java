@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -68,6 +69,24 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
     this.isAirBorne = true;
     this.experienceValue = 20;
     this.rotationYaw = rand.nextInt(240) + 60;
+  }
+  @Override
+  public int getMaxSpawnedInChunk() {
+    return config.settings.max;
+  }
+  @Override
+  public boolean getCanSpawnHere() {
+    int i = MathHelper.floor(this.posX);
+    int j = MathHelper.floor(this.getEntityBoundingBox().minY);
+    int k = MathHelper.floor(this.posZ);
+    BlockPos blockpos = new BlockPos(i, j, k);
+    boolean canSpawn = this.world.getBlockState(blockpos.down()).getBlock() != Blocks.AIR
+        && this.world.getLight(blockpos) > 8
+        && super.getCanSpawnHere()
+        && this.rand.nextInt(config.settings.weightedProb) == 0
+        ;
+ 
+    return canSpawn;
   }
   @Override
   protected void entityInit() {

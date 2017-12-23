@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -68,16 +69,34 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
     this.getDataManager().register(targetBlock, new BlockPos(0, -1, 0));
     this.getDataManager().register(lastTargetBlock, new BlockPos(0, -1, 0));
     this.getDataManager().register(lastLastTargetBlock, new BlockPos(0, -1, 0));
+    this.random = this.world.rand;
+  }
+  @Override
+  public int getMaxSpawnedInChunk() {
+    return config.settings.max;
+  }
+  @Override
+  public boolean getCanSpawnHere() {
+    int i = MathHelper.floor(this.posX);
+    int j = MathHelper.floor(this.getEntityBoundingBox().minY);
+    int k = MathHelper.floor(this.posZ);
+    BlockPos blockpos = new BlockPos(i, j, k);
+    boolean canSpawn = this.world.getBlockState(blockpos.down()).getBlock() != Blocks.AIR
+        && this.world.getLight(blockpos) > 8
+        && super.getCanSpawnHere()
+        && this.rand.nextInt(config.settings.weightedProb) == 0
+        ;
+  
+    return canSpawn;
   }
   @Override
   public void collideWithEntity(Entity entity) {
     if (this.getAttackTarget() != null && this.getHealth() > 0 && !this.getDataManager().get(stunned).booleanValue()) {
-      if (entity instanceof EntityLivingBase &&entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0) {
+      if (entity instanceof EntityLivingBase && entity.getUniqueID().compareTo(this.getAttackTarget().getUniqueID()) == 0) {
         EntityLivingBase living = ((EntityLivingBase) entity);
         if (EntityUtil.isCreativePlayer(living)) {
           return;
         }
-        
         living.attackEntityFrom(DamageSource.GENERIC, config.settings.attack);
         float magnitude = (float) Math.sqrt(motionX * motionX + motionZ * motionZ);
         living.knockBack(this, 2.0f * magnitude + 0.1f, -motionX / magnitude + 0.1, -motionZ / magnitude + 0.1);
@@ -90,7 +109,6 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
   public void updateAITasks() {
     super.updateAITasks();
   }
- 
   @Override
   public void onUpdate() {
     super.onUpdate();
@@ -178,7 +196,7 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
         EmberRootZoo.proxy.spawnParticleMagicSparkleFX(getEntityWorld(), posX + ((random.nextDouble()) - 0.5) * 0.2, posY + 0.25 + ((random.nextDouble()) - 0.5) * 0.2, posZ + ((random.nextDouble()) - 0.5) * 0.2, -0.25 * moveVec.x, -0.25 * moveVec.y, -0.25 * moveVec.z, 107, 255, 28);
       }
       if (getDataManager().get(happiness) < -25 && this.ticksExisted % 20 == 0 && this.getAttackTarget() == null) {
-        List<EntityPlayer> playersValid = EntityUtil.getNonCreativePlayers(getEntityWorld(), new AxisAlignedBB(posX - RANGE_ATTACK, posY - RANGE_ATTACK, posZ - RANGE_ATTACK, posX + RANGE_ATTACK, posY + RANGE_ATTACK, posZ +RANGE_ATTACK));
+        List<EntityPlayer> playersValid = EntityUtil.getNonCreativePlayers(getEntityWorld(), new AxisAlignedBB(posX - RANGE_ATTACK, posY - RANGE_ATTACK, posZ - RANGE_ATTACK, posX + RANGE_ATTACK, posY + RANGE_ATTACK, posZ + RANGE_ATTACK));
         if (playersValid.size() > 0) {
           this.setAttackTarget(playersValid.get(rand.nextInt(playersValid.size())));
         }
@@ -249,7 +267,6 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2);
     ConfigSpawnEntity.syncInstance(this, config.settings);
- 
   }
   @Override
   public void onLivingUpdate() {
