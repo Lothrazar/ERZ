@@ -7,6 +7,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.config.Configuration;
+import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.util.EntityUtil;
 
 /**
@@ -96,9 +97,8 @@ public class ConfigSpawnEntity {
    */
   public static void syncInstance(EntityLivingBase living, MobProperties settings) {
     EntityUtil.setMaxHealth(living, settings.maxHealth);
-    //  System.out.println("syncInstance SET SPEED " + living.getName() + " " + settings.speed);
-    //    if (settings.speed > 0)
-    //      EntityUtil.setSpeed(living, settings.speed);
+   EmberRootZoo.log("syncInstance SET AttackDamage " + living.getName() + " " + settings.attack);
+ 
     if (settings.attack >= 0)
       EntityUtil.setBaseDamage(living, settings.attack);
     if (settings.followRange >= 0)

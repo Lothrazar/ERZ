@@ -184,6 +184,14 @@ public class EntityUtil {
     entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(maxHealth);
     //    entity.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).notifyAll();
   }
+  public static void setAttackSpeed(EntityLivingBase entity, double sp) {
+    IAttributeInstance ai = entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_SPEED);
+    if (ai == null) {
+      entity.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_SPEED);
+      ai = entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_SPEED);
+    }
+    ai.setBaseValue(sp);
+  }
   public static void setBaseDamage(EntityLivingBase entity, double attackDamage) {
     IAttributeInstance ai = entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);
     if (ai == null) {

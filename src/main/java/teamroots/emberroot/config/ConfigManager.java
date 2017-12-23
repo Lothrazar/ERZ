@@ -43,12 +43,12 @@ public class ConfigManager {
     entityConfigs.add(EntityConcussionCreeper.config.setDefaultSpawns(1, 1, 17).setDefaultProperties(20, -1, 32));
     entityConfigs.add(EntityDeer.config.setDefaultSpawns(3, 7, 20).setDefaultProperties(15, -1, 32));
     entityConfigs.add(EntityDireSlime.config.setDefaultSpawns(1, 1, 3).setDefaultProperties(12, -1, 32));//0.3F,
-    entityConfigs.add(EntityEnderminy.config.setDefaultSpawns(1, 1, 17).setDefaultProperties(15, 10, 32));//0.3F,
+    entityConfigs.add(EntityEnderminy.config.setDefaultSpawns(1, 1, 17).setDefaultProperties(15, 2, 32));//0.3F,
     entityConfigs.add(EntityFairy.config.setDefaultSpawns(5, 10, 20).setDefaultProperties(18, -1, 16));
     entityConfigs.add(EntityAncientGolem.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(25, 5, 16));
     entityConfigs.add(EntityFallenHero.config.setDefaultSpawns(1, 1, 1).setDefaultProperties(25, 4, 75));//0.43F,
     entityConfigs.add(EntityRainbowSlime.config.setDefaultSpawns(1, 1, 1).setDefaultProperties(-1, -1, 32));//0.2F,
-    entityConfigs.add(EntityDireWolf.config.setDefaultSpawns(1, 1, 22).setDefaultProperties(20, 4, 40));//0.5F,
+    entityConfigs.add(EntityDireWolf.config.setDefaultSpawns(1, 1, 22).setDefaultProperties(16, 1, 40));//0.5F,
     entityConfigs.add(EntityWitherWitch.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(30, -1, 16));
     entityConfigs.add(EntityOwl.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(10, -1, -1));
     entityConfigs.add(EntityFallenMount.config.setDefaultSpawns(0, 0, 0).setDefaultProperties(30, -1, -1));

@@ -104,6 +104,7 @@ public class EntityDireWolf extends EntityMob {
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
+//    EntityUtil.setAttackSpeed(this, 8.5);// hmm wat doesnt work?
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
