@@ -149,7 +149,7 @@ public class RegistryManager {
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityFallenMount.NAME), EntityFallenMount.class, EntityFallenMount.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityFallenMount.NAME), 0x365A25, 0xA0A0A0);
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityTimberWolf.NAME), EntityTimberWolf.class, EntityTimberWolf.NAME, id++, EmberRootZoo.instance, 64, 1, true);
-    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityTimberWolf.NAME), 0x696969, 0xA5A5A5);
+    EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityTimberWolf.NAME), 0x708090, 0xD3D3D3);
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntitySprite.NAME), EntitySprite.class, EntitySprite.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntitySprite.NAME), Util.intColor(130, 255, 60), Util.intColor(130, 255, 60));
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntitySpriteling.NAME), EntitySpriteling.class, EntitySpriteling.NAME, id++, EmberRootZoo.instance, 64, 1, true);

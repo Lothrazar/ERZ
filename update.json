@@ -5,4 +5,5 @@
  Many more config flags added to control mob behavior.   "
  
  
- "1.3.3":"Fixed issues with the mod using biomeWhitelist config and spawn weight configs.   Changed several default config values changed for balance reasons; does not change existing config files (Attack damage and health reduced for several mobs; Sprites have lower spawn rates, and come in groups of 1 not 4) "
+ "1.3.3":"Fixed issues with the mod using biomeWhitelist config and spawn weight configs.   Changed several default config values changed for balance reasons; does not change existing config files (Attack damage and health reduced for several mobs; Sprites have lower spawn rates, and come in groups of 1 not 4).
+Changed timberwolf egg color slightly.  Added spawn eggs to a creative tab.   "
