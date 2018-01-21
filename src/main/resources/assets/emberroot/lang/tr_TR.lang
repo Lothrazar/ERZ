@@ -1,0 +1,42 @@
+itemGroup.emberroot=EmberRoot Zoo
+  
+entity.rainbow_golem.name=Golem
+entity.rainbow_golem.blue.name=Buz Golemi
+entity.rainbow_golem.green.name=Doğa Golemi
+entity.rainbow_golem.yellow.name=Altın Golem
+entity.rainbow_golem.orange.name=Alev Golemi
+entity.rainbow_golem.purple.name=Değerlitaş Golem
+entity.rainbow_golem.red.name=Mağma Golemi
+
+entity.rainbowslime.name=Gökkuşağı Balçık
+entity.rainbowslime.blue.name=Su Balçık
+entity.rainbowslime.clay.name=Kil Balçık
+entity.rainbowslime.white.name=Kar Balçık
+entity.rainbowslime.purple.name=Zehirli Balçık
+entity.deers.name=Yabani Geyik
+entity.sprouts.name=Gökkuşağı Filizi
+entity.fairies.name=Gökkuşağı Perisi
+
+entity.hero.name=Düşmüş Kahraman
+entity.enderminy.name=Mini Enderman
+entity.dire_wolf.name=Korkunç Kurt
+entity.fallenmount.name=Düşmüş At
+entity.knight_fallen.name=Düşmüş Sövalye
+entity.witherwitch.name=Zehirli Cadı
+entity.withercat.name=Seytan Kedi
+entity.slime.name=Blok Balçık
+entity.owl.name=Yabani Baykuş
+entity.skeleton_frozen.name=Donmuş İskelet
+
+entity.timberwolf.name=Boz Kurt
+entity.rootsonespriteboss.name=Perilerin Koruyucusu
+entity.rootsonespritegreater.name=Büyük Peri
+entity.rootsonesprite.name=Peri
+entity.rootsonespriteling.name=Küçük Peri
+
+entity.creeper.name=Lanetli Creeper
+
+
+item.owl_egg.name=Baykuş Yumurtası
+death.attack.ember=Alev Golemi Tarafından Öldürüldü
+
