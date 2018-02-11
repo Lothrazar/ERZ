@@ -4,6 +4,7 @@ import java.util.List;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.config.Configuration;
@@ -42,6 +43,10 @@ public class ConfigSpawnEntity {
     this.defaults.useAllBiomes = true;// just the default
     return this;
   }
+  public ConfigSpawnEntity setSpeeds(float mSpeed) {
+    this.defaults.movementSpeed = mSpeed;
+    return this;
+  }
   public ConfigSpawnEntity setDefaultSpawns(int pmin, int pmax, int pweight) {
     defaults.min = pmin;
     defaults.max = pmax;
@@ -74,6 +79,9 @@ public class ConfigSpawnEntity {
     if (defaults.attack >= 0) {
       settings.attack = config.getFloat("baseDamage", category, defaults.attack, 0, 100, "Base attack, before weapons and buffs");
     }
+    if (defaults.movementSpeed > 0) {
+      settings.movementSpeed = config.getFloat("movementSpeed", category, defaults.movementSpeed, 0, 2, "Base speed, before buffs.  (Does not apply to living mobs, you must kill and respawn to see new speed get applied)");
+    }
   }
   public Biome[] getBiomeFilter() {
     List<Biome> allBiomes = new ArrayList<Biome>();
@@ -98,11 +106,13 @@ public class ConfigSpawnEntity {
    */
   public static void syncInstance(EntityLivingBase living, MobProperties settings) {
     EntityUtil.setMaxHealth(living, settings.maxHealth);
- 
     if (settings.attack >= 0)
       EntityUtil.setBaseDamage(living, settings.attack);
     if (settings.followRange >= 0)
       EntityUtil.setFollow(living, settings.followRange);
+    if (settings.movementSpeed > 0) {
+      EntityUtil.setSpeed(living, settings.movementSpeed);
+    }
   }
   /**
    * just a simple struct
@@ -118,12 +128,13 @@ public class ConfigSpawnEntity {
     public float attack;
     public boolean useAllBiomes = true;
     public int followRange;
+    public float movementSpeed = 0;
     @Override
     public String toString() {
       String s = " min " + this.min + " max " + this.max + " weight " + this.weightedProb + " attack  " + this.attack + " follow" + this.followRange + " allBiomes : " + this.useAllBiomes;
       s += System.lineSeparator();
       s += "BIOMES: ";
-      for(String b : this.biomes){
+      for (String b : this.biomes) {
         s += b + ",";
       }
       return s;

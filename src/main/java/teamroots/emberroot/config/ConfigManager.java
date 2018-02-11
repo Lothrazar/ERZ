@@ -53,7 +53,7 @@ public class ConfigManager {
     entityConfigs.add(EntityFallenHero.config.setDefaultSpawns(1, 1, 5).setDefaultProperties(25, 4, 75));
     entityConfigs.add(EntityRainbowSlime.config.setDefaultSpawns(1, 1, 1).setDefaultProperties(-1, -1, 32).setDefaultBiomesAll());
   
-    entityConfigs.add(EntityDireWolf.config.setDefaultSpawns(1, 1, 4).setDefaultProperties(16, 1, 40));//0.5F,
+    entityConfigs.add(EntityDireWolf.config.setDefaultSpawns(1, 1, 4).setDefaultProperties(16, 1, 40).setSpeeds(0.2F)); 
     entityConfigs.add(EntityWitherWitch.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(30, -1, 16));
     entityConfigs.add(EntityOwl.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(10, -1, -1));
     entityConfigs.add(EntityFallenMount.config.setDefaultSpawns(0, 0, 0).setDefaultProperties(30, -1, -1));

@@ -24,6 +24,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
+import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.entity.ai.EntityAIAttackOnCollideAggressive;
 import teamroots.emberroot.entity.ai.EntityAINearestAttackableTargetBounded;
@@ -62,7 +63,7 @@ public class EntityDireWolf extends EntityMob {
     //getNavigator().setAvoidsWater(true);
     //    ((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
     tasks.addTask(1, new EntityAISwimming(this));
-    tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
+    tasks.addTask(3, new EntityAILeapAtTarget(this, 0.1F));
     tasks.addTask(4, new EntityAIAttackOnCollideAggressive(this, ATTACK_SPEED, true).setAttackFrequency(60));
     tasks.addTask(7, new EntityAIWander(this, 0.5D));
     tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -104,8 +105,15 @@ public class EntityDireWolf extends EntityMob {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
-//    EntityUtil.setAttackSpeed(this, 8.5);// hmm wat doesnt work?
+    //    EntityUtil.setAttackSpeed(this, 8.5);// hmm wat doesnt work?
+//    if (config.settings.movementSpeed > 0) {
+//      EmberRootZoo.log("movement speed wolf config "+ config.settings.movementSpeed );
+//      getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(config.settings.movementSpeed);
+//    }
+//    else {
+//      //was 0.5
+//      getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
+//    }
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override

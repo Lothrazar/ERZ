@@ -22,6 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.data.Point3i;
 
 public class EntityUtil {
@@ -176,10 +177,13 @@ public class EntityUtil {
   public static void setFollow(EntityLivingBase entity, double s) {
     entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32);
   }
-  //  public static void setSpeed(EntityLivingBase entity, double s) { 
-  //    entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(s);
-  ////    entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).notifyAll();
-  //  }
+  public static void setSpeed(EntityLivingBase entity, double s) {
+    
+    EmberRootZoo.log("movement speed wolf config "+entity.getName()+ s );
+
+    entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(s);
+  
+  }
   public static void setMaxHealth(EntityLivingBase entity, double maxHealth) {
     entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(maxHealth);
     //    entity.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).notifyAll();
@@ -200,9 +204,9 @@ public class EntityUtil {
     }
     ai.setBaseValue(attackDamage);
   }
-  public static boolean isCreativePlayer(EntityLivingBase e){
-    if(e instanceof EntityPlayer){
-      return ((EntityPlayer)e).isCreative();
+  public static boolean isCreativePlayer(EntityLivingBase e) {
+    if (e instanceof EntityPlayer) {
+      return ((EntityPlayer) e).isCreative();
     }
     return false;
   }
