@@ -121,7 +121,7 @@ public class EntityWitherCat extends EntityMob implements IOwnable<EntityWitherC
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-//    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25F);
+    //    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25F);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   protected void updateAttackDamage(float growthRatio) {

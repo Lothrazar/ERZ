@@ -55,7 +55,7 @@ public class EntityFrozenKnight extends EntitySkeleton {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-//    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2F);
+    //    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2F);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override

@@ -36,7 +36,6 @@ import teamroots.emberroot.entity.sprite.EntitySprite;
 import teamroots.emberroot.entity.spritegreater.EntityGreaterSprite;
 import teamroots.emberroot.entity.spriteguardian.EntitySpriteGuardianBoss;
 import teamroots.emberroot.entity.spriteling.EntitySpriteling;
-import teamroots.emberroot.entity.sprout.EntitySprout;
 import teamroots.emberroot.entity.witch.EntityWitherWitch;
 import teamroots.emberroot.entity.wolfdire.EntityDireWolf;
 import teamroots.emberroot.entity.wolftimber.EntityTimberWolf;
@@ -69,7 +68,7 @@ public class EmberRootZoo {
         }
       }
       //now add
-      list.add(addEntity(EntityDeer.NAME)); 
+      list.add(addEntity(EntityDeer.NAME));
       list.add(addEntity(EntityFairy.NAME));
       list.add(addEntity(EntityRainbowSlime.NAME));
       list.add(addEntity(EntityAncientGolem.NAME));

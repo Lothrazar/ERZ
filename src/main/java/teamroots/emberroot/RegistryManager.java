@@ -1,14 +1,9 @@
 package teamroots.emberroot;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
@@ -103,7 +98,7 @@ public class RegistryManager {
     for (ConfigSpawnEntity cfg : ConfigManager.entityConfigs) {
       EmberRootZoo.log("entity " + cfg.entityClass.getName() + System.lineSeparator() + cfg.toString());
       if (cfg.settings.weightedProb <= 0 || cfg.settings.max <= 0) {
-        EmberRootZoo.log("entity " + cfg.entityClass.getName() +" Has been disabled from spawning fully");
+        EmberRootZoo.log("entity " + cfg.entityClass.getName() + " Has been disabled from spawning fully");
         continue;
       }
       if (cfg.settings.useAllBiomes) {
@@ -199,8 +194,7 @@ public class RegistryManager {
     RenderingRegistry.registerEntityRenderingHandler(EntityFrozenKnight.class, new RenderFrozenKnight.Factory());
   }
   private List<SoundEvent> sounds = new ArrayList<SoundEvent>();
-  private 
-  List<Item> items = new ArrayList<Item>();
+  private List<Item> items = new ArrayList<Item>();
   public SoundEvent registerSound(String name) {
     final ResourceLocation res = new ResourceLocation(Const.MODID, name);//new ResourceLocation(Const.MODID, "sounds/" + UtilSound.Own.crackle+".ogg");
     SoundEvent sound = new SoundEvent(res);
@@ -218,6 +212,6 @@ public class RegistryManager {
   @SubscribeEvent
   public void onRegisterItems(RegistryEvent.Register<Item> event) {
     event.getRegistry().registerAll(this.items.toArray(new Item[0]));
-//    addRecipes();
+    //    addRecipes();
   }
 }

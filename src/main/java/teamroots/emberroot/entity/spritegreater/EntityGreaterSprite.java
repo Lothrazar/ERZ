@@ -84,9 +84,7 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
     boolean canSpawn = this.world.getBlockState(blockpos.down()).getBlock() != Blocks.AIR
         && this.world.getLight(blockpos) < ConfigManager.LIGHT_LEVEL
         && super.getCanSpawnHere()
-        && this.rand.nextInt(config.settings.weightedProb) == 0
-        ;
- 
+        && this.rand.nextInt(config.settings.weightedProb) == 0;
     return canSpawn;
   }
   @Override
@@ -345,7 +343,6 @@ public class EntityGreaterSprite extends EntityFlying implements ISprite {// imp
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-  
     this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2);
     //SPEED 2

@@ -82,8 +82,7 @@ public class EntitySprite extends EntityFlying implements ISprite {// implements
     boolean canSpawn = this.world.getBlockState(blockpos.down()).getBlock() != Blocks.AIR
         && this.world.getLight(blockpos) < ConfigManager.LIGHT_LEVEL
         && super.getCanSpawnHere()
-        && this.rand.nextInt(config.settings.weightedProb) == 0
-    ;
+        && this.rand.nextInt(config.settings.weightedProb) == 0;
     return canSpawn;
   }
   @Override

@@ -49,12 +49,8 @@ public class ParticleFairyGlow extends Particle implements IParticleTracked {
     this.setParticleTexture(sprite);
   }
   /*
-   * @Override public void renderParticle(BufferBuilder buffer, Entity entity,
-   * float partialTicks, float rotX, float rotZ, float rotYZ, float rotXY, float
-   * rotXZ){ GlStateManager.enableBlend();
-   * GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE);
-   * super.renderParticle(buffer, entity, partialTicks, rotX, rotZ, rotYZ,
-   * rotXY, rotXZ); }
+   * @Override public void renderParticle(BufferBuilder buffer, Entity entity, float partialTicks, float rotX, float rotZ, float rotYZ, float rotXY, float rotXZ){ GlStateManager.enableBlend();
+   * GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE); super.renderParticle(buffer, entity, partialTicks, rotX, rotZ, rotYZ, rotXY, rotXZ); }
    */
   @Override
   public int getBrightnessForRender(float pTicks) {

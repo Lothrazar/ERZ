@@ -22,7 +22,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.data.Point3i;
 
 public class EntityUtil {
@@ -178,11 +177,8 @@ public class EntityUtil {
     entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32);
   }
   public static void setSpeed(EntityLivingBase entity, double s) {
-    
-//    EmberRootZoo.log("movement speed wolf config "+entity.getName()+ s );
-
+    //    EmberRootZoo.log("movement speed wolf config "+entity.getName()+ s );
     entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(s);
-  
   }
   public static void setMaxHealth(EntityLivingBase entity, double maxHealth) {
     entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(maxHealth);

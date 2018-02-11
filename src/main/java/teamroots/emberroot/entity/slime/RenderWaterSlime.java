@@ -25,8 +25,7 @@ public class RenderWaterSlime extends RenderLiving<EntitySlime> {//RenderSlime {
       RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
   /**
-   * Allows the render to do state modifications necessary before the model is
-   * rendered.
+   * Allows the render to do state modifications necessary before the model is rendered.
    */
   @Override
   protected void preRenderCallback(EntitySlime entitylivingbaseIn, float partialTickTime) {
