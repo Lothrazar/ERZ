@@ -76,7 +76,7 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.22D);
+//    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.22D);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override

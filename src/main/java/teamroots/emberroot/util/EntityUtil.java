@@ -179,7 +179,7 @@ public class EntityUtil {
   }
   public static void setSpeed(EntityLivingBase entity, double s) {
     
-    EmberRootZoo.log("movement speed wolf config "+entity.getName()+ s );
+//    EmberRootZoo.log("movement speed wolf config "+entity.getName()+ s );
 
     entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(s);
   

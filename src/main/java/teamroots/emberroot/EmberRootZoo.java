@@ -127,7 +127,7 @@ public class EmberRootZoo {
   }
   public static DamageSource damage_ember;
   public static Item itemOwlEgg;
-  private static boolean doLog = true;
+  private static boolean doLog = false;
   public static void log(String string) {
     if (doLog == false) {
       return;

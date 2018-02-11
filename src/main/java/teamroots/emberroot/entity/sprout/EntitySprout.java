@@ -62,7 +62,7 @@ public class EntitySprout extends EntityCreature {
     super.applyEntityAttributes();
     ConfigSpawnEntity.syncInstance(this, config.settings);
     //    this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
-    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224D);
+//    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224D);
   }
   public Integer getVariant() {
     return getDataManager().get(variant);

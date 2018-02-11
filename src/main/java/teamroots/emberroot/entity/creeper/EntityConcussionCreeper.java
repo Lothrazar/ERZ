@@ -64,7 +64,7 @@ public class EntityConcussionCreeper extends EntityCreeper {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25F);
+//    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25F);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override

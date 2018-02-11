@@ -105,19 +105,11 @@ public class EntityDireWolf extends EntityMob {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    //    EntityUtil.setAttackSpeed(this, 8.5);// hmm wat doesnt work?
-//    if (config.settings.movementSpeed > 0) {
-//      EmberRootZoo.log("movement speed wolf config "+ config.settings.movementSpeed );
-//      getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(config.settings.movementSpeed);
-//    }
-//    else {
-//      //was 0.5
-//      getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
-//    }
+    //    EntityUtil.setAttackSpeed(this, 8.5);// hmm wat doesnt work? 
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
-  protected void playStepSound(BlockPos bp, Block p_145780_4_) {
+  protected void playStepSound(BlockPos bp, Block block) {
     playSound(SoundEvents.ENTITY_WOLF_STEP, 0.15F, 1.0F);
   }
   @Override

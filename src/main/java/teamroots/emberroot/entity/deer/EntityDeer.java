@@ -89,7 +89,7 @@ public class EntityDeer extends EntityAnimal {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224D);
+//    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224D);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
