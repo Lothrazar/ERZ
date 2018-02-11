@@ -11,4 +11,4 @@
 Guardian of Sprites should no longer forget to drop Totem of Undying.  "
 
 
-"1.3.4":"Fixed Fallen Knights doing zero attack damage; also now they never spawn with a bow.  "
+"1.3.4":"Fixed Fallen Knights doing zero attack damage; also now they never spawn with a bow.  Increased default spawn rates of Timber wolves, and some other config defaults (will not affect existing config files). "
