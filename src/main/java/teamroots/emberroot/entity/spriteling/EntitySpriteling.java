@@ -8,7 +8,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -82,13 +81,10 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
     int j = MathHelper.floor(this.getEntityBoundingBox().minY);
     int k = MathHelper.floor(this.posZ);
     BlockPos blockpos = new BlockPos(i, j, k);
-//    this.world.getBlockState(blockpos.down()).getBlock() != Blocks.AIR
-        
+    //    this.world.getBlockState(blockpos.down()).getBlock() != Blocks.AIR
     boolean canSpawn = this.world.getLight(blockpos) < ConfigManager.LIGHT_LEVEL
         && super.getCanSpawnHere()
-        && this.rand.nextInt(config.settings.weightedProb) == 0
-        ;
-  
+        && this.rand.nextInt(config.settings.weightedProb) == 0;
     return canSpawn;
   }
   @Override

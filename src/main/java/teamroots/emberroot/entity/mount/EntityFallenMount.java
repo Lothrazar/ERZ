@@ -99,7 +99,7 @@ public class EntityFallenMount extends EntityHorse {
     setHorseSaddled(true);
     setGrowingAge(0);
     getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(fallenMountHealth);
-    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2);
+    //    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2);
     getAttributeMap().getAttributeInstanceByName("horse.jumpStrength").setBaseValue(0.5);
     setHealth(getMaxHealth());
     float chanceOfArmor = 0.9F;// world.getDifficulty() == EnumDifficulty.HARD ? Config.fallenMountChanceArmoredHard   : Config.fallenMountChanceArmored;

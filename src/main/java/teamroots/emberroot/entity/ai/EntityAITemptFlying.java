@@ -25,17 +25,14 @@ public class EntityAITemptFlying extends EntityAIBase {
   /** The player that is tempting the entity that is using this AI. */
   private EntityPlayer temptingPlayer;
   /**
-   * A counter that is decremented each time the shouldExecute method is called.
-   * The shouldExecute method will always return false if delayTemptCounter is
-   * greater than 0.
+   * A counter that is decremented each time the shouldExecute method is called. The shouldExecute method will always return false if delayTemptCounter is greater than 0.
    */
   private int delayTemptCounter;
   /** True if this EntityAITempt task is running */
   private boolean isRunning;
   private final Set<Item> temptItem;
   /**
-   * Whether the entity using this AI will be scared by the tempter's sudden
-   * movement.
+   * Whether the entity using this AI will be scared by the tempter's sudden movement.
    */
   private final boolean scaredByPlayerMovement;
   public EntityAITemptFlying(EntityLiving temptedEntityIn, double speedIn, Item temptItemIn, boolean scaredByPlayerMovementIn) {
@@ -107,8 +104,7 @@ public class EntityAITemptFlying extends EntityAIBase {
     this.isRunning = true;
   }
   /**
-   * Reset the task's internal state. Called when this task is interrupted by
-   * another one
+   * Reset the task's internal state. Called when this task is interrupted by another one
    */
   public void resetTask() {
     //somehow it keeps getting cancelled/reset. block if player is nearby

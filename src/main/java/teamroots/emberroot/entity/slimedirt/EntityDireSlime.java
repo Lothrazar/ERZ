@@ -42,14 +42,14 @@ public class EntityDireSlime extends EntityMagmaCube {
   public enum SlimeConf {
     //WAS attack damage
     //small , 4, 3,, medium 8,5, large 20,8
-    SMALL(1 ,0.4), MEDIUM(2, 0.2), LARGE(4,   0.4);
+    SMALL(1, 0.4), MEDIUM(2, 0.2), LARGE(4, 0.4);
     public final int size;
- //   public final double health;
-   // public final double attackDamage;
+    //   public final double health;
+    // public final double attackDamage;
     public final double chance;
-    private SlimeConf(int size,  double chance) {
+    private SlimeConf(int size, double chance) {
       this.size = size;
-     // this.health = health;
+      // this.health = health;
       //this.attackDamage = attackDamage;
       this.chance = chance;
     }
@@ -146,8 +146,8 @@ public class EntityDireSlime extends EntityMagmaCube {
   public void setSlimeSize(int size, boolean doFullHeal) {
     super.setSlimeSize(size, doFullHeal);
     SlimeConf conf = SlimeConf.getConfForSize(size);
-//    getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(conf.attackDamage);
-//    getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(conf.health);
+    //    getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(conf.attackDamage);
+    //    getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(conf.health);
     setHealth(getMaxHealth());
   }
   @Override
@@ -226,7 +226,6 @@ public class EntityDireSlime extends EntityMagmaCube {
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     ConfigSpawnEntity.syncInstance(this, config.settings);
- 
   }
   @Override
   protected int getAttackStrength() {

@@ -3,7 +3,6 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -62,7 +61,7 @@ public class EntityDireWolf extends EntityMob {
     //getNavigator().setAvoidsWater(true);
     //    ((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
     tasks.addTask(1, new EntityAISwimming(this));
-    tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
+    tasks.addTask(3, new EntityAILeapAtTarget(this, 0.1F));
     tasks.addTask(4, new EntityAIAttackOnCollideAggressive(this, ATTACK_SPEED, true).setAttackFrequency(60));
     tasks.addTask(7, new EntityAIWander(this, 0.5D));
     tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -104,12 +103,11 @@ public class EntityDireWolf extends EntityMob {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
-//    EntityUtil.setAttackSpeed(this, 8.5);// hmm wat doesnt work?
+    //    EntityUtil.setAttackSpeed(this, 8.5);// hmm wat doesnt work? 
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
-  protected void playStepSound(BlockPos bp, Block p_145780_4_) {
+  protected void playStepSound(BlockPos bp, Block block) {
     playSound(SoundEvents.ENTITY_WOLF_STEP, 0.15F, 1.0F);
   }
   @Override

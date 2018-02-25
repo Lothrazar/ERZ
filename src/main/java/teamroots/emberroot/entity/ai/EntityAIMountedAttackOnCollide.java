@@ -15,8 +15,7 @@ public class EntityAIMountedAttackOnCollide extends EntityAIBase {
   double speedTowardsTarget;
   double speedTowardsTargetMounted;
   /**
-   * When true, the mob will continue chasing its target, even if it can't find
-   * a path to them right now.
+   * When true, the mob will continue chasing its target, even if it can't find a path to them right now.
    */
   boolean longMemory;
   Path entityPathEntity;

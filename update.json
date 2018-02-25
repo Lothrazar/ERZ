@@ -9,3 +9,6 @@
  Fixed some flying mobs and the camo Slimes not working with the spawn rate configs.  Reduced attack frequency of Dire Wolf.  
  Fixed issues with the mod using biomeWhitelist configs not affecting some mobs.   Changed several default config values changed for balance reasons; does not change existing config files (Attack damage and health reduced for several mobs; some default spawn rates reduced).  Changed timberwolf egg color slightly so it stands out more.  Added spawn eggs to a creative tab.  Fixed Mini enderman not loading its loot table.    Bigger sprites are now a different color to help tell the difference from smaller ones.  Fixed Sprites using hardcoded 3.0 damage instead of reading from config.  Sprites will no longer attack creative mode players and cause them knockback.  
 Guardian of Sprites should no longer forget to drop Totem of Undying.  "
+
+
+"1.3.4":"Fixed Fallen Knights doing zero attack damage; also now they never spawn with a bow.  Added movement speed to the config file for many mobs.  Added Turkish tr_TR.lang (thanks RoCoKo). "
