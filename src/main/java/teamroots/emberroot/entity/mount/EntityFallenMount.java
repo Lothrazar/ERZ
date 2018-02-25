@@ -26,16 +26,17 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
+import teamroots.emberroot.util.EntityUtil;
 
 /**
  * Original author: https://github.com/CrazyPants
  */
 public class EntityFallenMount extends EntityHorse {
   public static final String NAME = "fallenmount";
-  public static final double MOUNTED_ATTACK_MOVE_SPEED = 2.5;
+  public static final double MOUNTED_ATTACK_MOVE_SPEED = 2.0;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFallenMount.class, EnumCreatureType.MONSTER);
   private boolean wasRidden = false;
-  private final EntityAINearestAttackableTarget<EntityPlayer> findTargetAI;
+  private EntityAINearestAttackableTarget<EntityPlayer> findTargetAI;
   private EntityAIAttackMelee attackAI;
   private ItemStack armor = ItemStack.EMPTY;
   private boolean fallenMountShadedByRider = true;
@@ -44,18 +45,22 @@ public class EntityFallenMount extends EntityHorse {
     super(world);
     setGrowingAge(0);
     setHorseSaddled(true);
-    tasks.taskEntries.clear();
+    // tasks.taskEntries.clear();
+  }
+  @Override
+  protected void initEntityAI() {
+    super.initEntityAI();
     tasks.addTask(0, new EntityAISwimming(this));
     tasks.addTask(6, new EntityAIWander(this, 1.2D));
     tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
     tasks.addTask(8, new EntityAILookIdle(this));
-    findTargetAI = new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true);
-    attackAI = new EntityAIAttackMelee(this, MOUNTED_ATTACK_MOVE_SPEED, false);
+    targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true));
     updateAttackAI();
   }
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
+    // EntityUtil.setBaseDamage(this, 0.5);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
@@ -173,6 +178,12 @@ public class EntityFallenMount extends EntityHorse {
     return !getPassengers().isEmpty();
   }
   private void updateAttackAI() {
+    if (findTargetAI == null) {
+      findTargetAI = new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true);
+    }
+    if (attackAI == null) {
+      attackAI = new EntityAIAttackMelee(this, MOUNTED_ATTACK_MOVE_SPEED, false);
+    }
     targetTasks.removeTask(findTargetAI);
     tasks.removeTask(attackAI);
     if (!isRidden()) {
@@ -190,6 +201,9 @@ public class EntityFallenMount extends EntityHorse {
       makeMad();
     }
     float damage = (float) getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
+    if (damage <= 0) {
+      damage = 1F;
+    }
     return target.attackEntityFrom(DamageSource.causeMobDamage(this), damage);
   }
   @Override

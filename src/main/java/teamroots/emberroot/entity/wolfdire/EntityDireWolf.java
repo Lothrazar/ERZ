@@ -60,6 +60,12 @@ public class EntityDireWolf extends EntityMob {
     setSize(0.8F, 1.2F);
     //getNavigator().setAvoidsWater(true);
     //    ((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
+
+  }
+
+  @Override
+  protected void initEntityAI() {
+    super.initEntityAI();
     tasks.addTask(1, new EntityAISwimming(this));
     tasks.addTask(3, new EntityAILeapAtTarget(this, 0.1F));
     tasks.addTask(4, new EntityAIAttackOnCollideAggressive(this, ATTACK_SPEED, true).setAttackFrequency(60));
@@ -72,6 +78,7 @@ public class EntityDireWolf extends EntityMob {
       nearTarg.setMaxDistanceToTarget(direWolfAggresiveRange);
       targetTasks.addTask(6, nearTarg);
     }
+    
   }
   @Override
   protected void entityInit() {

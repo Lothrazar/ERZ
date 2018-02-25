@@ -58,6 +58,19 @@ public class EntityWitherCat extends EntityMob implements IOwnable<EntityWitherC
   private boolean attackTargetChanged = false;
   public EntityWitherCat(World world) {
     super(world);
+
+    setSize(DEF_WIDTH, DEF_HEIGHT);
+  }
+  @Override
+  protected void entityInit() {
+    super.entityInit();
+ 
+    dataManager.register(SCALE_INDEX, Float.valueOf(1));
+    dataManager.register(GROWTH_MODE_INDEX, Integer.valueOf(GrowthMode.NONE.ordinal()));
+  }
+  @Override
+  protected void initEntityAI() {
+    super.initEntityAI();
     followTask = new EntityAIFollowOwner(this, 2.5, 5, 1);
     EntityAIFollowOwner retreatTask = new EntityAIFollowOwner(this, 2.5, 5, 2.5);
     tasks.addTask(1, new EntityAISwimming(this));
@@ -67,13 +80,7 @@ public class EntityWitherCat extends EntityMob implements IOwnable<EntityWitherC
     tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     tasks.addTask(6, new EntityAILookIdle(this));
     tasks.addTask(7, new EntityAIAttackMelee(this, 1.0D, true));
-    setSize(DEF_WIDTH, DEF_HEIGHT);
-  }
-  @Override
-  protected void entityInit() {
-    super.entityInit();
-    dataManager.register(SCALE_INDEX, Float.valueOf(1));
-    dataManager.register(GROWTH_MODE_INDEX, Integer.valueOf(GrowthMode.NONE.ordinal()));
+    
   }
   @Override
   public EntityWitherWitch getOwner() {
