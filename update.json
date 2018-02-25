@@ -15,4 +15,4 @@ Guardian of Sprites should no longer forget to drop Totem of Undying.  "
 
 
 
-"1.3.5":"Updated mob AI registration (moved from constructor to init) which should reduce AI breaks such as spinning on ledges and other navigation issues.  Fixed fallen mounts doing zero damage and just nudging the player around.  Fallen Knights are more likely to dismount when in combat in order to be more deadly.  "
+"1.3.5":"Updated mob AI registration (moved from constructor to init) which should reduce AI breaks such as spinning on ledges and other navigation issues.  Fixed fallen mounts doing zero damage and just nudging the player around.  Fallen Knights are more likely to dismount when in combat in order to be more deadly.  New Fallen Knight config ChanceBow, defaults to 40% chance of having a bow instead of melee.  "

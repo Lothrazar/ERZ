@@ -34,22 +34,19 @@ import teamroots.emberroot.util.SpawnUtil;
  * Original author: https://github.com/CrazyPants
  */
 public class EntityFallenKnight extends EntitySkeleton {
+  public static float CHANCE_BOW;
   public static final String NAME = "knight_fallen";
- 
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFallenKnight.class, EnumCreatureType.MONSTER);
   public static boolean attackVillagers;
- 
   private final EntityAIBreakDoor breakDoorAI = new EntityAIBreakDoor(this);
   private boolean canBreakDoors = false;
   private EntityLivingBase lastAttackTarget = null;
   private boolean firstUpdate = true;
   private boolean isMounted = false;
   private boolean spawned = false;
- 
   public static float fallenKnightChanceMounted = 0.75f;
   private float fallenKnightChancePerArmorPiece = 0.66f;
   private float fallenKnightChanceArmorUpgrade = 0.2f;
- 
   public EntityFallenKnight(World world) {
     super(world);
   }
@@ -61,14 +58,11 @@ public class EntityFallenKnight extends EntitySkeleton {
   @Override
   protected void initEntityAI() {
     super.initEntityAI();
- 
     if (attackVillagers) {
       targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
     }
- 
     this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true));
   }
- 
   @Override
   protected SoundEvent getAmbientSound() {
     return SoundEvents.ENTITY_ZOMBIE_AMBIENT;
@@ -96,14 +90,12 @@ public class EntityFallenKnight extends EntitySkeleton {
     }
     firstUpdate = false;
     if (!isMounted == isRidingMount()) {
- 
       getNavigator().clearPathEntity();
       isMounted = isRidingMount();
     }
-//    if (isBurning() && isRidingMount()) {
-//      //getRidingEntity().setFire(8);
-//    }
- 
+    //    if (isBurning() && isRidingMount()) {
+    //      //getRidingEntity().setFire(8);
+    //    }
   }
   private boolean isRidingMount() {
     return isRiding() && getRidingEntity().getClass() == EntityFallenMount.class;
@@ -138,7 +130,6 @@ public class EntityFallenKnight extends EntitySkeleton {
       startRiding(mount);
     }
   }
- 
   private void addRandomArmor() {
     float occupiedDiffcultyMultiplier = EntityUtil.getDifficultyMultiplierForLocation(world, posX, posY, posZ);
     int equipmentLevel = getRandomEquipmentLevel(occupiedDiffcultyMultiplier);
@@ -162,9 +153,8 @@ public class EntityFallenKnight extends EntitySkeleton {
         }
       }
     }
-    setItemStackToSlot(EntityEquipmentSlot.MAINHAND, getSwordForLevel(isHardDifficulty() ? 2 : 1));
+    setItemStackToSlot(EntityEquipmentSlot.MAINHAND, getWeaponForLevel());
   }
- 
   private int getRandomEquipmentLevel(float occupiedDiffcultyMultiplier) {
     float chanceImprovedArmor = fallenKnightChanceArmorUpgrade;
     chanceImprovedArmor *= (1 + occupiedDiffcultyMultiplier); //If we have the max occupied factor, double the chance of improved armor   
@@ -179,8 +169,12 @@ public class EntityFallenKnight extends EntitySkeleton {
   protected boolean isHardDifficulty() {
     return EntityUtil.isHardDifficulty(world);
   }
-  private ItemStack getSwordForLevel(int swordLevel) {
+  private ItemStack getWeaponForLevel() {
     ////have a better chance of not getting a wooden or stone sword
+    if (world.rand.nextDouble() < CHANCE_BOW) {
+      return new ItemStack(Items.BOW);
+    }
+    int swordLevel = isHardDifficulty() ? 2 : 1;//TODO: refactor
     if (swordLevel < 2) {
       swordLevel += rand.nextInt(isHardDifficulty() ? 3 : 2);
       swordLevel = Math.min(swordLevel, 2);
