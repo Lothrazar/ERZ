@@ -77,6 +77,18 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
     super(worldIn);
     setSize(0.4F, 0.85F);
     stepHeight = 1.0F;
+
+    //    EntityAINearestAttackableTargetBounded<EntitySpider> targetSpiders = new EntityAINearestAttackableTargetBounded<EntitySpider>(this, EntitySpider.class,
+    //        true, true);
+    //    targetSpiders.setMaxDistanceToTarget(12);
+    //    targetSpiders.setMaxVerticalDistanceToTarget(24);
+    //    targetTasks.addTask(0, targetSpiders);
+    moveHelper = new FlyingMoveHelper(this);
+    timeUntilNextEgg = getNextLayingTime();
+  }
+  @Override
+  protected void initEntityAI() {
+    super.initEntityAI();
     int pri = 0;
     tasks.addTask(++pri, new EntityAIFlyingPanic(this, 2));
     tasks.addTask(++pri, new EntityAIFlyingAttackOnCollide(this, 2.5, false));
@@ -90,13 +102,6 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
     tasks.addTask(++pri, new EntityAIFlyingShortWander(this, 2, 150));
     tasks.addTask(++pri, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
     tasks.addTask(++pri, new EntityAILookIdle(this));
-    //    EntityAINearestAttackableTargetBounded<EntitySpider> targetSpiders = new EntityAINearestAttackableTargetBounded<EntitySpider>(this, EntitySpider.class,
-    //        true, true);
-    //    targetSpiders.setMaxDistanceToTarget(12);
-    //    targetSpiders.setMaxVerticalDistanceToTarget(24);
-    //    targetTasks.addTask(0, targetSpiders);
-    moveHelper = new FlyingMoveHelper(this);
-    timeUntilNextEgg = getNextLayingTime();
   }
   public Integer getVariant() {
     return getDataManager().get(variant);

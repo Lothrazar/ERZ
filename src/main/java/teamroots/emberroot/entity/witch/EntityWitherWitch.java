@@ -58,12 +58,16 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
   private boolean firstUpdate = true;
   private final List<EntityWitherCat> cats = new ArrayList<EntityWitherCat>();
   private List<NBTTagCompound> loadedCats;
-  private final EntityAIRangedAttack rangedAttackAI;
+  private EntityAIRangedAttack rangedAttackAI;
   private int noActiveTargetTime;
   private int witherWitchMaxCats = 3;
   private int witherWitchMinCats = 1;
   public EntityWitherWitch(World world) {
     super(world);
+  }
+  @Override
+  protected void initEntityAI() {
+    super.initEntityAI();
     rangedAttackAI = new EntityAIRangedAttack(this, 1, 60, 10);
     tasks.addTask(1, new EntityAISwimming(this));
     tasks.addTask(2, rangedAttackAI);

@@ -19,8 +19,8 @@ import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntityTimberWolf extends EntityMob {
-  // public static final DataParameter<Boolean> hasHorns = EntityDataManager.<Boolean> createKey(EntityTimberWolf.class, DataSerializers.BOOLEAN);
-  public static final String NAME = "timberwolf";
+
+ public static final String NAME = "timberwolf";
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityTimberWolf.class, EnumCreatureType.MONSTER);
   public static boolean attackSkeleton;
   public EntityTimberWolf(World world) {

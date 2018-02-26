@@ -69,6 +69,13 @@ public class EntityEnderminy extends EntityMob {
   public EntityEnderminy(World world) {
     super(world);
     stepHeight = 1.0F;
+
+  }
+  @Override
+  protected void initEntityAI() {
+    super.initEntityAI();
+    
+    
     tasks.addTask(0, new EntityAISwimming(this));
     tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
     tasks.addTask(7, new EntityAIWander(this, 1.0D));
@@ -78,13 +85,16 @@ public class EntityEnderminy extends EntityMob {
     if (attackIfLookingAtPlayer) {
       targetTasks.addTask(2, new AIFindPlayer());
     }
+    
     //    if(attackCreepers) {
     //      targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityCreeper>(this, EntityCreeper.class, true, true));
     //    }
+    
   }
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
+
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
