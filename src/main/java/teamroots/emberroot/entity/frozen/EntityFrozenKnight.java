@@ -32,7 +32,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayer;
 import teamroots.emberroot.Const;
+import teamroots.emberroot.EmberRootZoo;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 import teamroots.emberroot.util.EntityUtil;
 
@@ -77,18 +79,17 @@ public class EntityFrozenKnight extends EntitySkeleton {
       targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
     }
   }
-
   @Override
   protected SoundEvent getAmbientSound() {
-    return SoundEvents.ENTITY_ZOMBIE_AMBIENT;
+    return SoundEvents.ENTITY_SKELETON_AMBIENT;
   }
   @Override
   protected SoundEvent getHurtSound(DamageSource s) {
-    return SoundEvents.ENTITY_ZOMBIE_HURT;
+    return SoundEvents.ENTITY_SKELETON_HURT;
   }
   @Override
   protected SoundEvent getDeathSound() {
-    return SoundEvents.ENTITY_ZOMBIE_DEATH;
+    return SoundEvents.ENTITY_SKELETON_DEATH;
   }
   private void addRandomArmor() {
     float occupiedDiffcultyMultiplier = EntityUtil.getDifficultyMultiplierForLocation(world, posX, posY, posZ);
@@ -178,17 +179,22 @@ public class EntityFrozenKnight extends EntitySkeleton {
   protected ResourceLocation getLootTable() {
     return new ResourceLocation(Const.MODID, "entity/skeleton_frozen");
   }
-  //  @Override
-  //  public void onLivingUpdate() {
-  //    //block from burning in sun
-  //    super.onLivingUpdate();
-  //  }
+ 
   @Override
   public boolean attackEntityAsMob(Entity entityIn) {
-    if (appliesSlowPotion && entityIn instanceof EntityPlayer) {
-      EntityPlayer p = (EntityPlayer) entityIn;
-      if (p.isPotionActive(MobEffects.SLOWNESS) == false) {
-        p.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 0)); // is 10seconds
+    if (appliesSlowPotion
+        && entityIn instanceof EntityPlayer
+        && entityIn instanceof FakePlayer == false) {
+      //is fake player test valid? maybe, im not sure.
+      //try catch for double safety \0/
+      try {
+        EntityPlayer p = (EntityPlayer) entityIn;
+        if (p.isPotionActive(MobEffects.SLOWNESS) == false) {
+          p.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 0)); // is 10seconds
+        }
+      }
+      catch (Exception e) {
+        EmberRootZoo.log("Error applying slowness to player: possible ticking, dead, or fake player " + e.getMessage());
       }
     }
     return super.attackEntityAsMob(entityIn);
