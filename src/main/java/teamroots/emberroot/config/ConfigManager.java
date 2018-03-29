@@ -96,7 +96,9 @@ public class ConfigManager {
     EntitySprout.canTempt = config.getBoolean("CanTempt", EntitySprout.config.category, true, "Tempt this with seeds.");
     EntityDireWolf.direWolfPackAttackEnabled = config.getBoolean("PackAttack", EntityDireWolf.config.category, true, "They attack as a pack.");
     EntityTimberWolf.attackSkeleton = config.getBoolean("AttackSkeleton", EntityTimberWolf.config.category, true, "Attacks Skeletons.");
-    renderDebugHitboxes = config.getBoolean("renderDebugHitboxes", "global", false, "For TESTING purposes only: This renders a very ugly white shape along with the mob to show its physical hitbox.");
+    EntityTimberWolf.attackSkeleton = config.getBoolean("AttackSkeleton", EntityTimberWolf.config.category, true, "Attacks Skeletons.");
+    EntityWitherWitch.witherWitchMaxCats = config.getInt("maxCats", EntityWitherWitch.config.category, 3, 0, 10, "Max number of pet cats this can spawn with; zero to disable");
+    EntityWitherWitch.witherWitchMinCats = config.getInt("minCats", EntityWitherWitch.config.category, 1, 0, 10, "Min number of pet cats this can spawn with");
     if (config.hasChanged()) {
       config.save();
     }
