@@ -45,7 +45,8 @@ public class EntityFallenMount extends EntityHorse {
     super(world);
     setGrowingAge(0);
     setHorseSaddled(true);
-    // tasks.taskEntries.clear();
+    findTargetAI = new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true);
+    attackAI = new EntityAIAttackMelee(this, MOUNTED_ATTACK_MOVE_SPEED, false);
   }
   @Override
   protected void initEntityAI() {
@@ -54,7 +55,6 @@ public class EntityFallenMount extends EntityHorse {
     tasks.addTask(6, new EntityAIWander(this, 1.2D));
     tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
     tasks.addTask(8, new EntityAILookIdle(this));
-    targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true));
     updateAttackAI();
   }
   @Override
@@ -175,18 +175,16 @@ public class EntityFallenMount extends EntityHorse {
     return getTotalArmorValue() > 0;
   }
   protected boolean isRidden() {
-    return !getPassengers().isEmpty();
+    return getPassengers() != null && getPassengers().isEmpty() == false;
   }
   private void updateAttackAI() {
-    if (findTargetAI == null) {
+    if (findTargetAI == null)
       findTargetAI = new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true);
-    }
-    if (attackAI == null) {
+    if (attackAI == null)
       attackAI = new EntityAIAttackMelee(this, MOUNTED_ATTACK_MOVE_SPEED, false);
-    }
     targetTasks.removeTask(findTargetAI);
     tasks.removeTask(attackAI);
-    if (!isRidden()) {
+    if (isRidden() == false) {
       targetTasks.addTask(2, findTargetAI);
       tasks.addTask(4, attackAI);
     }

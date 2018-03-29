@@ -90,13 +90,15 @@ public class ConfigManager {
     EntityFallenHero.avoidCreepers = config.getBoolean("AvoidsCreepers", EntityFallenHero.config.category, true, "Avoids Creepers.");
     EntityFallenHero.temptWithGold = config.getBoolean("TemptWithGold", EntityFallenHero.config.category, true, "Lure this with gold ingots (remember it is passive to the player initially, and fights off some hostiles).");
     EntityFallenKnight.attackVillagers = config.getBoolean("AttackVillagers", EntityFallenKnight.config.category, false, "Attacks Villagers.");
-    EntityFallenKnight.CHANCE_BOW = config.getFloat("ChanceBow", EntityFallenKnight.config.category, 0.4F, 0, 1, "Chance to spawn with a bow.");
+//    EntityFallenKnight.CHANCE_BOW = config.getFloat("ChanceBow", EntityFallenKnight.config.category, 0.4F, 0, 1, "Chance to spawn with a bow.");
     EntityFallenKnight.fallenKnightChanceMounted = config.getFloat("ChanceSpawnsWithMount", EntityFallenKnight.config.category, 0.75F, 0, 1, "Percentage chance this spawns with a mount.");
     EntityOwl.temptSpiderEye = config.getBoolean("TemptAndBreedSpiderEye", EntityOwl.config.category, true, "Spider Eye used to tempt and breed.");
     EntitySprout.canTempt = config.getBoolean("CanTempt", EntitySprout.config.category, true, "Tempt this with seeds.");
     EntityDireWolf.direWolfPackAttackEnabled = config.getBoolean("PackAttack", EntityDireWolf.config.category, true, "They attack as a pack.");
     EntityTimberWolf.attackSkeleton = config.getBoolean("AttackSkeleton", EntityTimberWolf.config.category, true, "Attacks Skeletons.");
-    renderDebugHitboxes = config.getBoolean("renderDebugHitboxes", "global", false, "For TESTING purposes only: This renders a very ugly white shape along with the mob to show its physical hitbox.");
+    EntityTimberWolf.attackSkeleton = config.getBoolean("AttackSkeleton", EntityTimberWolf.config.category, true, "Attacks Skeletons.");
+    EntityWitherWitch.witherWitchMaxCats = config.getInt("maxCats", EntityWitherWitch.config.category, 3, 0, 10, "Max number of pet cats this can spawn with; zero to disable");
+    EntityWitherWitch.witherWitchMinCats = config.getInt("minCats", EntityWitherWitch.config.category, 1, 0, 10, "Min number of pet cats this can spawn with");
     if (config.hasChanged()) {
       config.save();
     }

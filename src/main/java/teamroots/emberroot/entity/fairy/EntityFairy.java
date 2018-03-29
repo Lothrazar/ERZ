@@ -139,14 +139,18 @@ public class EntityFairy extends EntityFlying {
       if (isTamed()) {
         getDataManager().set(tame, false);
         this.setOwnerId(null);
-        this.playUnTameEffect(7);
+        if (player.world.isRemote) {
+          this.playUnTameEffect(7);
+        }
       }
       else {
         //if i am not tame, AND you give me glowstone
         getDataManager().set(tame, true);
         this.setOwnerId(player.getUniqueID());
         getDataManager().setDirty(tame);
-        this.playTameEffect(7);
+        if (player.world.isRemote) {
+          this.playTameEffect(7);
+        }
         player.getHeldItem(hand).shrink(1);
       }
       return true;
@@ -198,8 +202,7 @@ public class EntityFairy extends EntityFlying {
   public boolean canBePushed() {
     return false;
   }
-  //  protected void collideWithEntity(Entity entityIn) {}
-  //  protected void collideWithNearbyEntities() {}
+ 
   @Override
   public void onUpdate() {
     super.onUpdate();
@@ -245,7 +248,8 @@ public class EntityFairy extends EntityFlying {
         int count = 1;
         double followRange = config.settings.followRange;
         if (this.getDistanceSqToEntity(p) < followRange) {
-          this.playTameEffect(2);
+          
+          //this.playTameEffect(2);
           List<EntityFairy> list = world.getEntitiesWithinAABB(EntityFairy.class, p.getEntityBoundingBox().expand(followRange, followRange, followRange));
           List<EntityFairy> prunedList = new ArrayList<EntityFairy>();
           for (EntityFairy f : list) {

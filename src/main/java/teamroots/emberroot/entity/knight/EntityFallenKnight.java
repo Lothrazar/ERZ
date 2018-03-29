@@ -17,6 +17,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -33,8 +34,7 @@ import teamroots.emberroot.util.SpawnUtil;
 /**
  * Original author: https://github.com/CrazyPants
  */
-public class EntityFallenKnight extends EntitySkeleton {
-  public static float CHANCE_BOW;
+public class EntityFallenKnight extends EntitySkeleton { 
   public static final String NAME = "knight_fallen";
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFallenKnight.class, EnumCreatureType.MONSTER);
   public static boolean attackVillagers;
@@ -47,6 +47,10 @@ public class EntityFallenKnight extends EntitySkeleton {
   public static float fallenKnightChanceMounted = 0.75f;
   private float fallenKnightChancePerArmorPiece = 0.66f;
   private float fallenKnightChanceArmorUpgrade = 0.2f;
+  private EntityAIMountedAttackOnCollide aiAttackOnCollide;
+//  private EntityAIMountedArrowAttack aiArrowAttack;
+//  private float fallenKnightRangedMaxRange = 20;
+//  private boolean fallKnightMountedArchesMaintainDistance = true;
   public EntityFallenKnight(World world) {
     super(world);
   }
@@ -59,9 +63,8 @@ public class EntityFallenKnight extends EntitySkeleton {
   protected void initEntityAI() {
     super.initEntityAI();
     if (attackVillagers) {
-      targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
+      targetTasks.addTask(4, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
     }
-    this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true));
   }
   @Override
   protected SoundEvent getAmbientSound() {
@@ -90,15 +93,43 @@ public class EntityFallenKnight extends EntitySkeleton {
     }
     firstUpdate = false;
     if (!isMounted == isRidingMount()) {
+      getAiAttackOnCollide().resetTask();
+//      getAiArrowAttack().resetTask();
       getNavigator().clearPathEntity();
       isMounted = isRidingMount();
     }
-    //    if (isBurning() && isRidingMount()) {
-    //      //getRidingEntity().setFire(8);
-    //    }
+ 
   }
+//  private boolean isUsingBow() {
+//    ItemStack itemstack = getHeldItem(EnumHand.MAIN_HAND);
+//    return   itemstack.getItem() == Items.BOW;
+//  }
   private boolean isRidingMount() {
     return isRiding() && getRidingEntity().getClass() == EntityFallenMount.class;
+  }
+  @Override
+  public void dismountRidingEntity() {
+    if( this.isDead || (this.getRidingEntity() != null && this.getRidingEntity().isDead )){
+      //dismount if dead
+      super.dismountRidingEntity();
+      return;
+    }
+ 
+//    super.dismountRidingEntity();
+  }
+  @Override
+  public void setCombatTask() {
+ 
+      tasks.addTask(4, getAiAttackOnCollide());
+ 
+  }
+ 
+  public EntityAIMountedAttackOnCollide getAiAttackOnCollide() {
+    if (aiAttackOnCollide == null) {
+      aiAttackOnCollide = new EntityAIMountedAttackOnCollide(this, EntityPlayer.class, EntityFallenMount.MOUNTED_ATTACK_MOVE_SPEED, 
+          EntityFallenMount.MOUNTED_ATTACK_MOVE_SPEED, false);
+    }
+    return aiAttackOnCollide;
   }
   @Override
   protected void despawnEntity() {
@@ -109,7 +140,7 @@ public class EntityFallenKnight extends EntitySkeleton {
     }
   }
   private void spawnMount() {
-    if (isRiding() || !spawned) {
+    if ( isRiding() || !spawned) {
       return;
     }
     EntityFallenMount mount = null;
@@ -153,7 +184,6 @@ public class EntityFallenKnight extends EntitySkeleton {
         }
       }
     }
-    setItemStackToSlot(EntityEquipmentSlot.MAINHAND, getWeaponForLevel());
   }
   private int getRandomEquipmentLevel(float occupiedDiffcultyMultiplier) {
     float chanceImprovedArmor = fallenKnightChanceArmorUpgrade;
@@ -170,10 +200,7 @@ public class EntityFallenKnight extends EntitySkeleton {
     return EntityUtil.isHardDifficulty(world);
   }
   private ItemStack getWeaponForLevel() {
-    ////have a better chance of not getting a wooden or stone sword
-    if (world.rand.nextDouble() < CHANCE_BOW) {
-      return new ItemStack(Items.BOW);
-    }
+ 
     int swordLevel = isHardDifficulty() ? 2 : 1;//TODO: refactor
     if (swordLevel < 2) {
       swordLevel += rand.nextInt(isHardDifficulty() ? 3 : 2);
@@ -198,6 +225,7 @@ public class EntityFallenKnight extends EntitySkeleton {
     //getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).applyModifier(new AttributeModifier("Random spawn bonus", rand.nextGaussian() * 0.05D, 1));
     //    func_189768_a(SkeletonType.NORMAL);//skeleton types do not exist anymore in 1.11.2. so its always normal.
     addRandomArmor();
+    setItemStackToSlot(EntityEquipmentSlot.MAINHAND, getWeaponForLevel());
     setEnchantmentBasedOnDifficulty(di); //enchantEquipment();
     float f = di.getClampedAdditionalDifficulty();
     this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * f);

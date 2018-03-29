@@ -60,8 +60,8 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
   private List<NBTTagCompound> loadedCats;
   private EntityAIRangedAttack rangedAttackAI;
   private int noActiveTargetTime;
-  private int witherWitchMaxCats = 3;
-  private int witherWitchMinCats = 1;
+  public static int witherWitchMaxCats = 3;
+  public static int witherWitchMinCats = 1;
   public EntityWitherWitch(World world) {
     super(world);
   }
@@ -232,9 +232,9 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
     cats.remove(cat);
   }
   private void spawnCats() {
-    //    if(!Config.witherCatEnabled) {
-    //      return;
-    //    }
+    if (witherWitchMaxCats <= 0) {
+      return;
+    }
     int numCats = rand.nextInt(witherWitchMaxCats + 1);
     numCats = Math.max(numCats, witherWitchMinCats);
     for (int i = 0; i < numCats; i++) {
@@ -246,7 +246,7 @@ public class EntityWitherWitch extends EntityMob implements IRangedAttackMob {
         spawnCat(spawnLoc);
       }
       else {
-        return;
+        break;
       }
     }
   }

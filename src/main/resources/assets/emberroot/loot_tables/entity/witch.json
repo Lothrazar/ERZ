@@ -1,7 +1,7 @@
 {
     "pools": [
         {
-			"name": "main",
+            "name": "main",
             "rolls": 2,
             "entries": [
                 {
@@ -12,7 +12,7 @@
                             "function": "set_count",
                             "count": {
                                 "min": 0,
-                                "max": 1
+                                "max": 2
                             }
                         }
                     ]
@@ -25,7 +25,7 @@
                             "function": "set_count",
                             "count": {
                                 "min": 0,
-                                "max": 1
+                                "max": 2
                             }
                         }
                     ]
@@ -38,34 +38,30 @@
                             "function": "set_count",
                             "count": {
                                 "min": 0,
-                                "max": 1
+                                "max": 2
                             }
                         }
                     ]
                 }
             ]
-        }
-        ,{
-             "conditions": [
+        },
+        {
+            "name": "main0",
+            "conditions": [
                 {
                     "condition": "killed_by_player"
                 },
                 {
                     "condition": "random_chance_with_looting",
-                    "chance": 0.25,
-                    "looting_multiplier": 0.01
+                    "chance": 0.025,
+                    "looting_multiplier": 0.5
                 }
             ],
             "rolls": 1,
             "entries": [
                 {
                     "type": "item",
-                    "name": "minecraft:glowstone",
-                    "weight": 1
-                }, {
-                    "type": "item",
-                    "name": "minecraft:redstone",
-                    "weight": 1
+                    "name": "minecraft:glowstone"
                 }
             ]
         }
