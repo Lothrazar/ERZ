@@ -114,20 +114,14 @@ public class EntityFallenKnight extends EntitySkeleton {
       super.dismountRidingEntity();
       return;
     }
-    System.out.println("Skelly dismount CANCELLED");
-    
-    
+ 
 //    super.dismountRidingEntity();
   }
   @Override
   public void setCombatTask() {
-//    tasks.removeTask(getAiAttackOnCollide());
-//    tasks.removeTask(getAiArrowAttack());
-//    if(this.isUsingBow()) {
-//      tasks.addTask(4, getAiArrowAttack());
-//    } else {
+ 
       tasks.addTask(4, getAiAttackOnCollide());
-//    }
+ 
   }
  
   public EntityAIMountedAttackOnCollide getAiAttackOnCollide() {
