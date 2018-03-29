@@ -14,6 +14,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
@@ -53,6 +54,7 @@ public class EntityFrozenKnight extends EntitySkeleton {
   public static boolean appliesSlowPotion;
   public EntityFrozenKnight(World world) {
     super(world);
+    
   }
   @Override
   protected void applyEntityAttributes() {
@@ -69,15 +71,21 @@ public class EntityFrozenKnight extends EntitySkeleton {
     if (avoidWolves) {
       this.tasks.addTask(3, new EntityAIAvoidEntity<EntityWolf>(this, EntityWolf.class, 6.0F, 1.0D, 1.2D));
     }
-    this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0D));
+//    this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0D));
     this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     this.tasks.addTask(6, new EntityAILookIdle(this));
     this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
     this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true));
-    //    this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityIronGolem.class, true));
+   // this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityIronGolem.class, true));
     if (attacksVillagers) {
-      targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
+      targetTasks.addTask(4, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
     }
+  }
+  @Override
+
+  public boolean canBreatheUnderwater()
+  {
+      return false;
   }
   @Override
   protected SoundEvent getAmbientSound() {
