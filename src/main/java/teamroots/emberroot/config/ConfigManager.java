@@ -90,7 +90,7 @@ public class ConfigManager {
     EntityFallenHero.avoidCreepers = config.getBoolean("AvoidsCreepers", EntityFallenHero.config.category, true, "Avoids Creepers.");
     EntityFallenHero.temptWithGold = config.getBoolean("TemptWithGold", EntityFallenHero.config.category, true, "Lure this with gold ingots (remember it is passive to the player initially, and fights off some hostiles).");
     EntityFallenKnight.attackVillagers = config.getBoolean("AttackVillagers", EntityFallenKnight.config.category, false, "Attacks Villagers.");
-    EntityFallenKnight.CHANCE_BOW = config.getFloat("ChanceBow", EntityFallenKnight.config.category, 0.4F, 0, 1, "Chance to spawn with a bow.");
+//    EntityFallenKnight.CHANCE_BOW = config.getFloat("ChanceBow", EntityFallenKnight.config.category, 0.4F, 0, 1, "Chance to spawn with a bow.");
     EntityFallenKnight.fallenKnightChanceMounted = config.getFloat("ChanceSpawnsWithMount", EntityFallenKnight.config.category, 0.75F, 0, 1, "Percentage chance this spawns with a mount.");
     EntityOwl.temptSpiderEye = config.getBoolean("TemptAndBreedSpiderEye", EntityOwl.config.category, true, "Spider Eye used to tempt and breed.");
     EntitySprout.canTempt = config.getBoolean("CanTempt", EntitySprout.config.category, true, "Tempt this with seeds.");
