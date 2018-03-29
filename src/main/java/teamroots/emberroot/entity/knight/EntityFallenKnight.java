@@ -59,10 +59,9 @@ public class EntityFallenKnight extends EntitySkeleton {
   protected void initEntityAI() {
     super.initEntityAI();
     if (attackVillagers) {
-      targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
+      targetTasks.addTask(4, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
     }
-    this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true));
-  }
+ }
   @Override
   protected SoundEvent getAmbientSound() {
     return SoundEvents.ENTITY_ZOMBIE_AMBIENT;
