@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.cat;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL14;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -14,17 +15,21 @@ import teamroots.emberroot.entity.cat.EntityWitherCat.GrowthMode;
 import teamroots.emberroot.util.RenderUtil;
 
 public class RenderWitherCat extends RenderLiving<EntityWitherCat> {
+
   public static final Factory FACTORY = new Factory();
   private ResourceLocation texture = new ResourceLocation(Const.MODID, "textures/entity/wither_cat.png");
   private ResourceLocation angryTexture = new ResourceLocation(Const.MODID, "textures/entity/wither_cat_angry.png");
+
   public RenderWitherCat(RenderManager rm) {
     super(rm, new ModelWitherCat(), 0.4F);
     addLayer(new AngryLayer());
   }
+
   @Override
   protected ResourceLocation getEntityTexture(EntityWitherCat p_110775_1_) {
     return texture;
   }
+
   @Override
   public void doRender(EntityWitherCat entity, double x, double y, double z, float p_76986_8_, float p_76986_9_) {
     super.doRender(entity, x, y, z, p_76986_8_, p_76986_9_);
@@ -32,6 +37,7 @@ public class RenderWitherCat extends RenderLiving<EntityWitherCat> {
     if (ConfigManager.renderDebugHitboxes)
       RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
+
   @Override
   protected void preRenderCallback(EntityWitherCat entity, float partialTick) {
     EntityWitherCat cat = (EntityWitherCat) entity;
@@ -45,7 +51,9 @@ public class RenderWitherCat extends RenderLiving<EntityWitherCat> {
       GL11.glScalef(scale + (0.25f * widthFactor), scale, scale - (0.1f * widthFactor));
     }
   }
+
   private class AngryLayer implements LayerRenderer<EntityWitherCat> {
+
     @Override
     public void doRenderLayer(EntityWitherCat cat, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
         float headPitch, float iScale) {
@@ -68,12 +76,15 @@ public class RenderWitherCat extends RenderLiving<EntityWitherCat> {
         setLightmap(cat);
       }
     }
+
     @Override
     public boolean shouldCombineTextures() {
       return false;
     }
   }
+
   public static class Factory implements IRenderFactory<EntityWitherCat> {
+
     @Override
     public Render<? super EntityWitherCat> createRenderFor(RenderManager manager) {
       return new RenderWitherCat(manager);

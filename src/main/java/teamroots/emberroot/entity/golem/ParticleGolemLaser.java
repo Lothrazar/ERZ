@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.golem;
+
 import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
@@ -14,12 +15,14 @@ import teamroots.emberroot.particle.IParticleTracked;
 
 @SideOnly(Side.CLIENT)
 public class ParticleGolemLaser extends Particle implements IParticleTracked {
+
   public float colorR = 0;
   public float colorG = 0;
   public float colorB = 0;
   public float initScale = 0;
   public float initAlpha = 0;
   public static ResourceLocation texture = new ResourceLocation(Const.MODID, "entity/particle_mote");
+
   public ParticleGolemLaser(World worldIn, double x, double y, double z, double vx, double vy, double vz, float r, float g, float b, float a, float scale, int lifetime) {
     super(worldIn, x, y, z, 0, 0, 0);
     this.colorR = r;
@@ -46,19 +49,24 @@ public class ParticleGolemLaser extends Particle implements IParticleTracked {
     TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(texture.toString());
     this.setParticleTexture(sprite);
   }
+
   @Override
   public int getBrightnessForRender(float pTicks) {
     return 255;
   }
+
   @Override
   public boolean shouldDisableDepth() {
     return true;
   }
+
   @Override
   public int getFXLayer() {
     return 1;
   }
+
   public static Random random = new Random();
+
   @Override
   public void onUpdate() {
     super.onUpdate();
@@ -71,22 +79,27 @@ public class ParticleGolemLaser extends Particle implements IParticleTracked {
     this.prevParticleAngle = particleAngle;
     particleAngle += 1.0f;
   }
+
   @Override
   public boolean alive() {
     return this.particleAge < this.particleMaxAge;
   }
+
   @Override
   public boolean isAdditive() {
     return true;
   }
+
   @Override
   public boolean renderThroughBlocks() {
     return false;
   }
+
   @Override
   public void renderParticle(BufferBuilder buffer, EntityPlayer player, float partialTicks, float f, float f4, float f1, float f2, float f3) {
     super.renderParticle(buffer, player, partialTicks, f, f4, f1, f2, f3);
   }
+
   @Override
   public boolean ignoreDepth() {
     return false;

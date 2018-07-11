@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.hero;
+
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -29,13 +30,16 @@ import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntityFallenHero extends EntityMob {
+
   public static final String NAME = "hero";
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFallenHero.class, EnumCreatureType.CREATURE);
   public static boolean avoidCreepers;
   public static boolean temptWithGold;
+
   public EntityFallenHero(World worldIn) {
     super(worldIn);
   }
+
   @Override
   protected void initEntityAI() {
     super.initEntityAI();
@@ -58,6 +62,7 @@ public class EntityFallenHero extends EntityMob {
     this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVindicator.class, true));
     this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntitySilverfish.class, true));
   }
+
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
@@ -65,6 +70,7 @@ public class EntityFallenHero extends EntityMob {
     //    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.33000000417232513D);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
+
   @Override
   public IEntityLivingData onInitialSpawn(DifficultyInstance di, IEntityLivingData livingData) {
     //TODO: armor odds in config?
@@ -91,10 +97,12 @@ public class EntityFallenHero extends EntityMob {
     }
     return super.onInitialSpawn(di, livingData);
   }
+
   @Override
   public ResourceLocation getLootTable() {
     return new ResourceLocation(Const.MODID, "entity/hero");
   }
+
   @Override
   public boolean isPreventingPlayerRest(EntityPlayer playerIn) {
     return false;

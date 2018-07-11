@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.spriteling;
+
 import java.util.List;
 import java.util.Random;
 import javax.annotation.Nullable;
@@ -31,6 +32,7 @@ import teamroots.emberroot.util.EntityUtil;
 import teamroots.emberroot.util.Util;
 
 public class EntitySpriteling extends EntityFlying implements ISprite {// implements IRangedAttackMob {
+
   private static final double RANGE_ATTACK = 16.0;
   public static final DataParameter<Float> targetDirectionX = EntityDataManager.<Float> createKey(EntitySpriteling.class, DataSerializers.FLOAT);
   public static final DataParameter<Float> targetDirectionY = EntityDataManager.<Float> createKey(EntitySpriteling.class, DataSerializers.FLOAT);
@@ -50,6 +52,7 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
   public Vec3d prevMoveVec = new Vec3d(0, 0, 0);
   Random random = new Random();
   public int offset = random.nextInt(25);
+
   public EntitySpriteling(World worldIn) {
     super(worldIn);
     setSize(0.5f, 0.5f);
@@ -58,6 +61,7 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
     this.experienceValue = 5;
     this.rotationYaw = rand.nextInt(240) + 60;
   }
+
   @Override
   protected void entityInit() {
     super.entityInit();
@@ -71,10 +75,12 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
     this.getDataManager().register(lastLastTargetBlock, new BlockPos(0, -1, 0));
     this.random = this.world.rand;
   }
+
   @Override
   public int getMaxSpawnedInChunk() {
     return config.settings.max;
   }
+
   @Override
   public boolean getCanSpawnHere() {
     int i = MathHelper.floor(this.posX);
@@ -87,6 +93,7 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
         && this.rand.nextInt(config.settings.weightedProb) == 0;
     return canSpawn;
   }
+
   @Override
   public void collideWithEntity(Entity entity) {
     if (this.getAttackTarget() != null && this.getHealth() > 0 && !this.getDataManager().get(stunned).booleanValue()) {
@@ -103,10 +110,12 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
       }
     }
   }
+
   @Override
   public void updateAITasks() {
     super.updateAITasks();
   }
+
   @Override
   public void onUpdate() {
     super.onUpdate();
@@ -214,6 +223,7 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
       this.setHappiness(getHappiness() - 0.001f);
     }
   }
+
   @Override
   public int getBrightnessForRender() {
     if (getDataManager().get(stunned).booleanValue()) {
@@ -230,6 +240,7 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
     }
     return j | k << 16;
   }
+
   @Override
   public boolean attackEntityFrom(DamageSource source, float amount) {
     getEntityWorld().playSound(posX, posY, posZ, EntitySprite.hurtSound, SoundCategory.NEUTRAL, random.nextFloat() * 0.1f + 0.95f, random.nextFloat() * 0.1f + 1.7f, false);
@@ -239,6 +250,7 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
     }
     return super.attackEntityFrom(source, amount);
   }
+
   @Override
   public boolean attackEntityAsMob(Entity entity) {
     if (entity instanceof EntityLivingBase) {
@@ -246,19 +258,23 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
     }
     return super.attackEntityAsMob(entity);
   }
+
   @Override
   public void setDead() {
     super.setDead();
     getEntityWorld().playSound(posX, posY, posZ, EntitySprite.hurtSound, SoundCategory.NEUTRAL, random.nextFloat() * 0.1f + 0.95f, (random.nextFloat() * 0.1f + 1.7f) / 2.0f, false);
   }
+
   @Override
   public boolean isAIDisabled() {
     return false;
   }
+
   @Override
   protected boolean canDespawn() {
     return true;
   }
+
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
@@ -266,10 +282,12 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
+
   @Override
   public void onLivingUpdate() {
     super.onLivingUpdate();
   }
+
   @Override
   public void readEntityFromNBT(NBTTagCompound compound) {
     super.readEntityFromNBT(compound);
@@ -290,6 +308,7 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
     getDataManager().setDirty(lastTargetBlock);
     getDataManager().setDirty(lastLastTargetBlock);
   }
+
   @Override
   public void writeEntityToNBT(NBTTagCompound compound) {
     super.writeEntityToNBT(compound);
@@ -308,15 +327,18 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
     compound.setInteger("lastLastTargetBlockY", getDataManager().get(lastLastTargetBlock).getY());
     compound.setInteger("lastLastTargetBlockZ", getDataManager().get(lastLastTargetBlock).getZ());
   }
+
   @Override
   public float getHappiness() {
     return getDataManager().get(happiness).floatValue();
   }
+
   @Override
   public void setHappiness(float value) {
     getDataManager().set(happiness, value);
     getDataManager().setDirty(happiness);
   }
+
   @Override
   public void setTargetPosition(BlockPos pos) {
     if (!pos.equals(getDataManager().get(lastLastTargetBlock)) && !pos.equals(getDataManager().get(lastTargetBlock)) && !pos.equals(getDataManager().get(targetBlock))) {
@@ -328,10 +350,12 @@ public class EntitySpriteling extends EntityFlying implements ISprite {// implem
       getDataManager().setDirty(targetBlock);
     }
   }
+
   @Override
   public BlockPos getTargetPosition() {
     return getDataManager().get(targetBlock);
   }
+
   @Nullable
   protected ResourceLocation getLootTable() {
     return new ResourceLocation(Const.MODID, "entity/sprite_mini");

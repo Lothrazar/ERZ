@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.spriteguardian;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -43,6 +44,7 @@ import teamroots.emberroot.util.EntityUtil;
 import teamroots.emberroot.util.Util;
 
 public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRangedAttackMob {
+
   private static final int RANGE_ATTACK = 72;
   public float range = 64;
   public ArrayList<Vec3d> pastPositions = new ArrayList<Vec3d>();
@@ -64,6 +66,7 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
   public static SoundEvent hurtSound;
   public static SoundEvent departureSound;
   private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
+
   public EntitySpriteGuardianBoss(World worldIn) {
     super(worldIn);
     setSize(2.0f, 2.0f);
@@ -75,10 +78,12 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
     }
     this.rotationYaw = rand.nextInt(240) + 60;
   }
+
   @Override
   public boolean isNonBoss() {
     return false;
   }
+
   @Override
   protected void entityInit() {
     super.entityInit();
@@ -91,6 +96,7 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
     this.getDataManager().register(fadeTimer, Integer.valueOf(0));
     this.getDataManager().register(projectiles, Integer.valueOf(0));
   }
+
   @Override
   public void collideWithEntity(Entity entity) {
     if (this.getAttackTarget() != null && this.getHealth() > 0 && !getDataManager().get(pacified).booleanValue()) {
@@ -108,10 +114,12 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
       }
     }
   }
+
   @Override
   public void updateAITasks() {
     super.updateAITasks();
   }
+
   @Override
   public void onUpdate() {
     super.onUpdate();
@@ -275,6 +283,7 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
       pastPositions.set(0, new Vec3d(posX, posY, posZ));
     }
   }
+
   @Override
   public boolean isEntityInvulnerable(DamageSource source) {
     if (getDataManager().get(pacified)) {
@@ -282,6 +291,7 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
     }
     return false;
   }
+
   @Override
   public int getBrightnessForRender() {
     float f = 0.5F;
@@ -295,6 +305,7 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
     }
     return j | k << 16;
   }
+
   @Override
   public boolean attackEntityFrom(DamageSource source, float amount) {
     getEntityWorld().playSound(posX, posY, posZ, hurtSound, SoundCategory.NEUTRAL, random.nextFloat() * 0.1f + 0.95f, random.nextFloat() * 0.1f + 0.95f, false);
@@ -305,6 +316,7 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
     }
     return super.attackEntityFrom(source, amount);
   }
+
   @Override
   public void damageEntity(DamageSource source, float amount) {
     if (this.getHealth() - amount <= 0 && !getDataManager().get(pacified).booleanValue()) {
@@ -327,6 +339,7 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
       }
     }
   }
+
   @Override
   public boolean attackEntityAsMob(Entity entity) {
     if (entity instanceof EntityLivingBase) {
@@ -334,10 +347,12 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
     }
     return super.attackEntityAsMob(entity);
   }
+
   @Override
   public boolean isAIDisabled() {
     return false;
   }
+
   @Override
   public void setDead() {
     if (this.isDead == false && this.world.isRemote == false) {
@@ -346,10 +361,12 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
     super.setDead();
     world.playSound(posX, posY, posZ, hurtSound, SoundCategory.NEUTRAL, random.nextFloat() * 0.1f + 0.95f, (random.nextFloat() * 0.1f + 0.7f) / 2.0f, false);
   }
+
   @Override
   protected boolean canDespawn() {
     return true;
   }
+
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
@@ -358,10 +375,12 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
     this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
     this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0);
   }
+
   @Override
   public void onLivingUpdate() {
     super.onLivingUpdate();
   }
+
   @Override
   public void readEntityFromNBT(NBTTagCompound compound) {
     super.readEntityFromNBT(compound);
@@ -383,6 +402,7 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
     getDataManager().setDirty(fadeTimer);
     this.bossInfo.setPercent(getHealth() / getMaxHealth());
   }
+
   @Override
   public void writeEntityToNBT(NBTTagCompound compound) {
     super.writeEntityToNBT(compound);
@@ -395,6 +415,7 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
     compound.setInteger("projectiles", getDataManager().get(projectiles));
     compound.setInteger("fadeTimer", getDataManager().get(fadeTimer));
   }
+
   public float getFade(float partialTicks) {
     if (getDataManager().get(fadeTimer) == 0) {
       return 1.0f;
@@ -403,17 +424,21 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
       return Math.max(0, (((float) getDataManager().get(fadeTimer) - partialTicks)) / 200.0f);
     }
   }
+
   @Override
   public void addTrackingPlayer(EntityPlayerMP player) {
     super.addTrackingPlayer(player);
     bossInfo.addPlayer(player);
   }
+
   @Override
   public void removeTrackingPlayer(EntityPlayerMP player) {
     super.removeTrackingPlayer(player);
     bossInfo.removePlayer(player);
   }
+
   public static BlockPattern golemPattern;
+
   public static BlockPattern getGolemPattern() {
     // if (golemPattern == null) {
     golemPattern = FactoryBlockPattern.start().aisle("$^$", "~#~", "###", "#~#").where(
@@ -428,6 +453,7 @@ public class EntitySpriteGuardianBoss extends EntityFlying {// implements IRange
     //   }
     return golemPattern;
   }
+
   @Nullable
   protected ResourceLocation getLootTable() {
     return new ResourceLocation(Const.MODID, "entity/sprite_boss");

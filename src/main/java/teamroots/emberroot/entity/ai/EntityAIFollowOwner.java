@@ -1,15 +1,18 @@
 package teamroots.emberroot.entity.ai;
+
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 
 public class EntityAIFollowOwner extends EntityAIBase {
+
   /** The child that is following its parent. */
   IOwnable<? extends EntityCreature, ? extends EntityLivingBase> owned;
   double followSpeed;
   private int pathingTimer;
   private double minDistanceSq;
   private double maxDistanceSq;
+
   /**
    * TODO: has same name as vanilla class so i should rename
    * 
@@ -24,6 +27,7 @@ public class EntityAIFollowOwner extends EntityAIBase {
     maxDistanceSq = maxDist * maxDist;
     this.followSpeed = followSpeed;
   }
+
   @Override
   public boolean shouldExecute() {
     if (owned.getOwner() == null) {
@@ -31,6 +35,7 @@ public class EntityAIFollowOwner extends EntityAIBase {
     }
     return getDistanceSqFromOwner() > maxDistanceSq;
   }
+
   @Override
   public boolean shouldContinueExecuting() {
     EntityLivingBase owner = owned.getOwner();
@@ -39,6 +44,7 @@ public class EntityAIFollowOwner extends EntityAIBase {
     }
     return !owned.asEntity().getNavigator().noPath();
   }
+
   public boolean isWithinTargetDistanceFromOwner() {
     if (owned.getOwner() == null) {
       return true;
@@ -46,16 +52,20 @@ public class EntityAIFollowOwner extends EntityAIBase {
     double distance = getDistanceSqFromOwner();
     return distance >= minDistanceSq && distance <= maxDistanceSq;
   }
+
   private double getDistanceSqFromOwner() {
     double distance = owned.asEntity().getDistanceSqToEntity(owned.getOwner());
     return distance;
   }
+
   @Override
   public void startExecuting() {
     pathingTimer = 0;
   }
+
   @Override
   public void resetTask() {}
+
   @Override
   public void updateTask() {
     EntityLivingBase owner = owned.getOwner();

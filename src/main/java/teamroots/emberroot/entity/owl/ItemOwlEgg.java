@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.owl;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -12,14 +13,17 @@ import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 
 public class ItemOwlEgg extends Item {
+
   private static final float VELOCITY_DEFAULT = 1.5F;
   private static final float INACCURACY_DEFAULT = 1.0F;
   private static final float PITCHOFFSET = 0.0F;
   public static final String NAME = "owl_egg";
+
   public ItemOwlEgg() {
     setUnlocalizedName(NAME);
     setRegistryName(new ResourceLocation(Const.MODID, NAME));
   }
+
   @Override
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
     ItemStack itemStackIn = playerIn.getHeldItem(hand);

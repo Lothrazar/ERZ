@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.sprite;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,6 +12,7 @@ import teamroots.emberroot.util.Util;
  *
  */
 public class ModelSprite extends ModelBase {
+
   public static ModelSprite instance;
   //fields
   ModelRenderer head1;
@@ -25,6 +27,7 @@ public class ModelSprite extends ModelBase {
   ModelRenderer frontarm2;
   ModelRenderer crest1;
   ModelRenderer crest2;
+
   public ModelSprite() {
     textureWidth = 128;
     textureHeight = 128;
@@ -111,6 +114,7 @@ public class ModelSprite extends ModelBase {
     head1.addChild(crest1);
     head1.addChild(crest2);
   }
+
   @Override
   public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
     float pTicks = ageInTicks - (int) ageInTicks;
@@ -165,6 +169,7 @@ public class ModelSprite extends ModelBase {
     GlStateManager.enableLighting();
     GlStateManager.popAttrib();
   }
+
   private void setRotation(ModelRenderer model, float x, float y, float z) {
     model.rotateAngleX = x;
     model.rotateAngleY = y;

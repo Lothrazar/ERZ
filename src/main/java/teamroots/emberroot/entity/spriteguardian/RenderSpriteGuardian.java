@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.spriteguardian;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,15 +12,19 @@ import teamroots.emberroot.Const;
 import teamroots.emberroot.entity.spritegreater.ModelNull;
 
 public class RenderSpriteGuardian extends RenderLiving<EntitySpriteGuardianBoss> {
+
   public RenderSpriteGuardian(RenderManager renderManager, ModelBase modelBase, float shadowSize) {
     super(renderManager, modelBase, shadowSize);
   }
+
   public static class Factory implements IRenderFactory<EntitySpriteGuardianBoss> {
+
     @Override
     public RenderSpriteGuardian createRenderFor(RenderManager manager) {
       return new RenderSpriteGuardian(manager, ModelNull.instance, 0.5f);
     }
   }
+
   @Override
   public void renderModel(EntitySpriteGuardianBoss entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
     boolean flag = !entity.isInvisible() || this.renderOutlines;
@@ -51,10 +56,12 @@ public class RenderSpriteGuardian extends RenderLiving<EntitySpriteGuardianBoss>
       }
     }
   }
+
   @Override
   public boolean shouldRender(EntitySpriteGuardianBoss entity, ICamera camera, double camX, double camY, double camZ) {
     return true;
   }
+
   @Override
   protected ResourceLocation getEntityTexture(EntitySpriteGuardianBoss entity) {
     return new ResourceLocation(Const.MODID, "textures/entity/sprite_guardian.png");

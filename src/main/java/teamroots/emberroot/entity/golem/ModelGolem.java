@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.golem;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -6,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
 
 public class ModelGolem extends ModelBase {
+
   //fields
   ModelRenderer legL;
   ModelRenderer legR;
@@ -16,6 +18,7 @@ public class ModelGolem extends ModelBase {
   ModelRenderer armL;
   ModelRenderer fistL;
   ModelRenderer head;
+
   public ModelGolem() {
     textureWidth = 64;
     textureHeight = 64;
@@ -74,6 +77,7 @@ public class ModelGolem extends ModelBase {
     head.mirror = true;
     setRotation(head, 0F, 0F, 0F);
   }
+
   public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
     GlStateManager.pushMatrix();
     float speed = (float) Math.min(0.25f, ((new Vec3d(entity.motionX, 0, entity.motionZ)).lengthVector() * 4.0f));
@@ -96,11 +100,13 @@ public class ModelGolem extends ModelBase {
     head.render(scale);
     GlStateManager.popMatrix();
   }
+
   private void setRotation(ModelRenderer model, float x, float y, float z) {
     model.rotateAngleX = x;
     model.rotateAngleY = y;
     model.rotateAngleZ = z;
   }
+
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
     super.setRotationAngles(f, f1, f2, f3, f4, f5, null);
   }

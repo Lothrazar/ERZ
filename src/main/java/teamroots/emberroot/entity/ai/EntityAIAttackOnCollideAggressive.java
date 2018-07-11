@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.ai;
+
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -7,6 +8,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 public class EntityAIAttackOnCollideAggressive extends EntityAIBase {
+
   World worldObj;
   EntityCreature attacker;
   int ticksToNextAttack;
@@ -20,10 +22,12 @@ public class EntityAIAttackOnCollideAggressive extends EntityAIBase {
   private double targetZ;
   //  private int failedPathFindingPenalty;
   private int attackFrequency = 20;
+
   public EntityAIAttackOnCollideAggressive(EntityCreature attacker, Class<?> targetClass, double attackSpeed, boolean longMemory) {
     this(attacker, attackSpeed, longMemory);
     classTarget = targetClass;
   }
+
   public EntityAIAttackOnCollideAggressive(EntityCreature attacker, double attackSpeed, boolean longMemory) {
     this.attacker = attacker;
     worldObj = attacker.world;
@@ -31,13 +35,16 @@ public class EntityAIAttackOnCollideAggressive extends EntityAIBase {
     this.longMemory = longMemory;
     setMutexBits(3);
   }
+
   public int getAttackFrequency() {
     return attackFrequency;
   }
+
   public EntityAIAttackOnCollideAggressive setAttackFrequency(int attackFrequency) {
     this.attackFrequency = attackFrequency;
     return this;
   }
+
   /**
    * Returns whether the EntityAIBase should begin execution.
    */
@@ -64,6 +71,7 @@ public class EntityAIAttackOnCollideAggressive extends EntityAIBase {
       }
     }
   }
+
   /**
    * Returns whether an in-progress EntityAIBase should continue executing
    */
@@ -73,15 +81,18 @@ public class EntityAIAttackOnCollideAggressive extends EntityAIBase {
     return entitylivingbase == null ? false : (!entitylivingbase.isEntityAlive() ? false : (!longMemory ? !attacker.getNavigator().noPath() : attacker
         .isWithinHomeDistanceCurrentPosition()));
   }
+
   @Override
   public void startExecuting() {
     attacker.getNavigator().setPath(entityPathEntity, speedTowardsTarget);
     ticksUntilNextPathingAttempt = 0;
   }
+
   @Override
   public void resetTask() {
     attacker.getNavigator().clearPathEntity();
   }
+
   /**
    * Updates the task
    */

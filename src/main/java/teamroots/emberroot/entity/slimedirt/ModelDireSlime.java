@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.slimedirt;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -9,10 +10,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ModelDireSlime extends ModelBase {
+
   ModelRenderer[] sliceRenderers = new ModelRenderer[16];
   ModelRenderer[] coreRenderers = new ModelRenderer[24];
   ModelRenderer coreRendererClay;
   ModelRenderer coreRenderer;
+
   public ModelDireSlime() {
     for (int i = 0; i < this.sliceRenderers.length; ++i) {
       this.sliceRenderers[i] = new ModelRenderer(this, 0, i);
@@ -28,6 +31,7 @@ public class ModelDireSlime extends ModelBase {
       this.coreRenderers[i].addBox(-3.0F, 13.0F, -3.0F, 6, 6, 6);
     }
   }
+
   @Override
   public void setLivingAnimations(EntityLivingBase p_78086_1_, float p_78086_2_, float p_78086_3_, float p_78086_4_) {
     EntityMagmaCube entitymagmacube = (EntityMagmaCube) p_78086_1_;
@@ -48,6 +52,7 @@ public class ModelDireSlime extends ModelBase {
       this.sliceRenderers[i].rotationPointY = (-(4 - i)) * f3 * 1.7F;
     }
   }
+
   @Override
   public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
     this.coreRenderer.render(p_78088_7_);

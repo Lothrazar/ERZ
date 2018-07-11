@@ -1,4 +1,5 @@
 package teamroots.emberroot.config;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +29,12 @@ import teamroots.emberroot.entity.wolfdire.EntityDireWolf;
 import teamroots.emberroot.entity.wolftimber.EntityTimberWolf;
 
 public class ConfigManager {
+
   public static final int LIGHT_LEVEL = 7;
   public static Configuration config;
   public static List<ConfigSpawnEntity> entityConfigs;
   public static boolean renderDebugHitboxes;
+
   public static void init(File configFile) {
     config = new Configuration(configFile);
     entityConfigs = new ArrayList<ConfigSpawnEntity>();
@@ -72,6 +75,7 @@ public class ConfigManager {
     entityConfigs.add(EntityFrozenKnight.config.setDefaultSpawns(1, 1, 15).setDefaultProperties(20, 4, 32).setDefaultBiomesAll().setSpeeds(0.2F));
     load();
   }
+
   private static void load() {
     for (ConfigSpawnEntity cfg : entityConfigs) {
       cfg.syncConfig(config);
@@ -90,7 +94,7 @@ public class ConfigManager {
     EntityFallenHero.avoidCreepers = config.getBoolean("AvoidsCreepers", EntityFallenHero.config.category, true, "Avoids Creepers.");
     EntityFallenHero.temptWithGold = config.getBoolean("TemptWithGold", EntityFallenHero.config.category, true, "Lure this with gold ingots (remember it is passive to the player initially, and fights off some hostiles).");
     EntityFallenKnight.attackVillagers = config.getBoolean("AttackVillagers", EntityFallenKnight.config.category, false, "Attacks Villagers.");
-//    EntityFallenKnight.CHANCE_BOW = config.getFloat("ChanceBow", EntityFallenKnight.config.category, 0.4F, 0, 1, "Chance to spawn with a bow.");
+    //    EntityFallenKnight.CHANCE_BOW = config.getFloat("ChanceBow", EntityFallenKnight.config.category, 0.4F, 0, 1, "Chance to spawn with a bow.");
     EntityFallenKnight.fallenKnightChanceMounted = config.getFloat("ChanceSpawnsWithMount", EntityFallenKnight.config.category, 0.75F, 0, 1, "Percentage chance this spawns with a mount.");
     EntityOwl.temptSpiderEye = config.getBoolean("TemptAndBreedSpiderEye", EntityOwl.config.category, true, "Spider Eye used to tempt and breed.");
     EntitySprout.canTempt = config.getBoolean("CanTempt", EntitySprout.config.category, true, "Tempt this with seeds.");
@@ -103,6 +107,7 @@ public class ConfigManager {
       config.save();
     }
   }
+
   @SubscribeEvent
   public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
     if (event.getModID().equalsIgnoreCase(Const.MODID)) {

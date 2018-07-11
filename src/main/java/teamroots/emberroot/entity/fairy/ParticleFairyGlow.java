@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.fairy;
+
 import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
@@ -14,6 +15,7 @@ import teamroots.emberroot.particle.IParticleTracked;
 
 @SideOnly(Side.CLIENT)
 public class ParticleFairyGlow extends Particle implements IParticleTracked {
+
   public float colorR = 0;
   public float colorG = 0;
   public float colorB = 0;
@@ -21,6 +23,7 @@ public class ParticleFairyGlow extends Particle implements IParticleTracked {
   public float initScale = 0;
   public ResourceLocation texture = new ResourceLocation(Const.MODID, "entity/particle_glow");
   private Random random = new Random();
+
   public ParticleFairyGlow(World worldIn, double x, double y, double z, double vx, double vy, double vz, float r, float g, float b, float a, float scale, int lifetime) {
     super(worldIn, x, y, z, 0, 0, 0);
     this.colorR = r;
@@ -48,22 +51,24 @@ public class ParticleFairyGlow extends Particle implements IParticleTracked {
     TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(texture.toString());
     this.setParticleTexture(sprite);
   }
-  /*
-   * @Override public void renderParticle(BufferBuilder buffer, Entity entity, float partialTicks, float rotX, float rotZ, float rotYZ, float rotXY, float rotXZ){ GlStateManager.enableBlend();
-   * GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE); super.renderParticle(buffer, entity, partialTicks, rotX, rotZ, rotYZ, rotXY, rotXZ); }
-   */
+
+  /* @Override public void renderParticle(BufferBuilder buffer, Entity entity, float partialTicks, float rotX, float rotZ, float rotYZ, float rotXY, float rotXZ){ GlStateManager.enableBlend();
+   * GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE); super.renderParticle(buffer, entity, partialTicks, rotX, rotZ, rotYZ, rotXY, rotXZ); } */
   @Override
   public int getBrightnessForRender(float pTicks) {
     return 255;
   }
+
   @Override
   public boolean shouldDisableDepth() {
     return true;
   }
+
   @Override
   public int getFXLayer() {
     return 1;
   }
+
   @Override
   public void onUpdate() {
     super.onUpdate();
@@ -76,23 +81,28 @@ public class ParticleFairyGlow extends Particle implements IParticleTracked {
     prevParticleAngle = particleAngle;
     particleAngle += rand.nextFloat();
   }
+
   @Override
   public boolean alive() {
     return this.particleAge < this.particleMaxAge;
   }
+
   @Override
   public boolean isAdditive() {
     return true;
   }
+
   @Override
   public boolean ignoreDepth() {
     return false;
   }
+
   @Override
   public boolean renderThroughBlocks() {
     // TODO Auto-generated method stub
     return false;
   }
+
   @Override
   public void renderParticle(BufferBuilder buffer, EntityPlayer player, float partialTicks, float f, float f4, float f1, float f2, float f3) {
     super.renderParticle(buffer, player, partialTicks, f, f4, f1, f2, f3);

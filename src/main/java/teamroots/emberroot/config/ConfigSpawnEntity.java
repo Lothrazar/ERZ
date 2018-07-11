@@ -1,4 +1,5 @@
 package teamroots.emberroot.config;
+
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.entity.EntityLiving;
@@ -18,6 +19,7 @@ import teamroots.emberroot.util.EntityUtil;
  * https://minecraft.gamepedia.com/Data_values#Biome_IDs
  */
 public class ConfigSpawnEntity {
+
   public Class<? extends EntityLiving> entityClass;
   public EnumCreatureType typeOfCreature;
   /**
@@ -29,11 +31,13 @@ public class ConfigSpawnEntity {
    */
   public MobProperties settings = new MobProperties();
   String category;
+
   public ConfigSpawnEntity(Class<? extends EntityLiving> clz, EnumCreatureType type) {
     this.entityClass = clz;
     this.typeOfCreature = type;
     category = clz.getSimpleName();
   }
+
   public ConfigSpawnEntity setDefaultProperties(int dhealth, float attack, int follow) {
     this.defaults.maxHealth = dhealth;
     this.defaults.attack = attack;
@@ -41,25 +45,30 @@ public class ConfigSpawnEntity {
     this.defaults.useAllBiomes = true;// just the default
     return this;
   }
+
   public ConfigSpawnEntity setSpeeds(float mSpeed) {
     this.defaults.movementSpeed = mSpeed;
     return this;
   }
+
   public ConfigSpawnEntity setDefaultSpawns(int pmin, int pmax, int pweight) {
     defaults.min = pmin;
     defaults.max = pmax;
     defaults.weightedProb = pweight;
     return this;
   }
+
   public ConfigSpawnEntity setDefaultBiomesAll() {
     defaults.useAllBiomes = true;
     return this;
   }
+
   public ConfigSpawnEntity setDefaultBiome(String[] biomelist) {
     defaults.useAllBiomes = false;
     defaults.biomes = biomelist;
     return this;
   }
+
   public void syncConfig(Configuration config) {
     settings.min = config.getInt("minSpawnCount", category, defaults.min, 0, 32, "Smallest spawn group.");
     settings.max = config.getInt("maxSpawnCount", category, defaults.max, 0, 32, "Biggest spawn group.");
@@ -81,6 +90,7 @@ public class ConfigSpawnEntity {
       settings.movementSpeed = config.getFloat("movementSpeed", category, defaults.movementSpeed, 0, 2, "Base speed, before buffs.  (Does not apply to living mobs, you must kill and respawn to see new speed get applied)");
     }
   }
+
   public Biome[] getBiomeFilter() {
     List<Biome> allBiomes = new ArrayList<Biome>();
     Biome found;
@@ -92,10 +102,12 @@ public class ConfigSpawnEntity {
     }
     return allBiomes.toArray(new Biome[0]);
   }
+
   @Override
   public String toString() {
     return this.settings.toString();
   }
+
   /**
    * some settings arent set in a static registration way, they must be set for each instance spawned such as attack, health, speed
    * 
@@ -112,12 +124,14 @@ public class ConfigSpawnEntity {
       EntityUtil.setSpeed(living, settings.movementSpeed);
     }
   }
+
   /**
    * just a simple struct
    *
    * TODO: would be better with getter/setter pattern BUT its not so bad, the config system enforces min/max/valid values for us already just dont ever set them again at runtime
    */
   public static class MobProperties {
+
     public int weightedProb;
     public int min;
     public int max;
@@ -127,6 +141,7 @@ public class ConfigSpawnEntity {
     public boolean useAllBiomes = true;
     public int followRange;
     public float movementSpeed = 0;
+
     @Override
     public String toString() {
       String s = " min " + this.min + " max " + this.max + " weight " + this.weightedProb + " attack  " + this.attack + " follow" + this.followRange + " allBiomes : " + this.useAllBiomes;

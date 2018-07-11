@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.owl;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,23 +18,28 @@ import teamroots.emberroot.util.PPUtil;
 import teamroots.emberroot.util.SpawnUtil;
 
 public class FlyingPathFinder extends PathFinder {
+
   private PathHeap path = new PathHeap();
   private PathPoint[] pathOptions = new PathPoint[32];
   private NodeProcessor nodeProcessor;
+
   public FlyingPathFinder(NodeProcessor nodeProcessorIn) {
     super(nodeProcessorIn);
     this.nodeProcessor = nodeProcessorIn;
   }
+
   //createEntityPathTo
   @Override
   public Path findPath(IBlockAccess blockaccess, EntityLiving entityFrom, Entity entityTo, float dist) {
     return createEntityPathTo(blockaccess, entityFrom, entityTo.posX, entityTo.getEntityBoundingBox().minY, entityTo.posZ, dist);
   }
+
   //createEntityPathTo
   @Override
   public Path findPath(IBlockAccess blockaccess, EntityLiving entityIn, BlockPos targetPos, float dist) {
     return createEntityPathTo(blockaccess, entityIn, targetPos.getX() + 0.5F, targetPos.getY() + 0.5F, targetPos.getZ() + 0.5F, dist);
   }
+
   private Path createEntityPathTo(IBlockAccess blockaccess, Entity ent, double x, double y, double z, float distance) {
     path.clearPath();
     if (!(ent instanceof EntityLiving)) {
@@ -93,6 +99,7 @@ public class FlyingPathFinder extends PathFinder {
     }
     return new Path(resPoints.toArray(new PathPoint[resPoints.size()]));
   }
+
   private PathPoint[] addToPath(Entity entityIn, PathPoint pathpointStart, PathPoint pathpointEnd, float maxDistance) {
     // set start point values
     //    pathpointStart.totalPathDistance = 0.0F;
@@ -163,9 +170,11 @@ public class FlyingPathFinder extends PathFinder {
       return createEntityPath(pathpointStart, curPoint);
     }
   }
+
   private int rnd(double d) {
     return (int) Math.round(d);
   }
+
   private Path createDefault(IBlockAccess blockaccess, EntityLiving entityIn, float distance, double x, double y, double z) {
     this.path.clearPath();
     this.nodeProcessor.initProcessor(blockaccess, entityIn);
@@ -183,6 +192,7 @@ public class FlyingPathFinder extends PathFinder {
     this.nodeProcessor.postProcess();
     return res;
   }
+
   private static PathPoint[] createEntityPath(PathPoint start, PathPoint end) {
     int i = 1;
     for (PathPoint pathpoint = end; PPUtil.getPrevious(pathpoint) != null; pathpoint = PPUtil.getPrevious(pathpoint)) {

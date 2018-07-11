@@ -1,20 +1,24 @@
 package teamroots.emberroot.entity.ai;
+
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.Vec3d;
 
 public class EntityAIFlyingPanic extends EntityAIBase {
+
   private EntityCreature theEntityCreature;
   protected double speed;
   private double randPosX;
   private double randPosY;
   private double randPosZ;
+
   public EntityAIFlyingPanic(EntityCreature creature, double speedIn) {
     theEntityCreature = creature;
     speed = speedIn;
     setMutexBits(1);
   }
+
   @Override
   public boolean shouldExecute() {
     if (theEntityCreature.getAttackTarget() == null && !theEntityCreature.isBurning()) {
@@ -31,10 +35,12 @@ public class EntityAIFlyingPanic extends EntityAIBase {
     randPosZ = vec3.z;
     return true;
   }
+
   @Override
   public void startExecuting() {
     theEntityCreature.getNavigator().tryMoveToXYZ(randPosX, randPosY, randPosZ, speed);
   }
+
   @Override
   public boolean shouldContinueExecuting() {
     return !theEntityCreature.getNavigator().noPath();

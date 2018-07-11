@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.frozen;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
@@ -43,6 +44,7 @@ import teamroots.emberroot.util.EntityUtil;
  * Original author: https://github.com/CrazyPants
  */
 public class EntityFrozenKnight extends EntitySkeleton {
+
   public static final String NAME = "skeleton_frozen";
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFrozenKnight.class, EnumCreatureType.MONSTER);
   public static boolean attacksVillagers;
@@ -52,16 +54,18 @@ public class EntityFrozenKnight extends EntitySkeleton {
   private double fallenKnightChanceShield = 0.5f;
   public static boolean spawnsWithArmor;
   public static boolean appliesSlowPotion;
+
   public EntityFrozenKnight(World world) {
     super(world);
-    
   }
+
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     //    getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2F);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
+
   @Override
   protected void initEntityAI() {
     //super.initEntityAI();
@@ -71,34 +75,37 @@ public class EntityFrozenKnight extends EntitySkeleton {
     if (avoidWolves) {
       this.tasks.addTask(3, new EntityAIAvoidEntity<EntityWolf>(this, EntityWolf.class, 6.0F, 1.0D, 1.2D));
     }
-//    this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0D));
+    //    this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0D));
     this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     this.tasks.addTask(6, new EntityAILookIdle(this));
     this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
     this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true));
-   // this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityIronGolem.class, true));
+    // this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityIronGolem.class, true));
     if (attacksVillagers) {
       targetTasks.addTask(4, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, false));
     }
   }
-  @Override
 
-  public boolean canBreatheUnderwater()
-  {
-      return false;
+  @Override
+  public boolean canBreatheUnderwater() {
+    return false;
   }
+
   @Override
   protected SoundEvent getAmbientSound() {
     return SoundEvents.ENTITY_SKELETON_AMBIENT;
   }
+
   @Override
   protected SoundEvent getHurtSound(DamageSource s) {
     return SoundEvents.ENTITY_SKELETON_HURT;
   }
+
   @Override
   protected SoundEvent getDeathSound() {
     return SoundEvents.ENTITY_SKELETON_DEATH;
   }
+
   private void addRandomArmor() {
     float occupiedDiffcultyMultiplier = EntityUtil.getDifficultyMultiplierForLocation(world, posX, posY, posZ);
     int equipmentLevel = getRandomEquipmentLevel(occupiedDiffcultyMultiplier);
@@ -127,6 +134,7 @@ public class EntityFrozenKnight extends EntitySkeleton {
       setItemStackToSlot(EntityEquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
     }
   }
+
   //  private int getRandomEquipmentLevel() {
   //    return getRandomEquipmentLevel(EntityUtil.getDifficultyMultiplierForLocation(world, posX, posY, posZ));
   //  }
@@ -141,9 +149,11 @@ public class EntityFrozenKnight extends EntitySkeleton {
     }
     return armorLevel;
   }
+
   protected boolean isHardDifficulty() {
     return EntityUtil.isHardDifficulty(world);
   }
+
   private ItemStack getSwordForLevel(int swordLevel) {
     ////have a better chance of not getting a wooden or stone sword
     if (swordLevel < 2) {
@@ -162,6 +172,7 @@ public class EntityFrozenKnight extends EntitySkeleton {
     }
     return new ItemStack(Items.IRON_SWORD);
   }
+
   @Override
   public IEntityLivingData onInitialSpawn(DifficultyInstance di, IEntityLivingData livingData) {
     //From base entity living class
@@ -175,19 +186,22 @@ public class EntityFrozenKnight extends EntitySkeleton {
     setCanPickUpLoot(rand.nextFloat() < 0.55F * f);
     return livingData;
   }
+
   @Override
   public void writeEntityToNBT(NBTTagCompound root) {
     super.writeEntityToNBT(root);
   }
+
   @Override
   public void readEntityFromNBT(NBTTagCompound root) {
     super.readEntityFromNBT(root);
   }
+
   @Override
   protected ResourceLocation getLootTable() {
     return new ResourceLocation(Const.MODID, "entity/skeleton_frozen");
   }
- 
+
   @Override
   public boolean attackEntityAsMob(Entity entityIn) {
     if (appliesSlowPotion

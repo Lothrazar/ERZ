@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.ai;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -14,6 +15,7 @@ import teamroots.emberroot.util.SpawnUtil;
 import teamroots.emberroot.util.VecUtil;
 
 public class EntityAIMountedArrowAttack extends EntityAIBase {
+
   private final EntityLiving entityHost;
   private final IRangedAttackMob rangedAttackEntityHost;
   private EntityLivingBase attackTarget;
@@ -28,6 +30,7 @@ public class EntityAIMountedArrowAttack extends EntityAIBase {
   private int runAwayTimer = 0;
   private PathPoint runningAwayTo;
   private boolean useRunAwayTactic;
+
   public EntityAIMountedArrowAttack(IRangedAttackMob host, double moveSpeed, double mountedEntityMoveSpeed, int minAttackTime, int maxAttackTime,
       float attackRange, boolean useRunAwayTactic) {
     timeUntilNextAttack = -1;
@@ -42,6 +45,7 @@ public class EntityAIMountedArrowAttack extends EntityAIBase {
     this.useRunAwayTactic = useRunAwayTactic;
     setMutexBits(3);
   }
+
   @Override
   public boolean shouldExecute() {
     EntityLivingBase toAttack = entityHost.getAttackTarget();
@@ -53,10 +57,12 @@ public class EntityAIMountedArrowAttack extends EntityAIBase {
       return true;
     }
   }
+
   @Override
   public boolean shouldContinueExecuting() {
     return shouldExecute() || !getNavigator().noPath();
   }
+
   @Override
   public void resetTask() {
     attackTarget = null;
@@ -65,6 +71,7 @@ public class EntityAIMountedArrowAttack extends EntityAIBase {
     runAwayTimer = 0;
     runningAwayTo = null;
   }
+
   /**
    * Updates the task
    */
@@ -111,6 +118,7 @@ public class EntityAIMountedArrowAttack extends EntityAIBase {
       timeUntilNextAttack = MathHelper.floor(rangeRatio * (maxRangedAttackTime - minRangedAttackTime) + minRangedAttackTime);
     }
   }
+
   private boolean isRunningAway() {
     if (runningAwayTo == null) {
       return false;
@@ -122,6 +130,7 @@ public class EntityAIMountedArrowAttack extends EntityAIBase {
     PathPoint dest = getNavigator().getPath().getFinalPathPoint();
     return dest.equals(runningAwayTo);
   }
+
   private boolean runAway() {
     if (!useRunAwayTactic) {
       return false;
@@ -150,12 +159,14 @@ public class EntityAIMountedArrowAttack extends EntityAIBase {
     }
     return res;
   }
+
   private double getMoveSpeed() {
     if (entityHost.isRiding()) {
       return mountedEntityMoveSpeed;
     }
     return entityMoveSpeed;
   }
+
   protected PathNavigate getNavigator() {
     return entityHost.getNavigator();
   }

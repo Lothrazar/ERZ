@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.owl;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.pathfinding.Path;
@@ -12,45 +13,56 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class FlyingPathNavigate extends PathNavigateGround {
+
   private int totalTicks;
   private int ticksAtLastPos;
   private Vec3d lastPosCheck = new Vec3d(0.0D, 0.0D, 0.0D);
   private boolean forceFlying = false;
+
   public FlyingPathNavigate(EntityLiving entitylivingIn, World worldIn) {
     super(entitylivingIn, worldIn);
   }
+
   public boolean isForceFlying() {
     return forceFlying && !noPath();
   }
+
   public void setForceFlying(boolean forceFlying) {
     this.forceFlying = forceFlying;
   }
+
   @Override
   protected PathFinder getPathFinder() {
     nodeProcessor = new FlyNodeProcessor();
     return new FlyingPathFinder(nodeProcessor);
   }
+
   @Override
   protected boolean canNavigate() {
     return true;
   }
+
   @Override
   protected Vec3d getEntityPosition() {
     int y = (int) (this.entity.getEntityBoundingBox().minY + 0.5D);
     return new Vec3d(this.entity.posX, y, this.entity.posZ);
   }
+
   public boolean tryFlyToXYZ(double x, double y, double z, double speedIn) {
     Path pathentity = getPathToPos(new BlockPos((double) MathHelper.floor(x), (double) ((int) y), (double) MathHelper.floor(z)));
     return setPath(pathentity, speedIn, true);
   }
+
   public boolean tryFlyToPos(double x, double y, double z, double speedIn) {
     Path pathentity = getPathToXYZ(x, y, z);
     return setPath(pathentity, speedIn, true);
   }
+
   public boolean tryFlyToEntityLiving(Entity entityIn, double speedIn) {
     Path pathentity = getPathToEntityLiving(entityIn);
     return pathentity != null ? setPath(pathentity, speedIn, true) : false;
   }
+
   public boolean setPath(Path path, double speed, boolean forceFlying) {
     if (super.setPath(path, speed)) {
       // String str = "FlyingPathNavigate.setPath:";
@@ -66,10 +78,12 @@ public class FlyingPathNavigate extends PathNavigateGround {
     }
     return false;
   }
+
   @Override
   public boolean setPath(Path path, double speed) {
     return setPath(path, speed, false);
   }
+
   @Override
   public void onUpdateNavigation() {
     ++totalTicks;
@@ -93,6 +107,7 @@ public class FlyingPathNavigate extends PathNavigateGround {
       }
     }
   }
+
   @Override
   protected void pathFollow() {
     Vec3d entPos = getEntityPosition();
@@ -118,6 +133,7 @@ public class FlyingPathNavigate extends PathNavigateGround {
     }
     checkForStuck(entPos);
   }
+
   @Override
   protected boolean isDirectPathBetweenPoints(Vec3d startPos, Vec3d endPos, int sizeX, int sizeY, int sizeZ) {
     Vec3d target = new Vec3d(endPos.x, endPos.y + this.entity.height * 0.5D, endPos.z);
@@ -131,10 +147,12 @@ public class FlyingPathNavigate extends PathNavigateGround {
     }
     return true;
   }
+
   private boolean isClear(Vec3d startPos, Vec3d target) {
     RayTraceResult hit = world.rayTraceBlocks(startPos, target, true, true, false);
     return hit == null || hit.typeOfHit == RayTraceResult.Type.MISS;
   }
+
   @Override
   protected void checkForStuck(Vec3d positionVec3) {
     if (totalTicks - ticksAtLastPos > 10 && positionVec3.squareDistanceTo(lastPosCheck) < 0.0625) {

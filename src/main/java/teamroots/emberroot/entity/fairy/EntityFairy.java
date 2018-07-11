@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.fairy;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -33,6 +34,7 @@ import teamroots.emberroot.entity.ai.EntityAITemptFlying;
 import teamroots.emberroot.proxy.ClientProxy;
 
 public class EntityFairy extends EntityFlying {
+
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityFairy.class, DataSerializers.VARINT);
   public static final DataParameter<BlockPos> spawnPosition = EntityDataManager.<BlockPos> createKey(EntityFairy.class, DataSerializers.BLOCK_POS);
   public static final DataParameter<BlockPos> targetPosition = EntityDataManager.<BlockPos> createKey(EntityFairy.class, DataSerializers.BLOCK_POS);
@@ -40,11 +42,14 @@ public class EntityFairy extends EntityFlying {
   //public static final DataParameter<Boolean> sitting = EntityDataManager.<Boolean> createKey(EntityFairy.class, DataSerializers.BOOLEAN);
   protected static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.<Optional<UUID>> createKey(EntityFairy.class, DataSerializers.OPTIONAL_UNIQUE_ID);
   public static final String NAME = "fairies";
+
   public static enum VariantColors {
     GREEN, PURPLE, PINK, ORANGE, BLUE, YELLOW, RED;
+
     public String nameLower() {
       return this.name().toLowerCase();
     }
+
     //not related to actual enum, we just have RGB for each color
     public int red() {
       switch (this) {
@@ -65,6 +70,7 @@ public class EntityFairy extends EntityFlying {
       }
       return 0;
     }
+
     public int green() {
       switch (this) {
         case GREEN://0
@@ -84,6 +90,7 @@ public class EntityFairy extends EntityFlying {
       }
       return 0;
     }
+
     public int blue() {
       switch (this) {
         case GREEN://0
@@ -104,35 +111,43 @@ public class EntityFairy extends EntityFlying {
       return 0;
     }
   }
+
   public static Random random = new Random();
   public static int counter = 0;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFairy.class, EnumCreatureType.CREATURE);
   public static boolean tameWithGlowstone;
+
   //public UUID owner = null;
   public EntityFairy(World world) {
     super(world);
     setSize(0.45f, 0.6f);
     this.experienceValue = 10;
   }
+
   @Override
   protected void initEntityAI() {
     this.tasks.addTask(0, new EntityAITemptFlying(this, 66.95D, Items.GLOWSTONE_DUST, false));
     this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
     this.tasks.addTask(7, new EntityAILookIdle(this));
   }
+
   public void setOwnerId(@Nullable UUID u) {
     this.dataManager.set(OWNER_UNIQUE_ID, Optional.fromNullable(u));
   }
+
   @Nullable
   public UUID getOwnerId() {
     return (UUID) ((Optional) this.dataManager.get(OWNER_UNIQUE_ID)).orNull();
   }
+
   public void setTamed(boolean tamed) {
     getDataManager().set(tame, tamed);
   }
+
   public boolean isTamed() {
     return getDataManager().get(tame);
   }
+
   @Override
   public boolean processInteract(EntityPlayer player, EnumHand hand) {
     if (tameWithGlowstone && player.getHeldItem(hand).isItemEqualIgnoreDurability(new ItemStack(Items.GLOWSTONE_DUST))) {
@@ -163,6 +178,7 @@ public class EntityFairy extends EntityFlying {
     //    }
     return false;
   }
+
   @SideOnly(Side.CLIENT)
   protected void playTameEffect(int count) {
     EnumParticleTypes enumparticletypes = EnumParticleTypes.HEART;
@@ -173,6 +189,7 @@ public class EntityFairy extends EntityFlying {
       this.world.spawnParticle(enumparticletypes, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d0, d1, d2);
     }
   }
+
   @SideOnly(Side.CLIENT)
   protected void playUnTameEffect(int count) {
     EnumParticleTypes enumparticletypes = EnumParticleTypes.SMOKE_LARGE;
@@ -183,26 +200,32 @@ public class EntityFairy extends EntityFlying {
       this.world.spawnParticle(enumparticletypes, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d0, d1, d2);
     }
   }
+
   public Integer getVariant() {
     return getDataManager().get(variant);
   }
+
   public VariantColors getVariantEnum() {
     return VariantColors.values()[getVariant()];
   }
+
   public float getRed() {
     return getVariantEnum().red();
   }
+
   public float getGreen() {
     return getVariantEnum().green();
   }
+
   public float getBlue() {
     return getVariantEnum().blue();
   }
+
   @Override
   public boolean canBePushed() {
     return false;
   }
- 
+
   @Override
   public void onUpdate() {
     super.onUpdate();
@@ -215,6 +238,7 @@ public class EntityFairy extends EntityFlying {
       }
     }
   }
+
   @SideOnly(Side.CLIENT)
   public static void spawnParticleGlow(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {
     if (EmberRootZoo.proxy instanceof ClientProxy) {
@@ -224,6 +248,7 @@ public class EntityFairy extends EntityFlying {
       }
     }
   }
+
   @Override
   protected void updateAITasks() {
     super.updateAITasks();
@@ -248,7 +273,6 @@ public class EntityFairy extends EntityFlying {
         int count = 1;
         double followRange = config.settings.followRange;
         if (this.getDistanceSqToEntity(p) < followRange) {
-          
           //this.playTameEffect(2);
           List<EntityFairy> list = world.getEntitiesWithinAABB(EntityFairy.class, p.getEntityBoundingBox().expand(followRange, followRange, followRange));
           List<EntityFairy> prunedList = new ArrayList<EntityFairy>();
@@ -348,18 +372,23 @@ public class EntityFairy extends EntityFlying {
       this.rotationYaw += f1;
     }
   }
+
   @Override
   public boolean doesEntityNotTriggerPressurePlate() {
     return true;
   }
+
   @Override
   protected boolean canTriggerWalking() {
     return false;
   }
+
   @Override
   public void fall(float distance, float damageMultiplier) {}
+
   @Override
   protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {}
+
   @Override
   protected void entityInit() {
     super.entityInit();
@@ -370,28 +399,34 @@ public class EntityFairy extends EntityFlying {
     this.getDataManager().register(spawnPosition, new BlockPos(0, -1, 0));
     this.getDataManager().register(targetPosition, new BlockPos(0, -1, 0));
   }
+
   @Override
   public boolean isAIDisabled() {
     return false;
   }
+
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
+
   @Override
   public ResourceLocation getLootTable() {
     String colour = getVariantEnum().nameLower();
     return new ResourceLocation(Const.MODID, "entity/fairy_" + colour);
   }
+
   @Override
   public float getEyeHeight() {
     return this.height;
   }
+
   @Override
   public int getBrightnessForRender() {
     return 255;
   }
+
   @Override
   public void readEntityFromNBT(NBTTagCompound compound) {
     super.readEntityFromNBT(compound);
@@ -419,6 +454,7 @@ public class EntityFairy extends EntityFlying {
     getDataManager().set(targetPosition, new BlockPos(compound.getInteger("targetX"), compound.getInteger("targetY"), compound.getInteger("targetZ")));
     getDataManager().setDirty(targetPosition);
   }
+
   @Override
   public void writeEntityToNBT(NBTTagCompound compound) {
     super.writeEntityToNBT(compound);

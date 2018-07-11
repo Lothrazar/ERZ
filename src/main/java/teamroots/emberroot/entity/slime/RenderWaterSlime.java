@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.slime;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -10,10 +11,12 @@ import teamroots.emberroot.config.ConfigManager;
 import teamroots.emberroot.util.RenderUtil;
 
 public class RenderWaterSlime extends RenderLiving<EntitySlime> {//RenderSlime {
+
   public RenderWaterSlime(RenderManager rm, ModelWaterSlime mainModel, float shadowSize) {
     super(rm, mainModel, shadowSize);
     this.addLayer(new LayerSlime(this));
   }
+
   /**
    * Renders the desired {@code T} type Entity.
    */
@@ -24,6 +27,7 @@ public class RenderWaterSlime extends RenderLiving<EntitySlime> {//RenderSlime {
     if (ConfigManager.renderDebugHitboxes)
       RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
+
   /**
    * Allows the render to do state modifications necessary before the model is rendered.
    */
@@ -36,6 +40,7 @@ public class RenderWaterSlime extends RenderLiving<EntitySlime> {//RenderSlime {
     float f3 = 1.0F / (f2 + 1.0F);
     GlStateManager.scale(f3 * f1, 1.0F / f3 * f1, f3 * f1);
   }
+
   //private static final ResourceLocation SLIME_TEXTURES = new ResourceLocation(Const.MODID,"textures/entity/slime_water.png");
   @Override
   protected ResourceLocation getEntityTexture(EntitySlime entity) {
@@ -43,7 +48,9 @@ public class RenderWaterSlime extends RenderLiving<EntitySlime> {//RenderSlime {
     String colour = slime.getVariantEnum().nameLower();
     return new ResourceLocation(Const.MODID, "textures/entity/slime_" + colour + ".png");
   }
+
   public static class Factory implements IRenderFactory<EntityRainbowSlime> {
+
     @Override
     public RenderWaterSlime createRenderFor(RenderManager manager) {
       return new RenderWaterSlime(manager, ModelWaterSlime.instance, 0);

@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.owl;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -9,6 +10,7 @@ import net.minecraft.util.math.MathHelper;
  * ModelOwl - Yulife Created using Tabula 5.1.0
  */
 public class ModelOwl extends ModelBase {
+
   public ModelRenderer body;
   public ModelRenderer head;
   public ModelRenderer legL;
@@ -25,6 +27,7 @@ public class ModelOwl extends ModelBase {
   public ModelRenderer tail2;
   public ModelRenderer tail3;
   private boolean useEars = true;
+
   public ModelOwl() {
     textureWidth = 64;
     textureHeight = 32;
@@ -101,6 +104,7 @@ public class ModelOwl extends ModelBase {
     legL.addChild(footL);
     head.addChild(beak);
   }
+
   /**
    * This is a helper function from Tabula to set the rotation of model parts
    */
@@ -109,6 +113,7 @@ public class ModelOwl extends ModelBase {
     modelRenderer.rotateAngleY = y;
     modelRenderer.rotateAngleZ = z;
   }
+
   @Override
   public void render(Entity entity, float time, float limbSwing, float f2, float headY, float headX, float scale) {
     super.render(entity, time, limbSwing, f2, headY, headX, scale);
@@ -141,6 +146,7 @@ public class ModelOwl extends ModelBase {
       GlStateManager.popMatrix();
     }
   }
+
   @Override
   public void setRotationAngles(float limbSwing1, float limbSwing2, float rotationAngle, float headY, float headX, float yOffset, Entity entity) {
     head.rotateAngleX = headX / (180F / (float) Math.PI);
