@@ -41,7 +41,7 @@ import teamroots.emberroot.entity.wolfdire.EntityDireWolf;
 import teamroots.emberroot.entity.wolftimber.EntityTimberWolf;
 import teamroots.emberroot.proxy.CommonProxy;
 
-@Mod(modid = Const.MODID, name = EmberRootZoo.MODNAME)
+@Mod(modid = Const.MODID, name = EmberRootZoo.MODNAME, updateJSON = "https://raw.githubusercontent.com/PrinceOfAmber/ERZ/master/update.json")
 public class EmberRootZoo {
   public static final String MODNAME = "EmberRootZoo";
   public static final String DEPENDENCIES = "";

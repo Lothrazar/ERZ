@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBreakDoor;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -17,7 +18,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -25,7 +25,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
-import teamroots.emberroot.entity.ai.EntityAIMountedArrowAttack;
 import teamroots.emberroot.entity.ai.EntityAIMountedAttackOnCollide;
 import teamroots.emberroot.entity.mount.EntityFallenMount;
 import teamroots.emberroot.util.EntityUtil;
@@ -57,6 +56,7 @@ public class EntityFallenKnight extends EntitySkeleton {
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
+    this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20D);//was 020
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
   @Override
@@ -93,6 +93,7 @@ public class EntityFallenKnight extends EntitySkeleton {
     }
     firstUpdate = false;
     if (!isMounted == isRidingMount()) {
+      System.out.println("attack on collide reset");
       getAiAttackOnCollide().resetTask();
 //      getAiArrowAttack().resetTask();
       getNavigator().clearPathEntity();
@@ -119,7 +120,8 @@ public class EntityFallenKnight extends EntitySkeleton {
   }
   @Override
   public void setCombatTask() {
- 
+    super.setCombatTask();
+    if (this.isMounted)
       tasks.addTask(4, getAiAttackOnCollide());
  
   }
