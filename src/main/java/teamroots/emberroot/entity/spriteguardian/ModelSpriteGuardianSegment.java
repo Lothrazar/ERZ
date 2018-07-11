@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.spriteguardian;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -7,6 +8,7 @@ import net.minecraft.util.math.Vec3d;
 import teamroots.emberroot.util.Util;
 
 public class ModelSpriteGuardianSegment extends ModelBase {
+
   public static ModelSpriteGuardianSegment instance;
   //fields
   ModelRenderer head1;
@@ -26,6 +28,7 @@ public class ModelSpriteGuardianSegment extends ModelBase {
   ModelRenderer crest6;
   ModelRenderer crest7;
   ModelRenderer crest8;
+
   public ModelSpriteGuardianSegment() {
     textureWidth = 128;
     textureHeight = 128;
@@ -132,9 +135,11 @@ public class ModelSpriteGuardianSegment extends ModelBase {
     head3.mirror = true;
     setRotation(head3, 0F, 0F, 0F);
   }
+
   public Vec3d getPosFromIndex(EntitySpriteGuardianBoss guardian, int index, float partialTicks) {
     return guardian.pastPositions.get(index);
   }
+
   public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, int index) {
     float scale = scaleFactor;
     super.render(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
@@ -178,6 +183,7 @@ public class ModelSpriteGuardianSegment extends ModelBase {
     GlStateManager.popMatrix();
     GlStateManager.popAttrib();
   }
+
   private void setRotation(ModelRenderer model, float x, float y, float z) {
     model.rotateAngleX = x;
     model.rotateAngleY = y;

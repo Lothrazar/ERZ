@@ -1,4 +1,5 @@
 package teamroots.emberroot.util;
+
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -10,9 +11,11 @@ import net.minecraft.world.World;
 import teamroots.emberroot.data.Point3i;
 
 public class SpawnUtil {
+
   public static boolean findClearGround(World world, Point3i startingLocation, Point3i clearLocation) {
     return findClearGround(world, startingLocation, clearLocation, 2, 10, false);
   }
+
   public static boolean findClearGround(World world, Point3i startingLocation, Point3i clearLocation, int horizRange, int vertRange,
       boolean checkForLivingEntities) {
     //first find some air in the y
@@ -29,9 +32,11 @@ public class SpawnUtil {
     }
     return foundTargetSpace;
   }
+
   public static boolean seachYForClearGround(Point3i target, World world) {
     return seachYForClearGround(target, world, 10, false);
   }
+
   public static boolean seachYForClearGround(Point3i target, World world, int searchRange, boolean checkForLivingEntities) {
     boolean foundY = false;
     for (int i = 0; i < searchRange && !foundY; i++) {
@@ -56,11 +61,13 @@ public class SpawnUtil {
     }
     return foundY && onGround;
   }
+
   public static boolean containsLiving(World world, Point3i blockCoord) {
     AxisAlignedBB bb = new AxisAlignedBB(blockCoord.x, blockCoord.y, blockCoord.z, blockCoord.x + 1, blockCoord.y + 1, blockCoord.z + 1);
     List<?> ents = world.getEntitiesWithinAABB(EntityLivingBase.class, bb);
     return ents != null && !ents.isEmpty();
   }
+
   public static boolean isLiquid(World world, int x, int y, int z) {
     IBlockState bs = world.getBlockState(VecUtil.bpos(x, y, z));
     if (bs == null || bs.getBlock() == null) {
@@ -72,6 +79,7 @@ public class SpawnUtil {
     }
     return false;
   }
+
   public static boolean isSpaceAvailableForSpawn(World worldObj, EntityLiving entity, EntityCreature asCreature, boolean checkEntityCollisions, boolean canSpawnInLiquid) {
     if (asCreature != null && asCreature.getBlockPathWeight(entity.getPosition()) < 0) {
       return false;
@@ -87,12 +95,15 @@ public class SpawnUtil {
     }
     return true;
   }
+
   public static boolean isSpaceAvailableForSpawn(World worldObj, EntityCreature entityCreature, boolean checkEntityCollisions, boolean canSpawnInLiquid) {
     return isSpaceAvailableForSpawn(worldObj, entityCreature, entityCreature, checkEntityCollisions, false);
   }
+
   public static boolean isSpaceAvailableForSpawn(World worldObj, EntityLiving entity, boolean checkEntityCollisions, boolean canSpawnInLiquid) {
     return isSpaceAvailableForSpawn(worldObj, entity, entity instanceof EntityCreature ? ((EntityCreature) entity) : null, checkEntityCollisions, canSpawnInLiquid);
   }
+
   public static boolean isSpaceAvailableForSpawn(World worldObj, EntityLiving spawn, boolean checkEntityCollisions) {
     return isSpaceAvailableForSpawn(worldObj, spawn, checkEntityCollisions, false);
   }

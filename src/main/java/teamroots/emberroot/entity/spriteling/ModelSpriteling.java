@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.spriteling;
+
 //import elucent.roots.entity.EntitySpriteling;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -6,6 +7,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
 public class ModelSpriteling extends ModelBase {
+
   public static ModelBase instance;
   //fields
   ModelRenderer head1;
@@ -13,6 +15,7 @@ public class ModelSpriteling extends ModelBase {
   ModelRenderer head3;
   ModelRenderer head4;
   ModelRenderer tail1;
+
   public ModelSpriteling() {
     textureWidth = 128;
     textureHeight = 128;
@@ -50,6 +53,7 @@ public class ModelSpriteling extends ModelBase {
     head1.addChild(head4);
     head1.addChild(tail1);
   }
+
   @Override
   public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
     GlStateManager.pushAttrib();
@@ -95,6 +99,7 @@ public class ModelSpriteling extends ModelBase {
     GlStateManager.enableLighting();
     GlStateManager.popAttrib();
   }
+
   private void setRotation(ModelRenderer model, float x, float y, float z) {
     model.rotateAngleX = x;
     model.rotateAngleY = y;

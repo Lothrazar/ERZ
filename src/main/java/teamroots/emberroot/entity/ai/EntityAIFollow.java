@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.ai;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
@@ -12,6 +13,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityAIFollow extends EntityAIBase {
+
   private EntityLivingBase target;
   private EntityLiving entity;
   World world;
@@ -21,6 +23,7 @@ public class EntityAIFollow extends EntityAIBase {
   float maxDist;
   float minDist;
   private float oldWaterCost;
+
   public EntityAIFollow(EntityLiving entity, EntityLivingBase target, double followSpeedIn, float minDistIn, float maxDistIn) {
     this.entity = entity;
     this.world = entity.world;
@@ -33,6 +36,7 @@ public class EntityAIFollow extends EntityAIBase {
       throw new IllegalArgumentException("Unsupported mob type for FollowOwnerGoal");
     }
   }
+
   @Override
   public boolean shouldExecute() {
     if (this.entity != null && this.target != null) {
@@ -43,23 +47,28 @@ public class EntityAIFollow extends EntityAIBase {
     }
     return false;
   }
+
   public boolean continueExecuting() {
     return !this.pathfinder.noPath() && this.entity.getDistanceSqToEntity(this.target) > (double) (this.maxDist * this.maxDist);
   }
+
   public void startExecuting() {
     this.timeToRecalcPath = 0;
     this.oldWaterCost = this.entity.getPathPriority(PathNodeType.WATER);
     this.entity.setPathPriority(PathNodeType.WATER, 0.0F);
   }
+
   public void resetTask() {
     this.target = null;
     this.pathfinder.clearPathEntity();
     this.entity.setPathPriority(PathNodeType.WATER, this.oldWaterCost);
   }
+
   private boolean isEmptyBlock(BlockPos pos) {
     IBlockState iblockstate = this.world.getBlockState(pos);
     return iblockstate.getMaterial() == Material.AIR ? true : !iblockstate.isFullCube();
   }
+
   public void updateTask() {
     this.entity.setHealth(0);
     this.entity.getLookHelper().setLookPositionWithEntity(this.target, 10.0F, (float) this.entity.getVerticalFaceSpeed());

@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.ai;
+
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -9,6 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import teamroots.emberroot.util.EntityUtil;
 
 public class EntityAIFlyingFindPerch extends EntityAIBase {
+
   private EntityCreature entity;
   private double xPosition;
   private double yPosition;
@@ -17,15 +19,18 @@ public class EntityAIFlyingFindPerch extends EntityAIBase {
   private int executionChance;
   private int searchRange = 6;
   private int searchAttempts = 30;
+
   public EntityAIFlyingFindPerch(EntityCreature creatureIn, double speedIn) {
     this(creatureIn, speedIn, 120);
   }
+
   public EntityAIFlyingFindPerch(EntityCreature creatureIn, double speedIn, int chance) {
     entity = creatureIn;
     speed = speedIn;
     executionChance = chance;
     setMutexBits(1);
   }
+
   @Override
   public boolean shouldExecute() {
     int chance = executionChance;
@@ -49,21 +54,25 @@ public class EntityAIFlyingFindPerch extends EntityAIBase {
     }
     return false;
   }
+
   private boolean isOnLeaves() {
     IBlockState bs = entity.getEntityWorld().getBlockState(entity.getPosition().down());
     Block block = bs.getBlock();
     return block.getMaterial(bs) == Material.LEAVES;
   }
+
   @Override
   public boolean shouldContinueExecuting() {
     return !entity.getNavigator().noPath();
   }
+
   @Override
   public void startExecuting() {
     if (!entity.getNavigator().tryMoveToXYZ(xPosition, yPosition, zPosition, speed)) {
       //      System.out.println("EntityAIFlyingFindPerch.startExecuting: No path");
     }
   }
+
   public void setExecutionChance(int newchance) {
     executionChance = newchance;
   }

@@ -1,4 +1,5 @@
 package teamroots.emberroot.util;
+
 import org.lwjgl.opengl.GL11;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,6 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public final class RenderUtil {
+
   public static void renderEntityBoundingBox(EntityLiving entity, double x, double y, double z) {
     AxisAlignedBB bb = entity.getEntityBoundingBox();
     if (bb != null) {

@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.ai;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -8,6 +9,7 @@ import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.util.math.MathHelper;
 
 public class EntityAIRangedAttack extends EntityAIBase {
+
   private final EntityLiving entityHost;
   private final IRangedAttackMob rangedAttackEntityHost;
   private EntityLivingBase attackTarget;
@@ -19,9 +21,11 @@ public class EntityAIRangedAttack extends EntityAIBase {
   private int maxRangedAttackTime;
   private float attackRange;
   private float attackRangeSq;
+
   public EntityAIRangedAttack(IRangedAttackMob host, double moveSpeed, int timeBetweenAttacks, float attackRange) {
     this(host, moveSpeed, timeBetweenAttacks, timeBetweenAttacks, attackRange);
   }
+
   public EntityAIRangedAttack(IRangedAttackMob host, double moveSpeed, int minTimeBetweenAttacks, int maxTimeBetweenAttacks, float range) {
     timeUntilNextAttack = -1;
     rangedAttackEntityHost = host;
@@ -33,6 +37,7 @@ public class EntityAIRangedAttack extends EntityAIBase {
     attackRangeSq = attackRange * attackRange;
     setMutexBits(3);
   }
+
   @Override
   public boolean shouldExecute() {
     EntityLivingBase target = entityHost.getAttackTarget();
@@ -42,23 +47,28 @@ public class EntityAIRangedAttack extends EntityAIBase {
     attackTarget = target;
     return true;
   }
+
   public EntityLivingBase getAttackTarget() {
     return attackTarget;
   }
+
   @Override
   public boolean shouldContinueExecuting() {
     return shouldExecute() || !entityHost.getNavigator().noPath();
   }
+
   protected double getTargetDistance() {
     IAttributeInstance iattributeinstance = entityHost.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE);
     return iattributeinstance == null ? 16.0D : iattributeinstance.getAttributeValue();
   }
+
   @Override
   public void resetTask() {
     attackTarget = null;
     timeTargetVisible = 0;
     timeUntilNextAttack = -1;
   }
+
   @Override
   public void updateTask() {
     double distToTargetSq = entityHost.getDistanceSq(attackTarget.posX, attackTarget.getEntityBoundingBox().minY, attackTarget.posZ);

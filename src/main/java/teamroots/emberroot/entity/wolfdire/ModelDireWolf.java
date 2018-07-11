@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.wolfdire;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -6,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 
 public class ModelDireWolf extends ModelBase {
+
   /** main box for the wolf head */
   public ModelRenderer wolfHeadMain;
   /** The wolf's body */
@@ -22,6 +24,7 @@ public class ModelDireWolf extends ModelBase {
   ModelRenderer wolfTail;
   /** The wolf's mane */
   ModelRenderer wolfMane;
+
   public ModelDireWolf() {
     float f = 0.0F;
     float f1 = 13.5F;
@@ -55,6 +58,7 @@ public class ModelDireWolf extends ModelBase {
     wolfHeadMain.setTextureOffset(16, 18).addBox(1.5F, -5.0F, -1.5F, 1, 2, 2, f);
     wolfHeadMain.setTextureOffset(0, 14).addBox(-1.5F, 0.0F, -7.0F, 3, 3, 4, f);
   }
+
   /**
    * Sets the models various rotation angles then renders the model.
    */
@@ -90,6 +94,7 @@ public class ModelDireWolf extends ModelBase {
     wolfMane.render(p_78088_7_);
     //    }
   }
+
   @Override
   public void setLivingAnimations(EntityLivingBase entity, float p_78086_2_, float p_78086_3_, float p_78086_4_) {
     EntityDireWolf entitywolf = (EntityDireWolf) entity;
@@ -135,6 +140,7 @@ public class ModelDireWolf extends ModelBase {
     //    wolfBody.rotateAngleZ = entitywolf.getShakeAngle(p_78086_4_, -0.16F);
     //    wolfTail.rotateAngleZ = entitywolf.getShakeAngle(p_78086_4_, -0.2F);
   }
+
   @Override
   public void setRotationAngles(float p_78087_1_, float p_78087_2_, float p_78087_3_, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity p_78087_7_) {
     super.setRotationAngles(p_78087_1_, p_78087_2_, p_78087_3_, p_78087_4_, p_78087_5_, p_78087_6_, p_78087_7_);

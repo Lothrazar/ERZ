@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.endermini;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -46,13 +47,17 @@ import teamroots.emberroot.config.ConfigSpawnEntity;
  * Original author: https://github.com/CrazyPants
  */
 public class EntityEnderminy extends EntityMob {
+
   public static final String NAME = "enderminy";
+
   public static enum VariantColors {
     GREEN, BLUE, PURPLE;
+
     public String nameLower() {
       return this.name().toLowerCase();
     }
   }
+
   public static final DataParameter<Float> size = EntityDataManager.<Float> createKey(EntityEnderminy.class, DataSerializers.FLOAT);
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityEnderminy.class, DataSerializers.VARINT);
   private static final int MAX_RND_TP_DISTANCE = 32;
@@ -66,16 +71,15 @@ public class EntityEnderminy extends EntityMob {
   public static boolean attackIfLookingAtPlayer = false;
   //  private boolean attackCreepers = Config.enderminyAttacksCreepers;
   private boolean groupAgroEnabled = true;
+
   public EntityEnderminy(World world) {
     super(world);
     stepHeight = 1.0F;
-
   }
+
   @Override
   protected void initEntityAI() {
     super.initEntityAI();
-    
-    
     tasks.addTask(0, new EntityAISwimming(this));
     tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
     tasks.addTask(7, new EntityAIWander(this, 1.0D));
@@ -85,18 +89,17 @@ public class EntityEnderminy extends EntityMob {
     if (attackIfLookingAtPlayer) {
       targetTasks.addTask(2, new AIFindPlayer());
     }
-    
     //    if(attackCreepers) {
     //      targetTasks.addTask(2, new EntityAINearestAttackableTarget<EntityCreeper>(this, EntityCreeper.class, true, true));
     //    }
-    
   }
+
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
-
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
+
   @Override
   protected void entityInit() {
     super.entityInit();
@@ -106,6 +109,7 @@ public class EntityEnderminy extends EntityMob {
     dataManager.register(size, sizeRand);
     setSize(0.6F * sizeRand, 2.9F * (sizeRand / 2));
   }
+
   //  @Override
   //  public boolean getCanSpawnHere() {
   //    boolean passedGrassCheck = true;
@@ -120,12 +124,15 @@ public class EntityEnderminy extends EntityMob {
   public Integer getVariant() {
     return dataManager.get(variant);
   }
+
   public Float getSizeSaved() {
     return dataManager.get(size);
   }
+
   public VariantColors getVariantEnum() {
     return VariantColors.values()[getVariant()];
   }
+
   /**
    * Checks to see if this enderman should be attacking this player
    */
@@ -149,6 +156,7 @@ public class EntityEnderminy extends EntityMob {
       return dotTangent > 1.0D - 0.025D / distance;
     }
   }
+
   public void onLivingUpdate() {
     if (this.world.isRemote) {
       for (int i = 0; i < 2; ++i) {
@@ -160,6 +168,7 @@ public class EntityEnderminy extends EntityMob {
     isJumping = false;
     super.onLivingUpdate();
   }
+
   protected void updateAITasks() {
     if (isWet()) {
       attackEntityFrom(DamageSource.DROWN, 1.0F);
@@ -169,15 +178,18 @@ public class EntityEnderminy extends EntityMob {
     }
     super.updateAITasks();
   }
+
   protected boolean teleportRandomly(int distance) {
     double d0 = posX + (rand.nextDouble() - 0.5D) * distance;
     double d1 = posY + rand.nextInt(distance + 1) - distance / 2;
     double d2 = posZ + (rand.nextDouble() - 0.5D) * distance;
     return teleportTo(d0, d1, d2);
   }
+
   protected boolean teleportRandomly() {
     return teleportRandomly(MAX_RND_TP_DISTANCE);
   }
+
   protected boolean teleportToEntity(Entity p_70816_1_) {
     Vec3d vec3 = new Vec3d(posX - p_70816_1_.posX, getEntityBoundingBox().minY + height / 2.0F - p_70816_1_.posY
         + p_70816_1_.getEyeHeight(), posZ - p_70816_1_.posZ);
@@ -188,6 +200,7 @@ public class EntityEnderminy extends EntityMob {
     double d3 = posZ + (rand.nextDouble() - 0.5D) * 8.0D - vec3.z * d0;
     return teleportTo(d1, d2, d3);
   }
+
   protected boolean teleportTo(double x, double y, double z) {
     EnderTeleportEvent event = new EnderTeleportEvent(this, x, y, z, 0);
     if (MinecraftForge.EVENT_BUS.post(event)) {
@@ -242,18 +255,22 @@ public class EntityEnderminy extends EntityMob {
     playSound(SoundEvents.ENTITY_ENDERMEN_TELEPORT, 1.0F, 1.0F);
     return true;
   }
+
   @Override
   protected SoundEvent getAmbientSound() {
     return isScreaming() ? SoundEvents.ENTITY_ENDERMEN_SCREAM : SoundEvents.ENTITY_ENDERMEN_AMBIENT;
   }
+
   @Override
   protected SoundEvent getHurtSound(DamageSource s) {
     return SoundEvents.ENTITY_ENDERMEN_HURT;
   }
+
   @Override
   protected SoundEvent getDeathSound() {
     return SoundEvents.ENTITY_ENDERMEN_DEATH;
   }
+
   /**
    * Called when the entity is attacked.
    */
@@ -293,6 +310,7 @@ public class EntityEnderminy extends EntityMob {
     }
     return res;
   }
+
   private void doGroupArgo() {
     if (!groupAgroEnabled) {
       return;
@@ -311,20 +329,26 @@ public class EntityEnderminy extends EntityMob {
       }
     }
   }
+
   public boolean isScreaming() {
     return dataManager.get(SCREAMING_INDEX);
   }
+
   public void setScreaming(boolean p_70819_1_) {
     dataManager.set(SCREAMING_INDEX, Boolean.valueOf(p_70819_1_));
   }
+
   class AIFindPlayer extends EntityAINearestAttackableTarget<EntityPlayer> {
+
     private EntityPlayer targetPlayer;
     private int stareTimer;
     private int teleportDelay;
     private EntityEnderminy enderminy = EntityEnderminy.this;
+
     public AIFindPlayer() {
       super(EntityEnderminy.this, EntityPlayer.class, true);
     }
+
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
@@ -341,6 +365,7 @@ public class EntityEnderminy extends EntityMob {
         return true;
       }
     }
+
     /**
      * Execute a one shot task or start executing a continuous task
      */
@@ -349,6 +374,7 @@ public class EntityEnderminy extends EntityMob {
       stareTimer = 5;
       teleportDelay = 0;
     }
+
     /**
      * Resets the task
      */
@@ -360,6 +386,7 @@ public class EntityEnderminy extends EntityMob {
       iattributeinstance.removeModifier(EntityEnderminy.attackingSpeedBoostModifier);
       super.resetTask();
     }
+
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
@@ -379,6 +406,7 @@ public class EntityEnderminy extends EntityMob {
         return super.shouldContinueExecuting();
       }
     }
+
     /**
      * Updates the task
      */
@@ -411,6 +439,7 @@ public class EntityEnderminy extends EntityMob {
       }
     }
   }
+
   @Override
   public ResourceLocation getLootTable() {
     return new ResourceLocation(Const.MODID, "entity/ender_mini");//TODO: rng ender pearl

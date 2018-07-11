@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.sprite.particle;
+
 import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
@@ -8,6 +9,7 @@ import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 
 public class ParticleMagicSparkleScalable extends Particle {
+
   Random random = new Random();
   public double colorR = 0;
   public double colorG = 0;
@@ -15,6 +17,7 @@ public class ParticleMagicSparkleScalable extends Particle {
   public int lifetime = 80;
   public float initScale = 0;
   public ResourceLocation texture = new ResourceLocation(Const.MODID, "textures/entity/sparkle");
+
   public ParticleMagicSparkleScalable(World worldIn, int lifetime, double x, double y, double z, double vx, double vy, double vz, float scale, double r, double g, double b) {
     super(worldIn, x, y, z, 0, 0, 0);
     this.colorR = r;
@@ -40,10 +43,12 @@ public class ParticleMagicSparkleScalable extends Particle {
     TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(texture.toString());
     this.setParticleTexture(sprite);
   }
+
   @Override
   public int getBrightnessForRender(float pTicks) {
     return 255;
   }
+
   //	@Override
   //	public boolean isTransparent(){
   //		return true;
@@ -53,12 +58,11 @@ public class ParticleMagicSparkleScalable extends Particle {
   public int getFXLayer() {
     return 1;
   }
+
   @Override
   public void onUpdate() {
     super.onUpdate();
-    /*
-     * this.motionX *= 0.9; this.motionY *= 0.9; this.motionZ *= 0.9;
-     */
+    /* this.motionX *= 0.9; this.motionY *= 0.9; this.motionZ *= 0.9; */
     if (random.nextInt(3) == 0 && this.particleAge < this.particleMaxAge) {
       this.particleAge++;
     }

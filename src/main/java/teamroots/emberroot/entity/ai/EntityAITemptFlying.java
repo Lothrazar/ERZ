@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.ai;
+
 import java.util.Set;
 import com.google.common.collect.Sets;
 import net.minecraft.entity.EntityLiving;
@@ -8,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class EntityAITemptFlying extends EntityAIBase {
+
   private static final double RANGE = 64.0D;
   /** The entity using this AI that is tempted by the player. */
   private final EntityLiving temptedEntity;
@@ -35,9 +37,11 @@ public class EntityAITemptFlying extends EntityAIBase {
    * Whether the entity using this AI will be scared by the tempter's sudden movement.
    */
   private final boolean scaredByPlayerMovement;
+
   public EntityAITemptFlying(EntityLiving temptedEntityIn, double speedIn, Item temptItemIn, boolean scaredByPlayerMovementIn) {
     this(temptedEntityIn, speedIn, scaredByPlayerMovementIn, Sets.newHashSet(temptItemIn));
   }
+
   public EntityAITemptFlying(EntityLiving temptedEntityIn, double speedIn, boolean scaredByPlayerMovementIn, Set<Item> temptItemIn) {
     this.temptedEntity = temptedEntityIn;
     this.speed = speedIn;
@@ -50,6 +54,7 @@ public class EntityAITemptFlying extends EntityAIBase {
     //            throw new IllegalArgumentException("Unsupported mob type for TemptGoal");
     //        }
   }
+
   /**
    * Returns whether the EntityAIBase should begin execution.
    */
@@ -68,9 +73,11 @@ public class EntityAITemptFlying extends EntityAIBase {
       }
     }
   }
+
   protected boolean isTempting(ItemStack stack) {
     return this.temptItem.contains(stack.getItem());
   }
+
   /**
    * Returns whether an in-progress EntityAIBase should continue executing
    */
@@ -94,6 +101,7 @@ public class EntityAITemptFlying extends EntityAIBase {
     }
     return this.shouldExecute();
   }
+
   /**
    * Execute a one shot task or start executing a continuous task
    */
@@ -103,6 +111,7 @@ public class EntityAITemptFlying extends EntityAIBase {
     this.targetZ = this.temptingPlayer.posZ;
     this.isRunning = true;
   }
+
   /**
    * Reset the task's internal state. Called when this task is interrupted by another one
    */
@@ -118,6 +127,7 @@ public class EntityAITemptFlying extends EntityAIBase {
     this.delayTemptCounter = 5;
     this.isRunning = false;
   }
+
   /**
    * Keep ticking a continuous task that has already been started
    */
@@ -132,6 +142,7 @@ public class EntityAITemptFlying extends EntityAIBase {
     this.temptedEntity.getNavigator().tryMoveToEntityLiving(this.temptingPlayer, this.speed);
     //}
   }
+
   /**
    * @see #isRunning
    */

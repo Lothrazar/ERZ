@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.owl;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -45,13 +46,17 @@ import teamroots.emberroot.entity.ai.EntityAIFlyingShortWander;
  * Original author: https://github.com/CrazyPants
  */
 public class EntityOwl extends EntityAnimal implements IFlyingMob {//
+
   public static final String NAME = "owl";
+
   public static enum VariantColors {
     PLAIN, SILVER, BROWN, COPPER;
+
     public String nameLower() {
       return this.name().toLowerCase();
     }
   }
+
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityOwl.class, DataSerializers.VARINT);
   public static SoundEvent SOUND_HOOT;// = new SoundEvent(new ResourceLocation(Const.MODID, "owl.hoot_single"));
   public static SoundEvent SOUND_HOOT_DOUBLE;//= new SoundEvent(new ResourceLocation(Const.MODID, "owl.hoot_double"));
@@ -73,11 +78,11 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
   private float turnRate = 30;
   public int timeUntilNextEgg;
   private float owlSpiderDamageMultiplier = 0.5F;//TODO: CONFIG
+
   public EntityOwl(World worldIn) {
     super(worldIn);
     setSize(0.4F, 0.85F);
     stepHeight = 1.0F;
-
     //    EntityAINearestAttackableTargetBounded<EntitySpider> targetSpiders = new EntityAINearestAttackableTargetBounded<EntitySpider>(this, EntitySpider.class,
     //        true, true);
     //    targetSpiders.setMaxDistanceToTarget(12);
@@ -86,6 +91,7 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
     moveHelper = new FlyingMoveHelper(this);
     timeUntilNextEgg = getNextLayingTime();
   }
+
   @Override
   protected void initEntityAI() {
     super.initEntityAI();
@@ -103,36 +109,44 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
     tasks.addTask(++pri, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
     tasks.addTask(++pri, new EntityAILookIdle(this));
   }
+
   public Integer getVariant() {
     return getDataManager().get(variant);
   }
+
   public VariantColors getVariantEnum() {
     return VariantColors.values()[getVariant()];
   }
+
   @Override
   protected void entityInit() {
     super.entityInit();
     this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
   }
+
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
+
   @Override
   protected PathNavigate createNavigator(World worldIn) {
     return new FlyingPathNavigate(this, worldIn);
   }
+
   @Override
   public FlyingPathNavigate getFlyingNavigator() {
     return (FlyingPathNavigate) getNavigator();
   }
+
   @Override
   public float getBlockPathWeight(BlockPos pos) {
     IBlockState bs = world.getBlockState(pos.down());
     return bs.getBlock().getMaterial(bs) == Material.LEAVES ? 10.0F : 0;
   }
+
   @Override
   public boolean attackEntityAsMob(Entity entityIn) {
     super.attackEntityAsMob(entityIn);
@@ -142,6 +156,7 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
     }
     return entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), attackDamage);
   }
+
   @Override
   public void onLivingUpdate() {
     // setDead();
@@ -192,12 +207,13 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
       motionZ *= groundSpeedRatio;
     }
   }
+
   private boolean isOnLeaves() {
     IBlockState bs = world.getBlockState(getPosition().down());
     return bs.getBlock().getMaterial(bs) == Material.LEAVES;
   }
-  /*
-   * //this ONLY fires serverside. however motionX only affects things clientside. so i moved the collision detection to the udptae
+
+  /* //this ONLY fires serverside. however motionX only affects things clientside. so i moved the collision detection to the udptae
    * 
    * @Override public void moveEntityWithHeading(float strafe, float forward) {
    * 
@@ -220,8 +236,7 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
    * addVelocity(motionX, motionY, motionZ);//moveEntity prevLimbSwingAmount = limbSwingAmount; double deltaX = posX - prevPosX; double deltaZ = posZ - prevPosZ; float f7 = MathHelper.sqrt(deltaX *
    * deltaX + deltaZ * deltaZ) * 4.0F; if (f7 > 1.0F) { f7 = 1.0F; } limbSwingAmount += (f7 - limbSwingAmount) * 0.4F; limbSwing += limbSwingAmount;
    * 
-   * }
-   */
+   * } */
   @Override
   public boolean isEntityInsideOpaqueBlock() {
     if (noClip) {
@@ -247,6 +262,7 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
       return false;
     }
   }
+
   private void calculateWingAngle(float partialTicks) {
     float flapComletion = prevWingRotation + (wingRotation - prevWingRotation) * partialTicks;
     float onGroundTimerThing = prevDestPos + (destPos - prevDestPos) * partialTicks;
@@ -255,6 +271,7 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
       wingAngle = (float) Math.toRadians(3);
     }
   }
+
   private void calculateBodyAngle(float partialTicks) {
     if (onGround) {
       bodyAngle = 7;
@@ -283,26 +300,33 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
       }
     }
   }
+
   public void calculateAngles(float partialTicks) {
     calculateBodyAngle(partialTicks);
     calculateWingAngle(partialTicks);
   }
+
   public float getBodyAngle() {
     return (float) Math.toRadians(bodyAngle);
   }
+
   public float getWingAngle() {
     return wingAngle;
   }
+
   @Override
   public float getEyeHeight() {
     return height;
   }
+
   @Override
   protected void updateFallState(double y, boolean onGroundIn, IBlockState blockIn, BlockPos pos) {}
+
   @Override
   public int getTalkInterval() {
     return 5;//TODO Config.owlHootInterval;
   }
+
   @Override
   public void playLivingSound() {
     SoundEvent snd = getAmbientSound();
@@ -316,6 +340,7 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
     float pitch = 0.8f * getSoundPitch();
     playSound(snd, volume, pitch);
   }
+
   @Override
   protected SoundEvent getAmbientSound() {
     if (world.rand.nextBoolean()) {
@@ -325,18 +350,22 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
       return SOUND_HOOT;
     }
   }
+
   @Override
   protected SoundEvent getHurtSound(DamageSource s) {
     return SOUND_HURT;
   }
+
   @Override
   protected SoundEvent getDeathSound() {
     return SOUND_HURT;
   }
+
   @Override
   public EntityOwl createChild(EntityAgeable ageable) {
     return new EntityOwl(world);
   }
+
   @Override
   public boolean isBreedingItem(ItemStack stack) {
     if (temptSpiderEye == false) {
@@ -344,30 +373,37 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
     }
     return stack != null && stack.getItem() == Items.SPIDER_EYE;
   }
+
   @Override
   protected void playStepSound(BlockPos pos, Block blockIn) {
     playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
   }
+
   @Override
   protected ResourceLocation getLootTable() {
     return new ResourceLocation(Const.MODID, "entity/owl");
   }
+
   @Override
   public float getMaxTurnRate() {
     return turnRate;
   }
+
   @Override
   public float getMaxClimbRate() {
     return climbRate;
   }
+
   @Override
   public EntityCreature asEntityCreature() {
     return this;
   }
+
   private int getNextLayingTime() {
     int dif = owlTimeBetweenEggsMax - owlTimeBetweenEggsMin;
     return owlTimeBetweenEggsMin + rand.nextInt(dif);
   }
+
   @Override
   public void readEntityFromNBT(NBTTagCompound compound) {
     super.readEntityFromNBT(compound);
@@ -377,12 +413,14 @@ public class EntityOwl extends EntityAnimal implements IFlyingMob {//
       getDataManager().setDirty(variant);
     }
   }
+
   @Override
   public void writeEntityToNBT(NBTTagCompound compound) {
     super.writeEntityToNBT(compound);
     compound.setInteger("EggLayTime", this.timeUntilNextEgg);
     compound.setInteger("variant", getDataManager().get(variant));
   }
+
   @Override
   public boolean canBeLeashedTo(EntityPlayer player) {
     boolean ret = !this.getLeashed() && (this instanceof IMob);

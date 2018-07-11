@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.mount;
+
 import java.util.Map;
 import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
@@ -13,6 +14,7 @@ import teamroots.emberroot.config.ConfigManager;
 import teamroots.emberroot.util.RenderUtil;
 
 public class RenderFallenMount extends RenderHorse {
+
   private static final String[] horseArmorTextures = new String[] {
       null,
       "textures/entity/horse/armor/horse_armor_iron.png",
@@ -22,16 +24,19 @@ public class RenderFallenMount extends RenderHorse {
   private static final String textureName = "textures/entity/horse/horse_zombie.png";
   private static final ResourceLocation zombieHorseTexture = new ResourceLocation(textureName);
   private static final Map<String, ResourceLocation> textureCache = Maps.newHashMap();
+
   public RenderFallenMount(RenderManager rm) {
     super(rm);
     //    super(rm, new ModelHorse(), 0.75F);
   }
+
   @Override
   public void doRender(EntityHorse entity, double x, double y, double z, float entityYaw, float partialTicks) {
     super.doRender(entity, x, y, z, entityYaw, partialTicks);
     if (ConfigManager.renderDebugHitboxes)
       RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
+
   @Override
   protected ResourceLocation getEntityTexture(EntityHorse horse) {
     if (horse.getTotalArmorValue() == 0) {
@@ -41,6 +46,7 @@ public class RenderFallenMount extends RenderHorse {
       return getArmoredTexture(horse);
     }
   }
+
   private ResourceLocation getArmoredTexture(EntityHorse horse) {
     String s = horseArmorTextures[horse.getHorseArmorType().ordinal()];
     ResourceLocation resourcelocation = textureCache.get(s);
@@ -51,7 +57,9 @@ public class RenderFallenMount extends RenderHorse {
     }
     return resourcelocation;
   }
+
   public static class Factory implements IRenderFactory<EntityHorse> {
+
     @Override
     public Render<? super EntityHorse> createRenderFor(RenderManager manager) {
       return new RenderFallenMount(manager);

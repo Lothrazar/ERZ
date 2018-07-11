@@ -1,9 +1,11 @@
 package teamroots.emberroot.util;
+
 import java.lang.reflect.Field;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class PPUtil {
+
   private static final Field PREV;
   private static final Field TOT_DIST;
   private static final Field DIST_TO_NEXT;
@@ -16,6 +18,7 @@ public class PPUtil {
     DIST_TO_TARG = ReflectionHelper.findField(PathPoint.class, "distanceToTarget", "field_75834_g");
     INDEX = ReflectionHelper.findField(PathPoint.class, "index", "field_75835_d");
   }
+
   public static PathPoint getPrevious(PathPoint pp) {
     try {
       return (PathPoint) PREV.get(pp);
@@ -24,6 +27,7 @@ public class PPUtil {
       throw new RuntimeException(e);
     }
   }
+
   public static void setPrevious(PathPoint pp, PathPoint prev) {
     try {
       PREV.set(pp, prev);
@@ -32,6 +36,7 @@ public class PPUtil {
       throw new RuntimeException(e);
     }
   }
+
   public static float getTotalPathDistance(PathPoint pp) {
     try {
       return TOT_DIST.getFloat(pp);
@@ -40,6 +45,7 @@ public class PPUtil {
       throw new RuntimeException(e);
     }
   }
+
   public static void setTotalPathDistance(PathPoint pp, float dist) {
     try {
       TOT_DIST.setFloat(pp, dist);
@@ -48,6 +54,7 @@ public class PPUtil {
       throw new RuntimeException(e);
     }
   }
+
   public static float getDistanceToNext(PathPoint pp) {
     try {
       return DIST_TO_NEXT.getFloat(pp);
@@ -56,6 +63,7 @@ public class PPUtil {
       throw new RuntimeException(e);
     }
   }
+
   public static void setDistanceToNext(PathPoint pp, float dist) {
     try {
       DIST_TO_NEXT.setFloat(pp, dist);
@@ -64,6 +72,7 @@ public class PPUtil {
       throw new RuntimeException(e);
     }
   }
+
   public static void setDistanceToTarget(PathPoint pp, float dist) {
     try {
       DIST_TO_TARG.setFloat(pp, dist);
@@ -72,6 +81,7 @@ public class PPUtil {
       throw new RuntimeException(e);
     }
   }
+
   public static void setIndex(PathPoint pp, int i) {
     try {
       INDEX.setInt(pp, i);

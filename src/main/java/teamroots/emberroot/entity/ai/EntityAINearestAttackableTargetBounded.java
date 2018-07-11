@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.ai;
+
 import java.util.Collections;
 import java.util.List;
 import com.google.common.base.Predicate;
@@ -10,32 +11,41 @@ import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.math.AxisAlignedBB;
 
 public class EntityAINearestAttackableTargetBounded<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
+
   private double distanceOverride = -1;
   private final int targetChance;
   private double vertDistOverride = -1;
+
   public EntityAINearestAttackableTargetBounded(EntityCreature creature, Class<T> classTarget, boolean checkSight) {
     this(creature, classTarget, checkSight, false);
   }
+
   public EntityAINearestAttackableTargetBounded(EntityCreature creature, Class<T> classTarget, boolean checkSight, boolean onlyNearby) {
     this(creature, classTarget, 10, checkSight, onlyNearby, (Predicate<? super T>) null);
   }
+
   public EntityAINearestAttackableTargetBounded(EntityCreature creature, Class<T> classTarget, int chance, boolean checkSight, boolean onlyNearby,
       final Predicate<? super T> targetSelector) {
     super(creature, classTarget, chance, checkSight, onlyNearby, targetSelector);
     targetChance = chance;
   }
+
   public double getMaxDistanceToTarget() {
     return distanceOverride;
   }
+
   public void setMaxDistanceToTarget(double distance) {
     this.distanceOverride = distance;
   }
+
   public double getMaxVerticalDistanceToTarget() {
     return distanceOverride;
   }
+
   public void setMaxVerticalDistanceToTarget(double vertDist) {
     vertDistOverride = vertDist;
   }
+
   @Override
   protected double getTargetDistance() {
     if (distanceOverride > 0) {
@@ -43,6 +53,7 @@ public class EntityAINearestAttackableTargetBounded<T extends EntityLivingBase> 
     }
     return super.getTargetDistance();
   }
+
   @Override
   public boolean shouldExecute() {
     if (targetChance > 0 && taskOwner.getRNG().nextInt(targetChance) != 0) {
@@ -64,6 +75,7 @@ public class EntityAINearestAttackableTargetBounded<T extends EntityLivingBase> 
       }
     }
   }
+
   private double getVerticalDistance() {
     if (vertDistOverride > 0) {
       return vertDistOverride;

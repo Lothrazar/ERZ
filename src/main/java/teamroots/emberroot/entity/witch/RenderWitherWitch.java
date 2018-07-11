@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.witch;
+
 import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelWitch;
@@ -20,13 +21,16 @@ import teamroots.emberroot.util.RenderUtil;
 
 //Pretty much a copy / paste from RenderWitch
 public class RenderWitherWitch extends RenderLiving<EntityWitherWitch> {
+
   private static final ResourceLocation witchTextures = new ResourceLocation(Const.MODID, "textures/entity/wither_witch.png");
   private final ModelWitch witchModel;
+
   public RenderWitherWitch(RenderManager rm) {
     super(rm, new ModelWitch(0.0F), 0.5F);
     this.witchModel = (ModelWitch) this.mainModel;
     addLayer(new LayerHeldItemWitch(this));
   }
+
   public void doRender(EntityWitherWitch entity, double x, double y, double z, float yaw, float partialTicks) {
     ItemStack itemstack = entity.getHeldItem(EnumHand.MAIN_HAND);
     this.witchModel.holdingItem = !itemstack.isEmpty();
@@ -34,27 +38,36 @@ public class RenderWitherWitch extends RenderLiving<EntityWitherWitch> {
     if (ConfigManager.renderDebugHitboxes)
       RenderUtil.renderEntityBoundingBox(entity, x, y, z);
   }
+
   protected void func_82410_b() {
     GL11.glTranslatef(0.0F, 0.1875F, 0.0F);
   }
+
   protected void preRenderCallback(EntityWitherWitch p_77041_1_, float p_77041_2_) {
     float f1 = 0.9375F;
     GL11.glScalef(f1, f1, f1);
   }
+
   protected ResourceLocation getEntityTexture(EntityWitherWitch p_110775_1_) {
     return witchTextures;
   }
+
   public static class Factory implements IRenderFactory<EntityWitherWitch> {
+
     @Override
     public Render<? super EntityWitherWitch> createRenderFor(RenderManager manager) {
       return new RenderWitherWitch(manager);
     }
   }
+
   public static class LayerHeldItemWitch implements LayerRenderer<EntityWitherWitch> {
+
     private final RenderWitherWitch witchRenderer;
+
     public LayerHeldItemWitch(RenderWitherWitch witchRendererIn) {
       this.witchRenderer = witchRendererIn;
     }
+
     public void doRenderLayer(EntityWitherWitch entitylivingbaseIn, float p_177141_2_, float p_177141_3_, float partialTicks, float p_177141_5_,
         float p_177141_6_, float p_177141_7_, float scale) {
       ItemStack itemstack = entitylivingbaseIn.getHeldItem(EnumHand.MAIN_HAND);
@@ -113,6 +126,7 @@ public class RenderWitherWitch extends RenderLiving<EntityWitherWitch> {
         GlStateManager.popMatrix();
       }
     }
+
     @Override
     public boolean shouldCombineTextures() {
       return false;

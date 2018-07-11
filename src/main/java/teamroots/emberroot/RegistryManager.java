@@ -1,4 +1,5 @@
 package teamroots.emberroot;
+
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.Minecraft;
@@ -72,14 +73,17 @@ import teamroots.emberroot.entity.wolftimber.RenderTimberWolf;
 import teamroots.emberroot.util.Util;
 
 public class RegistryManager {
+
   public static int intColor(int r, int g, int b) {
     return (r * 65536 + g * 256 + b);
   }
+
   public static void registerAll() {
     registerDamageSources();
     registerEntities();
     registerSpawning();
   }
+
   public static void registerSpawning() {
     List<Biome> allBiomes = new ArrayList<Biome>();
     for (BiomeEntry b : BiomeManager.getBiomes(BiomeType.COOL)) {
@@ -109,6 +113,7 @@ public class RegistryManager {
       }
     }
   }
+
   public static void registerEntities() {
     int id = 0;
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityDeer.NAME), EntityDeer.class, EntityDeer.NAME, id++, EmberRootZoo.instance, 64, 1, true);
@@ -157,9 +162,11 @@ public class RegistryManager {
     EntityRegistry.registerModEntity(new ResourceLocation(Const.MODID, EntityFrozenKnight.NAME), EntityFrozenKnight.class, EntityFrozenKnight.NAME, id++, EmberRootZoo.instance, 64, 1, true);
     EntityRegistry.registerEgg(new ResourceLocation(Const.MODID, EntityFrozenKnight.NAME), intColor(87, 58, 134), 0xA0A0A0);
   }
+
   public static void registerDamageSources() {
     EmberRootZoo.damage_ember = new DamageGolem();
   }
+
   @SideOnly(Side.CLIENT)
   @SubscribeEvent
   public void registerRendering(ModelRegistryEvent event) {
@@ -193,8 +200,10 @@ public class RegistryManager {
     RenderingRegistry.registerEntityRenderingHandler(EntitySpriteGuardianBoss.class, new RenderSpriteGuardian.Factory());
     RenderingRegistry.registerEntityRenderingHandler(EntityFrozenKnight.class, new RenderFrozenKnight.Factory());
   }
+
   private List<SoundEvent> sounds = new ArrayList<SoundEvent>();
   private List<Item> items = new ArrayList<Item>();
+
   public SoundEvent registerSound(String name) {
     final ResourceLocation res = new ResourceLocation(Const.MODID, name);//new ResourceLocation(Const.MODID, "sounds/" + UtilSound.Own.crackle+".ogg");
     SoundEvent sound = new SoundEvent(res);
@@ -202,13 +211,16 @@ public class RegistryManager {
     sounds.add(sound);
     return sound;
   }
+
   public void register(Item r) {
     this.items.add(r);
   }
+
   @SubscribeEvent
   public void onRegisterSoundEvent(RegistryEvent.Register<SoundEvent> event) {
     event.getRegistry().registerAll(this.sounds.toArray(new SoundEvent[0]));
   }
+
   @SubscribeEvent
   public void onRegisterItems(RegistryEvent.Register<Item> event) {
     event.getRegistry().registerAll(this.items.toArray(new Item[0]));

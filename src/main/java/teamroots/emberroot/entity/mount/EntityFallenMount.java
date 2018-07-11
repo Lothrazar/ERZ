@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.mount;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IEntityLivingData;
@@ -26,14 +27,14 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
-import teamroots.emberroot.util.EntityUtil;
 
 /**
  * Original author: https://github.com/CrazyPants
  */
 public class EntityFallenMount extends EntityHorse {
+
   public static final String NAME = "fallenmount";
-  public static final double MOUNTED_ATTACK_MOVE_SPEED = 2.0;
+  public static final double MOUNTED_ATTACK_MOVE_SPEED = 2;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityFallenMount.class, EnumCreatureType.MONSTER);
   private boolean wasRidden = false;
   private EntityAINearestAttackableTarget<EntityPlayer> findTargetAI;
@@ -41,6 +42,7 @@ public class EntityFallenMount extends EntityHorse {
   private ItemStack armor = ItemStack.EMPTY;
   private boolean fallenMountShadedByRider = true;
   private double fallenMountHealth = 30;
+
   public EntityFallenMount(World world) {
     super(world);
     setGrowingAge(0);
@@ -48,6 +50,7 @@ public class EntityFallenMount extends EntityHorse {
     findTargetAI = new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true);
     attackAI = new EntityAIAttackMelee(this, MOUNTED_ATTACK_MOVE_SPEED, false);
   }
+
   @Override
   protected void initEntityAI() {
     super.initEntityAI();
@@ -57,16 +60,19 @@ public class EntityFallenMount extends EntityHorse {
     tasks.addTask(8, new EntityAILookIdle(this));
     updateAttackAI();
   }
+
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     // EntityUtil.setBaseDamage(this, 0.5);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
+
   @Override
   protected boolean isMovementBlocked() {
     return isRearing();
   }
+
   @Override
   public boolean processInteract(EntityPlayer player, EnumHand hand) {
     ItemStack itemstack = player.inventory.getCurrentItem();
@@ -75,22 +81,27 @@ public class EntityFallenMount extends EntityHorse {
     }
     return false;
   }
+
   @Override
   protected boolean canDespawn() {
     return true;
   }
+
   @Override
   public boolean canMateWith(EntityAnimal p_70878_1_) {
     return false;
   }
+
   @Override
   public boolean canBeLeashedTo(EntityPlayer player) {
     return false;
   }
+
   @Override
   public boolean isBreedingItem(ItemStack p_70877_1_) {
     return false;
   }
+
   @Override
   public boolean isCreatureType(EnumCreatureType type, boolean forSpawnCount) {
     if (type == EnumCreatureType.MONSTER) {
@@ -98,6 +109,7 @@ public class EntityFallenMount extends EntityHorse {
     }
     return false;
   }
+
   @Override
   public IEntityLivingData onInitialSpawn(DifficultyInstance di, IEntityLivingData data) {
     setHorseArmorStack(ItemStack.EMPTY);
@@ -140,6 +152,7 @@ public class EntityFallenMount extends EntityHorse {
     }
     return data;
   }
+
   @Override
   public void onUpdate() {
     super.onUpdate();
@@ -147,6 +160,7 @@ public class EntityFallenMount extends EntityHorse {
       setDead();
     }
   }
+
   @Override
   public void onLivingUpdate() {
     super.onLivingUpdate();
@@ -165,6 +179,7 @@ public class EntityFallenMount extends EntityHorse {
       wasRidden = isRidden();
     }
   }
+
   private boolean burnInSun() {
     if (!isRidden()) {
       return getTotalArmorValue() == 0;
@@ -174,9 +189,11 @@ public class EntityFallenMount extends EntityHorse {
     }
     return getTotalArmorValue() > 0;
   }
+
   protected boolean isRidden() {
     return getPassengers() != null && getPassengers().isEmpty() == false;
   }
+
   private void updateAttackAI() {
     if (findTargetAI == null)
       findTargetAI = new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true);
@@ -189,6 +206,7 @@ public class EntityFallenMount extends EntityHorse {
       tasks.addTask(4, attackAI);
     }
   }
+
   @Override
   public boolean attackEntityAsMob(Entity target) {
     if (isRidden() || isDead) {
@@ -204,6 +222,7 @@ public class EntityFallenMount extends EntityHorse {
     }
     return target.attackEntityFrom(DamageSource.causeMobDamage(this), damage);
   }
+
   @Override
   public void writeEntityToNBT(NBTTagCompound root) {
     super.writeEntityToNBT(root);
@@ -211,6 +230,7 @@ public class EntityFallenMount extends EntityHorse {
     armor.writeToNBT(armTag);
     root.setTag("armor", armTag);
   }
+
   @Override
   public void readEntityFromNBT(NBTTagCompound root) {
     super.readEntityFromNBT(root);
@@ -225,6 +245,7 @@ public class EntityFallenMount extends EntityHorse {
       setHorseArmorStack(armor);
     }
   }
+
   @Override
   protected ResourceLocation getLootTable() {
     return new ResourceLocation(Const.MODID, "entity/mount_fallen");

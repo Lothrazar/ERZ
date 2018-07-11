@@ -1,23 +1,17 @@
 
-
-"1.3.2":"Fixed the Sprout mobs spawning insane amounts.  Golems will no longer shoot through walls, their projectiles now have block collision.  Guardian of Sprites will no longer bump and push players around in creative.  Guardian of Sprites will now despawn in peaceful mode.  Fixed owls spamming eggs; they now have laying rates increased to between 500 and 900 seconds randomly (still only on leaves).   Lingering potions spawned from certain rainbow slimes no longer last forever, also they make the potion splash sound when starting.  Fixed Timber Wolves duplicating on world reload.  Fixed Timber Wolves spawning way too much.  Fixed timber wolves dealing zero damage.  Temporarily disabled the taming and breeding of Timber Wolves since it was buggy (will revisit in later update.)
-
- Many more config flags added to control mob behavior.   "
- 
- 
- "1.3.3":"Fixed the green flying Sprites so that they do despawn as normal (previously they would NEVER despawn, making it look like they were multiplying or spawning in mass numbers).  Sprites now only spawn in darkness, instead of ignoring light levels.  
- Fixed some flying mobs and the camo Slimes not working with the spawn rate configs.  Reduced attack frequency of Dire Wolf.  
- Fixed issues with the mod using biomeWhitelist configs not affecting some mobs.   Changed several default config values changed for balance reasons; does not change existing config files (Attack damage and health reduced for several mobs; some default spawn rates reduced).  Changed timberwolf egg color slightly so it stands out more.  Added spawn eggs to a creative tab.  Fixed Mini enderman not loading its loot table.    Bigger sprites are now a different color to help tell the difference from smaller ones.  Fixed Sprites using hardcoded 3.0 damage instead of reading from config.  Sprites will no longer attack creative mode players and cause them knockback.  
-Guardian of Sprites should no longer forget to drop Totem of Undying.  "
-
-
-"1.3.4":"Fixed Fallen Knights doing zero attack damage; also now they never spawn with a bow.  Added movement speed to the config file for many mobs.  Added Turkish tr_TR.lang (thanks RoCoKo). "
-
-
-
-"1.3.5":"Updated mob AI registration (moved from constructor to init) which should reduce AI breaks such as spinning on ledges and other navigation issues.  Fixed fallen mounts doing zero damage and just nudging the player around.  Fallen Knights are more likely to dismount when in combat in order to be more deadly.  New Fallen Knight config ChanceBow, defaults to 40% chance of having a bow instead of melee.  "
-
-"1.3.6":"Fixed a server crash when you tame a Fairy with glowstone.   Fixed the loot table for Toxic Witch failing to load.  Fixed Frozen Skeleton causing errors when interacting with Mob Grinders / Fake Players.  Frozen Skeleton no longer has Zombie sounds.  "
-
-
-"1.3.7":"Wither witch has new configs maxCats and minCats to control pet creation at spawn time.  Fixed an AI priority conflict with Fallen Knight.   Fixed Fallen Knight getting dismounted when mount tries to attack.   Removed ChanceBow for Fallen Knight (this was not in original release, was added recently and never worked right), now mob is always melee.  "
+{
+  "homepage": "https://minecraft.curseforge.com/projects/emberroot-zoo",
+  "promos": {
+    "1.12.2-latest": "1.3.8",
+    "1.12.2-recommended": "1.3.8"
+  }
+  ,"1.12.2":{
+	"1.3.2":"Fixed the Sprout mobs spawning insane amounts.  Golems will no longer shoot through walls, their projectiles now have block collision.  Guardian of Sprites will no longer bump and push players around in creative.  Guardian of Sprites will now despawn in peaceful mode.  Fixed owls spamming eggs; they now have laying rates increased to between 500 and 900 seconds randomly (still only on leaves).   Lingering potions spawned from certain rainbow slimes no longer last forever, also they make the potion splash sound when starting.  Fixed Timber Wolves duplicating on world reload.  Fixed Timber Wolves spawning way too much.  Fixed timber wolves dealing zero damage.  Temporarily disabled the taming and breeding of Timber Wolves since it was buggy (will revisit in later update.)	 Many more config flags added to control mob behavior.   "
+    ,"1.3.3":"Fixed the green flying Sprites so that they do despawn as normal (previously they would NEVER despawn, making it look like they were multiplying or spawning in mass numbers).  Sprites now only spawn in darkness, instead of ignoring light levels.   Fixed some flying mobs and the camo Slimes not working with the spawn rate configs.  Reduced attack frequency of Dire Wolf.  	 Fixed issues with the mod using biomeWhitelist configs not affecting some mobs.   Changed several default config values changed for balance reasons; does not change existing config files (Attack damage and health reduced for several mobs; some default spawn rates reduced).  Changed timberwolf egg color slightly so it stands out more.  Added spawn eggs to a creative tab.  Fixed Mini enderman not loading its loot table.    Bigger sprites are now a different color to help tell the difference from smaller ones.  Fixed Sprites using hardcoded 3.0 damage instead of reading from config.  Sprites will no longer attack creative mode players and cause them knockback.  	Guardian of Sprites should no longer forget to drop Totem of Undying.  "
+	,"1.3.4":"Fixed Fallen Knights doing zero attack damage; also now they never spawn with a bow.  Added movement speed to the config file for many mobs.  Added Turkish tr_TR.lang (thanks RoCoKo). "
+	,"1.3.5":"Updated mob AI registration (moved from constructor to init) which should reduce AI breaks such as spinning on ledges and other navigation issues.  Fixed fallen mounts doing zero damage and just nudging the player around.  Fallen Knights are more likely to dismount when in combat in order to be more deadly.  New Fallen Knight config ChanceBow, defaults to 40% chance of having a bow instead of melee.  "
+	,"1.3.6":"Fixed a server crash when you tame a Fairy with glowstone.   Fixed the loot table for Toxic Witch failing to load.  Fixed Frozen Skeleton causing errors when interacting with Mob Grinders / Fake Players.  Frozen Skeleton no longer has Zombie sounds.  "
+	,"1.3.7":"Wither witch has new configs maxCats and minCats to control pet creation at spawn time.  Fixed an AI priority conflict with Fallen Knight.   Fixed Fallen Knight getting dismounted when mount tries to attack.   Removed ChanceBow for Fallen Knight (this was not in original release, was added recently and never worked right), now mob is always melee.  "
+	,"1.3.8":"Minimum forge version is now 14.23.1.2594.  Greatly reduced movement speed of fallen knights."
+	}
+ }

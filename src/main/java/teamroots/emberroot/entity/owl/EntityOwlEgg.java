@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.owl;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.Item;
@@ -9,15 +10,19 @@ import net.minecraft.world.World;
 import teamroots.emberroot.EmberRootZoo;
 
 public class EntityOwlEgg extends EntityThrowable {
+
   public EntityOwlEgg(World worldIn) {
     super(worldIn);
   }
+
   public EntityOwlEgg(World worldIn, EntityLivingBase throwerIn) {
     super(worldIn, throwerIn);
   }
+
   public EntityOwlEgg(World worldIn, double x, double y, double z) {
     super(worldIn, x, y, z);
   }
+
   @Override
   protected void onImpact(RayTraceResult impact) {
     if (impact.entityHit != null) {

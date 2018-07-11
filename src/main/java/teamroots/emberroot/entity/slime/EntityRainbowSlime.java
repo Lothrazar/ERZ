@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.slime;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
@@ -22,43 +23,55 @@ import teamroots.emberroot.Const;
 import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntityRainbowSlime extends EntitySlime {
+
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntitySlime.class, DataSerializers.VARINT);
   public static final String NAME = "rainbowslime";
+
   public static enum VariantColors {
     BLUE, GREY, WHITE, PURPLE, RED;//water, snow, clay
+
     public String nameLower() {
       return this.name().toLowerCase();
     }
   }
+
   public static boolean canPlaceBlocks;
   public static boolean canPotionsDeath;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityRainbowSlime.class, EnumCreatureType.MONSTER);
+
   public EntityRainbowSlime(World worldIn) {
     super(worldIn);
   }
+
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
+
   @Override
   protected void entityInit() {
     super.entityInit();
     this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
   }
+
   public Integer getVariant() {
     return getDataManager().get(variant);
   }
+
   public VariantColors getVariantEnum() {
     return VariantColors.values()[getVariant()];
   }
+
   @Override
   protected void initEntityAI() {
     super.initEntityAI();
   }
+
   private boolean isBaby() {
     return this.getSlimeSize() == 1;
   }
+
   @Override
   public void setDead() {
     if (this.world.isRemote == false
@@ -75,6 +88,7 @@ public class EntityRainbowSlime extends EntitySlime {
     spawnChildSlimes();
     this.isDead = true;
   }
+
   private void setBlockOnDeath() {
     BlockPos pos = this.getPosition();
     IBlockState setBlock = null;
@@ -107,6 +121,7 @@ public class EntityRainbowSlime extends EntitySlime {
       this.world.setBlockState(this.getPosition(), setBlock);
     }
   }
+
   public void setPotionsOnDeath() {
     switch (this.getVariantEnum()) {
       case BLUE:
@@ -123,6 +138,7 @@ public class EntityRainbowSlime extends EntitySlime {
       break;
     }
   }
+
   private void spawnLingeringPotion(PotionType type) {
     EntityPotion entitypotion = new EntityPotion(world, this, PotionUtils.addPotionToItemStack(new ItemStack(Items.LINGERING_POTION), type));
     entitypotion.setThrowableHeading(0, 1, 0, 0.05F, 1.0F);
@@ -130,6 +146,7 @@ public class EntityRainbowSlime extends EntitySlime {
       world.spawnEntity(entitypotion);
     }
   }
+
   @Override
   public String getName() {
     if (this.hasCustomName()) {
@@ -144,6 +161,7 @@ public class EntityRainbowSlime extends EntitySlime {
       return I18n.translateToLocal("entity." + s + "." + var + ".name");
     }
   }
+
   /**
    * Just like vanilla except we set the variant to match the parent
    */
@@ -168,6 +186,7 @@ public class EntityRainbowSlime extends EntitySlime {
       }
     }
   }
+
   /**
    * make sure that on death we get one of our own
    */
@@ -175,21 +194,25 @@ public class EntityRainbowSlime extends EntitySlime {
   protected EntityRainbowSlime createInstance() {
     return new EntityRainbowSlime(this.world);
   }
+
   @Override
   protected EnumParticleTypes getParticleType() {
     return EnumParticleTypes.WATER_SPLASH;
   }
+
   @Override
   public void readEntityFromNBT(NBTTagCompound compound) {
     super.readEntityFromNBT(compound);
     getDataManager().set(variant, compound.getInteger("variant"));
     getDataManager().setDirty(variant);
   }
+
   @Override
   public void writeEntityToNBT(NBTTagCompound compound) {
     super.writeEntityToNBT(compound);
     compound.setInteger("variant", getDataManager().get(variant));
   }
+
   @Override
   public ResourceLocation getLootTable() {
     String colour = getVariantEnum().nameLower();

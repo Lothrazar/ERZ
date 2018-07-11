@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.ai;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,6 +13,7 @@ import net.minecraft.util.math.Vec3d;
 import teamroots.emberroot.entity.owl.IFlyingMob;
 
 public class EntityAIFlyingAttackOnCollide extends EntityAIBase {
+
   private EntityCreature attacker;
   private int attackTick;
   private double speedTowardsTarget;
@@ -25,10 +27,12 @@ public class EntityAIFlyingAttackOnCollide extends EntityAIBase {
   private int failedPathFindingPenalty = 0;
   private boolean canPenalize = false;
   private IFlyingMob flyingMob;
+
   public EntityAIFlyingAttackOnCollide(IFlyingMob mob, Class<? extends Entity> targetClass, double speedIn, boolean useLongMemory) {
     this(mob, speedIn, useLongMemory);
     this.classTarget = targetClass;
   }
+
   public EntityAIFlyingAttackOnCollide(IFlyingMob mob, double speedIn, boolean useLongMemory) {
     this.flyingMob = mob;
     this.attacker = mob.asEntityCreature();
@@ -36,6 +40,7 @@ public class EntityAIFlyingAttackOnCollide extends EntityAIBase {
     this.longMemory = useLongMemory;
     this.setMutexBits(3);
   }
+
   @Override
   public boolean shouldExecute() {
     EntityLivingBase entitylivingbase = attacker.getAttackTarget();
@@ -61,11 +66,13 @@ public class EntityAIFlyingAttackOnCollide extends EntityAIBase {
     setPathTo(entitylivingbase);
     return this.entityPathEntity != null;
   }
+
   private void setPathTo(EntityLivingBase target) {
     Vec3d targPos = target.getPositionVector();
     AxisAlignedBB targBB = target.getEntityBoundingBox();
     entityPathEntity = attacker.getNavigator().getPathToPos(new BlockPos(targPos.x, targBB.maxY + 1, targPos.z));
   }
+
   @Override
   public boolean shouldContinueExecuting() {
     EntityLivingBase target = attacker.getAttackTarget();
@@ -74,15 +81,18 @@ public class EntityAIFlyingAttackOnCollide extends EntityAIBase {
     }
     return !longMemory ? !attacker.getNavigator().noPath() : attacker.isWithinHomeDistanceFromPosition(new BlockPos(target));
   }
+
   @Override
   public void startExecuting() {
     flyingMob.getFlyingNavigator().setPath(entityPathEntity, speedTowardsTarget, true);
     delayCounter = 0;
   }
+
   @Override
   public void resetTask() {
     attacker.getNavigator().clearPathEntity();
   }
+
   @Override
   public void updateTask() {
     EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
@@ -129,10 +139,12 @@ public class EntityAIFlyingAttackOnCollide extends EntityAIBase {
       attacker.attackEntityAsMob(entitylivingbase);
     }
   }
+
   private boolean flyToAttacker(EntityLivingBase targetEnt) {
     AxisAlignedBB targBB = targetEnt.getEntityBoundingBox();
     return flyingMob.getFlyingNavigator().tryFlyToPos(targetEnt.posX, targBB.maxY + 0.5, targetEnt.posZ, speedTowardsTarget);
   }
+
   protected double getAttackRangeSq(EntityLivingBase attackTarget) {
     return (attacker.width * 2.0F * attacker.width * 2.0F + attackTarget.width);
   }

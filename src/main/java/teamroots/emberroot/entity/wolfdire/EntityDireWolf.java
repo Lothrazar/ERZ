@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.wolfdire;
+
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
@@ -32,18 +33,22 @@ import teamroots.emberroot.util.EntityUtil;
  * Original author: https://github.com/CrazyPants
  */
 public class EntityDireWolf extends EntityMob {
+
   private static final double ATTACK_SPEED = 0.8D;
   public static final String NAME = "dire_wolf";
   public static SoundEvent SND_HURT;//= new SoundEvent(new ResourceLocation(Const.MODID, "direwolf.hurt"));
   public static SoundEvent SND_HOWL;//= new SoundEvent(new ResourceLocation(Const.MODID, "direwolf.howl"));
   public static SoundEvent SND_GROWL;// = new SoundEvent(new ResourceLocation(Const.MODID, "direwolf.growl"));
   public static SoundEvent SND_DEATH;//= new SoundEvent(new ResourceLocation(Const.MODID, "direwolf.death"));
+
   public static enum VariantColors {
     WHITE, GREY, BLACK;
+
     public String nameLower() {
       return this.name().toLowerCase();
     }
   }
+
   public static final DataParameter<Integer> variant = EntityDataManager.<Integer> createKey(EntityDireWolf.class, DataSerializers.VARINT);
   private static final DataParameter<Boolean> ANGRY_INDEX = EntityDataManager.<Boolean> createKey(EntityDireWolf.class, DataSerializers.BOOLEAN);
   private static final int direWolfAggresiveRange = 8;
@@ -55,12 +60,10 @@ public class EntityDireWolf extends EntityMob {
   private static int packHowl = 0;
   private static long lastHowl = 0;
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityDireWolf.class, EnumCreatureType.MONSTER);
+
   public EntityDireWolf(World world) {
     super(world);
     setSize(0.8F, 1.2F);
-    //getNavigator().setAvoidsWater(true);
-    //    ((PathNavigateGround) this.getNavigator()).setAvoidsWater(true);
-
   }
 
   @Override
@@ -78,8 +81,8 @@ public class EntityDireWolf extends EntityMob {
       nearTarg.setMaxDistanceToTarget(direWolfAggresiveRange);
       targetTasks.addTask(6, nearTarg);
     }
-    
   }
+
   @Override
   protected void entityInit() {
     super.entityInit();
@@ -87,36 +90,45 @@ public class EntityDireWolf extends EntityMob {
     updateAngry();
     this.getDataManager().register(variant, rand.nextInt(VariantColors.values().length));
   }
+
   public Integer getVariant() {
     return getDataManager().get(variant);
   }
+
   public VariantColors getVariantEnum() {
     return VariantColors.values()[getVariant()];
   }
+
   public boolean isAngry() {
     return dataManager.get(ANGRY_INDEX);
   }
+
   @Override
   protected boolean isValidLightLevel() {
     return true;
   }
+
   @Override
   public int getMaxSpawnedInChunk() {
     return maxSpawnedInChunk;
   }
+
   private void updateAngry() {
     dataManager.set(ANGRY_INDEX, getAttackTarget() != null ? Boolean.TRUE : Boolean.FALSE);
   }
+
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     //    EntityUtil.setAttackSpeed(this, 8.5);// hmm wat doesnt work? 
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
+
   @Override
   protected void playStepSound(BlockPos bp, Block block) {
     playSound(SoundEvents.ENTITY_WOLF_STEP, 0.15F, 1.0F);
   }
+
   @Override
   protected SoundEvent getAmbientSound() {
     if (isAngry()) {
@@ -138,6 +150,7 @@ public class EntityDireWolf extends EntityMob {
       return SND_GROWL;
     }
   }
+
   @Override
   public void playSound(SoundEvent sound, float volume, float pitch) {
     if (SND_HOWL.equals(sound)) {
@@ -146,32 +159,39 @@ public class EntityDireWolf extends EntityMob {
     }
     world.playSound(posX, posY, posZ, sound, SoundCategory.NEUTRAL, volume, pitch, true);
   }
+
   @Override
   protected SoundEvent getHurtSound(DamageSource s) {
     return SND_HURT;
   }
+
   @Override
   protected SoundEvent getDeathSound() {
     return SND_DEATH;
   }
+
   @Override
   public float getEyeHeight() {
     return height * 0.8F;
   }
+
   @Override
   protected float getSoundVolume() {
     return 0.4F;
   }
+
   @Override
   protected ResourceLocation getLootTable() {
     return new ResourceLocation(Const.MODID, "entity/wolf_dire");
   }
+
   public float getTailRotation() {
     if (isAngry()) {
       return (float) Math.PI / 2;
     }
     return (float) Math.PI / 4;
   }
+
   @Override
   public void setPosition(double x, double y, double z) {
     posX = x;
@@ -185,6 +205,7 @@ public class EntityDireWolf extends EntityMob {
         x - hw, y, z - hd,
         x + hw, y + f1, z + hd));
   }
+
   @Override
   public void onLivingUpdate() {
     super.onLivingUpdate();
@@ -197,6 +218,7 @@ public class EntityDireWolf extends EntityMob {
       updateAngry();
     }
   }
+
   private void doGroupArgo(EntityLivingBase curTarget) {
     if (!direWolfPackAttackEnabled) {
       return;

@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.wolftimber;
+
 import javax.annotation.Nullable;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -20,14 +21,16 @@ import teamroots.emberroot.config.ConfigSpawnEntity;
 
 public class EntityTimberWolf extends EntityMob {
 
- public static final String NAME = "timberwolf";
+  public static final String NAME = "timberwolf";
   public static ConfigSpawnEntity config = new ConfigSpawnEntity(EntityTimberWolf.class, EnumCreatureType.MONSTER);
   public static boolean attackSkeleton;
+
   public EntityTimberWolf(World world) {
     super(world);
     //setSize(1.5f, 1.5f);
     this.experienceValue = 3;
   }
+
   protected void initEntityAI() {
     this.tasks.addTask(1, new EntityAISwimming(this));
     this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
@@ -40,20 +43,24 @@ public class EntityTimberWolf extends EntityMob {
       this.targetTasks.addTask(5, new EntityAINearestAttackableTarget<EntitySkeleton>(this, EntitySkeleton.class, false));
     }
   }
+
   @Nullable
   protected ResourceLocation getLootTable() {
     return new ResourceLocation(Const.MODID, "entity/wolf_timber");
   }
+
   @Override
   public boolean isAIDisabled() {
     return false;
   }
+
   @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.20000000298023224F);
     ConfigSpawnEntity.syncInstance(this, config.settings);
   }
+
   public float getEyeHeight() {
     return this.isChild() ? this.height : 1.3F;
   }

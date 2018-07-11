@@ -1,4 +1,5 @@
 package teamroots.emberroot.util;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -17,15 +18,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class Util {
+
   public static Random random = new Random();
   public static ArrayList<IBlockState> oreList = new ArrayList<IBlockState>();
   public static ArrayList<Block> naturalBlocks = new ArrayList<Block>();
+
   public static double randomDouble(double min, double max) {
     double range = max - min;
     double scale = random.nextDouble() * range;
     double shifted = scale + min;
     return shifted;
   }
+
   public static float fastSin(float x) {
     if (x < -3.14159265) {
       x += 6.28318531;
@@ -42,6 +46,7 @@ public class Util {
       return (float) (1.27323954 * x - 0.405284735 * x * x);
     }
   }
+
   public static float fastCos(float x) {
     if (x < -3.14159265) {
       x += 6.28318531;
@@ -62,6 +67,7 @@ public class Util {
       return (float) (1.27323954 * x - 0.405284735 * x * x);
     }
   }
+
   public static boolean hasOreDictPrefix(ItemStack stack, String dict) {
     int[] ids = OreDictionary.getOreIDs(stack);
     for (int i = 0; i < ids.length; i++) {
@@ -73,6 +79,7 @@ public class Util {
     }
     return false;
   }
+
   public static float yawDegreesBetweenPointsSafe(double posX, double posY, double posZ, double posX2, double posY2, double posZ2, double previousYaw) {
     float f = (float) ((180.0f * Math.atan2(posX2 - posX, posZ2 - posZ)) / (float) Math.PI);
     if (Math.abs(f - previousYaw) > 90) {
@@ -85,16 +92,19 @@ public class Util {
     }
     return f;
   }
+
   public static float yawDegreesBetweenPoints(double posX, double posY, double posZ, double posX2, double posY2, double posZ2) {
     float f = (float) ((180.0f * Math.atan2(posX2 - posX, posZ2 - posZ)) / (float) Math.PI);
     return f;
   }
+
   public static Vec3d lookVector(float rotYaw, float rotPitch) {
     return new Vec3d(
         Math.sin(rotYaw) * Math.cos(rotPitch),
         Math.sin(rotPitch),
         Math.cos(rotYaw) * Math.cos(rotPitch));
   }
+
   public static float interpolateYawDegrees(float angle1, float ratio1, float angle2, float ratio2) {
     if (Math.abs(angle1 - angle2) > 180) {
       if (angle2 > angle1) {
@@ -106,13 +116,16 @@ public class Util {
     }
     return angle1 * ratio1 + angle2 * ratio2;
   }
+
   public static float pitchDegreesBetweenPoints(double posX, double posY, double posZ, double posX2, double posY2, double posZ2) {
     return (float) Math.toDegrees(Math.atan2(posY2 - posY, Math.sqrt((posX2 - posX) * (posX2 - posX) + (posZ2 - posZ) * (posZ2 - posZ))));
   }
+
   public static double interpolate(float s, float e, float t) {
     double t2 = (1.0 - fastCos(t * 3.14159265358979323f)) / 2.0;
     return (s * (1.0 - t2) + (e) * t2);
   }
+
   public static BlockPos getRayTrace(World world, EntityPlayer player, int reachDistance) {
     double x = player.posX;
     double y = player.posY + player.getEyeHeight();
@@ -127,6 +140,7 @@ public class Util {
     }
     return new BlockPos(x, y, z);
   }
+
   public static BlockPos getRayTraceNonFull(World world, EntityPlayer player, int reachDistance) {
     double x = player.posX;
     double y = player.posY + player.getEyeHeight();
@@ -141,6 +155,7 @@ public class Util {
     }
     return new BlockPos(x, y, z);
   }
+
   //	public static void addTickTracking(Entity entity){
   //		if (entity.getEntityData().hasKey(RootsNames.TAG_TRACK_TICKS)){
   //			entity.getEntityData().setInteger(RootsNames.TAG_TRACK_TICKS, entity.getEntityData().getInteger(RootsNames.TAG_TRACK_TICKS)+1);
@@ -175,6 +190,7 @@ public class Util {
     }
     return null;
   }
+
   public static void initOres() {
     oreList.add(Blocks.IRON_ORE.getDefaultState());
     oreList.add(Blocks.GOLD_ORE.getDefaultState());
@@ -183,6 +199,7 @@ public class Util {
     oreList.add(Blocks.LAPIS_ORE.getDefaultState());
     oreList.add(Blocks.COAL_ORE.getDefaultState());
   }
+
   public static void initNaturalBlocks() {
     naturalBlocks.add(Blocks.TALLGRASS);
     naturalBlocks.add(Blocks.GRASS);
@@ -198,6 +215,7 @@ public class Util {
     naturalBlocks.add(Blocks.RED_FLOWER);
     naturalBlocks.add(Blocks.YELLOW_FLOWER);
   }
+
   public static boolean containsItem(List<ItemStack> list, Item item) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i) != null) {
@@ -208,6 +226,7 @@ public class Util {
     }
     return false;
   }
+
   public static boolean containsItem(List<ItemStack> list, Block item) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i) != null) {
@@ -218,6 +237,7 @@ public class Util {
     }
     return false;
   }
+
   public static boolean containsItem(List<ItemStack> list, Item item, int meta) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i) != null) {
@@ -228,6 +248,7 @@ public class Util {
     }
     return false;
   }
+
   public static boolean containsItem(List<ItemStack> list, Block item, int meta) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i) != null) {
@@ -238,9 +259,11 @@ public class Util {
     }
     return false;
   }
+
   public static IBlockState getRandomOre() {
     return oreList.get(random.nextInt(oreList.size()));
   }
+
   public static boolean oreDictMatches(ItemStack stack1, ItemStack stack2) {
     if (OreDictionary.itemMatches(stack1, stack2, true)) {
       return true;
@@ -255,9 +278,11 @@ public class Util {
     }
     return false;
   }
+
   public static int intColor(int r, int g, int b) {
     return (r * 65536 + g * 256 + b);
   }
+
   public static boolean isNaturalBlock(Block block) {
     for (int i = 0; i < naturalBlocks.size(); i++) {
       if (naturalBlocks.get(i) == block) {
@@ -266,6 +291,7 @@ public class Util {
     }
     return false;
   }
+
   public static boolean itemListsMatchWithSize(List<ItemStack> i1, List<ItemStack> i2) {
     ArrayList<ItemStack> recipe = new ArrayList<ItemStack>();
     ArrayList<ItemStack> available = new ArrayList<ItemStack>();
@@ -296,12 +322,15 @@ public class Util {
     }
     return recipe.size() == 0;
   }
+
   public static float fract(float f) {
     return f - (int) f;
   }
+
   public static double fract(double d) {
     return d - (int) d;
   }
+
   public static boolean itemListsMatch(List<ItemStack> i1, List<ItemStack> i2) {
     ArrayList<ItemStack> recipe = new ArrayList<ItemStack>();
     ArrayList<ItemStack> available = new ArrayList<ItemStack>();
@@ -332,6 +361,7 @@ public class Util {
     }
     return recipe.size() == 0;
   }
+
   public static float getNatureAmount(IBlockState state) {
     if (state.getBlock() == Blocks.DIRT) {
       return 0.04f;
@@ -368,6 +398,7 @@ public class Util {
     }
     return 0;
   }
+
   public static EnumFacing getRayFace(World world, EntityPlayer player, int reachDistance) {
     double x = player.posX;
     double y = player.posY + player.getEyeHeight();

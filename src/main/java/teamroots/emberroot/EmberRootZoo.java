@@ -1,4 +1,5 @@
 package teamroots.emberroot;
+
 import java.util.Iterator;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -41,22 +42,26 @@ import teamroots.emberroot.entity.wolfdire.EntityDireWolf;
 import teamroots.emberroot.entity.wolftimber.EntityTimberWolf;
 import teamroots.emberroot.proxy.CommonProxy;
 
-@Mod(modid = Const.MODID, name = EmberRootZoo.MODNAME)
+@Mod(modid = Const.MODID, name = EmberRootZoo.MODNAME, updateJSON = "https://raw.githubusercontent.com/PrinceOfAmber/ERZ/master/update.json")
 public class EmberRootZoo {
+
   public static final String MODNAME = "EmberRootZoo";
   public static final String DEPENDENCIES = "";
   @SidedProxy(clientSide = "teamroots." + Const.MODID + ".proxy.ClientProxy", serverSide = "teamroots." + Const.MODID + ".proxy.ServerProxy")
   public static CommonProxy proxy;
   public static CreativeTabs tab = new CreativeTabs(Const.MODID) {
+
     @Override
     public String getTabLabel() {
       return Const.MODID;
     }
+
     @Override
     @SideOnly(Side.CLIENT)
     public ItemStack getTabIconItem() {
       return new ItemStack(Blocks.MOB_SPAWNER);
     }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void displayAllRelevantItems(NonNullList<ItemStack> list) {
@@ -89,6 +94,7 @@ public class EmberRootZoo {
       list.add(addEntity(EntitySpriteGuardianBoss.NAME));
       list.add(addEntity(EntityFrozenKnight.NAME));
     }
+
     private ItemStack addEntity(String name) {
       ItemStack s = new ItemStack(Items.SPAWN_EGG);
       ItemMonsterPlacer.applyEntityIdToItemStack(s, new ResourceLocation(Const.MODID, name));
@@ -98,6 +104,7 @@ public class EmberRootZoo {
   @Instance(Const.MODID)
   public static EmberRootZoo instance;
   public org.apache.logging.log4j.Logger logger;
+
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
     this.logger = event.getModLog();
@@ -124,9 +131,11 @@ public class EmberRootZoo {
     EntitySpriteGuardianBoss.hurtSound = registry.registerSound("bosshurt");
     EntitySpriteGuardianBoss.departureSound = registry.registerSound("bossdeath");
   }
+
   public static DamageSource damage_ember;
   public static Item itemOwlEgg;
   private static boolean doLog = false;
+
   public static void log(String string) {
     if (doLog == false) {
       return;

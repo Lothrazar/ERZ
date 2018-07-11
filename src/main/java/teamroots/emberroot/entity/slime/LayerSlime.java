@@ -1,4 +1,5 @@
 package teamroots.emberroot.entity.slime;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.renderer.GlStateManager;
@@ -9,11 +10,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class LayerSlime implements LayerRenderer<EntitySlime> {
+
   private final RenderWaterSlime slimeRenderer;
   private final ModelBase slimeModel = new ModelSlime(0);
+
   public LayerSlime(RenderWaterSlime slimeRendererIn) {
     this.slimeRenderer = slimeRendererIn;
   }
+
   public void doRenderLayer(EntitySlime entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
     if (!entitylivingbaseIn.isInvisible()) {
       GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -26,6 +30,7 @@ public class LayerSlime implements LayerRenderer<EntitySlime> {
       GlStateManager.disableNormalize();
     }
   }
+
   public boolean shouldCombineTextures() {
     return true;
   }
