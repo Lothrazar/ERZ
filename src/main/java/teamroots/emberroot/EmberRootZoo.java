@@ -10,11 +10,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -130,6 +132,51 @@ public class EmberRootZoo {
     EntitySpriteGuardianBoss.ambientSound = registry.registerSound("bossambient");
     EntitySpriteGuardianBoss.hurtSound = registry.registerSound("bosshurt");
     EntitySpriteGuardianBoss.departureSound = registry.registerSound("bossdeath");
+  }
+
+  @EventHandler
+  public void postInit(FMLPostInitializationEvent event) {
+    //loot tables
+    //TODO: less copy/paste way 
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/owl"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/sprout_red"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/sprout_orange"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/sprout_yellow"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/sprout_green"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/sprout_blue"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/sprout_purple"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/creeper_concussion"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/deer"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/golem_red"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/golem_orange"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/golem_yellow"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/golem_green"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/golem_blue"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/golem_purple"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/hero"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/slime_blue"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/slime_grey"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/slime_white"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/slime_purple"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/slime_red"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/skeleton_frozen"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/mount_fallen"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/wolf_dire"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/cat_wither"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/slime_block"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/ender_mini"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/fairy_green"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/fairy_purple"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/fairy_pink"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/fairy_orange"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/fairy_blue"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/fairy_yellow"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/fairy_red"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/sprite_normal"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/sprite_mini"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/witch"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/sprite_greater"));
+    LootTableList.register(new ResourceLocation(Const.MODID, "entity/sprite_boss"));
   }
 
   public static DamageSource damage_ember;
