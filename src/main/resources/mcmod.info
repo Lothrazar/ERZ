@@ -3,7 +3,7 @@
   "modid": "emberroot",
   "name": "EmberRoot Zoo",
   "description": "Includes many monsters and creatures, with a detailed config system.  Includes Open Source code and textures from Embers and Roots (Elucent) and from Ender Zoo (CrazyPants)",
-  "version": "1.3.8",
+  "version": "1.3.9",
   "mcversion": "1.12.2",
   "url": "https://minecraft.curseforge.com/projects/emberroot-zoo",
   "updateUrl": "https://minecraft.curseforge.com/projects/emberroot-zoo",
