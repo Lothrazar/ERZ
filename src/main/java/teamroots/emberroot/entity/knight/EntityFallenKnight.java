@@ -102,7 +102,7 @@ public class EntityFallenKnight extends EntitySkeleton {
     }
     firstUpdate = false;
     if (!isMounted == isRidingMount()) {
-      System.out.println("attack on collide reset");
+      //      System.out.println("attack on collide reset");
       getAiAttackOnCollide().resetTask();
       //      getAiArrowAttack().resetTask();
       getNavigator().clearPathEntity();
