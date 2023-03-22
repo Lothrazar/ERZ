@@ -88,7 +88,7 @@ public class ModelFairy extends ModelBase {
   }
 
   public void render(Entity entity, float f, float f1, float age, float f3, float f4, float f5) {
-    OpenGlHelper.setLightmapTextureCoords(1, 240f, 240f);
+    OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f, 240f);
     GlStateManager.pushMatrix();
     float speed = (float) Math.min(0.25f, ((new Vec3d(entity.motionX, 0, entity.motionZ)).lengthVector() * 4.0f));
     super.render(entity, f, f1, age, f3, f4, f5);
